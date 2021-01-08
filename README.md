@@ -7,7 +7,7 @@
 - [Getting started](#-getting-started)
   - [Prerequisites](#-prerequisites)
   - [Installation](#-installation)
-- [Packages Docs]
+- [Packages Docs](#-packages-docs)
 - [Conventional Commits](#-conventional-commits)
 - [Available scripts](#-available-scripts)
 - [Useful docs](#-useful-docs)
