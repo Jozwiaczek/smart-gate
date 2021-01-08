@@ -1,0 +1,6 @@
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    update_schedule: 'monthly'
+    target_branch: 'master'
+    directory: '/'

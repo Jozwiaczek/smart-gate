@@ -1,0 +1,36 @@
+{
+  "name": "smart-gate-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "serve": "^11.3.2",
+    "typescript": "^4.0.3",
+    "react-scripts": "4.0.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8"
+  },
+  "scripts": {
+    "prebuild": "yarn clean",
+    "clean": "rimraf build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --watchAll=false --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests",
+    "test:watch": "react-scripts test",
+    "lint": "yarn eslint '**/*.{js,jsx,ts,tsx}' --cache",
+    "lint:fix": "yarn lint --fix",
+    "serve:build": "serve -s build -l 4000",
+    "serve:coverage": "serve -s ./coverage -l 4001",
+    "type-check": "tsc --noEmit"
+  }
+}

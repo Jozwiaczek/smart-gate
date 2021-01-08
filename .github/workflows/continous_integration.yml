@@ -1,0 +1,26 @@
+name: Continuous Integration
+on: [pull_request]
+
+env:
+  NODE_VERSION: '14.x'
+
+jobs:
+  Validate:
+    name: 'Validate Pull Request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Git checkout'
+        uses: actions/checkout@v2
+      - name: 'Use cached node_modules'
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: 'Install dependency'
+        run: yarn install --frozen-lockfile
+      - name: 'Audit dependencies'
+        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
+      - name: 'Build API'
+        run: cd packages/api & yarn build
+      - name: 'Build Client'
+        run: cd packages/client & yarn build
