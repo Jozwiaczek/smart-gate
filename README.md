@@ -7,7 +7,7 @@
 - [Getting started](#-getting-started)
   - [Prerequisites](#-prerequisites)
   - [Installation](#-installation)
-  - [Prepare and fill secrets](#-prepare-and-fill-secrets)
+- [Packages Docs]
 - [Conventional Commits](#-conventional-commits)
 - [Available scripts](#-available-scripts)
 - [Useful docs](#-useful-docs)
@@ -25,15 +25,12 @@
 yarn
 ```
 
-### Prepare and fill secrets
+## 📦 Packages Docs
 
-Copy and paste .env.example into .env.development and fill all secrets.
-
-> **Note:** In order to expose a variable to the browser you have to prefix the variables with `NEXT_PUBLIC_`
-
-| Secret  | Description                  |
-| ------- | ---------------------------- |
-| API_URL | Api url (without `/graphql`) |
+- Backend:
+    - [Api](./packages/api/README.md)
+- Frontend:
+    - [Client](./packages/client/README.md)
 
 ## 📏 Conventional Commits
 
@@ -52,28 +49,16 @@ Common types according to commitlint-config-conventional (based on the Angular c
 
 To run script, in terminal type `yarn {script}`.
 
-| Script                            | Description                                                      | Note                                         |
-| --------------------------------- | ---------------------------------------------------------------- | -------------------------------------------- |
-| `prebuild`                        | Runs yarn clean                                                  | It runs automatically before every build     |
-| `build`                           | Builds app in prod mode                                          |                                              |
-| `build:dev`                       | Builds app in dev mode                                           |                                              |
-| `check`                           | Runs linter, prettier and ts check                               |                                              |
-| `clean`                           | Removes build directory if it exists                             |                                              |
-| `graphql:generate-typedefs`       | Generates ts types and resources hooks based on graphql endpoint | For more details check `graphql-codegen.yml` |
-| `graphql:generate-typedefs:watch` | Runs type generation in watch mode                               |                                              |
-| `preinstall`                      | Checks is yarn was used package manager                          | It runs automatically before every install   |
-| `lint`                            | Checks linter rules                                              |                                              |
-| `lint:fix`                        | Fix linter                                                       |                                              |
-| `prettier`                        | Checks prettier rules                                            |                                              |
-| `prettier:fix`                    | Fix prettier                                                     |                                              |
-| `serve:build`                     | Serves locally app from build directory                          | Before serve, run `yarn build`               |
-| `serve:coverage`                  | Serves locally coverage from tests                               | Before serve, run `yarn test:coverage`       |
-| `sort:packageJson`                | Sort alphabetical all package.json in project                    | It runs automatically on every push          |
-| `start`                           | Starts app locally                                               |                                              |
-| `start:prod`                      | Starts app locally in prod mode                                  |                                              |
-| `test`                            | Runs test for utils and helpers                                  |                                              |
-| `test:coverage`                   | Runs test in coverage mode                                       |                                              |
-| `test:watch`                      | Runs test in watch mode for all tests                            |                                              |
-| `type-check`                      | Checks TypeScript types                                          |                                              |
+| Script            | Description                                               | Note                                       |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------ |
+| `check`           | Runs linter, prettier, tests and ts-check in all packages |                                            |
+| `preinstall`      | Checks is yarn was used package manager                   | It runs automatically before every install |
+| `lint`            | Checks linter rules                                       |                                            |
+| `lint:fix`        | Fix linter                                                |                                            |
+| `prettier`        | Checks prettier rules                                     |                                            |
+| `prettier:fix`    | Fix prettier                                              |                                            |
+| `sortPackageJson` | Sort alphabetical all package.json in project             | It runs automatically on every push        |
+| `test`            | Runs tests for all packages                               |                                            |
+| `type-check`      | Checks TypeScript types for all packages                  |                                            |
 
 ## Useful docs
