@@ -57,7 +57,7 @@ To run script, in terminal type `yarn {script}`.
 | `lint:fix`        | Fix linter                                                |                                            |
 | `prettier`        | Checks prettier rules                                     |                                            |
 | `prettier:fix`    | Fix prettier                                              |                                            |
-| `sortPackageJson` | Sort alphabetical all package.json in project             | It runs automatically on every push        |
+| `sortPackageJson` | Sort alphabetical all package.json in project             |                                            |
 | `test`            | Runs tests for all packages                               |                                            |
 | `type-check`      | Checks TypeScript types for all packages                  |                                            |
 
