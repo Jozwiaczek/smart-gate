@@ -35,15 +35,37 @@ yarn
 ## 📏 Conventional Commits
 
 Commitlint checks if your commit messages meet the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) format.
+Also it requires package scope (https://www.npmjs.com/package/@commitlint/config-lerna-scopes).
+
+Structure:
+
+```git
+type(package-name): general info
+```
+
+Structure with more inforamtion:
+
+```git
+type(package-name): general info
+
+- add login panel
+- add avatar
+```
 
 Example:
 
 ```git
-feat(blog): add comment section
+feat(api): add comment section
 ```
 
 Common types according to commitlint-config-conventional (based on the Angular convention) can be:
 [conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json)
+
+For just validating your commit message without commiting it use terminal:
+
+```shell
+echo 'foo: bar' | commitlint
+```
 
 ## Available scripts
 
