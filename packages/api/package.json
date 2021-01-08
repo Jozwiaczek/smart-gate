@@ -10,7 +10,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "yarn eslint '**/*.{js,jsx,ts,tsx}' --cache",
+    "lint": "eslint '*.{js,jsx,ts,tsx}' --cache",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
     "test:watch": "jest --watch",

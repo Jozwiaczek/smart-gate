@@ -28,9 +28,9 @@ yarn
 ## 📦 Packages Docs
 
 - Backend:
-    - [Api](./packages/api/README.md)
+  - [Api](./packages/api/README.md)
 - Frontend:
-    - [Client](./packages/client/README.md)
+  - [Client](./packages/client/README.md)
 
 ## 📏 Conventional Commits
 
