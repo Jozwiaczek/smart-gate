@@ -21,6 +21,6 @@ jobs:
       - name: 'Audit dependencies'
         run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
       - name: 'Build API'
-        run: cd packages/api & yarn build
+        run: cd packages/api && yarn build
       - name: 'Build Client'
-        run: cd packages/client & yarn build
+        run: cd packages/client && yarn build
