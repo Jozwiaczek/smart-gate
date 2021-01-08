@@ -1,0 +1,59 @@
+{
+  "name": "smart-gate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Gate project - for opening physical home/garage gate",
+  "repository": "git@github.com:Jozwiaczek/smart-gate.git",
+  "license": "MIT",
+  "author": "jakub.jozwiak <kubencki@gmail.com>",
+  "contributors": [
+    {
+      "name": "Jakub Jóźwiak",
+      "email": "kubencki@gmail.com"
+    },
+    {
+      "name": "Mateusz Nestorowicz",
+      "email": "nestorowicz1@gmail.com"
+    }
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "yarn type-check & yarn lint:fix & yarn prettier:fix & yarn test",
+    "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "sortPackageJson": "sort-package-json & lerna exec sort-package-json",
+    "removeNodeModules": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
+    "test": "lerna run test",
+    "type-check": "lerna run type-check"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.7",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "sort-package-json": "^1.48.1"
+  },
+  "engines": {
+    "node": ">=12",
+    "yarn": ">=1.22"
+  }
+}
