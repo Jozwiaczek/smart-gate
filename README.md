@@ -59,7 +59,7 @@ feat(api): add comment section
 ```
 
 Common types according to commitlint-config-conventional (based on the Angular convention) can be:
-[conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json)
+[conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json).
 
 For just validating your commit message without commiting it use terminal:
 

@@ -32,5 +32,17 @@
     "serve:build": "serve -s build -l 4000",
     "serve:coverage": "serve -s ./coverage -l 4001",
     "type-check": "tsc --noEmit"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
