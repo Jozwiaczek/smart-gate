@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -36,7 +38,7 @@ const SignIn = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+      <Card className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -92,7 +94,7 @@ const SignIn = () => {
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Card>
     </Container>
   );
 };
