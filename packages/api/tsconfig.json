@@ -9,6 +9,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
     "esModuleInterop": true
