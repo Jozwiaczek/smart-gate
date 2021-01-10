@@ -4,6 +4,7 @@
     "baseUrl": "./",
     "outDir": "./build",
     "composite": true,
-    "target": "esnext"
+    "target": "es2017",
+    "module": "commonjs"
   }
 }
