@@ -2,9 +2,9 @@
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./build",
     "composite": true,
-    "target": "es2017",
-    "module": "commonjs"
-  }
+    "isolatedModules": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*spec.ts"]
 }
