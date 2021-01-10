@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./build",
-    "composite": true
+    "composite": true,
+    "target": "es2017",
+    "module": "commonjs"
   }
 }
