@@ -9,9 +9,11 @@ interface DefaultLayoutProps {
 const DefaultLayout = ({ children }: DefaultLayoutProps) => (
   <>
     <main>{children}</main>
-    <Box mt={8}>
-      <Copyright />
-    </Box>
+    <footer>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </footer>
   </>
 );
 
