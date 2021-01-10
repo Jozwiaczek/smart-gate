@@ -1,0 +1,12 @@
+{
+  "name": "smart-gate-core",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Set of core elements for smart-gate packages.",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
+    "lint:fix": "yarn lint --fix",
+    "type-check": "tsc --noEmit"
+  }
+}
