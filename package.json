@@ -20,7 +20,7 @@
     "packages/*"
   ],
   "scripts": {
-    "check": "yarn type-check & yarn lint:fix & yarn prettier:fix & yarn test",
+    "check": "yarn type-check & yarn lint:fix & yarn prettier:fix & yarn test & yarn test:e2e",
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
@@ -29,6 +29,7 @@
     "sortPackageJson": "sort-package-json & lerna exec sort-package-json",
     "removeNodeModules": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "test": "lerna run test",
+    "test:e2e": "lerna run test:e2e",
     "type-check": "lerna run type-check"
   },
   "devDependencies": {
