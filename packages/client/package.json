@@ -6,7 +6,7 @@
     "prebuild": "yarn clean",
     "build": "react-scripts build",
     "clean": "rimraf build",
-    "lint": "eslint '**/*.{js,jsx,ts,tsx}' --cache",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
     "serve:build": "serve -s build -l 4000",
     "serve:coverage": "serve -s ./coverage -l 4001",
