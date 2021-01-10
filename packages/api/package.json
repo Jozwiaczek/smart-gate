@@ -6,7 +6,7 @@
     "prebuild": "yarn clean",
     "build": "nest build",
     "clean": "rimraf build",
-    "lint": "eslint '*.{js,jsx,ts,tsx}' --cache",
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}' --cache",
     "lint:fix": "yarn lint --fix",
     "serve:coverage": "serve -s ./coverage -l 4002",
     "start": "nest start",
