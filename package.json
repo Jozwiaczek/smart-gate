@@ -20,7 +20,7 @@
     "packages/*"
   ],
   "scripts": {
-    "check": "yarn type-check && yarn lint:fix && yarn prettier:fix && yarn test && yarn sortPackageJson",
+    "check": "yarn lint:fix && yarn prettier:fix && yarn type-check && yarn test && yarn sortPackageJson",
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
