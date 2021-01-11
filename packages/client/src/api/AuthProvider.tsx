@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import React, { createContext, PropsWithChildren, useCallback } from 'react';
 import useAxios from '../hooks/useAxios';
 
 interface User {
@@ -13,23 +13,19 @@ interface AuthUser {
 }
 
 export interface AuthProps {
-  user?: Promise<AuthUser>;
+  getCurrentUser: () => Promise<AuthUser>;
   login: (user: User) => Promise<string | boolean>;
   register: (user: User) => Promise<string | boolean>;
-  logout: (user: User) => string | boolean;
-  refetchUser: () => void;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<AuthProps | undefined>(undefined);
 
 const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   const axios = useAxios();
-  const [refetch, setRefetch] = useState(false);
+  const API_URL = process.env.REACT_APP_API_URL;
 
-  const refetchUser = () => setRefetch((prev) => !prev);
-
-  const user = useMemo(async () => {
-    const API_URL = process.env.REACT_APP_API_URL;
+  const getCurrentUser = useCallback(async () => {
     let authUser = {
       loading: false,
       user: undefined,
@@ -41,32 +37,39 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     } catch (ignore) {}
 
     return authUser;
-  }, [refetch]);
+  }, [axios]);
 
   const login = useCallback(async (userData: User) => {
-    console.trace(userData);
-    refetchUser();
+    try {
+      const response = await axios.post(`${API_URL}/auth/login`, { ...userData });
+      localStorage.setItem('access_token', response.data.access_token);
+    } catch (error) {
+      return error;
+    }
+
     return true;
   }, []);
 
-  const register = useCallback(async (userData: User) => {
-    console.trace(userData);
-    refetchUser();
+  const register = useCallback(async (userData?: User) => {
+    try {
+      const response = await axios.post(`${API_URL}/auth/register`, { ...userData });
+      localStorage.setItem('access_token', response.data.access_token);
+    } catch (error) {
+      return error;
+    }
+
     return true;
   }, []);
 
-  const logout = useCallback((userData: User) => {
-    console.trace(userData);
-    refetchUser();
-    return true;
+  const logout = useCallback(() => {
+    localStorage.removeItem('access_token');
   }, []);
 
   const AuthValue = {
-    user,
+    getCurrentUser,
     login,
     register,
     logout,
-    refetchUser,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;

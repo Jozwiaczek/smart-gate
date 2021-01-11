@@ -12,8 +12,7 @@ const AxiosProvider = ({ children }: PropsWithChildren<unknown>) => {
     });
 
     axiosConfig.interceptors.request.use((config) => {
-      // Read token for anywhere, in this case directly from localStorage
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const overriddenConfig = config;
       if (token) {
         overriddenConfig.headers.Authorization = `Bearer ${token}`;
