@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -9,9 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Users } from 'smart-gate-core';
+import { useAuth, useSnackbar } from '../../hooks';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,24 +25,53 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+  input: {
+    height: 70,
+  },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
-type Inputs = Users;
+interface Inputs {
+  email: string;
+  password: string;
+}
 
 const SignIn = () => {
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm<Inputs>();
-  const onSubmit = (data: Inputs) => console.log(data);
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const showSnackbar = useSnackbar();
+  const { register, handleSubmit, errors, reset, formState } = useForm<Inputs>({
+    mode: 'all',
+  });
+  const auth = useAuth();
+
+  if (!auth) {
+    return null;
+  }
+
+  const onSubmit = async (values: Inputs) => {
+    setLoading(true);
+    try {
+      await auth.login(values);
+      reset();
+      history.push('/dashboard');
+    } catch (error) {
+      const { message } = error.response.data;
+      showSnackbar({ message, severity: 'error' });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container maxWidth="xs">
       <Card className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -52,6 +81,7 @@ const SignIn = () => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            className={classes.input}
             variant="outlined"
             margin="normal"
             required
@@ -60,28 +90,34 @@ const SignIn = () => {
             label="Email Address"
             name="email"
             error={!!errors.email}
+            helperText={errors.email?.message}
             autoComplete="email"
             autoFocus
-            inputRef={register({ required: true })}
+            disabled={loading}
+            inputRef={register({ required: 'Required' })}
           />
           <TextField
+            className={classes.input}
             variant="outlined"
             margin="normal"
             required
             fullWidth
             error={!!errors.password}
+            helperText={errors.password?.message}
             name="password"
             label="Password"
             type="password"
             id="password"
+            disabled={loading}
             autoComplete="current-password"
-            inputRef={register({ required: true })}
+            inputRef={register({ required: 'Required' })}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
+            disabled={!formState.isValid || loading}
             className={classes.submit}
           >
             Sign In
@@ -93,7 +129,7 @@ const SignIn = () => {
               </MuiLink>
             </Grid>
             <Grid item>
-              <MuiLink component={Link} to="/" variant="body2">
+              <MuiLink component={Link} to="/registration" variant="body2">
                 Dont have an account? Sign Up
               </MuiLink>
             </Grid>

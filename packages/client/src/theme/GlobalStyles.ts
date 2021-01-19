@@ -7,11 +7,9 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
   
-  html {
-    overflow-x: hidden;
-  }
-
+  html,
   body {
+    height: 100%;
     padding: 0;
     margin: 0;
     font-family: Roboto, Rubik, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
@@ -20,7 +18,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   main {
-    padding: 0 15px;
+    flex: 1 0 auto;
+    height: 100%;
+  }
+
+  footer {
+    flex-shrink: 0;
   }
 `;
 

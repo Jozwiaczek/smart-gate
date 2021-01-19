@@ -14,8 +14,8 @@ const StylesProvider = ({ children }: StylesProviderProps) => (
   <SCStylesProvider injectFirst>
     <MuiThemeProvider theme={DefaultTheme}>
       <ThemeProvider theme={DefaultTheme}>
+        <GlobalStyles />
         <DefaultLayout>
-          <GlobalStyles />
           <CssBaseline />
           {children}
         </DefaultLayout>

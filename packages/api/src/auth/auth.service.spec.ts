@@ -1,11 +1,11 @@
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersModule } from '../users/users.module';
+import { UserModule } from '../user/user.module';
 import { AuthService } from './auth.service';
-import { jwtConstants } from './constants';
-import { JwtStrategy } from './jwt.strategy';
-import { LocalStrategy } from './local.strategy';
+import { jwtConstants } from './strategies/jwt/constants';
+import { JwtStrategy } from './strategies/jwt/jwt.strategy';
+import { LocalStrategy } from './strategies/local/local.strategy';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -13,7 +13,7 @@ describe('AuthService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        UsersModule,
+        UserModule,
         PassportModule,
         JwtModule.register({
           secret: jwtConstants.secret,

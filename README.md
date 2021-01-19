@@ -55,7 +55,7 @@ type(package-name): general info
 Example:
 
 ```git
-feat(api): add comment section
+feat(smart-gate-api): add comment section
 ```
 
 Common types according to commitlint-config-conventional (based on the Angular convention) can be:

@@ -29,6 +29,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'consistent-return': 0,
     '@typescript-eslint/no-var-requires': 0,
     'import/prefer-default-export': 0,
     '@typescript-eslint/no-implied-eval': 0,
