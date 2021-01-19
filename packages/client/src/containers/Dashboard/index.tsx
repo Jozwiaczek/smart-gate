@@ -11,7 +11,12 @@ const Dashboard = () => {
     return null;
   }
 
-  const { logout } = auth;
+  const { logout, getCurrentUser } = auth;
+
+  const getMe = async () => {
+    const user = await getCurrentUser();
+    console.log('L:18 | user: ', user);
+  };
 
   return (
     <Container>
@@ -19,6 +24,9 @@ const Dashboard = () => {
       <h2>Dashboard</h2>
       <Button variant="contained" component={Link} to="/" onClick={logout} color="primary">
         Logout
+      </Button>
+      <Button variant="contained" onClick={getMe} color="secondary">
+        Test
       </Button>
     </Container>
   );

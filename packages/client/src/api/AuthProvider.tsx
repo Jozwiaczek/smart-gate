@@ -32,7 +32,7 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
       error: undefined,
     };
     try {
-      authUser = await axios.get(`${API_URL}/users`);
+      authUser = await axios.get(`${API_URL}/users/me`);
       // eslint-disable-next-line no-empty
     } catch (ignore) {}
 
@@ -40,23 +40,15 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, [axios]);
 
   const login = useCallback(async (userData: User) => {
-    try {
-      const response = await axios.post(`${API_URL}/auth/login`, { ...userData });
-      localStorage.setItem('access_token', response.data.access_token);
-    } catch (error) {
-      return error;
-    }
+    const response = await axios.post(`${API_URL}/auth/login`, { ...userData });
+    localStorage.setItem('access_token', response.data.access_token);
 
     return true;
   }, []);
 
   const register = useCallback(async (userData?: User) => {
-    try {
-      const response = await axios.post(`${API_URL}/auth/register`, { ...userData });
-      localStorage.setItem('access_token', response.data.access_token);
-    } catch (error) {
-      return error;
-    }
+    const response = await axios.post(`${API_URL}/auth/register`, { ...userData });
+    localStorage.setItem('access_token', response.data.access_token);
 
     return true;
   }, []);

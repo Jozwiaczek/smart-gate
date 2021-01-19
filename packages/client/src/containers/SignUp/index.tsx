@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from '../../hooks';
+import { useAuth, useSnackbar } from '../../hooks';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +46,7 @@ interface Inputs {
 
 export default function Index() {
   const classes = useStyles();
+  const showSnackbar = useSnackbar();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, reset, formState } = useForm<Inputs>({
@@ -63,8 +64,8 @@ export default function Index() {
       await auth.register(values);
       reset();
       history.push('/dashboard');
-    } catch (error) {
-      console.log('L:63 | error: ', error);
+    } catch ({ message }) {
+      showSnackbar({ message, severity: 'error' });
     } finally {
       setLoading(false);
     }
@@ -83,31 +84,31 @@ export default function Index() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} className={classes.inputContainer}>
               <TextField
-                inputRef={register({ required: 'Required' })}
+                inputRef={register()}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
                 fullWidth
-                required
                 error={!!errors.firstName}
                 helperText={errors.firstName?.message}
                 id="firstName"
                 label="First Name"
                 autoFocus
+                disabled={loading}
               />
             </Grid>
             <Grid item xs={12} sm={6} className={classes.inputContainer}>
               <TextField
-                inputRef={register({ required: 'Required' })}
+                inputRef={register()}
                 variant="outlined"
                 fullWidth
-                required
                 id="lastName"
                 error={!!errors.lastName}
                 helperText={errors.lastName?.message}
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                disabled={loading}
               />
             </Grid>
             <Grid item xs={12} className={classes.inputContainer}>
@@ -128,6 +129,7 @@ export default function Index() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                disabled={loading}
               />
             </Grid>
             <Grid item xs={12} className={classes.inputContainer}>
@@ -146,6 +148,7 @@ export default function Index() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                disabled={loading}
               />
             </Grid>
           </Grid>
