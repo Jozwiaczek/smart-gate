@@ -1,9 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Connection } from 'typeorm';
 import { Role } from '../auth/role.enum';
 import { UserEntity } from '../database/entities/user.entity';
 
 @Injectable()
 export class UserService {
+  constructor(private readonly connection: Connection) {}
+
   private users = [
     {
       id: '1',
@@ -19,11 +22,17 @@ export class UserService {
       password: '123',
       firstName: 'Joe',
       lastName: 'Doe',
-      roles: [Role.User],
+      roles: Role.User,
     },
   ] as Array<UserEntity>;
 
   async findOne(email: string): Promise<UserEntity | undefined> {
+    const userEntity = await this.connection.getRepository(UserEntity).findOne({
+      email: 'kupa',
+      password: 'kupa2',
+      roles: Role.Admin,
+    });
+    console.log('L:33 | userEntity: ', userEntity);
     return this.users.find((user) => user.email === email);
   }
 

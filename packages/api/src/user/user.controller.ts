@@ -23,6 +23,11 @@ export class UserController {
     return this.userService.findOne(email);
   }
 
+  @Get('kupa')
+  async findOneKupa(@Body() email: string): Promise<UserEntity | undefined> {
+    return this.userService.findOne(email);
+  }
+
   @UseGuards(OnlyAuthenticatedGuard)
   @Get('me')
   public async getCurrentUser(): Promise<Partial<UserEntity>> {
