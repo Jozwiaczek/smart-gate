@@ -1,44 +1,37 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Role } from '../auth/role.enum';
+import { Connection } from 'typeorm';
 import { UserEntity } from '../database/entities/user.entity';
+import { UserRequestType } from './user-request.type';
 
 @Injectable()
 export class UserService {
-  private users = [
-    {
-      id: '1',
-      email: 'admin',
-      password: '123',
-      firstName: 'Anna',
-      lastName: 'Doe',
-      roles: [Role.Admin],
-    },
-    {
-      id: '2',
-      email: 'user',
-      password: '123',
-      firstName: 'Joe',
-      lastName: 'Doe',
-      roles: [Role.User],
-    },
-  ] as Array<UserEntity>;
+  constructor(private readonly connection: Connection) {}
 
-  async findOne(email: string): Promise<UserEntity | undefined> {
-    return this.users.find((user) => user.email === email);
-  }
-
-  async create(user: UserEntity): Promise<UserEntity> {
-    if (!this.users.includes(user)) {
-      this.users.push(user);
-    }
-    return user;
-  }
-
-  public async getUserByEmail(userEmail: string): Promise<UserEntity> {
-    const foundUser = this.users.find(({ email }) => email === userEmail);
+  async getUserById(userId: string): Promise<UserEntity | undefined> {
+    const foundUser = this.connection.getRepository(UserEntity).findOne({
+      id: userId,
+    });
 
     if (!foundUser) {
-      throw new NotFoundException(`User with email=${userEmail} not found`);
+      throw new NotFoundException(`User with id: ${userId} not found`);
+    }
+
+    return foundUser;
+  }
+
+  async getUsers(): Promise<Array<UserEntity>> {
+    return this.connection.getRepository(UserEntity).find();
+  }
+
+  async create(user: UserRequestType): Promise<UserEntity> {
+    return this.connection.getRepository(UserEntity).save(user);
+  }
+
+  async getByEmail(email: string): Promise<UserEntity | undefined> {
+    const foundUser = this.connection.getRepository(UserEntity).findOne({ email });
+
+    if (!foundUser) {
+      throw new NotFoundException(`User with email=${email} not found`);
     }
 
     return foundUser;

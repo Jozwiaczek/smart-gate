@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserEntity } from '../database/entities/user.entity';
+import { UserRequestType } from '../user/user-request.type';
 import { AuthService } from './auth.service';
 import { Role } from './role.enum';
 import { Roles } from './roles.decorator';
@@ -18,7 +19,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() user: UserEntity) {
+  async register(@Body() user: UserRequestType) {
     return this.authService.register(user);
   }
 

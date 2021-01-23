@@ -122,3 +122,4 @@ dist
 .env.production.local
 
 .idea
+/packages/api/build/
