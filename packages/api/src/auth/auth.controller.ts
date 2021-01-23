@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserEntity } from '../database/entities/user.entity';
-import { UserRequestType } from '../user/user-request.type';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { Role } from './role.enum';
 import { Roles } from './roles.decorator';
@@ -19,7 +19,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() user: UserRequestType) {
+  async register(@Body() user: CreateUserDto) {
     return this.authService.register(user);
   }
 
