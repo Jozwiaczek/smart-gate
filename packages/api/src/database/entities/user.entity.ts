@@ -29,12 +29,13 @@ export class UserEntity {
   })
   public lastName: string | null;
 
-  // TODO: Add @OneToMany relation with Roles entity
   @Column({
-    type: 'varchar',
+    type: 'enum',
+    array: true,
+    nullable: true,
     enum: Role,
   })
-  public roles: Role;
+  public roles: Array<Role>;
 
   @CreateDateColumn({
     type: 'timestamp',
