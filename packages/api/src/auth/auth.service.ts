@@ -83,18 +83,16 @@ export class AuthService {
     return this.userService.getByEmail(this.tokenContent.email);
   }
 
-  async login(user: UserEntity) {
-    const payload = { email: user.email, sub: user.id, roles: user.roles };
+  async login({ email, id, roles }: UserEntity) {
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign({ email, sub: id, roles }),
     };
   }
 
   async register(user: UserRequestType) {
-    const createdUser = await this.userService.create(user);
-    const payload = { email: createdUser.email, sub: createdUser.id, roles: createdUser.roles };
+    const { email, roles, id } = await this.userService.create(user);
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign({ email, sub: id, roles }),
     };
   }
 
