@@ -1,7 +1,7 @@
 import { IsString, IsEmail } from 'class-validator';
-import { Role } from '../auth/role.enum';
+import { Role } from '../../auth/role.enum';
 
-export class UserRequestType {
+export class CreateUserDto {
   @IsEmail()
   email: string;
 

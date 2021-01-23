@@ -6,13 +6,13 @@ import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
 import { LocalStrategy } from './strategies/local/local.strategy';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 // eslint-disable-next-line import/no-cycle
-import { UserModule } from '../user/user.module';
+import { UsersModule } from '../users/users.module';
 import { jwtConstants } from './strategies/jwt/constants';
 import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
-    forwardRef(() => UserModule),
+    forwardRef(() => UsersModule),
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

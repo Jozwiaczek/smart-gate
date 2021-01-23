@@ -11,9 +11,9 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { UserEntity } from '../database/entities/user.entity';
-import { UserRequestType } from '../user/user-request.type';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 // eslint-disable-next-line import/no-cycle
-import { UserService } from '../user/user.service';
+import { UsersService } from '../users/users.service';
 import { Role } from './role.enum';
 
 export interface TokenPayload {
@@ -38,8 +38,8 @@ export class AuthService {
   private tokenContent: TokenPayload | undefined;
 
   constructor(
-    @Inject(forwardRef(() => UserService))
-    private readonly userService: UserService,
+    @Inject(forwardRef(() => UsersService))
+    private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     @Inject(REQUEST)
     private readonly request: Request,
@@ -63,7 +63,7 @@ export class AuthService {
   }
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.userService.getByEmail(email);
+    const user = await this.usersService.findOneByEmail(email);
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
@@ -80,7 +80,7 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    return this.userService.getByEmail(this.tokenContent.email);
+    return this.usersService.findOneByEmail(this.tokenContent.email);
   }
 
   async login({ email, id, roles }: UserEntity) {
@@ -89,8 +89,8 @@ export class AuthService {
     };
   }
 
-  async register(user: UserRequestType) {
-    const { email, roles, id } = await this.userService.create(user);
+  async register(user: CreateUserDto) {
+    const { email, roles, id } = await this.usersService.create(user);
     return {
       access_token: this.jwtService.sign({ email, sub: id, roles }),
     };
