@@ -90,7 +90,8 @@ export class AuthService {
   }
 
   async register(user: CreateUserDto) {
-    const { email, roles, id } = await this.usersService.create(user);
+    const createdUser = await this.usersService.create(user);
+    const { email, roles, id } = createdUser;
     return {
       access_token: this.jwtService.sign({ email, sub: id, roles }),
     };
