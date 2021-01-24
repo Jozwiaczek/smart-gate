@@ -23,8 +23,8 @@ export class UserService {
     },
   ] as Array<UserEntity>;
 
-  async findOne(email: string): Promise<UserEntity | undefined> {
-    return this.users.find((user) => user.email === email);
+  async findById(id: string): Promise<UserEntity | undefined> {
+    return this.users.find((user) => user.id === id);
   }
 
   async create(user: UserEntity): Promise<UserEntity> {
@@ -42,5 +42,11 @@ export class UserService {
     }
 
     return foundUser;
+  }
+
+  getUserByCred(user_email: string, user_password: string): Promise<UserEntity | undefined> {
+    return Promise.resolve(
+      this.users.find(({ email, password }) => user_email === email && user_password === password),
+    );
   }
 }

@@ -1,11 +1,21 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { CookieOptions } from 'express';
+import ms from 'ms';
 import { UserEntity } from '../database/entities/user.entity';
-import { AuthService } from './auth.service';
-import { Role } from './role.enum';
-import { Roles } from './roles.decorator';
-import { RolesGuard } from './roles.guard';
-import { JwtAuthGuard } from './strategies/jwt/jwt-auth.guard';
+import { AuthService, Tokens } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
+import { TokenConfig } from '../utils/constants';
+import { CookiePayload } from './decorators/payload.decorator';
+import { CookieRequest, CookieResponse, LoginRequest, Payload } from '../utils/models';
 
 @Controller('auth')
 export class AuthController {
@@ -13,8 +23,15 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Body() user: UserEntity) {
-    return this.authService.login(user);
+  async login(@Req() request: LoginRequest, @Res({ passthrough: true }) response: CookieResponse) {
+    const {
+      user,
+      body: { keepMeLogin },
+    } = request;
+    const tokens = this.authService.generateTokens(user, keepMeLogin);
+    AuthController.setCookies(tokens, keepMeLogin, response);
+    const { password, ...rest } = user;
+    return rest;
   }
 
   @Post('register')
@@ -22,20 +39,58 @@ export class AuthController {
     return this.authService.register(user);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.User)
-  @Get('profile')
-  getProfile(@Body() user: UserEntity) {
-    return user;
+  @Get('refresh')
+  async refresh(
+    @CookiePayload() payload: Payload,
+    @Req() request: CookieRequest,
+    @Res({ passthrough: true }) response: CookieResponse,
+  ) {
+    const newTokens = await this.authService.refreshTokens({
+      refreshToken: request.cookies[TokenConfig.refreshToken.name],
+      logoutToken: request.cookies[TokenConfig.logoutToken.name],
+      accessToken: request.cookies[TokenConfig.accessToken.name],
+    });
+    AuthController.setCookies(newTokens, payload.keepMeLogin, response);
   }
 
-  @Get('public-route')
-  testPublicRoute() {
-    return 'It works';
+  @Get('logout')
+  async logout(
+    @Req() request: CookieRequest,
+    @Res({ passthrough: true }) response: CookieResponse,
+  ) {
+    const refreshToken = request.cookies[TokenConfig.refreshToken.name];
+    if (!refreshToken) throw new BadRequestException('Invalid cookies');
+
+    await this.authService.logout(refreshToken);
+
+    response.clearCookie(TokenConfig.refreshToken.name);
+    response.clearCookie(TokenConfig.logoutToken.name);
+    response.clearCookie(TokenConfig.accessToken.name);
   }
 
-  @Get('not-public-route')
-  testNotPublicRoute() {
-    return 'It works';
+  private static setCookies(tokens: Tokens, keepMeLogin: boolean, response: CookieResponse) {
+    const options: CookieOptions = {
+      httpOnly: true,
+      path: '/',
+    };
+    response.cookie(TokenConfig.refreshToken.name, tokens.refreshToken, {
+      ...options,
+      expires: new Date(
+        Date.now() +
+          (keepMeLogin
+            ? ms(TokenConfig.refreshToken.keepMe.expiresIn)
+            : ms(TokenConfig.refreshToken.withOutKeepMe.expiresIn)),
+      ),
+    });
+    response.cookie(TokenConfig.accessToken.name, tokens.accessToken, {
+      ...options,
+      expires: new Date(Date.now() + ms(TokenConfig.accessToken.expiresIn)),
+    });
+    if (!keepMeLogin) {
+      response.cookie(TokenConfig.logoutToken.name, tokens.logoutToken, {
+        ...options,
+        expires: undefined,
+      });
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, forwardRef, Get, Inject, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, forwardRef, Get, Inject, UseGuards } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
 import { OnlyAuthenticatedGuard } from '../auth/guards/only-authenticated.guard';
 import { JwtAuthGuard } from '../auth/strategies/jwt/jwt-auth.guard';
@@ -20,12 +20,13 @@ export class UserController {
   @Roles(Role.User)
   @Get()
   async findOne(@Body() email: string): Promise<UserEntity | undefined> {
-    return this.userService.findOne(email);
+    return undefined;
   }
 
   @UseGuards(OnlyAuthenticatedGuard)
   @Get('me')
-  public async getCurrentUser(): Promise<Partial<UserEntity>> {
+  public async getCurrentUser(): Promise<Partial<UserEntity> | undefined> {
+    console.log('here');
     return this.authService.getUser();
   }
 }

@@ -1,153 +1,108 @@
-import {
-  ForbiddenException,
-  forwardRef,
-  Inject,
-  Injectable,
-  Scope,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
+import { forwardRef, Inject, UnauthorizedException } from '@nestjs/common';
 import jsonwebtoken from 'jsonwebtoken';
 import { UserEntity } from '../database/entities/user.entity';
-// eslint-disable-next-line import/no-cycle
 import { UserService } from '../user/user.service';
-import { Role } from './role.enum';
+import { TokenConfig } from '../utils/constants';
 
+export interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+  logoutToken: string;
+}
 export interface TokenPayload {
-  email_verified: boolean;
-  auth_time: number;
-  exp: number;
-  email: string;
-  group?: Array<Role>;
+  sub: string;
+  roles: Array<string>;
+  keepMeLogin: boolean;
 }
 
-interface CognitoTokenContent {
-  header: {
-    alg: string;
-    kid: string;
-  };
-  payload: TokenPayload;
-  signature: string;
-}
-
-@Injectable({ scope: Scope.REQUEST })
 export class AuthService {
-  private tokenContent: TokenPayload | undefined;
-
   constructor(
     @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
-    private readonly jwtService: JwtService,
-    @Inject(REQUEST)
-    private readonly request: Request,
   ) {}
 
-  public async isRequestAuthenticated(requiredRole?: Role): Promise<boolean> {
+  public generateTokens(user: UserEntity, keepMeLogin: boolean): Tokens {
+    const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
+    const tokens: Tokens = {
+      accessToken: jsonwebtoken.sign(payload, 'secret', {
+        expiresIn: TokenConfig.accessToken.expiresIn,
+      }),
+      logoutToken: keepMeLogin
+        ? ''
+        : jsonwebtoken.sign(payload, 'secret', {
+            expiresIn: TokenConfig.logoutToken.expiresIn,
+          }),
+      refreshToken: jsonwebtoken.sign(payload, 'secret', {
+        expiresIn: keepMeLogin
+          ? TokenConfig.refreshToken.keepMe.expiresIn
+          : TokenConfig.refreshToken.withOutKeepMe.expiresIn,
+      }),
+    };
+
+    // todo store refresh token in db
+
+    return tokens;
+  }
+
+  public validateTokens(tokens: Tokens): TokenPayload {
+    const { accessToken, logoutToken } = tokens;
     try {
-      const token: string = this.extractTokenFromHeaders();
+      const accessPayload = jsonwebtoken.verify(accessToken, 'secret') as TokenPayload;
+      if (!accessPayload.keepMeLogin) {
+        const logoutPayload = jsonwebtoken.verify(logoutToken, 'secret') as TokenPayload;
+        if (accessPayload.sub !== logoutPayload.sub) {
+          throw new Error('Invalid subscriber ID');
+        }
+      }
+      return accessPayload;
+    } catch (err) {
+      throw new UnauthorizedException('Invalid tokens');
+    }
+  }
 
-      await this.decodeAndVerifyToken(token);
-
-      if (requiredRole) {
-        this.verifyRole(requiredRole);
+  public async refreshTokens(tokens: Tokens): Promise<Tokens> {
+    const { logoutToken, refreshToken } = tokens;
+    try {
+      const refreshPayload = jsonwebtoken.verify(refreshToken, 'secret') as TokenPayload;
+      if (!refreshPayload.keepMeLogin) {
+        const logoutPayload = jsonwebtoken.verify(logoutToken, 'secret') as TokenPayload;
+        if (logoutPayload.sub !== refreshPayload.sub) {
+          throw new Error('Invalid subscriber ID');
+        }
       }
 
-      return true;
-    } catch (error) {
-      console.error('Error: ', error);
-      return false;
+      // TODO check refresh token in db
+      let newTokens: Tokens;
+      const user = await this.userService.findById(refreshPayload.sub);
+      if (user) {
+        newTokens = this.generateTokens(user, refreshPayload.keepMeLogin);
+        // TODO save refresh token in db
+      } else {
+        throw new Error('Invalid subscriber ID');
+      }
+      return newTokens;
+    } catch (err) {
+      throw new UnauthorizedException('Invalid tokens');
     }
   }
 
-  async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.userService.findOne(email);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
+  public async getUser(): Promise<Promise<UserEntity> | undefined> {
+    return undefined;
   }
 
-  public async getUser(): Promise<UserEntity> {
-    if (!(await this.isRequestAuthenticated())) {
-      throw new UnauthorizedException();
-    }
-
-    if (!this.tokenContent) {
-      throw new UnauthorizedException();
-    }
-
-    return this.userService.getUserByEmail(this.tokenContent.email);
+  public async logout(refreshToken: string) {
+    // TODO remove token
   }
 
   async login(user: UserEntity) {
-    const payload = { email: user.email, sub: user.id, roles: user.roles };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return null;
   }
 
   async register(user: UserEntity) {
-    await this.userService.create(user);
-    const payload = { email: user.email, sub: user.id, roles: user.roles };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return null;
   }
 
-  private async decodeAndVerifyToken(token: string): Promise<TokenPayload> {
-    if (this.tokenContent) {
-      return this.tokenContent;
-    }
-
-    const tokenContent: unknown = jsonwebtoken.decode(token, {
-      complete: true,
-    });
-
-    if (!AuthService.isTokenContentValid(tokenContent)) {
-      throw new Error('Invalid token content');
-    }
-
-    const tokenPublicKey = tokenContent.header.kid;
-    const verifiedTokenContent: TokenPayload = jsonwebtoken.verify(
-      token,
-      tokenPublicKey,
-    ) as TokenPayload;
-
-    this.tokenContent = verifiedTokenContent;
-    return verifiedTokenContent;
-  }
-
-  private static isTokenContentValid(tokenContent: unknown): tokenContent is CognitoTokenContent {
-    return Boolean(tokenContent) && typeof tokenContent !== 'string';
-  }
-
-  private extractTokenFromHeaders(): string {
-    const authorizationHeader: string | undefined = this.request.headers.authorization;
-    if (!authorizationHeader) {
-      throw new Error('Missing Authorization header');
-    }
-
-    const [bearer, token] = authorizationHeader.split(' ');
-
-    if (bearer !== 'Bearer' || !token) {
-      throw new Error('Bad Authorization header');
-    }
-
-    return token;
-  }
-
-  private verifyRole(requiredRole: Role): void {
-    if (!this.tokenContent) {
-      throw new UnauthorizedException();
-    }
-
-    const groupFromToken: Role[] | undefined = this.tokenContent.group;
-
-    if (!groupFromToken || !groupFromToken.includes(requiredRole)) {
-      throw new ForbiddenException();
-    }
+  async validateUser(email: string, password: string): Promise<UserEntity | undefined> {
+    return this.userService.getUserByCred(email, password);
   }
 }

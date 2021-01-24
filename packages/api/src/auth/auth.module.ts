@@ -7,7 +7,7 @@ import { LocalStrategy } from './strategies/local/local.strategy';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 // eslint-disable-next-line import/no-cycle
 import { UserModule } from '../user/user.module';
-import { jwtConstants } from './strategies/jwt/constants';
+import { jwtConstants } from '../utils/constants';
 import { AuthController } from './auth.controller';
 
 @Module({
