@@ -52,9 +52,13 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, []);
 
   const register = useCallback(async (userData?: User) => {
-    const response = await axios.post(`${API_URL}/auth/register`, { ...userData });
+    const response = await axios.post(
+      `${API_URL}/auth/register`,
+      { ...userData },
+      { withCredentials: true },
+    );
     localStorage.setItem('access_token', response.data.access_token);
-
+    console.log('response', response);
     return true;
   }, []);
 

@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common';
 import { CookieOptions } from 'express';
 import ms from 'ms';
-import { UserEntity } from '../database/entities/user.entity';
 import { AuthService, Tokens } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
 import { TokenConfig } from '../utils/constants';
-import { CookiePayload } from './decorators/payload.decorator';
+import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { CookieRequest, CookieResponse, LoginRequest, Payload } from '../utils/models';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -35,8 +35,17 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() user: UserEntity) {
-    return this.authService.register(user);
+  async register(
+    @Body() user: CreateUserDto,
+    @Res({ passthrough: true }) response: CookieResponse,
+  ) {
+    const newUser = await this.authService.register(user).catch(() => {
+      throw new BadRequestException('User already exists');
+    });
+    const tokens = this.authService.generateTokens(newUser, false);
+    AuthController.setCookies(tokens, false, response);
+    const { password, ...rest } = user;
+    return rest;
   }
 
   @Get('refresh')
