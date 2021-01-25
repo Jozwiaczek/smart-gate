@@ -31,6 +31,7 @@ yarn
   - [Api](./packages/api/README.md)
 - Frontend:
   - [Client](./packages/client/README.md)
+  - [Admin](./packages/admin/README.md)
 
 ## 📏 Conventional Commits
 

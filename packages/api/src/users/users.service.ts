@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { UserEntity } from '../database/entities/user.entity';
+import { GetList } from '../interfaces/react-admin-types';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -12,8 +13,9 @@ export class UsersService {
     return this.connection.getRepository(UserEntity).save(createUserDto);
   }
 
-  async findAll(): Promise<Array<UserEntity>> {
-    return this.connection.getRepository(UserEntity).find();
+  async findAll(): Promise<GetList<UserEntity>> {
+    const allUsers = await this.connection.getRepository(UserEntity).find();
+    return { data: allUsers, total: allUsers.length };
   }
 
   async findOne(id: string): Promise<UserEntity | undefined> {
