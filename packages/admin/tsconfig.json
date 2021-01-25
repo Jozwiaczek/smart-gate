@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": "./",
+    "outDir": "./build",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx",
+    "target": "es5",
+    "module": "esnext",
+    "noEmit": true,
+    "allowJs": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "test", "build", "**/*spec.ts"]
+}
