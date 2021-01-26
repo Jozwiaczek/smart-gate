@@ -14,7 +14,8 @@
     "test": "react-scripts test --watchAll=false --passWithNoTests",
     "test:coverage": "jest --coverage --passWithNoTests",
     "test:watch": "react-scripts test",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "hygen:admin-model": "cd ../.. && hygen admin-model new && yarn prettier:fix"
   },
   "dependencies": {
     "react": "^17.0.1",
