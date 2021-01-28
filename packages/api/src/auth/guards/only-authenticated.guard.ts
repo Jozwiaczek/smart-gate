@@ -1,7 +1,8 @@
 import { CanActivate, Injectable, ExecutionContext } from '@nestjs/common';
-import { AuthService, Tokens } from '../auth.service';
+import { AuthService } from '../auth.service';
 import { TokenConfig } from '../../utils/constants';
-import { CookieRequest } from '../../utils/models';
+import { Tokens } from '../../interfaces/token-types';
+import { CookieRequest } from '../../interfaces/cookie-types';
 
 @Injectable()
 export class OnlyAuthenticatedGuard implements CanActivate {

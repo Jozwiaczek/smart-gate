@@ -4,17 +4,7 @@ import { UserEntity } from '../database/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { TokenConfig } from '../utils/constants';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-
-export interface Tokens {
-  accessToken: string;
-  refreshToken: string;
-  logoutToken: string;
-}
-export interface TokenPayload {
-  sub: string;
-  roles: Array<string>;
-  keepMeLogin: boolean;
-}
+import { TokenPayload, Tokens } from '../interfaces/token-types';
 
 export class AuthService {
   constructor(
@@ -24,21 +14,31 @@ export class AuthService {
 
   public generateTokens(user: UserEntity, keepMeLogin: boolean): Tokens {
     const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
-    const tokens: Tokens = {
-      accessToken: jsonwebtoken.sign(payload, 'secret', {
-        expiresIn: TokenConfig.accessToken.expiresIn,
-      }),
-      logoutToken: keepMeLogin
-        ? ''
-        : jsonwebtoken.sign(payload, 'secret', {
-            expiresIn: TokenConfig.logoutToken.expiresIn,
-          }),
-      refreshToken: jsonwebtoken.sign(payload, 'secret', {
-        expiresIn: keepMeLogin
-          ? TokenConfig.refreshToken.keepMe.expiresIn
-          : TokenConfig.refreshToken.withOutKeepMe.expiresIn,
-      }),
-    };
+    const { sign } = jsonwebtoken;
+    let tokens: Tokens;
+    if (keepMeLogin) {
+      tokens = {
+        accessToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.accessToken.expiresIn,
+        }),
+        logoutToken: '',
+        refreshToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.refreshToken.keepMeLogin.expiresIn,
+        }),
+      };
+    } else {
+      tokens = {
+        accessToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.accessToken.expiresIn,
+        }),
+        logoutToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.logoutToken.expiresIn,
+        }),
+        refreshToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.refreshToken.withOutKeepMeLogin.expiresIn,
+        }),
+      };
+    }
 
     // todo store refresh token in db
 
@@ -47,10 +47,11 @@ export class AuthService {
 
   public validateTokens(tokens: Tokens): TokenPayload {
     const { accessToken, logoutToken } = tokens;
+    const { verify } = jsonwebtoken;
     try {
-      const accessPayload = jsonwebtoken.verify(accessToken, 'secret') as TokenPayload;
+      const accessPayload = verify(accessToken, 'secret') as TokenPayload;
       if (!accessPayload.keepMeLogin) {
-        const logoutPayload = jsonwebtoken.verify(logoutToken, 'secret') as TokenPayload;
+        const logoutPayload = verify(logoutToken, 'secret') as TokenPayload;
         if (accessPayload.sub !== logoutPayload.sub) {
           throw new Error('Invalid subscriber ID');
         }
@@ -63,10 +64,11 @@ export class AuthService {
 
   public async refreshTokens(tokens: Tokens): Promise<Tokens> {
     const { logoutToken, refreshToken } = tokens;
+    const { verify } = jsonwebtoken;
     try {
-      const refreshPayload = jsonwebtoken.verify(refreshToken, 'secret') as TokenPayload;
+      const refreshPayload = verify(refreshToken, 'secret') as TokenPayload;
       if (!refreshPayload.keepMeLogin) {
-        const logoutPayload = jsonwebtoken.verify(logoutToken, 'secret') as TokenPayload;
+        const logoutPayload = verify(logoutToken, 'secret') as TokenPayload;
         if (logoutPayload.sub !== refreshPayload.sub) {
           throw new Error('Invalid subscriber ID');
         }
@@ -101,7 +103,9 @@ export class AuthService {
 
   async validateUser(email: string, passwordHash: string): Promise<UserEntity> {
     const user = await this.usersService.findOneByEmail(email);
-    if (user.password !== passwordHash) throw new NotFoundException('User password mismatch');
+    if (user.password !== passwordHash) {
+      throw new NotFoundException('User password mismatch');
+    }
     return user;
   }
 }

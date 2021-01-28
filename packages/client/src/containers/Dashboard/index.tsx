@@ -19,8 +19,7 @@ const Dashboard = () => {
   };
 
   const logoutUser = async () => {
-    const data = await logout();
-    console.log(data);
+    await logout();
   };
 
   const refreshToken = async () => {

@@ -6,10 +6,10 @@ export const jwtConstants = {
 export const TokenConfig = {
   refreshToken: {
     name: 'refresh_token',
-    keepMe: {
+    keepMeLogin: {
       expiresIn: '60d',
     },
-    withOutKeepMe: {
+    withOutKeepMeLogin: {
       expiresIn: '12h',
     },
   },

@@ -10,12 +10,13 @@ import {
 } from '@nestjs/common';
 import { CookieOptions } from 'express';
 import ms from 'ms';
-import { AuthService, Tokens } from './auth.service';
+import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
 import { TokenConfig } from '../utils/constants';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
-import { CookieRequest, CookieResponse, LoginRequest, Payload } from '../utils/models';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
+import { Payload, Tokens } from '../interfaces/token-types';
 
 @Controller('auth')
 export class AuthController {
@@ -54,10 +55,11 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
+    const { cookies } = request;
     const newTokens = await this.authService.refreshTokens({
-      refreshToken: request.cookies[TokenConfig.refreshToken.name],
-      logoutToken: request.cookies[TokenConfig.logoutToken.name],
-      accessToken: request.cookies[TokenConfig.accessToken.name],
+      refreshToken: cookies[TokenConfig.refreshToken.name],
+      logoutToken: cookies[TokenConfig.logoutToken.name],
+      accessToken: cookies[TokenConfig.accessToken.name],
     });
     AuthController.setCookies(newTokens, payload.keepMeLogin, response);
   }
@@ -67,7 +69,8 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const refreshToken = request.cookies[TokenConfig.refreshToken.name];
+    const { cookies } = request;
+    const refreshToken = cookies[TokenConfig.refreshToken.name];
     if (!refreshToken) throw new BadRequestException('Invalid cookies');
 
     await this.authService.logout(refreshToken);
@@ -78,28 +81,30 @@ export class AuthController {
   }
 
   private static setCookies(tokens: Tokens, keepMeLogin: boolean, response: CookieResponse) {
+    const { accessToken, logoutToken, refreshToken } = tokens;
     const options: CookieOptions = {
       httpOnly: true,
       path: '/',
     };
-    response.cookie(TokenConfig.refreshToken.name, tokens.refreshToken, {
-      ...options,
-      expires: new Date(
-        Date.now() +
-          (keepMeLogin
-            ? ms(TokenConfig.refreshToken.keepMe.expiresIn)
-            : ms(TokenConfig.refreshToken.withOutKeepMe.expiresIn)),
-      ),
-    });
-    response.cookie(TokenConfig.accessToken.name, tokens.accessToken, {
-      ...options,
-      expires: new Date(Date.now() + ms(TokenConfig.accessToken.expiresIn)),
-    });
-    if (!keepMeLogin) {
-      response.cookie(TokenConfig.logoutToken.name, tokens.logoutToken, {
+
+    if (keepMeLogin) {
+      response.cookie(TokenConfig.refreshToken.name, refreshToken, {
+        ...options,
+        expires: new Date(Date.now() + ms(TokenConfig.refreshToken.keepMeLogin.expiresIn)),
+      });
+    } else {
+      response.cookie(TokenConfig.refreshToken.name, refreshToken, {
+        ...options,
+        expires: new Date(Date.now() + ms(TokenConfig.refreshToken.withOutKeepMeLogin.expiresIn)),
+      });
+      response.cookie(TokenConfig.logoutToken.name, logoutToken, {
         ...options,
         expires: undefined,
       });
     }
+    response.cookie(TokenConfig.accessToken.name, accessToken, {
+      ...options,
+      expires: new Date(Date.now() + ms(TokenConfig.accessToken.expiresIn)),
+    });
   }
 }

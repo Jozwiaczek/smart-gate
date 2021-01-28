@@ -1,7 +1,6 @@
 import { Request } from '@nestjs/common';
 import { CookieOptions } from 'express';
 import { UserEntity } from '../database/entities/user.entity';
-import { TokenPayload } from '../auth/auth.service';
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 export interface LoginRequest
@@ -27,9 +26,4 @@ export interface CookieRequest extends Request {
   cookies: {
     [cookie: string]: string;
   };
-}
-
-export interface Payload extends TokenPayload {
-  iat: number;
-  exp: number;
 }
