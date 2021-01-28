@@ -2,6 +2,25 @@
 
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
 
+<div
+  style={{
+    display: 'flex',
+    width: 140,
+    height: 35,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }}
+  href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=8%3A30"
+>
+  <img
+    src="https://theme.zdassets.com/theme_assets/9325143/ec27c7adedf401a3bc21f3e389011dfad2caa67b.png"
+    alt="Figma logo"
+    width="auto"
+  /> 
+  <h3>Designs</h3>
+</a>
+
+
 ## 🚩 Table of Contents
 
 - [Getting started](#-getting-started)
