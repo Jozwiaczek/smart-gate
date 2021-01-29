@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Role } from '../../auth/role.enum';
+// eslint-disable-next-line import/no-cycle
+import { RefreshTokenEntity } from './refreshToken.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -36,6 +45,9 @@ export class UserEntity {
     enum: Role,
   })
   public roles: Array<Role>;
+
+  @OneToMany(() => RefreshTokenEntity, (token) => token.user)
+  public refreshTokens: Promise<[RefreshTokenEntity]>;
 
   @CreateDateColumn({
     type: 'timestamp',
