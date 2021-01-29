@@ -63,7 +63,12 @@ export default function Index() {
     try {
       await auth.register(values);
       reset();
-      history.push('/dashboard');
+      const isPlatformAuthAvailable = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+      if (isPlatformAuthAvailable) {
+        history.push('/enablePlatformAuth');
+      } else {
+        history.push('/dashboard');
+      }
     } catch ({ message }) {
       showSnackbar({ message, severity: 'error' });
     } finally {
