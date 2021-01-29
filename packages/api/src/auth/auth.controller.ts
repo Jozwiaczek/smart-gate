@@ -11,13 +11,12 @@ import {
 import { CookieOptions } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
-import { TokenConfig } from '../utils/constants';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
 import { GeneratedTokens, Payload } from '../interfaces/token-types';
 import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
-import { getCookies } from '../utils/helpers';
+import { getCookies, constants } from '../utils';
 
 @Controller('auth')
 export class AuthController {
@@ -57,11 +56,12 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
+    const { tokenConfig } = constants;
     const cookies = getCookies(request);
     const newTokens = await this.authService.refreshTokens({
-      refreshToken: cookies[TokenConfig.refreshToken.name],
-      logoutToken: cookies[TokenConfig.logoutToken.name],
-      accessToken: cookies[TokenConfig.accessToken.name],
+      refreshToken: cookies[tokenConfig.refreshToken.name],
+      logoutToken: cookies[tokenConfig.logoutToken.name],
+      accessToken: cookies[tokenConfig.accessToken.name],
     });
     AuthController.setCookies(newTokens, payload.keepMeLogin, response, false);
   }
@@ -73,13 +73,14 @@ export class AuthController {
     @CookiePayload() payload: Payload,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
+    const { tokenConfig } = constants;
     const cookies = getCookies(request);
-    const refreshToken = cookies[TokenConfig.refreshToken.name];
+    const refreshToken = cookies[tokenConfig.refreshToken.name];
     await this.authService.logout(refreshToken, payload.sub);
 
-    response.clearCookie(TokenConfig.refreshToken.name);
-    response.clearCookie(TokenConfig.logoutToken.name);
-    response.clearCookie(TokenConfig.accessToken.name);
+    response.clearCookie(tokenConfig.refreshToken.name);
+    response.clearCookie(tokenConfig.logoutToken.name);
+    response.clearCookie(tokenConfig.accessToken.name);
   }
 
   private static setCookies(
@@ -93,6 +94,7 @@ export class AuthController {
       accessExpiration,
       refreshExpiration,
     } = tokenGen;
+    const { tokenConfig } = constants;
     const isDevelopment = process.env.ENV === 'development';
     const options: CookieOptions = {
       httpOnly: true,
@@ -102,18 +104,18 @@ export class AuthController {
     };
 
     if (!keepMeLogin) {
-      response.cookie(TokenConfig.logoutToken.name, logoutToken, {
+      response.cookie(tokenConfig.logoutToken.name, logoutToken, {
         ...options,
         expires: undefined,
       });
     }
     if (setRefreshToken) {
-      response.cookie(TokenConfig.refreshToken.name, refreshToken, {
+      response.cookie(tokenConfig.refreshToken.name, refreshToken, {
         ...options,
         expires: refreshExpiration,
       });
     }
-    response.cookie(TokenConfig.accessToken.name, accessToken, {
+    response.cookie(tokenConfig.accessToken.name, accessToken, {
       ...options,
       expires: accessExpiration,
     });

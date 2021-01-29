@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { UserEntity } from '../database/entities/user.entity';
 import { UsersService } from '../users/users.service';
-import { TokenConfig } from '../utils/constants';
+import { constants } from '../utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { GeneratedTokens, Payload, TokenPayload, Tokens } from '../interfaces/token-types';
 import { RefreshTokenService } from './refresh-token.service';
@@ -16,6 +16,7 @@ export class AuthService {
   ) {}
 
   private static generateTokens(user: UserEntity, keepMeLogin: boolean): GeneratedTokens {
+    const { tokenConfig } = constants;
     const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
     const { sign } = jsonwebtoken;
     const { ACCESS_SECRET, REFRESH_SECRET, LOGOUT_SECRET } = process.env;
@@ -26,23 +27,23 @@ export class AuthService {
     if (keepMeLogin) {
       tokens = {
         accessToken: sign(payload, ACCESS_SECRET, {
-          expiresIn: TokenConfig.accessToken.expiresIn,
+          expiresIn: tokenConfig.accessToken.expiresIn,
         }),
         logoutToken: '',
         refreshToken: sign(payload, REFRESH_SECRET, {
-          expiresIn: TokenConfig.refreshToken.keepMeLogin.expiresIn,
+          expiresIn: tokenConfig.refreshToken.keepMeLogin.expiresIn,
         }),
       };
     } else {
       tokens = {
         accessToken: sign(payload, ACCESS_SECRET, {
-          expiresIn: TokenConfig.accessToken.expiresIn,
+          expiresIn: tokenConfig.accessToken.expiresIn,
         }),
         logoutToken: sign(payload, LOGOUT_SECRET, {
-          expiresIn: TokenConfig.logoutToken.expiresIn,
+          expiresIn: tokenConfig.logoutToken.expiresIn,
         }),
         refreshToken: sign(payload, REFRESH_SECRET, {
-          expiresIn: TokenConfig.refreshToken.withOutKeepMeLogin.expiresIn,
+          expiresIn: tokenConfig.refreshToken.withOutKeepMeLogin.expiresIn,
         }),
       };
     }
