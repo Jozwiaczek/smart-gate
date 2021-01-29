@@ -1,153 +1,111 @@
-import {
-  ForbiddenException,
-  forwardRef,
-  Inject,
-  Injectable,
-  Scope,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
+import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import jsonwebtoken from 'jsonwebtoken';
 import { UserEntity } from '../database/entities/user.entity';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-// eslint-disable-next-line import/no-cycle
 import { UsersService } from '../users/users.service';
-import { Role } from './role.enum';
+import { TokenConfig } from '../utils/constants';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { TokenPayload, Tokens } from '../interfaces/token-types';
 
-export interface TokenPayload {
-  email_verified: boolean;
-  auth_time: number;
-  exp: number;
-  email: string;
-  group?: Array<Role>;
-}
-
-interface CognitoTokenContent {
-  header: {
-    alg: string;
-    kid: string;
-  };
-  payload: TokenPayload;
-  signature: string;
-}
-
-@Injectable({ scope: Scope.REQUEST })
 export class AuthService {
-  private tokenContent: TokenPayload | undefined;
-
   constructor(
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
-    private readonly jwtService: JwtService,
-    @Inject(REQUEST)
-    private readonly request: Request,
   ) {}
 
-  public async isRequestAuthenticated(requiredRole?: Role): Promise<boolean> {
+  public generateTokens(user: UserEntity, keepMeLogin: boolean): Tokens {
+    const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
+    const { sign } = jsonwebtoken;
+    let tokens: Tokens;
+    if (keepMeLogin) {
+      tokens = {
+        accessToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.accessToken.expiresIn,
+        }),
+        logoutToken: '',
+        refreshToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.refreshToken.keepMeLogin.expiresIn,
+        }),
+      };
+    } else {
+      tokens = {
+        accessToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.accessToken.expiresIn,
+        }),
+        logoutToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.logoutToken.expiresIn,
+        }),
+        refreshToken: sign(payload, 'secret', {
+          expiresIn: TokenConfig.refreshToken.withOutKeepMeLogin.expiresIn,
+        }),
+      };
+    }
+
+    // todo store refresh token in db
+
+    return tokens;
+  }
+
+  public validateTokens(tokens: Tokens): TokenPayload {
+    const { accessToken, logoutToken } = tokens;
+    const { verify } = jsonwebtoken;
     try {
-      const token: string = this.extractTokenFromHeaders();
+      const accessPayload = verify(accessToken, 'secret') as TokenPayload;
+      if (!accessPayload.keepMeLogin) {
+        const logoutPayload = verify(logoutToken, 'secret') as TokenPayload;
+        if (accessPayload.sub !== logoutPayload.sub) {
+          throw new Error('Invalid subscriber ID');
+        }
+      }
+      return accessPayload;
+    } catch (err) {
+      throw new UnauthorizedException('Invalid tokens');
+    }
+  }
 
-      await this.decodeAndVerifyToken(token);
-
-      if (requiredRole) {
-        this.verifyRole(requiredRole);
+  public async refreshTokens(tokens: Tokens): Promise<Tokens> {
+    const { logoutToken, refreshToken } = tokens;
+    const { verify } = jsonwebtoken;
+    try {
+      const refreshPayload = verify(refreshToken, 'secret') as TokenPayload;
+      if (!refreshPayload.keepMeLogin) {
+        const logoutPayload = verify(logoutToken, 'secret') as TokenPayload;
+        if (logoutPayload.sub !== refreshPayload.sub) {
+          throw new Error('Invalid subscriber ID');
+        }
       }
 
-      return true;
-    } catch (error) {
-      console.error('Error: ', error);
-      return false;
+      // TODO check refresh token in db
+      let newTokens: Tokens;
+      const user = await this.usersService.findOne(refreshPayload.sub);
+      if (user) {
+        newTokens = this.generateTokens(user, refreshPayload.keepMeLogin);
+        // TODO save refresh token in db
+      } else {
+        throw new Error('Invalid subscriber ID');
+      }
+      return newTokens;
+    } catch (err) {
+      throw new UnauthorizedException('Invalid tokens');
     }
   }
 
-  async validateUser(email: string, pass: string): Promise<any> {
+  public async getUser(): Promise<Promise<UserEntity> | undefined> {
+    return undefined;
+  }
+
+  public async logout(refreshToken: string) {
+    // TODO remove token
+  }
+
+  async register(user: CreateUserDto): Promise<UserEntity> {
+    return this.usersService.create(user);
+  }
+
+  async validateUser(email: string, passwordHash: string): Promise<UserEntity> {
     const user = await this.usersService.findOneByEmail(email);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+    if (user.password !== passwordHash) {
+      throw new NotFoundException('User password mismatch');
     }
-    return null;
-  }
-
-  public async getUserFromToken(): Promise<UserEntity | undefined> {
-    if (!(await this.isRequestAuthenticated())) {
-      throw new UnauthorizedException();
-    }
-
-    if (!this.tokenContent) {
-      throw new UnauthorizedException();
-    }
-
-    return this.usersService.findOneByEmail(this.tokenContent.email);
-  }
-
-  async login({ email, id, roles }: UserEntity) {
-    return {
-      access_token: this.jwtService.sign({ email, sub: id, roles }),
-    };
-  }
-
-  async register(user: CreateUserDto) {
-    const createdUser = await this.usersService.create(user);
-    const { email, roles, id } = createdUser;
-    return {
-      access_token: this.jwtService.sign({ email, sub: id, roles }),
-    };
-  }
-
-  private async decodeAndVerifyToken(token: string): Promise<TokenPayload> {
-    if (this.tokenContent) {
-      return this.tokenContent;
-    }
-
-    const tokenContent: unknown = jsonwebtoken.decode(token, {
-      complete: true,
-    });
-
-    if (!AuthService.isTokenContentValid(tokenContent)) {
-      throw new Error('Invalid token content');
-    }
-
-    const tokenPublicKey = tokenContent.header.kid;
-    const verifiedTokenContent: TokenPayload = jsonwebtoken.verify(
-      token,
-      tokenPublicKey,
-    ) as TokenPayload;
-
-    this.tokenContent = verifiedTokenContent;
-    return verifiedTokenContent;
-  }
-
-  private static isTokenContentValid(tokenContent: unknown): tokenContent is CognitoTokenContent {
-    return Boolean(tokenContent) && typeof tokenContent !== 'string';
-  }
-
-  private extractTokenFromHeaders(): string {
-    const authorizationHeader: string | undefined = this.request.headers.authorization;
-    if (!authorizationHeader) {
-      throw new Error('Missing Authorization header');
-    }
-
-    const [bearer, token] = authorizationHeader.split(' ');
-
-    if (bearer !== 'Bearer' || !token) {
-      throw new Error('Bad Authorization header');
-    }
-
-    return token;
-  }
-
-  private verifyRole(requiredRole: Role): void {
-    if (!this.tokenContent) {
-      throw new UnauthorizedException();
-    }
-
-    const groupFromToken: Role[] | undefined = this.tokenContent.group;
-
-    if (!groupFromToken || !groupFromToken.includes(requiredRole)) {
-      throw new ForbiddenException();
-    }
+    return user;
   }
 }

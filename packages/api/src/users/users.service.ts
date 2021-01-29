@@ -28,14 +28,13 @@ export class UsersService {
     return foundUser;
   }
 
-  async findOneByEmail(email: string): Promise<UserEntity | undefined> {
-    const foundUser = await this.connection.getRepository(UserEntity).findOne({ email });
-
-    if (!foundUser) {
-      throw new NotFoundException(`User with email: ${email} not found`);
-    }
-
-    return foundUser;
+  async findOneByEmail(email: string): Promise<UserEntity> {
+    return this.connection
+      .getRepository(UserEntity)
+      .findOneOrFail({ email })
+      .catch(() => {
+        throw new NotFoundException(`User with email: ${email} not found`);
+      });
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<UserEntity | undefined> {

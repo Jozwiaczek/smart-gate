@@ -11,8 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
-import { OnlyAuthenticatedGuard } from '../auth/guards/only-authenticated.guard';
-import { UserEntity } from '../database/entities/user.entity';
+import { RolesGuard } from '../auth/roles.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
@@ -35,7 +34,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
@@ -49,11 +48,5 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
-  }
-
-  @UseGuards(OnlyAuthenticatedGuard)
-  @Get('me')
-  public async getCurrentUser(): Promise<UserEntity | undefined> {
-    return this.authService.getUserFromToken();
   }
 }
