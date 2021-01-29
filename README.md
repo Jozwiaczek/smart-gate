@@ -18,6 +18,7 @@
   - [Installation](#-installation)
 - [Packages Docs](#-packages-docs)
 - [Conventional Commits](#-conventional-commits)
+- [Hygen - Code generator](#-hygen-code-generator)
 - [Available scripts](#-available-scripts)
 - [Useful docs](#-useful-docs)
 
@@ -77,6 +78,18 @@ For just validating your commit message without commiting it use terminal:
 ```shell
 echo 'foo: bar' | commitlint
 ```
+
+## Hygen - Code generator
+
+Hygen is the cli dev tool that provides the ability for generating scalable code. All code generation templates are defined in the `__template` directory.
+Remember to add created model to git files (typically those files are excluded from default).
+For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
+
+### Avaliable generators:
+
+| Package | Script              | Description                            |
+| ------- | ------------------- | -------------------------------------- |
+| admin   | `hygen:admin-model` | Creates selected views for admin model |
 
 ## Available scripts
 
