@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { TokenConfig } from '../../utils/constants';
 import { Tokens } from '../../interfaces/token-types';
 import { CookieRequest } from '../../interfaces/cookie-types';
+import { getCookies } from '../../utils/helpers';
 
 @Injectable()
 export class OnlyAuthenticatedGuard implements CanActivate {
@@ -10,10 +11,11 @@ export class OnlyAuthenticatedGuard implements CanActivate {
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<CookieRequest>();
+    const cookies = getCookies(request);
     const tokens: Tokens = {
-      refreshToken: request.cookies[TokenConfig.refreshToken.name],
-      logoutToken: request.cookies[TokenConfig.logoutToken.name],
-      accessToken: request.cookies[TokenConfig.accessToken.name],
+      refreshToken: cookies[TokenConfig.refreshToken.name],
+      logoutToken: cookies[TokenConfig.logoutToken.name],
+      accessToken: cookies[TokenConfig.accessToken.name],
     };
     return !!this.authService.validateTokens(tokens);
   }

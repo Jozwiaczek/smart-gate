@@ -17,6 +17,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
 import { GeneratedTokens, Payload } from '../interfaces/token-types';
 import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
+import { getCookies } from '../utils/helpers';
 
 @Controller('auth')
 export class AuthController {
@@ -56,7 +57,7 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const { cookies } = request;
+    const cookies = getCookies(request);
     const newTokens = await this.authService.refreshTokens({
       refreshToken: cookies[TokenConfig.refreshToken.name],
       logoutToken: cookies[TokenConfig.logoutToken.name],
@@ -72,7 +73,7 @@ export class AuthController {
     @CookiePayload() payload: Payload,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const { cookies } = request;
+    const cookies = getCookies(request);
     const refreshToken = cookies[TokenConfig.refreshToken.name];
     await this.authService.logout(refreshToken, payload.sub);
 
@@ -92,9 +93,12 @@ export class AuthController {
       accessExpiration,
       refreshExpiration,
     } = tokenGen;
+    const isDevelopment = process.env.ENV === 'development';
     const options: CookieOptions = {
       httpOnly: true,
       path: '/',
+      secure: !isDevelopment,
+      sameSite: isDevelopment ? undefined : 'strict',
     };
 
     if (!keepMeLogin) {
@@ -109,7 +113,6 @@ export class AuthController {
         expires: refreshExpiration,
       });
     }
-
     response.cookie(TokenConfig.accessToken.name, accessToken, {
       ...options,
       expires: accessExpiration,
