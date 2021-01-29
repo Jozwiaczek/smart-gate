@@ -18,26 +18,30 @@ export class AuthService {
   private static generateTokens(user: UserEntity, keepMeLogin: boolean): GeneratedTokens {
     const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
     const { sign } = jsonwebtoken;
+    const { ACCESS_SECRET, REFRESH_SECRET, LOGOUT_SECRET } = process.env;
+    if (!ACCESS_SECRET || !REFRESH_SECRET || !LOGOUT_SECRET) {
+      throw new Error('Secrets not set');
+    }
     let tokens: Tokens;
     if (keepMeLogin) {
       tokens = {
-        accessToken: sign(payload, 'secret', {
+        accessToken: sign(payload, ACCESS_SECRET, {
           expiresIn: TokenConfig.accessToken.expiresIn,
         }),
         logoutToken: '',
-        refreshToken: sign(payload, 'secret', {
+        refreshToken: sign(payload, REFRESH_SECRET, {
           expiresIn: TokenConfig.refreshToken.keepMeLogin.expiresIn,
         }),
       };
     } else {
       tokens = {
-        accessToken: sign(payload, 'secret', {
+        accessToken: sign(payload, ACCESS_SECRET, {
           expiresIn: TokenConfig.accessToken.expiresIn,
         }),
-        logoutToken: sign(payload, 'secret', {
+        logoutToken: sign(payload, LOGOUT_SECRET, {
           expiresIn: TokenConfig.logoutToken.expiresIn,
         }),
-        refreshToken: sign(payload, 'secret', {
+        refreshToken: sign(payload, REFRESH_SECRET, {
           expiresIn: TokenConfig.refreshToken.withOutKeepMeLogin.expiresIn,
         }),
       };
@@ -68,10 +72,14 @@ export class AuthService {
   public validateTokens(tokens: Tokens): TokenPayload {
     const { accessToken, logoutToken } = tokens;
     const { verify } = jsonwebtoken;
+    const { ACCESS_SECRET, LOGOUT_SECRET } = process.env;
+    if (!ACCESS_SECRET || !LOGOUT_SECRET) {
+      throw new Error('Secrets not set');
+    }
     try {
-      const accessPayload = verify(accessToken, 'secret') as TokenPayload;
+      const accessPayload = verify(accessToken, ACCESS_SECRET) as TokenPayload;
       if (!accessPayload.keepMeLogin) {
-        const logoutPayload = verify(logoutToken, 'secret') as TokenPayload;
+        const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
         if (accessPayload.sub !== logoutPayload.sub) {
           throw new Error('Invalid subscriber ID');
         }
@@ -85,10 +93,14 @@ export class AuthService {
   public async refreshTokens(tokens: Tokens): Promise<GeneratedTokens> {
     const { logoutToken, refreshToken } = tokens;
     const { verify } = jsonwebtoken;
+    const { REFRESH_SECRET, LOGOUT_SECRET } = process.env;
+    if (!REFRESH_SECRET || !LOGOUT_SECRET) {
+      throw new Error('Secrets not set');
+    }
     try {
-      const refreshPayload = verify(refreshToken, 'secret') as TokenPayload;
+      const refreshPayload = verify(refreshToken, REFRESH_SECRET) as TokenPayload;
       if (!refreshPayload.keepMeLogin) {
-        const logoutPayload = verify(logoutToken, 'secret') as TokenPayload;
+        const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
         if (logoutPayload.sub !== refreshPayload.sub) {
           throw new Error('Invalid subscriber ID');
         }
