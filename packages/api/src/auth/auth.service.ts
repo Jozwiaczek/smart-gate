@@ -5,15 +5,17 @@ import { UserEntity } from '../database/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { TokenConfig } from '../utils/constants';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { TokenPayload, Tokens } from '../interfaces/token-types';
+import { GeneratedTokens, Payload, TokenPayload, Tokens } from '../interfaces/token-types';
+import { RefreshTokenService } from './refresh-token.service';
 
 export class AuthService {
   constructor(
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
+    private readonly refreshTokenService: RefreshTokenService,
   ) {}
 
-  public generateTokens(user: UserEntity, keepMeLogin: boolean): Tokens {
+  private static generateTokens(user: UserEntity, keepMeLogin: boolean): GeneratedTokens {
     const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
     const { sign } = jsonwebtoken;
     let tokens: Tokens;
@@ -41,9 +43,26 @@ export class AuthService {
       };
     }
 
-    // todo store refresh token in db
+    const { exp: accessExp } = jsonwebtoken.decode(tokens.accessToken) as Payload;
+    const { exp: refreshExp } = jsonwebtoken.decode(tokens.refreshToken) as Payload;
 
-    return tokens;
+    return {
+      tokens,
+      accessExpiration: new Date(accessExp * 1000),
+      refreshExpiration: new Date(refreshExp * 1000),
+    };
+  }
+
+  public async login(user: UserEntity, keepMeLogin: boolean): Promise<GeneratedTokens> {
+    const genTokens = AuthService.generateTokens(user, keepMeLogin);
+    const {
+      tokens: { refreshToken },
+      refreshExpiration,
+    } = genTokens;
+
+    await this.refreshTokenService.create(refreshToken, user, refreshExpiration);
+
+    return genTokens;
   }
 
   public validateTokens(tokens: Tokens): TokenPayload {
@@ -63,7 +82,7 @@ export class AuthService {
     }
   }
 
-  public async refreshTokens(tokens: Tokens): Promise<Tokens> {
+  public async refreshTokens(tokens: Tokens): Promise<GeneratedTokens> {
     const { logoutToken, refreshToken } = tokens;
     const { verify } = jsonwebtoken;
     try {
@@ -74,15 +93,13 @@ export class AuthService {
           throw new Error('Invalid subscriber ID');
         }
       }
-
-      // TODO check refresh token in db
-      let newTokens: Tokens;
       const user = await this.usersService.findOne(refreshPayload.sub);
-      if (user) {
-        newTokens = this.generateTokens(user, refreshPayload.keepMeLogin);
-        // TODO save refresh token in db
+      const valid = !!(await this.refreshTokenService.find(refreshToken, user));
+      let newTokens: GeneratedTokens;
+      if (valid) {
+        newTokens = AuthService.generateTokens(user, refreshPayload.keepMeLogin);
       } else {
-        throw new Error('Invalid subscriber ID');
+        throw new Error('Invalid refresh token');
       }
       return newTokens;
     } catch (err) {
@@ -94,8 +111,9 @@ export class AuthService {
     return undefined;
   }
 
-  public async logout(refreshToken: string) {
-    // TODO remove token
+  public async logout(refreshToken: string, userId: string) {
+    const user = await this.usersService.findOne(userId);
+    await this.refreshTokenService.delete(refreshToken, user);
   }
 
   async register(user: CreateUserDto): Promise<UserEntity> {
