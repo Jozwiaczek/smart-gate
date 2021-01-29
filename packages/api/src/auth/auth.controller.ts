@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { CookieOptions } from 'express';
 import ms from 'ms';
+import * as bcrypt from 'bcrypt';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
 import { TokenConfig } from '../utils/constants';

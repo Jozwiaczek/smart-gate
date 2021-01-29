@@ -1,5 +1,6 @@
 import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import jsonwebtoken from 'jsonwebtoken';
+import * as bcrypt from 'bcrypt';
 import { UserEntity } from '../database/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { TokenConfig } from '../utils/constants';
@@ -98,12 +99,20 @@ export class AuthService {
   }
 
   async register(user: CreateUserDto): Promise<UserEntity> {
-    return this.usersService.create(user);
+    const { password, ...rest } = user;
+
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(password, salt);
+
+    const newUser: CreateUserDto = { password: hash, ...rest };
+    return this.usersService.create(newUser);
   }
 
-  async validateUser(email: string, passwordHash: string): Promise<UserEntity> {
+  async validateUser(email: string, password: string): Promise<UserEntity> {
     const user = await this.usersService.findOneByEmail(email);
-    if (user.password !== passwordHash) {
+    const { password: passwordHash } = user;
+    const isMatch = await bcrypt.compare(password, passwordHash);
+    if (!isMatch) {
       throw new NotFoundException('User password mismatch');
     }
     return user;
