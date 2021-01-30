@@ -9,14 +9,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CookieOptions } from 'express';
-import ms from 'ms';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
-import { TokenConfig } from '../utils/constants';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
-import { Payload, Tokens } from '../interfaces/token-types';
+import { GeneratedTokens, Payload } from '../interfaces/token-types';
+import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
+import { getCookies, constants } from '../utils';
 
 @Controller('auth')
 export class AuthController {
@@ -29,8 +29,9 @@ export class AuthController {
       user,
       body: { keepMeLogin },
     } = request;
-    const tokens = this.authService.generateTokens(user, keepMeLogin);
-    AuthController.setCookies(tokens, keepMeLogin, response);
+
+    const genTokens = await this.authService.login(user, keepMeLogin);
+    AuthController.setCookies(genTokens, keepMeLogin, response, true);
     const { password, ...rest } = user;
     return rest;
   }
@@ -43,8 +44,8 @@ export class AuthController {
     const newUser = await this.authService.register(user).catch(() => {
       throw new BadRequestException('User already exists');
     });
-    const tokens = this.authService.generateTokens(newUser, false);
-    AuthController.setCookies(tokens, false, response);
+    const genTokens = await this.authService.login(newUser, false);
+    AuthController.setCookies(genTokens, false, response, true);
     const { password, ...rest } = user;
     return rest;
   }
@@ -55,56 +56,68 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const { cookies } = request;
+    const { tokenConfig } = constants;
+    const cookies = getCookies(request);
     const newTokens = await this.authService.refreshTokens({
-      refreshToken: cookies[TokenConfig.refreshToken.name],
-      logoutToken: cookies[TokenConfig.logoutToken.name],
-      accessToken: cookies[TokenConfig.accessToken.name],
+      refreshToken: cookies[tokenConfig.refreshToken.name],
+      logoutToken: cookies[tokenConfig.logoutToken.name],
+      accessToken: cookies[tokenConfig.accessToken.name],
     });
-    AuthController.setCookies(newTokens, payload.keepMeLogin, response);
+    AuthController.setCookies(newTokens, payload.keepMeLogin, response, false);
   }
 
+  @UseGuards(OnlyAuthenticatedGuard)
   @Get('logout')
   async logout(
     @Req() request: CookieRequest,
+    @CookiePayload() payload: Payload,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const { cookies } = request;
-    const refreshToken = cookies[TokenConfig.refreshToken.name];
-    if (!refreshToken) throw new BadRequestException('Invalid cookies');
+    const { tokenConfig } = constants;
+    const cookies = getCookies(request);
+    const refreshToken = cookies[tokenConfig.refreshToken.name];
+    await this.authService.logout(refreshToken, payload.sub);
 
-    await this.authService.logout(refreshToken);
-
-    response.clearCookie(TokenConfig.refreshToken.name);
-    response.clearCookie(TokenConfig.logoutToken.name);
-    response.clearCookie(TokenConfig.accessToken.name);
+    response.clearCookie(tokenConfig.refreshToken.name);
+    response.clearCookie(tokenConfig.logoutToken.name);
+    response.clearCookie(tokenConfig.accessToken.name);
   }
 
-  private static setCookies(tokens: Tokens, keepMeLogin: boolean, response: CookieResponse) {
-    const { accessToken, logoutToken, refreshToken } = tokens;
+  private static setCookies(
+    tokenGen: GeneratedTokens,
+    keepMeLogin: boolean,
+    response: CookieResponse,
+    setRefreshToken: boolean,
+  ) {
+    const {
+      tokens: { accessToken, logoutToken, refreshToken },
+      accessExpiration,
+      refreshExpiration,
+    } = tokenGen;
+    const { tokenConfig } = constants;
+    const isDevelopment = process.env.ENV === 'development';
     const options: CookieOptions = {
       httpOnly: true,
       path: '/',
+      secure: !isDevelopment,
+      sameSite: isDevelopment ? undefined : 'strict',
     };
 
-    if (keepMeLogin) {
-      response.cookie(TokenConfig.refreshToken.name, refreshToken, {
-        ...options,
-        expires: new Date(Date.now() + ms(TokenConfig.refreshToken.keepMeLogin.expiresIn)),
-      });
-    } else {
-      response.cookie(TokenConfig.refreshToken.name, refreshToken, {
-        ...options,
-        expires: new Date(Date.now() + ms(TokenConfig.refreshToken.withOutKeepMeLogin.expiresIn)),
-      });
-      response.cookie(TokenConfig.logoutToken.name, logoutToken, {
+    if (!keepMeLogin) {
+      response.cookie(tokenConfig.logoutToken.name, logoutToken, {
         ...options,
         expires: undefined,
       });
     }
-    response.cookie(TokenConfig.accessToken.name, accessToken, {
+    if (setRefreshToken) {
+      response.cookie(tokenConfig.refreshToken.name, refreshToken, {
+        ...options,
+        expires: refreshExpiration,
+      });
+    }
+    response.cookie(tokenConfig.accessToken.name, accessToken, {
       ...options,
-      expires: new Date(Date.now() + ms(TokenConfig.accessToken.expiresIn)),
+      expires: accessExpiration,
     });
   }
 }

@@ -18,14 +18,13 @@ export class UsersService {
     return { data: allUsers, total: allUsers.length };
   }
 
-  async findOne(id: string): Promise<UserEntity | undefined> {
-    const foundUser = await this.connection.getRepository(UserEntity).findOne({ id });
-
-    if (!foundUser) {
-      throw new NotFoundException(`User with id: ${id} not found`);
-    }
-
-    return foundUser;
+  async findOne(id: string): Promise<UserEntity> {
+    return this.connection
+      .getRepository(UserEntity)
+      .findOneOrFail({ id })
+      .catch(() => {
+        throw new NotFoundException(`User with id: ${id} not found`);
+      });
   }
 
   async findOneByEmail(email: string): Promise<UserEntity> {
