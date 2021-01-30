@@ -1,15 +1,15 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import { Wrapper } from './Copyright.styled';
 
 const Copyright = () => (
-  <Typography variant="body2" color="textSecondary" align="center">
-    {'Copyright © '}
-    <Link color="inherit" href="https://github.com/Jozwiaczek/smart-gate">
+  <Wrapper>
+    Copyright ©&nbsp;
+    <a href="https://github.com/Jozwiaczek/smart-gate" rel="noreferrer" target="_blank">
       Smart Gate
-    </Link>{' '}
+    </a>
+    &nbsp;
     {new Date().getFullYear()}.
-  </Typography>
+  </Wrapper>
 );
 
 export default Copyright;

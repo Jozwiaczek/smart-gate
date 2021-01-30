@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import Snackbar from './Snackbar';
+import Snackbar from '.';
 import { SnackbarProps } from './Snackbar.types';
 
 export default {

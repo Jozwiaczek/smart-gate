@@ -3,8 +3,6 @@ to: src/elements/<%= h.changeCase.pascal(Name) %>/<%= h.changeCase.pascal(Name) 
 ---
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
 `;
-
-export default Wrapper;

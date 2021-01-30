@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core';
 import React, { ReactNode } from 'react';
 import { Copyright } from '../../elements';
 import { Container } from './DefaultLayout.styled';
@@ -11,9 +10,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => (
   <Container>
     <main>{children}</main>
     <footer>
-      <Box mb={3}>
-        <Copyright />
-      </Box>
+      <Copyright />
     </footer>
   </Container>
 );

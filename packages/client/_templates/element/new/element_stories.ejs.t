@@ -3,7 +3,7 @@ to: "<%= isStories ? `src/elements/${h.changeCase.pascal(Name)}/${h.changeCase.p
 ---
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import <%= h.changeCase.pascal(Name) %> from './<%= h.changeCase.pascal(Name) %>';
+import <%= h.changeCase.pascal(Name) %> from '.';
 import { <%= h.changeCase.pascal(Name) %>Props } from './<%= h.changeCase.pascal(Name) %>.types';
 
 export default {
