@@ -1,5 +1,5 @@
 ---
-to: "<%= types.includes('Show') ? `packages/admin/src/models/${h.changeCase.camel(Name)}/Show/index.tsx` : null %>"
+to: "<%= types.includes('Show') ? `src/models/${h.changeCase.camel(Name)}/Show/index.tsx` : null %>"
 ---
 import React from 'react';
 import { Show as RaShow, ShowProps, TabbedShowLayout } from 'react-admin';

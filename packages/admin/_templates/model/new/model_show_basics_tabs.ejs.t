@@ -1,5 +1,5 @@
 ---
-to: "<%= types.includes('Show') ? `packages/admin/src/models/${h.changeCase.camel(Name)}/Show/tabs/BasicsTab.tsx` : null %>"
+to: "<%= types.includes('Show') ? `src/models/${h.changeCase.camel(Name)}/Show/tabs/BasicsTab.tsx` : null %>"
 ---
 import React from 'react';
 import { Tab, TextField } from 'react-admin';

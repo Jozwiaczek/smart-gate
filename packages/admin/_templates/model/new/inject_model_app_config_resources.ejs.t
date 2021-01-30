@@ -1,6 +1,6 @@
 ---
 inject: true
-to: packages/admin/src/App.tsx
+to: src/App.tsx
 before: </Admin>
 ---
 <Resource

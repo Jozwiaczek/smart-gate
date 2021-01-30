@@ -1,7 +1,7 @@
 ---
 message: |
     USAGE:
-        $ hygen admin-model [COMMAND]
+        $ hygen model [COMMAND]
 
     COMMANDS:
         - new     Generates a react-admin model with selected views and inject them into admin config.

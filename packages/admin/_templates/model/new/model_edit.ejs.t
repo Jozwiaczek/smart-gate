@@ -1,5 +1,5 @@
 ---
-to: "<%= types.includes('Edit') ? `packages/admin/src/models/${h.changeCase.camel(Name)}/Edit.tsx` : null %>"
+to: "<%= types.includes('Edit') ? `src/models/${h.changeCase.camel(Name)}/Edit.tsx` : null %>"
 ---
 import React from 'react';
 import { Edit as RaEdit, SimpleForm, TextInput, EditProps } from 'react-admin';

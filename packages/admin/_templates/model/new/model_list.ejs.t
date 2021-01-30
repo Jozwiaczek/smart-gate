@@ -1,5 +1,5 @@
 ---
-to: "<%= types.includes('List') ? `packages/admin/src/models/${h.changeCase.camel(Name)}/List.tsx` : null %>"
+to: "<%= types.includes('List') ? `src/models/${h.changeCase.camel(Name)}/List.tsx` : null %>"
 ---
 import React from 'react';
 import {

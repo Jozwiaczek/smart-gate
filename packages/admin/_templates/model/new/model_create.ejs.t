@@ -1,5 +1,5 @@
 ---
-to: "<%= types.includes('Create') ? `packages/admin/src/models/${h.changeCase.camel(Name)}/Create.tsx` : null %>"
+to: "<%= types.includes('Create') ? `src/models/${h.changeCase.camel(Name)}/Create.tsx` : null %>"
 ---
 import React from 'react';
 import { Create as RaCreate, SimpleForm, TextInput, CreateProps } from 'react-admin';
