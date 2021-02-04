@@ -1,12 +1,13 @@
 import React from 'react';
+import Link from '../Link';
 import { Wrapper } from './Copyright.styled';
 
 const Copyright = () => (
   <Wrapper>
     Copyright ©&nbsp;
-    <a href="https://github.com/Jozwiaczek/smart-gate" rel="noreferrer" target="_blank">
+    <Link to="https://github.com/Jozwiaczek/smart-gate" asOuterLink>
       Smart Gate
-    </a>
+    </Link>
     &nbsp;
     {new Date().getFullYear()}.
   </Wrapper>
