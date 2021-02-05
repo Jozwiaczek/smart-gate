@@ -15,8 +15,8 @@ import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
 import { GeneratedTokens, Payload } from '../interfaces/token-types';
-import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
-import { getCookies, constants } from '../utils';
+import { constants, getCookies } from '../utils';
+import { Auth } from './decorators/auth.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -50,6 +50,7 @@ export class AuthController {
     return rest;
   }
 
+  @Auth()
   @Get('refresh')
   async refresh(
     @CookiePayload() payload: Payload,
@@ -66,7 +67,6 @@ export class AuthController {
     AuthController.setCookies(newTokens, payload.keepMeLogin, response, false);
   }
 
-  @UseGuards(OnlyAuthenticatedGuard)
   @Get('logout')
   async logout(
     @Req() request: CookieRequest,
