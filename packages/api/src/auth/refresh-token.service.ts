@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import { RefreshTokenEntity } from '../database/entities/refreshToken.entity';
 import { UserEntity } from '../database/entities/user.entity';
-import { Payload } from '../interfaces/token-types';
+import { TokenPayload } from '../interfaces/token-types';
 
 @Injectable()
 export class RefreshTokenService {
@@ -23,16 +23,22 @@ export class RefreshTokenService {
   }
 
   async find(refreshToken: string, user: UserEntity): Promise<RefreshTokenEntity> {
-    const { exp } = jsonwebtoken.decode(refreshToken) as Payload;
-    if (exp * 1000 < Date.now()) {
-      throw new Error('token out of date');
+    const { REFRESH_SECRET } = process.env;
+    if (!REFRESH_SECRET) {
+      throw new Error('Refresh secret not set');
+    }
+    const { exp } = jsonwebtoken.verify(refreshToken, REFRESH_SECRET) as TokenPayload;
+    if (!exp) {
+      throw new Error('Incorrect expiration date');
     }
     const refreshTokens = await this.connection
       .getRepository(RefreshTokenEntity)
       .find({ user, expirationDate: new Date(exp * 1000) });
 
     const tokenEntity = refreshTokens.find(({ token }) => bcrypt.compareSync(refreshToken, token));
-    if (!tokenEntity) throw new NotFoundException('Token not found');
+    if (!tokenEntity) {
+      throw new NotFoundException('Token not found');
+    }
     return tokenEntity;
   }
 

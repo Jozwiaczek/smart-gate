@@ -8,15 +8,13 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { CookieOptions } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
-import { GeneratedTokens, Payload } from '../interfaces/token-types';
-import { constants, getCookies } from '../utils';
-import { Auth } from './decorators/auth.decorator';
+import { TokenPayload } from '../interfaces/token-types';
+import { constants, cookiesUtils } from '../utils';
 
 @Controller('auth')
 export class AuthController {
@@ -29,9 +27,9 @@ export class AuthController {
       user,
       body: { keepMeLogin },
     } = request;
-
     const genTokens = await this.authService.login(user, keepMeLogin);
-    AuthController.setCookies(genTokens, keepMeLogin, response, true);
+    const { setCookies } = cookiesUtils;
+    setCookies(genTokens, keepMeLogin, response, true);
     const { password, ...rest } = user;
     return rest;
   }
@@ -45,79 +43,26 @@ export class AuthController {
       throw new BadRequestException('User already exists');
     });
     const genTokens = await this.authService.login(newUser, false);
-    AuthController.setCookies(genTokens, false, response, true);
+    const { setCookies } = cookiesUtils;
+    setCookies(genTokens, false, response, true);
     const { password, ...rest } = user;
     return rest;
-  }
-
-  @Auth()
-  @Get('refresh')
-  async refresh(
-    @CookiePayload() payload: Payload,
-    @Req() request: CookieRequest,
-    @Res({ passthrough: true }) response: CookieResponse,
-  ) {
-    const { tokenConfig } = constants;
-    const cookies = getCookies(request);
-    const newTokens = await this.authService.refreshTokens({
-      refreshToken: cookies[tokenConfig.refreshToken.name],
-      logoutToken: cookies[tokenConfig.logoutToken.name],
-      accessToken: cookies[tokenConfig.accessToken.name],
-    });
-    AuthController.setCookies(newTokens, payload.keepMeLogin, response, false);
   }
 
   @Get('logout')
   async logout(
     @Req() request: CookieRequest,
-    @CookiePayload() payload: Payload,
+    @CookiePayload() payload: TokenPayload,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
     const { tokenConfig } = constants;
-    const cookies = getCookies(request);
-    const refreshToken = cookies[tokenConfig.refreshToken.name];
-    await this.authService.logout(refreshToken, payload.sub);
-
     response.clearCookie(tokenConfig.refreshToken.name);
     response.clearCookie(tokenConfig.logoutToken.name);
     response.clearCookie(tokenConfig.accessToken.name);
-  }
 
-  private static setCookies(
-    tokenGen: GeneratedTokens,
-    keepMeLogin: boolean,
-    response: CookieResponse,
-    setRefreshToken: boolean,
-  ) {
-    const {
-      tokens: { accessToken, logoutToken, refreshToken },
-      accessExpiration,
-      refreshExpiration,
-    } = tokenGen;
-    const { tokenConfig } = constants;
-    const isDevelopment = process.env.ENV === 'development';
-    const options: CookieOptions = {
-      httpOnly: true,
-      path: '/',
-      secure: !isDevelopment,
-      sameSite: isDevelopment ? undefined : 'strict',
-    };
-
-    if (!keepMeLogin) {
-      response.cookie(tokenConfig.logoutToken.name, logoutToken, {
-        ...options,
-        expires: undefined,
-      });
-    }
-    if (setRefreshToken) {
-      response.cookie(tokenConfig.refreshToken.name, refreshToken, {
-        ...options,
-        expires: refreshExpiration,
-      });
-    }
-    response.cookie(tokenConfig.accessToken.name, accessToken, {
-      ...options,
-      expires: accessExpiration,
-    });
+    const { getCookies } = cookiesUtils;
+    const cookies = getCookies(request);
+    const refreshToken = cookies[tokenConfig.refreshToken.name];
+    await this.authService.logout(refreshToken, payload.sub);
   }
 }

@@ -11,7 +11,7 @@ const Dashboard = () => {
     return null;
   }
 
-  const { logout, getCurrentUser, refresh } = auth;
+  const { logout, getCurrentUser } = auth;
 
   const getMe = async () => {
     const user = await getCurrentUser();
@@ -20,10 +20,6 @@ const Dashboard = () => {
 
   const logoutUser = async () => {
     await logout();
-  };
-
-  const refreshToken = async () => {
-    await refresh();
   };
 
   return (
@@ -35,9 +31,6 @@ const Dashboard = () => {
       </Button>
       <Button variant="contained" onClick={getMe} color="secondary">
         Test
-      </Button>
-      <Button variant="contained" onClick={refreshToken} color="inherit">
-        Refresh
       </Button>
     </Container>
   );

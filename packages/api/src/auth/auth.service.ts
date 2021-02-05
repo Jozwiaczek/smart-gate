@@ -5,7 +5,12 @@ import { UserEntity } from '../database/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { constants } from '../utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { GeneratedTokens, Payload, TokenPayload, Tokens } from '../interfaces/token-types';
+import {
+  GeneratedTokens,
+  TokenPayload,
+  TokenPayloadCreate,
+  Tokens,
+} from '../interfaces/token-types';
 import { RefreshTokenService } from './refresh-token.service';
 
 export class AuthService {
@@ -17,7 +22,7 @@ export class AuthService {
 
   private static generateTokens(user: UserEntity, keepMeLogin: boolean): GeneratedTokens {
     const { tokenConfig } = constants;
-    const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
+    const payload: TokenPayloadCreate = { sub: user.id, roles: user.roles, keepMeLogin };
     const { sign } = jsonwebtoken;
     const { ACCESS_SECRET, REFRESH_SECRET, LOGOUT_SECRET } = process.env;
     if (!ACCESS_SECRET || !REFRESH_SECRET || !LOGOUT_SECRET) {
@@ -48,10 +53,11 @@ export class AuthService {
       };
     }
 
-    const { exp: accessExp } = jsonwebtoken.decode(tokens.accessToken) as Payload;
-    const { exp: refreshExp } = jsonwebtoken.decode(tokens.refreshToken) as Payload;
+    const { exp: accessExp } = jsonwebtoken.decode(tokens.accessToken) as TokenPayload;
+    const { exp: refreshExp } = jsonwebtoken.decode(tokens.refreshToken) as TokenPayload;
 
     return {
+      payload,
       tokens,
       accessExpiration: new Date(accessExp * 1000),
       refreshExpiration: new Date(refreshExp * 1000),
@@ -70,7 +76,10 @@ export class AuthService {
     return genTokens;
   }
 
-  public validateTokens(tokens: Tokens): TokenPayload {
+  public validateTokens(
+    tokens: Tokens,
+    accessTokenOptions?: jsonwebtoken.VerifyOptions,
+  ): TokenPayload {
     const { accessToken, logoutToken } = tokens;
     const { verify } = jsonwebtoken;
     const { ACCESS_SECRET, LOGOUT_SECRET } = process.env;
@@ -78,7 +87,7 @@ export class AuthService {
       throw new Error('Secrets not set');
     }
     try {
-      const accessPayload = verify(accessToken, ACCESS_SECRET) as TokenPayload;
+      const accessPayload = verify(accessToken, ACCESS_SECRET, accessTokenOptions) as TokenPayload;
       if (!accessPayload.keepMeLogin) {
         const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
         if (accessPayload.sub !== logoutPayload.sub) {
@@ -125,6 +134,11 @@ export class AuthService {
   }
 
   public async logout(refreshToken: string, userId: string) {
+    const { REFRESH_SECRET } = process.env;
+    if (!REFRESH_SECRET) {
+      throw new Error('Secrets not set');
+    }
+    jsonwebtoken.verify(refreshToken, REFRESH_SECRET);
     const user = await this.usersService.findOne(userId);
     await this.refreshTokenService.delete(refreshToken, user);
   }
