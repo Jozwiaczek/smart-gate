@@ -6,10 +6,11 @@ import { LocalStrategy } from './strategies/local/local.strategy';
 // eslint-disable-next-line import/no-cycle
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
+import { RefreshTokenService } from './refresh-token.service';
 
 @Module({
   imports: [forwardRef(() => UsersModule), PassportModule],
-  providers: [AuthService, LocalStrategy, OnlyAuthenticatedGuard],
+  providers: [AuthService, RefreshTokenService, LocalStrategy, OnlyAuthenticatedGuard],
   exports: [AuthService, OnlyAuthenticatedGuard],
   controllers: [AuthController],
 })

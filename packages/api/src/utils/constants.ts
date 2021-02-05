@@ -1,9 +1,4 @@
-// TODO: move secret into .env
-export const jwtConstants = {
-  secret: 'secretKey',
-};
-
-export const TokenConfig = {
+const tokenConfig = {
   refreshToken: {
     name: 'refresh_token',
     keepMeLogin: {
@@ -22,3 +17,4 @@ export const TokenConfig = {
     expiresIn: '5m',
   },
 };
+export default { tokenConfig };

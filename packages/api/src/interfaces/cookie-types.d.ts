@@ -26,4 +26,7 @@ export interface CookieRequest extends Request {
   cookies: {
     [cookie: string]: string;
   };
+  signedCookies: {
+    [cookie: string]: string;
+  };
 }

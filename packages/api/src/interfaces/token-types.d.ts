@@ -14,3 +14,9 @@ export interface Tokens {
   refreshToken: string;
   logoutToken: string;
 }
+
+export interface GeneratedTokens {
+  tokens: Tokens;
+  accessExpiration: Date;
+  refreshExpiration: Date;
+}
