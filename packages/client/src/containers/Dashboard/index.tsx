@@ -1,7 +1,5 @@
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Button } from '../../elements';
 import { useAuth } from '../../hooks';
 import { Container } from './Dashboard.styled';
 
@@ -28,17 +26,15 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <Typography variant="h1">Smart Gate</Typography>
+      <h1>Smart Gate</h1>
       <h2>Dashboard</h2>
-      <Button variant="contained" component={Link} to="/" onClick={logoutUser} color="primary">
+      <Button to="/" onClick={logoutUser}>
         Logout
       </Button>
-      <Button variant="contained" onClick={getMe} color="secondary">
+      <Button onClick={getMe} color="secondary">
         Test
       </Button>
-      <Button variant="contained" onClick={refreshToken} color="inherit">
-        Refresh
-      </Button>
+      <Button onClick={refreshToken}>Refresh</Button>
     </Container>
   );
 };

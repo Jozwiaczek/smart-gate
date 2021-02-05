@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ButtonProps } from './Button.types';
 
 export const StyledButton = styled.button<ButtonProps>(
-  ({ color, theme: { palette } }) => `
+  ({ color, fullWidth, margin, theme: { palette } }) => `
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,13 +12,16 @@ export const StyledButton = styled.button<ButtonProps>(
   background-color: ${color !== 'primary' ? palette.secondary.main : palette.primary.main};
   color: ${palette.primary.contrastText};
   padding: 21px 14px;
-  margin: 0;
+  margin: ${margin};
   text-align: center;
   border: none;
   min-width: 220px;
   cursor: pointer;
   line-height: 16px;
   transition: 0.15s;
+  overflow: hidden;
+  
+  ${fullWidth && 'width: 100%'};
 
   &:disabled {
     background-color: ${palette.action.disabledBackground};
@@ -57,18 +60,20 @@ export const StyledButton = styled.button<ButtonProps>(
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    height: 100%;
     background-color: #fff;
     opacity: 0;
     transition: opacity 0.2s;
   }
 
   ::after {
+    padding: 50%;
     content: '';
     position: absolute;
     left: 50%;
     top: 50%;
     border-radius: 50%;
-    padding: 50%;
     width: 32px;
     height: 32px;
     background-color: #fff;
