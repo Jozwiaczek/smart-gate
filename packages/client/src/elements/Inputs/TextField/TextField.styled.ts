@@ -63,7 +63,7 @@ export const Container = styled.div`
 `;
 
 export const Error = styled.div`
-  color: ${({ theme: { palette } }) => palette.error};
+  color: ${({ theme: { palette } }) => palette.error.main};
   font-size: 13px;
   margin-left: 5px;
   margin-top: 5px;

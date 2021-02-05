@@ -8,4 +8,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   margin?: string;
   to?: string;
+  withArrow?: boolean;
 }

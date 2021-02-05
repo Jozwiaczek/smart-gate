@@ -89,3 +89,7 @@ export const StyledButton = styled.button<ButtonProps>(
   }
 `,
 );
+
+export const IconContainer = styled.div`
+  margin-left: 8px;
+`;

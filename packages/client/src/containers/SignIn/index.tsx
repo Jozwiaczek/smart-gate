@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Card, Link, TextField } from '../../elements';
+import { Checkbox } from '../../elements/Inputs';
 import { useAuth, useSnackbar } from '../../hooks';
 import { Container, LinksContainer } from './SignIn.styled';
 import { SignInInputs } from './SignIn.types';
@@ -63,14 +64,20 @@ const SignIn = () => {
             maxWidth="100%"
             errors={errors}
             name="password"
-            label="Password"
             type="password"
             disabled={loading}
             autoComplete="current-password"
           />
-          <Button type="submit" fullWidth disabled={loading} margin="30px 0 0 0">
+          <Button type="submit" fullWidth disabled={loading} margin="30px 0" withArrow>
             Sign In
           </Button>
+          <Checkbox
+            required
+            ref={register({ required: true })}
+            errors={errors}
+            label="Keep me signed in."
+            name="keepSignIn"
+          />
           <LinksContainer>
             <Link to="/">Forgot password?</Link>
             <Link to="/registration">Dont have an account? Sign Up</Link>
