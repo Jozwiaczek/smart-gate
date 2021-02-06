@@ -33,15 +33,13 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
         }, [fieldError]);
 
         const validationRules = useMemo((): RegisterOptions => {
-          const internalRules: RegisterOptions = {};
+          const internalRules = validation;
           if (required) {
             internalRules.required = 'Required';
           }
-          if (validation) {
-            return { ...internalRules, ...validation };
-          }
+
           return internalRules;
-        }, []);
+        }, [required, validation]);
 
         return cloneElement(child, {
           error,
