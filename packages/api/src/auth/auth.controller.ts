@@ -25,15 +25,15 @@ export class AuthController {
   async login(@Req() request: LoginRequest, @Res({ passthrough: true }) response: CookieResponse) {
     const {
       user,
-      body: { keepMeLogin },
+      body: { keepMeLoggedIn },
     } = request;
-
-    const genTokens = await this.authService.login(user, keepMeLogin);
+    const genTokens = await this.authService.login(user, keepMeLoggedIn);
     const { setCookies } = cookiesUtils;
-    setCookies(genTokens, keepMeLogin, response, true);
+    setCookies(genTokens, keepMeLoggedIn, response, true);
     // TODO: add separate method for extracting user
     // eslint-disable-next-line no-unused-vars
     const { password, ...rest } = user;
+
     return rest;
   }
 

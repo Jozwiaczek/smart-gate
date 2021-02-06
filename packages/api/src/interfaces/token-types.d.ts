@@ -6,7 +6,7 @@ export interface TokenPayload extends TokenPayloadCreate {
 export interface TokenPayloadCreate {
   sub: string;
   roles: Array<string>;
-  keepMeLogin: boolean;
+  keepMeLoggedIn: boolean;
 }
 
 export interface Tokens {

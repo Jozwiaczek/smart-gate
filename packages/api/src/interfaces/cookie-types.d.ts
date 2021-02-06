@@ -10,7 +10,7 @@ export interface LoginRequest
       body: {
         readonly email: string;
         readonly password: string;
-        readonly keepMeLogin: boolean;
+        readonly keepMeLoggedIn: boolean;
       };
     }
   > {
