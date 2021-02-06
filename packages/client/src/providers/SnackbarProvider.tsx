@@ -1,6 +1,6 @@
-import React, { createContext, FC, useState } from 'react';
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import MuiAlert, { Color } from '@material-ui/lab/Alert';
+import React, { createContext, FC, useState } from 'react';
 
 export interface SnackbarContextValue {
   showSnackbar: (props: ShowSnackbarProps) => void;

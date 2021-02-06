@@ -8,8 +8,6 @@
     "jsx": "react-jsx",
     "target": "es5",
     "module": "esnext",
-    "noEmit": true,
-    "allowJs": true,
     "strict": false
   },
   "include": ["src"],

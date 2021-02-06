@@ -1,4 +1,5 @@
 import 'styled-components';
+
 import { ITheme } from '../theme/Theme';
 
 declare module 'styled-components' {

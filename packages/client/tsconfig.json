@@ -7,9 +7,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
     "target": "es5",
-    "module": "esnext",
-    "noEmit": true,
-    "allowJs": true
+    "module": "esnext"
   },
   "include": ["src"],
   "exclude": ["node_modules", "test", "build", "**/*spec.ts"]

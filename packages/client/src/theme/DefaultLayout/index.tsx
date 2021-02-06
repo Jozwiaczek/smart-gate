@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import React, { ReactNode } from 'react';
+
 import Copyright from '../../elements';
 import { Container } from './DefaultLayout.styled';
 

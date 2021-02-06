@@ -9,14 +9,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CookieOptions } from 'express';
-import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './strategies/local/local-auth.guard';
-import { CookiePayload } from './decorators/cookiePayload.decorator';
-import { CreateUserDto } from '../users/dto/create-user.dto';
+
 import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
 import { GeneratedTokens, Payload } from '../interfaces/token-types';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { constants, getCookies } from '../utils';
+import { AuthService } from './auth.service';
+import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
-import { getCookies, constants } from '../utils';
+import { LocalAuthGuard } from './strategies/local/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {

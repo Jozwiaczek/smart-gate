@@ -1,4 +1,5 @@
 import { CanActivate, Injectable, Scope } from '@nestjs/common';
+
 import { AuthService } from '../auth.service';
 
 @Injectable({

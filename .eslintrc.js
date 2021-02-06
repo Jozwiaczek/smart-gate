@@ -1,4 +1,5 @@
 module.exports = {
+  plugins: ['react-hooks', 'simple-import-sort', 'import'],
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     'airbnb-typescript', // Uses the recommended rules from @airbnb-typescript
@@ -29,6 +30,14 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'sort-imports': 'off',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'consistent-return': 0,
     '@typescript-eslint/no-var-requires': 0,
     'import/prefer-default-export': 0,
