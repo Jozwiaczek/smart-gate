@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 
 import { AuthService } from '../auth/auth.service';
-import { RolesGuard } from '../auth/roles.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';

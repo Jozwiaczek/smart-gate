@@ -18,7 +18,6 @@ export interface AuthProps {
   login: (user: User) => Promise<string | boolean>;
   register: (user: User) => Promise<string | boolean>;
   logout: () => void;
-  refresh: () => void;
 }
 
 export const AuthContext = createContext<AuthProps | undefined>(undefined);
@@ -74,16 +73,11 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     return response.data;
   }, [API_URL, axios]);
 
-  const refresh = useCallback(async () => {
-    await axios.get(`${API_URL}/auth/refresh`, { withCredentials: true });
-  }, [API_URL, axios]);
-
   const AuthValue = {
     getCurrentUser,
     login,
     register,
     logout,
-    refresh,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;

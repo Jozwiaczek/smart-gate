@@ -10,7 +10,7 @@ const Dashboard = () => {
     return null;
   }
 
-  const { logout, getCurrentUser, refresh } = auth;
+  const { logout, getCurrentUser } = auth;
 
   const getMe = async () => {
     const user = await getCurrentUser();
@@ -19,10 +19,6 @@ const Dashboard = () => {
 
   const logoutUser = async () => {
     await logout();
-  };
-
-  const refreshToken = async () => {
-    await refresh();
   };
 
   return (
@@ -35,7 +31,6 @@ const Dashboard = () => {
       <Button onClick={getMe} color="secondary">
         Test
       </Button>
-      <Button onClick={refreshToken}>Refresh</Button>
     </Container>
   );
 };
