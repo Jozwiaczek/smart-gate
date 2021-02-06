@@ -17,7 +17,7 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
   <form onSubmit={onSubmit} noValidate {...rest}>
     {Children.map(children, (child) => {
       if (isValidElement(child) && isFormInput(child)) {
-        const { name, required, validation } = child.props;
+        const { name, required, validation = {} } = child.props;
         const fieldError = errors && errors[name];
 
         const error = useMemo((): string | null => {
