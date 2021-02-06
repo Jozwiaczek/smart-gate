@@ -1,6 +1,7 @@
-import React, { createContext, FC, useState } from 'react';
-import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
-import MuiAlert, { Color } from '@material-ui/lab/Alert';
+import React, { createContext, FC, useRef, useState } from 'react';
+import { Snackbar } from '../elements';
+import { SnackbarSeverity } from '../elements/Snackbar/Snackbar.types';
+import useOnClickOutside from '../hooks/useOnClickOutside';
 
 export interface SnackbarContextValue {
   showSnackbar: (props: ShowSnackbarProps) => void;
@@ -19,57 +20,50 @@ const getDisplayDuration = (message: string): number => {
 
 export interface ShowSnackbarProps {
   message: string;
-  severity?: Color;
-  position?: SnackbarOrigin;
+  severity?: SnackbarSeverity;
   duration?: number;
 }
-
-const initPosition: SnackbarOrigin = {
-  vertical: 'bottom',
-  horizontal: 'center',
-};
 
 const SnackbarProvider: FC = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const [messageInternal, setMessageInternal] = useState('');
-  const [severityInternal, setSeverityInternal] = useState<Color>('info');
-  const [durationInternal, setDurationInternal] = useState(getDisplayDuration(messageInternal));
-  const [positionInternal, setPositionInternal] = useState<SnackbarOrigin>(initPosition);
-
-  const showSnackbar = ({
-    message,
-    severity = 'info',
-    position = initPosition,
-    duration,
-  }: ShowSnackbarProps) => {
-    setMessageInternal(message);
-    setSeverityInternal(severity);
-    setPositionInternal(position);
-    if (duration) {
-      setDurationInternal(duration);
-    } else {
-      setDurationInternal(getDisplayDuration(message));
-    }
-    setOpen(true);
-  };
+  const [severityInternal, setSeverityInternal] = useState<SnackbarSeverity>('info');
+  const [timeOutInternal, setTimeOutInternal] = useState<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  const snackbarContainerRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
     setOpen(false);
+    if (timeOutInternal) {
+      clearTimeout(timeOutInternal);
+      setTimeOutInternal(undefined);
+    }
   };
+
+  const showSnackbar = ({ message, severity = 'info', duration }: ShowSnackbarProps) => {
+    if (!isOpen) {
+      setMessageInternal(message);
+      setSeverityInternal(severity);
+      let durationInternal = duration;
+      if (!duration) {
+        durationInternal = getDisplayDuration(message);
+      }
+      setOpen(true);
+      setTimeOutInternal(setTimeout(handleClose, durationInternal as number));
+    }
+  };
+
+  useOnClickOutside(snackbarContainerRef, handleClose);
 
   return (
     <>
       <SnackbarContext.Provider value={{ showSnackbar }}>{children}</SnackbarContext.Provider>
-      <Snackbar
-        anchorOrigin={positionInternal}
-        open={isOpen}
-        autoHideDuration={durationInternal}
-        onClose={handleClose}
-      >
-        <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity={severityInternal}>
+      <div ref={snackbarContainerRef}>
+        <Snackbar onClose={handleClose} open={isOpen} severity={severityInternal}>
           {messageInternal}
-        </MuiAlert>
-      </Snackbar>
+        </Snackbar>
+      </div>
     </>
   );
 };

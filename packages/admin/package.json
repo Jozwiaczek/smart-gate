@@ -6,7 +6,7 @@
     "prebuild": "yarn clean",
     "build": "react-scripts build",
     "clean": "rimraf build",
-    "hygen:admin-model": "cd ../.. && hygen admin-model new && yarn prettier:fix",
+    "hygen:model": "hygen model new && cd ../.. && yarn prettier:fix",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
     "serve:build": "serve -s build -l 4000",
