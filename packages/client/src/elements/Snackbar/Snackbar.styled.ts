@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
+
 import { ITheme } from '../../theme/Theme';
 import { CloseButtonProps, SnackbarSeverity, SnackbarWrapperProps } from './Snackbar.types';
 

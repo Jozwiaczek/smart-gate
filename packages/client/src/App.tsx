@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import AuthProvider from './api/AuthProvider';
 import AxiosProvider from './api/AxiosProvider';
 import { Dashboard, SignIn, SignUp } from './containers';

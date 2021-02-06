@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
+
 import DefaultLayout from './DefaultLayout';
 import GlobalStyles from './GlobalStyles';
 import DefaultTheme from './Theme';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Create as RaCreate, SimpleForm, TextInput, CreateProps } from 'react-admin';
+import { Create as RaCreate, CreateProps, SimpleForm, TextInput } from 'react-admin';
 
 const Create = (props: CreateProps) => (
   <RaCreate {...props}>

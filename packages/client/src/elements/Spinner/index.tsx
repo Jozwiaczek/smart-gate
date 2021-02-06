@@ -1,5 +1,6 @@
 import React from 'react';
-import { CubeGrid, Cube } from './Spinner.styled';
+
+import { Cube, CubeGrid } from './Spinner.styled';
 import { SpinnerProps } from './Spinner.types';
 
 const cubeDelaysInOrder = [200, 300, 400, 100, 200, 300, 0, 100, 200];

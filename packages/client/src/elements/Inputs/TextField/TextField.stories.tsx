@@ -1,7 +1,8 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import TextField from '.';
+
 import { UserIcon } from '../../../icons';
+import TextField from '.';
 import { TextFieldProps } from './TextField.types';
 
 export default {

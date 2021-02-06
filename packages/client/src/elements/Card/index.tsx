@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Wrapper } from './Card.styled';
 import { CardProps } from './Card.types';
 
