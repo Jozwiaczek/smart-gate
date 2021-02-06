@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+
 import { CubeProps, GridProps } from './Spinner.types';
 
 export const CubeGrid = styled.div<GridProps>(

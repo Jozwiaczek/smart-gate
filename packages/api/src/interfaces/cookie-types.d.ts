@@ -1,5 +1,6 @@
 import { Request } from '@nestjs/common';
 import { CookieOptions } from 'express';
+
 import { UserEntity } from '../database/entities/user.entity';
 
 type Modify<T, R> = Omit<T, keyof R> & R;

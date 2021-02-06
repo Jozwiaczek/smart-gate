@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Connection, LessThan } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
+import { Connection, LessThan } from 'typeorm';
+
 import { RefreshTokenEntity } from '../database/entities/refreshToken.entity';
 import { UserEntity } from '../database/entities/user.entity';
 import { TokenPayload } from '../interfaces/token-types';

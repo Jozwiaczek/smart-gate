@@ -1,4 +1,5 @@
 import React, { createContext, PropsWithChildren, useCallback } from 'react';
+
 import useAxios from '../hooks/useAxios';
 
 interface User {
@@ -37,34 +38,40 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     } catch (ignore) {}
 
     return authUser;
-  }, [axios]);
+  }, [API_URL, axios]);
 
-  const login = useCallback(async (userData: User) => {
-    const response = await axios.post(
-      `${API_URL}/auth/login`,
-      { ...userData },
-      { withCredentials: true },
-    );
-    localStorage.setItem('access_token', response.data.access_token);
+  const login = useCallback(
+    async (userData: User) => {
+      const response = await axios.post(
+        `${API_URL}/auth/login`,
+        { ...userData },
+        { withCredentials: true },
+      );
+      localStorage.setItem('access_token', response.data.access_token);
 
-    return true;
-  }, []);
+      return true;
+    },
+    [API_URL, axios],
+  );
 
-  const register = useCallback(async (userData?: User) => {
-    const response = await axios.post(
-      `${API_URL}/auth/register`,
-      { ...userData },
-      { withCredentials: true },
-    );
-    localStorage.setItem('access_token', response.data.access_token);
-    console.log('response', response);
-    return true;
-  }, []);
+  const register = useCallback(
+    async (userData?: User) => {
+      const response = await axios.post(
+        `${API_URL}/auth/register`,
+        { ...userData },
+        { withCredentials: true },
+      );
+      localStorage.setItem('access_token', response.data.access_token);
+      console.log('response', response);
+      return true;
+    },
+    [API_URL, axios],
+  );
 
   const logout = useCallback(async () => {
     const response = await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
     return response.data;
-  }, []);
+  }, [API_URL, axios]);
 
   const AuthValue = {
     getCurrentUser,

@@ -1,5 +1,5 @@
-import React, { createContext, PropsWithChildren, useMemo } from 'react';
 import axios, { AxiosInstance } from 'axios';
+import React, { createContext, PropsWithChildren, useMemo } from 'react';
 
 export const AxiosContext = createContext<AxiosInstance>(axios);
 

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+
 import { ITheme } from '../../theme/Theme';
 import { LinkColor, LinkProps } from './Link.types';
 

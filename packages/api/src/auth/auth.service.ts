@@ -1,7 +1,10 @@
 import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import jsonwebtoken from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+import jsonwebtoken from 'jsonwebtoken';
+
 import { UserEntity } from '../database/entities/user.entity';
+import { GeneratedTokens, Payload, TokenPayload, Tokens } from '../interfaces/token-types';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { constants } from '../utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+
 import { ShowSnackbarProps, SnackbarContext } from '../providers/SnackbarProvider';
 
 const useSnackbar = (): ((snackbarProps: ShowSnackbarProps) => void) => {
