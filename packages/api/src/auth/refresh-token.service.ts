@@ -11,7 +11,7 @@ export class RefreshTokenService {
   constructor(private readonly connection: Connection) {}
 
   async create(token: string, user: UserEntity, expirationDate: Date): Promise<RefreshTokenEntity> {
-    await this.beforeCreate(user);
+    await this.beforeCreate();
     const salt = await bcrypt.genSalt();
     const hashToken = await bcrypt.hash(token, salt);
     const entity = {
@@ -47,7 +47,7 @@ export class RefreshTokenService {
     return this.connection.getRepository(RefreshTokenEntity).remove(token);
   }
 
-  private async beforeCreate(user: UserEntity) {
+  private async beforeCreate() {
     const entities = await this.connection
       .getRepository(RefreshTokenEntity)
       .find({ expirationDate: LessThan(new Date()) });

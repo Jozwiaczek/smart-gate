@@ -10,7 +10,6 @@
   /> 
 </a>
 
-
 ## 🚩 Table of Contents
 
 - [Getting started](#-getting-started)
@@ -87,9 +86,10 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 
 ### Avaliable generators:
 
-| Package | Script              | Description                            |
-| ------- | ------------------- | -------------------------------------- |
-| admin   | `hygen:admin-model` | Creates selected views for admin model |
+| Package | Script          | Description                                                   |
+| ------- | --------------- | ------------------------------------------------------------- |
+| admin   | `hygen:model`   | Creates selected views for admin model                        |
+| client  | `hygen:element` | Creates new standarized React component, story and style file |
 
 ## Available scripts
 
