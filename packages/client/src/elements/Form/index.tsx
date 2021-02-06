@@ -1,12 +1,4 @@
-import React, {
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useMemo,
-} from 'react';
-import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import React, { Children, cloneElement, isValidElement, ReactElement, ReactNode } from 'react';
 import { Checkbox, TextField } from '../Inputs';
 import { FormProps } from './Form.types';
 
@@ -16,39 +8,34 @@ const isFormInput = (child: ReactElement) => formInputs.includes(child.type);
 const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormProps) => (
   <form onSubmit={onSubmit} noValidate {...rest}>
     {Children.map(children, (child) => {
-      if (isValidElement(child) && isFormInput(child)) {
-        const { name, required, validation = {} } = child.props;
-        const fieldError = errors && errors[name];
+      if (isValidElement(child)) {
+        if (isFormInput(child)) {
+          const { name, required, validation = {} } = child.props;
+          const fieldError = errors && errors[name];
 
-        const error = useMemo((): string | null => {
-          if (!fieldError) {
-            return null;
+          let error;
+          if (fieldError) {
+            if (fieldError.type === 'required') {
+              error = 'Required';
+            }
+            error = fieldError.message;
           }
 
-          if (fieldError.type === 'required') {
-            return 'Required';
-          }
-
-          return fieldError.message;
-        }, [fieldError]);
-
-        const validationRules = useMemo((): RegisterOptions => {
-          const internalRules = validation;
           if (required) {
-            internalRules.required = 'Required';
+            validation.required = 'Required';
           }
 
-          return internalRules;
-        }, [required, validation]);
+          // Form inputs
+          return cloneElement(child, {
+            error,
+            ref: register(validation),
+            disabled: Boolean(loading),
+          });
+        }
 
-        return cloneElement(child, {
-          error,
-          ref: register(validationRules),
-          disabled: Boolean(loading),
-        });
+        // Other children
+        return child;
       }
-
-      return child;
     })}
   </form>
 );
