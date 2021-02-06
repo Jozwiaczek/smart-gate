@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { Button, Card, Link, TextField } from '../../elements';
+import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
+import { emailRegex } from '../../utils/constants';
 import { Container } from './SignUp.styled';
 import { SignUpInputs } from './SignUp.types';
 
@@ -43,61 +44,49 @@ export default function Index() {
     <Container>
       <Card minWidth="500px">
         <h1>Sign up</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          errors={errors}
+          loading={loading}
+          register={register}
+        >
           <TextField
-            ref={register()}
             autoComplete="fname"
             name="firstName"
             maxWidth="100%"
-            errors={errors}
             label="First Name"
             autoFocus
-            disabled={loading}
           />
+          <TextField maxWidth="100%" label="Last Name" name="lastName" autoComplete="lname" />
           <TextField
-            ref={register()}
-            maxWidth="100%"
-            errors={errors}
-            label="Last Name"
-            name="lastName"
-            autoComplete="lname"
-            disabled={loading}
-          />
-          <TextField
-            ref={register({
-              required: 'Required',
+            validation={{
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value: emailRegex,
                 message: 'Invalid email address.',
               },
-            })}
+            }}
             maxWidth="100%"
-            errors={errors}
             required
             label="Email Address"
             name="email"
             autoComplete="email"
-            disabled={loading}
           />
           <TextField
-            ref={register({
-              required: 'Required',
+            validation={{
               minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
-            })}
+            }}
             maxWidth="100%"
-            errors={errors}
             required
             name="password"
             label="Password"
             type="password"
             autoComplete="current-password"
-            disabled={loading}
           />
           <Button type="submit" fullWidth color="primary" disabled={loading} margin="30px 0 30px 0">
             Sign Up
           </Button>
           <Link to="/">Already have an account? Sign in</Link>
-        </form>
+        </Form>
       </Card>
     </Container>
   );

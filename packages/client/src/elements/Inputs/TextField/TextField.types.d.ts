@@ -1,19 +1,13 @@
-import {
-  DetailedHTMLProps,
-  Dispatch,
-  InputHTMLAttributes,
-  ReactElement,
-  SetStateAction,
-} from 'react';
-import { FieldErrors } from 'react-hook-form';
+import { DetailedHTMLProps, InputHTMLAttributes, ReactElement } from 'react';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  handleChange?: Dispatch<SetStateAction<unknown>>;
   maxWidth?: string;
-  errors?: FieldErrors;
+  error?: string;
   name: string;
   icon?: ReactElement;
   label?: string;
+  validation?: RegisterOptions;
 }
 
 export type ITextFieldProps = DetailedHTMLProps<

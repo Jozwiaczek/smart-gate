@@ -1,11 +1,9 @@
-import { DetailedHTMLProps, Dispatch, InputHTMLAttributes, SetStateAction } from 'react';
-import { FieldErrors } from 'react-hook-form';
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
 export interface CheckboxProps {
   name: string;
   label: string;
-  handleChange?: Dispatch<SetStateAction<unknown>>;
-  errors?: FieldErrors;
+  error?: string;
   required?: boolean;
   margin?: string;
 }
