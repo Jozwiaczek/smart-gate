@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import useTheme from './useTheme';
+
 import { ITheme } from '../theme/Theme';
+import useTheme from './useTheme';
 
 type QueryInput = string | ((theme: ITheme) => string);
 

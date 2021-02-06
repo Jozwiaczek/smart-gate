@@ -6,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { Role } from '../../auth/role.enum';
 // eslint-disable-next-line import/no-cycle
 import { RefreshTokenEntity } from './refreshToken.entity';

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { StyledLink, StyledOutLink } from './Link.styled';
 import { LinkProps } from './Link.types';
 

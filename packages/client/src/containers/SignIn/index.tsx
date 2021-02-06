@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { Button, Card, Form, Link, TextField, Checkbox } from '../../elements';
+
+import { Button, Card, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import { Container, LinksContainer } from './SignIn.styled';
 import { SignInInputs } from './SignIn.types';

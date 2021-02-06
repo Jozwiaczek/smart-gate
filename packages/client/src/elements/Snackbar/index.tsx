@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CloseButton, SnackbarWrapper } from './Snackbar.styled';
 import { SnackbarProps } from './Snackbar.types';
 

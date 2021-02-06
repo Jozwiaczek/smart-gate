@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { CheckboxLabelProps, CheckboxWrapperProps, CheckmarkProps } from './Checkbox.types';
 
 export const CheckboxLabel = styled.label<CheckboxLabelProps>`

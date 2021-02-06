@@ -1,8 +1,9 @@
 import { forwardRef, Module } from '@nestjs/common';
+
 // eslint-disable-next-line import/no-cycle
 import { AuthModule } from '../auth/auth.module';
-import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
 
 @Module({
   controllers: [UsersController],
