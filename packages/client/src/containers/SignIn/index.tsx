@@ -69,7 +69,7 @@ const SignIn = () => {
           <Button type="submit" fullWidth disabled={loading} margin="30px 0" withArrow>
             Sign In
           </Button>
-          <Checkbox label="Keep me signed in." name="keepMeLoggedIn" required />
+          <Checkbox label="Keep me signed in." name="keepMeLoggedIn" />
           <LinksContainer>
             <Link to="/">Forgot password?</Link>
             <Link to="/registration">Dont have an account? Sign Up</Link>
