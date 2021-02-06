@@ -3,17 +3,15 @@ import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { UserEntity } from '../database/entities/user.entity';
-import { GeneratedTokens, Payload, TokenPayload, Tokens } from '../interfaces/token-types';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-import { UsersService } from '../users/users.service';
-import { constants } from '../utils';
-import { CreateUserDto } from '../users/dto/create-user.dto';
 import {
   GeneratedTokens,
   TokenPayload,
   TokenPayloadCreate,
   Tokens,
 } from '../interfaces/token-types';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
+import { constants } from '../utils';
 import { RefreshTokenService } from './refresh-token.service';
 
 export class AuthService {

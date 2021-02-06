@@ -5,6 +5,7 @@
     "outDir": "./build",
     "composite": true,
     "target": "es2017",
-    "module": "commonjs"
+    "module": "commonjs",
+    "noEmit": false
   }
 }

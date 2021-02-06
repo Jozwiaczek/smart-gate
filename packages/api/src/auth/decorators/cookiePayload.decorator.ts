@@ -1,9 +1,8 @@
 import { createParamDecorator, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import jsonwebtoken from 'jsonwebtoken';
 
-import { CookieRequest } from '../../interfaces/cookie-types';
-import { Payload } from '../../interfaces/token-types';
-import { constants, getCookies } from '../../utils';
+import { TokenPayload } from '../../interfaces/token-types';
+import { constants, cookiesUtils } from '../../utils';
 
 export const CookiePayload = createParamDecorator(
   (data: unknown, context: ExecutionContext): TokenPayload => {
