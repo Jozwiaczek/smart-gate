@@ -1,4 +1,5 @@
 import { CookieOptions } from 'express';
+
 import { CookieRequest, CookieResponse } from '../interfaces/cookie-types';
 import { GeneratedTokens } from '../interfaces/token-types';
 import Constants from './constants';
