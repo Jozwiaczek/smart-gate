@@ -20,7 +20,7 @@
 - [Hygen - Code generator](#-hygen-code-generator)
 - [Available scripts](#-available-scripts)
 
-## Getting started
+## 🎓 Getting started
 
 ### Prerequisites
 
