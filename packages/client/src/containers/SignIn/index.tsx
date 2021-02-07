@@ -34,9 +34,12 @@ const SignIn = () => {
       reset();
       history.push('/dashboard');
     } catch (error) {
-      console.error('Error: ', error);
-      const { message } = error.response.data;
-      showSnackbar({ message, severity: 'error' });
+      if (!error.response) {
+        showSnackbar({ message: error.message, severity: 'error' });
+      } else {
+        const { message } = error.response.data;
+        showSnackbar({ message, severity: 'error' });
+      }
     } finally {
       setLoading(false);
     }

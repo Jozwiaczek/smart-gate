@@ -34,8 +34,13 @@ export default function Index() {
       await auth.register(values);
       reset();
       history.push('/dashboard');
-    } catch ({ message }) {
-      showSnackbar({ message, severity: 'error' });
+    } catch (error) {
+      if (!error.response) {
+        showSnackbar({ message: error.message, severity: 'error' });
+      } else {
+        const { message } = error.response.data;
+        showSnackbar({ message, severity: 'error' });
+      }
     } finally {
       setLoading(false);
     }

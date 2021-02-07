@@ -18,19 +18,16 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     let internalStartAdornment = startAdornment;
     let internalEndAdornment = endAdornment;
 
-    const togglePasswordMask = () => {
-      setPasswordMasked((prev) => !prev);
-    };
-
-    const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
+    const togglePasswordMask = (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
+      event.stopPropagation();
+      setPasswordMasked((prev) => !prev);
     };
 
     const passwordToggleIcon = (
       <IconButton
         aria-label="Toggle password visibility"
         onClick={togglePasswordMask}
-        onMouseDown={handleMouseDownPassword}
         color="primary"
       >
         {isPasswordMasked ? <CloseEyeIcon /> : <OpenEyeIcon />}
