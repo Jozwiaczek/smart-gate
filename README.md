@@ -107,4 +107,3 @@ To run script, in terminal type `yarn {script}`.
 | `test`            | Runs tests for all packages                               |                                            |
 | `type-check`      | Checks TypeScript types for all packages                  |                                            |
 
-## Useful docs
