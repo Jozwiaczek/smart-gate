@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 
-import { LabelProps, StyledInputProps } from './TextField.types';
+import { InputAdornmentProps, LabelProps, StyledInputProps } from './TextField.types';
 
-export const IconContainer = styled.span`
+const inputAdornmentSize = 22;
+const inputBasePadding = 20;
+
+export const InputAdornment = styled.span<InputAdornmentProps>`
   position: absolute;
-  top: 43px;
-  left: 12px;
+  top: 44px;
+  ${({ position }) => `${position === 'start' ? 'left:' : 'right:'} ${inputBasePadding}px`};
+  svg {
+    font-size: ${inputAdornmentSize}px;
+  }
 `;
 
 export const Label = styled.label<LabelProps>(
@@ -34,9 +40,25 @@ export const Label = styled.label<LabelProps>(
 `,
 );
 
+const getInputPadding = (isStartAdornment?: boolean, isEndAdornment?: boolean): string => {
+  const adornmentPadding = 1.5 * inputBasePadding + inputAdornmentSize;
+
+  let leftPadding = inputBasePadding;
+  let rightPadding = inputBasePadding;
+
+  if (isStartAdornment) {
+    leftPadding = adornmentPadding;
+  }
+  if (isEndAdornment) {
+    rightPadding = adornmentPadding;
+  }
+
+  return `${inputBasePadding}px ${rightPadding}px ${inputBasePadding}px ${leftPadding}px`;
+};
+
 export const StyledInput = styled.input<StyledInputProps>(
-  ({ maxWidth, isError, isIcon, theme: { palette, sizes } }) => `
-  padding: ${isIcon ? '20px 20px 20px 46px' : '20px'};
+  ({ maxWidth, isError, isStartAdornment, isEndAdornment, theme: { palette, sizes } }) => `
+  padding: ${getInputPadding(isStartAdornment, isEndAdornment)};
   width: 100%;
   min-width: 250px;
   background: ${palette.background.default};

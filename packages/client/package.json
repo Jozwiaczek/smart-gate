@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "build:storybook": "build-storybook",
     "clean": "rimraf build",
-    "hygen:element": "hygen element new && cd ../.. && yarn prettier:fix",
+    "hygen:element": "hygen element new && cd ../.. && yarn prettier:fix && yarn lint:fix",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
     "serve:build": "serve -s build -l 4000",
