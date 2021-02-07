@@ -1,10 +1,10 @@
 const tokenConfig = {
   refreshToken: {
     name: 'refresh_token',
-    keepMeLogin: {
+    keepMeLoggedIn: {
       expiresIn: '60d',
     },
-    withOutKeepMeLogin: {
+    withOutKeepMeLoggedIn: {
       expiresIn: '12h',
     },
   },

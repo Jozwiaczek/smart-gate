@@ -1,12 +1,12 @@
-export interface TokenPayload {
-  sub: string;
-  roles: Array<string>;
-  keepMeLogin: boolean;
-}
-
-export interface Payload extends TokenPayload {
+export interface TokenPayload extends TokenPayloadCreate {
   iat: number;
   exp: number;
+}
+
+export interface TokenPayloadCreate {
+  sub: string;
+  roles: Array<string>;
+  keepMeLoggedIn: boolean;
 }
 
 export interface Tokens {
@@ -16,6 +16,7 @@ export interface Tokens {
 }
 
 export interface GeneratedTokens {
+  payload: TokenPayloadCreate;
   tokens: Tokens;
   accessExpiration: Date;
   refreshExpiration: Date;

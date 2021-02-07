@@ -3,7 +3,12 @@ import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { UserEntity } from '../database/entities/user.entity';
-import { GeneratedTokens, Payload, TokenPayload, Tokens } from '../interfaces/token-types';
+import {
+  GeneratedTokens,
+  TokenPayload,
+  TokenPayloadCreate,
+  Tokens,
+} from '../interfaces/token-types';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { constants } from '../utils';
@@ -16,23 +21,23 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService,
   ) {}
 
-  private static generateTokens(user: UserEntity, keepMeLogin: boolean): GeneratedTokens {
+  private static generateTokens(user: UserEntity, keepMeLoggedIn: boolean): GeneratedTokens {
     const { tokenConfig } = constants;
-    const payload: TokenPayload = { sub: user.id, roles: user.roles, keepMeLogin };
+    const payload: TokenPayloadCreate = { sub: user.id, roles: user.roles, keepMeLoggedIn };
     const { sign } = jsonwebtoken;
     const { ACCESS_SECRET, REFRESH_SECRET, LOGOUT_SECRET } = process.env;
     if (!ACCESS_SECRET || !REFRESH_SECRET || !LOGOUT_SECRET) {
       throw new Error('Secrets not set');
     }
     let tokens: Tokens;
-    if (keepMeLogin) {
+    if (keepMeLoggedIn) {
       tokens = {
         accessToken: sign(payload, ACCESS_SECRET, {
           expiresIn: tokenConfig.accessToken.expiresIn,
         }),
         logoutToken: '',
         refreshToken: sign(payload, REFRESH_SECRET, {
-          expiresIn: tokenConfig.refreshToken.keepMeLogin.expiresIn,
+          expiresIn: tokenConfig.refreshToken.keepMeLoggedIn.expiresIn,
         }),
       };
     } else {
@@ -44,23 +49,24 @@ export class AuthService {
           expiresIn: tokenConfig.logoutToken.expiresIn,
         }),
         refreshToken: sign(payload, REFRESH_SECRET, {
-          expiresIn: tokenConfig.refreshToken.withOutKeepMeLogin.expiresIn,
+          expiresIn: tokenConfig.refreshToken.withOutKeepMeLoggedIn.expiresIn,
         }),
       };
     }
 
-    const { exp: accessExp } = jsonwebtoken.decode(tokens.accessToken) as Payload;
-    const { exp: refreshExp } = jsonwebtoken.decode(tokens.refreshToken) as Payload;
+    const { exp: accessExp } = jsonwebtoken.decode(tokens.accessToken) as TokenPayload;
+    const { exp: refreshExp } = jsonwebtoken.decode(tokens.refreshToken) as TokenPayload;
 
     return {
+      payload,
       tokens,
       accessExpiration: new Date(accessExp * 1000),
       refreshExpiration: new Date(refreshExp * 1000),
     };
   }
 
-  public async login(user: UserEntity, keepMeLogin: boolean): Promise<GeneratedTokens> {
-    const genTokens = AuthService.generateTokens(user, keepMeLogin);
+  public async login(user: UserEntity, keepMeLoggedIn: boolean): Promise<GeneratedTokens> {
+    const genTokens = AuthService.generateTokens(user, keepMeLoggedIn);
     const {
       tokens: { refreshToken },
       refreshExpiration,
@@ -71,7 +77,10 @@ export class AuthService {
     return genTokens;
   }
 
-  public validateTokens(tokens: Tokens): TokenPayload {
+  public validateTokens(
+    tokens: Tokens,
+    accessTokenOptions?: jsonwebtoken.VerifyOptions,
+  ): TokenPayload {
     const { accessToken, logoutToken } = tokens;
     const { verify } = jsonwebtoken;
     const { ACCESS_SECRET, LOGOUT_SECRET } = process.env;
@@ -79,8 +88,8 @@ export class AuthService {
       throw new Error('Secrets not set');
     }
     try {
-      const accessPayload = verify(accessToken, ACCESS_SECRET) as TokenPayload;
-      if (!accessPayload.keepMeLogin) {
+      const accessPayload = verify(accessToken, ACCESS_SECRET, accessTokenOptions) as TokenPayload;
+      if (!accessPayload.keepMeLoggedIn) {
         const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
         if (accessPayload.sub !== logoutPayload.sub) {
           throw new Error('Invalid subscriber ID');
@@ -101,7 +110,7 @@ export class AuthService {
     }
     try {
       const refreshPayload = verify(refreshToken, REFRESH_SECRET) as TokenPayload;
-      if (!refreshPayload.keepMeLogin) {
+      if (!refreshPayload.keepMeLoggedIn) {
         const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
         if (logoutPayload.sub !== refreshPayload.sub) {
           throw new Error('Invalid subscriber ID');
@@ -111,7 +120,7 @@ export class AuthService {
       const valid = !!(await this.refreshTokenService.find(refreshToken, user));
       let newTokens: GeneratedTokens;
       if (valid) {
-        newTokens = AuthService.generateTokens(user, refreshPayload.keepMeLogin);
+        newTokens = AuthService.generateTokens(user, refreshPayload.keepMeLoggedIn);
       } else {
         throw new Error('Invalid refresh token');
       }
@@ -126,6 +135,11 @@ export class AuthService {
   }
 
   public async logout(refreshToken: string, userId: string) {
+    const { REFRESH_SECRET } = process.env;
+    if (!REFRESH_SECRET) {
+      throw new Error('Secrets not set');
+    }
+    jsonwebtoken.verify(refreshToken, REFRESH_SECRET);
     const user = await this.usersService.findOne(userId);
     await this.refreshTokenService.delete(refreshToken, user);
   }
