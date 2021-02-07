@@ -1,9 +1,9 @@
-import React, { forwardRef, MouseEvent, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
-import { CloseEyeIcon, OpenEyeIcon } from '../../../icons';
-import LockIcon from '../../../icons/LockIcon';
+import { LockIcon } from '../../../icons';
+import Theme from '../../../theme/Theme';
 import { getLabelFromName } from '../../../utils';
-import IconButton from '../../IconButton';
+import PasswordIconButton from './PasswordIconButton';
 import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
 import { ITextFieldProps, TextFieldProps } from './TextField.types';
 
@@ -18,25 +18,9 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     let internalStartAdornment = startAdornment;
     let internalEndAdornment = endAdornment;
 
-    const togglePasswordMask = (event: MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-      setPasswordMasked((prev) => !prev);
-    };
-
-    const passwordToggleIcon = (
-      <IconButton
-        aria-label="Toggle password visibility"
-        onClick={togglePasswordMask}
-        color="primary"
-      >
-        {isPasswordMasked ? <CloseEyeIcon /> : <OpenEyeIcon />}
-      </IconButton>
-    );
-
     if (isPassword) {
-      internalStartAdornment = <LockIcon />;
-      internalEndAdornment = passwordToggleIcon;
+      internalStartAdornment = <LockIcon color={Theme.palette.error.main} />;
+      internalEndAdornment = <PasswordIconButton setPasswordMasked={setPasswordMasked} />;
     }
 
     useEffect(() => {
@@ -50,11 +34,10 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     }, [isPasswordMasked, type]);
 
     return (
-      <Container>
+      <Container isPasswordMasked={isPasswordMasked}>
         <StyledInput
           ref={ref}
           id={name}
-          isError={Boolean(error)}
           maxWidth={maxWidth}
           name={name}
           isStartAdornment={Boolean(internalStartAdornment)}

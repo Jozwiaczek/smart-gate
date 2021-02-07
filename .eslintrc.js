@@ -1,5 +1,4 @@
 module.exports = {
-  plugins: ['react-hooks', 'simple-import-sort', 'import'],
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     'airbnb-typescript', // Uses the recommended rules from @airbnb-typescript
@@ -7,6 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
     'plugin:prettier/recommended', // Align prettier settings with eslint
   ],
+  plugins: ['react-hooks', 'simple-import-sort', 'import'],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
@@ -64,9 +64,9 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],
-    '@typescript-eslint/explicit-function-return-type': [0], // Disabled to improve code readability. No needed during writing React components
+    '@typescript-eslint/explicit-function-return-type': [0], // Disabled to improve code readability. No needed during writing React PasswordIconButton
     '@typescript-eslint/indent': [0], // Disabled because prettier will handle this rule
-    'react/state-in-constructor': [0], // Disabled because we want to allow to write components with and without constructor
+    'react/state-in-constructor': [0], // Disabled because we want to allow to write PasswordIconButton with and without constructor
     'react/button-has-type': [0], // Disabled because it not work well with TypeScript
     'react/jsx-boolean-value': [2, 'never'],
     'react/jsx-one-expression-per-line': [0], // Disabled because of prettier rules

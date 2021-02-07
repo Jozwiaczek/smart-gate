@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
+import { UserIcon } from '../../icons';
 import { emailRegex } from '../../utils/constants';
 import { Container } from './SignUp.styled';
 import { SignUpInputs } from './SignUp.types';
@@ -12,7 +13,7 @@ export default function Index() {
   const showSnackbar = useSnackbar();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors, reset, trigger } = useForm<SignUpInputs>({
+  const { register, handleSubmit, errors, reset, trigger, getValues } = useForm<SignUpInputs>({
     mode: 'onBlur',
   });
   const auth = useAuth();
@@ -31,7 +32,9 @@ export default function Index() {
     }
 
     try {
-      await auth.register(values);
+      // eslint-disable-next-line no-unused-vars
+      const { confirmPassword, ...formValues } = values;
+      await auth.register(formValues);
       reset();
       history.push('/dashboard');
     } catch (error) {
@@ -56,37 +59,37 @@ export default function Index() {
           loading={loading}
           register={register}
         >
+          <TextField name="firstName" autoFocus />
+          <TextField name="lastName" />
           <TextField
-            autoComplete="fname"
-            name="firstName"
-            maxWidth="100%"
-            label="First Name"
-            autoFocus
-          />
-          <TextField maxWidth="100%" label="Last Name" name="lastName" autoComplete="lname" />
-          <TextField
+            name="email"
             validation={{
               pattern: {
                 value: emailRegex,
                 message: 'Invalid email address.',
               },
             }}
-            maxWidth="100%"
+            startAdornment={<UserIcon />}
             required
-            label="Email Address"
-            name="email"
-            autoComplete="email"
           />
           <TextField
+            name="password"
+            type="password"
             validation={{
               minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
             }}
-            maxWidth="100%"
             required
-            name="password"
-            label="Password"
+          />
+          <TextField
+            name="confirmPassword"
             type="password"
-            autoComplete="current-password"
+            validation={{
+              pattern: {
+                value: RegExp(getValues().password),
+                message: 'The password fields must match.',
+              },
+            }}
+            required
           />
           <Button type="submit" fullWidth color="primary" disabled={loading} margin="30px 0 30px 0">
             Sign Up
