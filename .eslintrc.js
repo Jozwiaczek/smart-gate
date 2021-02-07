@@ -64,9 +64,9 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],
-    '@typescript-eslint/explicit-function-return-type': [0], // Disabled to improve code readability. No needed during writing React PasswordIconButton
+    '@typescript-eslint/explicit-function-return-type': [0], // Disabled to improve code readability. No needed during writing React components
     '@typescript-eslint/indent': [0], // Disabled because prettier will handle this rule
-    'react/state-in-constructor': [0], // Disabled because we want to allow to write PasswordIconButton with and without constructor
+    'react/state-in-constructor': [0], // Disabled because we want to allow to write components with and without constructor
     'react/button-has-type': [0], // Disabled because it not work well with TypeScript
     'react/jsx-boolean-value': [2, 'never'],
     'react/jsx-one-expression-per-line': [0], // Disabled because of prettier rules
