@@ -19,7 +19,6 @@
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
 - [Available scripts](#-available-scripts)
-- [Useful docs](#-useful-docs)
 
 ## Getting started
 
@@ -78,7 +77,7 @@ For just validating your commit message without commiting it use terminal:
 echo 'foo: bar' | commitlint
 ```
 
-## Hygen - Code generator
+## 🤖 Hygen - Code generator
 
 Hygen is the cli dev tool that provides the ability for generating scalable code. All code generation templates are defined in the `__template` directory.
 Remember to add created model to git files (typically those files are excluded from default).
@@ -91,7 +90,7 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 | admin   | `hygen:model`   | Creates selected views for admin model                        |
 | client  | `hygen:element` | Creates new standarized React component, story and style file |
 
-## Available scripts
+## 📝 Available scripts
 
 To run script, in terminal type `yarn {script}`.
 
