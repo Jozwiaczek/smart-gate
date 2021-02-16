@@ -4,15 +4,14 @@ services:
   postgres:
     container_name: smart-gate-db
     image: postgres
+    volumes:
+      - ./docker/on-init-db.sh:/docker-entrypoint-initdb.d/on-init-db.sh
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
+      POSTGRES_MULTIPLE_DATABASES: ${DB_DATABASE_TEST}, ${DB_DATABASE}
     ports:
-      - '${DB_PORT}:5432'
+      - ${DB_PORT}:${DB_PORT}
     networks:
       - postgres
     restart: unless-stopped
