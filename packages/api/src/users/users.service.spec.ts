@@ -3,11 +3,12 @@ import { Test } from '@nestjs/testing';
 import { Connection } from 'typeorm';
 
 import { clearTestDatabase } from '../../test/utils/clearTestDatabase';
+import { testCreateRandomUser } from '../../test/utils/testCreateRandomUser';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';
 import { UsersService } from './users.service';
 
-describe('UserService', () => {
+describe('UsersService', () => {
   let connection: Connection;
   let usersService: UsersService;
 
@@ -43,10 +44,7 @@ describe('UserService', () => {
       const repository = connection.getRepository(UserEntity);
       await repository.delete({});
       expect(await repository.count()).toStrictEqual(0);
-      const userEntity: UserEntity = new UserEntity();
-      userEntity.email = 'some@email.com';
-      userEntity.password = 'some_password';
-      await repository.save(userEntity);
+      const userEntity = await testCreateRandomUser(connection);
       expect(await repository.count()).toStrictEqual(1);
       const selectedUserEntity = await usersService.findOne(userEntity.id);
       expect(userEntity).toStrictEqual(selectedUserEntity);
@@ -69,10 +67,7 @@ describe('UserService', () => {
       const repository = connection.getRepository(UserEntity);
       await repository.delete({});
       expect(await repository.count()).toStrictEqual(0);
-      const userEntity: UserEntity = new UserEntity();
-      userEntity.email = 'some@email.com';
-      userEntity.password = 'some_password';
-      await repository.save(userEntity);
+      const userEntity = await testCreateRandomUser(connection);
       expect(await repository.count()).toStrictEqual(1);
       const selectedUserEntity = await usersService.findOneByEmail('some@email.com');
       expect(userEntity).toStrictEqual(selectedUserEntity);
