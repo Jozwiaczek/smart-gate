@@ -14,7 +14,7 @@
 
 - [Getting started](#-getting-started)
   - [Prerequisites](#-prerequisites)
-  - [Installation](#-installation)
+  - [General installation](#-general-installation)
 - [Packages Docs](#-packages-docs)
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
@@ -27,7 +27,7 @@
 - [Node.js](https://nodejs.org/en/) >= 12
 - [Yarn](https://classic.yarnpkg.com/lang/en/) >=1.22
 
-### Installation
+### General installation
 
 ```shell script
 yarn
@@ -83,26 +83,28 @@ Hygen is the cli dev tool that provides the ability for generating scalable code
 Remember to add created model to git files (typically those files are excluded from default).
 For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 
-### Avaliable generators:
+### Available generators:
 
 | Package | Script          | Description                                                   |
 | ------- | --------------- | ------------------------------------------------------------- |
 | admin   | `hygen:model`   | Creates selected views for admin model                        |
-| client  | `hygen:element` | Creates new standarized React component, story and style file |
+| client  | `hygen:element` | Creates new standardize React component, story and style file |
 
 ## 📝 Available scripts
 
 To run script, in terminal type `yarn {script}`.
 
-| Script            | Description                                               | Note                                       |
-| ----------------- | --------------------------------------------------------- | ------------------------------------------ |
-| `check`           | Runs linter, prettier, tests and ts-check in all packages |                                            |
-| `preinstall`      | Checks is yarn was used package manager                   | It runs automatically before every install |
-| `lint`            | Checks linter rules                                       |                                            |
-| `lint:fix`        | Fix linter                                                |                                            |
-| `prettier`        | Checks prettier rules                                     |                                            |
-| `prettier:fix`    | Fix prettier                                              |                                            |
-| `sortPackageJson` | Sort alphabetical all package.json in project             |                                            |
-| `test`            | Runs tests for all packages                               |                                            |
-| `type-check`      | Checks TypeScript types for all packages                  |                                            |
-
+| Script              | Description                                               | Note                                       |
+| ------------------- | --------------------------------------------------------- | ------------------------------------------ |
+| `build`             |                                                           |                                            |
+| `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
+| `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
+| `lint`              | Checks linter rules                                       |                                            |
+| `lint:fix`          | Fix linter                                                |                                            |
+| `prettier`          | Checks prettier rules                                     |                                            |
+| `prettier:fix`      | Fix prettier                                              |                                            |
+| `removeNodeModules` | Remove all node_modules from project (all packages)       |                                            |
+| `sortPackageJson`   | Sort alphabetical all package.json in project             |                                            |
+| `test`              | Runs tests for all packages                               |                                            |
+| `test:e2e`          | Runs end to end tests for all packages                    |                                            |
+| `type-check`        | Checks TypeScript types for all packages                  |                                            |
