@@ -67,7 +67,10 @@ describe('UsersService', () => {
       const repository = connection.getRepository(UserEntity);
       await repository.delete({});
       expect(await repository.count()).toStrictEqual(0);
-      const userEntity = await testCreateRandomUser(connection);
+      const userEntity: UserEntity = new UserEntity();
+      userEntity.email = 'some@email.com';
+      userEntity.password = 'some_password';
+      await repository.save(userEntity);
       expect(await repository.count()).toStrictEqual(1);
       const selectedUserEntity = await usersService.findOneByEmail('some@email.com');
       expect(userEntity).toStrictEqual(selectedUserEntity);
