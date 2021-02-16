@@ -16,7 +16,7 @@ const setCookies = (
     refreshExpiration,
   } = tokenGen;
   const { tokenConfig } = Constants;
-  const isDevelopment = process.env.ENV === 'development';
+  const isDevelopment = process.env.NODE_ENV === 'development';
   const options: CookieOptions = {
     httpOnly: true,
     path: '/',
@@ -43,7 +43,7 @@ const setCookies = (
 };
 
 const getCookies = (request: CookieRequest) => {
-  const isDevelopment = process.env.ENV === 'development';
+  const isDevelopment = process.env.NODE_ENV === 'development';
   return isDevelopment ? request.cookies : request.signedCookies;
 };
 

@@ -13,14 +13,25 @@ export interface DatabaseConfig {
 @Injectable()
 export class DatabaseConfigService {
   public getConfig(): DatabaseConfig {
-    return this.validateConfig({
+    const baseConfig = {
       host: process.env.DB_HOST,
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
+      synchronize: process.env.NODE_ENV !== 'production',
+      logging: process.env.NODE_ENV === 'production',
+    };
+
+    if (process.env.NODE_ENV === 'test') {
+      return this.validateConfig({
+        ...baseConfig,
+        database: process.env.DB_DATABASE_TEST,
+      });
+    }
+
+    return this.validateConfig({
+      ...baseConfig,
       database: process.env.DB_DATABASE,
-      synchronize: process.env.ENV !== 'production',
-      logging: process.env.ENV === 'production',
     });
   }
 
