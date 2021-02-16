@@ -1,6 +1,10 @@
 # [Smart Gate](https://github.com/Jozwiaczek/smart-gate)
 
+> 🔐 System for handling access to any physical entry gate.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
 
 <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=8%3A30">
   <img
@@ -12,6 +16,7 @@
 
 ## 🚩 Table of Contents
 
+- [About](#-about)
 - [Getting started](#-getting-started)
   - [Prerequisites](#-prerequisites)
   - [General installation](#-general-installation)
@@ -19,6 +24,10 @@
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
 - [Available scripts](#-available-scripts)
+
+## 📖 About
+
+System for managing and handling access to any physical entry home gate.
 
 ## 🎓 Getting started
 
@@ -98,6 +107,7 @@ To run script, in terminal type `yarn {script}`.
 | ------------------- | --------------------------------------------------------- | ------------------------------------------ |
 | `build`             |                                                           |                                            |
 | `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
+| `heroku-postbuild`  | It runs on heroku before api build                        |                                            |
 | `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
 | `lint`              | Checks linter rules                                       |                                            |
 | `lint:fix`          | Fix linter                                                |                                            |
@@ -105,6 +115,7 @@ To run script, in terminal type `yarn {script}`.
 | `prettier:fix`      | Fix prettier                                              |                                            |
 | `removeNodeModules` | Remove all node_modules from project (all packages)       |                                            |
 | `sortPackageJson`   | Sort alphabetical all package.json in project             |                                            |
+| `start`             | Used to run api package on heroku                         |                                            |
 | `test`              | Runs tests for all packages                               |                                            |
 | `test:e2e`          | Runs end to end tests for all packages                    |                                            |
 | `type-check`        | Checks TypeScript types for all packages                  |                                            |
