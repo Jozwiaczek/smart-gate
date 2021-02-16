@@ -3,6 +3,8 @@ import React, { createContext, PropsWithChildren, useCallback } from 'react';
 import useAxios from '../hooks/useAxios';
 
 interface User {
+  firstName?: string;
+  lastName?: string;
   email: string;
   password: string;
 }

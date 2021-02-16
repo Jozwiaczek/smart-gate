@@ -1,5 +1,4 @@
 module.exports = {
-  plugins: ['react-hooks', 'simple-import-sort', 'import'],
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     'airbnb-typescript', // Uses the recommended rules from @airbnb-typescript
@@ -7,6 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
     'plugin:prettier/recommended', // Align prettier settings with eslint
   ],
+  plugins: ['react-hooks', 'simple-import-sort', 'import'],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports

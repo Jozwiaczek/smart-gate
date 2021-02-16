@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Button, Card, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
+import { UserIcon } from '../../icons';
 import { Container, LinksContainer } from './SignIn.styled';
 import { SignInInputs } from './SignIn.types';
 
@@ -34,9 +35,12 @@ const SignIn = () => {
       reset();
       history.push('/dashboard');
     } catch (error) {
-      console.error('Error: ', error);
-      const { message } = error.response.data;
-      showSnackbar({ message, severity: 'error' });
+      if (!error.response) {
+        showSnackbar({ message: error.message, severity: 'error' });
+      } else {
+        const { message } = error.response.data;
+        showSnackbar({ message, severity: 'error' });
+      }
     } finally {
       setLoading(false);
     }
@@ -52,25 +56,12 @@ const SignIn = () => {
           register={register}
           loading={loading}
         >
-          <TextField
-            required
-            maxWidth="100%"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            required
-            maxWidth="100%"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-          />
+          <TextField name="email" required autoFocus startAdornment={<UserIcon />} />
+          <TextField required name="password" type="password" autoComplete="current-password" />
           <Button type="submit" fullWidth disabled={loading} margin="30px 0" withArrow>
             Sign In
           </Button>
-          <Checkbox label="Keep me signed in." name="keepMeLoggedIn" />
+          <Checkbox name="keepMeLoggedIn" />
           <LinksContainer>
             <Link to="/">Forgot password?</Link>
             <Link to="/registration">Dont have an account? Sign Up</Link>

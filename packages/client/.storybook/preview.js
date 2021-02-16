@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/theme/Theme';
 import GlobalStyles from '../src/theme/GlobalStyles';
 
@@ -7,11 +7,18 @@ export const parameters = {
   layout: 'centered',
 };
 
+const ViewportContainer = styled.div`
+  width: 1440px;
+  height: 900px;
+`;
+
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Story />
+      <ViewportContainer>
+        <Story />
+      </ViewportContainer>
     </ThemeProvider>
   ),
 ];

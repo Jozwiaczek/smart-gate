@@ -2,7 +2,7 @@ import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
 export interface CheckboxProps {
   name: string;
-  label: string;
+  label?: string;
   error?: string;
   required?: boolean;
   margin?: string;

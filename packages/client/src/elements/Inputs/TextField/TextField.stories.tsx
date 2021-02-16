@@ -21,7 +21,7 @@ Default.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   placeholder: 'Example placeholder',
-  icon: <UserIcon />,
+  startAdornment: <UserIcon />,
   name: 'firstName',
 };
 

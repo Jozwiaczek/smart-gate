@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "build:storybook": "build-storybook",
     "clean": "rimraf build",
-    "hygen:element": "hygen element new && cd ../.. && yarn prettier:fix",
+    "hygen:element": "hygen element new && cd ../.. && yarn prettier:fix && yarn lint:fix",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
     "serve:build": "serve -s build -l 4000",
@@ -20,6 +20,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "animejs": "^3.2.1",
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -48,6 +49,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/animejs": "^3.1.2",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",

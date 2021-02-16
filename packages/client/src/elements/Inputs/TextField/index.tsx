@@ -1,29 +1,64 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
+import { LockIcon } from '../../../icons';
+import Theme from '../../../theme/Theme';
 import { getLabelFromName } from '../../../utils';
-import { Container, Error, IconContainer, Label, StyledInput } from './TextField.styled';
+import PasswordIconButton from './PasswordIconButton';
+import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
 import { ITextFieldProps, TextFieldProps } from './TextField.types';
 
 const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
-  ({ error, name, label, icon, required, maxWidth, ...rest }, ref) => (
-    <Container>
-      <StyledInput
-        ref={ref}
-        id={name}
-        isError={Boolean(error)}
-        maxWidth={maxWidth}
-        name={name}
-        isIcon={!!icon}
-        required={required}
-        {...rest}
-      />
-      <Label htmlFor={name} isError={Boolean(error)} required={required}>
-        {label || getLabelFromName(name)}
-      </Label>
-      {icon && <IconContainer>{icon}</IconContainer>}
-      <Error>{error}</Error>
-    </Container>
-  ),
+  (
+    { startAdornment, endAdornment, error, name, label, required, maxWidth, type, ...rest },
+    ref,
+  ) => {
+    const [isPasswordMasked, setPasswordMasked] = useState(true);
+    const [internalType, setInternalType] = useState(type);
+    const isPassword = type === 'password';
+    let internalStartAdornment = startAdornment;
+    let internalEndAdornment = endAdornment;
+
+    if (isPassword) {
+      internalStartAdornment = <LockIcon color={Theme.palette.error.main} />;
+      internalEndAdornment = <PasswordIconButton setPasswordMasked={setPasswordMasked} />;
+    }
+
+    useEffect(() => {
+      if (type === 'password') {
+        if (isPasswordMasked) {
+          setInternalType('password');
+        } else {
+          setInternalType('text');
+        }
+      }
+    }, [isPasswordMasked, type]);
+
+    return (
+      <Container isPasswordMasked={isPasswordMasked}>
+        <StyledInput
+          ref={ref}
+          id={name}
+          maxWidth={maxWidth}
+          name={name}
+          isStartAdornment={Boolean(internalStartAdornment)}
+          isEndAdornment={Boolean(endAdornment)}
+          required={required}
+          type={internalType}
+          {...rest}
+        />
+        <Label htmlFor={name} isError={Boolean(error)} required={required}>
+          {label || getLabelFromName(name)}
+        </Label>
+        {internalStartAdornment && (
+          <InputAdornment position="start">{internalStartAdornment}</InputAdornment>
+        )}
+        {internalEndAdornment && (
+          <InputAdornment position="end">{internalEndAdornment}</InputAdornment>
+        )}
+        <Error>{error}</Error>
+      </Container>
+    );
+  },
 );
 
 export default TextField;
