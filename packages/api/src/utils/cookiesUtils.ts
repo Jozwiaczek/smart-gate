@@ -21,7 +21,7 @@ const setCookies = (
     httpOnly: true,
     path: '/',
     secure: !isDevelopment,
-    sameSite: isDevelopment ? undefined : 'strict',
+    sameSite: 'lax',
   };
 
   if (!keepMeLogin) {
