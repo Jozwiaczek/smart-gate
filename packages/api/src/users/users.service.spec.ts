@@ -47,18 +47,14 @@ describe('UsersService', () => {
     });
 
     it('returns user from database', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
-      const arr = [];
-      for (let i = 0; i < 10; i += 1) {
-        arr.push(testCreateRandomUser(connection));
-      }
-      const users = await Promise.all(arr);
-      expect(await repository.count()).toStrictEqual(10);
-      const result = await usersService.findAll();
-      expect(result.total).toEqual(10);
-      expect(result.data).toEqual(expect.arrayContaining(users));
+      await setupRepository(connection);
+
+      const firstUser = await testCreateRandomUser(connection);
+      const secondUser = await testCreateRandomUser(connection);
+
+      const allUsers = await usersService.findAll();
+      expect(allUsers.total).toEqual(2);
+      expect(allUsers.data).toStrictEqual([firstUser, secondUser]);
     });
   });
 
