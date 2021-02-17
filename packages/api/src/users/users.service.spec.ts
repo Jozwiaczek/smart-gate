@@ -7,10 +7,15 @@ import { testCreateRandomUser } from '../../test/utils/testCreateRandomUser';
 import { Role } from '../auth/role.enum';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';
-import { GetList } from '../interfaces/react-admin-types';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
+
+const setupRepository = async (connection: Connection) => {
+  const repository = connection.getRepository(UserEntity);
+  await repository.delete({});
+  expect(await repository.count()).toStrictEqual(0);
+};
 
 describe('UsersService', () => {
   let connection: Connection;
@@ -34,13 +39,11 @@ describe('UsersService', () => {
 
   describe('findAll()', () => {
     it('returns empty array if no users', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
-      await expect(usersService.findAll()).resolves.toStrictEqual({
-        data: [],
-        total: 0,
-      } as GetList<UserEntity>);
+      await setupRepository(connection);
+      const allUsers = await usersService.findAll();
+
+      expect(allUsers.total).toStrictEqual(0);
+      expect(allUsers.data).toStrictEqual([]);
     });
 
     it('returns user from database', async () => {
