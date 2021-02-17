@@ -3,6 +3,6 @@
 #
 
 [build]
-base = "packages/client/"
-publish = "build/"
+base = "packages/client"
+publish = "build"
 command = "yarn build"
