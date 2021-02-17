@@ -1,4 +1,4 @@
-const getLabelFromName = (source: string): string => {
+const getLabelFromSource = (source: string): string => {
   return source
     .split(/(?=[A-Z])/)
     .map((str, index) => {
@@ -10,4 +10,4 @@ const getLabelFromName = (source: string): string => {
     .join(' ');
 };
 
-export default getLabelFromName;
+export default getLabelFromSource;
