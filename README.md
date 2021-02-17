@@ -1,18 +1,31 @@
-# [Smart Gate](https://github.com/Jozwiaczek/smart-gate)
+<h1 align="center">Smart Gate</h1>
 
-> 🔐 System for handling access to any physical entry gate.
+<p align="center">
+    <a href="https://github.com/Jozwiaczek/smart-gate">
+        <img src="./readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
+    </a>
+    <br>
+    <i>🔐 System for handling access to any physical entry gate.</i>
+    <br>
+    <br>
+    <i>Created by <b>Jakub Jóźwiak</b> and <b>Mateusz Nestorowicz</b></i>
+</p>
+
+<p align="center">
+    Live app:
+    <a href="https://smart-gate.netlify.app/"><strong>smart-gate.netlify.app</strong></a>
+    <br>
+    <br>
+    UI/UX:
+    <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
+</p>
+
+<hr>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
-
-<a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=8%3A30">
-  <img
-    src="https://theme.zdassets.com/theme_assets/9325143/ec27c7adedf401a3bc21f3e389011dfad2caa67b.png"
-    alt="Figma logo"
-    width="auto"
-  /> 
-</a>
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_small)
 
 ## 🚩 Table of Contents
 
@@ -24,6 +37,7 @@
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
 - [Available scripts](#-available-scripts)
+- [License](#-license)
 
 ## 📖 About
 
@@ -119,3 +133,10 @@ To run script, in terminal type `yarn {script}`.
 | `test`              | Runs tests for all packages                               |                                            |
 | `test:e2e`          | Runs end to end tests for all packages                    |                                            |
 | `type-check`        | Checks TypeScript types for all packages                  |                                            |
+
+## License
+
+Copyright 2020 Intent.
+Licensed under the [MIT license](LICENSE).
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_large)
