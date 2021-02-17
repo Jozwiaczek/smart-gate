@@ -37,12 +37,10 @@ describe('UsersService', () => {
       const repository = connection.getRepository(UserEntity);
       await repository.delete({});
       expect(await repository.count()).toStrictEqual(0);
-      await expect(usersService.findAll()).resolves.toEqual(
-        expect.objectContaining({
-          data: [],
-          total: 0,
-        } as GetList<UserEntity>),
-      );
+      await expect(usersService.findAll()).resolves.toStrictEqual({
+        data: [],
+        total: 0,
+      } as GetList<UserEntity>);
     });
 
     it('returns user from database', async () => {
