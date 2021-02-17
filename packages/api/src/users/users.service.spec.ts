@@ -3,6 +3,7 @@ import { Test } from '@nestjs/testing';
 import { Connection, QueryFailedError } from 'typeorm';
 
 import { clearTestDatabase } from '../../test/utils/clearTestDatabase';
+import { testClearRepository } from '../../test/utils/testClearRepository';
 import { testCreateRandomUser } from '../../test/utils/testCreateRandomUser';
 import { Role } from '../auth/role.enum';
 import { DatabaseModule } from '../database/database.module';
@@ -10,12 +11,6 @@ import { UserEntity } from '../database/entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-
-const setupRepository = async (connection: Connection) => {
-  const repository = connection.getRepository(UserEntity);
-  await repository.delete({});
-  expect(await repository.count()).toStrictEqual(0);
-};
 
 describe('UsersService', () => {
   let connection: Connection;
@@ -39,7 +34,7 @@ describe('UsersService', () => {
 
   describe('findAll()', () => {
     it('returns empty array if no users', async () => {
-      await setupRepository(connection);
+      await testClearRepository(connection, UserEntity);
       const allUsers = await usersService.findAll();
 
       expect(allUsers.total).toStrictEqual(0);
@@ -47,7 +42,7 @@ describe('UsersService', () => {
     });
 
     it('returns user from database', async () => {
-      await setupRepository(connection);
+      await testClearRepository(connection, UserEntity);
 
       const firstUser = await testCreateRandomUser(connection);
       const secondUser = await testCreateRandomUser(connection);
@@ -60,21 +55,20 @@ describe('UsersService', () => {
 
   describe('findOne()', () => {
     it('rejects with NotFoundException when user is not found', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      await testClearRepository(connection, UserEntity);
+
       await expect(
         usersService.findOne('3c3b2ebb-9daa-4f42-85b2-eecc213ca86e'),
       ).rejects.toBeInstanceOf(NotFoundException);
     });
 
     it('returns user with requested id', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      const repository = await testClearRepository(connection, UserEntity);
+
       const userEntity = await testCreateRandomUser(connection);
-      expect(await repository.count()).toStrictEqual(1);
       const selectedUserEntity = await usersService.findOne(userEntity.id);
+
+      expect(await repository.count()).toStrictEqual(1);
       expect(userEntity).toStrictEqual(selectedUserEntity);
     });
   });
