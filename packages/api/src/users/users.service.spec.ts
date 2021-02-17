@@ -63,47 +63,41 @@ describe('UsersService', () => {
     });
 
     it('returns user with requested id', async () => {
-      const repository = await testClearRepository(connection, UserEntity);
+      await testClearRepository(connection, UserEntity);
 
       const userEntity = await testCreateRandomUser(connection);
       const selectedUserEntity = await usersService.findOne(userEntity.id);
 
-      expect(await repository.count()).toStrictEqual(1);
       expect(userEntity).toStrictEqual(selectedUserEntity);
     });
   });
 
   describe('findOneByEmail()', () => {
     it('rejects with NotFoundException when user is not found', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      await testClearRepository(connection, UserEntity);
+
       await expect(usersService.findOneByEmail('some@email.com')).rejects.toBeInstanceOf(
         NotFoundException,
       );
     });
 
     it('returns valid userEntity when user is found', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      const repository = await testClearRepository(connection, UserEntity);
       const userEntity: UserEntity = new UserEntity();
       userEntity.email = 'some@email.com';
       userEntity.password = 'some_password';
+
       await repository.save(userEntity);
-      expect(await repository.count()).toStrictEqual(1);
       const selectedUserEntity = await usersService.findOneByEmail('some@email.com');
+
       expect(userEntity).toStrictEqual(selectedUserEntity);
     });
   });
 
   describe('create()', () => {
     it('rejects with Exception when user with the same email already exists', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      await testClearRepository(connection, UserEntity);
       const randomUser = await testCreateRandomUser(connection);
-      expect(await repository.count()).toStrictEqual(1);
       const user: CreateUserDto = {
         email: randomUser.email,
         password: 'test',
@@ -111,13 +105,12 @@ describe('UsersService', () => {
         lastName: 'test',
         roles: [],
       };
+
       await expect(usersService.create(user)).rejects.toBeInstanceOf(QueryFailedError);
     });
 
     it('returns valid created user', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      await testClearRepository(connection, UserEntity);
       const user: CreateUserDto = {
         email: 'smart@gate.com',
         password: 'test',
@@ -131,14 +124,13 @@ describe('UsersService', () => {
 
   describe('update()', () => {
     it('rejects with NotFoundException when user has wrong id', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      const repository = await testClearRepository(connection, UserEntity);
       const randomUser = await testCreateRandomUser(connection);
-      expect(await repository.count()).toStrictEqual(1);
       const user: UpdateUserDto = {
         email: randomUser.email,
       };
+
+      expect(await repository.count()).toStrictEqual(1);
       await expect(usersService.update(`${Date.now()}`, user)).rejects.toBeInstanceOf(
         NotFoundException,
       );
