@@ -5,6 +5,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_shield)
 
 <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=8%3A30">
   <img
@@ -119,3 +120,7 @@ To run script, in terminal type `yarn {script}`.
 | `test`              | Runs tests for all packages                               |                                            |
 | `test:e2e`          | Runs end to end tests for all packages                    |                                            |
 | `type-check`        | Checks TypeScript types for all packages                  |                                            |
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_large)
