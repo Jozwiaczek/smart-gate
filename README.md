@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://github.com/Jozwiaczek/smart-gate">
-        <img src=".readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
+        <img src="./readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
     </a>
     <br>
     <i>🔐 System for handling access to any physical entry gate.</i>
