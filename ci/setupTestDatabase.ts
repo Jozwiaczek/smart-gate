@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import pg from 'pg';
 
 interface CreateClientAndConnectParams {
@@ -31,19 +29,11 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
-  console.log('L:32 | process.env.DB_USERNAME: ', process.env.DB_USERNAME);
-  console.log('L:32 | process.env.DB_USERNAME: ', process.env.NODE_ENV);
-
-  const missingVariables = ['DB_USERNAME', 'DB_ADMIN_PASSWORD'].filter((key) => !process.env[key]);
-  if (missingVariables.length) {
-    throw new Error(`Missing environment variables: ${missingVariables.join(', ')}`);
-  }
-
   const adminClient = await createClientAndConnect({
     host: process.env.DB_HOST || 'localhost',
     port: +(process.env.DB_PORT as string) || 5432,
-    user: process.env.DB_ADMIN_USER as string,
-    password: process.env.DB_ADMIN_PASSWORD as string,
+    user: (process.env.DB_ADMIN_USER as string) || 'sg',
+    password: (process.env.DB_ADMIN_PASSWORD as string) || 'sg',
   });
 
   await adminClient.query('CREATE DATABASE smart-gate-db-test');
@@ -53,8 +43,8 @@ const setupTestDatabase = async (): Promise<void> => {
   const testDatabaseClient = await createClientAndConnect({
     host: process.env.DB_HOST || 'localhost',
     port: +(process.env.DB_PORT as string) || 5432,
-    user: process.env.DB_ADMIN_USER as string,
-    password: process.env.DB_ADMIN_PASSWORD as string,
+    user: (process.env.DB_ADMIN_USER as string) || 'sg',
+    password: (process.env.DB_ADMIN_PASSWORD as string) || 'sg',
     database: 'smart-gate-db-test',
   });
 
