@@ -1,7 +1,12 @@
+# For all config options check: https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#reviewersę
+
 version: 2
 updates:
   - package-ecosystem: 'npm'
     directory: '/'
+    reviewers:
+      - 'Jozwiaczek'
+      - 'Mefjus'
     schedule:
       interval: 'monthly'
       day: 'friday'
@@ -9,6 +14,9 @@ updates:
       timezone: 'Europe/Warsaw'
   - package-ecosystem: 'github-actions'
     directory: '/'
+    reviewers:
+      - 'Jozwiaczek'
+      - 'Mefjus'
     schedule:
       interval: 'monthly'
       day: 'friday'
