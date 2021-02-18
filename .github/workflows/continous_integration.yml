@@ -7,9 +7,9 @@ env:
 jobs:
   Validate:
     name: 'Validate Pull Request'
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: ubuntu-latest
-    container: node:12.19.1-alpine3.10
+    container: node
     env:
       DB_PORT: 5432
       DB_HOST: postgres
@@ -18,7 +18,7 @@ jobs:
       DB_DATABASE_TEST: smart_gate_db_test
     services:
       postgres:
-        image: postgres:10.12-alpine
+        image: postgres
         env:
           POSTGRES_PASSWORD: postgres_password
         options: >-
