@@ -1,9 +1,9 @@
 version: 2
 updates:
-  - package-ecosystem: "yarn"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "monthly"
-      day: "friday"
-      time: "16:00"
-      timezone: "Europe/Warsaw"
+      interval: 'monthly'
+      day: 'friday'
+      time: '16:00'
+      timezone: 'Europe/Warsaw'
