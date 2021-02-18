@@ -14,7 +14,7 @@ export interface DatabaseConfig {
 export class DatabaseConfigService {
   public getConfig(): DatabaseConfig {
     const baseConfig = {
-      host: process.env.DB_HOST,
+      host: process.env.DB_HOST || 'localhost',
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
@@ -25,13 +25,13 @@ export class DatabaseConfigService {
     if (process.env.NODE_ENV === 'test') {
       return this.validateConfig({
         ...baseConfig,
-        database: process.env.DB_DATABASE_TEST,
+        database: process.env.DB_DATABASE_TEST || 'smart_gate_db_test',
       });
     }
 
     return this.validateConfig({
       ...baseConfig,
-      database: process.env.DB_DATABASE,
+      database: process.env.DB_DATABASE || 'smart_gate_db',
     });
   }
 
