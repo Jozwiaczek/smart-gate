@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 
-import { UserEntity } from '../../src/database/entities/user.entity';
+import { UserEntity } from '../../src/modules/database/entities/user.entity';
 
 export const testCreateRandomUser = async (connection: Connection): Promise<UserEntity> => {
   const userEntity = new UserEntity();

@@ -9,10 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
-import { TokenPayload } from '../interfaces/token-types';
+import { CookieRequest, CookieResponse, LoginRequest } from '../../interfaces/cookie-types';
+import { TokenPayload } from '../../interfaces/token-types';
+import { constants, cookiesUtils } from '../../utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { constants, cookiesUtils } from '../utils';
 import { AuthService } from './auth.service';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
