@@ -29,6 +29,9 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
+  console.log('L:32 | process.env.DB_USERNAME: ', process.env.DB_USERNAME);
+  console.log('L:32 | process.env.DB_USERNAME: ', process.env.NODE_ENV);
+
   const missingVariables = ['DB_USERNAME', 'DB_ADMIN_PASSWORD'].filter((key) => !process.env[key]);
   if (missingVariables.length) {
     throw new Error(`Missing environment variables: ${missingVariables.join(', ')}`);
