@@ -1,4 +1,4 @@
-import pg from 'pg';
+import { Client } from 'pg';
 
 interface CreateClientAndConnectParams {
   host: string;
@@ -15,7 +15,7 @@ const createClientAndConnect = async ({
   password,
   database,
 }: CreateClientAndConnectParams) => {
-  const client = new pg.Client({
+  const client = new Client({
     host,
     port,
     user,
