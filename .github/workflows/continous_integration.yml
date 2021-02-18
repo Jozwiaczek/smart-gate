@@ -38,6 +38,10 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: 'Audit dependencies'
         run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
+      - name: 'Run Prettier'
+        run: yarn prettier
+      - name: 'Run ESLint'
+        run: yarn lint
       - name: 'Setup test database'
         run: yarn ci:setup:db
       - name: 'Run unit tests'
