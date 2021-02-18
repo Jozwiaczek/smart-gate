@@ -29,6 +29,8 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
+  console.log('L:32 | process.env.DB_ADMIN_USER: ', process.env.DB_ADMIN_USER);
+
   const adminClient = await createClientAndConnect({
     host: process.env.DB_HOST || 'localhost',
     port: +(process.env.DB_PORT as string) || 5432,
