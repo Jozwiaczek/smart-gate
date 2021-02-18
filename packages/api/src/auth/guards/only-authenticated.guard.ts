@@ -49,7 +49,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
   ): Promise<TokenPayloadCreate> {
     const tokenGen = await this.authService.refreshTokens(tokens);
     const { setCookies } = cookiesUtils;
-    setCookies(tokenGen, tokenGen.payload.keepMeLoggedIn, response, false);
+    setCookies(tokenGen, tokenGen.payload.keepMeLoggedIn, response, true);
     return tokenGen.payload;
   }
 }

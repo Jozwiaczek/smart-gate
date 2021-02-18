@@ -8,7 +8,7 @@ const setCookies = (
   tokenGen: GeneratedTokens,
   keepMeLogin: boolean,
   response: CookieResponse,
-  setRefreshToken: boolean,
+  setOnlyAccessToken: boolean,
 ) => {
   const {
     tokens: { accessToken, logoutToken, refreshToken },
@@ -21,16 +21,17 @@ const setCookies = (
     httpOnly: true,
     path: '/',
     secure: !isDevelopment,
-    sameSite: 'lax',
+    signed: !isDevelopment,
+    sameSite: isDevelopment ? undefined : 'none',
   };
 
-  if (!keepMeLogin) {
+  if (!keepMeLogin && !setOnlyAccessToken) {
     response.cookie(tokenConfig.logoutToken.name, logoutToken, {
       ...options,
       expires: undefined,
     });
   }
-  if (setRefreshToken) {
+  if (!setOnlyAccessToken) {
     response.cookie(tokenConfig.refreshToken.name, refreshToken, {
       ...options,
       expires: refreshExpiration,
