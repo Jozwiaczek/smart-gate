@@ -29,30 +29,39 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
-  const missingVariables = ['DB_ADMIN_USER', 'DB_ADMIN_PASSWORD'].filter(
-    (key) => !process.env[key],
-  );
+  const requiredVariables = [
+    'DB_HOST',
+    'DB_PORT',
+    'DB_USERNAME',
+    'DB_PASSWORD',
+    'DB_DATABASE_TEST',
+  ];
+  const missingVariables = requiredVariables.filter((key) => !process.env[key]);
   if (missingVariables.length > 0) {
     throw new Error(`Missing environment variables: ${missingVariables.join(', ')}`);
   }
 
   const adminClient = await createClientAndConnect({
-    host: process.env.DB_HOST || 'postgres',
+    host: process.env.DB_HOST,
     port: +(process.env.DB_PORT as string) || 5432,
-    user: process.env.DB_ADMIN_USER as string,
-    password: process.env.DB_ADMIN_PASSWORD as string,
+    user: process.env.DB_USERNAME as string,
+    password: process.env.DB_PASSWORD as string,
   });
 
-  await adminClient.query('CREATE DATABASE smart_gate_db_test');
-  await adminClient.query("CREATE USER sg WITH ENCRYPTED PASSWORD 'sg'");
-  await adminClient.query('GRANT ALL PRIVILEGES ON DATABASE smart_gate_db_test TO sg');
+  await adminClient.query(`CREATE DATABASE ${process.env.DB_DATABASE_TEST}`);
+  await adminClient.query(
+    `CREATE USER ${process.env.DB_USERNAME} WITH ENCRYPTED PASSWORD '${process.env.DB_PASSWORD}'`,
+  );
+  await adminClient.query(
+    `GRANT ALL PRIVILEGES ON DATABASE ${process.env.DB_DATABASE_TEST} TO ${process.env.DB_USERNAME}`,
+  );
 
   const testDatabaseClient = await createClientAndConnect({
-    host: process.env.DB_HOST || 'postgres',
+    host: process.env.DB_HOST,
     port: +(process.env.DB_PORT as string) || 5432,
-    user: process.env.DB_ADMIN_USER as string,
-    password: process.env.DB_ADMIN_PASSWORD as string,
-    database: 'smart_gate_db_test',
+    user: process.env.DB_USERNAME as string,
+    password: process.env.DB_PASSWORD as string,
+    database: process.env.DB_DATABASE_TEST,
   });
 
   await testDatabaseClient.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');

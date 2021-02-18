@@ -32,15 +32,16 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: 'Audit dependencies'
         run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
-      - name: "Setup test database"
+      - name: 'Setup test database'
         run: yarn ci:setup:db
         env:
           DB_HOST: postgres
-          DB_ADMIN_USER: postgres
-          DB_ADMIN_PASSWORD: postgres_password
-      - name: "Run unit tests"
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres_password
+          DB_DATABASE_TEST: smart_gate_db_test
+      - name: 'Run unit tests'
         run: yarn test
-      - name: "Run E2E tests"
+      - name: 'Run E2E tests'
         run: yarn test:e2e
       - name: 'Build API'
         run: cd packages/api && yarn build

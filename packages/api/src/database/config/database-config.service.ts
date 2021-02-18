@@ -14,10 +14,10 @@ export interface DatabaseConfig {
 export class DatabaseConfigService {
   public getConfig(): DatabaseConfig {
     const baseConfig = {
-      host: process.env.DB_HOST || 'postgres',
+      host: process.env.DB_HOST,
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
-      username: process.env.DB_USERNAME || 'postgres',
-      password: process.env.DB_PASSWORD || 'postgres_password',
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
       synchronize: true,
       logging: process.env.NODE_ENV === 'production',
     };
@@ -25,13 +25,13 @@ export class DatabaseConfigService {
     if (process.env.NODE_ENV === 'test') {
       return this.validateConfig({
         ...baseConfig,
-        database: process.env.DB_DATABASE_TEST || 'smart_gate_db_test',
+        database: process.env.DB_DATABASE_TEST,
       });
     }
 
     return this.validateConfig({
       ...baseConfig,
-      database: process.env.DB_DATABASE || 'smart_gate_db',
+      database: process.env.DB_DATABASE,
     });
   }
 
