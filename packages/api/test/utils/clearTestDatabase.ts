@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { Test } from '@nestjs/testing';
 import { Connection } from 'typeorm';
 

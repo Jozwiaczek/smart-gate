@@ -9,4 +9,5 @@ module.exports = {
   coverageDirectory: '../coverage',
   coverageReporters: ['html', 'text'],
   testEnvironment: 'node',
+  globalSetup: '../test/globalSetup.ts',
 };

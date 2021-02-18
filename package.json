@@ -22,6 +22,7 @@
   "scripts": {
     "build": "lerna run build",
     "check": "yarn lint:fix && yarn prettier:fix && yarn type-check && yarn test && yarn test:e2e && yarn sortPackageJson",
+    "ci:setup:db": "yarn ts-node ci/setupTestDatabase.ts",
     "heroku-postbuild": "yarn install && cd packages/api && yarn build",
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "lint": "lerna run lint",
@@ -35,10 +36,15 @@
     "test:e2e": "lerna run test:e2e",
     "type-check": "lerna run type-check"
   },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "pg": "^8.5.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
+    "@types/pg": "^7.14.10",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "enquirer": "^2.3.6",
