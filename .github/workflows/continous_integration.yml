@@ -42,8 +42,20 @@ jobs:
           DB_DATABASE_TEST: smart_gate_db_test
       - name: 'Run unit tests'
         run: yarn test
+        env:
+          DB_PORT: 5432
+          DB_HOST: postgres
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres_password
+          DB_DATABASE_TEST: smart_gate_db_test
       - name: 'Run E2E tests'
         run: yarn test:e2e
+        env:
+          DB_PORT: 5432
+          DB_HOST: postgres
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres_password
+          DB_DATABASE_TEST: smart_gate_db_test
       - name: 'Build API'
         run: cd packages/api && yarn build
       - name: 'Build Client'
