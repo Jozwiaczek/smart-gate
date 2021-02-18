@@ -29,13 +29,7 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
-  const requiredVariables = [
-    'DB_HOST',
-    'DB_PORT',
-    'DB_USERNAME',
-    'DB_PASSWORD',
-    'DB_DATABASE_TEST',
-  ];
+  const requiredVariables = ['DB_HOST', 'DB_USERNAME', 'DB_PASSWORD', 'DB_DATABASE_TEST'];
   const missingVariables = requiredVariables.filter((key) => !process.env[key]);
   if (missingVariables.length > 0) {
     throw new Error(`Missing environment variables: ${missingVariables.join(', ')}`);
