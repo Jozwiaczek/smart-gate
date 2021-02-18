@@ -118,6 +118,7 @@ describe('UsersService', () => {
         lastName: 'test',
         roles: [Role.User],
       };
+
       await expect(usersService.create(user)).resolves.toEqual(expect.objectContaining(user));
     });
   });
@@ -130,16 +131,14 @@ describe('UsersService', () => {
         email: randomUser.email,
       };
 
-      expect(await repository.count()).toStrictEqual(1);
+      await expect(repository.count()).resolves.toStrictEqual(1);
       await expect(usersService.update(`${Date.now()}`, user)).rejects.toBeInstanceOf(
         NotFoundException,
       );
     });
 
     it('returns valid updated user firstname and lastname', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      const repository = await testClearRepository(connection, UserEntity);
       const user: CreateUserDto = {
         email: 'smart@gate.com',
         password: 'test',
@@ -148,15 +147,16 @@ describe('UsersService', () => {
         roles: [Role.User],
       };
       const newUser = await usersService.create(user);
-      expect(await repository.count()).toStrictEqual(1);
       const noChanges = {};
-      await expect(usersService.update(newUser.id, noChanges)).resolves.toEqual(
-        expect.objectContaining(newUser),
-      );
       const nameChange: UpdateUserDto = {
         firstName: `${Date.now()}`,
         lastName: `${Date.now()}`,
       };
+
+      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(usersService.update(newUser.id, noChanges)).resolves.toEqual(
+        expect.objectContaining(newUser),
+      );
       await expect(usersService.update(newUser.id, nameChange)).resolves.toEqual(
         expect.objectContaining({ ...newUser, ...nameChange }),
       );
@@ -165,24 +165,22 @@ describe('UsersService', () => {
 
   describe('remove()', () => {
     it('rejects with Exception when user has wrong id', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
+      const repository = await testClearRepository(connection, UserEntity);
       await testCreateRandomUser(connection);
-      expect(await repository.count()).toStrictEqual(1);
+
+      await expect(repository.count()).resolves.toStrictEqual(1);
       await expect(usersService.remove(`${Date.now()}`)).rejects.toBeInstanceOf(QueryFailedError);
     });
 
     it('returns true and remove user', async () => {
-      const repository = connection.getRepository(UserEntity);
-      await repository.delete({});
-      expect(await repository.count()).toStrictEqual(0);
-      const user = await testCreateRandomUser(connection);
-      await testCreateRandomUser(connection);
-      expect(await repository.count()).toStrictEqual(2);
-      expect(await usersService.remove(user.id)).toStrictEqual(true);
-      expect(await repository.count()).toStrictEqual(1);
-      expect(await repository.findOne({ id: user.id })).toStrictEqual(undefined);
+      const repository = await testClearRepository(connection, UserEntity);
+      const firstUser = await testCreateRandomUser(connection);
+      const secondUser = await testCreateRandomUser(connection);
+
+      await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
+      await expect(usersService.remove(firstUser.id)).resolves.toStrictEqual(true);
+      await expect(repository.find()).resolves.toStrictEqual([secondUser]);
+      await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
     });
   });
 });
