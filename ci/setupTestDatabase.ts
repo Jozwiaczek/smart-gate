@@ -31,6 +31,7 @@ const createClientAndConnect = async ({
 const setupTestDatabase = async (): Promise<void> => {
   console.log('L:32 | process.env.DB_USERNAME: ', process.env.DB_USERNAME);
   console.log('L:32 | process.env.DB_PASSWORD: ', process.env.DB_PASSWORD);
+  console.log('L:32 | process.env.DB_ADMIN_USER: ', process.env.DB_ADMIN_USER);
 
   const missingVariables = ['DB_USERNAME', 'DB_PASSWORD'].filter((key) => !process.env[key]);
   if (missingVariables.length > 0) {
