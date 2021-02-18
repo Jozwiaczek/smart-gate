@@ -29,7 +29,13 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
-  const requiredVariables = ['DB_HOST', 'DB_USERNAME', 'DB_PASSWORD', 'DB_DATABASE_TEST'];
+  const requiredVariables = [
+    'DB_HOST',
+    'DB_USERNAME',
+    'DB_PASSWORD',
+    'DB_DATABASE_TEST',
+    'DB_PORT',
+  ];
   const missingVariables = requiredVariables.filter((key) => !process.env[key]);
   if (missingVariables.length > 0) {
     throw new Error(`Missing environment variables: ${missingVariables.join(', ')}`);
@@ -37,22 +43,16 @@ const setupTestDatabase = async (): Promise<void> => {
 
   const adminClient = await createClientAndConnect({
     host: process.env.DB_HOST,
-    port: +(process.env.DB_PORT as string) || 5432,
+    port: +(process.env.DB_PORT as string),
     user: process.env.DB_USERNAME as string,
     password: process.env.DB_PASSWORD as string,
   });
 
   await adminClient.query(`CREATE DATABASE ${process.env.DB_DATABASE_TEST}`);
-  await adminClient.query(
-    `CREATE USER ${process.env.DB_USERNAME} WITH ENCRYPTED PASSWORD '${process.env.DB_PASSWORD}'`,
-  );
-  await adminClient.query(
-    `GRANT ALL PRIVILEGES ON DATABASE ${process.env.DB_DATABASE_TEST} TO ${process.env.DB_USERNAME}`,
-  );
 
   const testDatabaseClient = await createClientAndConnect({
     host: process.env.DB_HOST,
-    port: +(process.env.DB_PORT as string) || 5432,
+    port: +(process.env.DB_PORT as string),
     user: process.env.DB_USERNAME as string,
     password: process.env.DB_PASSWORD as string,
     database: process.env.DB_DATABASE_TEST,

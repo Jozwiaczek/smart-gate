@@ -35,6 +35,7 @@ jobs:
       - name: 'Setup test database'
         run: yarn ci:setup:db
         env:
+          DB_PORT: 5432
           DB_HOST: postgres
           DB_USERNAME: postgres
           DB_PASSWORD: postgres_password
