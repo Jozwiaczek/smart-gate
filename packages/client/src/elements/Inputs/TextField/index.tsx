@@ -36,6 +36,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     return (
       <Container isPasswordMasked={isPasswordMasked}>
         <StyledInput
+          data-testid="textField"
           ref={ref}
           id={name}
           maxWidth={maxWidth}

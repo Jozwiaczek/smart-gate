@@ -48,7 +48,11 @@ const PasswordIconButton = ({ setPasswordMasked }: PasswordIconButtonProps) => {
 
   return (
     <StyledPasswordIconButton>
-      <IconButton aria-label="Toggle password visibility" onClick={togglePasswordMask}>
+      <IconButton
+        data-testid="textField-password-icon-button"
+        aria-label="Toggle password visibility"
+        onClick={togglePasswordMask}
+      >
         <svg className="eye" width="36" height="36" viewBox="0 0 72 72">
           <path
             className="eye-lower"
