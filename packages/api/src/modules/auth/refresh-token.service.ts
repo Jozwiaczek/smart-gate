@@ -3,9 +3,9 @@ import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import { Connection, LessThan } from 'typeorm';
 
+import { TokenPayload } from '../../interfaces/token-types';
 import { RefreshTokenEntity } from '../database/entities/refreshToken.entity';
 import { UserEntity } from '../database/entities/user.entity';
-import { TokenPayload } from '../interfaces/token-types';
 
 @Injectable()
 export class RefreshTokenService {
