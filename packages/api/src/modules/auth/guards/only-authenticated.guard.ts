@@ -1,8 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 
-import { CookieResponse } from '../../interfaces/cookie-types';
-import { TokenPayloadCreate, Tokens } from '../../interfaces/token-types';
-import { constants, cookiesUtils } from '../../utils';
+import { CookieResponse } from '../../../interfaces/cookie-types';
+import { TokenPayloadCreate, Tokens } from '../../../interfaces/token-types';
+import { constants, cookiesUtils } from '../../../utils';
 import { AuthService } from '../auth.service';
 
 @Injectable()

@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { Connection, QueryFailedError } from 'typeorm';
 
-import { clearTestDatabase } from '../../test/utils/clearTestDatabase';
-import { testClearRepository } from '../../test/utils/testClearRepository';
-import { testCreateRandomUser } from '../../test/utils/testCreateRandomUser';
+import { clearTestDatabase } from '../../../test/utils/clearTestDatabase';
+import { testClearRepository } from '../../../test/utils/testClearRepository';
+import { testCreateRandomUser } from '../../../test/utils/testCreateRandomUser';
 import { Role } from '../auth/role.enum';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';

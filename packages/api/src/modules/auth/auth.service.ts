@@ -2,16 +2,16 @@ import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@n
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 
-import { UserEntity } from '../database/entities/user.entity';
 import {
   GeneratedTokens,
   TokenPayload,
   TokenPayloadCreate,
   Tokens,
-} from '../interfaces/token-types';
+} from '../../interfaces/token-types';
+import { constants } from '../../utils';
+import { UserEntity } from '../database/entities/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
-import { constants } from '../utils';
 import { RefreshTokenService } from './refresh-token.service';
 
 export class AuthService {
