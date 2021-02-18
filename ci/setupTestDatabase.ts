@@ -29,20 +29,18 @@ const createClientAndConnect = async ({
 };
 
 const setupTestDatabase = async (): Promise<void> => {
-  console.log('L:32 | process.env.DB_USERNAME: ', process.env.DB_USERNAME);
-  console.log('L:32 | process.env.DB_PASSWORD: ', process.env.DB_PASSWORD);
-  console.log('L:32 | process.env.DB_ADMIN_USER: ', process.env.DB_ADMIN_USER);
-
-  const missingVariables = ['DB_USERNAME', 'DB_PASSWORD'].filter((key) => !process.env[key]);
+  const missingVariables = ['DB_ADMIN_USER', 'DB_ADMIN_PASSWORD'].filter(
+    (key) => !process.env[key],
+  );
   if (missingVariables.length > 0) {
     throw new Error(`Missing environment variables: ${missingVariables.join(', ')}`);
   }
 
   const adminClient = await createClientAndConnect({
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'postgres',
     port: +(process.env.DB_PORT as string) || 5432,
-    user: process.env.DB_USERNAME as string,
-    password: process.env.DB_PASSWORD as string,
+    user: process.env.DB_ADMIN_USER as string,
+    password: process.env.DB_ADMIN_PASSWORD as string,
   });
 
   await adminClient.query('CREATE DATABASE smart_gate_db_test');
@@ -50,10 +48,10 @@ const setupTestDatabase = async (): Promise<void> => {
   await adminClient.query('GRANT ALL PRIVILEGES ON DATABASE smart_gate_db_test TO sg');
 
   const testDatabaseClient = await createClientAndConnect({
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'postgres',
     port: +(process.env.DB_PORT as string) || 5432,
-    user: process.env.DB_USERNAME as string,
-    password: process.env.DB_PASSWORD as string,
+    user: process.env.DB_ADMIN_USER as string,
+    password: process.env.DB_ADMIN_PASSWORD as string,
     database: 'smart_gate_db_test',
   });
 

@@ -14,10 +14,10 @@ export interface DatabaseConfig {
 export class DatabaseConfigService {
   public getConfig(): DatabaseConfig {
     const baseConfig = {
-      host: process.env.DB_HOST || 'localhost',
+      host: process.env.DB_HOST || 'postgres',
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      username: process.env.DB_USERNAME || 'postgres',
+      password: process.env.DB_PASSWORD || 'postgres_password',
       synchronize: true,
       logging: process.env.NODE_ENV === 'production',
     };
