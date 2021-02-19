@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { fireEvent, render, screen } from '../../../utils/test-utils';
-import { TextField } from '../index';
+import TextField from '.';
 
 describe('TextField', () => {
   it('properly change input type', () => {

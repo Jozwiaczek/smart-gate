@@ -19,5 +19,13 @@ module.exports = {
         disabled: 'No',
         initial: 'enabled',
       },
+      {
+        type: 'toggle',
+        name: 'isTest',
+        message: 'Add unit test?',
+        enabled: 'Yes',
+        disabled: 'No',
+        initial: 'enabled',
+      },
     ]),
 };
