@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 
 import { LockIcon } from '../../../icons';
 import Theme from '../../../theme/Theme';
-import { getLabelFromName } from '../../../utils';
+import { getLabelFromSource } from '../../../utils';
 import PasswordIconButton from './PasswordIconButton';
 import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
 import { ITextFieldProps, TextFieldProps } from './TextField.types';
@@ -36,6 +36,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     return (
       <Container isPasswordMasked={isPasswordMasked}>
         <StyledInput
+          data-testid="textField"
           ref={ref}
           id={name}
           maxWidth={maxWidth}
@@ -47,7 +48,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
           {...rest}
         />
         <Label htmlFor={name} isError={Boolean(error)} required={required}>
-          {label || getLabelFromName(name)}
+          {label || getLabelFromSource(name)}
         </Label>
         {internalStartAdornment && (
           <InputAdornment position="start">{internalStartAdornment}</InputAdornment>
