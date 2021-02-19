@@ -1,9 +1,7 @@
-import 'dotenv/config';
-
 import { Test } from '@nestjs/testing';
 import { Connection } from 'typeorm';
 
-import { DatabaseModule } from '../../src/database/database.module';
+import { DatabaseModule } from '../../src/modules/database/database.module';
 
 export const clearTestDatabase = async (): Promise<void> => {
   const app = await Test.createTestingModule({

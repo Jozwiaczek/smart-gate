@@ -25,7 +25,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_small)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_shield)
 
 ## 🚩 Table of Contents
 

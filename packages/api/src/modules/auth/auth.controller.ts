@@ -9,10 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { CookieRequest, CookieResponse, LoginRequest } from '../interfaces/cookie-types';
-import { TokenPayload } from '../interfaces/token-types';
+import { CookieRequest, CookieResponse, LoginRequest } from '../../interfaces/cookie-types';
+import { TokenPayload } from '../../interfaces/token-types';
+import { constants, cookiesUtils } from '../../utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { constants, cookiesUtils } from '../utils';
 import { AuthService } from './auth.service';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
@@ -30,7 +30,7 @@ export class AuthController {
     } = request;
     const genTokens = await this.authService.login(user, keepMeLoggedIn);
     const { setCookies } = cookiesUtils;
-    setCookies(genTokens, keepMeLoggedIn, response, true);
+    setCookies(genTokens, keepMeLoggedIn, response, false);
     // TODO: add separate method for extracting user
     // eslint-disable-next-line no-unused-vars
     const { password, ...rest } = user;
@@ -47,7 +47,7 @@ export class AuthController {
     });
     const genTokens = await this.authService.login(newUser, false);
     const { setCookies } = cookiesUtils;
-    setCookies(genTokens, false, response, true);
+    setCookies(genTokens, false, response, false);
     // TODO: add separate method for extracting user
     // eslint-disable-next-line no-unused-vars
     const { password, ...rest } = user;

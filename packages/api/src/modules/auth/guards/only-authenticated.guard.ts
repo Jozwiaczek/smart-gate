@@ -1,8 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 
-import { CookieResponse } from '../../interfaces/cookie-types';
-import { TokenPayloadCreate, Tokens } from '../../interfaces/token-types';
-import { constants, cookiesUtils } from '../../utils';
+import { CookieResponse } from '../../../interfaces/cookie-types';
+import { TokenPayloadCreate, Tokens } from '../../../interfaces/token-types';
+import { constants, cookiesUtils } from '../../../utils';
 import { AuthService } from '../auth.service';
 
 @Injectable()
@@ -49,7 +49,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
   ): Promise<TokenPayloadCreate> {
     const tokenGen = await this.authService.refreshTokens(tokens);
     const { setCookies } = cookiesUtils;
-    setCookies(tokenGen, tokenGen.payload.keepMeLoggedIn, response, false);
+    setCookies(tokenGen, tokenGen.payload.keepMeLoggedIn, response, true);
     return tokenGen.payload;
   }
 }

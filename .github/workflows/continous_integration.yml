@@ -2,17 +2,35 @@ name: Continuous Integration
 on: [pull_request]
 
 env:
-  NODE_VERSION: '14.x'
+  NODE_VERSION: '12.x'
 
 jobs:
   Validate:
     name: 'Validate Pull Request'
+    timeout-minutes: 10
     runs-on: ubuntu-latest
+    container: node
+    env:
+      DB_PORT: 5432
+      DB_HOST: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres_password
+      DB_DATABASE_TEST: smart_gate_db_test
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: 'Git checkout'
         uses: actions/checkout@v2
       - name: 'Use cached node_modules'
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -20,6 +38,16 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: 'Audit dependencies'
         run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
+      - name: 'Run Prettier'
+        run: yarn prettier
+      - name: 'Run ESLint'
+        run: yarn lint
+      - name: 'Setup test database'
+        run: yarn ci:setup:db
+      - name: 'Run unit tests'
+        run: yarn test
+      - name: 'Run E2E tests'
+        run: yarn test:e2e
       - name: 'Build API'
         run: cd packages/api && yarn build
       - name: 'Build Client'
