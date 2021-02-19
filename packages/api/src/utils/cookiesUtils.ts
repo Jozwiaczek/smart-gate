@@ -4,16 +4,10 @@ import { CookieRequest, CookieResponse } from '../interfaces/cookie-types';
 import { GeneratedTokens } from '../interfaces/token-types';
 import Constants from './constants';
 
-const setCookies = (
-  tokenGen: GeneratedTokens,
-  keepMeLogin: boolean,
-  response: CookieResponse,
-  setOnlyAccessToken: boolean,
-) => {
+const setCookies = (tokenGen: GeneratedTokens, response: CookieResponse) => {
   const {
     tokens: { accessToken, logoutToken, refreshToken },
-    accessExpiration,
-    refreshExpiration,
+    expiration,
   } = tokenGen;
   const { tokenConfig } = Constants;
   const isDevelopment = process.env.NODE_ENV === 'development';
@@ -25,21 +19,21 @@ const setCookies = (
     sameSite: isDevelopment ? undefined : 'none',
   };
 
-  if (!keepMeLogin && !setOnlyAccessToken) {
+  if (logoutToken) {
     response.cookie(tokenConfig.logoutToken.name, logoutToken, {
       ...options,
       expires: undefined,
     });
   }
-  if (!setOnlyAccessToken) {
+  if (refreshToken) {
     response.cookie(tokenConfig.refreshToken.name, refreshToken, {
       ...options,
-      expires: refreshExpiration,
+      expires: expiration,
     });
   }
   response.cookie(tokenConfig.accessToken.name, accessToken, {
     ...options,
-    expires: accessExpiration,
+    expires: expiration,
   });
 };
 

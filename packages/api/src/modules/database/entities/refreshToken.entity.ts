@@ -9,14 +9,12 @@ export class RefreshTokenEntity {
   public id: string;
 
   @Column({
-    type: 'varchar',
-  })
-  public token: string;
-
-  @Column({
     type: 'timestamp',
   })
   public expirationDate: Date;
+
+  @Column({ type: 'boolean' })
+  public keepMeLoggedIn: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.refreshTokens)
   public user: UserEntity;

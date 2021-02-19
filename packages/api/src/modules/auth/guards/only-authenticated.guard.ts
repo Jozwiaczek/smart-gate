@@ -1,7 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import jsonwebtoken from 'jsonwebtoken';
 
 import { CookieResponse } from '../../../interfaces/cookie-types';
-import { TokenPayloadCreate, Tokens } from '../../../interfaces/token-types';
+import { AccessPayload, GeneratedTokens, Tokens } from '../../../interfaces/token-types';
 import { constants, cookiesUtils } from '../../../utils';
 import { AuthService } from '../auth.service';
 
@@ -11,7 +12,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
-      let payload: TokenPayloadCreate;
+      let payload: AccessPayload;
       const { tokenConfig } = constants;
       const { getCookies } = cookiesUtils;
       const request = context.switchToHttp().getRequest();
@@ -43,13 +44,19 @@ export class OnlyAuthenticatedGuard implements CanActivate {
     return true;
   }
 
-  private async refreshTokens(
-    response: CookieResponse,
-    tokens: Tokens,
-  ): Promise<TokenPayloadCreate> {
-    const tokenGen = await this.authService.refreshTokens(tokens);
+  private async refreshTokens(response: CookieResponse, tokens: Tokens): Promise<AccessPayload> {
+    const { decode } = jsonwebtoken;
+    const [newAccessToken, expiration] = await this.authService.refreshAccessTokens(tokens);
     const { setCookies } = cookiesUtils;
-    setCookies(tokenGen, tokenGen.payload.keepMeLoggedIn, response, true);
-    return tokenGen.payload;
+    const tokenGen: GeneratedTokens = {
+      tokens: {
+        accessToken: newAccessToken,
+      },
+      expiration,
+    };
+
+    setCookies(tokenGen, response);
+
+    return decode(newAccessToken) as AccessPayload;
   }
 }

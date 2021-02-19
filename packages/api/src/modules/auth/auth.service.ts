@@ -1,18 +1,20 @@
 import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
+import ms from 'ms';
 
 import {
+  AccessPayload,
+  BasePayload,
   GeneratedTokens,
   TokenPayload,
-  TokenPayloadCreate,
   Tokens,
 } from '../../interfaces/token-types';
 import { constants } from '../../utils';
 import { UserEntity } from '../database/entities/user.entity';
+import { RefreshTokenService } from '../refresh-token/refresh-token.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
-import { RefreshTokenService } from './refresh-token.service';
 
 export class AuthService {
   constructor(
@@ -21,60 +23,72 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService,
   ) {}
 
-  private static generateTokens(user: UserEntity, keepMeLoggedIn: boolean): GeneratedTokens {
-    const { tokenConfig } = constants;
-    const payload: TokenPayloadCreate = { sub: user.id, roles: user.roles, keepMeLoggedIn };
+  public async login(user: UserEntity, keepMeLoggedIn: boolean): Promise<GeneratedTokens> {
+    const {
+      tokenConfig: { refreshToken, logoutToken },
+    } = constants;
     const { sign } = jsonwebtoken;
-    const { ACCESS_SECRET, REFRESH_SECRET, LOGOUT_SECRET } = process.env;
-    if (!ACCESS_SECRET || !REFRESH_SECRET || !LOGOUT_SECRET) {
+    const { LOGOUT_SECRET } = process.env;
+    if (!LOGOUT_SECRET) {
       throw new Error('Secrets not set');
     }
-    let tokens: Tokens;
-    if (keepMeLoggedIn) {
-      tokens = {
-        accessToken: sign(payload, ACCESS_SECRET, {
-          expiresIn: tokenConfig.accessToken.expiresIn,
-        }),
-        logoutToken: '',
-        refreshToken: sign(payload, REFRESH_SECRET, {
-          expiresIn: tokenConfig.refreshToken.keepMeLoggedIn.expiresIn,
-        }),
-      };
-    } else {
-      tokens = {
-        accessToken: sign(payload, ACCESS_SECRET, {
-          expiresIn: tokenConfig.accessToken.expiresIn,
-        }),
-        logoutToken: sign(payload, LOGOUT_SECRET, {
-          expiresIn: tokenConfig.logoutToken.expiresIn,
-        }),
-        refreshToken: sign(payload, REFRESH_SECRET, {
-          expiresIn: tokenConfig.refreshToken.withOutKeepMeLoggedIn.expiresIn,
-        }),
-      };
+
+    const refreshExpiresIn = keepMeLoggedIn
+      ? refreshToken.keepMeLoggedIn.expiresIn
+      : refreshToken.withOutKeepMeLoggedIn.expiresIn;
+    const refreshExpiration = new Date(ms(refreshExpiresIn));
+
+    const newRefreshToken = await this.refreshTokenService.create(
+      user,
+      keepMeLoggedIn,
+      refreshExpiration,
+    );
+    const newAccessToken = this.generateAccessTokens(user, keepMeLoggedIn);
+
+    const tokens: Tokens = {
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    };
+
+    if (!keepMeLoggedIn) {
+      const logoutPayload: BasePayload = { sub: user.id, type: logoutToken.name };
+      tokens.logoutToken = sign(logoutPayload, LOGOUT_SECRET, {
+        expiresIn: logoutToken.expiresIn,
+      });
     }
 
-    const { exp: accessExp } = jsonwebtoken.decode(tokens.accessToken) as TokenPayload;
-    const { exp: refreshExp } = jsonwebtoken.decode(tokens.refreshToken) as TokenPayload;
-
     return {
-      payload,
       tokens,
-      accessExpiration: new Date(accessExp * 1000),
-      refreshExpiration: new Date(refreshExp * 1000),
+      expiration: refreshExpiration,
     };
   }
 
-  public async login(user: UserEntity, keepMeLoggedIn: boolean): Promise<GeneratedTokens> {
-    const genTokens = AuthService.generateTokens(user, keepMeLoggedIn);
+  public generateAccessTokens(user: UserEntity, keepMeLoggedIn: boolean): string {
+    const { sign } = jsonwebtoken;
+
+    const { ACCESS_SECRET } = process.env;
+    if (!ACCESS_SECRET) {
+      throw new Error('Secrets not set');
+    }
+    const { id, roles } = user;
     const {
-      tokens: { refreshToken },
-      refreshExpiration,
-    } = genTokens;
+      tokenConfig: { accessToken },
+    } = constants;
+    const payload: AccessPayload = { sub: id, type: accessToken.name, roles, keepMeLoggedIn };
 
-    await this.refreshTokenService.create(refreshToken, user, refreshExpiration);
+    return sign(payload, ACCESS_SECRET, {
+      expiresIn: accessToken.expiresIn,
+    });
+  }
 
-    return genTokens;
+  private static validatePayload(payload: BasePayload, userId: string, type: string) {
+    const { sub, type: payloadType } = payload;
+    if (sub !== userId) {
+      throw Error('Invalid subscriber ID');
+    }
+    if (payloadType !== type) {
+      throw Error('Invalid payload type');
+    }
   }
 
   public validateTokens(
@@ -82,6 +96,12 @@ export class AuthService {
     accessTokenOptions?: jsonwebtoken.VerifyOptions,
   ): TokenPayload {
     const { accessToken, logoutToken } = tokens;
+    const {
+      tokenConfig: {
+        accessToken: { name: accessTokenName },
+        logoutToken: { name: logoutTokenName },
+      },
+    } = constants;
     const { verify } = jsonwebtoken;
     const { ACCESS_SECRET, LOGOUT_SECRET } = process.env;
     if (!ACCESS_SECRET || !LOGOUT_SECRET) {
@@ -89,11 +109,13 @@ export class AuthService {
     }
     try {
       const accessPayload = verify(accessToken, ACCESS_SECRET, accessTokenOptions) as TokenPayload;
+      AuthService.validatePayload(accessPayload, accessPayload.sub, accessTokenName);
       if (!accessPayload.keepMeLoggedIn) {
-        const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
-        if (accessPayload.sub !== logoutPayload.sub) {
-          throw new Error('Invalid subscriber ID');
+        if (!logoutToken) {
+          throw new Error('Missing logout token');
         }
+        const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
+        AuthService.validatePayload(logoutPayload, accessPayload.sub, logoutTokenName);
       }
       return accessPayload;
     } catch (err) {
@@ -101,30 +123,44 @@ export class AuthService {
     }
   }
 
-  public async refreshTokens(tokens: Tokens): Promise<GeneratedTokens> {
-    const { logoutToken, refreshToken } = tokens;
+  public async refreshAccessTokens(tokens: Tokens): Promise<[string, Date]> {
+    const { logoutToken, refreshToken, accessToken } = tokens;
+    const {
+      tokenConfig: {
+        accessToken: { name: accessTokenName },
+        logoutToken: { name: logoutTokenName },
+      },
+    } = constants;
     const { verify } = jsonwebtoken;
-    const { REFRESH_SECRET, LOGOUT_SECRET } = process.env;
-    if (!REFRESH_SECRET || !LOGOUT_SECRET) {
+    const { ACCESS_SECRET, LOGOUT_SECRET } = process.env;
+    if (!ACCESS_SECRET || !LOGOUT_SECRET) {
       throw new Error('Secrets not set');
     }
     try {
-      const refreshPayload = verify(refreshToken, REFRESH_SECRET) as TokenPayload;
-      if (!refreshPayload.keepMeLoggedIn) {
-        const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
-        if (logoutPayload.sub !== refreshPayload.sub) {
-          throw new Error('Invalid subscriber ID');
+      const accessPayload = verify(accessToken, ACCESS_SECRET, {
+        ignoreExpiration: true,
+      }) as AccessPayload;
+      AuthService.validatePayload(accessPayload, accessPayload.sub, accessTokenName);
+
+      if (!refreshToken) {
+        throw new Error('Missing refresh token');
+      }
+      const { keepMeLoggedIn, user, expirationDate } = await this.refreshTokenService.find(
+        refreshToken,
+        accessPayload.sub,
+      );
+
+      if (!keepMeLoggedIn) {
+        if (!logoutToken) {
+          throw new Error('Missing logout token');
         }
+        const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
+        AuthService.validatePayload(logoutPayload, user.id, logoutTokenName);
       }
-      const user = await this.usersService.findOne(refreshPayload.sub);
-      const valid = !!(await this.refreshTokenService.find(refreshToken, user));
-      let newTokens: GeneratedTokens;
-      if (valid) {
-        newTokens = AuthService.generateTokens(user, refreshPayload.keepMeLoggedIn);
-      } else {
-        throw new Error('Invalid refresh token');
-      }
-      return newTokens;
+
+      const newAccessToken = await this.generateAccessTokens(user, keepMeLoggedIn);
+
+      return [newAccessToken, expirationDate];
     } catch (err) {
       throw new UnauthorizedException('Invalid tokens');
     }
@@ -135,13 +171,7 @@ export class AuthService {
   }
 
   public async logout(refreshToken: string, userId: string) {
-    const { REFRESH_SECRET } = process.env;
-    if (!REFRESH_SECRET) {
-      throw new Error('Secrets not set');
-    }
-    jsonwebtoken.verify(refreshToken, REFRESH_SECRET);
-    const user = await this.usersService.findOne(userId);
-    await this.refreshTokenService.delete(refreshToken, user);
+    await this.refreshTokenService.delete(refreshToken, userId);
   }
 
   async register(user: CreateUserDto): Promise<UserEntity> {

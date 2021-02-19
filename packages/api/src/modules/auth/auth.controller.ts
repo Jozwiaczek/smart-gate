@@ -30,7 +30,7 @@ export class AuthController {
     } = request;
     const genTokens = await this.authService.login(user, keepMeLoggedIn);
     const { setCookies } = cookiesUtils;
-    setCookies(genTokens, keepMeLoggedIn, response, false);
+    setCookies(genTokens, response);
     // TODO: add separate method for extracting user
     // eslint-disable-next-line no-unused-vars
     const { password, ...rest } = user;
@@ -47,7 +47,7 @@ export class AuthController {
     });
     const genTokens = await this.authService.login(newUser, false);
     const { setCookies } = cookiesUtils;
-    setCookies(genTokens, false, response, false);
+    setCookies(genTokens, response);
     // TODO: add separate method for extracting user
     // eslint-disable-next-line no-unused-vars
     const { password, ...rest } = user;
