@@ -1,16 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { StylesProvider } from '../../../theme';
+import { fireEvent, render, screen } from '../../../utils/test-utils';
 import { TextField } from '../index';
 
 describe('TextField', () => {
-  it('checks', () => {
-    render(
-      <StylesProvider>
-        <TextField name="firstName" type="password" />
-      </StylesProvider>,
-    );
+  it('properly change input type', () => {
+    render(<TextField name="firstName" type="password" />);
     const passwordInput = screen.getByTestId('textField');
     fireEvent.change(passwordInput, { target: { value: '123456' } });
     expect(passwordInput).toHaveAttribute('type', 'password');
