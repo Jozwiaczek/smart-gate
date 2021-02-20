@@ -36,7 +36,7 @@ export class AuthService {
     const refreshExpiresIn = keepMeLoggedIn
       ? refreshToken.keepMeLoggedIn.expiresIn
       : refreshToken.withOutKeepMeLoggedIn.expiresIn;
-    const refreshExpiration = new Date(ms(refreshExpiresIn));
+    const refreshExpiration = new Date(Date.now() + ms(refreshExpiresIn));
 
     const newRefreshToken = await this.refreshTokenService.create(
       user,
@@ -149,16 +149,16 @@ export class AuthService {
         refreshToken,
         accessPayload.sub,
       );
-
+      const userEntity = await user;
       if (!keepMeLoggedIn) {
         if (!logoutToken) {
           throw new Error('Missing logout token');
         }
         const logoutPayload = verify(logoutToken, LOGOUT_SECRET) as TokenPayload;
-        AuthService.validatePayload(logoutPayload, user.id, logoutTokenName);
+        AuthService.validatePayload(logoutPayload, userEntity.id, logoutTokenName);
       }
 
-      const newAccessToken = await this.generateAccessTokens(user, keepMeLoggedIn);
+      const newAccessToken = await this.generateAccessTokens(userEntity, keepMeLoggedIn);
 
       return [newAccessToken, expirationDate];
     } catch (err) {
@@ -170,8 +170,15 @@ export class AuthService {
     return undefined;
   }
 
-  public async logout(refreshToken: string, userId: string) {
-    await this.refreshTokenService.delete(refreshToken, userId);
+  public async logout(refreshToken: string, access: string) {
+    const { verify } = jsonwebtoken;
+    const { ACCESS_SECRET } = process.env;
+    if (!ACCESS_SECRET) {
+      throw new Error('Secret not set');
+    }
+
+    const payload = verify(access, ACCESS_SECRET, { ignoreExpiration: true }) as AccessPayload;
+    await this.refreshTokenService.delete(refreshToken, payload.sub);
   }
 
   async register(user: CreateUserDto): Promise<UserEntity> {

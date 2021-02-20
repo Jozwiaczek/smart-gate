@@ -15,7 +15,7 @@ export class RefreshTokenService {
   async create(user: UserEntity, keepMeLoggedIn: boolean, expirationDate: Date): Promise<string> {
     await this.beforeCreate();
     const entity = {
-      user,
+      userId: user.id,
       expirationDate,
       keepMeLoggedIn,
     };
@@ -25,7 +25,7 @@ export class RefreshTokenService {
   }
 
   async find(refreshTokenHash: string, userId: string): Promise<RefreshTokenEntity> {
-    const tokenEntities = await this.repository.find({ user: { id: userId } });
+    const tokenEntities = await this.repository.find({ where: { userId } });
     const tokenEntity = tokenEntities.find(({ id }) => bcrypt.compareSync(id, refreshTokenHash));
 
     if (!tokenEntity) {
@@ -36,7 +36,6 @@ export class RefreshTokenService {
     if (expirationDate.getTime() < Date.now()) {
       throw new TokenExpiredError('Token expired', expirationDate);
     }
-
     return tokenEntity;
   }
 

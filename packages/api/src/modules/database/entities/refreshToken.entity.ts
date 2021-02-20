@@ -17,7 +17,10 @@ export class RefreshTokenEntity {
   public keepMeLoggedIn: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.refreshTokens)
-  public user: UserEntity;
+  public user: Promise<UserEntity>;
+
+  @Column({ type: 'uuid' })
+  public userId: string;
 
   @CreateDateColumn({
     type: 'timestamp',

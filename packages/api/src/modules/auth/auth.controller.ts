@@ -10,11 +10,9 @@ import {
 } from '@nestjs/common';
 
 import { CookieRequest, CookieResponse, LoginRequest } from '../../interfaces/cookie-types';
-import { TokenPayload } from '../../interfaces/token-types';
 import { constants, cookiesUtils } from '../../utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthService } from './auth.service';
-import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LocalAuthGuard } from './strategies/local/local-auth.guard';
 
 @Controller('auth')
@@ -57,7 +55,6 @@ export class AuthController {
   @Get('logout')
   async logout(
     @Req() request: CookieRequest,
-    @CookiePayload() payload: TokenPayload,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
     const { tokenConfig } = constants;
@@ -68,6 +65,7 @@ export class AuthController {
     const { getCookies } = cookiesUtils;
     const cookies = getCookies(request);
     const refreshToken = cookies[tokenConfig.refreshToken.name];
-    await this.authService.logout(refreshToken, payload.sub);
+    const accessToken = cookies[tokenConfig.accessToken.name];
+    await this.authService.logout(refreshToken, accessToken);
   }
 }
