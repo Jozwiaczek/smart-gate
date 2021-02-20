@@ -4,42 +4,57 @@ import { CookieRequest, CookieResponse } from '../interfaces/cookie-types';
 import { GeneratedTokens } from '../interfaces/token-types';
 import Constants from './constants';
 
+const {
+  tokenConfig: {
+    accessToken: { name: accessTokenName },
+    refreshToken: { name: refreshTokenName },
+    logoutToken: { name: logoutTokenName },
+  },
+} = Constants;
+
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+const options: CookieOptions = {
+  httpOnly: true,
+  path: '/',
+  secure: !isDevelopment,
+  signed: !isDevelopment,
+  sameSite: isDevelopment ? undefined : 'none',
+};
+
 const setCookies = (tokenGen: GeneratedTokens, response: CookieResponse) => {
   const {
     tokens: { accessToken, logoutToken, refreshToken },
     expiration,
   } = tokenGen;
-  const { tokenConfig } = Constants;
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  const options: CookieOptions = {
-    httpOnly: true,
-    path: '/',
-    secure: !isDevelopment,
-    signed: !isDevelopment,
-    sameSite: isDevelopment ? undefined : 'none',
-  };
 
   if (logoutToken) {
-    response.cookie(tokenConfig.logoutToken.name, logoutToken, {
+    response.cookie(logoutTokenName, logoutToken, {
       ...options,
       expires: undefined,
     });
   }
   if (refreshToken) {
-    response.cookie(tokenConfig.refreshToken.name, refreshToken, {
+    response.cookie(refreshTokenName, refreshToken, {
       ...options,
       expires: expiration,
     });
   }
-  response.cookie(tokenConfig.accessToken.name, accessToken, {
+  response.cookie(accessTokenName, accessToken, {
     ...options,
     expires: expiration,
   });
 };
 
 const getCookies = (request: CookieRequest) => {
-  const isDevelopment = process.env.NODE_ENV === 'development';
   return isDevelopment ? request.cookies : request.signedCookies;
 };
 
-export default { setCookies, getCookies };
+const clearCookies = (response: CookieResponse) => {
+  const tokensName = [accessTokenName, refreshTokenName, logoutTokenName];
+  tokensName.forEach((tokenName) => {
+    response.cookie(tokenName, '', { ...options, maxAge: 0 });
+  });
+};
+
+export default { setCookies, getCookies, clearCookies };

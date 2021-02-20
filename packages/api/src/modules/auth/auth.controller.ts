@@ -58,14 +58,15 @@ export class AuthController {
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
     const { tokenConfig } = constants;
-    response.clearCookie(tokenConfig.refreshToken.name);
-    response.clearCookie(tokenConfig.logoutToken.name);
-    response.clearCookie(tokenConfig.accessToken.name);
+    const { getCookies, clearCookies } = cookiesUtils;
 
-    const { getCookies } = cookiesUtils;
+    clearCookies(response);
+
     const cookies = getCookies(request);
+
     const refreshToken = cookies[tokenConfig.refreshToken.name];
     const accessToken = cookies[tokenConfig.accessToken.name];
+
     await this.authService.logout(refreshToken, accessToken);
   }
 }
