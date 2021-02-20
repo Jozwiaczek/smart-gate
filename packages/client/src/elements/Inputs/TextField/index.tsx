@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 import { LockIcon } from '../../../icons';
-import Theme from '../../../theme/Theme';
 import { getLabelFromSource } from '../../../utils';
 import PasswordIconButton from './PasswordIconButton';
 import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
@@ -14,12 +14,13 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
   ) => {
     const [isPasswordMasked, setPasswordMasked] = useState(true);
     const [internalType, setInternalType] = useState(type);
+    const theme = useTheme();
     const isPassword = type === 'password';
     let internalStartAdornment = startAdornment;
     let internalEndAdornment = endAdornment;
 
     if (isPassword) {
-      internalStartAdornment = <LockIcon color={Theme.palette.error.main} />;
+      internalStartAdornment = <LockIcon color={theme.palette.error.main} />;
       internalEndAdornment = <PasswordIconButton setPasswordMasked={setPasswordMasked} />;
     }
 
@@ -41,6 +42,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
           id={name}
           maxWidth={maxWidth}
           name={name}
+          showPassword={isPassword && !isPasswordMasked}
           isStartAdornment={Boolean(internalStartAdornment)}
           isEndAdornment={Boolean(endAdornment)}
           required={required}

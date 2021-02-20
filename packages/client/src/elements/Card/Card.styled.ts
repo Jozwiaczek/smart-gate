@@ -6,7 +6,7 @@ export const Wrapper = styled.div<CardProps>(
   ({ minWidth, theme: { sizes, palette } }) => `
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: ${palette.background.paper};
   box-shadow: ${palette.boxShadow};
   border-radius: ${sizes.borderRadius};
   padding: 50px;

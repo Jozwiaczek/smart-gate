@@ -1,7 +1,7 @@
-type SpinnerColor = 'primary' | 'secondary';
+import { ThemeType } from '../../theme/Theme';
 
 export interface SpinnerProps {
-  color?: SpinnerColor;
+  color?: ThemeType;
   size?: string;
   margin?: string;
 }

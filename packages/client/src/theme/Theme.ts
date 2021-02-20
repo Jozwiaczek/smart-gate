@@ -1,4 +1,10 @@
-const DefaultTheme = {
+export enum ThemeType {
+  light,
+  dark,
+}
+
+export const getTheme = (themeType: ThemeType) => ({
+  type: themeType,
   breakpoints: {
     xs: 0,
     sm: 600,
@@ -7,14 +13,14 @@ const DefaultTheme = {
     xl: 1920,
   },
   sizes: {
-    borderRadius: '10px',
+    borderRadius: '12px',
   },
   palette: {
     primary: {
       light: '#40DF9F',
-      lightText: '#22343C',
+      lightText: '#fff',
       dark: '#257D69',
-      darkText: '#fff',
+      darkText: '#22343C',
     },
     error: {
       light: '#e57373',
@@ -37,8 +43,7 @@ const DefaultTheme = {
       dark: '#388e3c',
     },
     text: {
-      primary: '#fff',
-      secondary: '#000',
+      primary: themeType === ThemeType.light ? '#22343C' : '#fff',
       disabled: 'rgba(0, 0, 0, 0.38)',
     },
     action: {
@@ -49,8 +54,8 @@ const DefaultTheme = {
       disabledBackground: 'rgba(0, 0, 0, 0.12)',
     },
     background: {
-      default: '#fafafa',
-      paper: '#fff',
+      default: themeType === ThemeType.light ? '#fff' : '#22343C',
+      paper: themeType === ThemeType.light ? '#FBFBFB' : '#30444E',
     },
     divider: 'rgba(0,0,0,0.24)',
     boxShadow: '0 10px 34px rgba(23, 75, 83, 0.1)',
@@ -63,8 +68,6 @@ const DefaultTheme = {
     `@media (min-${vertical ? 'height' : 'width'}: calc(${breakpointUp}px + 1px)) and (max-${
       vertical ? 'height' : 'width'
     }: ${breakpointDown}px)`,
-};
+});
 
-export default DefaultTheme;
-
-export type ITheme = typeof DefaultTheme;
+export type ITheme = ReturnType<typeof getTheme>;

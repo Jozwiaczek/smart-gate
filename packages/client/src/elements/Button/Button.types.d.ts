@@ -1,10 +1,10 @@
 import { ButtonHTMLAttributes } from 'react';
 
-type ButtonColor = 'primary' | 'secondary';
+import { ThemeType } from '../../theme/Theme';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
-  color?: ButtonColor;
+  colorVariant?: ThemeType;
   fullWidth?: boolean;
   margin?: string;
   to?: string;

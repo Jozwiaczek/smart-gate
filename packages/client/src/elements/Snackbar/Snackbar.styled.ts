@@ -47,7 +47,7 @@ const getSnackbarColor = ({ severity, theme: { palette } }: GetSnackbarColorsPro
 
   switch (severity) {
     case 'info':
-      return text.secondary;
+      return text.primary;
     default:
       return text.primary;
   }

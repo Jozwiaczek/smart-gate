@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 
+import { ThemeType } from '../../theme/Theme';
 import { ButtonProps } from './Button.types';
 
 export const StyledButton = styled.button<ButtonProps>(
-  ({ color, fullWidth, margin, theme: { palette } }) => `
+  ({ colorVariant, fullWidth, margin, theme: { palette } }) => `
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border-radius: 12px;
   font-size: 16px;
-  background-color: ${color !== 'primary' ? palette.secondary.main : palette.primary.main};
-  color: ${palette.primary.contrastText};
+  background-color: ${
+    colorVariant === ThemeType.light ? palette.primary.light : palette.primary.dark
+  };
+  color: ${colorVariant === ThemeType.light ? palette.primary.darkText : palette.primary.lightText};
   padding: 21px 14px;
   margin: ${margin};
   text-align: center;
@@ -45,7 +48,9 @@ export const StyledButton = styled.button<ButtonProps>(
 
   &:hover,
   &:active {
-    background-color: ${color !== 'primary' ? palette.secondary.dark : palette.primary.dark};
+    background-color: ${
+      colorVariant === ThemeType.light ? palette.primary.light : palette.primary.dark
+    };
     box-shadow: ${palette.boxShadow};
   }
 

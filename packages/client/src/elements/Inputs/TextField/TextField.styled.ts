@@ -27,8 +27,8 @@ export const Label = styled.label<LabelProps>(
   min-width: 250px;
   display: block;
   transition: 0.2s;
-  color: ${isError ? palette.error.main : palette.text.secondary};
-  border-color: ${isError ? palette.error.main : palette.text.secondary};
+  color: ${isError ? palette.error.main : palette.text.primary};
+  border-color: ${isError ? palette.error.main : palette.text.primary};
   pointer-events: none;
   transition: top, font-size, left;
   transition-duration: 150ms;
@@ -46,12 +46,12 @@ export const Label = styled.label<LabelProps>(
 );
 
 export const StyledInput = styled.input<StyledInputProps>(
-  ({ maxWidth, isStartAdornment, isEndAdornment, theme: { palette, sizes } }) => `
+  ({ showPassword, maxWidth, isStartAdornment, isEndAdornment, theme: { palette, sizes } }) => `
   padding: ${getInputPadding(isStartAdornment, isEndAdornment)};
   width: 100%;
   min-width: 250px;
   height: 55px;
-  color: ${palette.text.primary};
+  color: ${showPassword ? palette.primary.darkText : '#fff'};
   background: transparent;
   border: 1px solid transparent;
   box-sizing: border-box;
@@ -68,11 +68,11 @@ export const StyledInput = styled.input<StyledInputProps>(
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: ${palette.text.primary};
+    -webkit-text-fill-color: ${showPassword ? palette.primary.darkText : '#fff'};
   }
   
   ::placeholder {
-    color: ${palette.text.primary};
+    color: #fff;
     opacity: 0.6;
   }
 `,
@@ -121,7 +121,7 @@ export const Container = styled.div<TextFieldContainerProps>(
     content: '';
     box-shadow: ${palette.boxShadow};
     position: absolute;
-    background: ${palette.primary.main};
+    background: ${palette.primary.light};
     border-radius: ${sizes.borderRadius};
     border: 1px solid transparent;
     z-index: 0;
@@ -134,7 +134,7 @@ export const Container = styled.div<TextFieldContainerProps>(
   }
 
   & input:focus + label {
-    color: ${palette.primary.main};
+    color: #fff;
   }
 `,
 );

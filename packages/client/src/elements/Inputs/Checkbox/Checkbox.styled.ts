@@ -6,7 +6,7 @@ export const CheckboxLabel = styled.label<CheckboxLabelProps>`
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: ${({ theme }) => theme.palette.text.secondary};
+  color: ${({ theme }) => theme.palette.text.primary};
   line-height: 24px;
   position: relative;
   padding-left: 28px;
@@ -30,7 +30,7 @@ export const Checkmark = styled.span<CheckmarkProps>(
   height: 20px;
   width: 20px;
   background-color: ${palette.background.default};
-  border: 2px solid ${palette.primary.main};
+  border: 2px solid ${palette.primary.dark};
   border-radius: 6px;
 
   ${
@@ -59,7 +59,7 @@ export const Checkmark = styled.span<CheckmarkProps>(
     top: 1px;
     width: 14px;
     height: 14px;
-    background: ${palette.primary.main};
+    background: ${palette.primary.dark};
     border-radius: 4px;
     transition: opacity 200ms ease-out;
   }

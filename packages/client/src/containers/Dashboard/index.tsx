@@ -1,11 +1,14 @@
 import React from 'react';
 
 import { Button } from '../../elements';
-import { useAuth } from '../../hooks';
+import { useAuth, useThemeType } from '../../hooks';
+import { ThemeType } from '../../theme/Theme';
 import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   const auth = useAuth();
+  const { themeType, setThemeType } = useThemeType();
+
   if (!auth) {
     return null;
   }
@@ -21,15 +24,26 @@ const Dashboard = () => {
     await logout();
   };
 
+  const onTest = () => {
+    if (themeType === ThemeType.light) {
+      setThemeType(ThemeType.dark);
+    } else {
+      setThemeType(ThemeType.light);
+    }
+  };
+
   return (
     <Container>
       <h1>Smart Gate</h1>
       <h2>Dashboard</h2>
-      <Button to="/" onClick={logoutUser}>
+      <Button to="/" onClick={logoutUser} margin="20px">
         Logout
       </Button>
-      <Button onClick={getMe} color="secondary">
+      <Button onClick={getMe} colorVariant={ThemeType.light} margin="20px">
         Test
+      </Button>
+      <Button onClick={onTest} margin="20px">
+        Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
       </Button>
     </Container>
   );

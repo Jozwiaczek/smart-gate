@@ -1,21 +1,40 @@
-import React, { createContext, ReactNode } from 'react';
+import React, { createContext, ReactNode, useState } from 'react';
+
+import useLocalStorage from '../hooks/useLocalStorage';
+import { ThemeType } from '../theme/Theme';
 
 export interface ThemeTypeContextValue {
-  type: 'light' | 'dark';
+  themeType: ThemeType;
+  setThemeType: (themeType: ThemeType) => void;
 }
 
 export const ThemeTypeContext = createContext<ThemeTypeContextValue>({
-  type: 'light',
+  themeType: ThemeType.light,
+  setThemeType: () => null,
 });
 
 interface ThemeProviderProps {
   children: ReactNode;
+  themeType?: ThemeType;
 }
 
-const ThemeTypeProvider = ({ children }: ThemeProviderProps) => {
+const ThemeTypeProvider = ({ themeType, children }: ThemeProviderProps) => {
+  const isSystemDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const [localStorageType, setLocalStorageType] = useLocalStorage<ThemeType>('themeType');
+  const defaultType =
+    localStorageType || themeType || isSystemDarkTheme ? ThemeType.dark : ThemeType.light;
+  const [internalType, setInternalType] = useState<ThemeType>(defaultType);
+
+  const setThemeType = (themeTypeParam: ThemeType) => {
+    setInternalType(themeTypeParam);
+    setLocalStorageType(themeTypeParam);
+  };
+
   return (
     <>
-      <ThemeTypeContext.Provider value={{ type: 'light' }}>{children}</ThemeTypeContext.Provider>
+      <ThemeTypeContext.Provider value={{ themeType: internalType, setThemeType }}>
+        {children}
+      </ThemeTypeContext.Provider>
     </>
   );
 };

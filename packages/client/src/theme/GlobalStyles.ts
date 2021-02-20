@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-family: Roboto, Rubik, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    overflow-x: hidden;
+    background: ${({ theme }) => theme.palette.background.default};
   }
 
   main {
@@ -25,11 +25,16 @@ const GlobalStyles = createGlobalStyle`
   footer {
     flex-shrink: 0;
   }
+
+  h1, h2, h3, h4, h5, h6, p {
+    color: ${({ theme }) => theme.palette.text.primary};
+  }
   
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     margin-block-start: 0;
     margin-block-end: 0;
+    
   }
   h1, h2, h3 {
     line-height: 120px;
