@@ -11,16 +11,10 @@ const DefaultTheme = {
   },
   palette: {
     primary: {
-      light: '#4791db',
-      main: '#1976d2',
-      dark: '#115293',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#e33371',
-      main: '#dc004e',
-      dark: '#9a0036',
-      contrastText: '#000',
+      light: '#40DF9F',
+      lightText: '#22343C',
+      dark: '#257D69',
+      darkText: '#fff',
     },
     error: {
       light: '#e57373',

@@ -9,7 +9,7 @@ const baseLink = ({ color, theme: { palette } }: { theme: ITheme; color?: LinkCo
   font-size: 18px;
   line-height: 24px;
   text-decoration: none;
-  color: ${color !== 'primary' ? palette.text.secondary : palette.primary.main};
+  color: ${color !== 'primary' ? palette.text.secondary : palette.primary.dark};
 
   &:disabled {
     color: ${palette.action.disabled};
