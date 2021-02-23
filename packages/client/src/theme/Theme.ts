@@ -1,6 +1,6 @@
 export enum ThemeType {
-  light,
-  dark,
+  light = 'light',
+  dark = 'dark',
 }
 
 export const getTheme = (themeType: ThemeType) => ({

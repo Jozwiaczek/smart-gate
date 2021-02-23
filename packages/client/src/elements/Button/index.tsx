@@ -18,7 +18,7 @@ const Button = ({
 }: ButtonProps) => {
   const baseButton = (
     <StyledButton colorVariant={colorVariant} disabled={loading ? true : disabled} {...rest}>
-      {loading && <Spinner color={ThemeType.dark} margin="0 8px 0 0" />}
+      {loading && <Spinner margin="0 8px 0 0" />}
       {children}
       {withArrow && (
         <IconContainer>

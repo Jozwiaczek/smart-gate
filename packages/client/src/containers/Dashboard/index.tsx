@@ -16,15 +16,14 @@ const Dashboard = () => {
   const { logout, getCurrentUser } = auth;
 
   const getMe = async () => {
-    const user = await getCurrentUser();
-    console.log('L:18 | user: ', user);
+    await getCurrentUser();
   };
 
   const logoutUser = async () => {
     await logout();
   };
 
-  const onTest = () => {
+  const onChangeTheme = () => {
     if (themeType === ThemeType.light) {
       setThemeType(ThemeType.dark);
     } else {
@@ -39,10 +38,10 @@ const Dashboard = () => {
       <Button to="/" onClick={logoutUser} margin="20px">
         Logout
       </Button>
-      <Button onClick={getMe} colorVariant={ThemeType.light} margin="20px">
+      <Button onClick={getMe} margin="20px">
         Test
       </Button>
-      <Button onClick={onTest} margin="20px">
+      <Button onClick={onChangeTheme} margin="20px">
         Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
       </Button>
     </Container>

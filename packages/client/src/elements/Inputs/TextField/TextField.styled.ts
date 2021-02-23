@@ -51,7 +51,7 @@ export const StyledInput = styled.input<StyledInputProps>(
   width: 100%;
   min-width: 250px;
   height: 55px;
-  color: ${showPassword ? palette.primary.darkText : '#fff'};
+  color: ${showPassword ? palette.primary.darkText : palette.primary.lightText};
   background: transparent;
   border: 1px solid transparent;
   box-sizing: border-box;
@@ -68,7 +68,7 @@ export const StyledInput = styled.input<StyledInputProps>(
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: ${showPassword ? palette.primary.darkText : '#fff'};
+    -webkit-text-fill-color: ${showPassword ? palette.primary.darkText : palette.primary.lightText};
   }
   
   ::placeholder {
@@ -134,7 +134,7 @@ export const Container = styled.div<TextFieldContainerProps>(
   }
 
   & input:focus + label {
-    color: #fff;
+    color: ${palette.primary.lightText};
   }
 `,
 );

@@ -92,13 +92,7 @@ export default function Index() {
             }}
             required
           />
-          <Button
-            type="submit"
-            fullWidth
-            colorVariant={ThemeType.light}
-            disabled={loading}
-            margin="30px 0 30px 0"
-          >
+          <Button type="submit" fullWidth disabled={loading} margin="30px 0 30px 0">
             Sign Up
           </Button>
           <Link to="/">Already have an account? Sign in</Link>
