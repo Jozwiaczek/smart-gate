@@ -1,4 +1,4 @@
-import React, { createContext, FC, useRef, useState } from 'react';
+import React, { createContext, useRef, useState } from 'react';
 
 import { Snackbar } from '../../elements';
 import { SnackbarSeverity } from '../../elements/Snackbar/Snackbar.types';

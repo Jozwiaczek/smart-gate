@@ -6,7 +6,6 @@ import { regex } from '../../constants';
 import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import { UserIcon } from '../../icons';
-import { ThemeType } from '../../theme/Theme';
 import { Container } from './SignUp.styled';
 import { SignUpInputs } from './SignUp.types';
 
