@@ -3,17 +3,17 @@ import React from 'react';
 import { StyledLink, StyledOutLink } from './Link.styled';
 import { LinkProps } from './Link.types';
 
-const Link = ({ children, to, asOuterLink, color, ...rest }: LinkProps) => {
+const Link = ({ children, to, asOuterLink, colorVariant = 'default', ...rest }: LinkProps) => {
   if (asOuterLink) {
     return (
-      <StyledOutLink color={color} href={to} to="" rel="noreferrer" target="_blank">
+      <StyledOutLink colorVariant={colorVariant} href={to} to="" rel="noreferrer" target="_blank">
         {children}
       </StyledOutLink>
     );
   }
 
   return (
-    <StyledLink color={color} to={to} {...rest}>
+    <StyledLink colorVariant={colorVariant} to={to} {...rest}>
       {children}
     </StyledLink>
   );

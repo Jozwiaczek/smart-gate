@@ -16,5 +16,5 @@ Default.args = {
   children: <>Lorem Ipsum</>,
   to: 'https://github.com/Jozwiaczek/smart-gate',
   asOuterLink: true,
-  color: 'primary',
+  colorVariant: 'default',
 };

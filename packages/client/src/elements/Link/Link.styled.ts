@@ -1,15 +1,28 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { ITheme, ThemeType } from '../../theme/Theme';
-import { LinkColor, LinkProps } from './Link.types';
+import { BaseLinkProps, GetLinkColorProps, LinkProps } from './Link.types';
 
-const baseLink = ({ color, theme: { type, palette } }: { theme: ITheme; color?: LinkColor }) => css`
+const getLinkColor = ({ colorVariant, theme }: GetLinkColorProps) => {
+  switch (colorVariant) {
+    case 'default':
+      return theme.palette.text.primary;
+    case 'colour':
+      return theme.palette.primary.main;
+
+    case 'grey':
+      return theme.palette.text.secondary;
+    default:
+      return colorVariant;
+  }
+};
+
+const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
   text-decoration: none;
-  color: ${color || palette.text.primary};
+  color: ${getLinkColor};
 
   &:disabled {
     color: ${palette.action.disabled};
@@ -19,7 +32,7 @@ const baseLink = ({ color, theme: { type, palette } }: { theme: ITheme; color?: 
 
   &:hover,
   &:active {
-    color: ${type === ThemeType.light ? palette.primary.dark : palette.primary.light};
+    color: ${getLinkColor};
   }
 `;
 
