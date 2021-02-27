@@ -48,13 +48,15 @@ const getSnackbarColor = ({ severity, theme: { palette } }: GetSnackbarColorsPro
   switch (severity) {
     case 'info':
       return text.primary;
+    case 'success':
+      return text.secondary;
     default:
-      return text.primary;
+      return text.light;
   }
 };
 
 const getSnackbarBackground = ({ severity, theme }: GetSnackbarColorsProps) => {
-  const { error, background, warning, text } = theme.palette;
+  const { error, background, warning, primary } = theme.palette;
 
   switch (severity) {
     case 'error':
@@ -62,9 +64,11 @@ const getSnackbarBackground = ({ severity, theme }: GetSnackbarColorsProps) => {
     case 'warning':
       return warning;
     case 'success':
+      return primary.main;
+    case 'info':
       return background.paper;
     default:
-      return text.primary;
+      return background.paper;
   }
 };
 
