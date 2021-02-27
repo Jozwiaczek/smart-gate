@@ -6,7 +6,7 @@ export const CheckboxLabel = styled.label<CheckboxLabelProps>`
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.secondary};
   line-height: 24px;
   position: relative;
   padding-left: 28px;
@@ -17,7 +17,7 @@ export const CheckboxLabel = styled.label<CheckboxLabelProps>`
     `
       :after {
         content: '*';
-        color: ${theme.palette.error.main};
+        color: ${theme.palette.error};
       }
   `}
 `;
@@ -29,14 +29,14 @@ export const Checkmark = styled.span<CheckmarkProps>(
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: ${palette.background.default};
+  background-color: ${palette.background.paper};
   border: 2px solid ${palette.primary.dark};
   border-radius: 6px;
 
   ${
     isError &&
     `
-      border: 2px solid ${palette.error.main};
+      border: 2px solid ${palette.error};
   `
   };
 

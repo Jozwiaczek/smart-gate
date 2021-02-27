@@ -1,6 +1,6 @@
 import styled, { ThemeProvider } from 'styled-components';
-import theme from '../src/theme/Theme';
 import GlobalStyles from '../src/theme/GlobalStyles';
+import { getTheme, ThemeType } from '../src/theme/Theme';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -14,7 +14,7 @@ const ViewportContainer = styled.div`
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={getTheme(ThemeType.light)}>
       <GlobalStyles />
       <ViewportContainer>
         <Story />

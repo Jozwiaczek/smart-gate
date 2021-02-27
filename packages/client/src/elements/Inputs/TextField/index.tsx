@@ -20,7 +20,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     let internalEndAdornment = endAdornment;
 
     if (isPassword) {
-      internalStartAdornment = <LockIcon color={theme.palette.error.main} />;
+      internalStartAdornment = <LockIcon color={theme.palette.error} />;
       internalEndAdornment = <PasswordIconButton setPasswordMasked={setPasswordMasked} />;
     }
 

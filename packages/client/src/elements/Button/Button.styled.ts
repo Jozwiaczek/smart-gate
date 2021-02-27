@@ -14,7 +14,7 @@ export const StyledButton = styled.button<ButtonProps>(
   background-color: ${
     colorVariant === ThemeType.light ? palette.primary.light : palette.primary.dark
   };
-  color: ${colorVariant === ThemeType.light ? palette.primary.darkText : palette.primary.lightText};
+  color: ${colorVariant === ThemeType.light ? palette.text.dark : palette.text.light};
   padding: 21px 14px;
   margin: ${margin};
   text-align: center;
@@ -28,14 +28,14 @@ export const StyledButton = styled.button<ButtonProps>(
   ${fullWidth && 'width: 100%'};
 
   &:disabled {
-    background-color: ${palette.action.disabledBackground};
+    background-color: ${palette.background.disabled};
     color: ${palette.action.disabled};
     cursor: not-allowed;
     pointer-events: all !important;
 
     &:hover,
     &:active {
-      background-color: ${palette.action.disabledBackground};
+      background-color: ${palette.background.disabled};
       box-shadow: none;
     }
 

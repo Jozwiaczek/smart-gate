@@ -20,7 +20,7 @@ export const StyledIconButton = styled.button(
   overflow: hidden;
   
   &:disabled {
-    background-color: ${theme.palette.action.disabledBackground};
+    background-color: ${theme.palette.background.disabled};
     color: ${theme.palette.action.disabled};
     cursor: not-allowed;
     pointer-events: all !important;

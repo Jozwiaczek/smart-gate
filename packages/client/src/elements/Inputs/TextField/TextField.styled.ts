@@ -27,8 +27,8 @@ export const Label = styled.label<LabelProps>(
   min-width: 250px;
   display: block;
   transition: 0.2s;
-  color: ${isError ? palette.error.main : palette.text.primary};
-  border-color: ${isError ? palette.error.main : palette.text.primary};
+  color: ${isError ? palette.error : palette.text.secondary};
+  border-color: ${isError ? palette.error : palette.text.primary};
   pointer-events: none;
   transition: top, font-size, left;
   transition-duration: 150ms;
@@ -38,7 +38,7 @@ export const Label = styled.label<LabelProps>(
     `
       :after {
         content: '*';
-        color: ${palette.error.main};
+        color: ${palette.error};
       }
   `
   }
@@ -51,7 +51,7 @@ export const StyledInput = styled.input<StyledInputProps>(
   width: 100%;
   min-width: 250px;
   height: 55px;
-  color: ${showPassword ? palette.primary.darkText : palette.primary.lightText};
+  color: ${showPassword ? palette.text.dark : palette.text.light};
   background: transparent;
   border: 1px solid transparent;
   box-sizing: border-box;
@@ -68,11 +68,11 @@ export const StyledInput = styled.input<StyledInputProps>(
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: ${showPassword ? palette.primary.darkText : palette.primary.lightText};
+    -webkit-text-fill-color: ${showPassword ? palette.text.dark : palette.text.light};
   }
   
   ::placeholder {
-    color: #fff;
+    color: ${palette.text.light};
     opacity: 0.6;
   }
 `,
@@ -134,13 +134,13 @@ export const Container = styled.div<TextFieldContainerProps>(
   }
 
   & input:focus + label {
-    color: ${palette.primary.lightText};
+    color: ${palette.text.primary};
   }
 `,
 );
 
 export const Error = styled.div`
-  color: ${({ theme: { palette } }) => palette.error.main};
+  color: ${({ theme: { palette } }) => palette.error};
   font-size: 13px;
   margin-left: 5px;
   margin-top: 5px;

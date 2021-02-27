@@ -6,5 +6,5 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 50px;
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.secondary};
 `;
