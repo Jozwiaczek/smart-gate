@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AxiosContext } from '../api/AxiosProvider';
+import { AxiosContext } from '../providers/api/AxiosProvider';
 
 const useAxios = () => useContext(AxiosContext);
 
