@@ -1,9 +1,7 @@
 import { AuthProvider } from 'ra-core/src/types';
 
 const authProvider: AuthProvider = {
-  login: ({ username, password }) => {
-    console.log('L:5 | username: ', username);
-    console.log('L:5 | password: ', password);
+  login: ({ username }) => {
     localStorage.setItem('username', username);
     return Promise.resolve();
   },
