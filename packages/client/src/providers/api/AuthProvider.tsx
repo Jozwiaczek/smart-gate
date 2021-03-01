@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren, useCallback } from 'react';
 
-import useAxios from '../hooks/useAxios';
+import useAxios from '../../hooks/useAxios';
 
 interface User {
   firstName?: string;
