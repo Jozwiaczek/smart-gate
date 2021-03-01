@@ -27,8 +27,8 @@ export const Label = styled.label<LabelProps>(
   min-width: 250px;
   display: block;
   transition: 0.2s;
-  color: ${isError ? palette.error : palette.text.secondary};
-  border-color: ${isError ? palette.error : palette.text.primary};
+  color: ${isError ? palette.action.error : palette.text.secondary};
+  border-color: ${isError ? palette.action.error : palette.text.primary};
   pointer-events: none;
   transition: top, font-size, left;
   transition-duration: 150ms;
@@ -38,7 +38,7 @@ export const Label = styled.label<LabelProps>(
     `
       :after {
         content: '*';
-        color: ${palette.error};
+        color: ${palette.action.error};
       }
   `
   }
@@ -140,7 +140,7 @@ export const Container = styled.div<TextFieldContainerProps>(
 );
 
 export const Error = styled.div`
-  color: ${({ theme: { palette } }) => palette.error};
+  color: ${({ theme: { palette } }) => palette.action.error};
   font-size: 13px;
   margin-left: 5px;
   margin-top: 5px;
