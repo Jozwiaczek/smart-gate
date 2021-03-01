@@ -1,4 +1,4 @@
-const { DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD } = process.env;
+const { DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD, NODE_ENV } = process.env;
 const config = {
   type: 'postgres',
   host: DB_HOST,
@@ -12,6 +12,7 @@ const config = {
   migrationsTransactionMode: 'each',
   migrations: ['./src/modules/database/migrations/*.ts'],
   cli: { migrationsDir: './src/modules/database/migrations' },
+  ssl: NODE_ENV !== 'development',
 };
 
 module.exports = config;
