@@ -9,6 +9,7 @@ const clearLocalStorageByKey = (key: string): void => {
   window.localStorage.removeItem(key);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const checkIfExist = (value: any): boolean =>
   value && typeof value !== 'undefined' && typeof value !== null;
 
