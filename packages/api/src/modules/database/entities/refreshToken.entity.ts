@@ -9,17 +9,18 @@ export class RefreshTokenEntity {
   public id: string;
 
   @Column({
-    type: 'varchar',
-  })
-  public token: string;
-
-  @Column({
     type: 'timestamp',
   })
   public expirationDate: Date;
 
+  @Column({ type: 'boolean' })
+  public keepMeLoggedIn: boolean;
+
   @ManyToOne(() => UserEntity, (user) => user.refreshTokens)
-  public user: UserEntity;
+  public user: Promise<UserEntity>;
+
+  @Column({ type: 'uuid' })
+  public userId: string;
 
   @CreateDateColumn({
     type: 'timestamp',

@@ -4,48 +4,57 @@ import { CookieRequest, CookieResponse } from '../interfaces/cookie-types';
 import { GeneratedTokens } from '../interfaces/token-types';
 import Constants from './constants';
 
-const setCookies = (
-  tokenGen: GeneratedTokens,
-  keepMeLogin: boolean,
-  response: CookieResponse,
-  setOnlyAccessToken: boolean,
-) => {
+const {
+  tokenConfig: {
+    accessToken: { name: accessTokenName },
+    refreshToken: { name: refreshTokenName },
+    logoutToken: { name: logoutTokenName },
+  },
+} = Constants;
+
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+const options: CookieOptions = {
+  httpOnly: true,
+  path: '/',
+  secure: !isDevelopment,
+  signed: !isDevelopment,
+  sameSite: isDevelopment ? undefined : 'none',
+};
+
+const setCookies = (tokenGen: GeneratedTokens, response: CookieResponse) => {
   const {
     tokens: { accessToken, logoutToken, refreshToken },
-    accessExpiration,
-    refreshExpiration,
+    expiration,
   } = tokenGen;
-  const { tokenConfig } = Constants;
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  const options: CookieOptions = {
-    httpOnly: true,
-    path: '/',
-    secure: !isDevelopment,
-    signed: !isDevelopment,
-    sameSite: isDevelopment ? undefined : 'none',
-  };
 
-  if (!keepMeLogin && !setOnlyAccessToken) {
-    response.cookie(tokenConfig.logoutToken.name, logoutToken, {
+  if (logoutToken) {
+    response.cookie(logoutTokenName, logoutToken, {
       ...options,
       expires: undefined,
     });
   }
-  if (!setOnlyAccessToken) {
-    response.cookie(tokenConfig.refreshToken.name, refreshToken, {
+  if (refreshToken) {
+    response.cookie(refreshTokenName, refreshToken, {
       ...options,
-      expires: refreshExpiration,
+      expires: expiration,
     });
   }
-  response.cookie(tokenConfig.accessToken.name, accessToken, {
+  response.cookie(accessTokenName, accessToken, {
     ...options,
-    expires: accessExpiration,
+    expires: expiration,
   });
 };
 
 const getCookies = (request: CookieRequest) => {
-  const isDevelopment = process.env.NODE_ENV === 'development';
   return isDevelopment ? request.cookies : request.signedCookies;
 };
 
-export default { setCookies, getCookies };
+const clearCookies = (response: CookieResponse) => {
+  const tokensName = [accessTokenName, refreshTokenName, logoutTokenName];
+  tokensName.forEach((tokenName) => {
+    response.cookie(tokenName, '', { ...options, maxAge: 0 });
+  });
+};
+
+export default { setCookies, getCookies, clearCookies };
