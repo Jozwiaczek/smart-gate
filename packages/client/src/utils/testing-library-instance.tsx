@@ -1,9 +1,9 @@
 import { render, RenderOptions } from '@testing-library/react';
 import React, { FC, ReactElement } from 'react';
 
-import { StylesProvider } from '../theme';
+import Providers from '../providers';
 
-const AllTheProviders: FC = ({ children }) => <StylesProvider>{children}</StylesProvider>;
+const AllTheProviders: FC = ({ children }) => <Providers>{children}</Providers>;
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'queries'>) =>
   render(ui, { wrapper: AllTheProviders, ...options });

@@ -1,15 +1,11 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { useThemeType } from '../hooks';
-import DefaultLayout from '../theme/DefaultLayout';
-import GlobalStyles from '../theme/GlobalStyles';
-import { getTheme } from '../theme/Theme';
-import ThemeTypeProvider from './ThemeTypeProvider';
-
-interface StylesProviderProps {
-  children: ReactNode;
-}
+import { useThemeType } from '../../hooks';
+import GlobalStyles from '../../theme/GlobalStyles';
+import { getTheme } from '../../theme/Theme';
+import ThemeTypeProvider from '../ThemeTypeProvider';
+import { StylesProviderProps } from './StylesProvider.types';
 
 const InnerStylesProvider = ({ children }: StylesProviderProps) => {
   const { themeType } = useThemeType();
@@ -17,7 +13,7 @@ const InnerStylesProvider = ({ children }: StylesProviderProps) => {
   return (
     <ThemeProvider theme={getTheme(themeType)}>
       <GlobalStyles />
-      <DefaultLayout>{children}</DefaultLayout>
+      {children}
     </ThemeProvider>
   );
 };

@@ -1,28 +1,8 @@
-import React, { createContext, PropsWithChildren, useCallback } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 
-import useAxios from '../../hooks/useAxios';
-
-interface User {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  password: string;
-}
-
-interface AuthUser {
-  data?: User;
-  loading: boolean;
-  error?: string;
-}
-
-export interface AuthProps {
-  getCurrentUser: () => Promise<AuthUser>;
-  login: (user: User) => Promise<string | boolean>;
-  register: (user: User) => Promise<string | boolean>;
-  logout: () => void;
-}
-
-export const AuthContext = createContext<AuthProps | undefined>(undefined);
+import useAxios from '../../../hooks/useAxios';
+import { AuthContext } from './AuthProvider.context';
+import { User } from './AuthProvider.types';
 
 const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   const axios = useAxios();

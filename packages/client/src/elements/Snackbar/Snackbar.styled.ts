@@ -56,7 +56,11 @@ const getSnackbarColor = ({ severity, theme: { palette } }: GetSnackbarColorsPro
 };
 
 const getSnackbarBackground = ({ severity, theme }: GetSnackbarColorsProps) => {
-  const { error, background, warning, primary } = theme.palette;
+  const {
+    background,
+    action: { error, warning },
+    primary,
+  } = theme.palette;
 
   switch (severity) {
     case 'error':

@@ -1,11 +1,8 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { Copyright } from '../../elements';
 import { Container } from './DefaultLayout.styled';
-
-interface DefaultLayoutProps {
-  children: ReactNode;
-}
+import { DefaultLayoutProps } from './DefaultLayout.types';
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => (
   <Container>

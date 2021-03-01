@@ -17,7 +17,7 @@ export const CheckboxLabel = styled.label<CheckboxLabelProps>`
     `
       :after {
         content: '*';
-        color: ${theme.palette.error};
+        color: ${theme.palette.action.error};
       }
   `}
 `;
@@ -36,7 +36,7 @@ export const Checkmark = styled.span<CheckmarkProps>(
   ${
     isError &&
     `
-      border: 2px solid ${palette.error};
+      border: 2px solid ${palette.action.error};
   `
   };
 

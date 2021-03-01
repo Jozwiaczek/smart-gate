@@ -40,13 +40,13 @@ export const getTheme = (themeType: ThemeType) => ({
       red: '#D32F2F',
       orange: '#FFB400',
     },
-    error: '#D32F2F',
-    warning: '#FFB400',
     action: {
       active: 'rgba(0, 0, 0, 0.54)',
       hover: 'rgba(0, 0, 0, 0.04)',
       selected: 'rgba(0, 0, 0, 0.08)',
       disabled: 'rgba(0, 0, 0, 0.26)',
+      error: '#D32F2F',
+      warning: '#FFB400',
     },
     divider: {
       default: themeType === ThemeType.light ? '#EAECED' : '#30444E',

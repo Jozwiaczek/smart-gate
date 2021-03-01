@@ -1,18 +1,11 @@
-import React, { createContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Snackbar } from '../../elements';
 import { SnackbarSeverity } from '../../elements/Snackbar/Snackbar.types';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import getDisplayDuration from './getDisplayDuration';
-import {
-  ShowSnackbarProps,
-  SnackbarContextValue,
-  SnackbarProviderProps,
-} from './SnackbarProvider.types';
-
-export const SnackbarContext = createContext<SnackbarContextValue>({
-  showSnackbar: () => {},
-});
+import { SnackbarContext } from './SnackbarProvider.context';
+import { ShowSnackbarProps, SnackbarProviderProps } from './SnackbarProvider.types';
 
 const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
   const [isOpen, setOpen] = useState(false);

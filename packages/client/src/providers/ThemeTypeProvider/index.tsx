@@ -1,15 +1,9 @@
-import React, { createContext } from 'react';
+import React from 'react';
 
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { ThemeType } from '../../theme/Theme';
-import { ThemeProviderProps, ThemeTypeContextValue } from './ThemeTypeProvider.types';
-
-export const ThemeTypeContext = createContext<ThemeTypeContextValue>({
-  themeType: ThemeType.dark,
-  setThemeType: () => null,
-  cleanThemeType: () => null,
-  setSystemThemeType: () => null,
-});
+import { ThemeTypeContext } from './ThemeTypeProvider.context';
+import { ThemeProviderProps } from './ThemeTypeProvider.types';
 
 const ThemeTypeProvider = ({ children }: ThemeProviderProps) => {
   const isSystemDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
