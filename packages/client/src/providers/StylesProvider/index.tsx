@@ -9,6 +9,7 @@ import { StylesProviderProps } from './StylesProvider.types';
 
 const InnerStylesProvider = ({ children }: StylesProviderProps) => {
   const { themeType } = useThemeType();
+  console.log('test');
 
   return (
     <ThemeProvider theme={getTheme(themeType)}>
