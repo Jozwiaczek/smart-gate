@@ -2,10 +2,10 @@ import React, { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { useThemeType } from '../hooks';
-import ThemeTypeProvider from '../providers/ThemeTypeProvider';
-import DefaultLayout from './DefaultLayout';
-import GlobalStyles from './GlobalStyles';
-import { getTheme } from './Theme';
+import DefaultLayout from '../theme/DefaultLayout';
+import GlobalStyles from '../theme/GlobalStyles';
+import { getTheme } from '../theme/Theme';
+import ThemeTypeProvider from './ThemeTypeProvider';
 
 interface StylesProviderProps {
   children: ReactNode;

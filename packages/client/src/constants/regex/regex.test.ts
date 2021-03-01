@@ -1,4 +1,4 @@
-import regex from './regex';
+import regex from '.';
 
 describe('Regular expressions', () => {
   describe('Match email', () => {
