@@ -51,7 +51,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/animejs": "^3.1.2",
     "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
+    "@types/node": "^14.14.31",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^17.0.1",
     "@types/react-router-dom": "^5.1.7",
