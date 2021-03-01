@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { TickIcon } from '../../../icons';
-import { getLabelFromName } from '../../../utils';
+import { getLabelFromSource } from '../../../utils';
 import { Error } from '../TextField/TextField.styled';
 import { CheckboxLabel, CheckboxWrapper, Checkmark, StyledInput } from './Checkbox.styled';
 import { CheckboxProps, ICheckboxProps } from './Checkbox.types';
@@ -18,7 +18,7 @@ const Checkbox = forwardRef<ICheckboxProps, CheckboxProps>(
           required={required}
           {...rest}
         />
-        {label || getLabelFromName(name)}
+        {label || getLabelFromSource(name)}
         <Checkmark isError={Boolean(error)}>
           <TickIcon />
         </Checkmark>

@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import Providers from './providers';
 import reportWebVitals from './reportWebVitals';
+import Routes from './Routes';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Providers>
+      <Routes />
+    </Providers>
   </React.StrictMode>,
   document.getElementById('root'),
 );

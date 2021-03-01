@@ -30,7 +30,7 @@ jobs:
       - name: 'Git checkout'
         uses: actions/checkout@v2
       - name: 'Use cached node_modules'
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}

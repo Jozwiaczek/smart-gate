@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { regex } from '../../constants';
 import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import { UserIcon } from '../../icons';
-import { emailRegex } from '../../utils/constants';
 import { Container } from './SignUp.styled';
 import { SignUpInputs } from './SignUp.types';
 
@@ -65,8 +65,8 @@ export default function Index() {
             name="email"
             validation={{
               pattern: {
-                value: emailRegex,
-                message: 'Invalid email address.',
+                value: regex.matchEmail,
+                message: 'Invalid matchEmail address.',
               },
             }}
             startAdornment={<UserIcon />}
