@@ -15,6 +15,7 @@ i18n
   .init({
     resources,
     fallbackLng: SGLocale.en,
+    supportedLngs: Object.values(SGLocale),
     debug: process.env.NODE_ENV === 'development',
   });
 
