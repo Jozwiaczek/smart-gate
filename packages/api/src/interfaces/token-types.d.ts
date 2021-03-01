@@ -1,23 +1,27 @@
-export interface TokenPayload extends TokenPayloadCreate {
-  iat: number;
-  exp: number;
+export interface BasePayload {
+  sub: string;
+  type: string;
 }
 
-export interface TokenPayloadCreate {
+export interface AccessPayload extends BasePayload {
   sub: string;
+  type: string;
   roles: Array<string>;
   keepMeLoggedIn: boolean;
 }
 
+export interface TokenPayload extends AccessPayload {
+  iat: number;
+  exp: number;
+}
+
 export interface Tokens {
   accessToken: string;
-  refreshToken: string;
-  logoutToken: string;
+  refreshToken?: string;
+  logoutToken?: string;
 }
 
 export interface GeneratedTokens {
-  payload: TokenPayloadCreate;
   tokens: Tokens;
-  accessExpiration: Date;
-  refreshExpiration: Date;
+  expiration: Date;
 }
