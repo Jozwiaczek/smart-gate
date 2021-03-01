@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { BaseLinkProps, GetLinkColorProps, LinkProps } from './Link.types';
+import { BaseLinkProps, GetLinkColorProps, StyledLinkProps } from './Link.types';
 
-const getLinkColor = ({ colorVariant, theme }: GetLinkColorProps) => {
-  switch (colorVariant) {
+const getLinkColor = ({ $colorVariant, theme }: GetLinkColorProps) => {
+  switch ($colorVariant) {
     case 'default':
       return theme.palette.text.primary;
     case 'colour':
@@ -13,7 +13,7 @@ const getLinkColor = ({ colorVariant, theme }: GetLinkColorProps) => {
     case 'grey':
       return theme.palette.text.secondary;
     default:
-      return colorVariant;
+      return $colorVariant;
   }
 };
 
@@ -36,10 +36,10 @@ const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
   }
 `;
 
-export const StyledLink = styled(Link)<LinkProps>`
+export const StyledLink = styled(Link)<StyledLinkProps>`
   ${baseLink}
 `;
 
-export const StyledOutLink = styled.a<LinkProps>`
+export const StyledOutLink = styled.a<StyledLinkProps>`
   ${baseLink}
 `;

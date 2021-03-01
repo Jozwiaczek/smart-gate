@@ -6,7 +6,7 @@ export type LinkColorVariant = 'colour' | 'grey' | 'default' | string;
 
 export interface GetLinkColorProps {
   theme: ITheme;
-  colorVariant?: LinkColorVariant;
+  $colorVariant?: LinkColorVariant;
 }
 
 export interface LinkProps {
@@ -16,7 +16,13 @@ export interface LinkProps {
   children: ReactNode;
 }
 
+export interface StyledLinkProps {
+  $colorVariant?: LinkColorVariant;
+  to: string;
+  children: ReactNode;
+}
+
 export interface BaseLinkProps {
   theme: ITheme;
-  colorVariant?: LinkColorVariant;
+  $colorVariant?: LinkColorVariant;
 }
