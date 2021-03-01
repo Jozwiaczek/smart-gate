@@ -36,6 +36,17 @@ $ npm run test:cov
 
 Postgresql and PgAdmin powered by the docker compose
 
+## Typeorm
+
+```bash
+# typeorm cli
+$ yarn typeorm <command>
+# typeorm generate migration
+$ yarn typeorm migration:generate -n <migration name>
+# typeorm run migrations
+$ yarn typeorm-migration:run
+```
+
 ## Requirements:
 
 - docker >= 17.12.0+

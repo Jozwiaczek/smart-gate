@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 import { TokenExpiredError } from 'jsonwebtoken';
 import { Connection, LessThan } from 'typeorm';
 
@@ -20,17 +19,15 @@ export class RefreshTokenService {
       keepMeLoggedIn,
     };
     const refreshTokenEntity = await this.repository.save(entity);
-    const salt = bcrypt.genSaltSync();
-    return bcrypt.hash(refreshTokenEntity.id, salt);
+    return refreshTokenEntity.id;
   }
 
-  async find(refreshTokenHash: string, userId: string): Promise<RefreshTokenEntity> {
-    const tokenEntities = await this.repository.find({ where: { userId } });
-    const tokenEntity = tokenEntities.find(({ id }) => bcrypt.compareSync(id, refreshTokenHash));
-
-    if (!tokenEntity) {
-      throw new NotFoundException('Token not found');
-    }
+  async find(refreshTokenId: string, userId: string): Promise<RefreshTokenEntity> {
+    const tokenEntity = await this.repository
+      .findOneOrFail({ where: { id: refreshTokenId, userId } })
+      .catch(() => {
+        throw new NotFoundException('Token not found');
+      });
 
     const { expirationDate } = tokenEntity;
     if (expirationDate.getTime() < Date.now()) {
@@ -39,8 +36,8 @@ export class RefreshTokenService {
     return tokenEntity;
   }
 
-  async delete(refreshTokenHash: string, userId: string): Promise<RefreshTokenEntity> {
-    const token = await this.find(refreshTokenHash, userId);
+  async delete(refreshTokenId: string, userId: string): Promise<RefreshTokenEntity> {
+    const token = await this.find(refreshTokenId, userId);
     return await this.repository.remove(token);
   }
 

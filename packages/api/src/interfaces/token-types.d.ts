@@ -1,6 +1,6 @@
-export interface TokenPayload extends AccessPayload {
-  iat: number;
-  exp: number;
+export interface BasePayload {
+  sub: string;
+  type: string;
 }
 
 export interface AccessPayload extends BasePayload {
@@ -10,9 +10,9 @@ export interface AccessPayload extends BasePayload {
   keepMeLoggedIn: boolean;
 }
 
-export interface BasePayload {
-  sub: string;
-  type: string;
+export interface TokenPayload extends AccessPayload {
+  iat: number;
+  exp: number;
 }
 
 export interface Tokens {
