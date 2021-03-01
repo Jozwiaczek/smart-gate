@@ -9,43 +9,48 @@ const clearLocalStorageByKey = (key: string): void => {
   window.localStorage.removeItem(key);
 };
 
-const useLocalStorage = <T>(
-  key: string,
-  defaultValue?: T,
-): [T | undefined, (val: T) => void, () => void] => {
-  const [data, setData] = useState<T | undefined>(undefined);
-  const set = useCallback((localStorageData: T) => writeToLocalStorage<T>(key, localStorageData), [
-    key,
-  ]);
-  const remove = useCallback(() => clearLocalStorageByKey(key), [key]);
+const checkIfExist = (value: any): boolean =>
+  value && typeof value !== 'undefined' && typeof value !== null;
+
+const useLocalStorage = <T>(key: string, defaultValue: T): [T, (val: T) => void, () => void] => {
+  const [data, setData] = useState<T>(defaultValue);
+
+  const set = useCallback(
+    (newValue: T) => {
+      writeToLocalStorage<T>(key, newValue);
+      setData(newValue);
+    },
+    [key],
+  );
 
   useEffect(() => {
     const currentData = window.localStorage.getItem(key);
 
-    if (
-      (!currentData || typeof currentData === 'undefined' || typeof currentData === null) &&
-      defaultValue
-    ) {
+    if (!checkIfExist(currentData) && defaultValue) {
       set(defaultValue);
     }
 
-    if (currentData && typeof currentData !== 'undefined' && typeof currentData !== null) {
-      const parsedData = JSON.parse(currentData);
+    if (checkIfExist(currentData)) {
+      const parsedData = JSON.parse(currentData as string);
       if (parsedData) {
         setData(parsedData);
       }
     }
   }, [defaultValue, key, set]);
 
+  const remove = useCallback(() => clearLocalStorageByKey(key), [key]);
+
   const checkLocalStorage = useCallback(
-    (e: StorageEvent) => {
-      if (e.storageArea === window.localStorage) {
-        if (key === e.key && e.newValue) {
-          setData(JSON.parse(e.newValue));
+    ({ storageArea, newValue, key: storageKey }: StorageEvent) => {
+      if (storageArea === window.localStorage) {
+        if (key === storageKey && newValue) {
+          setData(JSON.parse(newValue));
+          return;
         }
+        setData(defaultValue);
       }
     },
-    [key],
+    [defaultValue, key],
   );
 
   useEffect(() => {
