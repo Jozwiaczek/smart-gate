@@ -12,7 +12,7 @@ const config = {
   migrationsTransactionMode: 'each',
   migrations: ['./src/modules/database/migrations/*.ts'],
   cli: { migrationsDir: './src/modules/database/migrations' },
-  ssl: NODE_ENV !== 'development',
+  ssl: NODE_ENV === 'development' ? false : { rejectUnauthorized: false },
 };
 
 module.exports = config;
