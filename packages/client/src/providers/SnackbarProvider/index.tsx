@@ -1,31 +1,13 @@
-import React, { createContext, FC, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-import { Snackbar } from '../elements';
-import { SnackbarSeverity } from '../elements/Snackbar/Snackbar.types';
-import useOnClickOutside from '../hooks/useOnClickOutside';
+import { Snackbar } from '../../elements';
+import { SnackbarSeverity } from '../../elements/Snackbar/Snackbar.types';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+import getDisplayDuration from './getDisplayDuration';
+import { SnackbarContext } from './SnackbarProvider.context';
+import { ShowSnackbarProps, SnackbarProviderProps } from './SnackbarProvider.types';
 
-export interface SnackbarContextValue {
-  showSnackbar: (props: ShowSnackbarProps) => void;
-}
-
-export const SnackbarContext = createContext<SnackbarContextValue>({
-  showSnackbar: () => {},
-});
-
-const getDisplayDuration = (message: string): number => {
-  const { min, max } = Math;
-  const msgLength = message.length;
-
-  return min(max(msgLength * 50, 2000), 7000);
-};
-
-export interface ShowSnackbarProps {
-  message: string;
-  severity?: SnackbarSeverity;
-  duration?: number;
-}
-
-const SnackbarProvider: FC = ({ children }) => {
+const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
   const [isOpen, setOpen] = useState(false);
   const [messageInternal, setMessageInternal] = useState('');
   const [severityInternal, setSeverityInternal] = useState<SnackbarSeverity>('info');

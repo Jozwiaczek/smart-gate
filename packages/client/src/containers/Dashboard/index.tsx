@@ -2,13 +2,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '../../elements';
-import { useAuth } from '../../hooks';
+import { useAuth, useThemeType } from '../../hooks';
 import { SGLocale } from '../../i18n';
+import { ThemeType } from '../../theme/Theme';
 import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
   const auth = useAuth();
+  const { themeType, setThemeType } = useThemeType();
+
   if (!auth) {
     return null;
   }
@@ -16,8 +19,7 @@ const Dashboard = () => {
   const { logout, getCurrentUser } = auth;
 
   const getMe = async () => {
-    const user = await getCurrentUser();
-    console.log('L:18 | user: ', user);
+    await getCurrentUser();
   };
 
   const logoutUser = async () => {
@@ -28,14 +30,25 @@ const Dashboard = () => {
     i18n.changeLanguage(i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl);
   };
 
+  const onChangeTheme = () => {
+    if (themeType === ThemeType.light) {
+      setThemeType(ThemeType.dark);
+    } else {
+      setThemeType(ThemeType.light);
+    }
+  };
+
   return (
     <Container>
       <h1>{t('title')}</h1>
       <h2>Dashboard</h2>
-      <Button to="/" onClick={logoutUser}>
+      <Button to="/" onClick={logoutUser} margin="20px">
         {t('actions.logout')}
       </Button>
-      <Button onClick={getMe} color="secondary">
+      <Button onClick={onChangeTheme} margin="20px">
+        Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
+      </Button>
+      <Button onClick={getMe} color="secondary" margin="20px">
         Test Get Me
       </Button>
       <Button onClick={changeLocale} color="secondary">

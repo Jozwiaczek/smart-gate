@@ -56,8 +56,20 @@ const SignIn = () => {
           register={register}
           loading={loading}
         >
-          <TextField name="email" required autoFocus startAdornment={<UserIcon />} />
-          <TextField required name="password" type="password" autoComplete="current-password" />
+          <TextField
+            name="email"
+            placeholder="Enter your email"
+            required
+            autoFocus
+            startAdornment={<UserIcon />}
+          />
+          <TextField
+            required
+            name="password"
+            placeholder="Enter your password"
+            type="password"
+            autoComplete="current-password"
+          />
           <Button type="submit" fullWidth disabled={loading} margin="30px 0" withArrow>
             Sign In
           </Button>

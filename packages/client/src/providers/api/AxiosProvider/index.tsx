@@ -1,7 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
-import React, { createContext, PropsWithChildren, useMemo } from 'react';
+import axios from 'axios';
+import React, { PropsWithChildren, useMemo } from 'react';
 
-export const AxiosContext = createContext<AxiosInstance>(axios);
+import { AxiosContext } from './AxiosProvider.context';
 
 const AxiosProvider = ({ children }: PropsWithChildren<unknown>) => {
   const AxiosOverriddenInstance = useMemo(() => {

@@ -5,4 +5,4 @@ export { default as useMediaDevice } from './useMediaDevice';
 export { default as useMediaQuery } from './useMediaQuery';
 export { default as useOnClickOutside } from './useOnClickOutside';
 export { default as useSnackbar } from './useSnackbar';
-export { default as useTheme } from './useTheme';
+export { default as useThemeType } from './useThemeType';

@@ -66,7 +66,7 @@ export default function Index() {
             validation={{
               pattern: {
                 value: regex.matchEmail,
-                message: 'Invalid matchEmail address.',
+                message: 'Invalid email address.',
               },
             }}
             startAdornment={<UserIcon />}
@@ -91,7 +91,7 @@ export default function Index() {
             }}
             required
           />
-          <Button type="submit" fullWidth color="primary" disabled={loading} margin="30px 0 30px 0">
+          <Button type="submit" fullWidth disabled={loading} margin="30px 0 30px 0">
             Sign Up
           </Button>
           <Link to="/">Already have an account? Sign in</Link>

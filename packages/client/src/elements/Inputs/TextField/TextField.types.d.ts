@@ -32,6 +32,7 @@ export interface StyledInputProps extends InputHTMLAttributes<HTMLInputElement> 
   maxWidth?: string;
   isStartAdornment?: boolean;
   isEndAdornment?: boolean;
+  showPassword?: boolean;
 }
 
 export interface TextFieldContainerProps {

@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { ArrowIcon } from '../../icons';
+import { ThemeType } from '../../theme/Theme';
+import Link from '../Link';
 import Spinner from '../Spinner';
 import { IconContainer, StyledButton } from './Button.styled';
 import { ButtonProps } from './Button.types';
 
 const Button = ({
   children,
-  color = 'primary',
+  colorVariant = ThemeType.light,
   loading,
   to,
   disabled,
@@ -16,8 +17,8 @@ const Button = ({
   ...rest
 }: ButtonProps) => {
   const baseButton = (
-    <StyledButton color={color} disabled={loading ? true : disabled} {...rest}>
-      {loading && <Spinner color="primary" margin="0 8px 0 0" />}
+    <StyledButton colorVariant={colorVariant} disabled={loading ? true : disabled} {...rest}>
+      {loading && <Spinner margin="0 8px 0 0" />}
       {children}
       {withArrow && (
         <IconContainer>

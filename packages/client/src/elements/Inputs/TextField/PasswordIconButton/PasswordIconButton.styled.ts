@@ -7,13 +7,13 @@ export const StyledPasswordIconButton = styled.div(
   right: -7px;
   .eye-lower {
     fill: none;
-    stroke: ${palette.text.primary};
+    stroke: ${palette.text.light};
     stroke-width: 4.5;
     stroke-linecap: round;
   }
 
   .eye-iris {
-    fill: ${palette.text.primary};
+    fill: ${palette.text.light};
     stroke-width: 4.65066;
     stroke-linecap: round;
   }
@@ -23,7 +23,7 @@ export const StyledPasswordIconButton = styled.div(
     fill: ${palette.primary.dark};
     stroke-linecap: butt;
     stroke-width: 4.5;
-    stroke: ${palette.text.primary};
+    stroke: ${palette.text.light};
   }
 
   .eye-lashes {
@@ -32,7 +32,7 @@ export const StyledPasswordIconButton = styled.div(
 
   .eye-lash {
     fill: none;
-    stroke: ${palette.text.primary};
+    stroke: ${palette.text.light};
     stroke-width: 4.5;
     stroke-linecap: butt;
   }

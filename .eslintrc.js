@@ -30,6 +30,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'react/require-default-props': 0,
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'sort-imports': 'off',

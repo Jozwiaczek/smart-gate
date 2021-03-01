@@ -1,15 +1,28 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { ITheme } from '../../theme/Theme';
-import { LinkColor, LinkProps } from './Link.types';
+import { BaseLinkProps, GetLinkColorProps, StyledLinkProps } from './Link.types';
 
-const baseLink = ({ color, theme: { palette } }: { theme: ITheme; color?: LinkColor }) => css`
+const getLinkColor = ({ $colorVariant, theme }: GetLinkColorProps) => {
+  switch ($colorVariant) {
+    case 'default':
+      return theme.palette.text.primary;
+    case 'colour':
+      return theme.palette.primary.main;
+
+    case 'grey':
+      return theme.palette.text.secondary;
+    default:
+      return $colorVariant;
+  }
+};
+
+const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
   text-decoration: none;
-  color: ${color !== 'primary' ? palette.text.secondary : palette.primary.main};
+  color: ${getLinkColor};
 
   &:disabled {
     color: ${palette.action.disabled};
@@ -19,14 +32,14 @@ const baseLink = ({ color, theme: { palette } }: { theme: ITheme; color?: LinkCo
 
   &:hover,
   &:active {
-    color: ${color !== 'primary' ? palette.action.active : palette.primary.dark};
+    color: ${getLinkColor};
   }
 `;
 
-export const StyledLink = styled(Link)<LinkProps>`
+export const StyledLink = styled(Link)<StyledLinkProps>`
   ${baseLink}
 `;
 
-export const StyledOutLink = styled.a<LinkProps>`
+export const StyledOutLink = styled.a<StyledLinkProps>`
   ${baseLink}
 `;
