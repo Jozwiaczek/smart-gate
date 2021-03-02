@@ -22,16 +22,16 @@ import {
 import { LoginInputs } from './Login.types';
 
 const Login = () => {
+  const auth = useAuth();
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
   const showSnackbar = useSnackbar();
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>({
     mode: 'onBlur',
   });
-  const auth = useAuth();
 
   if (!auth) {
-    return null;
+    return null; // TODO: add page loader
   }
 
   const onSubmit = async (values: LoginInputs) => {
