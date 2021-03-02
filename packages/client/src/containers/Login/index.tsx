@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { BackgroundLogo, Button, Card, Checkbox, Form, Link, TextField } from '../../elements';
+import {
+  AnimatedLogo,
+  BackgroundLogo,
+  Button,
+  Card,
+  Checkbox,
+  Form,
+  Link,
+  TextField,
+} from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
-import { EmailIcon, SmartGateLogo } from '../../icons';
+import { EmailIcon } from '../../icons';
 import {
   ActionsContainer,
   CardContainer,
@@ -12,7 +21,6 @@ import {
   IconWrapper,
   LinksContainer,
   LoginButtonContainer,
-  LogoWrapper,
 } from './Login.styled';
 import { LoginInputs } from './Login.types';
 
@@ -65,9 +73,7 @@ const Login = () => {
       <BackgroundLogo />
       <CardContainer>
         <Card>
-          <LogoWrapper>
-            <SmartGateLogo />
-          </LogoWrapper>
+          <AnimatedLogo />
           <Form
             onSubmit={handleSubmit(onSubmit)}
             errors={errors}

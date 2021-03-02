@@ -11,8 +11,8 @@ export const Wrapper = styled.div<CardProps>(
   border-radius: ${sizes.borderRadius};
   padding: 50px;
   min-width: ${minWidth};
-  ${down(breakpoints.xs)} {
-    padding: 40px 10px
+  ${down(breakpoints.sm)} {
+    padding: 40px 20px
   }
 `,
 );

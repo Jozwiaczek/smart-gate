@@ -6,7 +6,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100%;
-  padding-bottom: 5vh;
 `;
 
 export const LinksContainer = styled.div`
@@ -18,16 +17,10 @@ export const LinksContainer = styled.div`
   height: 50px;
 `;
 
-export const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const CardContainer = styled.div`
   max-width: 500px;
   width: 100%;
-  margin: 10px;
+  margin: 15px;
 `;
 
 export const ActionsContainer = styled.div`

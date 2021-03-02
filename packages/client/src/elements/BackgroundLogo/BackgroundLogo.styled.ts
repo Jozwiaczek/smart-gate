@@ -13,8 +13,7 @@ export const BackgroundLogoWrapper = styled.div(
       display: flex;
       justify-content: center;
       align-items: stretch;
-      color: ${palette.background.paper};
-      opacity: 0.75
+      color: ${palette.divider.default};
   }
   `,
 );
