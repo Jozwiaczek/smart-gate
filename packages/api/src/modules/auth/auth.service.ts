@@ -14,6 +14,7 @@ import { constants } from '../../utils';
 import { UserEntity } from '../database/entities/user.entity';
 import { RefreshTokenService } from '../refresh-token/refresh-token.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
 
 export class AuthService {
@@ -23,7 +24,12 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService,
   ) {}
 
-  public async login(user: UserEntity, keepMeLoggedIn: boolean): Promise<GeneratedTokens> {
+  public async login({
+    email,
+    keepMeLoggedIn,
+  }: LoginUserDto): Promise<[GeneratedTokens, UserEntity]> {
+    const user = await this.usersService.findOneByEmail(email);
+
     const {
       tokenConfig: { refreshToken, logoutToken },
     } = constants;
@@ -57,10 +63,13 @@ export class AuthService {
       });
     }
 
-    return {
-      tokens,
-      expiration: refreshExpiration,
-    };
+    return [
+      {
+        tokens,
+        expiration: refreshExpiration,
+      },
+      user,
+    ];
   }
 
   public generateAccessTokens(user: UserEntity, keepMeLoggedIn: boolean): string {
@@ -182,12 +191,17 @@ export class AuthService {
   }
 
   async register(user: CreateUserDto): Promise<UserEntity> {
-    const { password, ...rest } = user;
+    const { password, firstName, lastName, email } = user;
 
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
 
-    const newUser: CreateUserDto = { password: hash, ...rest };
+    const newUser: CreateUserDto = {
+      firstName,
+      lastName,
+      email,
+      password: hash,
+    };
     return this.usersService.create(newUser);
   }
 

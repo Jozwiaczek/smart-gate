@@ -5,7 +5,6 @@ import { Connection, QueryFailedError } from 'typeorm';
 import { clearTestDatabase } from '../../../test/utils/clearTestDatabase';
 import { testClearRepository } from '../../../test/utils/testClearRepository';
 import { testCreateRandomUser } from '../../../test/utils/testCreateRandomUser';
-import { Role } from '../auth/role.enum';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -103,7 +102,6 @@ describe('UsersService', () => {
         password: 'test',
         firstName: 'test',
         lastName: 'test',
-        roles: [],
       };
 
       await expect(usersService.create(user)).rejects.toBeInstanceOf(QueryFailedError);
@@ -116,7 +114,6 @@ describe('UsersService', () => {
         password: 'test',
         firstName: 'test',
         lastName: 'test',
-        roles: [Role.User],
       };
 
       await expect(usersService.create(user)).resolves.toEqual(expect.objectContaining(user));
@@ -144,7 +141,6 @@ describe('UsersService', () => {
         password: 'test',
         firstName: 'test',
         lastName: 'test',
-        roles: [Role.User],
       };
       const newUser = await usersService.create(user);
       const noChanges = {};
