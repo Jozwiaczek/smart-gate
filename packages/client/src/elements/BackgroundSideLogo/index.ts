@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { SmartGateBackgroundLogoIcon } from '../../icons';
 
-const BackgroundLogo = styled(SmartGateBackgroundLogoIcon)(
+const BackgroundSideLogo = styled(SmartGateBackgroundLogoIcon)(
   ({ theme: { breakpoints, up, palette } }) => `
   display: none;
   ${up(breakpoints.lg)} {
@@ -10,7 +10,7 @@ const BackgroundLogo = styled(SmartGateBackgroundLogoIcon)(
       z-index: -999;
       top: -2%;
       right: -15%;
-      left: 50%;
+      left: 40%;
       bottom: -2%;
       display: flex;
       justify-content: center;
@@ -20,4 +20,4 @@ const BackgroundLogo = styled(SmartGateBackgroundLogoIcon)(
   `,
 );
 
-export default BackgroundLogo;
+export default BackgroundSideLogo;

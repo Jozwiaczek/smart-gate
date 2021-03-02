@@ -1,15 +1,7 @@
 import styled from 'styled-components';
 
-import { Card } from '../../elements';
+import { Button, Card } from '../../elements';
 import { EmailIcon } from '../../icons';
-
-export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100%;
-`;
 
 export const LinksContainer = styled.div`
   display: flex;
@@ -24,6 +16,8 @@ export const StyledCard = styled(Card)`
   max-width: 500px;
   width: 100%;
   margin: 15px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -37,7 +31,7 @@ export const ActionsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const LoginButtonContainer = styled.div(
+export const StyledButton = styled(Button)(
   ({ theme: { breakpoints, down } }) => `
   max-width: 200px;
   width: 100%;

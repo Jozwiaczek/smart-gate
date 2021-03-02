@@ -4,19 +4,18 @@ import { useHistory } from 'react-router-dom';
 
 import {
   AnimatedLogo,
-  BackgroundLogo,
-  Button,
+  BackgroundSideLogo,
   Checkbox,
   Form,
+  LayoutContainer,
   Link,
   TextField,
 } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import {
   ActionsContainer,
-  Container,
   LinksContainer,
-  LoginButtonContainer,
+  StyledButton,
   StyledCard,
   StyledEmailIcon,
 } from './Login.styled';
@@ -60,11 +59,9 @@ const Login = () => {
     }
   };
 
-  console.log('test2');
-
   return (
-    <Container>
-      <BackgroundLogo />
+    <LayoutContainer>
+      <BackgroundSideLogo />
       <StyledCard>
         <AnimatedLogo />
         <Form
@@ -74,26 +71,24 @@ const Login = () => {
           loading={loading}
         >
           <TextField
+            autoFocus
+            required
             name="email"
             placeholder="Enter your email"
-            required
-            autoFocus
             startAdornment={<StyledEmailIcon />}
           />
           <TextField
             required
             name="password"
-            placeholder="Enter your password"
             type="password"
+            placeholder="Enter your password"
             autoComplete="current-password"
           />
           <ActionsContainer>
             <Checkbox name="keepMeLoggedIn" />
-            <LoginButtonContainer>
-              <Button type="submit" fullWidth disabled={loading} withArrow>
-                Log in
-              </Button>
-            </LoginButtonContainer>
+            <StyledButton type="submit" fullWidth disabled={loading} withArrow>
+              Log in
+            </StyledButton>
           </ActionsContainer>
           <LinksContainer>
             <Link to="/" colorVariant="grey">
@@ -105,7 +100,7 @@ const Login = () => {
           </LinksContainer>
         </Form>
       </StyledCard>
-    </Container>
+    </LayoutContainer>
   );
 };
 
