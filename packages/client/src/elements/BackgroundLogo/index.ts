@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const BackgroundLogoWrapper = styled.div(
+import { SmartGateBackgroundLogoIcon } from '../../icons';
+
+const BackgroundLogo = styled(SmartGateBackgroundLogoIcon)(
   ({ theme: { breakpoints, up, palette } }) => `
   display: none;
   ${up(breakpoints.lg)} {
@@ -17,3 +19,5 @@ export const BackgroundLogoWrapper = styled.div(
   }
   `,
 );
+
+export default BackgroundLogo;

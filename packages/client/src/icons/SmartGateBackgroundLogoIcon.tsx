@@ -1,6 +1,9 @@
 import React, { forwardRef, memo, Ref, SVGProps } from 'react';
 
-const SmartGateBackgroundLogo = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
+const SmartGateBackgroundLogoIcon = (
+  props: SVGProps<SVGSVGElement>,
+  svgRef?: Ref<SVGSVGElement>,
+) => (
   <svg
     width="100%"
     height="100%"
@@ -18,4 +21,4 @@ const SmartGateBackgroundLogo = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SV
   </svg>
 );
 
-export default memo(forwardRef(SmartGateBackgroundLogo));
+export default memo(forwardRef(SmartGateBackgroundLogoIcon));

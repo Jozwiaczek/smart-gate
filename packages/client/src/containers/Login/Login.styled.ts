@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import { Card } from '../../elements';
+import { EmailIcon } from '../../icons';
+
 export const Container = styled.div`
   width: 100%;
   display: flex;
@@ -17,10 +20,11 @@ export const LinksContainer = styled.div`
   height: 50px;
 `;
 
-export const CardContainer = styled.div`
+export const StyledCard = styled(Card)`
   max-width: 500px;
   width: 100%;
   margin: 15px;
+  align-items: center;
 `;
 
 export const ActionsContainer = styled.div`
@@ -46,6 +50,6 @@ export const LoginButtonContainer = styled.div(
 `,
 );
 
-export const IconWrapper = styled.div`
+export const StyledEmailIcon = styled(EmailIcon)`
   color: ${({ theme }) => theme.palette.colors.orange};
 `;

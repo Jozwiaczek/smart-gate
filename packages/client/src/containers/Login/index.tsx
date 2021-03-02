@@ -6,21 +6,19 @@ import {
   AnimatedLogo,
   BackgroundLogo,
   Button,
-  Card,
   Checkbox,
   Form,
   Link,
   TextField,
 } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
-import { EmailIcon } from '../../icons';
 import {
   ActionsContainer,
-  CardContainer,
   Container,
-  IconWrapper,
   LinksContainer,
   LoginButtonContainer,
+  StyledCard,
+  StyledEmailIcon,
 } from './Login.styled';
 import { LoginInputs } from './Login.types';
 
@@ -62,57 +60,51 @@ const Login = () => {
     }
   };
 
-  const emailIcon = (
-    <IconWrapper>
-      <EmailIcon />
-    </IconWrapper>
-  );
+  console.log('test2');
 
   return (
     <Container>
       <BackgroundLogo />
-      <CardContainer>
-        <Card>
-          <AnimatedLogo />
-          <Form
-            onSubmit={handleSubmit(onSubmit)}
-            errors={errors}
-            register={register}
-            loading={loading}
-          >
-            <TextField
-              name="email"
-              placeholder="Enter your email"
-              required
-              autoFocus
-              startAdornment={emailIcon}
-            />
-            <TextField
-              required
-              name="password"
-              placeholder="Enter your password"
-              type="password"
-              autoComplete="current-password"
-            />
-            <ActionsContainer>
-              <Checkbox name="keepMeLoggedIn" />
-              <LoginButtonContainer>
-                <Button type="submit" fullWidth disabled={loading} withArrow>
-                  Log in
-                </Button>
-              </LoginButtonContainer>
-            </ActionsContainer>
-            <LinksContainer>
-              <Link to="/" colorVariant="grey">
-                Forgot password?
-              </Link>
-              <Link to="/registration" colorVariant="colour">
-                I don’t have an account
-              </Link>
-            </LinksContainer>
-          </Form>
-        </Card>
-      </CardContainer>
+      <StyledCard>
+        <AnimatedLogo />
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          errors={errors}
+          register={register}
+          loading={loading}
+        >
+          <TextField
+            name="email"
+            placeholder="Enter your email"
+            required
+            autoFocus
+            startAdornment={<StyledEmailIcon />}
+          />
+          <TextField
+            required
+            name="password"
+            placeholder="Enter your password"
+            type="password"
+            autoComplete="current-password"
+          />
+          <ActionsContainer>
+            <Checkbox name="keepMeLoggedIn" />
+            <LoginButtonContainer>
+              <Button type="submit" fullWidth disabled={loading} withArrow>
+                Log in
+              </Button>
+            </LoginButtonContainer>
+          </ActionsContainer>
+          <LinksContainer>
+            <Link to="/" colorVariant="grey">
+              Forgot password?
+            </Link>
+            <Link to="/registration" colorVariant="colour">
+              I don’t have an account
+            </Link>
+          </LinksContainer>
+        </Form>
+      </StyledCard>
     </Container>
   );
 };
