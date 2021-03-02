@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
+import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { constants, cookiesUtils } from '../../utils';
 import { ValidationPipe } from '../../utils/validation.pipe';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -31,10 +32,16 @@ export class AuthController {
 
     const { setCookies } = cookiesUtils;
     setCookies(genTokens, response);
-    // TODO: add separate method for extracting user
-    // eslint-disable-next-line no-unused-vars
-    const { password, ...rest } = user;
-    return rest;
+
+    const { email, firstName, lastName, roles } = user;
+    const loginUserInfo: LoginUserInfo = {
+      email,
+      firstName,
+      lastName,
+      roles,
+      expirationDate: genTokens.expiration,
+    };
+    return loginUserInfo;
   }
 
   @Post('register')
@@ -53,13 +60,18 @@ export class AuthController {
     };
 
     const [genTokens] = await this.authService.login(loginUser);
-    console.log(genTokens);
     const { setCookies } = cookiesUtils;
     setCookies(genTokens, response);
-    // TODO: add separate method for extracting user
-    // eslint-disable-next-line no-unused-vars
-    const { password, ...rest } = user;
-    return rest;
+
+    const { email, firstName, lastName, roles } = newUser;
+    const loginUserInfo: LoginUserInfo = {
+      email,
+      firstName,
+      lastName,
+      roles,
+      expirationDate: genTokens.expiration,
+    };
+    return loginUserInfo;
   }
 
   @Get('logout')

@@ -29,15 +29,13 @@ export class UserEntity {
 
   @Column({
     type: 'varchar',
-    nullable: true,
   })
-  public firstName: string | null;
+  public firstName: string;
 
   @Column({
     type: 'varchar',
-    nullable: true,
   })
-  public lastName: string | null;
+  public lastName: string;
 
   @Column({
     type: 'enum',
