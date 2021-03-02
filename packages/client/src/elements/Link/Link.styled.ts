@@ -18,10 +18,6 @@ const getLinkColor = ({ $colorVariant, theme }: GetLinkColorProps) => {
 };
 
 const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  text-decoration: none;
   color: ${getLinkColor};
 
   &:disabled {

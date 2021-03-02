@@ -5,6 +5,6 @@ export const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 70px;
   color: ${({ theme }) => theme.palette.text.secondary};
 `;

@@ -5,11 +5,10 @@ import { CheckboxLabelProps, CheckboxWrapperProps, CheckmarkProps } from './Chec
 export const CheckboxLabel = styled.label<CheckboxLabelProps>`
   display: flex;
   align-items: center;
-  font-size: 16px;
+  height: 26px;
   color: ${({ theme }) => theme.palette.text.secondary};
-  line-height: 24px;
   position: relative;
-  padding-left: 28px;
+  padding-left: 36px;
   cursor: pointer;
   user-select: none;
   ${({ required, theme }) =>
@@ -25,12 +24,12 @@ export const CheckboxLabel = styled.label<CheckboxLabelProps>`
 export const Checkmark = styled.span<CheckmarkProps>(
   ({ isError, theme: { palette } }) => `
   position: absolute;
-  top: calc(50% - 10px);
+  top: calc(50% - 13px);
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 26px;
+  width: 26px;
   background-color: ${palette.background.paper};
-  border: 2px solid ${palette.primary.dark};
+  border: 3px solid ${palette.primary.dark};
   border-radius: 6px;
 
   ${
@@ -44,10 +43,10 @@ export const Checkmark = styled.span<CheckmarkProps>(
     opacity: 0;
     z-index: 2;
     position: absolute;
-    width: 8px;
-    height: 7px;
-    top: 5px;
-    left: 4px;
+    width: 45%;
+    height: 45%;
+    top: 6px;
+    left: 6px;
     transition: opacity 200ms ease-out;
   }
 
@@ -55,10 +54,11 @@ export const Checkmark = styled.span<CheckmarkProps>(
     content: '';
     position: absolute;
     opacity: 0;
-    left: 1px;
-    top: 1px;
-    width: 14px;
-    height: 14px;
+    left: 2px;
+    top: 2px;
+    display: flex;
+    width: 16px;
+    height: 16px;
     background: ${palette.primary.dark};
     border-radius: 4px;
     transition: opacity 200ms ease-out;

@@ -6,7 +6,7 @@ export enum ThemeType {
 export const getTheme = (themeType: ThemeType) => ({
   type: themeType,
   breakpoints: {
-    xs: 0,
+    xs: 375,
     sm: 600,
     md: 960,
     lg: 1120,

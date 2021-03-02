@@ -19,7 +19,7 @@ export const StyledButton = styled.button<ButtonProps>(
   margin: ${margin};
   text-align: center;
   border: none;
-  min-width: 220px;
+  min-width: 100px;
   cursor: pointer;
   line-height: 16px;
   transition: 0.15s;
