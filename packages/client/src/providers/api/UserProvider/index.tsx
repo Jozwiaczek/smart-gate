@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useCallback, useState } from 'react';
 
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { UserContext } from './UserProvider.context';
@@ -11,12 +11,12 @@ const UserProvider = ({ children }: PropsWithChildren<unknown>) => {
     undefined,
   );
 
-  const getUser = () => {
+  const getUser = useCallback(() => {
     if (expiration && new Date(expiration).getTime() > Date.now()) {
       return user;
     }
     return undefined;
-  };
+  }, [expiration, user]);
 
   const setUser = (newUser: User | undefined, expirationDate: number | undefined = undefined) => {
     if (!newUser || !expirationDate) {

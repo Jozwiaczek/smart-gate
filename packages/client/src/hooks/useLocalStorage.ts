@@ -1,13 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const writeToLocalStorage = <T>(key: string, data: T): void => {
-  console.log('set', data);
   const stringifyData = JSON.stringify(data);
   window.localStorage.setItem(key, stringifyData);
-};
-
-const clearLocalStorageByKey = (key: string): void => {
-  window.localStorage.removeItem(key);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +20,11 @@ const useLocalStorage = <T>(key: string, defaultValue: T): [T, (val: T) => void,
     [key],
   );
 
+  const clear = useCallback((): void => {
+    window.localStorage.removeItem(key);
+    setData(defaultValue);
+  }, [defaultValue, key]);
+
   useEffect(() => {
     const currentData = window.localStorage.getItem(key);
 
@@ -40,7 +40,7 @@ const useLocalStorage = <T>(key: string, defaultValue: T): [T, (val: T) => void,
     }
   }, [defaultValue, key, set]);
 
-  const remove = useCallback(() => clearLocalStorageByKey(key), [key]);
+  const remove = useCallback(() => clear(), [clear]);
 
   const checkLocalStorage = useCallback(
     ({ storageArea, newValue, key: storageKey }: StorageEvent) => {

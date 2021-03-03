@@ -32,9 +32,10 @@ export class AuthService {
 
   public async login({
     email,
+    password,
     keepMeLoggedIn,
   }: LoginUserDto): Promise<[GeneratedTokens, UserEntity]> {
-    const user = await this.usersService.findOneByEmail(email);
+    const user = await this.validateUser(email, password);
 
     const {
       tokenConfig: { refreshToken, logoutToken },
