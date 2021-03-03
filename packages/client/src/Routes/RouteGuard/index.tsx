@@ -10,7 +10,7 @@ const Loading = () => {
   return <p>loading</p>;
 };
 
-const RouteGuard = ({ redirectTo = routes.home, ...rest }: RouteGuardProps) => {
+const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => {
   const [{ data, loading }, setLazyLoading] = useState<LazyLoading<boolean>>({
     error: false,
     loading: true,

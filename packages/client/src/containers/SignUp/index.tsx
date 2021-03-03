@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { regex } from '../../constants';
+import { regex, routes } from '../../constants';
 import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import { UserIcon } from '../../icons';
@@ -36,7 +36,7 @@ export default function Index() {
       const { confirmPassword, ...formValues } = values;
       await auth.register(formValues);
       reset();
-      history.push('/dashboard');
+      history.push(routes.home);
     } catch (error) {
       if (!error.response) {
         showSnackbar({ message: error.message, severity: 'error' });

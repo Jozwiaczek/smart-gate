@@ -8,9 +8,9 @@ import RouteGuard from './RouteGuard';
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path={routes.home} component={SignIn} />
+      <RouteGuard exact path={routes.home} component={Dashboard} />
+      <Route path={routes.login} component={SignIn} />
       <Route path={routes.registration} component={SignUp} />
-      <RouteGuard path={routes.dashboard} component={Dashboard} />
     </Switch>
   </BrowserRouter>
 );
