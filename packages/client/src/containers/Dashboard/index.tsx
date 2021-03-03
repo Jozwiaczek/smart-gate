@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Button } from '../../elements';
 import { useAuth, useThemeType } from '../../hooks';
+import useUser from '../../hooks/useUser';
 import { SGLocale } from '../../i18n';
 import { ThemeType } from '../../theme/Theme';
 import { Container } from './Dashboard.styled';
@@ -10,16 +11,18 @@ import { Container } from './Dashboard.styled';
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
   const auth = useAuth();
+  const { getUser } = useUser();
+  console.log(getUser());
   const { themeType, setThemeType } = useThemeType();
 
   if (!auth) {
     return null;
   }
 
-  const { logout, getCurrentUser } = auth;
+  const { logout, isAuthenticated } = auth;
 
   const getMe = async () => {
-    await getCurrentUser();
+    console.log(await isAuthenticated());
   };
 
   const logoutUser = async () => {

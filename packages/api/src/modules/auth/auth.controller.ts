@@ -11,11 +11,14 @@ import {
 
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { LoginUserInfo } from '../../interfaces/login-user-info';
+import { TokenPayload } from '../../interfaces/token-types';
 import { constants, cookiesUtils } from '../../utils';
 import { ValidationPipe } from '../../utils/validation.pipe';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
+import { Auth } from './decorators/auth.decorator';
+import { CookiePayload } from './decorators/cookiePayload.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -35,11 +38,13 @@ export class AuthController {
 
     const { email, firstName, lastName, roles } = user;
     const loginUserInfo: LoginUserInfo = {
-      email,
-      firstName,
-      lastName,
-      roles,
-      expirationDate: genTokens.expiration,
+      user: {
+        email,
+        firstName,
+        lastName,
+        roles,
+      },
+      expirationDate: genTokens.expiration.getTime(),
     };
     return loginUserInfo;
   }
@@ -65,11 +70,29 @@ export class AuthController {
 
     const { email, firstName, lastName, roles } = newUser;
     const loginUserInfo: LoginUserInfo = {
-      email,
-      firstName,
-      lastName,
-      roles,
-      expirationDate: genTokens.expiration,
+      user: {
+        email,
+        firstName,
+        lastName,
+        roles,
+      },
+      expirationDate: genTokens.expiration.getTime(),
+    };
+    return loginUserInfo;
+  }
+
+  @Auth()
+  @Get('me')
+  async me(@CookiePayload() { sub, exp }: TokenPayload) {
+    const { email, firstName, lastName, roles } = await this.authService.getUser(sub);
+    const loginUserInfo: LoginUserInfo = {
+      user: {
+        email,
+        firstName,
+        lastName,
+        roles,
+      },
+      expirationDate: exp * 1000,
     };
     return loginUserInfo;
   }

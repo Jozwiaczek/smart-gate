@@ -2,54 +2,58 @@ import { AxiosResponse } from 'axios';
 import React, { PropsWithChildren, useCallback } from 'react';
 
 import useAxios from '../../../hooks/useAxios';
+import useLocalStorage from '../../../hooks/useLocalStorage';
+import useUser from '../../../hooks/useUser';
 import { AuthContext } from './AuthProvider.context';
-import { LoginData, LoginUserInfo, RegistrationData, User } from './AuthProvider.types';
+import { LoginData, LoginUserInfo, RegistrationData } from './AuthProvider.types';
 
 const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   const axios = useAxios();
-  console.log('test123');
-  const setUser = (loginUserInfo: LoginUserInfo) => {};
+  const { getUser, setUser } = useUser();
+  const [expiration] = useLocalStorage('loginExpirationDate', undefined);
 
-  const getCurrentUser = useCallback(async () => {
-    let authUser = {
-      loading: false,
-      user: undefined,
-      error: undefined,
-    };
-    try {
-      authUser = await axios.get('/users/me');
-      // eslint-disable-next-line no-empty
-    } catch (ignore) {}
-
-    return authUser;
-  }, [axios]);
+  const isAuthenticated = useCallback(async () => {
+    if (getUser()) {
+      return true;
+    }
+    if (expiration) {
+      return axios
+        .get<never, AxiosResponse<LoginUserInfo>>('/auth/me')
+        .then(({ data: { user, expirationDate } }) => {
+          setUser(user, expirationDate);
+          return true;
+        })
+        .catch(() => {
+          return false;
+        });
+    }
+    return false;
+  }, [axios, expiration, getUser, setUser]);
 
   const login = useCallback(
     async (userData: LoginData) => {
-      const response = await axios.post<LoginData, AxiosResponse<LoginUserInfo>>(
-        '/auth/login',
-        userData,
-      );
+      const {
+        data: { user, expirationDate },
+      } = await axios.post<LoginData, AxiosResponse<LoginUserInfo>>('/auth/login', userData);
 
-      setUser(response.data);
-
+      setUser(user, expirationDate);
       return true;
     },
-    [axios],
+    [axios, setUser],
   );
 
   const register = useCallback(
     async (userData?: RegistrationData) => {
-      const response = await axios.post<RegistrationData, AxiosResponse<LoginUserInfo>>(
-        '/auth/register',
-        { ...userData },
-      );
+      const {
+        data: { user, expirationDate },
+      } = await axios.post<RegistrationData, AxiosResponse<LoginUserInfo>>('/auth/register', {
+        ...userData,
+      });
 
-      setUser(response.data);
-
+      setUser(user, expirationDate);
       return true;
     },
-    [axios],
+    [axios, setUser],
   );
 
   const logout = useCallback(async () => {
@@ -58,10 +62,10 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, [axios]);
 
   const AuthValue = {
-    getCurrentUser,
     login,
     register,
     logout,
+    isAuthenticated,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;

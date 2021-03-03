@@ -1,4 +1,10 @@
-import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import ms from 'ms';
@@ -175,8 +181,10 @@ export class AuthService {
     }
   }
 
-  public async getUser(): Promise<Promise<UserEntity> | undefined> {
-    return undefined;
+  public async getUser(userId: string): Promise<UserEntity> {
+    return this.usersService.findOne(userId).catch(() => {
+      throw new BadRequestException('Invalid request');
+    });
   }
 
   public async logout(refreshToken: string, access: string) {
