@@ -1,28 +1,18 @@
 import axios from 'axios';
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { AxiosContext } from './AxiosProvider.context';
 
 const AxiosProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const AxiosOverriddenInstance = useMemo(() => {
-    const axiosConfig = axios.create({
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  const API_URL = process.env.REACT_APP_API_URL;
 
-    axiosConfig.interceptors.request.use((config) => {
-      const token = localStorage.getItem('access_token');
-      const overriddenConfig = config;
-      if (token) {
-        overriddenConfig.headers.Authorization = `Bearer ${token}`;
-      }
-
-      return overriddenConfig;
-    });
-
-    return axiosConfig;
-  }, []);
+  const AxiosOverriddenInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+  });
 
   return <AxiosContext.Provider value={AxiosOverriddenInstance}>{children}</AxiosContext.Provider>;
 };
