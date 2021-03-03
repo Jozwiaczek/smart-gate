@@ -1,3 +1,4 @@
+export { default as Animated } from './Animated';
 export { default as AnimatedLogo } from './AnimatedLogo';
 export { default as BackgroundSideLogo } from './BackgroundSideLogo';
 export { default as Button } from './Button';
