@@ -58,8 +58,9 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
 
   const logout = useCallback(async () => {
     const response = await axios.get('/auth/logout');
+    setUser(undefined);
     return response.data;
-  }, [axios]);
+  }, [axios, setUser]);
 
   const AuthValue = {
     login,

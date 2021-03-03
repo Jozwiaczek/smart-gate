@@ -6,7 +6,7 @@ import { User } from './UserProvider.types';
 
 const UserProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [user, setNewUser] = useState<User | undefined>();
-  const [expiration, setExpiration] = useLocalStorage<number | undefined>(
+  const [expiration, setExpiration, removeExpiration] = useLocalStorage<number | undefined>(
     'loginExpirationDate',
     undefined,
   );
@@ -19,11 +19,12 @@ const UserProvider = ({ children }: PropsWithChildren<unknown>) => {
   };
 
   const setUser = (newUser: User | undefined, expirationDate: number | undefined = undefined) => {
-    if (!newUser && expiration) {
-      setExpiration(undefined);
+    if (!newUser || !expirationDate) {
+      removeExpiration();
+    } else {
+      setExpiration(expirationDate);
+      setNewUser(newUser);
     }
-    setExpiration(expirationDate);
-    setNewUser(newUser);
   };
 
   return <UserContext.Provider value={{ getUser, setUser }}>{children}</UserContext.Provider>;

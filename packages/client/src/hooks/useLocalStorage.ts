@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const writeToLocalStorage = <T>(key: string, data: T): void => {
+  console.log('set', data);
   const stringifyData = JSON.stringify(data);
   window.localStorage.setItem(key, stringifyData);
 };
