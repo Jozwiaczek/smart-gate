@@ -43,11 +43,11 @@ const useAnimated = <T extends Element>({
     }
   }, [animateInType, animateOutType, animationOpt, autoTrigger, isInViewPort, targets]);
 
-  const triggerAnimation = () => {
+  const trigger = () => {
     animateInRef.current?.play();
   };
 
-  return { triggerAnimation, ref: containerRefInner };
+  return { trigger, ref: containerRefInner };
 };
 
 export default useAnimated;

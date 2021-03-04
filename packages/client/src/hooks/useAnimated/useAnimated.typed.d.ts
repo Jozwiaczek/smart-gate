@@ -30,6 +30,6 @@ export interface UseAnimatedProps {
 }
 
 export interface UseAnimatedReturnProps<T extends Element> {
-  triggerAnimation: () => void;
+  trigger: () => void;
   ref: RefObject<T>;
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { regex } from '../../constants';
 import {
   AnimatedLogo,
   BackgroundSideLogo,
@@ -28,34 +29,26 @@ const Login = () => {
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
   const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
-  const { triggerAnimation } = useAnimated({
+  const { trigger: triggerCardShake } = useAnimated({
     type: 'shake',
     targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>({
-    mode: 'onBlur',
-  });
+  const { register, handleSubmit, errors, reset } = useForm<LoginInputs>();
 
   if (!auth) {
     return null; // TODO: add page loader
   }
 
   const onSubmit = async (values: LoginInputs) => {
-    triggerAnimation();
     setLoading(true);
-    const isValid = await trigger();
-
-    if (!isValid) {
-      setLoading(false);
-      return;
-    }
 
     try {
       await auth.login(values);
       reset();
       history.push('/dashboard');
     } catch (error) {
+      triggerCardShake();
       if (!error.response) {
         showSnackbar({ message: error.message, severity: 'error' });
       } else {
@@ -83,12 +76,21 @@ const Login = () => {
             required
             name="email"
             placeholder="Enter your email"
+            validation={{
+              pattern: {
+                value: regex.matchEmail,
+                message: 'Invalid email address.',
+              },
+            }}
             startAdornment={<StyledEmailIcon />}
           />
           <TextField
             required
             name="password"
             type="password"
+            validation={{
+              minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
+            }}
             placeholder="Enter your password"
             autoComplete="current-password"
           />
