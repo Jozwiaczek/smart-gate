@@ -1,19 +1,37 @@
 import { RefObject, useLayoutEffect, useState } from 'react';
 
-const useOnScreen = (ref: RefObject<Element>, rootMargin = '0px') => {
+interface UseOnScreenOptions {
+  root?: Element | null;
+  rootMargin?: string;
+  disabled?: boolean;
+  triggerOnce?: boolean;
+}
+
+const useOnScreen = (ref: RefObject<Element>, opt?: UseOnScreenOptions) => {
   const [isIntersecting, setIntersecting] = useState(true);
+  const [triggeredOnce, setTriggeredOnce] = useState(false);
 
   useLayoutEffect(() => {
+    if (opt?.disabled) {
+      return;
+    }
+
     if (!ref && !window && !('IntersectionObserver' in window)) {
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIntersecting(entry.isIntersecting);
+        if (!triggeredOnce) {
+          setIntersecting(entry.isIntersecting);
+          if (opt?.triggerOnce) {
+            setTriggeredOnce(true);
+          }
+        }
       },
       {
-        rootMargin,
+        root: opt?.root,
+        rootMargin: opt?.rootMargin,
       },
     );
 
@@ -27,9 +45,9 @@ const useOnScreen = (ref: RefObject<Element>, rootMargin = '0px') => {
         observer.unobserve(ref.current);
       }
     };
-  }, [ref, rootMargin]);
+  }, [opt, ref, triggeredOnce]);
 
-  return isIntersecting;
+  return opt?.disabled ? false : isIntersecting;
 };
 
 export default useOnScreen;
