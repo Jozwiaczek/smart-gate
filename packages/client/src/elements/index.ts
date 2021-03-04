@@ -8,5 +8,6 @@ export { default as IconButton } from './IconButton';
 export { Checkbox, TextField } from './Inputs';
 export { default as LayoutContainer } from './LayoutContainer';
 export { default as Link } from './Link';
+export { default as PageLoader } from './PageLoader';
 export { default as Snackbar } from './Snackbar';
 export { default as Spinner } from './Spinner';
