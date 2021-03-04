@@ -18,11 +18,7 @@ const Registration = () => {
       mode: 'onBlur',
     },
   );
-  const auth = useAuth();
-
-  if (!auth) {
-    return null;
-  }
+  const { register: registerUser } = useAuth();
 
   const onSubmit = async (values: RegistrationInputs) => {
     setLoading(true);
@@ -36,7 +32,7 @@ const Registration = () => {
     try {
       // eslint-disable-next-line no-unused-vars
       const { confirmPassword, ...formValues } = values;
-      await auth.register(formValues);
+      await registerUser(formValues);
       reset();
       history.push(routes.home);
     } catch (error) {

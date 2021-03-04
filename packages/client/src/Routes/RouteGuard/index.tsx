@@ -17,12 +17,11 @@ const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => 
     data: false,
   });
 
-  const auth = useAuth();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     let isActive = true;
-    auth
-      ?.isAuthenticated()
+    isAuthenticated()
       .then((isAuth) => {
         if (isActive) {
           setLazyLoading((prev) => ({ ...prev, data: isAuth, loading: false }));
@@ -36,7 +35,7 @@ const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => 
     return () => {
       isActive = false;
     };
-  }, [auth]);
+  }, [isAuthenticated]);
 
   if (loading) {
     return <Loading />;

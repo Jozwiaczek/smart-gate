@@ -9,14 +9,8 @@ import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
-  const auth = useAuth();
+  const { logout, isAuthenticated } = useAuth();
   const { themeType, setThemeType } = useThemeType();
-
-  if (!auth) {
-    return null;
-  }
-
-  const { logout, isAuthenticated } = auth;
 
   const getMe = async () => {
     console.log(await isAuthenticated());
