@@ -1,9 +1,9 @@
-import { Ref } from 'react';
+import { RefObject } from 'react';
 
 export type AnimationType = 'fadeIn' | 'fadeOut' | 'shake' | 'slideInUp' | 'slideInOut';
 export type UseAnimatedType = AnimationType | [AnimationType, AnimationType];
 
-export type AnimationTargets = Element | ReadonlyArray<Element>;
+export type AnimationTargets = Element | ReadonlyArray<Element> | null;
 
 export interface AnimationOptions {
   maxDebounceSize?: number;
@@ -29,8 +29,7 @@ export interface UseAnimatedProps {
   opt?: UseAnimatedOptions;
 }
 
-export interface UseAnimatedReturnProps {
+export interface UseAnimatedReturnProps<T extends Element> {
   triggerAnimation: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ref: Ref<any>;
+  ref: RefObject<T>;
 }

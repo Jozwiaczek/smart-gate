@@ -5,7 +5,11 @@ import useOnScreen from '../useOnScreen';
 import getAnimation from './getAnimation';
 import { AnimationType, UseAnimatedProps, UseAnimatedReturnProps } from './useAnimated.typed';
 
-const useAnimated = ({ targets, type, opt = {} }: UseAnimatedProps): UseAnimatedReturnProps => {
+const useAnimated = <T extends Element>({
+  targets,
+  type,
+  opt = {},
+}: UseAnimatedProps): UseAnimatedReturnProps<T> => {
   const { root, rootMargin, animationOpt, autoTrigger = true, autoTriggerOnce = false } = opt;
   const isInOut = Array.isArray(type);
   const animateInType = (isInOut ? type[0] : type) as AnimationType;
@@ -13,7 +17,7 @@ const useAnimated = ({ targets, type, opt = {} }: UseAnimatedProps): UseAnimated
 
   const animateInRef = useRef<AnimeInstance>();
   const animateOutRef = useRef<AnimeInstance>();
-  const containerRefInner = useRef<Element>(null);
+  const containerRefInner = useRef<T>(null);
   const isInViewPort = useOnScreen(containerRefInner, {
     root,
     rootMargin,

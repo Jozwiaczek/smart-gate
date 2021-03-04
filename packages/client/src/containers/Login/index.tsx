@@ -27,11 +27,9 @@ const Login = () => {
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const animatedCard = useAnimated({ type: 'fadeIn' });
+  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
   const { triggerAnimation } = useAnimated({
     type: 'shake',
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
