@@ -2,10 +2,10 @@ import React, { forwardRef, memo, Ref, SVGProps } from 'react';
 
 const LockIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
   <svg
-    width="1em"
-    height="1em"
+    width={16}
+    height={18}
     viewBox="0 0 16 18"
-    fill="currentColor"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
     ref={svgRef}
     {...props}

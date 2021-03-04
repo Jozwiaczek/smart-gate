@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledPasswordIconButton = styled.div(
+import IconButton from '../../../IconButton';
+
+const StyledIconButton = styled(IconButton)(
   ({ theme: { palette } }) => `
   position: absolute;
   top: -5px;
@@ -38,3 +40,5 @@ export const StyledPasswordIconButton = styled.div(
   }
 `,
 );
+
+export default StyledIconButton;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { getCssColor } from '../../utils';
 
-export const StyledIconButton = styled.button(
+const IconButton = styled.button(
   ({ color, theme }) => `
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@ export const StyledIconButton = styled.button(
   position: relative;
   border-radius: 50%;
   font-size: 16px;
-  background: transparent; 
+  background: transparent;
   color: ${getCssColor({ color, theme })};
   text-align: center;
   border: none;
@@ -32,3 +32,5 @@ export const StyledIconButton = styled.button(
   }
 `,
 );
+
+export default IconButton;

@@ -6,6 +6,13 @@ import Routes from './Routes';
 import * as serviceWorkerRegistration from './serviceWorker/serviceWorkerRegistration';
 import reportWebVitals from './utils/reportWebVitals';
 
+// Load Polyfills
+(async () => {
+  if (typeof window.IntersectionObserver === 'undefined') {
+    await import('intersection-observer');
+  }
+})();
+
 ReactDOM.render(
   <React.StrictMode>
     <Providers>

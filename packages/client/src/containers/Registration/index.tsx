@@ -6,23 +6,25 @@ import { regex } from '../../constants';
 import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import { UserIcon } from '../../icons';
-import { Container } from './SignUp.styled';
-import { SignUpInputs } from './SignUp.types';
+import { Container } from './Registration.styled';
+import { RegistrationInputs } from './Registration.types';
 
-export default function Index() {
+const Registration = () => {
   const showSnackbar = useSnackbar();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors, reset, trigger, getValues } = useForm<SignUpInputs>({
-    mode: 'onBlur',
-  });
+  const { register, handleSubmit, errors, reset, trigger, getValues } = useForm<RegistrationInputs>(
+    {
+      mode: 'onBlur',
+    },
+  );
   const auth = useAuth();
 
   if (!auth) {
     return null;
   }
 
-  const onSubmit = async (values: SignUpInputs) => {
+  const onSubmit = async (values: RegistrationInputs) => {
     setLoading(true);
     const isValid = await trigger();
 
@@ -99,4 +101,6 @@ export default function Index() {
       </Card>
     </Container>
   );
-}
+};
+
+export default Registration;
