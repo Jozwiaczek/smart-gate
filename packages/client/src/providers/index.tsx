@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
-import { DefaultLayout } from '../containers';
 import i18n from '../i18n';
 import { AuthProvider, AxiosProvider } from './api';
 import UserProvider from './api/UserProvider';
@@ -18,9 +17,7 @@ const Providers = ({ children }: ProvidersProps) => (
       <AxiosProvider>
         <AuthProvider>
           <I18nextProvider i18n={i18n}>
-            <SnackbarProvider>
-              <DefaultLayout>{children}</DefaultLayout>
-            </SnackbarProvider>
+            <SnackbarProvider>{children}</SnackbarProvider>
           </I18nextProvider>
         </AuthProvider>
       </AxiosProvider>

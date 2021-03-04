@@ -7,7 +7,6 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
   
-  html,
   body {
     height: 100%;
     padding: 0;
@@ -18,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   main {
+    display: flex;
     flex: 1 0 auto;
     height: 100%;
   }

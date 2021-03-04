@@ -1,4 +1,4 @@
-export interface SignUpInputs {
+export interface RegistrationInputs {
   firstName: string;
   lastName: string;
   email: string;

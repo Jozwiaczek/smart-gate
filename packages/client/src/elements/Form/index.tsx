@@ -7,7 +7,7 @@ const formInputs: Array<ReactNode> = [Checkbox, TextField];
 const isFormInput = (child: ReactElement) => formInputs.includes(child.type);
 
 const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormProps) => (
-  <form onSubmit={onSubmit} noValidate {...rest}>
+  <form onSubmit={onSubmit} style={{ width: '100%' }} noValidate {...rest}>
     {Children.map(children, (child) => {
       if (isValidElement(child)) {
         if (isFormInput(child)) {

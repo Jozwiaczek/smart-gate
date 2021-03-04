@@ -2,14 +2,16 @@ import styled from 'styled-components';
 
 import { CardProps } from './Card.types';
 
-export const Wrapper = styled.div<CardProps>(
-  ({ minWidth, theme: { sizes, palette } }) => `
-  display: flex;
-  flex-direction: column;
+const Card = styled.div<CardProps>(
+  ({ theme: { sizes, palette, breakpoints, down } }) => `
   background: ${palette.background.paper};
   box-shadow: ${palette.boxShadow};
   border-radius: ${sizes.borderRadius};
   padding: 50px;
-  min-width: ${minWidth};
+  ${down(breakpoints.sm)} {
+    padding: 40px 20px
+  }
 `,
 );
+
+export default Card;
