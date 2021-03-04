@@ -83,6 +83,8 @@ describe('UsersService', () => {
     it('returns valid userEntity when user is found', async () => {
       const repository = await testClearRepository(connection, UserEntity);
       const userEntity: UserEntity = new UserEntity();
+      userEntity.firstName = 'firstName';
+      userEntity.lastName = 'lastName';
       userEntity.email = 'some@email.com';
       userEntity.password = 'some_password';
 

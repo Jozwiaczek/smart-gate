@@ -1,4 +1,4 @@
-import { Role } from 'api/build/src/modules/auth/role.enum';
+import { Role } from '../../../enums/role.enum';
 
 export interface User {
   email: string;
