@@ -44,11 +44,6 @@ const PageLoader = () => {
         delay: anime.stagger(100, { grid, from: 'center' }),
       })
       .add({
-        translateX: () => anime.random(-10, 10),
-        translateY: () => anime.random(-10, 10),
-        delay: anime.stagger(8, { from: 'last' }),
-      })
-      .add({
         translateX: anime.stagger('.25rem', { grid, from: 'center', axis: 'x' }),
         translateY: anime.stagger('.25rem', { grid, from: 'center', axis: 'y' }),
         rotate: 0,
