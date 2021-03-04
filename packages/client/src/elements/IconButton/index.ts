@@ -10,7 +10,7 @@ const IconButton = styled.button(
   position: relative;
   border-radius: 50%;
   font-size: 16px;
-  background: transparent; 
+  background: transparent;
   color: ${getCssColor({ color, theme })};
   text-align: center;
   border: none;
