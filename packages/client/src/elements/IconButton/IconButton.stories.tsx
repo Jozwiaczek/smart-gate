@@ -5,7 +5,7 @@ import LockIcon from '../../icons/LockIcon';
 import IconButton from '.';
 
 export default {
-  title: 'Elements/IconButton',
+  title: 'Elements/Icon Button',
   component: IconButton,
 } as Meta;
 

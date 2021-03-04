@@ -4,7 +4,7 @@ import React from 'react';
 import PageLoader from '.';
 
 export default {
-  title: 'Elements/PageLoader',
+  title: 'Elements/Page Loader',
   component: PageLoader,
 } as Meta;
 
