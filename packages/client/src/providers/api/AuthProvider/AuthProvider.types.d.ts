@@ -1,4 +1,4 @@
-import { User } from '../UserProvider/UserProvider.types';
+import { User } from '../CurrentUserProvider/CurrentUserProvider.types';
 
 export interface LoginUserInfo {
   user: User;

@@ -1,19 +1,19 @@
 import { AxiosResponse } from 'axios';
 import React, { PropsWithChildren, useCallback } from 'react';
 
+import { useCurrentUser } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
 import useLocalStorage from '../../../hooks/useLocalStorage';
-import useUser from '../../../hooks/useUser';
 import { AuthContext } from './AuthProvider.context';
 import { LoginData, LoginUserInfo, RegistrationData } from './AuthProvider.types';
 
 const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   const axios = useAxios();
-  const { getUser, setUser } = useUser();
+  const [currentUser, setUser] = useCurrentUser();
   const [expiration] = useLocalStorage('loginExpirationDate', undefined);
 
   const isAuthenticated = useCallback(async () => {
-    if (getUser()) {
+    if (currentUser) {
       return true;
     }
     if (expiration) {
@@ -28,7 +28,7 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
         });
     }
     return false;
-  }, [axios, expiration, getUser, setUser]);
+  }, [axios, expiration, currentUser, setUser]);
 
   const login = useCallback(
     async (userData: LoginData) => {

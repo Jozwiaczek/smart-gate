@@ -3,7 +3,7 @@ import { I18nextProvider } from 'react-i18next';
 
 import i18n from '../i18n';
 import { AuthProvider, AxiosProvider } from './api';
-import UserProvider from './api/UserProvider';
+import UserProvider from './api/CurrentUserProvider';
 import SnackbarProvider from './SnackbarProvider';
 import StylesProvider from './StylesProvider';
 

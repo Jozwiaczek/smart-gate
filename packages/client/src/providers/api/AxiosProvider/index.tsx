@@ -1,12 +1,12 @@
 import axios, { AxiosError } from 'axios';
 import React, { PropsWithChildren } from 'react';
 
-import useUser from '../../../hooks/useUser';
+import { useCurrentUser } from '../../../hooks';
 import { AxiosContext } from './AxiosProvider.context';
 
 const AxiosProvider = ({ children }: PropsWithChildren<unknown>) => {
   const API_URL = process.env.REACT_APP_API_URL;
-  const { setUser } = useUser();
+  const [, setUser] = useCurrentUser();
 
   const AxiosOverriddenInstance = axios.create({
     baseURL: API_URL,
