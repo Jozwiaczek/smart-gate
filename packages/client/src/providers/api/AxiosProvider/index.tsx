@@ -1,28 +1,32 @@
-import axios from 'axios';
-import React, { PropsWithChildren, useMemo } from 'react';
+import axios, { AxiosError } from 'axios';
+import React, { PropsWithChildren } from 'react';
 
+import { useCurrentUser } from '../../../hooks';
 import { AxiosContext } from './AxiosProvider.context';
 
 const AxiosProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const AxiosOverriddenInstance = useMemo(() => {
-    const axiosConfig = axios.create({
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  const API_URL = process.env.REACT_APP_API_URL;
+  const [, setUser] = useCurrentUser();
 
-    axiosConfig.interceptors.request.use((config) => {
-      const token = localStorage.getItem('access_token');
-      const overriddenConfig = config;
-      if (token) {
-        overriddenConfig.headers.Authorization = `Bearer ${token}`;
+  const AxiosOverriddenInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+  });
+
+  AxiosOverriddenInstance.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error: AxiosError) => {
+      if (error && error.response && error.response.status === 401) {
+        setUser(undefined);
       }
-
-      return overriddenConfig;
-    });
-
-    return axiosConfig;
-  }, []);
+      return Promise.reject(error);
+    },
+  );
 
   return <AxiosContext.Provider value={AxiosOverriddenInstance}>{children}</AxiosContext.Provider>;
 };

@@ -1,65 +1,72 @@
+import { AxiosResponse } from 'axios';
 import React, { PropsWithChildren, useCallback } from 'react';
 
+import { useCurrentUser } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 import { AuthContext } from './AuthProvider.context';
-import { User } from './AuthProvider.types';
+import { LoginData, LoginUserInfo, RegistrationData } from './AuthProvider.types';
 
 const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   const axios = useAxios();
-  const API_URL = process.env.REACT_APP_API_URL;
+  const [currentUser, setUser] = useCurrentUser();
+  const [expiration] = useLocalStorage('loginExpirationDate', undefined);
 
-  const getCurrentUser = useCallback(async () => {
-    let authUser = {
-      loading: false,
-      user: undefined,
-      error: undefined,
-    };
-    try {
-      authUser = await axios.get(`${API_URL}/users/me`, { withCredentials: true });
-      // eslint-disable-next-line no-empty
-    } catch (ignore) {}
-
-    return authUser;
-  }, [API_URL, axios]);
+  const isAuthenticated = useCallback(async () => {
+    if (currentUser) {
+      return true;
+    }
+    if (expiration) {
+      return axios
+        .get<never, AxiosResponse<LoginUserInfo>>('/auth/me')
+        .then(({ data: { user, expirationDate } }) => {
+          setUser(user, expirationDate);
+          return true;
+        })
+        .catch(() => {
+          return false;
+        });
+    }
+    return false;
+  }, [axios, expiration, currentUser, setUser]);
 
   const login = useCallback(
-    async (userData: User) => {
-      const response = await axios.post(
-        `${API_URL}/auth/login`,
-        { ...userData },
-        { withCredentials: true },
-      );
-      localStorage.setItem('access_token', response.data.access_token);
+    async (userData: LoginData) => {
+      const {
+        data: { user, expirationDate },
+      } = await axios.post<LoginData, AxiosResponse<LoginUserInfo>>('/auth/login', userData);
 
+      setUser(user, expirationDate);
       return true;
     },
-    [API_URL, axios],
+    [axios, setUser],
   );
 
   const register = useCallback(
-    async (userData?: User) => {
-      const response = await axios.post(
-        `${API_URL}/auth/register`,
-        { ...userData },
-        { withCredentials: true },
-      );
-      localStorage.setItem('access_token', response.data.access_token);
-      console.log('response', response);
+    async (userData?: RegistrationData) => {
+      const {
+        data: { user, expirationDate },
+      } = await axios.post<RegistrationData, AxiosResponse<LoginUserInfo>>('/auth/register', {
+        ...userData,
+      });
+
+      setUser(user, expirationDate);
       return true;
     },
-    [API_URL, axios],
+    [axios, setUser],
   );
 
   const logout = useCallback(async () => {
-    const response = await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
+    const response = await axios.get('/auth/logout');
+    setUser(undefined);
     return response.data;
-  }, [API_URL, axios]);
+  }, [axios, setUser]);
 
   const AuthValue = {
-    getCurrentUser,
     login,
     register,
     logout,
+    isAuthenticated,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;

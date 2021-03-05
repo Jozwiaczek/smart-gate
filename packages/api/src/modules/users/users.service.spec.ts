@@ -5,7 +5,6 @@ import { Connection, QueryFailedError } from 'typeorm';
 import { clearTestDatabase } from '../../../test/utils/clearTestDatabase';
 import { testClearRepository } from '../../../test/utils/testClearRepository';
 import { testCreateRandomUser } from '../../../test/utils/testCreateRandomUser';
-import { Role } from '../auth/role.enum';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -84,6 +83,8 @@ describe('UsersService', () => {
     it('returns valid userEntity when user is found', async () => {
       const repository = await testClearRepository(connection, UserEntity);
       const userEntity: UserEntity = new UserEntity();
+      userEntity.firstName = 'firstName';
+      userEntity.lastName = 'lastName';
       userEntity.email = 'some@email.com';
       userEntity.password = 'some_password';
 
@@ -103,7 +104,6 @@ describe('UsersService', () => {
         password: 'test',
         firstName: 'test',
         lastName: 'test',
-        roles: [],
       };
 
       await expect(usersService.create(user)).rejects.toBeInstanceOf(QueryFailedError);
@@ -116,7 +116,6 @@ describe('UsersService', () => {
         password: 'test',
         firstName: 'test',
         lastName: 'test',
-        roles: [Role.User],
       };
 
       await expect(usersService.create(user)).resolves.toEqual(expect.objectContaining(user));
@@ -144,7 +143,6 @@ describe('UsersService', () => {
         password: 'test',
         firstName: 'test',
         lastName: 'test',
-        roles: [Role.User],
       };
       const newUser = await usersService.create(user);
       const noChanges = {};
