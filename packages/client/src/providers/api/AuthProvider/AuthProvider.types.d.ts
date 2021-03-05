@@ -1,19 +1,26 @@
-export interface User {
-  firstName?: string;
-  lastName?: string;
+import { User } from '../CurrentUserProvider/CurrentUserProvider.types';
+
+export interface LoginUserInfo {
+  user: User;
+  expirationDate: number;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+  keepMeLoggedIn: boolean;
+}
+
+export interface RegistrationData {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
 
-export interface AuthUser {
-  data?: User;
-  loading: boolean;
-  error?: string;
-}
-
 export interface AuthProps {
-  getCurrentUser: () => Promise<AuthUser>;
-  login: (user: User) => Promise<string | boolean>;
-  register: (user: User) => Promise<string | boolean>;
+  login: (user: LoginData) => Promise<string | boolean>;
+  register: (user: RegistrationData) => Promise<string | boolean>;
+  isAuthenticated: () => Promise<boolean>;
   logout: () => void;
 }

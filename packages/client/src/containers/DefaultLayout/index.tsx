@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <Container>
       <main>{children}</main>
-      {pathname === routes.home && (
+      {pathname === routes.login && (
         <footer>
           <Copyright />
         </footer>

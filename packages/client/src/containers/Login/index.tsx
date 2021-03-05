@@ -24,7 +24,7 @@ import {
 import { LoginInputs } from './Login.types';
 
 const Login = () => {
-  const auth = useAuth();
+  const { login } = useAuth();
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
@@ -36,15 +36,11 @@ const Login = () => {
   });
   const { register, handleSubmit, errors, reset } = useForm<LoginInputs>();
 
-  if (!auth) {
-    return null; // TODO: add page loader
-  }
-
   const onSubmit = async (values: LoginInputs) => {
     setLoading(true);
 
     try {
-      await auth.login(values);
+      await login(values);
       reset();
       history.push('/dashboard');
     } catch (error) {

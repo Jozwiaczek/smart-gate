@@ -1,7 +1,5 @@
 import { IsEmail, IsString } from 'class-validator';
 
-import { Role } from '../../auth/role.enum';
-
 export class CreateUserDto {
   @IsEmail()
   email: string;
@@ -9,9 +7,9 @@ export class CreateUserDto {
   @IsString()
   password: string;
 
-  roles: Array<Role>;
+  @IsString()
+  firstName: string;
 
-  firstName?: string | undefined;
-
-  lastName?: string | undefined;
+  @IsString()
+  lastName: string;
 }
