@@ -1,16 +1,21 @@
 import anime, { AnimeTimelineInstance } from 'animejs';
 import React, { createRef, RefObject, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
+import { useMediaDevice } from '../../hooks';
 import { LoaderBox, LoaderBoxItem, Wrapper } from './PageLoader.styled';
+import { PageLoaderProps } from './PageLoader.types';
 
-const PageLoader = () => {
+const PageLoader = ({ size }: PageLoaderProps) => {
   const animationRef = useRef<AnimeTimelineInstance>();
   const [targets, setTargets] = useState<Array<RefObject<HTMLDivElement>>>([]);
+  const { isMobile } = useMediaDevice();
 
-  const grid = useMemo(() => [17, 17], []);
-  const col = grid[0];
-  const row = grid[1];
-  const numberOfBoxItems = col * row;
+  let sizeInternal = isMobile ? 10 : 20;
+  if (size) {
+    sizeInternal = size;
+  }
+  const grid = useMemo(() => [sizeInternal, sizeInternal], [sizeInternal]);
+  const numberOfBoxItems = sizeInternal ** 2;
 
   const createBoxItems = useMemo(
     () =>
@@ -73,7 +78,7 @@ const PageLoader = () => {
 
   return (
     <Wrapper data-testid="pageLoader">
-      <LoaderBox>{createBoxItems}</LoaderBox>
+      <LoaderBox size={sizeInternal}>{createBoxItems}</LoaderBox>
     </Wrapper>
   );
 };

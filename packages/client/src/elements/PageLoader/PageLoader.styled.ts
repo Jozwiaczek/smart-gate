@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { LoaderBoxProps } from './PageLoader.types';
+
 export const Wrapper = styled.div`
   position: fixed;
   display: flex;
@@ -10,13 +12,13 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.background.default};
 `;
 
-export const LoaderBox = styled.div`
+export const LoaderBox = styled.div<LoaderBoxProps>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 17rem;
-  height: 17rem;
+  width: ${({ size }) => size}rem;
+  height: ${({ size }) => size}rem;
 `;
 
 export const LoaderBoxItem = styled.div`
