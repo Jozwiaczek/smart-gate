@@ -8,13 +8,12 @@ import { LazyLoading } from '../../interfaces/lazyLoading';
 import { RouteGuardProps } from './RouteGuard.types';
 
 const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => {
+  const { isAuthenticated } = useAuth();
   const [{ data, loading }, setLazyLoading] = useState<LazyLoading<boolean>>({
     error: false,
     loading: true,
     data: false,
   });
-
-  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     let isActive = true;
@@ -34,11 +33,15 @@ const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => 
     };
   }, [isAuthenticated]);
 
-  if (loading) {
+  if (true) {
     return <PageLoader />;
   }
 
-  return data ? <Route {...rest} /> : <Redirect to={{ pathname: redirectTo }} />;
+  if (data) {
+    return <Route {...rest} />;
+  }
+
+  return <Redirect to={{ pathname: redirectTo }} />;
 };
 
 export default RouteGuard;

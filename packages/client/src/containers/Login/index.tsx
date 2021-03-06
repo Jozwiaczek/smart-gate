@@ -34,17 +34,22 @@ const Login = () => {
     targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, reset } = useForm<LoginInputs>();
+  const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>();
+
+  const onBeforeSubmit = async () => {
+    const isValid = await trigger();
+    if (!isValid) {
+      triggerCardShake();
+    }
+  };
 
   const onSubmit = async (values: LoginInputs) => {
     setLoading(true);
-
     try {
       await login(values);
       reset();
       history.push('/dashboard');
     } catch (error) {
-      triggerCardShake();
       if (!error.response) {
         showSnackbar({ message: error.message, severity: 'error' });
       } else {
@@ -92,7 +97,13 @@ const Login = () => {
           />
           <ActionsContainer>
             <Checkbox name="keepMeLoggedIn" />
-            <StyledButton type="submit" fullWidth disabled={loading} withArrow>
+            <StyledButton
+              type="submit"
+              fullWidth
+              disabled={loading}
+              withArrow
+              onClick={onBeforeSubmit}
+            >
               Log in
             </StyledButton>
           </ActionsContainer>
