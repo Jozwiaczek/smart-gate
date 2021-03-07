@@ -48,65 +48,72 @@ const PageLoader = ({ size }: PageLoaderProps) => {
     [],
   );
 
+  const isMountedRefs = <T extends RefObject<HTMLElement>>(arr: Array<T>) =>
+    arr.every((el: T) => !!el.current);
+
   useLayoutEffect(() => {
-    anime
-      .timeline({
-        targets: targets.map((boxItem) => boxItem.current),
-        easing: 'easeInOutSine',
-        delay: anime.stagger(50),
-        loop: true,
-      })
-      .add({
-        translateX: [
-          { value: anime.stagger('-.1rem', { grid, from: 'center', axis: 'x' }) },
-          { value: anime.stagger('.1rem', { grid, from: 'center', axis: 'x' }) },
-        ],
-        translateY: [
-          { value: anime.stagger('-.1rem', { grid, from: 'center', axis: 'y' }) },
-          { value: anime.stagger('.1rem', { grid, from: 'center', axis: 'y' }) },
-        ],
-        duration: 1000,
-        scale: 0.5,
-        delay: anime.stagger(100, { grid, from: 'center' }),
-      })
-      .add({
-        translateX: anime.stagger('.25rem', { grid, from: 'center', axis: 'x' }),
-        translateY: anime.stagger('.25rem', { grid, from: 'center', axis: 'y' }),
-        rotate: 0,
-        scaleX: 2.5,
-        scaleY: 0.25,
-        delay: anime.stagger(4, { from: 'center' }),
-      })
-      .add({
-        rotate: anime.stagger([90, 0], { grid, from: 'center' }),
-        delay: anime.stagger(50, { grid, from: 'center' }),
-      })
-      .add({
-        translateX: 0,
-        translateY: 0,
-        scale: 0.5,
-        scaleX: 1,
-        rotate: 180,
-        duration: 1000,
-        delay: anime.stagger(100, { grid, from: 'center' }),
-      })
-      .add({
-        scaleY: 1,
-        scale: 1,
-        delay: anime.stagger(20, { grid, from: 'center' }),
-      });
+    if (isMountedRefs(targets)) {
+      anime
+        .timeline({
+          targets: targets.map((boxItem) => boxItem.current),
+          easing: 'easeInOutSine',
+          delay: anime.stagger(50),
+          loop: true,
+        })
+        .add({
+          translateX: [
+            { value: anime.stagger('-.1rem', { grid, from: 'center', axis: 'x' }) },
+            { value: anime.stagger('.1rem', { grid, from: 'center', axis: 'x' }) },
+          ],
+          translateY: [
+            { value: anime.stagger('-.1rem', { grid, from: 'center', axis: 'y' }) },
+            { value: anime.stagger('.1rem', { grid, from: 'center', axis: 'y' }) },
+          ],
+          duration: 1000,
+          scale: 0.5,
+          delay: anime.stagger(100, { grid, from: 'center' }),
+        })
+        .add({
+          translateX: anime.stagger('.25rem', { grid, from: 'center', axis: 'x' }),
+          translateY: anime.stagger('.25rem', { grid, from: 'center', axis: 'y' }),
+          rotate: 0,
+          scaleX: 2.5,
+          scaleY: 0.25,
+          delay: anime.stagger(4, { from: 'center' }),
+        })
+        .add({
+          rotate: anime.stagger([90, 0], { grid, from: 'center' }),
+          delay: anime.stagger(50, { grid, from: 'center' }),
+        })
+        .add({
+          translateX: 0,
+          translateY: 0,
+          scale: 0.5,
+          scaleX: 1,
+          rotate: 180,
+          duration: 1000,
+          delay: anime.stagger(100, { grid, from: 'center' }),
+        })
+        .add({
+          scaleY: 1,
+          scale: 1,
+          delay: anime.stagger(20, { grid, from: 'center' }),
+        });
+    }
   }, [grid, targets]);
 
   useLayoutEffect(() => {
     setTimeout(() => {
-      anime({
-        targets: loadingTargets.map((boxItem) => boxItem.current),
-        scale: [0, 1],
-        opacity: 1,
-        duration: 2000,
-        elasticity: 600,
-        delay: (el, i) => 45 * (i + 1),
-      });
+      if (isMountedRefs(loadingTargets)) {
+        anime({
+          targets: loadingTargets.map((boxItem) => boxItem.current),
+          scale: [0, 1],
+          opacity: 1,
+          duration: 2000,
+          elasticity: 600,
+          delay: (el, i) => 45 * (i + 1),
+        });
+      }
     }, 50);
   }, [loadingTargets]);
 

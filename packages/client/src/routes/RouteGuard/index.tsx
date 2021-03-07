@@ -33,7 +33,7 @@ const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => 
     };
   }, [isAuthenticated]);
 
-  if (true) {
+  if (loading) {
     return <PageLoader />;
   }
 
