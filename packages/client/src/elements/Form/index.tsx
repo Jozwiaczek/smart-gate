@@ -1,6 +1,6 @@
 import React, { Children, cloneElement, isValidElement, ReactElement, ReactNode } from 'react';
 
-import { Checkbox, TextField } from '../Inputs';
+import { Checkbox, TextField } from '../inputs';
 import { FormProps } from './Form.types';
 
 const formInputs: Array<ReactNode> = [Checkbox, TextField];

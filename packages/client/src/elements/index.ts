@@ -1,12 +1,10 @@
-export { default as AnimatedLogo } from './AnimatedLogo';
+export { AnimatedLogo, Spinner } from './animations';
 export { default as BackgroundSideLogo } from './BackgroundSideLogo';
-export { default as Button } from './Button';
+export { Button, IconButton } from './buttons';
 export { default as Card } from './Card';
 export { default as Copyright } from './Copyright';
 export { default as Form } from './Form';
-export { default as IconButton } from './IconButton';
-export { Checkbox, TextField } from './Inputs';
-export { default as LayoutContainer } from './LayoutContainer';
+export { Checkbox, TextField } from './inputs';
+export { DefaultLayout, LayoutContainer } from './layouts';
 export { default as Link } from './Link';
 export { default as Snackbar } from './Snackbar';
-export { default as Spinner } from './Spinner';
