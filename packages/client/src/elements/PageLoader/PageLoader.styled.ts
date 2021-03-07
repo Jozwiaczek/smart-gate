@@ -32,3 +32,14 @@ export const LoaderBoxItem = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.primary.main};
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
+
+export const LoadingLetter = styled.span`
+  overflow: hidden;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  display: inline-block;
+`;
+
+export const LoadingLabel = styled.h2`
+  letter-spacing: 5px;
+`;
