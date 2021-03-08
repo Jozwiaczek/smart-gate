@@ -103,18 +103,16 @@ const PageLoader = ({ size }: PageLoaderProps) => {
   }, [grid, targets]);
 
   useLayoutEffect(() => {
-    setTimeout(() => {
-      if (isMountedRefs(loadingTargets)) {
-        anime({
-          targets: loadingTargets.map((boxItem) => boxItem.current),
-          scale: [0, 1],
-          opacity: 1,
-          duration: 2000,
-          elasticity: 600,
-          delay: (el, i) => 45 * (i + 1),
-        });
-      }
-    }, 50);
+    if (isMountedRefs(loadingTargets)) {
+      anime({
+        targets: loadingTargets.map((boxItem) => boxItem.current),
+        scale: [0, 1],
+        opacity: 1,
+        duration: 2000,
+        elasticity: 600,
+        delay: (el, i) => 45 * (i + 1) + 500,
+      });
+    }
   }, [loadingTargets]);
 
   return (
