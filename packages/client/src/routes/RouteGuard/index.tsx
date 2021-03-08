@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { routes } from '../../constants';
 import { useAuth } from '../../hooks';
 import { LazyLoading } from '../../interfaces/lazyLoading';
-import { RouteGuardProps } from './routeGuard.types,d';
+import { RouteGuardProps } from './RouteGuard.types';
 
 const Loading = () => {
   return <p>loading</p>;
