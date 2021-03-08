@@ -54,13 +54,13 @@ export const StyledInput = styled.input<StyledInputProps>(
   color: ${showPassword ? palette.text.dark : palette.text.light};
   background: transparent;
   border: 1px solid transparent;
-  box-sizing: border-box;
   border-radius: ${sizes.borderRadius};
   outline: none;
   max-width: ${maxWidth};
   cursor: text;
   position: absolute;
   z-index: 1;
+  font-size: 16px;
   
   // Resolves issue with native background color on field autofill
   &:-webkit-autofill,

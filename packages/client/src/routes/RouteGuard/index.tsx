@@ -2,29 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 import { routes } from '../../constants';
+import { PageLoader } from '../../elements';
 import { useAuth } from '../../hooks';
 import { LazyLoading } from '../../interfaces/lazyLoading';
 import { RouteGuardProps } from './RouteGuard.types';
 
-const Loading = () => {
-  return <p>loading</p>;
-};
-
 const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => {
+  const { isAuthenticated } = useAuth();
   const [{ data, loading }, setLazyLoading] = useState<LazyLoading<boolean>>({
     error: false,
     loading: true,
     data: false,
   });
 
-  const { isAuthenticated } = useAuth();
-
   useEffect(() => {
     let isActive = true;
     isAuthenticated()
-      .then((isAuth) => {
+      .then((isUserLoaded) => {
         if (isActive) {
-          setLazyLoading((prev) => ({ ...prev, data: isAuth, loading: false }));
+          setLazyLoading((prev) => ({ ...prev, data: isUserLoaded, loading: false }));
         }
       })
       .catch(() => {
@@ -38,10 +34,14 @@ const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => 
   }, [isAuthenticated]);
 
   if (loading) {
-    return <Loading />;
+    return <PageLoader />;
   }
 
-  return <>{data ? <Route {...rest} /> : <Redirect to={{ pathname: redirectTo }} />}</>;
+  if (data) {
+    return <Route {...rest} />;
+  }
+
+  return <Redirect to={{ pathname: redirectTo }} />;
 };
 
 export default RouteGuard;

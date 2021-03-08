@@ -2,10 +2,10 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 
 import LockIcon from '../../../icons/LockIcon';
-import IconButton from './index';
+import IconButton from '.';
 
 export default {
-  title: 'Elements/buttons/IconButton',
+  title: 'Elements/buttons/Icon Button',
   component: IconButton,
 } as Meta;
 
