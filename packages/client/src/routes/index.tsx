@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { routes } from '../constants';
-import { Dashboard, DefaultLayout, Login, Registration } from '../containers';
+import { Dashboard, Login, Registration } from '../containers';
+import { DefaultLayout } from '../elements';
 import RouteGuard from './RouteGuard';
 
 const Routes = () => (
