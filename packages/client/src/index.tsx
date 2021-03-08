@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Providers from './providers';
-import Routes from './Routes';
+import Routes from './routes';
 import * as serviceWorkerRegistration from './serviceWorker/serviceWorkerRegistration';
 import reportWebVitals from './utils/reportWebVitals';
 
