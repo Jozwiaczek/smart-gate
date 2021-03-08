@@ -1,7 +1,7 @@
 import anime from 'animejs';
 import React, { createRef, RefObject, useLayoutEffect, useMemo, useState } from 'react';
 
-import { useMediaDevice } from '../../hooks';
+import { useMediaDevice } from '../../../hooks';
 import {
   LoaderBox,
   LoaderBoxItem,
