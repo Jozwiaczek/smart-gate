@@ -10,7 +10,7 @@ export const StyledActionsContainer = styled.div<ActionsContainerProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 0;
+  margin-top: 30px;
   flex-wrap: wrap;
   flex-direction: ${({ direction }) => direction};
 
