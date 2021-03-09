@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 
 import { routes } from '../../../constants';
 import { Copyright } from '../../index';
-import { Container } from './DefaultLayout.styled';
-import { DefaultLayoutProps } from './DefaultLayout.types';
+import { Container } from './GlobalLayout.styled';
+import { GlobalLayoutProps } from './GlobalLayout.types';
 
-const DefaultLayout = ({ children }: DefaultLayoutProps) => {
+const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   const { pathname } = useLocation();
 
   return (
@@ -21,4 +21,4 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   );
 };
 
-export default DefaultLayout;
+export default GlobalLayout;

@@ -3,24 +3,11 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { regex } from '../../constants';
-import {
-  AnimatedLogo,
-  BackgroundSideLogo,
-  Checkbox,
-  Form,
-  LayoutContainer,
-  Link,
-  TextField,
-} from '../../elements';
+import { AnimatedLogo, AuthLayout, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
-import {
-  ActionsContainer,
-  LinksContainer,
-  StyledButton,
-  StyledCard,
-  StyledEmailIcon,
-} from './Login.styled';
+import { EmailIcon } from '../../icons';
+import { StyledButton } from './Login.styled';
 import { LoginInputs } from './Login.types';
 
 const Login = () => {
@@ -61,63 +48,57 @@ const Login = () => {
     }
   };
 
+  console.log('test');
+
   return (
-    <LayoutContainer>
-      <BackgroundSideLogo />
-      <StyledCard ref={animatedCard.ref}>
-        <AnimatedLogo />
-        <Form
-          onSubmit={handleSubmit(onSubmit)}
-          errors={errors}
-          register={register}
-          loading={loading}
-        >
-          <TextField
-            autoFocus
-            required
-            name="email"
-            placeholder="Enter your email"
-            validation={{
-              pattern: {
-                value: regex.matchEmail,
-                message: 'Invalid email address.',
-              },
-            }}
-            startAdornment={<StyledEmailIcon />}
-          />
-          <TextField
-            required
-            name="password"
-            type="password"
-            validation={{
-              minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
-            }}
-            placeholder="Enter your password"
-            autoComplete="current-password"
-          />
-          <ActionsContainer>
-            <Checkbox name="keepMeLoggedIn" />
-            <StyledButton
-              type="submit"
-              fullWidth
-              disabled={loading}
-              withArrow
-              onClick={onBeforeSubmit}
-            >
-              Log in
-            </StyledButton>
-          </ActionsContainer>
-          <LinksContainer>
-            <Link to="/" colorVariant="grey">
-              Forgot password?
-            </Link>
-            <Link to="/registration" colorVariant="colour">
-              I don’t have an account
-            </Link>
-          </LinksContainer>
-        </Form>
-      </StyledCard>
-    </LayoutContainer>
+    <AuthLayout.Container ref={animatedCard.ref}>
+      <AnimatedLogo margin="10px 0" />
+      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} loading={loading}>
+        <TextField
+          autoFocus
+          required
+          name="email"
+          placeholder="Enter your email"
+          validation={{
+            pattern: {
+              value: regex.matchEmail,
+              message: 'Invalid email address.',
+            },
+          }}
+          startAdornment={<EmailIcon />}
+        />
+        <TextField
+          required
+          name="password"
+          type="password"
+          validation={{
+            minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
+          }}
+          placeholder="Enter your password"
+          autoComplete="current-password"
+        />
+        <AuthLayout.ActionsContainer direction="row">
+          <Checkbox name="keepMeLoggedIn" />
+          <StyledButton
+            type="submit"
+            fullWidth
+            disabled={loading}
+            withArrow
+            onClick={onBeforeSubmit}
+          >
+            Log in
+          </StyledButton>
+        </AuthLayout.ActionsContainer>
+      </Form>
+      <AuthLayout.ActionsContainer>
+        <Link to="/" colorVariant="grey">
+          Forgot password?
+        </Link>
+        <Link to="/registration" colorVariant="colour">
+          I don’t have an account
+        </Link>
+      </AuthLayout.ActionsContainer>
+    </AuthLayout.Container>
   );
 };
 

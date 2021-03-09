@@ -1,35 +1,6 @@
 import styled from 'styled-components';
 
-import { Button, Card } from '../../elements';
-import { EmailIcon } from '../../icons';
-
-export const LinksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 30px;
-  height: 50px;
-`;
-
-export const StyledCard = styled(Card)`
-  max-width: 500px;
-  width: 100%;
-  margin: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const ActionsContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-  flex-wrap: wrap;
-`;
+import { Button } from '../../elements';
 
 export const StyledButton = styled(Button)(
   ({ theme: { breakpoints, down } }) => `
@@ -43,7 +14,3 @@ export const StyledButton = styled(Button)(
   }
 `,
 );
-
-export const StyledEmailIcon = styled(EmailIcon)`
-  color: ${({ theme }) => theme.palette.colors.orange};
-`;

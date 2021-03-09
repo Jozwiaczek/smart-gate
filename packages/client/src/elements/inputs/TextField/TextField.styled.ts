@@ -13,6 +13,7 @@ export const InputAdornment = styled.span<InputAdornmentProps>`
   top: 44px;
   z-index: 2;
   ${({ position }) => `${position === 'start' ? 'left:' : 'right:'} ${inputBasePadding}px`};
+  color: ${({ theme }) => theme.palette.colors.orange};
   svg {
     font-size: ${inputAdornmentSize}px;
   }

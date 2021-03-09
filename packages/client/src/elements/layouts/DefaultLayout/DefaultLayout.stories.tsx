@@ -4,7 +4,7 @@ import React from 'react';
 import LayoutContainer from './index';
 
 export default {
-  title: 'Elements/layouts/Layout Container',
+  title: 'Elements/layouts/Default Layout',
   component: LayoutContainer,
 } as Meta;
 
