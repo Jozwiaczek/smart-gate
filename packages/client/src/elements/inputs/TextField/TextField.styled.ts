@@ -86,7 +86,7 @@ export const StyledInput = styled.input<StyledInputProps>(
   ${isError && `border: 1px solid ${palette.action.error}`};
   
   ::placeholder {
-    color: ${palette.text.light};
+    color: ${showPassword ? palette.text.dark : palette.text.light};
     opacity: 0.6;
   }
 `,
