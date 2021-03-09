@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LayoutContainer = styled.div`
+const DefaultLayout = styled.div`
   width: 100%;
   min-height: 100%;
   display: flex;
@@ -8,4 +8,4 @@ const LayoutContainer = styled.div`
   align-items: center;
 `;
 
-export default LayoutContainer;
+export default DefaultLayout;
