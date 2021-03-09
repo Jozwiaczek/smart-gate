@@ -18,3 +18,5 @@ export interface FormProps extends HTMLForm {
     rules?: RegisterOptions,
   ): void;
 }
+
+export type ValidationType = 'email' | 'required' | 'password';

@@ -83,7 +83,7 @@ export const StyledInput = styled.input<StyledInputProps>(
     border: 1px solid ${palette.text.secondary};
   }
   
-  ${isError && `border: 1px solid ${palette.action.error};`}
+  ${isError && `border: 1px solid ${palette.action.error}`};
   
   ::placeholder {
     color: ${palette.text.light};

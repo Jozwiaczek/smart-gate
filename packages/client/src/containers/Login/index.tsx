@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { regex } from '../../constants';
 import { AnimatedLogo, AuthLayout, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
@@ -56,25 +55,10 @@ const Login = () => {
           autoFocus
           required
           name="email"
-          placeholder="Enter your email"
-          validation={{
-            pattern: {
-              value: regex.matchEmail,
-              message: 'Invalid email address.',
-            },
-          }}
+          validationType="email"
           startAdornment={<EmailIcon />}
         />
-        <TextField
-          required
-          name="password"
-          type="password"
-          validation={{
-            minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
-          }}
-          placeholder="Enter your password"
-          autoComplete="current-password"
-        />
+        <TextField required name="password" type="password" validationType="password" />
         <AuthLayout.ActionsContainer direction="row">
           <Checkbox name="keepMeLoggedIn" />
           <StyledButton
