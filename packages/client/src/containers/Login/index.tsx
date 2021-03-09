@@ -48,8 +48,6 @@ const Login = () => {
     }
   };
 
-  console.log('test');
-
   return (
     <AuthLayout.Container ref={animatedCard.ref}>
       <AnimatedLogo margin="10px 0" />

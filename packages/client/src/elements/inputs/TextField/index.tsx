@@ -45,7 +45,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
           showPassword={isPassword && !isPasswordMasked}
           isStartAdornment={Boolean(internalStartAdornment)}
           isEndAdornment={Boolean(endAdornment)}
-          required={required}
+          isError={Boolean(error)}
           type={internalType}
           {...rest}
         />

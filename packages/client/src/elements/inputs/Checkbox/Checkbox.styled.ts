@@ -73,6 +73,10 @@ export const StyledInput = styled.input`
   height: 0;
   width: 0;
 
+  &:focus ~ ${Checkmark} {
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.text.secondary};
+  }
+
   &:checked ~ ${Checkmark}::after, &:checked ~ ${Checkmark} > svg {
     opacity: 1;
   }

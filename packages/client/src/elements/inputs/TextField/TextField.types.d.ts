@@ -33,6 +33,7 @@ export interface StyledInputProps extends InputHTMLAttributes<HTMLInputElement> 
   isStartAdornment?: boolean;
   isEndAdornment?: boolean;
   showPassword?: boolean;
+  isError?: boolean;
 }
 
 export interface TextFieldContainerProps {
