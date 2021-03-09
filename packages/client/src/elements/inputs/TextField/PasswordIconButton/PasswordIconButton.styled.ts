@@ -5,8 +5,10 @@ import IconButton from '../../../buttons/IconButton';
 const StyledIconButton = styled(IconButton)(
   ({ theme: { palette } }) => `
   position: absolute;
-  top: -5px;
+  top: -12px;
   right: -7px;
+  width: 45px;
+  height: 45px;
   .eye-lower {
     fill: none;
     stroke: ${palette.text.light};

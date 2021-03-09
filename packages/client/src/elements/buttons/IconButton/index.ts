@@ -30,6 +30,10 @@ const IconButton = styled.button(
   &:active {
     opacity: 0.75;
   }
+  
+  &:focus {
+    box-shadow: 0 0 0 1px ${theme.palette.text.primary};
+  }
 `,
 );
 

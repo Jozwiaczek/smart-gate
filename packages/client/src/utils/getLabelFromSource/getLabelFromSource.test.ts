@@ -1,28 +1,30 @@
-import index from './index';
+import getLabelFromSource from '.';
 
 describe('getLabelFromSource', () => {
+  const expectedResult = 'First name';
+
   it('returns label for camelCase string', () => {
-    const label = index('firstName');
-    expect(label).toEqual('First name');
+    const label = getLabelFromSource('firstName');
+    expect(label).toEqual(expectedResult);
   });
 
   it('returns label for pascalCase string', () => {
-    const label = index('FirstName');
-    expect(label).toEqual('First name');
-  });
-
-  it('returns same string for label string', () => {
-    const label = index('First name');
-    expect(label).toEqual('First name');
+    const label = getLabelFromSource('FirstName');
+    expect(label).toEqual(expectedResult);
   });
 
   it('returns label for lowerCase string with spaces', () => {
-    const label = index('first name');
-    expect(label).toEqual('First name');
+    const label = getLabelFromSource('first name');
+    expect(label).toEqual(expectedResult);
+  });
+
+  it('returns same string for label string', () => {
+    const label = getLabelFromSource('First name');
+    expect(label).toEqual(expectedResult);
   });
 
   it('returns empty string for empty string', () => {
-    const label = index('');
+    const label = getLabelFromSource('');
     expect(label).toEqual('');
   });
 });

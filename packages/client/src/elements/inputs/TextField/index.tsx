@@ -2,14 +2,25 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 
 import { LockIcon } from '../../../icons';
-import { getLabelFromSource } from '../../../utils';
+import { getLabelFromSource, getPlaceholderFromSource } from '../../../utils';
 import PasswordIconButton from './PasswordIconButton';
 import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
 import { ITextFieldProps, TextFieldProps } from './TextField.types';
 
 const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
   (
-    { startAdornment, endAdornment, error, name, label, required, maxWidth, type, ...rest },
+    {
+      placeholder,
+      startAdornment,
+      endAdornment,
+      error,
+      name,
+      label,
+      required,
+      maxWidth,
+      type,
+      ...rest
+    },
     ref,
   ) => {
     const [isPasswordMasked, setPasswordMasked] = useState(true);
@@ -45,8 +56,9 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
           showPassword={isPassword && !isPasswordMasked}
           isStartAdornment={Boolean(internalStartAdornment)}
           isEndAdornment={Boolean(endAdornment)}
-          required={required}
+          isError={Boolean(error)}
           type={internalType}
+          placeholder={placeholder || `Enter your ${getPlaceholderFromSource(name)}`}
           {...rest}
         />
         <Label htmlFor={name} isError={Boolean(error)} required={required}>

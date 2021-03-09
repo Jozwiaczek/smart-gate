@@ -2,8 +2,10 @@ import anime, { AnimeInstance } from 'animejs';
 import React, { useEffect, useRef } from 'react';
 
 import { SmartGateLogoIcon } from '../../../icons';
+import { AnimatedLogoWrapper } from './AnimatedLogo.styled';
+import { AnimatedLogoProps } from './AnimatedLogo.types';
 
-const AnimatedLogo = () => {
+const AnimatedLogo = ({ margin = '0' }: AnimatedLogoProps) => {
   const logoRef = useRef<SVGPathElement>(null);
   const animationRef = useRef<AnimeInstance>();
 
@@ -16,7 +18,11 @@ const AnimatedLogo = () => {
     });
   }, []);
 
-  return <SmartGateLogoIcon data-testid="animatedLogo" ref={logoRef} />;
+  return (
+    <AnimatedLogoWrapper margin={margin}>
+      <SmartGateLogoIcon data-testid="animatedLogo" ref={logoRef} />
+    </AnimatedLogoWrapper>
+  );
 };
 
 AnimatedLogo.displayName = 'AnimatedLogo';

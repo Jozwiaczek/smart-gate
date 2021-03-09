@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { regex, routes } from '../../constants';
+import { routes } from '../../constants';
 import { Button, Card, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import { UserIcon } from '../../icons';
@@ -59,17 +59,7 @@ const Registration = () => {
         >
           <TextField name="firstName" autoFocus />
           <TextField name="lastName" />
-          <TextField
-            name="email"
-            validation={{
-              pattern: {
-                value: regex.matchEmail,
-                message: 'Invalid email address.',
-              },
-            }}
-            startAdornment={<UserIcon />}
-            required
-          />
+          <TextField name="email" startAdornment={<UserIcon />} required />
           <TextField
             name="password"
             type="password"

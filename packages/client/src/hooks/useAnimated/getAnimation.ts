@@ -15,7 +15,7 @@ const getAnimation = (
   };
 
   const createAnimation = ({
-    duration: baseDuration = 500,
+    duration: baseDuration = 600,
     delay: baseDelay = 0,
     ...rest
   }: anime.AnimeParams) =>

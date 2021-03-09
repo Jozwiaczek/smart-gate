@@ -13,6 +13,7 @@ export const InputAdornment = styled.span<InputAdornmentProps>`
   top: 44px;
   z-index: 2;
   ${({ position }) => `${position === 'start' ? 'left:' : 'right:'} ${inputBasePadding}px`};
+  color: ${({ theme }) => theme.palette.colors.orange};
   svg {
     font-size: ${inputAdornmentSize}px;
   }
@@ -46,7 +47,14 @@ export const Label = styled.label<LabelProps>(
 );
 
 export const StyledInput = styled.input<StyledInputProps>(
-  ({ showPassword, maxWidth, isStartAdornment, isEndAdornment, theme: { palette, sizes } }) => `
+  ({
+    showPassword,
+    maxWidth,
+    isStartAdornment,
+    isError,
+    isEndAdornment,
+    theme: { palette, sizes },
+  }) => `
   padding: ${getInputPadding(isStartAdornment, isEndAdornment)};
   width: 100%;
   min-width: 250px;
@@ -71,8 +79,14 @@ export const StyledInput = styled.input<StyledInputProps>(
     -webkit-text-fill-color: ${showPassword ? palette.text.dark : palette.text.light};
   }
   
+  &:focus {
+    border: 1px solid ${palette.text.secondary};
+  }
+  
+  ${isError && `border: 1px solid ${palette.action.error}`};
+  
   ::placeholder {
-    color: ${palette.text.light};
+    color: ${showPassword ? palette.text.dark : palette.text.light};
     opacity: 0.6;
   }
 `,
@@ -109,8 +123,8 @@ export const Container = styled.div<TextFieldContainerProps>(
         : `
           height: 45px;
           width: 45px;
-          top: 33px;
-          left: calc(100% - 45px - 15px);
+          top: 32px;
+          left: calc(100% - 45px - 14px);
           bottom: 18px;
           right: 15px;
           border-radius: 50%;

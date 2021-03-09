@@ -56,6 +56,7 @@ export const StyledButton = styled.button<ButtonProps>(
 
   &:focus {
     outline: 0;
+    box-shadow: 0 0 0 1px ${palette.text.primary} inset;
   }
 
   // Overlay

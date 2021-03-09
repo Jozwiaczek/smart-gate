@@ -1,6 +1,8 @@
 import { DetailedHTMLProps, InputHTMLAttributes, ReactElement, ReactNode } from 'react';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
+import { ValidationType } from '../../Form/Form.types';
+
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   maxWidth?: string;
   error?: string;
@@ -10,6 +12,7 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   validation?: RegisterOptions;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  validationType?: ValidationType;
 }
 
 export type ITextFieldProps = DetailedHTMLProps<
@@ -33,6 +36,7 @@ export interface StyledInputProps extends InputHTMLAttributes<HTMLInputElement> 
   isStartAdornment?: boolean;
   isEndAdornment?: boolean;
   showPassword?: boolean;
+  isError?: boolean;
 }
 
 export interface TextFieldContainerProps {
