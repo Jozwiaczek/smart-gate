@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Smart Gate",
+  "name": "Smart Gate",
+  "description": "System for handling access to any physical entry gate",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +19,9 @@
       "sizes": "512x512"
     }
   ],
+  "categories": ["productivity", "security", "utilities"],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#257D69",
+  "background_color": "#22343C"
 }
