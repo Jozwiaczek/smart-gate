@@ -10,7 +10,15 @@ const checkIfExist = (value: any): boolean =>
   value && typeof value !== 'undefined' && typeof value !== null;
 
 const useLocalStorage = <T>(key: string, defaultValue: T): [T, (val: T) => void, () => void] => {
-  const [data, setData] = useState<T>(defaultValue);
+  const getInitValue = () => {
+    const localValue = window.localStorage.getItem(key);
+    if (localValue) {
+      return JSON.parse(localValue);
+    }
+    return defaultValue;
+  };
+
+  const [data, setData] = useState<T>(getInitValue());
 
   const set = useCallback(
     (newValue: T) => {
