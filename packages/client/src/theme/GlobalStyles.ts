@@ -37,11 +37,11 @@ const GlobalStyles = createGlobalStyle`
     
   }
   h1, h2, h3 {
-    line-height: 120px;
+    line-height: 120%;
   }
   
   h4, h5, h6, p {
-    line-height: 150px;
+    line-height: 150%;
   }
   
   h1 {

@@ -3,32 +3,42 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { Button, Card, Form, Link, TextField } from '../../elements';
+import { AuthLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
-import { UserIcon } from '../../icons';
-import { Container } from './Registration.styled';
+import useAnimated from '../../hooks/useAnimated';
+import { EmailIcon, UserIcon } from '../../icons';
+import { StyledButton, Title } from './Registration.styled';
 import { RegistrationInputs } from './Registration.types';
 
 const Registration = () => {
-  const showSnackbar = useSnackbar();
-  const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors, reset, trigger, getValues } = useForm<RegistrationInputs>(
-    {
-      mode: 'onBlur',
-    },
-  );
   const { register: registerUser } = useAuth();
+  const history = useHistory();
+  const showSnackbar = useSnackbar();
+  const [loading, setLoading] = useState(false);
+  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
+  const { trigger: triggerCardShake } = useAnimated({
+    type: 'shake',
+    targets: animatedCard.ref.current,
+    opt: { autoTrigger: false },
+  });
+  const {
+    register,
+    handleSubmit,
+    errors,
+    reset,
+    trigger,
+    getValues,
+  } = useForm<RegistrationInputs>();
+
+  const onBeforeSubmit = async () => {
+    const isValid = await trigger();
+    if (!isValid) {
+      triggerCardShake();
+    }
+  };
 
   const onSubmit = async (values: RegistrationInputs) => {
     setLoading(true);
-    const isValid = await trigger();
-
-    if (!isValid) {
-      setLoading(false);
-      return;
-    }
-
     try {
       // eslint-disable-next-line no-unused-vars
       const { confirmPassword, ...formValues } = values;
@@ -48,44 +58,44 @@ const Registration = () => {
   };
 
   return (
-    <Container>
-      <Card minWidth="500px">
-        <h1>Sign up</h1>
-        <Form
-          onSubmit={handleSubmit(onSubmit)}
-          errors={errors}
-          loading={loading}
-          register={register}
-        >
-          <TextField name="firstName" autoFocus />
-          <TextField name="lastName" />
-          <TextField name="email" startAdornment={<UserIcon />} required />
-          <TextField
-            name="password"
-            type="password"
-            validation={{
-              minLength: { value: 6, message: 'Password must contain at least 6 characters.' },
-            }}
-            required
-          />
-          <TextField
-            name="confirmPassword"
-            type="password"
-            validation={{
-              pattern: {
-                value: RegExp(getValues().password),
-                message: 'The password fields must match.',
-              },
-            }}
-            required
-          />
-          <Button type="submit" fullWidth disabled={loading} margin="30px 0 30px 0">
-            Sign Up
-          </Button>
-          <Link to="/">Already have an account? Sign in</Link>
-        </Form>
-      </Card>
-    </Container>
+    <AuthLayout.Container ref={animatedCard.ref}>
+      <Title>Registration</Title>
+      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
+        <TextField name="firstName" autoFocus required startAdornment={<UserIcon />} />
+        <TextField name="lastName" required startAdornment={<UserIcon />} />
+        <TextField name="email" validationType="email" startAdornment={<EmailIcon />} required />
+        <TextField name="password" type="password" validationType="password" required />
+        <TextField
+          name="confirmPassword"
+          type="password"
+          placeholder="Repeat your password"
+          validation={{
+            pattern: {
+              value: RegExp(getValues().password),
+              message: 'The password fields must match.',
+            },
+          }}
+          required
+        />
+        <AuthLayout.ActionsContainer>
+          <StyledButton
+            type="submit"
+            fullWidth
+            disabled={loading}
+            withArrow
+            onClick={onBeforeSubmit}
+          >
+            Create my account
+          </StyledButton>
+          <p>
+            Already have an account?&nbsp;
+            <Link to={routes.login} colorVariant="colour">
+              Log in
+            </Link>
+          </p>
+        </AuthLayout.ActionsContainer>
+      </Form>
+    </AuthLayout.Container>
   );
 };
 

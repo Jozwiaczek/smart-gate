@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { routes } from '../../constants';
 import { AnimatedLogo, AuthLayout, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
@@ -34,7 +35,7 @@ const Login = () => {
     try {
       await login(values);
       reset();
-      history.push('/dashboard');
+      history.push(routes.home);
     } catch (error) {
       if (!error.response) {
         showSnackbar({ message: error.message, severity: 'error' });
@@ -50,7 +51,7 @@ const Login = () => {
   return (
     <AuthLayout.Container ref={animatedCard.ref}>
       <AnimatedLogo margin="10px 0" />
-      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} loading={loading}>
+      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
           autoFocus
           required

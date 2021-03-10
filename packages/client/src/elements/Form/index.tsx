@@ -16,9 +16,9 @@ import { FormProps, ValidationType } from './Form.types';
 const formInputs: Array<ReactNode> = [Checkbox, TextField];
 const isFormInput = (child: ReactElement) => formInputs.includes(child.type);
 
-const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormProps) => (
-  <form onSubmit={onSubmit} style={{ width: '100%' }} noValidate {...rest}>
-    {Children.map(children, (child) => {
+const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormProps) => {
+  const adjustChildrenRecursively = (childrenList: ReactNode): ReactNode =>
+    Children.map(childrenList, (child) => {
       if (isValidElement(child)) {
         if (isFormInput(child)) {
           const { name, required, validation = {}, validationType } = child.props;
@@ -58,7 +58,6 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
             };
           }
 
-          // Form inputs
           return cloneElement(child, {
             error: fieldError?.message,
             ref: register(validation),
@@ -66,11 +65,23 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
           });
         }
 
-        // Other children
-        return child;
+        // Recursive function invoke for nested elements
+        if (child.props.children) {
+          return cloneElement(child, {
+            ...child.props,
+            children: adjustChildrenRecursively(child.props.children),
+          });
+        }
       }
-    })}
-  </form>
-);
+
+      return child;
+    });
+
+  return (
+    <form onSubmit={onSubmit} style={{ width: '100%' }} noValidate {...rest}>
+      {adjustChildrenRecursively(children)}
+    </form>
+  );
+};
 
 export default Form;
