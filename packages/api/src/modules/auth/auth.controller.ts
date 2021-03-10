@@ -61,7 +61,7 @@ export class AuthController {
     const loginUser: LoginUserDto = {
       email: newUser.email,
       keepMeLoggedIn: false,
-      password: '',
+      password: user.password,
     };
 
     const [genTokens] = await this.authService.login(loginUser);

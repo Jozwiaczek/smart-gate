@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { AuthLayout, Button, Form, Link, TextField } from '../../elements';
+import { AuthLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon, UserIcon } from '../../icons';
