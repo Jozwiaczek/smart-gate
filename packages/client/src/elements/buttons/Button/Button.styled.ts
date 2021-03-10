@@ -1,11 +1,46 @@
 import styled from 'styled-components';
 
 import { ThemeType } from '../../../theme/Theme';
-import { ButtonProps } from './Button.types';
+import { ButtonProps, HelperStyledFunction } from './Button.types';
 
 export const IconContainer = styled.div`
   margin-left: 8px;
 `;
+
+const getFontColor = ({
+  colorVariant,
+  palette: {
+    text: { light, dark },
+  },
+}: HelperStyledFunction) => {
+  switch (colorVariant) {
+    case 'blue':
+      return light;
+    case 'red':
+      return light;
+    case ThemeType.dark:
+      return light;
+    case ThemeType.light:
+      return dark;
+    default:
+      return dark;
+  }
+};
+
+const getBaseColor = ({ colorVariant, palette: { colors, primary } }: HelperStyledFunction) => {
+  switch (colorVariant) {
+    case 'blue':
+      return colors.blue;
+    case 'red':
+      return colors.red;
+    case ThemeType.dark:
+      return primary.dark;
+    case ThemeType.light:
+      return primary.light;
+    default:
+      return primary.dark;
+  }
+};
 
 export const StyledButton = styled.button<ButtonProps>(
   ({ colorVariant, fullWidth, margin, theme: { palette } }) => `
@@ -15,10 +50,8 @@ export const StyledButton = styled.button<ButtonProps>(
   position: relative;
   border-radius: 12px;
   font-size: 16px;
-  background-color: ${
-    colorVariant === ThemeType.light ? palette.primary.light : palette.primary.dark
-  };
-  color: ${colorVariant === ThemeType.light ? palette.text.dark : palette.text.light};
+  background-color: ${getBaseColor({ colorVariant, palette })};
+  color: ${getFontColor({ colorVariant, palette })};
   padding: 21px 14px;
   margin: ${margin};
   text-align: center;
