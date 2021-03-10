@@ -89,7 +89,7 @@ const Registration = () => {
           </StyledButton>
           <p>
             Already have an account?&nbsp;
-            <Link to={routes.login} colorVariant="colour">
+            <Link to={routes.login} colorVariant="colour" transition="glide-bottom">
               Log in
             </Link>
           </p>

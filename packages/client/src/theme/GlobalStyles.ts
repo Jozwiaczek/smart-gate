@@ -7,6 +7,11 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
   
+  // For page transitions
+  #root {
+    height: 100vh;
+  }
+  
   body {
     height: 100%;
     padding: 0;

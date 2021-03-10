@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { routes } from '../../constants';
 import { PageLoader } from '../../elements';
 import { useAuth } from '../../hooks';
 import { LazyLoading } from '../../interfaces/lazyLoading';
+import Route from '../Route';
 import { RouteGuardProps } from './RouteGuard.types';
 
 const RouteGuard = ({ redirectTo = routes.login, ...rest }: RouteGuardProps) => {

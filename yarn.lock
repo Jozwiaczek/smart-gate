@@ -15988,6 +15988,11 @@ react-textarea-autosize@^8.1.1:
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
 
+react-tiger-transition@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/react-tiger-transition/-/react-tiger-transition-4.1.2.tgz#ca1c47ee8a530c10d41a8883ec1a7239b021934b"
+  integrity sha512-x2oGhTeKgVwGP0QiGX88+UBtBjX9xUnU5lIeSre01bW2prOEmyW0VvHYyo8K8K51OwaZslJdmYeSgU26Sic/ZA==
+
 react-transition-group@^4.4.0, react-transition-group@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"

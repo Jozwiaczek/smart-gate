@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import { RouteAnimationsType } from '../../routes/routeAnimations/routeAnimations.type';
 import { ITheme } from '../../theme/Theme';
 
 export type LinkColorVariant = 'colour' | 'grey' | 'default' | string;
@@ -14,6 +15,7 @@ export interface LinkProps {
   asOuterLink?: boolean;
   to: string;
   children: ReactNode;
+  transition?: RouteAnimationsType;
 }
 
 export interface StyledLinkProps {

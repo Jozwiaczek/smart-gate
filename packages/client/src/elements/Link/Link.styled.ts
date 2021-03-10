@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-tiger-transition';
 import styled, { css } from 'styled-components';
 
 import { BaseLinkProps, GetLinkColorProps, StyledLinkProps } from './Link.types';

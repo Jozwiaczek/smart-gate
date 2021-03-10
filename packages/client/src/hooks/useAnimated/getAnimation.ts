@@ -7,22 +7,12 @@ const getAnimation = (
   { targets, duration, delay, maxDebounceSize }: GetAnimationOptions,
   autoplay = true,
 ) => {
-  const baseConfig = {
-    targets,
-    duration,
-    autoplay,
-    delay,
-  };
-
-  const createAnimation = ({
-    duration: baseDuration = 600,
-    delay: baseDelay = 0,
-    ...rest
-  }: anime.AnimeParams) =>
+  const createAnimation = ({ ...rest }: anime.AnimeParams) =>
     anime({
-      ...baseConfig,
-      duration: baseDuration,
-      delay: baseDelay,
+      targets,
+      autoplay,
+      duration: duration || 600,
+      delay: delay || 0,
       ...rest,
     });
 

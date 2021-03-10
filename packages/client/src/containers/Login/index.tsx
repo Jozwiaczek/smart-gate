@@ -74,10 +74,10 @@ const Login = () => {
         </AuthLayout.ActionsContainer>
       </Form>
       <AuthLayout.ActionsContainer>
-        <Link to="/" colorVariant="grey">
+        <Link to={routes.home} colorVariant="grey" transition="glide-right">
           Forgot password?
         </Link>
-        <Link to="/registration" colorVariant="colour">
+        <Link to={routes.registration} colorVariant="colour" transition="glide-top">
           I don’t have an account
         </Link>
       </AuthLayout.ActionsContainer>

@@ -51,7 +51,11 @@ export const getTheme = (themeType: ThemeType) => ({
     divider: {
       default: themeType === ThemeType.light ? '#EAECED' : '#30444E',
     },
-    boxShadow: '0 10px 34px rgba(23, 75, 83, 0.1)',
+    boxShadow: `0 1px 1px rgba(0,0,0,0.06), 
+              0 2px 2px rgba(0,0,0,0.06), 
+              0 4px 4px rgba(0,0,0,0.06), 
+              0 8px 8px rgba(0,0,0,0.06),
+              0 16px 16px rgba(0,0,0,0.06)`,
     labelOpacity: 0.7,
   },
   up: (breakpoint: number, vertical = false) =>

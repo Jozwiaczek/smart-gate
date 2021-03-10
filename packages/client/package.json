@@ -30,6 +30,8 @@
     "react-hook-form": "^6.14.1",
     "react-i18next": "^11.8.8",
     "react-router-dom": "^5.2.0",
+    "react-tiger-transition": "^4.1.2",
+    "react-transition-group": "^4.4.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
