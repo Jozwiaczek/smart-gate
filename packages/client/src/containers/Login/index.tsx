@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
@@ -14,6 +15,7 @@ const Login = () => {
   const { login } = useAuth();
   const history = useHistory();
   const showSnackbar = useSnackbar();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
   const { trigger: triggerCardShake } = useAnimated({
@@ -59,9 +61,15 @@ const Login = () => {
           validationType="email"
           startAdornment={<EmailIcon />}
         />
-        <TextField required name="password" type="password" validationType="password" />
+        <TextField
+          required
+          name="password"
+          type="password"
+          validationType="password"
+          label={t('user.password')}
+        />
         <AuthLayout.ActionsContainer direction="row">
-          <Checkbox name="keepMeLoggedIn" />
+          <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
           <StyledButton
             type="submit"
             fullWidth
@@ -69,16 +77,16 @@ const Login = () => {
             withArrow
             onClick={onBeforeSubmit}
           >
-            Log in
+            {t('routes.login.login')}
           </StyledButton>
         </AuthLayout.ActionsContainer>
       </Form>
       <AuthLayout.ActionsContainer>
         <Link to="/" colorVariant="grey">
-          Forgot password?
+          {t('routes.login.forgotPassword')}
         </Link>
         <Link to="/registration" colorVariant="colour">
-          I don’t have an account
+          {t('routes.login.register')}
         </Link>
       </AuthLayout.ActionsContainer>
     </AuthLayout.Container>
