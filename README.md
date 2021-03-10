@@ -137,7 +137,7 @@ To run script, in terminal type `yarn {script}`.
 
 ## License
 
-Copyright 2020 Intent.
+Copyright 2020 Jakub Jóźwiak.
 Licensed under the [MIT license](LICENSE).
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_large)
