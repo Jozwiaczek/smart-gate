@@ -7,6 +7,25 @@ const pl: TranslationStructure = {
       lastName: 'Nazwisko',
       password: 'Hasło',
     },
+    form: {
+      inputs: {
+        defaultPlaceholderBase: 'Wpisz',
+        confirmPassword: 'Potwierdź hasło',
+        repeatPassword: 'Powtórz hasło',
+      },
+      validation: {
+        required: 'Pole wymagane',
+        invalidEmail: 'Nieprawidłowy adres email',
+        basePassword: 'Hasło musi zawierać przynajmniej',
+        characters: 'znaków',
+        letter: 'litere',
+        lowercaseLetter: 'małą litere',
+        uppercaseLetter: 'dużą litere',
+        number: 'liczbe',
+        specialCharacter: 'znak specjalny',
+        repeatPasswordError: 'Podane hasła muszą się zgadzać',
+      },
+    },
     routes: {
       dashboard: {
         logout: 'Wyloguj się',
@@ -16,15 +35,14 @@ const pl: TranslationStructure = {
         forgotPassword: 'Zapomniałem hasła',
         register: 'Nie mam konta',
         login: 'Zaloguj',
+        onSubmitError: 'Błąd rejestracji',
       },
       registration: {
         title: 'Rejestracja',
         createAccount: 'Utwórz konto',
         alreadyHaveAccount: 'Masz już konto?',
         login: 'Zaloguj',
-        confirmPassword: 'Potwierdź hasło',
-        repeatPassword: 'Powtórz hasło',
-        repeatPasswordError: 'Podane hasła muszą się zgadzać',
+        onSubmitError: 'Błąd logowania',
       },
     },
   },

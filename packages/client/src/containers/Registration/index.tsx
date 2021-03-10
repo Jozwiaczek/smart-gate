@@ -48,12 +48,7 @@ const Registration = () => {
       reset();
       history.push(routes.home);
     } catch (error) {
-      if (!error.response) {
-        showSnackbar({ message: error.message, severity: 'error' });
-      } else {
-        const { message } = error.response.data;
-        showSnackbar({ message, severity: 'error' });
-      }
+      showSnackbar({ message: t('routes.registration.onSubmitError'), severity: 'error' });
     } finally {
       setLoading(false);
     }
@@ -85,13 +80,13 @@ const Registration = () => {
           required
         />
         <TextField
-          name={t('routes.registration.confirmPassword')}
+          name={t('form.inputs.confirmPassword')}
           type="password"
-          placeholder={t('routes.registration.repeatPassword')}
+          placeholder={t('form.inputs.repeatPassword')}
           validation={{
             pattern: {
               value: RegExp(getValues().password),
-              message: t('routes.registration.repeatPasswordError'),
+              message: t('form.validation.repeatPasswordError'),
             },
           }}
           required

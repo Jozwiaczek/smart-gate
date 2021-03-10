@@ -39,12 +39,7 @@ const Login = () => {
       reset();
       history.push(routes.home);
     } catch (error) {
-      if (!error.response) {
-        showSnackbar({ message: error.message, severity: 'error' });
-      } else {
-        const { message } = error.response.data;
-        showSnackbar({ message, severity: 'error' });
-      }
+      showSnackbar({ message: t('routes.login.onSubmitError'), severity: 'error' });
     } finally {
       setLoading(false);
     }

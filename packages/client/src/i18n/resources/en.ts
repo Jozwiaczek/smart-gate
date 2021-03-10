@@ -5,6 +5,25 @@ const en = {
       lastName: 'Last name',
       password: 'Password',
     },
+    form: {
+      inputs: {
+        defaultPlaceholderBase: 'Wpisz',
+        confirmPassword: 'Confirm password',
+        repeatPassword: 'Repeat your password',
+      },
+      validation: {
+        required: 'Required',
+        invalidEmail: 'Invalid email address',
+        basePassword: 'Password must contain at least',
+        characters: 'characters',
+        letter: 'letter',
+        lowercaseLetter: 'lowercase letter',
+        uppercaseLetter: 'uppercase letter',
+        number: 'number',
+        specialCharacter: 'special character',
+        repeatPasswordError: 'The password fields must match',
+      },
+    },
     routes: {
       dashboard: {
         logout: 'Logout',
@@ -14,15 +33,14 @@ const en = {
         forgotPassword: 'Forgot password',
         register: "I don't have an account",
         login: 'Log in',
+        onSubmitError: 'Login error',
       },
       registration: {
         title: 'Registration',
         createAccount: 'Create my account',
         alreadyHaveAccount: 'Already have an account?',
         login: 'Log in',
-        confirmPassword: 'Confirm password',
-        repeatPassword: 'Repeat your password',
-        repeatPasswordError: 'The password fields must match.',
+        onSubmitError: 'Registration error',
       },
     },
   },
