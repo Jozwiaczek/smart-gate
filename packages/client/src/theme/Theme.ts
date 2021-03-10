@@ -3,6 +3,12 @@ export enum ThemeType {
   dark = 'dark',
 }
 
+const getBoxShadow = (strength: number): string => `0 1px 1px rgba(0,0,0,${strength}),
+              0 2px 2px rgba(0,0,0,${strength}),
+              0 4px 4px rgba(0,0,0,${strength}),
+              0 8px 8px rgba(0,0,0,${strength}),
+              0 16px 16px rgba(0,0,0,${strength})`;
+
 export const getTheme = (themeType: ThemeType) => ({
   type: themeType,
   breakpoints: {
@@ -18,6 +24,7 @@ export const getTheme = (themeType: ThemeType) => ({
   palette: {
     primary: {
       main: themeType === ThemeType.light ? '#3ED598' : '#257D69',
+      mainInvert: themeType === ThemeType.light ? '#257D69' : '#3ED598',
       light: '#3ED598',
       dark: '#257D69',
       linear: 'linear-gradient(180deg, #257D69 17.63%, #40DF9F 78.98%)',
@@ -51,11 +58,12 @@ export const getTheme = (themeType: ThemeType) => ({
     divider: {
       default: themeType === ThemeType.light ? '#EAECED' : '#30444E',
     },
-    boxShadow: `0 1px 1px rgba(0,0,0,0.06), 
-              0 2px 2px rgba(0,0,0,0.06), 
-              0 4px 4px rgba(0,0,0,0.06), 
-              0 8px 8px rgba(0,0,0,0.06),
-              0 16px 16px rgba(0,0,0,0.06)`,
+    boxShadow: {
+      default: getBoxShadow(0.04),
+      small: getBoxShadow(0.02),
+      big: getBoxShadow(0.08),
+      getBoxShadow,
+    },
     labelOpacity: 0.7,
   },
   up: (breakpoint: number, vertical = false) =>

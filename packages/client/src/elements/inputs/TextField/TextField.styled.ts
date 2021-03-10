@@ -31,9 +31,9 @@ export const Label = styled.label<LabelProps>(
   color: ${isError ? palette.action.error : palette.text.secondary};
   border-color: ${isError ? palette.action.error : palette.text.primary};
   pointer-events: none;
-  transition: top, font-size, left;
+  transition: top, font-size, left, color;
   transition-duration: 150ms;
-  transition-timing-function: ease-in;
+  transition-timing-function: ease-in-out;
   ${
     required &&
     `
@@ -80,7 +80,7 @@ export const StyledInput = styled.input<StyledInputProps>(
   }
   
   &:focus {
-    border: 1px solid ${palette.text.secondary};
+    border: 2px solid ${palette.primary.light};
   }
   
   ${isError && `border: 1px solid ${palette.action.error}`};
@@ -133,7 +133,7 @@ export const Container = styled.div<TextFieldContainerProps>(
   }
   &:before {
     content: '';
-    box-shadow: ${palette.boxShadow};
+    box-shadow: ${palette.boxShadow.small};
     position: absolute;
     background: ${palette.primary.light};
     border-radius: ${sizes.borderRadius};
@@ -148,6 +148,10 @@ export const Container = styled.div<TextFieldContainerProps>(
   }
 
   & input:focus + label {
+    color: ${palette.text.primary};
+  }
+  
+  & input:hover + label {
     color: ${palette.text.primary};
   }
 `,

@@ -6,11 +6,18 @@ export const CheckboxLabel = styled.label<CheckboxLabelProps>`
   display: flex;
   align-items: center;
   height: 26px;
-  color: ${({ theme }) => theme.palette.text.secondary};
   position: relative;
   padding-left: 36px;
   cursor: pointer;
   user-select: none;
+
+  p {
+    transition: color;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    color: ${({ theme }) => theme.palette.text.secondary};
+  }
+
   ${({ required, theme }) =>
     required &&
     `
@@ -74,7 +81,12 @@ export const StyledInput = styled.input`
   width: 0;
 
   &:focus ~ ${Checkmark} {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.text.secondary};
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.primary.light};
+  }
+
+  &:hover ~ p,
+  &:active ~ p {
+    color: ${({ theme }) => theme.palette.text.primary};
   }
 
   &:checked ~ ${Checkmark}::after, &:checked ~ ${Checkmark} > svg {

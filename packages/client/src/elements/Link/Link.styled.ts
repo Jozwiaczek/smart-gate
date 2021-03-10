@@ -3,15 +3,39 @@ import styled, { css } from 'styled-components';
 
 import { BaseLinkProps, GetLinkColorProps, StyledLinkProps } from './Link.types';
 
-const getLinkColor = ({ $colorVariant, theme }: GetLinkColorProps) => {
+const getLinkColor = ({
+  $colorVariant,
+  theme: {
+    palette: { text, primary },
+  },
+}: GetLinkColorProps) => {
   switch ($colorVariant) {
     case 'default':
-      return theme.palette.text.primary;
+      return text.primary;
     case 'colour':
-      return theme.palette.primary.main;
+      return primary.main;
 
     case 'grey':
-      return theme.palette.text.secondary;
+      return text.secondary;
+    default:
+      return $colorVariant;
+  }
+};
+
+const getHoverLinkColor = ({
+  $colorVariant,
+  theme: {
+    palette: { text, primary },
+  },
+}: GetLinkColorProps) => {
+  switch ($colorVariant) {
+    case 'default':
+      return text.secondary;
+    case 'colour':
+      return primary.mainInvert;
+
+    case 'grey':
+      return text.primary;
     default:
       return $colorVariant;
   }
@@ -19,6 +43,7 @@ const getLinkColor = ({ $colorVariant, theme }: GetLinkColorProps) => {
 
 const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
   color: ${getLinkColor};
+  transition: color 150ms ease-in-out;
 
   &:disabled {
     color: ${palette.action.disabled};
@@ -28,7 +53,7 @@ const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
 
   &:hover,
   &:active {
-    color: ${getLinkColor};
+    color: ${getHoverLinkColor};
   }
 `;
 
