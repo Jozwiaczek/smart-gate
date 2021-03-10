@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
@@ -7,11 +8,13 @@ import { AuthLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon, UserIcon } from '../../icons';
+import { onlyOnDevEnv } from '../../utils';
 import { StyledButton, Title } from './Registration.styled';
 import { RegistrationInputs } from './Registration.types';
 
 const Registration = () => {
   const { register: registerUser } = useAuth();
+  const { t } = useTranslation();
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
@@ -46,12 +49,8 @@ const Registration = () => {
       reset();
       history.push(routes.home);
     } catch (error) {
-      if (!error.response) {
-        showSnackbar({ message: error.message, severity: 'error' });
-      } else {
-        const { message } = error.response.data;
-        showSnackbar({ message, severity: 'error' });
-      }
+      onlyOnDevEnv(() => console.error(error));
+      showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
     } finally {
       setLoading(false);
     }
@@ -59,20 +58,37 @@ const Registration = () => {
 
   return (
     <AuthLayout.Container ref={animatedCard.ref}>
-      <Title>Registration</Title>
+      <Title>{t('routes.registration.title')}</Title>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextField name="firstName" autoFocus required startAdornment={<UserIcon />} />
-        <TextField name="lastName" required startAdornment={<UserIcon />} />
-        <TextField name="email" validationType="email" startAdornment={<EmailIcon />} required />
-        <TextField name="password" type="password" validationType="password" required />
         <TextField
-          name="confirmPassword"
+          name="firstName"
+          label={t('user.firstName')}
+          autoFocus
+          required
+          startAdornment={<UserIcon />}
+        />
+        <TextField
+          name="lastName"
+          label={t('user.lastName')}
+          required
+          startAdornment={<UserIcon />}
+        />
+        <TextField name="email" validationType="email" startAdornment={<EmailIcon />} required />
+        <TextField
+          name="password"
+          label={t('user.password')}
           type="password"
-          placeholder="Repeat your password"
+          validationType="password"
+          required
+        />
+        <TextField
+          name={t('form.inputs.confirmPassword')}
+          type="password"
+          placeholder={t('form.inputs.repeatPassword')}
           validation={{
             pattern: {
               value: RegExp(getValues().password),
-              message: 'The password fields must match.',
+              message: t('form.validation.repeatPasswordError'),
             },
           }}
           required
@@ -85,12 +101,12 @@ const Registration = () => {
             withArrow
             onClick={onBeforeSubmit}
           >
-            Create my account
+            {t('routes.registration.createAccount')}
           </StyledButton>
           <p>
-            Already have an account?&nbsp;
+            {t('routes.registration.alreadyHaveAccount')}&nbsp;
             <Link to={routes.login} colorVariant="colour">
-              Log in
+              {t('routes.registration.login')}
             </Link>
           </p>
         </AuthLayout.ActionsContainer>

@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 
 import { LockIcon } from '../../../icons';
@@ -23,6 +24,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     },
     ref,
   ) => {
+    const { t } = useTranslation();
     const [isPasswordMasked, setPasswordMasked] = useState(true);
     const [internalType, setInternalType] = useState(type);
     const theme = useTheme();
@@ -58,7 +60,10 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
           isEndAdornment={Boolean(endAdornment)}
           isError={Boolean(error)}
           type={internalType}
-          placeholder={placeholder || `Enter your ${getPlaceholderFromSource(name)}`}
+          placeholder={
+            placeholder ||
+            `${t('form.inputs.defaultPlaceholderBase')} ${getPlaceholderFromSource(label || name)}`
+          }
           {...rest}
         />
         <Label htmlFor={name} isError={Boolean(error)} required={required}>
