@@ -8,6 +8,7 @@ import { AuthLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon, UserIcon } from '../../icons';
+import { onlyOnDevEnv } from '../../utils';
 import { StyledButton, Title } from './Registration.styled';
 import { RegistrationInputs } from './Registration.types';
 
@@ -48,7 +49,8 @@ const Registration = () => {
       reset();
       history.push(routes.home);
     } catch (error) {
-      showSnackbar({ message: t('routes.registration.onSubmitError'), severity: 'error' });
+      onlyOnDevEnv(() => console.error(error));
+      showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
     } finally {
       setLoading(false);
     }

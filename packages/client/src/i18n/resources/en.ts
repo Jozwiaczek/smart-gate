@@ -6,6 +6,9 @@ const en = {
       password: 'Password',
     },
     form: {
+      errors: {
+        onSubmitError: 'Oops! Something went wrong. Operation failed.',
+      },
       inputs: {
         defaultPlaceholderBase: 'Wpisz',
         confirmPassword: 'Confirm password',
@@ -33,14 +36,12 @@ const en = {
         forgotPassword: 'Forgot password',
         register: "I don't have an account",
         login: 'Log in',
-        onSubmitError: 'Login error',
       },
       registration: {
         title: 'Registration',
         createAccount: 'Create my account',
         alreadyHaveAccount: 'Already have an account?',
         login: 'Log in',
-        onSubmitError: 'Registration error',
       },
     },
   },

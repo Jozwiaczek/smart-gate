@@ -8,6 +8,9 @@ const pl: TranslationStructure = {
       password: 'Hasło',
     },
     form: {
+      errors: {
+        onSubmitError: 'Oops! Coś poszło nie tak.',
+      },
       inputs: {
         defaultPlaceholderBase: 'Wpisz',
         confirmPassword: 'Potwierdź hasło',
@@ -35,14 +38,12 @@ const pl: TranslationStructure = {
         forgotPassword: 'Zapomniałem hasła',
         register: 'Nie mam konta',
         login: 'Zaloguj',
-        onSubmitError: 'Błąd rejestracji',
       },
       registration: {
         title: 'Rejestracja',
         createAccount: 'Utwórz konto',
         alreadyHaveAccount: 'Masz już konto?',
         login: 'Zaloguj',
-        onSubmitError: 'Błąd logowania',
       },
     },
   },

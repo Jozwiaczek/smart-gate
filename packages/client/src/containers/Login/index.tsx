@@ -8,6 +8,7 @@ import { AnimatedLogo, AuthLayout, Checkbox, Form, Link, TextField } from '../..
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon } from '../../icons';
+import { onlyOnDevEnv } from '../../utils';
 import { StyledButton } from './Login.styled';
 import { LoginInputs } from './Login.types';
 
@@ -39,7 +40,8 @@ const Login = () => {
       reset();
       history.push(routes.home);
     } catch (error) {
-      showSnackbar({ message: t('routes.login.onSubmitError'), severity: 'error' });
+      onlyOnDevEnv(() => console.error(error));
+      showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
     } finally {
       setLoading(false);
     }
