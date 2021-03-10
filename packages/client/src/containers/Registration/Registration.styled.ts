@@ -6,7 +6,7 @@ export const Title = styled.h1(
   ({ theme: { breakpoints, down } }) => `
   margin: 30px 0;
   ${down(breakpoints.xs)} {
-    font-size: 40px;  
+    font-size: 40px;
   }
 `,
 );
