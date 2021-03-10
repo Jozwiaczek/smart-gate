@@ -10,7 +10,7 @@ const en = {
         onSubmitError: 'Oops! Something went wrong. Operation failed.',
       },
       inputs: {
-        defaultPlaceholderBase: 'Wpisz',
+        defaultPlaceholderBase: 'Enter',
         confirmPassword: 'Confirm password',
         repeatPassword: 'Repeat your password',
       },
