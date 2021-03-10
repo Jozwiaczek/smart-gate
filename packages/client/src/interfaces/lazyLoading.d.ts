@@ -1,5 +1,5 @@
+export type STATE = 'loading' | 'error' | 'data';
 export interface LazyLoading<T> {
-  loading: boolean;
+  state: STATE;
   data: T;
-  error: boolean;
 }
