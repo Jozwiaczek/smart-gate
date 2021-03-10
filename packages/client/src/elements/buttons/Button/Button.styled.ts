@@ -54,7 +54,7 @@ export const StyledButton = styled.button<ButtonProps>(
   :hover {
     box-shadow: ${palette.boxShadow.big};
     svg {
-      transform: translateX(3px); 
+      transform: translateX(3px);
       transition: transform 150ms ease-in-out;
     }
   }
