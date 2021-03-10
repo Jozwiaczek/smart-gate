@@ -1,7 +1,7 @@
 import 'react-tiger-transition/styles/main.min.css';
 import './routeAnimations';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Navigation } from 'react-tiger-transition';
 
@@ -12,12 +12,10 @@ import Route from './Route';
 import RouteGuard from './RouteGuard';
 
 const Routes = () => {
-  // use to resolve findDOMNode error message
-  const nodeRef = useRef(null);
   return (
     <BrowserRouter>
       <GlobalLayout>
-        <Navigation globalTransitionProps={{ nodeRef }}>
+        <Navigation>
           <Route exact path={routes.registration}>
             <Registration />
           </Route>
