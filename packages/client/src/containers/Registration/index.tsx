@@ -58,7 +58,10 @@ const Registration = () => {
   };
 
   return (
-    <AuthLayout.Container ref={animatedCard.ref}>
+    <AuthLayout.Container
+      ref={animatedCard.ref}
+      back={{ to: routes.login, withTransition: 'glide-bottom' }}
+    >
       <Title>Registration</Title>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField name="firstName" autoFocus required startAdornment={<UserIcon />} />
