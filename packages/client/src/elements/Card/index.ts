@@ -5,7 +5,7 @@ import { CardProps } from './Card.types';
 const Card = styled.div<CardProps>(
   ({ theme: { sizes, palette, breakpoints, down } }) => `
   background: ${palette.background.paper};
-  box-shadow: ${palette.boxShadow};
+  box-shadow: ${palette.boxShadow.default};
   border-radius: ${sizes.borderRadius};
   padding: 50px;
   ${down(breakpoints.sm)} {
