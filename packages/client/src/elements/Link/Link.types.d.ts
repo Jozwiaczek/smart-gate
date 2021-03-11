@@ -10,7 +10,13 @@ export interface GetLinkColorProps {
   $colorVariant?: LinkColorVariant;
 }
 
-export interface LinkProps {
+interface BaseProps {
+  $fullWidth?: boolean;
+  $asButton?: boolean;
+  children: ReactNode;
+}
+
+export interface LinkProps extends BaseProps {
   colorVariant?: LinkColorVariant;
   asOuterLink?: boolean;
   to: string;
@@ -18,13 +24,12 @@ export interface LinkProps {
   transition?: RouteAnimationsType;
 }
 
-export interface StyledLinkProps {
+export interface StyledLinkProps extends BaseProps {
   $colorVariant?: LinkColorVariant;
   to: string;
-  children: ReactNode;
 }
 
-export interface BaseLinkProps {
+export interface BaseLinkProps extends BaseProps {
   theme: ITheme;
   $colorVariant?: LinkColorVariant;
 }

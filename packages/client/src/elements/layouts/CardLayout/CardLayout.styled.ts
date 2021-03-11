@@ -4,7 +4,7 @@ import { ArrowIcon } from '../../../icons';
 import { Card } from '../../index';
 import Link from '../../Link';
 import { StyledLink, StyledOutLink } from '../../Link/Link.styled';
-import { ActionsContainerProps } from './AuthLayout.types';
+import { ActionsContainerProps } from './CardLayout.types';
 
 export const StyledActionsContainer = styled.div<ActionsContainerProps>`
   width: 100%;
@@ -27,12 +27,20 @@ export const StyledCard = styled(Card)`
   flex-direction: column;
   align-items: center;
   position: relative;
+  text-align: center;
 `;
 
 export const CardWrapper = styled.div`
   max-width: 500px;
   width: 100%;
   margin: 15px;
+`;
+
+export const CardContentWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const BackLinkWrapper = styled.div`

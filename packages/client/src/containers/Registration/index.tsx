@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { AuthLayout, Form, Link, TextField } from '../../elements';
+import { CardLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon, UserIcon } from '../../icons';
@@ -18,10 +18,8 @@ const Registration = () => {
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
-  const { trigger: triggerCardShake } = useAnimated({
+  const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
     type: 'shake',
-    targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
   const {
@@ -57,8 +55,8 @@ const Registration = () => {
   };
 
   return (
-    <AuthLayout.Container
-      ref={animatedCard.ref}
+    <CardLayout.Container
+      ref={animatedCardRef}
       back={{ to: routes.login, withTransition: 'glide-bottom' }}
     >
       <Title>{t('routes.registration.title')}</Title>
@@ -96,7 +94,7 @@ const Registration = () => {
           }}
           required
         />
-        <AuthLayout.ActionsContainer>
+        <CardLayout.ActionsContainer>
           <StyledButton
             type="submit"
             fullWidth
@@ -112,9 +110,9 @@ const Registration = () => {
               {t('routes.registration.login')}
             </Link>
           </p>
-        </AuthLayout.ActionsContainer>
+        </CardLayout.ActionsContainer>
       </Form>
-    </AuthLayout.Container>
+    </CardLayout.Container>
   );
 };
 

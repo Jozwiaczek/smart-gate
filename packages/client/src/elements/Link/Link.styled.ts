@@ -41,9 +41,16 @@ const getHoverLinkColor = ({
   }
 };
 
-const baseLink = ({ theme: { palette } }: BaseLinkProps) => css`
+const baseLink = ({ theme: { palette }, $fullWidth, $asButton }: BaseLinkProps) => css`
   color: ${getLinkColor};
   transition: color 150ms ease-in-out;
+
+  ${$fullWidth && 'width: 100%'};
+
+  ${$asButton &&
+  `
+    text-decoration: none;
+  `};
 
   &:disabled {
     color: ${palette.action.disabled};

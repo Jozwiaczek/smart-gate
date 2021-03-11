@@ -1,5 +1,8 @@
 const en = {
   translation: {
+    actions: {
+      back: 'back',
+    },
     user: {
       firstName: 'First name',
       lastName: 'Last name',
@@ -42,6 +45,13 @@ const en = {
         createAccount: 'Create my account',
         alreadyHaveAccount: 'Already have an account?',
         login: 'Log in',
+      },
+      pageNotFound: {
+        title: 'Oops, Seems it’s <b>Wrong gate</b>',
+        description: 'We are sorry, but the <b>page</b> you<br /> requested <b>was not found</b>.',
+        goTo: 'Go to ',
+        dashboard: 'Dashboard',
+        loginPage: 'Login page',
       },
     },
   },

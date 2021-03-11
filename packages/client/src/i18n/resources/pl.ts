@@ -2,6 +2,9 @@ import { TranslationStructure } from './en';
 
 const pl: TranslationStructure = {
   translation: {
+    actions: {
+      back: 'wróć',
+    },
     user: {
       firstName: 'Imię',
       lastName: 'Nazwisko',
@@ -44,6 +47,13 @@ const pl: TranslationStructure = {
         createAccount: 'Utwórz konto',
         alreadyHaveAccount: 'Masz już konto?',
         login: 'Zaloguj',
+      },
+      pageNotFound: {
+        title: 'Upss, trafiłeś do <br/><b>Złej bramy</b>',
+        description: 'Przepraszamy, ale żądana <br/><b>strona nie została znaleziona</b>.',
+        goTo: 'Wróć do ',
+        dashboard: 'ekranu głównego',
+        loginPage: 'strony logowania',
       },
     },
   },

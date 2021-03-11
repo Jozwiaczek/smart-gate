@@ -44,6 +44,7 @@ export const getTheme = (themeType: ThemeType) => ({
       disabled: 'rgba(0, 0, 0, 0.12)',
     },
     colors: {
+      blue: '#40AFDF',
       red: '#D32F2F',
       orange: '#FFB400',
     },

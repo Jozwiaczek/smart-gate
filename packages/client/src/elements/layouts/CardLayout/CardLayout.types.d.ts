@@ -7,7 +7,7 @@ export interface BackLinkProps {
   withTransition?: RouteAnimationsType;
 }
 
-export interface AuthLayoutProps {
+export interface CardLayoutProps {
   back?: BackLinkProps;
   children: ReactNode;
 }
