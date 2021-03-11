@@ -1,4 +1,5 @@
 import React, { Children, cloneElement, isValidElement, ReactElement, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   hasLetter,
@@ -17,6 +18,8 @@ const formInputs: Array<ReactNode> = [Checkbox, TextField];
 const isFormInput = (child: ReactElement) => formInputs.includes(child.type);
 
 const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormProps) => {
+  const { t } = useTranslation();
+
   const adjustChildrenRecursively = (childrenList: ReactNode): ReactNode =>
     Children.map(childrenList, (child) => {
       if (isValidElement(child)) {
@@ -26,34 +29,34 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
           const internalValidationType: ValidationType = validationType;
 
           if (required || internalValidationType === 'required') {
-            validation.required = 'Required';
+            validation.required = t('form.validation.required');
           }
 
           if (internalValidationType === 'email') {
             validation.validate = (value: string) =>
-              isValidEmail(value) || 'Invalid email address.';
+              isValidEmail(value) || t('form.validation.invalidEmail');
           }
 
           if (internalValidationType === 'password') {
             validation.validate = (value: string) => {
-              const basePasswordErrorMsg = 'Password must contain at least';
+              const basePasswordErrorMsg = t('form.validation.basePassword');
               if (!isValidLength(value)) {
-                return `${basePasswordErrorMsg} 8 characters.`;
+                return `${basePasswordErrorMsg} 8 ${t('form.validation.characters')}`;
               }
               if (!hasLetter(value)) {
-                return `${basePasswordErrorMsg} 1 letter.`;
+                return `${basePasswordErrorMsg} 1 ${t('form.validation.letter')}`;
               }
               if (!hasLowercaseLetter(value)) {
-                return `${basePasswordErrorMsg} 1 lowercase letter.`;
+                return `${basePasswordErrorMsg} 1 ${t('form.validation.lowercaseLetter')}`;
               }
               if (!hasUppercaseLetter(value)) {
-                return `${basePasswordErrorMsg} 1 uppercase letter.`;
+                return `${basePasswordErrorMsg} 1 ${t('form.validation.uppercaseLetter')}`;
               }
               if (!hasNumeric(value)) {
-                return `${basePasswordErrorMsg} 1 number.`;
+                return `${basePasswordErrorMsg} 1 ${t('form.validation.number')}`;
               }
               if (!hasSpecialChar(value)) {
-                return `${basePasswordErrorMsg} 1 special character.`;
+                return `${basePasswordErrorMsg} 1 ${t('form.validation.specialCharacter')}`;
               }
             };
           }

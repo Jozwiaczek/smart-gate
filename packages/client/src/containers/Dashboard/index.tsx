@@ -34,10 +34,10 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <h1>{t('title')}</h1>
+      <h1>Smart Gate</h1>
       <h2>Dashboard</h2>
       <Button to="/" onClick={logoutUser} margin="20px">
-        {t('actions.logout')}
+        {t('routes.dashboard.logout')}
       </Button>
       <Button onClick={onChangeTheme} margin="20px">
         Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme

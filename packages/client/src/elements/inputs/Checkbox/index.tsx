@@ -18,7 +18,7 @@ const Checkbox = forwardRef<ICheckboxProps, CheckboxProps>(
           required={required}
           {...rest}
         />
-        {label || getLabelFromSource(name)}
+        <p>{label || getLabelFromSource(name)}</p>
         <Checkmark isError={Boolean(error)}>
           <TickIcon />
         </Checkmark>

@@ -32,7 +32,7 @@ const IconButton = styled.button(
   }
   
   &:focus {
-    box-shadow: 0 0 0 1px ${theme.palette.text.primary};
+    box-shadow: 0 0 0 2px ${theme.palette.primary.light};
   }
 `,
 );

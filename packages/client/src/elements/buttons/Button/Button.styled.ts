@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { ThemeType } from '../../../theme/Theme';
 import { ButtonProps } from './Button.types';
 
+export const IconContainer = styled.div`
+  margin-left: 8px;
+`;
+
 export const StyledButton = styled.button<ButtonProps>(
   ({ colorVariant, fullWidth, margin, theme: { palette } }) => `
   display: flex;
@@ -24,6 +28,7 @@ export const StyledButton = styled.button<ButtonProps>(
   line-height: 16px;
   transition: 0.15s;
   overflow: hidden;
+  outline: none;
   
   ${fullWidth && 'width: 100%'};
 
@@ -46,17 +51,19 @@ export const StyledButton = styled.button<ButtonProps>(
     }
   }
 
-  &:hover,
-  &:active {
-    background-color: ${
-      colorVariant === ThemeType.light ? palette.primary.light : palette.primary.dark
-    };
-    box-shadow: ${palette.boxShadow};
+  :hover {
+    box-shadow: ${palette.boxShadow.big};
+    svg {
+      transform: translateX(3px);
+      transition: transform 150ms ease-in-out;
+    }
   }
 
-  &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 1px ${palette.text.primary} inset;
+  :focus {
+    transition: box-shadow 150ms ease-in-out;
+    box-shadow: 0 0 0 3px ${
+      colorVariant === ThemeType.light ? palette.primary.dark : palette.primary.light
+    };
   }
 
   // Overlay
@@ -96,7 +103,3 @@ export const StyledButton = styled.button<ButtonProps>(
   }
 `,
 );
-
-export const IconContainer = styled.div`
-  margin-left: 8px;
-`;
