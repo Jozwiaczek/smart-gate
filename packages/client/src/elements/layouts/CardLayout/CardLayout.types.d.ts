@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface AuthLayoutProps {
+export interface CardLayoutProps {
   children: ReactNode;
 }
 

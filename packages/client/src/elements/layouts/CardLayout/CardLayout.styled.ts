@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Card } from '../../index';
 import { StyledLink, StyledOutLink } from '../../Link/Link.styled';
-import { ActionsContainerProps } from './AuthLayout.types';
+import { ActionsContainerProps } from './CardLayout.types';
 
 export const StyledActionsContainer = styled.div<ActionsContainerProps>`
   width: 100%;
@@ -26,4 +26,12 @@ export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+`;
+
+export const CardWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

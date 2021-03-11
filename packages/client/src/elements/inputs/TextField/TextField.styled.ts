@@ -98,6 +98,7 @@ export const Container = styled.div<TextFieldContainerProps>(
   padding: 28px 0 0;
   height: 105px;
   margin-top: 10px;
+  text-align: left;
 
   // Input background
   &:after {
