@@ -5,6 +5,6 @@ export { default as Card } from './Card';
 export { default as Copyright } from './Copyright';
 export { default as Form } from './Form';
 export { Checkbox, TextField } from './inputs';
-export { AuthLayout, DefaultLayout, GlobalLayout } from './layouts';
+export { CardLayout, DefaultLayout, GlobalLayout } from './layouts';
 export { default as Link } from './Link';
 export { default as Snackbar } from './Snackbar';

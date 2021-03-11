@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { AnimatedLogo, AuthLayout, Checkbox, Form, Link, TextField } from '../../elements';
+import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon } from '../../icons';
@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <AuthLayout.Container ref={animatedCardRef}>
+    <CardLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
@@ -63,7 +63,7 @@ const Login = () => {
           validationType="password"
           label={t('user.password')}
         />
-        <AuthLayout.ActionsContainer direction="row">
+        <CardLayout.ActionsContainer direction="row">
           <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
           <StyledButton
             type="submit"
@@ -74,17 +74,17 @@ const Login = () => {
           >
             {t('routes.login.login')}
           </StyledButton>
-        </AuthLayout.ActionsContainer>
+        </CardLayout.ActionsContainer>
       </Form>
-      <AuthLayout.ActionsContainer>
+      <CardLayout.ActionsContainer>
         <Link to="/" colorVariant="grey">
           {t('routes.login.forgotPassword')}
         </Link>
         <Link to="/registration" colorVariant="colour">
           {t('routes.login.register')}
         </Link>
-      </AuthLayout.ActionsContainer>
-    </AuthLayout.Container>
+      </CardLayout.ActionsContainer>
+    </CardLayout.Container>
   );
 };
 

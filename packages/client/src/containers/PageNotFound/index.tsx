@@ -2,9 +2,8 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { routes } from '../../constants';
-import { AuthLayout, Button, Heaven, Hell } from '../../elements';
+import { Button, CardLayout, Heaven, Hell } from '../../elements';
 import { useCurrentUser, useThemeType } from '../../hooks';
-import useAnimated from '../../hooks/useAnimated';
 import { ThemeType } from '../../theme/Theme';
 import { ContentWrapper, Description, IllustrationWrapper, Title } from './PageNotFound.styled';
 
@@ -23,7 +22,7 @@ const PageNotFound = () => {
   }, []);
 
   return (
-    <AuthLayout.Container>
+    <CardLayout.Container>
       <Title>
         {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: t('routes.pageNotFound.title') }} />
@@ -46,7 +45,7 @@ const PageNotFound = () => {
         {t('routes.pageNotFound.goTo')}
         {currentUser ? t('routes.pageNotFound.dashboard') : t('routes.pageNotFound.loginPage')}
       </Button>
-    </AuthLayout.Container>
+    </CardLayout.Container>
   );
 };
 

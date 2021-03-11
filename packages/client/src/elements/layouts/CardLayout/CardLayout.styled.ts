@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Card } from '../../index';
 import { StyledLink, StyledOutLink } from '../../Link/Link.styled';
-import { ActionsContainerProps } from './AuthLayout.types';
+import { ActionsContainerProps } from './CardLayout.types';
 
 export const StyledActionsContainer = styled.div<ActionsContainerProps>`
   width: 100%;

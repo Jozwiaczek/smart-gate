@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { AuthLayout, Form, Link, TextField } from '../../elements';
+import { CardLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon, UserIcon } from '../../icons';
@@ -55,7 +55,7 @@ const Registration = () => {
   };
 
   return (
-    <AuthLayout.Container ref={animatedCardRef}>
+    <CardLayout.Container ref={animatedCardRef}>
       <Title>{t('routes.registration.title')}</Title>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
@@ -91,7 +91,7 @@ const Registration = () => {
           }}
           required
         />
-        <AuthLayout.ActionsContainer>
+        <CardLayout.ActionsContainer>
           <StyledButton
             type="submit"
             fullWidth
@@ -107,9 +107,9 @@ const Registration = () => {
               {t('routes.registration.login')}
             </Link>
           </p>
-        </AuthLayout.ActionsContainer>
+        </CardLayout.ActionsContainer>
       </Form>
-    </AuthLayout.Container>
+    </CardLayout.Container>
   );
 };
 

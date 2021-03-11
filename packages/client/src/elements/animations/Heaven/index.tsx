@@ -18,6 +18,7 @@ const Hell = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => {
     anime({
       ...baseOpt,
       targets: cloud.current,
+      direction: 'alternate',
       duration,
       translateX: [
         maxDebounce * -1,
@@ -32,7 +33,7 @@ const Hell = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => {
     anime({
       ...baseOpt,
       targets: cloud2.current,
-      direction: 'reverse',
+      direction: 'alternate',
       duration,
       translateX: [
         maxDebounce * -1,

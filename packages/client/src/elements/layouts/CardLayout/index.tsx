@@ -3,10 +3,10 @@ import React, { forwardRef } from 'react';
 import useAnimated from '../../../hooks/useAnimated';
 import { BackgroundSideLogo } from '../../index';
 import DefaultLayout from '../DefaultLayout';
-import { CardWrapper, StyledActionsContainer, StyledCard } from './AuthLayout.styled';
-import { ActionsContainerProps, AuthLayoutProps } from './AuthLayout.types';
+import { CardWrapper, StyledActionsContainer, StyledCard } from './CardLayout.styled';
+import { ActionsContainerProps, CardLayoutProps } from './CardLayout.types';
 
-export const Container = forwardRef<HTMLDivElement, AuthLayoutProps>(({ children }, ref) => {
+export const Container = forwardRef<HTMLDivElement, CardLayoutProps>(({ children }, ref) => {
   const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
 
   return (
