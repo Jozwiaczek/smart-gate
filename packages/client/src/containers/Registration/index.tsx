@@ -18,10 +18,8 @@ const Registration = () => {
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
-  const { trigger: triggerCardShake } = useAnimated({
+  const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
     type: 'shake',
-    targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
   const {
@@ -57,7 +55,7 @@ const Registration = () => {
   };
 
   return (
-    <AuthLayout.Container ref={animatedCard.ref}>
+    <AuthLayout.Container ref={animatedCardRef}>
       <Title>{t('routes.registration.title')}</Title>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField

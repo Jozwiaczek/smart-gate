@@ -14,7 +14,6 @@ const PageNotFound = () => {
   const [currentUser] = useCurrentUser();
   const illustrationWrapperRef = useRef<HTMLDivElement>(null);
   const [illustrationHeight, setIllustrationHeight] = useState(0);
-  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
   const isLightTheme = themeType === ThemeType.light;
 
   useLayoutEffect(() => {
@@ -24,7 +23,7 @@ const PageNotFound = () => {
   }, []);
 
   return (
-    <AuthLayout.Container ref={animatedCard.ref}>
+    <AuthLayout.Container>
       <Title>
         {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: t('routes.pageNotFound.title') }} />

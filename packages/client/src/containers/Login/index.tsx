@@ -18,10 +18,8 @@ const Login = () => {
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
-  const { trigger: triggerCardShake } = useAnimated({
+  const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
     type: 'shake',
-    targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
   const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>();
@@ -48,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <AuthLayout.Container ref={animatedCard.ref}>
+    <AuthLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
