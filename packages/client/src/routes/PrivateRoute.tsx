@@ -2,8 +2,8 @@ import React from 'react';
 import { RouteProps } from 'react-router';
 import { Redirect, Route } from 'react-router-dom';
 
-import { routes } from '../../constants';
-import { useCurrentUser } from '../../hooks';
+import { routes } from '../constants';
+import { useCurrentUser } from '../hooks';
 
 const RouteGuard = (props: RouteProps) => {
   const [currentUser] = useCurrentUser();
@@ -12,7 +12,7 @@ const RouteGuard = (props: RouteProps) => {
     return <Route {...props} />;
   }
 
-  return <Redirect to={{ pathname: routes.login }} />;
+  return <Redirect to={{ pathname: routes.LOGIN }} />;
 };
 
 export default RouteGuard;

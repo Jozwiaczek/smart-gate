@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Role } from '../../../enums/role.enum';
 
 export interface User {
@@ -5,6 +7,10 @@ export interface User {
   firstName: string;
   lastName: string;
   roles: Array<Role>;
+}
+
+export interface CurrentUserProviderProps {
+  children: ReactNode;
 }
 
 export type CurrentUserContextValue = [

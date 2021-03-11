@@ -10,7 +10,7 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
-import { Environment } from '../constants';
+import { environments } from '../constants';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -26,7 +26,7 @@ type Config = {
 };
 
 export function register(config?: Config) {
-  if (process.env.NODE_ENV === Environment.prod && 'serviceWorker' in navigator) {
+  if (process.env.NODE_ENV === environments.PROD && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {

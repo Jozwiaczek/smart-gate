@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-import { Environment } from '../constants';
+import { environments } from '../constants';
 import resources from './resources';
 
 export enum SGLocale {
@@ -17,7 +17,7 @@ i18n
     resources,
     fallbackLng: SGLocale.en,
     supportedLngs: Object.values(SGLocale),
-    debug: process.env.NODE_ENV === Environment.dev,
+    debug: process.env.NODE_ENV === environments.DEV,
   });
 
 export default i18n;

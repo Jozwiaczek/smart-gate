@@ -9,7 +9,7 @@ const PublicGuard = (props: RouteProps) => {
   const [currentUser] = useCurrentUser();
 
   if (currentUser) {
-    return <Redirect to={{ pathname: routes.home }} />;
+    return <Redirect to={{ pathname: routes.HOME }} />;
   }
 
   return <Route {...props} />;

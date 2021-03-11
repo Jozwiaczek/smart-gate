@@ -47,7 +47,7 @@ const Registration = () => {
       const { confirmPassword, ...formValues } = values;
       await registerUser(formValues);
       reset();
-      history.push(routes.home);
+      history.push(routes.HOME);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
@@ -105,7 +105,7 @@ const Registration = () => {
           </StyledButton>
           <p>
             {t('routes.registration.alreadyHaveAccount')}&nbsp;
-            <Link to={routes.login} colorVariant="colour">
+            <Link to={routes.LOGIN} colorVariant="colour">
               {t('routes.registration.login')}
             </Link>
           </p>

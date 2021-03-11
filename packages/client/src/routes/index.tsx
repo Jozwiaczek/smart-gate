@@ -1,42 +1,16 @@
 import React from 'react';
-import { RouteProps as RouterRouteProps } from 'react-router';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { routes } from '../constants';
-import { Dashboard, Login, Registration } from '../containers';
 import { GlobalLayout } from '../elements';
 import { useCurrentUser } from '../hooks';
 import { AuthProvider } from '../providers/api';
+import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-import RouteGuard from './RouteGuard';
-
-interface RouteProps extends RouterRouteProps {
-  path: string;
-}
-
-export const unauthorizedRoutes: Array<RouteProps> = [
-  {
-    path: routes.login,
-    component: Login,
-  },
-  {
-    path: routes.registration,
-    component: Registration,
-  },
-];
-
-export const authorizedRoutes = [
-  {
-    path: routes.home,
-    component: Dashboard,
-    exact: true,
-  },
-];
+import { authorizedRoutes, unauthorizedRoutes } from './routesConfig';
 
 const NotFoundPage = () => {
   const [currentUser] = useCurrentUser();
-  console.log('L:37 | currentUser: ', currentUser);
-  return <p>NotFoundPage</p>;
+  return <p>NotFoundPage - {currentUser?.email}</p>;
 };
 
 const Routes = () => (
@@ -48,7 +22,7 @@ const Routes = () => (
             <PublicRoute key={routeProps.path} {...routeProps} />
           ))}
           {authorizedRoutes.map((routeProps) => (
-            <RouteGuard key={routeProps.path} {...routeProps} />
+            <PrivateRoute key={routeProps.path} {...routeProps} />
           ))}
           <Route component={NotFoundPage} />
         </Switch>

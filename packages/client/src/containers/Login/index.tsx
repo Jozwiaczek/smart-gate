@@ -38,7 +38,7 @@ const Login = () => {
     try {
       await login(values);
       reset();
-      history.push(routes.home);
+      history.push(routes.HOME);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });

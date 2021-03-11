@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { CurrentUserContext } from './CurrentUserProvider.context';
-import { User } from './CurrentUserProvider.types';
+import { CurrentUserProviderProps, User } from './CurrentUserProvider.types';
 
-const CurrentUserProvider = ({ children }: PropsWithChildren<unknown>) => {
+const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
   const [storeUser, setStoreUser] = useState<User | undefined>();
   const [expiration, setExpiration, removeExpiration] = useLocalStorage<number | undefined>(
     'loginExpirationDate',

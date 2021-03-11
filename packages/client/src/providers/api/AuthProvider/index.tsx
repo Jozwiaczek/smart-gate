@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useEffect } from 'react';
 
+import { localStorageKeys } from '../../../constants';
 import { useCurrentUser } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
 import useLocalStorage from '../../../hooks/useLocalStorage';
@@ -16,7 +17,7 @@ import {
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const axios = useAxios();
   const [currentUser, setCurrentUser] = useCurrentUser();
-  const [expiration] = useLocalStorage('loginExpirationDate', undefined);
+  const [expiration] = useLocalStorage(localStorageKeys.LOGIN_EXPIRATION_DATE, undefined);
 
   const checkAuth = useCallback(async () => {
     if (currentUser) {
