@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { routes } from '../../constants';
-import { AuthLayout, Button } from '../../elements';
+import { AuthLayout, Button, Heaven, Hell } from '../../elements';
 import { useCurrentUser, useThemeType } from '../../hooks';
-import { HeavenIllustration, HellIllustration } from '../../icons';
+import useAnimated from '../../hooks/useAnimated';
 import { ThemeType } from '../../theme/Theme';
 import { ContentWrapper, Description, IllustrationWrapper, Title } from './PageNotFound.styled';
 
@@ -14,6 +14,8 @@ const PageNotFound = () => {
   const [currentUser] = useCurrentUser();
   const illustrationWrapperRef = useRef<HTMLDivElement>(null);
   const [illustrationHeight, setIllustrationHeight] = useState(0);
+  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
+  const isLightTheme = themeType === ThemeType.light;
 
   useLayoutEffect(() => {
     if (illustrationWrapperRef && illustrationWrapperRef.current) {
@@ -22,14 +24,14 @@ const PageNotFound = () => {
   }, []);
 
   return (
-    <AuthLayout.Container>
+    <AuthLayout.Container ref={animatedCard.ref}>
       <Title>
         {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: t('routes.pageNotFound.title') }} />
       </Title>
       <ContentWrapper illustrationHeight={illustrationHeight}>
         <IllustrationWrapper ref={illustrationWrapperRef}>
-          {themeType === ThemeType.light ? <HeavenIllustration /> : <HellIllustration />}
+          {isLightTheme ? <Heaven /> : <Hell />}
         </IllustrationWrapper>
         <Description illustrationHeight={illustrationHeight}>
           {/* eslint-disable-next-line react/no-danger */}
@@ -40,7 +42,7 @@ const PageNotFound = () => {
         to={currentUser ? routes.home : routes.login}
         fullWidth
         withArrow
-        colorVariant={themeType === ThemeType.light ? 'blue' : 'red'}
+        colorVariant={isLightTheme ? 'blue' : 'red'}
       >
         {t('routes.pageNotFound.goTo')}
         {currentUser ? t('routes.pageNotFound.dashboard') : t('routes.pageNotFound.loginPage')}

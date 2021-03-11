@@ -1,7 +1,5 @@
 export { default as ArrowIcon } from './ArrowIcon';
 export { default as EmailIcon } from './EmailIcon';
-export { default as HeavenIllustration } from './HeavenIllustration';
-export { default as HellIllustration } from './HellIllustration';
 export { default as LockIcon } from './LockIcon';
 export { default as SmartGateBackgroundLogoIcon } from './SmartGateBackgroundLogoIcon';
 export { default as SmartGateLogoIcon } from './SmartGateLogoIcon';
