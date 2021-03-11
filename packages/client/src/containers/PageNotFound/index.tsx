@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { routes } from '../../constants';
 import { Button, CardLayout, Heaven, Hell } from '../../elements';
@@ -24,16 +24,14 @@ const PageNotFound = () => {
   return (
     <CardLayout.Container>
       <Title>
-        {/* eslint-disable-next-line react/no-danger */}
-        <div dangerouslySetInnerHTML={{ __html: t('routes.pageNotFound.title') }} />
+        <Trans i18nKey="routes.pageNotFound.title" components={{ b: <b /> }} />
       </Title>
       <ContentWrapper illustrationHeight={illustrationHeight}>
         <IllustrationWrapper ref={illustrationWrapperRef}>
           {isLightTheme ? <Heaven /> : <Hell />}
         </IllustrationWrapper>
         <Description illustrationHeight={illustrationHeight}>
-          {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{ __html: t('routes.pageNotFound.description') }} />
+          <Trans i18nKey="routes.pageNotFound.description" components={{ b: <b /> }} />
         </Description>
       </ContentWrapper>
       <Button
