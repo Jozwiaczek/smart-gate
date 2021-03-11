@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { User } from '../CurrentUserProvider/CurrentUserProvider.types';
 
 export interface LoginUserInfo {
@@ -18,9 +20,13 @@ export interface RegistrationData {
   password: string;
 }
 
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
 export interface AuthProps {
   login: (user: LoginData) => Promise<string | boolean>;
   register: (user: RegistrationData) => Promise<string | boolean>;
-  isAuthenticated: () => Promise<boolean>;
+  checkAuth: () => Promise<boolean>;
   logout: () => void;
 }

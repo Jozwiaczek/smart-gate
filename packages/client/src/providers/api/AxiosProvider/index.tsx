@@ -1,10 +1,10 @@
 import axios, { AxiosError } from 'axios';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 import { useCurrentUser } from '../../../hooks';
 import { AxiosContext } from './AxiosProvider.context';
 
-const AxiosProvider = ({ children }: PropsWithChildren<unknown>) => {
+const AxiosProvider = ({ children }: { children: ReactNode }) => {
   const API_URL = process.env.REACT_APP_API_URL;
   const [, setUser] = useCurrentUser();
 

@@ -9,11 +9,11 @@ import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
-  const { logout, isAuthenticated } = useAuth();
+  const { logout, checkAuth } = useAuth();
   const { themeType, setThemeType } = useThemeType();
 
   const getMe = async () => {
-    console.log(await isAuthenticated());
+    console.log(await checkAuth());
   };
 
   const logoutUser = async () => {
