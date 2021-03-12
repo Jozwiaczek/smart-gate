@@ -15,6 +15,7 @@ const pl: TranslationStructure = {
         defaultPlaceholderBase: 'Wpisz',
         confirmPassword: 'Potwierdź hasło',
         repeatPassword: 'Powtórz hasło',
+        newPassword: 'Nowe hasło',
       },
       validation: {
         required: 'Pole wymagane',
@@ -44,6 +45,19 @@ const pl: TranslationStructure = {
         createAccount: 'Utwórz konto',
         alreadyHaveAccount: 'Masz już konto?',
         login: 'Zaloguj',
+      },
+      passwordRecovery: {
+        title1: 'Zapomniałeś hasła?',
+        title2: 'Zaktualizuj hasło',
+        description1:
+          'Wpisz swój email na który zostanie wysłany email z instrukcją resetowania hasła.',
+        description2:
+          'We’ve sent a 6-character code to <b>{{email}}</b>.<br/>The code expires shortly, so please enter it soon.',
+        description3: 'Update your password for <b>{{email}}</b>.',
+        sendRecoveryEmail: 'Wyślij email z linkiem',
+        iRememberPassword: 'Przypomniałem sobie hasło',
+        resendEmail: 'Wyślij ponownie email',
+        updatePassword: 'Zaktualizuj hasło',
       },
       pageNotFound: {
         title: 'Upss, trafiłeś do <br/><b>Złej bramy</b>',

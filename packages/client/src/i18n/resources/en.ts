@@ -13,6 +13,7 @@ const en = {
         defaultPlaceholderBase: 'Enter',
         confirmPassword: 'Confirm password',
         repeatPassword: 'Repeat your password',
+        newPassword: 'New password',
       },
       validation: {
         required: 'Required',
@@ -43,9 +44,22 @@ const en = {
         alreadyHaveAccount: 'Already have an account?',
         login: 'Log in',
       },
+      passwordRecovery: {
+        title1: 'Forgot password?',
+        title2: 'Update password',
+        description1:
+          'Please enter your email address and we will send you instructions on how to reset your password.',
+        description2:
+          'We’ve sent a 6-character code to <b>{{email}}</b>.<br/>The code expires shortly, so please enter it soon.',
+        description3: 'Update your password for <b>{{email}}</b>.',
+        sendRecoveryEmail: 'Send recovery email',
+        iRememberPassword: 'I remember my password now',
+        resendEmail: 'Resend email',
+        updatePassword: 'Update password',
+      },
       pageNotFound: {
         title: 'Oops, Seems it’s <b>Wrong gate</b>',
-        description: 'We are sorry, but the <b>page</b> you<br /> requested <b>was not found</b>.',
+        description: 'We are sorry, but the <b>page</b> you<br/> requested <b>was not found</b>.',
         goTo: 'Go to ',
         dashboard: 'Dashboard',
         loginPage: 'Login page',

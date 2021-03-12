@@ -9,7 +9,7 @@ import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon, UserIcon } from '../../icons';
 import { onlyOnDevEnv } from '../../utils';
-import { StyledButton, Title } from './Registration.styled';
+import { StyledButton } from './Registration.styled';
 import { RegistrationInputs } from './Registration.types';
 
 const Registration = () => {
@@ -56,7 +56,7 @@ const Registration = () => {
 
   return (
     <CardLayout.Container ref={animatedCardRef}>
-      <Title>{t('routes.registration.title')}</Title>
+      <CardLayout.Title>{t('routes.registration.title')}</CardLayout.Title>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
           name="firstName"

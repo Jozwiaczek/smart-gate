@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextField } from '../../elements';
+import { Button, CardLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon } from '../../icons';
 import { onlyOnDevEnv } from '../../utils';
-import { StyledButton } from './Login.styled';
-import { LoginInputs } from './Login.types';
+import { PasswordRecoveryInputs } from './PasswordRecovery.types';
 
-const Login = () => {
-  const { login } = useAuth();
-  const history = useHistory();
+const PasswordRecovery = () => {
+  const { sendPasswordRecoveryEmail } = useAuth();
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
@@ -22,7 +19,7 @@ const Login = () => {
     type: 'shake',
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>();
+  const { register, handleSubmit, errors, reset, trigger } = useForm<PasswordRecoveryInputs>();
 
   const onBeforeSubmit = async () => {
     const isValid = await trigger();
@@ -31,12 +28,13 @@ const Login = () => {
     }
   };
 
-  const onSubmit = async (values: LoginInputs) => {
+  const onSubmit = async (values: PasswordRecoveryInputs) => {
     setLoading(true);
     try {
-      await login(values);
+      console.log('L:36 | values: ', values);
+      await sendPasswordRecoveryEmail();
       reset();
-      history.push(routes.home);
+      // history.push(routes.home);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
@@ -47,7 +45,8 @@ const Login = () => {
 
   return (
     <CardLayout.Container ref={animatedCardRef}>
-      <AnimatedLogo margin="10px 0" />
+      <CardLayout.Title>{t('routes.passwordRecovery.title1')}</CardLayout.Title>
+      <CardLayout.Description>{t('routes.passwordRecovery.description1')}</CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
           autoFocus
@@ -56,36 +55,19 @@ const Login = () => {
           validationType="email"
           startAdornment={<EmailIcon />}
         />
-        <TextField
-          required
-          name="password"
-          type="password"
-          validationType="password"
-          label={t('user.password')}
-        />
         <CardLayout.ActionsContainer direction="row">
-          <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
-          <StyledButton
-            type="submit"
-            fullWidth
-            disabled={loading}
-            withArrow
-            onClick={onBeforeSubmit}
-          >
-            {t('routes.login.login')}
-          </StyledButton>
+          <Button type="submit" fullWidth disabled={loading} withArrow onClick={onBeforeSubmit}>
+            {t('routes.passwordRecovery.sendRecoveryEmail')}
+          </Button>
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to={routes.passwordRecovery} colorVariant="grey">
-          {t('routes.login.forgotPassword')}
-        </Link>
-        <Link to={routes.registration} colorVariant="colour">
-          {t('routes.login.register')}
+        <Link to={routes.login} colorVariant="colour">
+          {t('routes.passwordRecovery.iRememberPassword')}
         </Link>
       </CardLayout.ActionsContainer>
     </CardLayout.Container>
   );
 };
 
-export default Login;
+export default PasswordRecovery;

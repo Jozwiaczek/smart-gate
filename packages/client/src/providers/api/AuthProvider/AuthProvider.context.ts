@@ -7,6 +7,7 @@ const defaultValues: AuthProps = {
   logout: () => {},
   login: () => Promise.resolve(false),
   register: () => Promise.resolve(false),
+  sendPasswordRecoveryEmail: () => Promise.resolve(false),
 };
 
 export const AuthContext = createContext<AuthProps>(defaultValues);
