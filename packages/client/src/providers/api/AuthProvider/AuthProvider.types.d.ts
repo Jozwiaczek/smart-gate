@@ -18,10 +18,20 @@ export interface RegistrationData {
   password: string;
 }
 
+export interface SendPasswordRecoveryEmailData {
+  email: string;
+}
+
+interface UpdatePasswordData {
+  email: string;
+  password: string;
+}
+
 export interface AuthProps {
   login: (user: LoginData) => Promise<string | boolean>;
   register: (user: RegistrationData) => Promise<string | boolean>;
   isAuthenticated: () => Promise<boolean>;
   logout: () => void;
-  sendPasswordRecoveryEmail: (email: string) => Promise<boolean>;
+  sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<boolean>;
+  updatePassword: (user: UpdatePasswordData) => Promise<boolean>;
 }

@@ -44,16 +44,25 @@ const en = {
         alreadyHaveAccount: 'Already have an account?',
         login: 'Log in',
       },
-      forgotPassword: {
-        title: 'Forgot password?',
-        titleSent: 'Email has been sent!',
-        description:
-          'Please enter your email address and we will send you instructions on how to reset your password.',
-        descriptionSent:
-          'We’ve sent a link to <b>{{email}}</b> for updating your password.<br/>The link expires shortly.',
-        sendRecoveryEmail: 'Send recovery email',
+      passwordRecovery: {
+        intro: {
+          title: 'Forgot password?',
+          description:
+            'Please enter your email address and we will send you instructions on how to reset your password.',
+          sendRecoveryEmail: 'Send recovery email',
+        },
+        sentInfo: {
+          title: 'Email has been sent!',
+          description:
+            'We’ve sent a link to <b>{{email}}</b> for updating your password.<br/>The link expires shortly.',
+          resendEmail: 'Resend email',
+        },
+        updatePassword: {
+          title: 'Update password',
+          description: 'Update your password for <b>{{email}}</b>.',
+          updatePassword: 'Update Password',
+        },
         iRememberPassword: 'I remember my password now',
-        resendEmail: 'Resend email',
       },
       pageNotFound: {
         title: 'Oops, Seems it’s <b>Wrong gate</b>',

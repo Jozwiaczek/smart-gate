@@ -30,11 +30,11 @@ const PasswordRecovery = () => {
     }
   };
 
-  const onSubmit = async ({ email }: PasswordRecoveryInputs) => {
+  const onSubmit = async (formData: PasswordRecoveryInputs) => {
     setLoading(true);
     try {
-      await sendPasswordRecoveryEmail(email);
-      setEmailSentAddress(email);
+      await sendPasswordRecoveryEmail(formData);
+      setEmailSentAddress(formData.email);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
@@ -45,8 +45,10 @@ const PasswordRecovery = () => {
 
   const formStep = (
     <>
-      <CardLayout.Title>{t('routes.forgotPassword.title')}</CardLayout.Title>
-      <CardLayout.Description>{t('routes.forgotPassword.description')}</CardLayout.Description>
+      <CardLayout.Title>{t('routes.passwordRecovery.intro.title')}</CardLayout.Title>
+      <CardLayout.Description>
+        {t('routes.passwordRecovery.intro.description')}
+      </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
           autoFocus
@@ -57,7 +59,7 @@ const PasswordRecovery = () => {
         />
         <CardLayout.ActionsContainer direction="row">
           <Button type="submit" fullWidth disabled={loading} withArrow onClick={onBeforeSubmit}>
-            {t('routes.forgotPassword.sendRecoveryEmail')}
+            {t('routes.passwordRecovery.intro.sendRecoveryEmail')}
           </Button>
         </CardLayout.ActionsContainer>
       </Form>
@@ -66,19 +68,23 @@ const PasswordRecovery = () => {
 
   const infoStep = (
     <>
-      <CardLayout.Title>{t('routes.forgotPassword.titleSent')}</CardLayout.Title>
+      <CardLayout.Title>{t('routes.passwordRecovery.sentInfo.title')}</CardLayout.Title>
       <PaperPlaneWrapper>
         <PaperPlane />
       </PaperPlaneWrapper>
       <CardLayout.Description>
         <Trans
-          i18nKey="routes.forgotPassword.descriptionSent"
+          i18nKey="routes.passwordRecovery.sentInfo.description"
           values={{ email: emailSentAddress }}
           components={{ b: <b /> }}
         />
       </CardLayout.Description>
-      <Link to={routes.passwordRecovery} onClick={() => setEmailSentAddress(undefined)}>
-        {t('routes.forgotPassword.resendEmail')}
+      <Link
+        to={routes.passwordRecovery}
+        colorVariant="grey"
+        onClick={() => setEmailSentAddress(undefined)}
+      >
+        {t('routes.passwordRecovery.sentInfo.resendEmail')}
       </Link>
     </>
   );
@@ -88,7 +94,7 @@ const PasswordRecovery = () => {
       {emailSentAddress ? infoStep : formStep}
       <CardLayout.ActionsContainer>
         <Link to={routes.login} colorVariant="colour">
-          {t('routes.forgotPassword.iRememberPassword')}
+          {t('routes.passwordRecovery.iRememberPassword')}
         </Link>
       </CardLayout.ActionsContainer>
     </CardLayout.Container>
