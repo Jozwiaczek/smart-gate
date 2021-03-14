@@ -6,7 +6,14 @@ import { LinkProps } from './Link.types';
 const Link = ({ children, to, asOuterLink, colorVariant = 'default', ...rest }: LinkProps) => {
   if (asOuterLink) {
     return (
-      <StyledOutLink $colorVariant={colorVariant} href={to} to="" rel="noreferrer" target="_blank">
+      <StyledOutLink
+        $colorVariant={colorVariant}
+        href={to}
+        to=""
+        rel="noreferrer"
+        target="_blank"
+        {...rest}
+      >
         {children}
       </StyledOutLink>
     );

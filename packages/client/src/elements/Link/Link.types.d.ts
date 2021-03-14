@@ -19,6 +19,7 @@ export interface LinkProps extends BaseProps {
   colorVariant?: LinkColorVariant;
   asOuterLink?: boolean;
   to: string;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 export interface StyledLinkProps extends BaseProps {

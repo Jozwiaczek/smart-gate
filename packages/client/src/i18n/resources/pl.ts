@@ -46,18 +46,16 @@ const pl: TranslationStructure = {
         alreadyHaveAccount: 'Masz już konto?',
         login: 'Zaloguj',
       },
-      passwordRecovery: {
-        title1: 'Zapomniałeś hasła?',
-        title2: 'Zaktualizuj hasło',
-        description1:
-          'Wpisz swój email na który zostanie wysłany email z instrukcją resetowania hasła.',
-        description2:
-          'We’ve sent a 6-character code to <b>{{email}}</b>.<br/>The code expires shortly, so please enter it soon.',
-        description3: 'Update your password for <b>{{email}}</b>.',
+      forgotPassword: {
+        title: 'Zapomniałeś hasła?',
+        titleSent: 'Email został wysłany!',
+        description:
+          'Wpisz swój email na który zostanie wysłany link z instrukcją resetowania hasła.',
+        descriptionSent:
+          'Wysłaliśmy Ci link na adres <b>{{email}}</b> w celu aktualizacji twojego hasła.<br/> Sprawdź swoje konto mailowe.',
         sendRecoveryEmail: 'Wyślij email z linkiem',
         iRememberPassword: 'Przypomniałem sobie hasło',
-        resendEmail: 'Wyślij ponownie email',
-        updatePassword: 'Zaktualizuj hasło',
+        resendEmail: 'Wyślij email ponownie',
       },
       pageNotFound: {
         title: 'Upss, trafiłeś do <br/><b>Złej bramy</b>',

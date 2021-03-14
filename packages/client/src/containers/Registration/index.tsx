@@ -7,7 +7,7 @@ import { routes } from '../../constants';
 import { CardLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
-import { EmailIcon, UserIcon } from '../../icons';
+import { ConfirmLockIcon, EmailIcon, UserIcon } from '../../icons';
 import { onlyOnDevEnv } from '../../utils';
 import { StyledButton } from './Registration.styled';
 import { RegistrationInputs } from './Registration.types';
@@ -83,6 +83,7 @@ const Registration = () => {
           name={t('form.inputs.confirmPassword')}
           type="password"
           placeholder={t('form.inputs.repeatPassword')}
+          startAdornment={<ConfirmLockIcon />}
           validation={{
             pattern: {
               value: RegExp(getValues().password),

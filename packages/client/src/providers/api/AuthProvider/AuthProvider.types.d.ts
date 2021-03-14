@@ -23,5 +23,5 @@ export interface AuthProps {
   register: (user: RegistrationData) => Promise<string | boolean>;
   isAuthenticated: () => Promise<boolean>;
   logout: () => void;
-  sendPasswordRecoveryEmail: () => Promise<boolean>;
+  sendPasswordRecoveryEmail: (email: string) => Promise<boolean>;
 }

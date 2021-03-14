@@ -62,8 +62,8 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     return response.data;
   }, [axios, setUser]);
 
-  const sendPasswordRecoveryEmail = useCallback(async () => {
-    console.log('sendPasswordRecoveryEmail');
+  const sendPasswordRecoveryEmail = useCallback(async (email: string) => {
+    console.log('sendPasswordRecoveryEmail:', email);
     return false;
   }, []);
 
