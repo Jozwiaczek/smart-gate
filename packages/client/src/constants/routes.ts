@@ -3,7 +3,7 @@ const routes = {
   login: '/login',
   registration: '/registration',
   passwordRecovery: '/passwordRecovery',
-  updatePassword: '/updatePassword',
+  passwordRecoveryUpdate: '/passwordRecovery/magicLink',
 };
 
 export default routes;

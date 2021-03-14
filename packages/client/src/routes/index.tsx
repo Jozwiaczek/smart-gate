@@ -20,8 +20,8 @@ const Routes = () => (
         <RouteGuard exact path={routes.home} component={Dashboard} />
         <Route path={routes.registration} component={Registration} />
         <Route path={routes.login} component={Login} />
-        <Route path={routes.passwordRecovery} component={PasswordRecovery} />
-        <Route path={routes.updatePassword} component={UpdatePassword} />
+        <Route exact path={routes.passwordRecovery} component={PasswordRecovery} />
+        <Route path={routes.passwordRecoveryUpdate} component={UpdatePassword} />
         <Route component={PageNotFound} />
       </Switch>
     </GlobalLayout>

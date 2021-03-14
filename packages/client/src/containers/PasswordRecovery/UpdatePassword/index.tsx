@@ -80,7 +80,6 @@ const UpdatePassword = () => {
             {t('routes.passwordRecovery.updatePassword.updatePassword')}
           </Button>
         </CardLayout.ActionsContainer>
-        \
       </Form>
       <CardLayout.ActionsContainer>
         <Link to={routes.login} colorVariant="colour">
