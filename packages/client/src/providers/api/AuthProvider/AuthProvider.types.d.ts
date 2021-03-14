@@ -27,6 +27,6 @@ interface AuthProviderProps {
 export interface AuthProps {
   login: (user: LoginData) => Promise<string | boolean>;
   register: (user: RegistrationData) => Promise<string | boolean>;
-  checkAuth: () => Promise<boolean>;
+  checkAuth: () => Promise<User | undefined>;
   logout: () => void;
 }

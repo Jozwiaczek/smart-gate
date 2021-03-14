@@ -1,21 +1,30 @@
-import { RouteProps as RouterRouteProps } from 'react-router';
-
 import { routes } from '../constants';
 import { Dashboard, Login, Registration } from '../containers';
+import { Role } from '../enums/role.enum';
+import { BasicRouteProps, ConditionRouteProps } from './ConditionRoute/Condition.types';
+import {
+  allowAll,
+  onlyAuthenticated,
+  onlyAuthenticatedCondition,
+  onlyUnauthenticated,
+} from './conditions';
 
-interface RouteProps extends RouterRouteProps {
-  path: string;
+interface OnlyAuthenticatedRouteProps extends BasicRouteProps {
+  roles?: [Role];
 }
-
-export const authorizedRoutes = [
+const onlyAuthenticatedRoutes: Array<ConditionRouteProps> = (<Array<OnlyAuthenticatedRouteProps>>[
   {
     path: routes.HOME,
     component: Dashboard,
     exact: true,
   },
-];
+]).map(({ roles, ...props }) => ({
+  ...props,
+  ...onlyAuthenticated,
+  condition: onlyAuthenticatedCondition(roles),
+}));
 
-export const unauthorizedRoutes: Array<RouteProps> = [
+const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[
   {
     path: routes.LOGIN,
     component: Login,
@@ -24,4 +33,15 @@ export const unauthorizedRoutes: Array<RouteProps> = [
     path: routes.REGISTRATION,
     component: Registration,
   },
+]).map((props) => ({ ...props, ...onlyUnauthenticated }));
+
+const allowAllRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[{}]).map((props) => ({
+  ...props,
+  ...allowAll,
+}));
+
+export const routesArray: Array<ConditionRouteProps> = [
+  ...onlyAuthenticatedRoutes,
+  ...onlyUnauthenticatedRoutes,
+  ...allowAllRoutes,
 ];

@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import { localStorageKeys } from '../../../constants';
 import { useCurrentUser } from '../../../hooks';
@@ -21,27 +21,23 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const checkAuth = useCallback(async () => {
     if (currentUser) {
-      return true;
+      return currentUser;
     }
     if (expiration) {
       return axios
         .get<never, AxiosResponse<LoginUserInfo>>('/auth/me')
         .then(({ data: { user, expirationDate } }) => {
           setCurrentUser(user, expirationDate);
-          return true;
+          return user;
         })
         .catch(() => {
           setCurrentUser(undefined);
-          return false;
+          return undefined;
         });
     }
     setCurrentUser(undefined);
-    return false;
+    return undefined;
   }, [axios, expiration, currentUser, setCurrentUser]);
-
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
 
   const login = useCallback(
     async (userData: LoginData) => {

@@ -3,10 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { GlobalLayout } from '../elements';
 import { useCurrentUser } from '../hooks';
-import { AuthProvider } from '../providers/api';
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
-import { authorizedRoutes, unauthorizedRoutes } from './routesConfig';
+import ConditionRoute from './ConditionRoute';
+import { routesArray } from './routesConfig';
 
 const NotFoundPage = () => {
   const [currentUser] = useCurrentUser();
@@ -16,17 +14,12 @@ const NotFoundPage = () => {
 const Routes = () => (
   <BrowserRouter>
     <GlobalLayout>
-      <AuthProvider>
-        <Switch>
-          {unauthorizedRoutes.map((routeProps) => (
-            <PublicRoute key={routeProps.path} {...routeProps} />
-          ))}
-          {authorizedRoutes.map((routeProps) => (
-            <PrivateRoute key={routeProps.path} {...routeProps} />
-          ))}
-          <Route component={NotFoundPage} />
-        </Switch>
-      </AuthProvider>
+      <Switch>
+        {routesArray.map((props) => (
+          <ConditionRoute key={props.path} {...props} />
+        ))}
+        <Route component={NotFoundPage} />
+      </Switch>
     </GlobalLayout>
   </BrowserRouter>
 );
