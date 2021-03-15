@@ -17,7 +17,7 @@ const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
       return storeUser;
     }
     return undefined;
-  }, [expiration, storeUser]);
+  }, [getExpiration, storeUser]);
 
   const setUser = (newUser: User | undefined, expirationDate: number | undefined = undefined) => {
     setExpiration(expirationDate);

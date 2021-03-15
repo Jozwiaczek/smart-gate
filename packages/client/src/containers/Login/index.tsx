@@ -35,7 +35,6 @@ const Login = () => {
     setLoading(true);
     try {
       await login(values);
-      console.log('after');
       reset();
       history.push(routes.HOME);
     } catch (error) {
