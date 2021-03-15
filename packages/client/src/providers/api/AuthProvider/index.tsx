@@ -1,10 +1,8 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback } from 'react';
 
-import { localStorageKeys } from '../../../constants';
-import { useCurrentUser } from '../../../hooks';
+import { useCurrentUser, useLocalStorageMemory } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
-import useLocalStorage from '../../../hooks/useLocalStorage';
 import { AuthContext } from './AuthProvider.context';
 import {
   AuthProps,
@@ -17,12 +15,13 @@ import {
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const axios = useAxios();
   const [currentUser, setCurrentUser] = useCurrentUser();
-  const [expiration] = useLocalStorage(localStorageKeys.LOGIN_EXPIRATION_DATE, undefined);
+  const [getExpiration] = useLocalStorageMemory('loginExpirationDate');
 
   const checkAuth = useCallback(async () => {
     if (currentUser) {
       return currentUser;
     }
+    const expiration = getExpiration();
     if (expiration) {
       return axios
         .get<never, AxiosResponse<LoginUserInfo>>('/auth/me')
@@ -37,7 +36,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
     setCurrentUser(undefined);
     return undefined;
-  }, [axios, expiration, currentUser, setCurrentUser]);
+  }, [axios, currentUser, getExpiration, setCurrentUser]);
 
   const login = useCallback(
     async (userData: LoginData) => {

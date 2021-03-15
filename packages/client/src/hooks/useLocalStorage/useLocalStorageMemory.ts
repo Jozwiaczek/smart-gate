@@ -1,7 +1,7 @@
-import LocalStorageKey from '../constants/localStorageKeys';
+import { localStorageKey } from './useLocalStorage.types';
 
 const useLocalStorageMemory = <T>(
-  key: LocalStorageKey,
+  key: localStorageKey,
 ): [get: () => T | undefined, set: (data: T | undefined) => void] => {
   const get = () => {
     const stringifyData = window.localStorage.getItem(key);

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import LocalStorageKey from '../../constants/localStorageKeys';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage/useLocalStorage';
 import { ThemeType } from '../../theme/Theme';
 import { ThemeTypeContext } from './ThemeTypeProvider.context';
 import { ThemeProviderProps } from './ThemeTypeProvider.types';
@@ -9,7 +8,7 @@ import { ThemeProviderProps } from './ThemeTypeProvider.types';
 const ThemeTypeProvider = ({ children }: ThemeProviderProps) => {
   const isSystemDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
   const [themeType, setThemeType, cleanThemeType] = useLocalStorage<ThemeType>(
-    LocalStorageKey.THEME_TYPE,
+    'themeType',
     ThemeType.dark,
   );
 
