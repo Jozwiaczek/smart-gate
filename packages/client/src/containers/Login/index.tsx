@@ -76,10 +76,10 @@ const Login = () => {
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to="/" colorVariant="grey">
+        <Link to={routes.PASSWORD_RECOVERY} colorVariant="grey">
           {t('routes.login.forgotPassword')}
         </Link>
-        <Link to="/registration" colorVariant="colour">
+        <Link to={routes.REGISTRATION} colorVariant="colour">
           {t('routes.login.register')}
         </Link>
       </CardLayout.ActionsContainer>

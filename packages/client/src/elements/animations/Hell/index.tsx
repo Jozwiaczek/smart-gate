@@ -1,7 +1,7 @@
 import anime from 'animejs';
-import React, { useEffect, useRef } from 'react';
+import React, { forwardRef, memo, Ref, SVGProps, useEffect, useRef } from 'react';
 
-const Hell = () => {
+const Hell = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => {
   const flames = useRef<SVGPathElement>(null);
   const flames2 = useRef<SVGPathElement>(null);
   const glow = useRef<SVGPathElement>(null);
@@ -34,7 +34,14 @@ const Hell = () => {
   }, []);
 
   return (
-    <svg width="100%" viewBox="0 0 276 319" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="100%"
+      viewBox="0 0 276 319"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ref={svgRef}
+      {...props}
+    >
       <path
         d="M88.946 208.054h93.649l10.513-97.952 16.244-33.59-.223-33-12.085-.949 1.616-10.948-14.672-13.233-13.11 3.523-4.092-10.513-30.904-6.723-34.684 6.723-4.927 10.513-11.829-3.345-13.847 13.212.848 10.791-9.911.948-5.876 48.686 19.388 23.346 13.902 92.511z"
         fill="url(#prefix__paint0_linear)"
@@ -829,4 +836,4 @@ const Hell = () => {
 
 Hell.displayName = 'Hell';
 
-export default Hell;
+export default memo(forwardRef(Hell));

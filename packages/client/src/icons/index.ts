@@ -1,4 +1,5 @@
 export { default as ArrowIcon } from './ArrowIcon';
+export { default as ConfirmLockIcon } from './ConfirmLockIcon';
 export { default as EmailIcon } from './EmailIcon';
 export { default as LockIcon } from './LockIcon';
 export { default as SmartGateBackgroundLogoIcon } from './SmartGateBackgroundLogoIcon';

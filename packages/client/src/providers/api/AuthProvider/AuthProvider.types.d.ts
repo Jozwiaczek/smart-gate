@@ -20,8 +20,17 @@ export interface RegistrationData {
   password: string;
 }
 
-interface AuthProviderProps {
+export interface AuthProviderProps {
   children: ReactNode;
+}
+
+export interface SendPasswordRecoveryEmailData {
+  email: string;
+}
+
+interface UpdatePasswordData {
+  email: string;
+  password: string;
 }
 
 export interface AuthProps {
@@ -29,4 +38,6 @@ export interface AuthProps {
   register: (user: RegistrationData) => Promise<string | boolean>;
   checkAuth: () => Promise<User | undefined>;
   logout: () => void;
+  sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<boolean>;
+  updatePassword: (user: UpdatePasswordData) => Promise<boolean>;
 }

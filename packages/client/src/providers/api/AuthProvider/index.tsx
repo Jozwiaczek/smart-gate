@@ -10,6 +10,8 @@ import {
   LoginData,
   LoginUserInfo,
   RegistrationData,
+  SendPasswordRecoveryEmailData,
+  UpdatePasswordData,
 } from './AuthProvider.types';
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -70,11 +72,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return response.data;
   }, [axios, setCurrentUser]);
 
+  const sendPasswordRecoveryEmail = useCallback(
+    async (emailData: SendPasswordRecoveryEmailData) => {
+      console.log('sendPasswordRecoveryEmail:', emailData);
+      return false;
+    },
+    [],
+  );
+
+  const updatePassword = useCallback(async (userData: UpdatePasswordData) => {
+    console.log('updatePassword:', userData);
+    return false;
+  }, []);
+
   const AuthValue: AuthProps = {
     login,
     register,
     logout,
     checkAuth,
+    sendPasswordRecoveryEmail,
+    updatePassword,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;
