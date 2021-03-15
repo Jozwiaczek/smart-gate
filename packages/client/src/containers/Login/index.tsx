@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { AnimatedLogo, AuthLayout, Checkbox, Form, Link, TextField } from '../../elements';
+import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextField } from '../../elements';
 import { useAuth, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { EmailIcon } from '../../icons';
@@ -18,10 +18,8 @@ const Login = () => {
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const animatedCard = useAnimated<HTMLDivElement>({ type: 'fadeIn' });
-  const { trigger: triggerCardShake } = useAnimated({
+  const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
     type: 'shake',
-    targets: animatedCard.ref.current,
     opt: { autoTrigger: false },
   });
   const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>();
@@ -37,18 +35,18 @@ const Login = () => {
     setLoading(true);
     try {
       await login(values);
+      console.log('after');
       reset();
       history.push(routes.HOME);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
-    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <AuthLayout.Container ref={animatedCard.ref}>
+    <CardLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
@@ -65,7 +63,7 @@ const Login = () => {
           validationType="password"
           label={t('user.password')}
         />
-        <AuthLayout.ActionsContainer direction="row">
+        <CardLayout.ActionsContainer direction="row">
           <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
           <StyledButton
             type="submit"
@@ -76,17 +74,17 @@ const Login = () => {
           >
             {t('routes.login.login')}
           </StyledButton>
-        </AuthLayout.ActionsContainer>
+        </CardLayout.ActionsContainer>
       </Form>
-      <AuthLayout.ActionsContainer>
+      <CardLayout.ActionsContainer>
         <Link to="/" colorVariant="grey">
           {t('routes.login.forgotPassword')}
         </Link>
         <Link to="/registration" colorVariant="colour">
           {t('routes.login.register')}
         </Link>
-      </AuthLayout.ActionsContainer>
-    </AuthLayout.Container>
+      </CardLayout.ActionsContainer>
+    </CardLayout.Container>
   );
 };
 

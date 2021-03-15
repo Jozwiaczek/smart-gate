@@ -36,7 +36,7 @@ const Dashboard = () => {
     <Container>
       <h1>Smart Gate</h1>
       <h2>Dashboard</h2>
-      <Button to="/" onClick={logoutUser} margin="20px">
+      <Button onClick={logoutUser} margin="20px">
         {t('routes.dashboard.logout')}
       </Button>
       <Button onClick={onChangeTheme} margin="20px">

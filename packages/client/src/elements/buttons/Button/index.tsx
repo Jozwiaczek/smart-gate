@@ -14,10 +14,16 @@ const Button = ({
   to,
   disabled,
   withArrow,
+  fullWidth,
   ...rest
 }: ButtonProps) => {
   const baseButton = (
-    <StyledButton colorVariant={colorVariant} disabled={loading ? true : disabled} {...rest}>
+    <StyledButton
+      colorVariant={colorVariant}
+      fullWidth={fullWidth}
+      disabled={loading ? true : disabled}
+      {...rest}
+    >
       {loading && <Spinner margin="0 8px 0 0" />}
       {children}
       {withArrow && (
@@ -29,7 +35,11 @@ const Button = ({
   );
 
   if (to) {
-    return <Link to={to}>{baseButton}</Link>;
+    return (
+      <Link to={to} $asButton $fullWidth={fullWidth} {...rest}>
+        {baseButton}
+      </Link>
+    );
   }
 
   return baseButton;

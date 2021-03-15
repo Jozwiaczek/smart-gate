@@ -105,13 +105,15 @@ export class AuthController {
     const { tokenConfig } = constants;
     const { getCookies, clearCookies } = cookiesUtils;
 
-    clearCookies(response);
-
     const cookies = getCookies(request);
 
     const refreshToken = cookies[tokenConfig.refreshToken.name];
     const accessToken = cookies[tokenConfig.accessToken.name];
 
-    await this.authService.logout(refreshToken, accessToken);
+    try {
+      await this.authService.logout(refreshToken, accessToken);
+    } finally {
+      clearCookies(response);
+    }
   }
 }

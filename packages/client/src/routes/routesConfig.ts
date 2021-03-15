@@ -1,5 +1,5 @@
 import { routes } from '../constants';
-import { Dashboard, Login, Registration } from '../containers';
+import { Dashboard, Login, PageNotFound, Registration } from '../containers';
 import { Role } from '../enums/role.enum';
 import { BasicRouteProps, ConditionRouteProps } from './ConditionRoute/Condition.types';
 import {
@@ -35,7 +35,12 @@ const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRoute
   },
 ]).map((props) => ({ ...props, ...onlyUnauthenticated }));
 
-const allowAllRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[{}]).map((props) => ({
+const allowAllRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[
+  {
+    path: routes.PAGE_NOT_FOUND,
+    component: PageNotFound,
+  },
+]).map((props) => ({
   ...props,
   ...allowAll,
 }));

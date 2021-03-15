@@ -1,52 +1,45 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const writeToLocalStorage = <T>(key: string, data: T): void => {
-  const stringifyData = JSON.stringify(data);
-  window.localStorage.setItem(key, stringifyData);
-};
+import LocalStorageKey from '../constants/localStorageKeys';
+import { useLocalStorageMemory } from './index';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const checkIfExist = (value: any): boolean =>
-  value && typeof value !== 'undefined' && typeof value !== null;
-
-const useLocalStorage = <T>(key: string, defaultValue: T): [T, (val: T) => void, () => void] => {
+const useLocalStorage = <T>(
+  key: LocalStorageKey,
+  defaultValue: T,
+): [T, (val: T) => void, () => void] => {
+  const [getLocalStorageMemory, setLocalStorageMemory] = useLocalStorageMemory<T>(key);
   const getInitValue = () => {
-    const localValue = window.localStorage.getItem(key);
-    if (localValue) {
-      return JSON.parse(localValue);
+    const localValue = getLocalStorageMemory();
+    if (localValue === undefined) {
+      return defaultValue;
     }
-    return defaultValue;
+    return localValue;
   };
 
   const [data, setData] = useState<T>(getInitValue());
 
   const set = useCallback(
     (newValue: T) => {
-      writeToLocalStorage<T>(key, newValue);
+      setLocalStorageMemory(newValue);
       setData(newValue);
     },
-    [key],
+    [setLocalStorageMemory],
   );
 
   const clear = useCallback((): void => {
-    window.localStorage.removeItem(key);
+    setLocalStorageMemory(undefined);
     setData(defaultValue);
-  }, [defaultValue, key]);
+  }, [defaultValue, setLocalStorageMemory]);
 
   useEffect(() => {
-    const currentData = window.localStorage.getItem(key);
+    const currentData = getLocalStorageMemory();
 
-    if (!checkIfExist(currentData) && defaultValue) {
+    if (currentData === undefined) {
       set(defaultValue);
+    } else {
+      setData(currentData);
     }
-
-    if (checkIfExist(currentData)) {
-      const parsedData = JSON.parse(currentData as string);
-      if (parsedData) {
-        setData(parsedData);
-      }
-    }
-  }, [defaultValue, key, set]);
+  }, [defaultValue, getLocalStorageMemory, key, set]);
 
   const remove = useCallback(() => clear(), [clear]);
 

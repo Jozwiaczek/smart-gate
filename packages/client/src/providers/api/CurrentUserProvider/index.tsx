@@ -1,17 +1,18 @@
 import React, { useMemo, useState } from 'react';
 
-import useLocalStorage from '../../../hooks/useLocalStorage';
+import LocalStorageKey from '../../../constants/localStorageKeys';
+import { useLocalStorageMemory } from '../../../hooks';
 import { CurrentUserContext } from './CurrentUserProvider.context';
 import { CurrentUserProviderProps, User } from './CurrentUserProvider.types';
 
 const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
   const [storeUser, setStoreUser] = useState<User | undefined>();
-  const [expiration, setExpiration, removeExpiration] = useLocalStorage<number | undefined>(
-    'loginExpirationDate',
-    undefined,
+  const [getExpiration, setExpiration] = useLocalStorageMemory<number>(
+    LocalStorageKey.LOGIN_EXPIRATION_DATE,
   );
 
   const user = useMemo(() => {
+    const expiration = getExpiration();
     if (expiration && new Date(expiration).getTime() > Date.now()) {
       return storeUser;
     }
@@ -19,12 +20,8 @@ const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
   }, [expiration, storeUser]);
 
   const setUser = (newUser: User | undefined, expirationDate: number | undefined = undefined) => {
-    if (!newUser || !expirationDate) {
-      removeExpiration();
-    } else {
-      setExpiration(expirationDate);
-      setStoreUser(newUser);
-    }
+    setExpiration(expirationDate);
+    setStoreUser(() => newUser);
   };
 
   return (
