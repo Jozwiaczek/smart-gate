@@ -5,7 +5,14 @@ import { useCurrentUser } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { AuthContext } from './AuthProvider.context';
-import { LoginData, LoginUserInfo, RegistrationData } from './AuthProvider.types';
+import {
+  AuthProps,
+  LoginData,
+  LoginUserInfo,
+  RegistrationData,
+  SendPasswordRecoveryEmailData,
+  UpdatePasswordData,
+} from './AuthProvider.types';
 
 const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
   const axios = useAxios();
@@ -62,11 +69,26 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     return response.data;
   }, [axios, setUser]);
 
-  const AuthValue = {
+  const sendPasswordRecoveryEmail = useCallback(
+    async (emailData: SendPasswordRecoveryEmailData) => {
+      console.log('sendPasswordRecoveryEmail:', emailData);
+      return false;
+    },
+    [],
+  );
+
+  const updatePassword = useCallback(async (userData: UpdatePasswordData) => {
+    console.log('updatePassword:', userData);
+    return false;
+  }, []);
+
+  const AuthValue: AuthProps = {
     login,
     register,
     logout,
     isAuthenticated,
+    sendPasswordRecoveryEmail,
+    updatePassword,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;

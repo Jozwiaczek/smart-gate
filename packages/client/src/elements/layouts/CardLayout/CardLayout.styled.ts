@@ -35,3 +35,17 @@ export const CardWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const StyledTitle = styled.h1(
+  ({ theme: { breakpoints, down } }) => `
+  margin: 30px 0 20px;
+  ${down(breakpoints.xs)} {
+    font-size: 40px;
+  }
+`,
+);
+
+export const StyledDescription = styled.p`
+  color: ${({ theme: { palette } }) => palette.text.secondary};
+  margin: 30px 0;
+`;
