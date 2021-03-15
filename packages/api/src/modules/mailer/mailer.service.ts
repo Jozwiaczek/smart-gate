@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
-import { logoBase64 } from '../../emailTemplates/constants';
-
 @Injectable()
 export class MailerService {
   transporter = nodemailer.createTransport(this.getTransporterConfig());
@@ -38,14 +36,6 @@ export class MailerService {
   async sendEmail(options: Mail.Options): Promise<void> {
     const emailResult = await this.transporter.sendMail({
       from: '"Smart Gate" <no-reply@smartgate.com>',
-      attachments: [
-        {
-          filename: 'logo.png',
-          content: logoBase64,
-          cid: 'logoUnique',
-          encoding: 'base64',
-        },
-      ],
       ...options,
     });
 
