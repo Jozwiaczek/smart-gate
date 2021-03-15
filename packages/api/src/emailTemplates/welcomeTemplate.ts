@@ -1,6 +1,6 @@
 import mjml2html from 'mjml';
 
-const welcomeTemplate = ({ firstName = '' }) => ({ logo = '' }) => {
+const welcomeTemplate = ({ firstName = '' }) => {
   const { html, errors } = mjml2html(
     `
     <mjml>
@@ -18,7 +18,7 @@ const welcomeTemplate = ({ firstName = '' }) => ({ logo = '' }) => {
       <mj-body>
         <mj-section padding-bottom="20px" padding-top="10px" css-class="body-section">
           <mj-column>
-            <mj-image src='${logo}' height='250px' width='250px' alt="header image" />
+            <mj-image src='cid:logoUnique' height='250px' width='250px' alt="header image" />
             <mj-text padding="10px 25px" font-size="22px">
               Welcome ${firstName}!
             </mj-text>

@@ -95,7 +95,7 @@ const Registration = () => {
           <StyledButton
             type="submit"
             fullWidth
-            disabled={loading}
+            loading={loading}
             withArrow
             onClick={onBeforeSubmit}
           >

@@ -49,6 +49,12 @@ export class AuthController {
       expirationDate: genTokens.expiration.getTime(),
     };
 
+    await this.mailerService.sendEmail({
+      to: email,
+      subject: 'Welcome in Smart Gate system 🔑',
+      html: welcomeTemplate({ firstName }),
+    });
+
     return loginUserInfo;
   }
 
@@ -81,14 +87,6 @@ export class AuthController {
       },
       expirationDate: genTokens.expiration.getTime(),
     };
-
-    await this.mailerService.sendEmail({
-      to: email,
-      subject: 'Welcome in Smart Gate system 🔑',
-      htmlCallback: welcomeTemplate({
-        firstName,
-      }),
-    });
 
     return loginUserInfo;
   }
