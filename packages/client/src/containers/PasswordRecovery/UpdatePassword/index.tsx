@@ -7,21 +7,29 @@ import { routes } from '../../../constants';
 import { Button, CardLayout, Form, Link, TextField } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
-import { ConfirmLockIcon } from '../../../icons';
+import { ConfirmLockIcon, ShieldLock } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
-import { LoginInputs } from '../../Login/Login.types';
+import { ShieldIconWrapper } from './UpdatePassword.styled';
 
 const UpdatePassword = () => {
   const { updatePassword } = useAuth();
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
+  const [isSent, setIsSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
     type: 'shake',
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, reset, trigger, getValues } = useForm<LoginInputs>();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    reset,
+    trigger,
+    getValues,
+  } = useForm<UpdatePasswordInputs>();
 
   const onBeforeSubmit = async () => {
     const isValid = await trigger();
@@ -30,12 +38,12 @@ const UpdatePassword = () => {
     }
   };
 
-  const onSubmit = async (values: LoginInputs) => {
+  const onSubmit = async ({ password }: UpdatePasswordInputs) => {
     setLoading(true);
     try {
-      await updatePassword(values);
+      await updatePassword({ password, email: 'EMAIL_HERE' });
       reset();
-      history.push(routes.home);
+      setIsSent(true);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
@@ -44,8 +52,8 @@ const UpdatePassword = () => {
     }
   };
 
-  return (
-    <CardLayout.Container ref={animatedCardRef}>
+  const formStep = (
+    <>
       <CardLayout.Title>{t('routes.passwordRecovery.updatePassword.title')}</CardLayout.Title>
       <CardLayout.Description>
         <Trans
@@ -86,6 +94,26 @@ const UpdatePassword = () => {
           {t('routes.passwordRecovery.iRememberPassword')}
         </Link>
       </CardLayout.ActionsContainer>
+    </>
+  );
+
+  const infoStep = (
+    <>
+      <CardLayout.Title>
+        {t('routes.passwordRecovery.updatePasswordConfirmation.title')}
+      </CardLayout.Title>
+      <ShieldIconWrapper>
+        <ShieldLock />
+      </ShieldIconWrapper>
+      <Button fullWidth withArrow to={routes.home}>
+        {t('routes.passwordRecovery.updatePasswordConfirmation.back')}
+      </Button>
+    </>
+  );
+
+  return (
+    <CardLayout.Container ref={animatedCardRef}>
+      {isSent ? infoStep : formStep}
     </CardLayout.Container>
   );
 };
