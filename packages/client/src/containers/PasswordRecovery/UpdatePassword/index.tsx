@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../../constants';
 import { Button, CardLayout, Form, Link, TextField } from '../../../elements';
@@ -13,7 +12,6 @@ import { ShieldIconWrapper } from './UpdatePassword.styled';
 
 const UpdatePassword = () => {
   const { updatePassword } = useAuth();
-  const history = useHistory();
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
   const [isSent, setIsSent] = useState(false);
