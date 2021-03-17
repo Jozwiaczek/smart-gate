@@ -85,7 +85,7 @@ export class AuthController {
     await this.mailerService.sendEmail({
       to: email,
       subject: 'Welcome in Smart Gate system 🔑',
-      html: welcomeTemplate({ firstName }),
+      html: welcomeTemplate({ firstName, link: '' }),
     });
 
     return loginUserInfo;

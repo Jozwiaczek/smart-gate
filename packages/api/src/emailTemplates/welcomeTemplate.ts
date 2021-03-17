@@ -1,6 +1,11 @@
 import mjml2html from 'mjml';
 
-const welcomeTemplate = ({ firstName = '' }) => {
+interface WelcomeTemplateProps {
+  firstName: string;
+  link: string;
+}
+
+const welcomeTemplate = ({ firstName, link }: WelcomeTemplateProps) => {
   const { html, errors } = mjml2html(
     `
     <mjml>
@@ -21,14 +26,14 @@ const welcomeTemplate = ({ firstName = '' }) => {
             <mj-text padding="50px 25px" font-size="40px" line-height='47px'>
               You’ve been invited <br/> to <b>Smart Gate</b>!
             </mj-text>
-            <mj-image src='${process.env.CLIENT_URL}/email-images/paper-plane.png' height='160px' width='160px' alt="header image" />
+            <mj-image src='${process.env.CLIENT_URL}/email-images/paper-plane.png' height='160px' width='160px' alt="paper plane image" />
             <mj-text font-size="24px">
             Hi <b>${firstName}</b>,
             </mj-text>
             <mj-text>
             It’s look like that administrator invites you to group<br/> in Smart Gate system. Click on the button to<br/> create your account.
             </mj-text>
-            <mj-button href="https://mjml.io" padding="40px 0 0 0" width='240px' height='45px'>
+            <mj-button href="${link}" padding="40px 0 0 0" width='240px' height='45px'>
               Create Your Account
             </mj-button>
             <mj-text font-size="14px" color='#96A7AF' padding="70px 0 0">Best, <br /> The Smart Gate Team
