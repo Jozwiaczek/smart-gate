@@ -91,3 +91,7 @@ This composes file contains the following environment variables:
 ```shell
 docker-compose down --rmi all --volumes
 ```
+
+## Setup ethereal (local mailer)
+
+Go to https://ethereal.email, then click `Create Ethereal Account`, and paste your credentials into `.env` file.
