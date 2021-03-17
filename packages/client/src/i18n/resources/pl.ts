@@ -64,6 +64,10 @@ const pl: TranslationStructure = {
           description: 'Zaktualizuj swoje hasło dla <b>{{email}}</b>.',
           updatePassword: 'Zaktualizuj hasło',
         },
+        updatePasswordConfirmation: {
+          title: 'Hasło zaktualizowane',
+          back: 'Wróc do strony logowania',
+        },
         iRememberPassword: 'Przypomniałem sobie hasło',
       },
       pageNotFound: {

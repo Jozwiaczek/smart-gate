@@ -62,6 +62,10 @@ const en = {
           description: 'Update your password for <b>{{email}}</b>.',
           updatePassword: 'Update Password',
         },
+        updatePasswordConfirmation: {
+          title: 'Password updated',
+          back: 'Back to login',
+        },
         iRememberPassword: 'I remember my password now',
       },
       pageNotFound: {
