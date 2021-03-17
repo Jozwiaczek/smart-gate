@@ -9,11 +9,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
+import { welcomeTemplate } from '../../emailTemplates';
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { TokenPayload } from '../../interfaces/token-types';
 import { constants, cookiesUtils } from '../../utils';
 import { ValidationPipe } from '../../utils/validation.pipe';
+import { MailerService } from '../mailer/mailer.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
@@ -22,7 +24,7 @@ import { CookiePayload } from './decorators/cookiePayload.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private readonly mailerService: MailerService) {}
 
   @Post('login')
   async login(
@@ -46,6 +48,7 @@ export class AuthController {
       },
       expirationDate: genTokens.expiration.getTime(),
     };
+
     return loginUserInfo;
   }
 
@@ -78,6 +81,13 @@ export class AuthController {
       },
       expirationDate: genTokens.expiration.getTime(),
     };
+
+    await this.mailerService.sendEmail({
+      to: email,
+      subject: 'Welcome in Smart Gate system 🔑',
+      html: welcomeTemplate({ firstName, link: '' }),
+    });
+
     return loginUserInfo;
   }
 

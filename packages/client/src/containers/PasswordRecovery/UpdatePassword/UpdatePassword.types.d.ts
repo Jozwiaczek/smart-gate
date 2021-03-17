@@ -1,0 +1,3 @@
+interface UpdatePasswordInputs {
+  password: string;
+}
