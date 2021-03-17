@@ -2,39 +2,17 @@ import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
+import { MailerConfigService } from './config/mailer-config.service';
+
 @Injectable()
 export class MailerService {
-  transporter = nodemailer.createTransport(this.getTransporterConfig());
-
-  getTransporterConfig() {
-    const { NODE_ENV, SENDGRID_API_KEY, ETHEREAL_USER, ETHEREAL_PASSWORD } = process.env;
-    if (NODE_ENV === 'production') {
-      return {
-        host: 'smtp.sendgrid.net',
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-          user: 'apikey',
-          pass: SENDGRID_API_KEY,
-        },
-      };
-    }
-
-    return {
-      host: 'smtp.ethereal.email',
-      port: 587,
-      secure: false,
-      requireTLS: false,
-      auth: {
-        user: ETHEREAL_USER,
-        pass: ETHEREAL_PASSWORD,
-      },
-    };
-  }
+  constructor(private readonly mailerConfigService: MailerConfigService) {}
 
   async sendEmail(options: Mail.Options): Promise<void> {
-    const emailResult = await this.transporter.sendMail({
+    const mailerConfig = await this.mailerConfigService.getConfig();
+    const transporter = nodemailer.createTransport(mailerConfig);
+
+    const emailResult = await transporter.sendMail({
       from: '"Smart Gate" <no-reply@smartgate.com>',
       ...options,
     });
