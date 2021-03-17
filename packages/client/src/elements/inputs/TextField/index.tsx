@@ -33,7 +33,7 @@ const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
     let internalEndAdornment = endAdornment;
 
     if (isPassword) {
-      internalStartAdornment = <LockIcon color={theme.palette.action.error} />;
+      internalStartAdornment = startAdornment || <LockIcon color={theme.palette.colors.red} />;
       internalEndAdornment = <PasswordIconButton setPasswordMasked={setPasswordMasked} />;
     }
 
