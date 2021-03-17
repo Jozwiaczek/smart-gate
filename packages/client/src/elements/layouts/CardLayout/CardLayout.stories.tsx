@@ -9,7 +9,9 @@ export default {
   component: Container,
 } as Meta;
 
-const Template: Story<CardLayoutProps> = (args) => <Container {...args} />;
+const Template: Story<CardLayoutProps> = ({ children, ...props }) => (
+  <Container {...props}>{children}</Container>
+);
 
 export const Default = Template.bind({});
 Default.args = {

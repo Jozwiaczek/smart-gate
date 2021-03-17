@@ -12,17 +12,17 @@ interface ProvidersProps {
 }
 
 const Providers = ({ children }: ProvidersProps) => (
-  <StylesProvider>
-    <UserProvider>
-      <AxiosProvider>
-        <AuthProvider>
+  <UserProvider>
+    <AxiosProvider>
+      <AuthProvider>
+        <StylesProvider>
           <I18nextProvider i18n={i18n}>
             <SnackbarProvider>{children}</SnackbarProvider>
           </I18nextProvider>
-        </AuthProvider>
-      </AxiosProvider>
-    </UserProvider>
-  </StylesProvider>
+        </StylesProvider>
+      </AuthProvider>
+    </AxiosProvider>
+  </UserProvider>
 );
 
 export default Providers;

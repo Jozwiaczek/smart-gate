@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage/useLocalStorage';
 import { ThemeType } from '../../theme/Theme';
 import { ThemeTypeContext } from './ThemeTypeProvider.context';
 import { ThemeProviderProps } from './ThemeTypeProvider.types';

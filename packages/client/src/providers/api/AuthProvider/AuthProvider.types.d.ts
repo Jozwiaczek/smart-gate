@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { User } from '../CurrentUserProvider/CurrentUserProvider.types';
 
 export interface LoginUserInfo {
@@ -18,6 +20,10 @@ export interface RegistrationData {
   password: string;
 }
 
+export interface AuthProviderProps {
+  children: ReactNode;
+}
+
 export interface SendPasswordRecoveryEmailData {
   email: string;
 }
@@ -30,7 +36,7 @@ interface UpdatePasswordData {
 export interface AuthProps {
   login: (user: LoginData) => Promise<string | boolean>;
   register: (user: RegistrationData) => Promise<string | boolean>;
-  isAuthenticated: () => Promise<boolean>;
+  checkAuth: () => Promise<User | undefined>;
   logout: () => void;
   sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<boolean>;
   updatePassword: (user: UpdatePasswordData) => Promise<boolean>;

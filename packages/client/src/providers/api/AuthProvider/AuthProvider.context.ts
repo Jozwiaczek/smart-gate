@@ -3,7 +3,7 @@ import { createContext } from 'react';
 import { AuthProps } from './AuthProvider.types';
 
 const defaultValues: AuthProps = {
-  isAuthenticated: () => Promise.resolve(false),
+  checkAuth: () => Promise.resolve(undefined),
   logout: () => {},
   login: () => Promise.resolve(false),
   register: () => Promise.resolve(false),

@@ -1,2 +1,2 @@
-export { default as Environment } from './enviroment';
+export { default as environments } from './enviroments';
 export { default as routes } from './routes';

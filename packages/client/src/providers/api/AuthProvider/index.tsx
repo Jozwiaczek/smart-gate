@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios';
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
-import { useCurrentUser } from '../../../hooks';
+import { useCurrentUser, useLocalStorageMemory } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
-import useLocalStorage from '../../../hooks/useLocalStorage';
 import { AuthContext } from './AuthProvider.context';
 import {
   AuthProps,
+  AuthProviderProps,
   LoginData,
   LoginUserInfo,
   RegistrationData,
@@ -14,28 +14,31 @@ import {
   UpdatePasswordData,
 } from './AuthProvider.types';
 
-const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const axios = useAxios();
-  const [currentUser, setUser] = useCurrentUser();
-  const [expiration] = useLocalStorage('loginExpirationDate', undefined);
+  const [currentUser, setCurrentUser] = useCurrentUser();
+  const [getExpiration] = useLocalStorageMemory('loginExpirationDate');
 
-  const isAuthenticated = useCallback(async () => {
+  const checkAuth = useCallback(async () => {
     if (currentUser) {
-      return true;
+      return currentUser;
     }
+    const expiration = getExpiration();
     if (expiration) {
       return axios
         .get<never, AxiosResponse<LoginUserInfo>>('/auth/me')
         .then(({ data: { user, expirationDate } }) => {
-          setUser(user, expirationDate);
-          return true;
+          setCurrentUser(user, expirationDate);
+          return user;
         })
         .catch(() => {
-          return false;
+          setCurrentUser(undefined);
+          return undefined;
         });
     }
-    return false;
-  }, [axios, expiration, currentUser, setUser]);
+    setCurrentUser(undefined);
+    return undefined;
+  }, [axios, currentUser, getExpiration, setCurrentUser]);
 
   const login = useCallback(
     async (userData: LoginData) => {
@@ -43,10 +46,10 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
         data: { user, expirationDate },
       } = await axios.post<LoginData, AxiosResponse<LoginUserInfo>>('/auth/login', userData);
 
-      setUser(user, expirationDate);
+      setCurrentUser(user, expirationDate);
       return true;
     },
-    [axios, setUser],
+    [axios, setCurrentUser],
   );
 
   const register = useCallback(
@@ -57,17 +60,17 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
         ...userData,
       });
 
-      setUser(user, expirationDate);
+      setCurrentUser(user, expirationDate);
       return true;
     },
-    [axios, setUser],
+    [axios, setCurrentUser],
   );
 
   const logout = useCallback(async () => {
     const response = await axios.get('/auth/logout');
-    setUser(undefined);
+    setCurrentUser(undefined);
     return response.data;
-  }, [axios, setUser]);
+  }, [axios, setCurrentUser]);
 
   const sendPasswordRecoveryEmail = useCallback(
     async (emailData: SendPasswordRecoveryEmailData) => {
@@ -86,7 +89,7 @@ const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     login,
     register,
     logout,
-    isAuthenticated,
+    checkAuth,
     sendPasswordRecoveryEmail,
     updatePassword,
   };

@@ -80,7 +80,7 @@ const PasswordRecovery = () => {
         />
       </CardLayout.Description>
       <Link
-        to={routes.passwordRecovery}
+        to={routes.PASSWORD_RECOVERY}
         colorVariant="grey"
         onClick={() => setEmailSentAddress(undefined)}
       >
@@ -93,7 +93,7 @@ const PasswordRecovery = () => {
     <CardLayout.Container ref={animatedCardRef}>
       {emailSentAddress ? infoStep : formStep}
       <CardLayout.ActionsContainer>
-        <Link to={routes.login} colorVariant="colour">
+        <Link to={routes.LOGIN} colorVariant="colour">
           {t('routes.passwordRecovery.iRememberPassword')}
         </Link>
       </CardLayout.ActionsContainer>

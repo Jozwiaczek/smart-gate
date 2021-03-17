@@ -1,7 +1,7 @@
-import Environment from '../constants/enviroment';
+import environments from '../constants/enviroments';
 
 const onlyOnDevEnv = (callback: () => void) => {
-  const isDev = process.env.NODE_ENV === Environment.dev;
+  const isDev = process.env.NODE_ENV === environments.DEV;
   if (isDev) {
     callback();
   }

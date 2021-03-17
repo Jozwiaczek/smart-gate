@@ -12,7 +12,7 @@ const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
     <Container>
       <main>{children}</main>
-      {pathname === routes.login && (
+      {pathname === routes.LOGIN && (
         <footer>
           <Copyright />
         </footer>

@@ -36,11 +36,10 @@ const Login = () => {
     try {
       await login(values);
       reset();
-      history.push(routes.home);
+      history.push(routes.HOME);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
-    } finally {
       setLoading(false);
     }
   };
@@ -77,10 +76,10 @@ const Login = () => {
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to={routes.passwordRecovery} colorVariant="grey">
+        <Link to={routes.PASSWORD_RECOVERY} colorVariant="grey">
           {t('routes.login.forgotPassword')}
         </Link>
-        <Link to={routes.registration} colorVariant="colour">
+        <Link to={routes.REGISTRATION} colorVariant="colour">
           {t('routes.login.register')}
         </Link>
       </CardLayout.ActionsContainer>
