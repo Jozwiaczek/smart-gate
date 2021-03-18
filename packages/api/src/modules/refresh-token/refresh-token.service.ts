@@ -38,12 +38,12 @@ export class RefreshTokenService {
 
   async delete(refreshTokenId: string, userId: string): Promise<RefreshTokenEntity> {
     const token = await this.find(refreshTokenId, userId);
-    return await this.repository.remove(token);
+    return this.repository.remove(token);
   }
 
   async deleteAllForUser(userId: string): Promise<RefreshTokenEntity[]> {
     const tokens = await this.repository.find({ where: { userId } });
-    return await this.repository.remove(tokens);
+    return this.repository.remove(tokens);
   }
 
   private async beforeCreate() {
