@@ -15,8 +15,8 @@ import { UsersModule } from './users/users.module';
     RefreshTokenModule,
     MailerModule,
     ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 10,
+      ttl: parseInt(process.env.RATE_LIMIT_MIN_TIME || '60', 10),
+      limit: parseInt(process.env.RATE_LIMIT_MIN_TIME || '10', 10),
     }),
   ],
 })
