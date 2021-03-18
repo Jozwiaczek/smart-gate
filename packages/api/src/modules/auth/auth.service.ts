@@ -188,15 +188,29 @@ export class AuthService {
     });
   }
 
-  public async logout(refreshToken: string, access: string) {
+  public async logout(refreshToken: string, accessToken: string) {
     const { verify } = jsonwebtoken;
     const { ACCESS_SECRET } = process.env;
     if (!ACCESS_SECRET) {
       throw new Error('Secret not set');
     }
 
-    const payload = verify(access, ACCESS_SECRET, { ignoreExpiration: true }) as AccessPayload;
+    const payload = verify(accessToken, ACCESS_SECRET, { ignoreExpiration: true }) as AccessPayload;
     await this.refreshTokenService.delete(refreshToken, payload.sub);
+  }
+
+  async logoutFromAllDevices(accessToken: string) {
+    const { verify } = jsonwebtoken;
+    const { ACCESS_SECRET } = process.env;
+    if (!ACCESS_SECRET) {
+      throw new Error('Secret not set');
+    }
+
+    const { sub: userId } = verify(accessToken, ACCESS_SECRET, {
+      ignoreExpiration: true,
+    }) as AccessPayload;
+
+    await this.refreshTokenService.deleteAllForUser(userId);
   }
 
   async register(user: CreateUserDto): Promise<UserEntity> {

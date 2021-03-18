@@ -126,4 +126,23 @@ export class AuthController {
       clearCookies(response);
     }
   }
+
+  @Get('logoutFromAllDevices')
+  async logoutFromAllDevices(
+    @Req() request: CookieRequest,
+    @Res({ passthrough: true }) response: CookieResponse,
+  ) {
+    const { tokenConfig } = constants;
+    const { getCookies, clearCookies } = cookiesUtils;
+
+    const cookies = getCookies(request);
+
+    const accessToken = cookies[tokenConfig.accessToken.name];
+
+    try {
+      await this.authService.logoutFromAllDevices(accessToken);
+    } finally {
+      clearCookies(response);
+    }
+  }
 }
