@@ -126,6 +126,7 @@ To run script, in terminal type `yarn {script}`.
 | ------------------- | --------------------------------------------------------- | ------------------------------------------ |
 | `build`             |                                                           |                                            |
 | `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
+| `ci:setup:db`       | Creates mock database for continous integration           | It's should be used only by Github Actions |
 | `heroku-postbuild`  | It runs on heroku before api build                        |                                            |
 | `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
 | `lint`              | Checks linter rules                                       |                                            |
