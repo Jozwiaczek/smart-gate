@@ -38,10 +38,10 @@ export class ConfigLoader {
         port: this.environmentConfigService.getNumberValue('PGADMIN_PORT'),
       },
       authSecrets: {
-        cookie: this.environmentConfigService.getStringValue('COOKIE_SECRET', true),
-        access: this.environmentConfigService.getStringValue('ACCESS_SECRET', true),
-        refresh: this.environmentConfigService.getStringValue('REFRESH_SECRET', true),
-        logout: this.environmentConfigService.getStringValue('LOGOUT_SECRET', true),
+        cookie: this.environmentConfigService.getStringValue('COOKIE_SECRET', !isTest),
+        access: this.environmentConfigService.getStringValue('ACCESS_SECRET', !isTest),
+        refresh: this.environmentConfigService.getStringValue('REFRESH_SECRET', !isTest),
+        logout: this.environmentConfigService.getStringValue('LOGOUT_SECRET', !isTest),
       },
       mailer: {
         sendGridSecret: this.environmentConfigService.getStringValue('SENDGRID_API_KEY', isProd),
