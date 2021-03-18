@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 
+import { AllExceptionsFilterModule } from './all-exceptions-filter/all-exceptions-filter.module';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { MailerModule } from './mailer/mailer.module';
@@ -13,6 +14,7 @@ import { UsersModule } from './users/users.module';
     DatabaseModule,
     UsersModule,
     RefreshTokenModule,
+    AllExceptionsFilterModule,
     MailerModule,
     ThrottlerModule.forRoot({
       ttl: parseInt(process.env.RATE_LIMIT_MIN_TIME || '60', 10),

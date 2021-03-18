@@ -2,9 +2,10 @@ import 'dotenv/config';
 
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
-import csurf from 'csurf';
+// import csurf from 'csurf';
 import helmet from 'helmet';
 
+import { AllExceptionsFilter } from './modules/all-exceptions-filter/all-exceptions-filter';
 import { AppModule } from './modules/app.module';
 
 async function bootstrap() {
@@ -18,7 +19,10 @@ async function bootstrap() {
   });
   app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(helmet());
-  app.use(csurf());
+  const allExceptionsFilter = app.get(AllExceptionsFilter);
+  app.useGlobalFilters(allExceptionsFilter);
+
+  // app.use(csurf()); TODO: fix https://github.com/Jozwiaczek/smart-gate/issues/139
   await app.listen(process.env.PORT || 3030);
 }
 bootstrap();
