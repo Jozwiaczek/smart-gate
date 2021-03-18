@@ -37,6 +37,7 @@
     "type-check": "lerna run type-check"
   },
   "dependencies": {
+    "base64url": "^3.0.1",
     "dotenv": "^8.2.0",
     "pg": "^8.5.1"
   },
