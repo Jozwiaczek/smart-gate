@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import { Config } from '../../config/config';
+
 export interface DatabaseConfig {
   host: string;
   port: number;
@@ -7,42 +9,33 @@ export interface DatabaseConfig {
   password: string;
   database: string;
   synchronize: boolean;
-  logging: boolean;
+  logging?: boolean;
 }
 
 @Injectable()
 export class DatabaseConfigService {
+  constructor(private readonly config: Config) {}
+
   public getConfig(): DatabaseConfig {
     const baseConfig = {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      host: this.config.database.host,
+      port: this.config.database.port || 5432,
+      username: this.config.database.username,
+      password: this.config.database.password,
+      logging: this.config.database.logging,
       synchronize: false,
-      logging: process.env.NODE_ENV === 'production',
     };
 
-    if (process.env.NODE_ENV === 'test') {
-      return this.validateConfig({
+    if (this.config.environment.isTest) {
+      return {
         ...baseConfig,
-        database: process.env.DB_DATABASE_TEST,
-      });
+        database: this.config.database.databaseTest,
+      };
     }
 
-    return this.validateConfig({
+    return {
       ...baseConfig,
-      database: process.env.DB_DATABASE,
-    });
-  }
-
-  private validateConfig(config: Partial<DatabaseConfig>): DatabaseConfig {
-    if (config.host === undefined) throw new Error('Empty database host');
-    if (config.port === undefined) throw new Error('Empty database port');
-    if (config.username === undefined) throw new Error('Empty database username');
-    if (config.password === undefined) throw new Error('Empty database password');
-    if (config.database === undefined) throw new Error('Empty database database');
-    if (config.synchronize === undefined) throw new Error('Empty database synchronize');
-    if (config.logging === undefined) throw new Error('Empty database logging');
-    return config as DatabaseConfig;
+      database: this.config.database.database,
+    };
   }
 }
