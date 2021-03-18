@@ -67,7 +67,6 @@ yarn
   - [Api](./packages/api/README.md)
 - Frontend:
   - [Client](./packages/client/README.md)
-  - [Admin](./packages/admin/README.md)
 
 ## 📏 Conventional Commits
 
@@ -115,7 +114,6 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 
 | Package | Script          | Description                                                   |
 | ------- | --------------- | ------------------------------------------------------------- |
-| admin   | `hygen:model`   | Creates selected views for admin model                        |
 | client  | `hygen:element` | Creates new standardize React component, story and style file |
 
 ## 📝 Available scripts
