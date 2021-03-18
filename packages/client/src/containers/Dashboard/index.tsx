@@ -9,7 +9,7 @@ import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
-  const { logout, checkAuth } = useAuth();
+  const { logout, logoutFromAllDevices, checkAuth } = useAuth();
   const { themeType, setThemeType } = useThemeType();
 
   const getMe = async () => {
@@ -18,6 +18,10 @@ const Dashboard = () => {
 
   const logoutUser = async () => {
     await logout();
+  };
+
+  const logoutUserFromAllDevices = async () => {
+    await logoutFromAllDevices();
   };
 
   const changeLocale = () => {
@@ -38,6 +42,9 @@ const Dashboard = () => {
       <h2>Dashboard</h2>
       <Button onClick={logoutUser} margin="20px">
         {t('routes.dashboard.logout')}
+      </Button>
+      <Button onClick={logoutUserFromAllDevices} margin="20px">
+        {t('routes.dashboard.logoutFromAllDevices')}
       </Button>
       <Button onClick={onChangeTheme} margin="20px">
         Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme

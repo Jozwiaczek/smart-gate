@@ -38,6 +38,7 @@ export interface AuthProps {
   register: (user: RegistrationData) => Promise<string | boolean>;
   checkAuth: () => Promise<User | undefined>;
   logout: () => void;
+  logoutFromAllDevices: () => void;
   sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<boolean>;
   updatePassword: (user: UpdatePasswordData) => Promise<boolean>;
 }

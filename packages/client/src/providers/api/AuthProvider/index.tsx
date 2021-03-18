@@ -72,6 +72,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return response.data;
   }, [axios, setCurrentUser]);
 
+  const logoutFromAllDevices = useCallback(async () => {
+    const response = await axios.get('/auth/logoutFromAllDevices');
+    setCurrentUser(undefined);
+    return response.data;
+  }, [axios, setCurrentUser]);
+
   const sendPasswordRecoveryEmail = useCallback(
     async (emailData: SendPasswordRecoveryEmailData) => {
       console.log('sendPasswordRecoveryEmail:', emailData);
@@ -89,6 +95,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     login,
     register,
     logout,
+    logoutFromAllDevices,
     checkAuth,
     sendPasswordRecoveryEmail,
     updatePassword,

@@ -33,6 +33,7 @@ const pl: TranslationStructure = {
     routes: {
       dashboard: {
         logout: 'Wyloguj się',
+        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
       },
       login: {
         keepMeLoggedIn: 'Nie wylogowuj mnie',

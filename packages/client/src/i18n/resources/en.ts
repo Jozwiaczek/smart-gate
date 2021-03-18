@@ -31,6 +31,7 @@ const en = {
     routes: {
       dashboard: {
         logout: 'Logout',
+        logoutFromAllDevices: 'Logout from all devices',
       },
       login: {
         keepMeLoggedIn: 'Keep me logged in',
