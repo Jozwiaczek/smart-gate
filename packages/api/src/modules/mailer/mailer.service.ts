@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
+import { InvitationEntity } from '../database/entities/invitation.entity';
 import { MailerConfigService } from './config/mailer-config.service';
 
 @Injectable()
@@ -21,5 +22,9 @@ export class MailerService {
       console.log('Message sent: %s', emailResult.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(emailResult));
     }
+  }
+
+  async sendInvitation(invitation: InvitationEntity): Promise<void> {
+    // TODO
   }
 }
