@@ -18,6 +18,10 @@
     <br>
     UI/UX:
     <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
+    <br>
+    <br>
+    PRD:
+    <a href="https://docs.google.com/document/d/14E-0rzD669n-rqC-OYjqsSLxrUU7D3bg7K5M9_AFOvs/edit#heading=h.gqa5vpc8p3qt"><strong>docs.google.com</strong></a>
 </p>
 
 <hr>
