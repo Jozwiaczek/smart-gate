@@ -9,21 +9,23 @@ export class ConfigLoader {
 
   public async loadConfig(): Promise<Config> {
     const nodeENV = this.environmentConfigService.getStringValue('NODE_ENV', true);
-    const isProduction = nodeENV === 'production';
+    const isProd = nodeENV === 'production';
+    const isTest = nodeENV === 'test';
+    const isDev = nodeENV === 'development';
 
     return {
-      port: this.environmentConfigService.getNumberValue('PORT', isProduction),
-      clientUrl: this.environmentConfigService.getStringValue('CLIENT_URL', isProduction),
+      port: this.environmentConfigService.getNumberValue('PORT', isProd),
+      clientUrl: this.environmentConfigService.getStringValue('CLIENT_URL', isProd),
       rateLimiter: {
-        minTime: this.environmentConfigService.getNumberValue('RATE_LIMIT_MIN_TIME', isProduction),
+        minTime: this.environmentConfigService.getNumberValue('RATE_LIMIT_MIN_TIME', isProd),
         maxConcurrent: this.environmentConfigService.getNumberValue(
           'RATE_LIMIT_MAX_CONCURRENT',
-          isProduction,
+          isProd,
         ),
       },
       database: {
-        database: this.environmentConfigService.getStringValue('DB_DATABASE', true),
-        databaseTest: this.environmentConfigService.getStringValue('DB_DATABASE_TEST', true),
+        database: this.environmentConfigService.getStringValue('DB_DATABASE', !isTest),
+        databaseTest: this.environmentConfigService.getStringValue('DB_DATABASE_TEST', isTest),
         host: this.environmentConfigService.getStringValue('DB_HOST', true),
         port: this.environmentConfigService.getNumberValue('DB_PORT'),
         username: this.environmentConfigService.getStringValue('DB_USERNAME', true),
@@ -42,21 +44,18 @@ export class ConfigLoader {
         logout: this.environmentConfigService.getStringValue('LOGOUT_SECRET', true),
       },
       mailer: {
-        sendGridSecret: this.environmentConfigService.getStringValue(
-          'SENDGRID_API_KEY',
-          isProduction,
-        ),
+        sendGridSecret: this.environmentConfigService.getStringValue('SENDGRID_API_KEY', isProd),
         etherealAuth: {
           user: this.environmentConfigService.getStringValue('ETHEREAL_USER'),
           pass: this.environmentConfigService.getStringValue('ETHEREAL_PASSWORD'),
         },
         sender: this.environmentConfigService.getStringValue('SENDER'),
-        replyTo: this.environmentConfigService.getStringValue('REPLY_TO', isProduction),
+        replyTo: this.environmentConfigService.getStringValue('REPLY_TO', isProd),
       },
       environment: {
-        isProd: isProduction,
-        isDev: nodeENV === 'development',
-        isTest: nodeENV === 'test',
+        isProd,
+        isDev,
+        isTest,
       },
     };
   }
