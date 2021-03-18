@@ -15,10 +15,10 @@ export class ConfigLoader {
       port: this.environmentConfigService.getNumberValue('PORT', isProduction),
       clientUrl: this.environmentConfigService.getStringValue('CLIENT_URL', isProduction),
       rateLimiter: {
-        minTime: this.environmentConfigService.getNumberValue('RATE_LIMIT_MIN_TIME', true),
+        minTime: this.environmentConfigService.getNumberValue('RATE_LIMIT_MIN_TIME', isProduction),
         maxConcurrent: this.environmentConfigService.getNumberValue(
           'RATE_LIMIT_MAX_CONCURRENT',
-          true,
+          isProduction,
         ),
       },
       database: {
