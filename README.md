@@ -29,7 +29,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_shield)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)
 
 ## 🚩 Table of Contents
@@ -67,7 +66,6 @@ yarn
   - [Api](./packages/api/README.md)
 - Frontend:
   - [Client](./packages/client/README.md)
-  - [Admin](./packages/admin/README.md)
 
 ## 📏 Conventional Commits
 
@@ -115,7 +113,6 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 
 | Package | Script          | Description                                                   |
 | ------- | --------------- | ------------------------------------------------------------- |
-| admin   | `hygen:model`   | Creates selected views for admin model                        |
 | client  | `hygen:element` | Creates new standardize React component, story and style file |
 
 ## 📝 Available scripts
@@ -144,5 +141,3 @@ To run script, in terminal type `yarn {script}`.
 
 Copyright 2020 Jakub Jóźwiak.
 Licensed under the [MIT license](LICENSE).
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FJozwiaczek%2Fsmart-gate?ref=badge_large)
