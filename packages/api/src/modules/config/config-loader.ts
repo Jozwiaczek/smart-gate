@@ -53,6 +53,12 @@ export class ConfigLoader {
         sender: this.environmentConfigService.get('SENDER'),
         replyTo: this.environmentConfigService.get('REPLY_TO', isProd),
       },
+      sentry: {
+        debug: this.environmentConfigService.get('SENTRY_DEBUG', false, Boolean),
+        dsn: this.environmentConfigService.get('SENTRY_DSN', isProd),
+        enabled: this.environmentConfigService.get('SENTRY_ENABLED', isProd, Boolean),
+        environment: this.environmentConfigService.get('SENTRY_ENVIRONMENT', false),
+      },
       environment: {
         isProd,
         isDev,

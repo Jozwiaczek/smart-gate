@@ -34,6 +34,13 @@ export class Config {
     maxConcurrent: number | undefined;
   };
 
+  sentry: {
+    debug: boolean | undefined;
+    dsn: string | undefined;
+    enabled: boolean | undefined;
+    environment: string | undefined;
+  };
+
   mailer: {
     sendGridSecret: string | undefined;
     etherealAuth: {

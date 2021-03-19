@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import * as sentry from '@sentry/node';
 
+import { Config } from '../config/config';
+
 @Injectable()
 export class SentryService {
+  constructor(private readonly config: Config) {}
+
   public async captureException(exception: unknown): Promise<void> {
-    if (!process.env.SENTRY_ENABLED) {
+    if (!this.config.sentry.enabled) {
       return;
     }
 
@@ -21,9 +25,9 @@ export class SentryService {
       console.log('Initializing Sentry client');
 
       sentry.init({
-        debug: Boolean(process.env.sentry_debug),
-        dsn: process.env.SENTRY_DSN,
-        environment: process.env.SENTRY_ENVIRONMENT || 'production',
+        debug: this.config.sentry.debug,
+        dsn: this.config.sentry.dsn,
+        environment: this.config.sentry.environment || 'production',
       });
     }
 
