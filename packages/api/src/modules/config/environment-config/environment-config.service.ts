@@ -33,12 +33,13 @@ export class EnvironmentConfigService {
     required?: boolean,
     parser?: CustomValueParser<string, T>,
   ): ReturnType<CustomValueParser<string, T>> {
-    console.log(key, required, parser, this.config[key]);
     if (this.config[key] === undefined) {
       const value: string | undefined = process.env[key];
+
       if (required && value === undefined) {
         throw new Error(`Missing environment variable: ${key}`);
       }
+
       if (value) {
         this.config[key] = parser ? parser(value) : value;
       }
