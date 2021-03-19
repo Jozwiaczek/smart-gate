@@ -18,8 +18,7 @@ async function bootstrap() {
   });
   app.use(cookieParser(config.authSecrets.cookie));
   app.use(helmet());
-  const allExceptionsFilter = app.get(AllExceptionsFilter);
-  app.useGlobalFilters(allExceptionsFilter);
+  app.useGlobalFilters(app.get(AllExceptionsFilter));
 
   await app.listen(config.port || 3030);
 }
