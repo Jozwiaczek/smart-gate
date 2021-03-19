@@ -23,7 +23,7 @@ export class EnvironmentConfigService {
   public get<T>(
     key: string,
     required: boolean,
-    parser: CustomValueParser<string | undefined, T | undefined>,
+    parser: CustomValueParser<string, T>,
   ): ReturnType<CustomValueParser<string | undefined, T | undefined>>;
 
   public get<T>(

@@ -13,10 +13,8 @@ export class ConfigLoader {
     const isTest = nodeENV === 'test';
     const isDev = nodeENV === 'development';
 
-    const NumberOrUndefined = (num: string | undefined) => (num ? Number(num) : undefined);
-
     return {
-      port: this.environmentConfigService.get('PORT', isProd, NumberOrUndefined),
+      port: this.environmentConfigService.get('PORT', isProd, Number),
       clientUrl: this.environmentConfigService.get('CLIENT_URL', isProd),
       rateLimiter: {
         minTime: this.environmentConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),
@@ -38,7 +36,7 @@ export class ConfigLoader {
       pgAdmin: {
         defaultEmail: this.environmentConfigService.get('PGADMIN_DEFAULT_EMAIL'),
         defaultPassword: this.environmentConfigService.get('PGADMIN_DEFAULT_PASSWORD'),
-        port: this.environmentConfigService.get('PGADMIN_PORT', false, NumberOrUndefined),
+        port: this.environmentConfigService.get('PGADMIN_PORT', false, Number),
       },
       authSecrets: {
         cookie: this.environmentConfigService.get('COOKIE_SECRET', !isTest),
