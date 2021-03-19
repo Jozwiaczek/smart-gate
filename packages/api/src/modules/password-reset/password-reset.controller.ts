@@ -5,7 +5,7 @@ import { CreatePasswordResetDto } from './dto/create-password-reset.dto';
 import { RecoverPasswordDto } from './dto/recover-password.dto';
 import { PasswordResetService } from './password-reset.service';
 
-@Controller('password-reset')
+@Controller('passwordReset')
 export class PasswordResetController {
   constructor(private readonly passwordResetService: PasswordResetService) {}
 

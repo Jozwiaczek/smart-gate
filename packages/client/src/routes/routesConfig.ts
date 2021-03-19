@@ -42,6 +42,7 @@ const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRoute
   },
   {
     path: routes.PASSWORD_RECOVERY,
+    exact: true,
     component: PasswordRecovery,
   },
   {

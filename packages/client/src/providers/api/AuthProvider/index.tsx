@@ -80,16 +80,21 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const sendPasswordRecoveryEmail = useCallback(
     async (emailData: SendPasswordRecoveryEmailData) => {
+      await axios.post('/passwordReset/create', emailData);
       console.log('sendPasswordRecoveryEmail:', emailData);
       return false;
     },
-    [],
+    [axios],
   );
 
-  const updatePassword = useCallback(async (userData: UpdatePasswordData) => {
-    console.log('updatePassword:', userData);
-    return false;
-  }, []);
+  const updatePassword = useCallback(
+    async (userData: UpdatePasswordData) => {
+      await axios.post('/passwordReset/recover', userData);
+      console.log('updatePassword:', userData);
+      return false;
+    },
+    [axios],
+  );
 
   const AuthValue: AuthProps = {
     login,

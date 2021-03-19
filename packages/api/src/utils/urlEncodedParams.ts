@@ -1,16 +1,9 @@
 import base64url from 'base64url';
 
-type ParamsObject = { [key: string]: string };
-const UrlEncodedParams = (url: string, params: ParamsObject): string => {
-  let path = `${url}?`;
-  path += Object.keys(params)
-    .map((key) => {
-      const encodeValue = base64url.encode(params[key]);
-      return `${key}=${encodeValue}`;
-    })
-    .join('&');
+const UrlEncodedParams = (url: string, ...params: string[]): string => {
+  const encodedParams = params.map((s) => base64url.encode(s));
 
-  return path;
+  return `${url}/${encodedParams.join('/')}`;
 };
 
 export default UrlEncodedParams;

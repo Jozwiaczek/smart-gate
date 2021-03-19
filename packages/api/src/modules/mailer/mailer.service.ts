@@ -22,7 +22,7 @@ export class MailerService {
       ...options,
     });
 
-    if (this.config.environment.isProd) {
+    if (this.config.environment.isDev) {
       console.log('Message sent: %s', emailResult.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(emailResult));
     }

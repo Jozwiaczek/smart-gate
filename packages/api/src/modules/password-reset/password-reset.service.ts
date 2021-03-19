@@ -26,8 +26,7 @@ export class PasswordResetService {
     const generatedUuid = uuidV4();
     await this.cacheManager.set(email, generatedUuid, { ttl: this.passwordResetTtl });
 
-    const link = urlEncodedParams(this.baseMagicLinkUrl, { email, code: generatedUuid });
-    console.log('link', link);
+    const link = urlEncodedParams(this.baseMagicLinkUrl, email, generatedUuid);
 
     await this.mailerService.sendPasswordRecovery(email, firstName, link).catch((error) => {
       this.cacheManager.del(email);
