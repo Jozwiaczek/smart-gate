@@ -15,7 +15,7 @@ export class ConfigLoader {
 
     return {
       port: this.environmentConfigService.get('PORT', isProd, Number),
-      clientUrl: this.environmentConfigService.get('CLIENT_URL', isProd),
+      clientUrl: this.environmentConfigService.get('CLIENT_URL'),
       rateLimiter: {
         minTime: this.environmentConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),
         maxConcurrent: this.environmentConfigService.get(

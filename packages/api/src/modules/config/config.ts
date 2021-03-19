@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class Config {
   port: number | undefined;
 
-  clientUrl: string | undefined;
+  clientUrl: string;
 
   database: {
     database: string;

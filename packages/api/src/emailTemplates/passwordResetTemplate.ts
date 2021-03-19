@@ -1,11 +1,12 @@
 import mjml2html from 'mjml';
 
-interface PasswordRecoveryTemplateProps {
-  firstName: string;
-  link: string;
-}
+import { PasswordRecoveryTemplateProps } from './emailTemplates.types';
 
-const passwordRecoveryTemplate = ({ firstName, link }: PasswordRecoveryTemplateProps) => {
+const passwordRecoveryTemplate = ({
+  firstName,
+  link,
+  clientUrl,
+}: PasswordRecoveryTemplateProps) => {
   const { html, errors } = mjml2html(
     `
     <mjml>
@@ -25,7 +26,7 @@ const passwordRecoveryTemplate = ({ firstName, link }: PasswordRecoveryTemplateP
         <mj-section border-radius="12px 12px 0 0" background-color="#22343C" padding="0">
           <mj-column>
             <mj-image
-              src="${process.env.CLIENT_URL}/email-images/sg-logo.png"
+              src="${clientUrl}/email-images/sg-logo.png"
               height="140px"
               width="140px"
               alt="header image"
@@ -43,7 +44,7 @@ const passwordRecoveryTemplate = ({ firstName, link }: PasswordRecoveryTemplateP
               Password Recovery
             </mj-text>
             <mj-image
-              src="${process.env.CLIENT_URL}/email-images/shield-lock.png"
+              src="${clientUrl}/email-images/shield-lock.png"
               height="141px"
               width="150px"
               alt="shield lock image"

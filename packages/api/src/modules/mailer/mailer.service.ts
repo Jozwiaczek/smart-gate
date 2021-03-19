@@ -32,7 +32,11 @@ export class MailerService {
     await this.sendEmail({
       to: email,
       subject: 'Smart Gate - Password recovery',
-      html: passwordResetTemplate({ firstName, link }),
+      html: passwordResetTemplate({
+        firstName,
+        link,
+        clientUrl: this.mailerConfigService.getClientUrl(),
+      }),
     });
   }
 }
