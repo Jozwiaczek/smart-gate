@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 
-import { AllExceptionsFilterModule } from './all-exceptions-filter/all-exceptions-filter.module';
 import { AuthModule } from './auth/auth.module';
 import { Config } from './config/config';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
+import { GlobalExceptionsFilterModule } from './global-exceptions-filter/global-exceptions-filter.module';
 import { MailerModule } from './mailer/mailer.module';
 import { RefreshTokenModule } from './refresh-token/refresh-token.module';
 import { UsersModule } from './users/users.module';
@@ -16,7 +16,7 @@ import { UsersModule } from './users/users.module';
     DatabaseModule,
     UsersModule,
     RefreshTokenModule,
-    AllExceptionsFilterModule,
+    GlobalExceptionsFilterModule,
     MailerModule,
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],

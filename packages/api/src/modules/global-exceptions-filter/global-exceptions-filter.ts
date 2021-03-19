@@ -3,7 +3,7 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from
 import { SentryService } from '../sentry/sentry.service';
 
 @Catch()
-export class AllExceptionsFilter implements ExceptionFilter {
+export class GlobalExceptionsFilter implements ExceptionFilter {
   constructor(private readonly sentryService: SentryService) {}
 
   public catch(exception: unknown, host: ArgumentsHost): void {
