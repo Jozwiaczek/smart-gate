@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '../../../utils/testing-library-instance';
+import { fireEvent, render, screen } from '../../../utils/testingLibraryInstance';
 import TextField from '.';
 
 describe('TextField', () => {
