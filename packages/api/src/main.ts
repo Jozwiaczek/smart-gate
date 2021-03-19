@@ -2,11 +2,11 @@ import 'dotenv/config';
 
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
-import csurf from 'csurf';
 import helmet from 'helmet';
 
 import { AppModule } from './modules/app.module';
 import { Config } from './modules/config/config';
+import { GlobalExceptionsFilter } from './modules/global-exceptions-filter/global-exceptions-filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,7 +18,8 @@ async function bootstrap() {
   });
   app.use(cookieParser(config.authSecrets.cookie));
   app.use(helmet());
-  app.use(csurf());
+  app.useGlobalFilters(app.get(GlobalExceptionsFilter));
+
   await app.listen(config.port || 3030);
 }
 bootstrap();
