@@ -6,21 +6,21 @@ import helmet from 'helmet';
 
 import { AllExceptionsFilter } from './modules/all-exceptions-filter/all-exceptions-filter';
 import { AppModule } from './modules/app.module';
+import { Config } from './modules/config/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const config = app.get(Config);
+
   app.enableCors({
-    origin: [
-      process.env.CLIENT_URL || 'http://localhost:8080',
-      process.env.ADMIN_URL || 'http://localhost:8081',
-    ],
+    origin: [config.clientUrl || 'http://localhost:8080'],
     credentials: true,
   });
-  app.use(cookieParser(process.env.COOKIE_SECRET));
+  app.use(cookieParser(config.authSecrets.cookie));
   app.use(helmet());
   const allExceptionsFilter = app.get(AllExceptionsFilter);
   app.useGlobalFilters(allExceptionsFilter);
 
-  await app.listen(process.env.PORT || 3030);
+  await app.listen(config.port || 3030);
 }
 bootstrap();

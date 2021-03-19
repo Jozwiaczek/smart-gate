@@ -11,7 +11,7 @@ type Handler = (e: BaseSyntheticEvent) => void;
  */
 const useOnClickOutside = (ref: RefObject<HTMLElement>, handler: Handler) => {
   useEffect(() => {
-    // eslint-disable-next-line
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const listener = (event: any) => {
       // Do nothing if clicking ref's element or descendent elements
       if (!ref.current || ref.current.contains(event.target)) {
