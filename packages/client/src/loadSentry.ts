@@ -1,6 +1,8 @@
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
+import { onlyOnDevEnv } from './utils';
+
 const {
   REACT_APP_SENTRY_DEBUG,
   REACT_APP_SENTRY_ENABLED,
@@ -8,7 +10,7 @@ const {
   REACT_APP_SENTRY_DSN,
 } = process.env;
 
-console.log('Initialize sentry');
+onlyOnDevEnv(() => console.log('Initializing sentry'));
 
 Sentry.init({
   dsn: REACT_APP_SENTRY_DSN,
