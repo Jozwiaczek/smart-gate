@@ -7,82 +7,42 @@ export class EnvironmentConfigService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private readonly config: Record<string, any> = {};
 
-  public getStringValue(key: string, required: boolean): string;
+  public get(key: string): ReturnType<CustomValueParser<string, string>>;
 
-  public getStringValue(key: string): string | undefined;
+  public get(key: string, required: true): ReturnType<CustomValueParser<string, string>>;
 
-  public getStringValue(key: string, required?: boolean): string | undefined {
-    if (this.config[key] === undefined) {
-      const value: string | undefined = process.env[key];
-      if (required && value === undefined) {
-        throw new Error(`Missing environment variable: ${key}`);
-      }
-
-      this.config[key] = value;
-    }
-
-    return this.config[key];
-  }
-
-  public getNumberValue(key: string, required: boolean): number;
-
-  public getNumberValue(key: string): number | undefined;
-
-  public getNumberValue(key: string, required?: boolean): number | undefined {
-    if (this.config[key] === undefined) {
-      const value: string | undefined = process.env[key];
-      if (required && value === undefined) {
-        throw new Error(`Missing environment variable: ${key}`);
-      }
-
-      this.config[key] = Number(value);
-    }
-
-    return this.config[key];
-  }
-
-  public getBooleanValue(key: string, required: boolean): boolean;
-
-  public getBooleanValue(key: string): boolean | undefined;
-
-  public getBooleanValue(key: string, required?: boolean): boolean | undefined {
-    if (this.config[key] === undefined) {
-      const value: string | undefined = process.env[key];
-      if (required && value === undefined) {
-        throw new Error(`Missing environment variable: ${key}`);
-      }
-
-      this.config[key] = Boolean(value);
-    }
-
-    return this.config[key];
-  }
-
-  public getCustomValue<T>(
+  public get(
     key: string,
-    parser: CustomValueParser<string, T>,
+    required: boolean,
+  ): ReturnType<CustomValueParser<string | undefined, string | undefined>>;
+
+  public get<T>(
+    key: string,
     required: true,
+    parser: CustomValueParser<string, T>,
   ): ReturnType<CustomValueParser<string, T>>;
 
-  public getCustomValue<T>(
+  public get<T>(
     key: string,
+    required: boolean,
     parser: CustomValueParser<string | undefined, T | undefined>,
   ): ReturnType<CustomValueParser<string | undefined, T | undefined>>;
 
-  public getCustomValue<T>(
+  public get<T>(
     key: string,
-    parser: CustomValueParser<string, T>,
-    required?: true,
+    required?: boolean,
+    parser?: CustomValueParser<string, T>,
   ): ReturnType<CustomValueParser<string, T>> {
+    console.log(key, required, parser, this.config[key]);
     if (this.config[key] === undefined) {
       const value: string | undefined = process.env[key];
       if (required && value === undefined) {
         throw new Error(`Missing environment variable: ${key}`);
       }
-
-      this.config[key] = parser(value as string);
+      if (value) {
+        this.config[key] = parser ? parser(value) : value;
+      }
     }
-
     return this.config[key];
   }
 }

@@ -6,12 +6,11 @@ import csurf from 'csurf';
 import helmet from 'helmet';
 
 import { AppModule } from './modules/app.module';
-import { ConfigLoader } from './modules/config/config-loader';
-import { EnvironmentConfigService } from './modules/config/environment-config/environment-config.service';
+import { Config } from './modules/config/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config = await new ConfigLoader(new EnvironmentConfigService()).loadConfig();
+  const config = app.get(Config);
 
   app.enableCors({
     origin: [config.clientUrl || 'http://localhost:8080'],
