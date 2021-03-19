@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 import { AuthModule } from './auth/auth.module';
+import { Config } from './config/config';
+import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { MailerModule } from './mailer/mailer.module';
 import { RefreshTokenModule } from './refresh-token/refresh-token.module';
@@ -14,9 +16,13 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     RefreshTokenModule,
     MailerModule,
-    ThrottlerModule.forRoot({
-      ttl: parseInt(process.env.RATE_LIMIT_MIN_TIME || '60', 10),
-      limit: parseInt(process.env.RATE_LIMIT_MIN_TIME || '10', 10),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [Config],
+      useFactory: (config: Config) => ({
+        ttl: config.rateLimiter.maxConcurrent,
+        limit: config.rateLimiter.minTime,
+      }),
     }),
   ],
 })

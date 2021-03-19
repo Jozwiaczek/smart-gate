@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 
+import { Config } from '../../config/config';
+
 interface MailerAuthConfig {
   user: string;
   pass: string;
@@ -14,49 +16,52 @@ interface MailerConfig<T = MailerAuthConfig> {
   auth: T;
 }
 
+interface SendEmailConfig {
+  sender: string;
+  replyTo: string;
+}
+
 @Injectable()
 export class MailerConfigService {
-  public async getConfig(): Promise<MailerConfig> {
+  constructor(private readonly config: Config) {}
+
+  public async getTransporterConfig(): Promise<MailerConfig> {
     const baseConfig = {
       port: 587,
       secure: false,
       requireTLS: true,
     };
 
-    const { NODE_ENV, SENDGRID_API_KEY, ETHEREAL_USER, ETHEREAL_PASSWORD } = process.env;
-    if (NODE_ENV === 'production') {
-      return this.validateConfig({
+    if (this.config.environment.isProd) {
+      return {
         ...baseConfig,
         host: 'smtp.sendgrid.net',
         auth: {
           user: 'apikey',
-          pass: SENDGRID_API_KEY,
+          pass: this.config.mailer.sendGridSecret || '',
         },
-      });
+      };
     }
 
     let auth = {
-      user: ETHEREAL_USER,
-      pass: ETHEREAL_PASSWORD,
+      user: this.config.mailer.etherealAuth.user || '',
+      pass: this.config.mailer.etherealAuth.pass || '',
     };
     if (!auth.user || !auth.pass) {
       auth = await nodemailer.createTestAccount();
     }
 
-    return this.validateConfig({
+    return {
       ...baseConfig,
       host: 'smtp.ethereal.email',
       auth,
-    });
+    };
   }
 
-  private validateConfig(config: Partial<MailerConfig<Partial<MailerAuthConfig>>>): MailerConfig {
-    if (config.host === undefined) throw new Error('Empty mailer host');
-    if (config.port === undefined) throw new Error('Empty mailer port');
-    if (config.secure === undefined) throw new Error('Empty mailer secure flag');
-    if (config.requireTLS === undefined) throw new Error('Empty mailer requireTLS flag');
-    if (config.auth?.user === undefined) throw new Error('Empty mailer auth user');
-    if (config.auth?.pass === undefined) throw new Error('Empty mailer auth pass');
-    return config as MailerConfig;
+  public getSendEmailConfig(): SendEmailConfig {
+    return {
+      sender: this.config.mailer.sender || 'Smart Gate',
+      replyTo: this.config.mailer.replyTo || 'sg@gmail.com',
+    };
   }
 }
