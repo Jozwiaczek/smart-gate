@@ -44,6 +44,10 @@ export class Config {
     replyTo: string | undefined;
   };
 
+  passwordReset: {
+    passwordResetTime: number | undefined;
+  };
+
   environment: {
     isDev: boolean;
     isProd: boolean;

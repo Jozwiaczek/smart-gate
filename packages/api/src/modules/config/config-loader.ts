@@ -44,6 +44,9 @@ export class ConfigLoader {
         refresh: this.environmentConfigService.get('REFRESH_SECRET', !isTest),
         logout: this.environmentConfigService.get('LOGOUT_SECRET', !isTest),
       },
+      passwordReset: {
+        passwordResetTime: this.environmentConfigService.get('PASSWORD_RESET_TIME', false, Number),
+      },
       mailer: {
         sendGridSecret: this.environmentConfigService.get('SENDGRID_API_KEY', isProd),
         etherealAuth: {
