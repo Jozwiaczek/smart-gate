@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 
 import { Config } from './config';
 import { ConfigLoader } from './config-loader';
-import { EnvironmentConfigModule } from './environment-config/environment-config.module';
+import { EnvConfigModule } from './env-config/env-config.module';
 
 @Module({
-  imports: [EnvironmentConfigModule],
+  imports: [EnvConfigModule],
   providers: [
     {
       provide: ConfigLoader,
