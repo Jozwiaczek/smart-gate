@@ -1,17 +1,12 @@
+import './loadSentry';
+import './loadPolyfills';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Providers from './providers';
 import Routes from './routes';
 import * as serviceWorkerRegistration from './serviceWorker/serviceWorkerRegistration';
-import reportWebVitals from './utils/reportWebVitals';
-
-// Load Polyfills
-(async () => {
-  if (typeof window.IntersectionObserver === 'undefined') {
-    await import('intersection-observer');
-  }
-})();
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,4 +19,4 @@ ReactDOM.render(
 
 serviceWorkerRegistration.register();
 
-reportWebVitals();
+// reportWebVitals(); TODO: setup analytics: https://github.com/Jozwiaczek/smart-gate/issues/145
