@@ -7,9 +7,7 @@ export class EnvironmentConfigService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private readonly config: Record<string, any> = {};
 
-  public get(key: string): ReturnType<CustomValueParser<string, string>>;
-
-  public get(key: string, required: true): ReturnType<CustomValueParser<string, string>>;
+  public get(key: string, required?: true): ReturnType<CustomValueParser<string, string>>;
 
   public get(
     key: string,
