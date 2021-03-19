@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 type CustomValueParser<SourceType, TargetType> = (valueRaw: SourceType) => TargetType;
 
 @Injectable()
-export class EnvironmentConfigService {
+export class EnvConfigService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private readonly config: Record<string, any> = {};
 
