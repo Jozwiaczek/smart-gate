@@ -2,7 +2,6 @@ import 'dotenv/config';
 
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
-// import csurf from 'csurf';
 import helmet from 'helmet';
 
 import { AllExceptionsFilter } from './modules/all-exceptions-filter/all-exceptions-filter';
@@ -22,7 +21,6 @@ async function bootstrap() {
   const allExceptionsFilter = app.get(AllExceptionsFilter);
   app.useGlobalFilters(allExceptionsFilter);
 
-  // app.use(csurf()); TODO: fix https://github.com/Jozwiaczek/smart-gate/issues/139
   await app.listen(process.env.PORT || 3030);
 }
 bootstrap();
