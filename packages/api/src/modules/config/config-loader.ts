@@ -15,7 +15,7 @@ export class ConfigLoader {
 
     return {
       port: this.envConfigService.get('PORT', isProd, Number),
-      clientUrl: this.envConfigService.get('CLIENT_URL', isProd),
+      clientUrl: this.envConfigService.get('CLIENT_URL'),
       rateLimiter: {
         minTime: this.envConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),
         maxConcurrent: this.envConfigService.get('RATE_LIMIT_MAX_CONCURRENT', isProd, Number),
@@ -39,6 +39,9 @@ export class ConfigLoader {
         access: this.envConfigService.get('ACCESS_SECRET', !isTest),
         refresh: this.envConfigService.get('REFRESH_SECRET', !isTest),
         logout: this.envConfigService.get('LOGOUT_SECRET', !isTest),
+      },
+      passwordReset: {
+        passwordResetTime: this.envConfigService.get('PASSWORD_RESET_TIME', false, Number),
       },
       mailer: {
         sendGridSecret: this.envConfigService.get('SENDGRID_API_KEY', isProd),

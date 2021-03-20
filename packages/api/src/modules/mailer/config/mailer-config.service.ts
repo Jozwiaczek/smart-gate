@@ -64,4 +64,8 @@ export class MailerConfigService {
       replyTo: this.config.mailer.replyTo || 'sg@gmail.com',
     };
   }
+
+  public getClientUrl(): string {
+    return this.config.clientUrl;
+  }
 }

@@ -7,6 +7,7 @@ import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { GlobalExceptionsFilterModule } from './global-exceptions-filter/global-exceptions-filter.module';
 import { MailerModule } from './mailer/mailer.module';
+import { PasswordResetModule } from './password-reset/password-reset.module';
 import { RefreshTokenModule } from './refresh-token/refresh-token.module';
 import { UsersModule } from './users/users.module';
 
@@ -26,6 +27,7 @@ import { UsersModule } from './users/users.module';
         limit: config.rateLimiter.minTime,
       }),
     }),
+    PasswordResetModule,
   ],
 })
 export class AppModule {}

@@ -17,4 +17,7 @@ const tokenConfig = {
     expiresIn: '5m',
   },
 };
-export default { tokenConfig };
+const clientEndpoints = {
+  passwordMagicLink: '/passwordRecovery/magicLink',
+};
+export default { tokenConfig, clientEndpoints };

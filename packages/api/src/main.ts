@@ -13,7 +13,7 @@ async function bootstrap() {
   const config = app.get(Config);
 
   app.enableCors({
-    origin: [config.clientUrl || 'http://localhost:8080'],
+    origin: config.clientUrl,
     credentials: true,
   });
   app.use(cookieParser(config.authSecrets.cookie));

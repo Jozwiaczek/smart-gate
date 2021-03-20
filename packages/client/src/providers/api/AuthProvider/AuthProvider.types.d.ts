@@ -30,6 +30,7 @@ export interface SendPasswordRecoveryEmailData {
 
 interface UpdatePasswordData {
   email: string;
+  code: string;
   password: string;
 }
 
