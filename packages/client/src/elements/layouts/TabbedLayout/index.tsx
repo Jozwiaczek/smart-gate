@@ -10,17 +10,17 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Role } from '../../enums/role.enum';
-import { useCurrentUser } from '../../hooks';
-import { User } from '../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
+import { Role } from '../../../enums/role.enum';
+import { useCurrentUser } from '../../../hooks';
+import { User } from '../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
 import {
   TabButton,
   TabLabel,
   TabPanelWrapper,
   TabsIndicator,
   TabsWrapper,
-} from './TabbedView.styled';
-import { TabPanelProps, TabProps, TabsProps } from './TabbedView.types';
+} from './TabbedLayout.styled';
+import { TabPanelProps, TabProps, TabsProps } from './TabbedLayout.types';
 
 const getIndicatorPosition = (
   value: number,
@@ -69,10 +69,10 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
 
   // TODO: Create tabs items refs for dynamically calculating total children width, instead constant 'tabWidth'.
   useLayoutEffect(() => {
-    const tabbedViewWidth = tabsWrapperRef.current?.offsetWidth || 0;
+    const tabbedContainerWidth = tabsWrapperRef.current?.offsetWidth || 0;
     const totalsChildren = countAvailableChildren(children, currentUser);
     setIndicatorLeft(
-      getIndicatorPosition(value, totalsChildren, tabbedViewWidth, tabWidth, tabIndicatorSize),
+      getIndicatorPosition(value, totalsChildren, tabbedContainerWidth, tabWidth, tabIndicatorSize),
     );
   }, [children, currentUser, tabWidth, value]);
 

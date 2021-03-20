@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { TabMarkerPosition, TabsIndicatorProps } from './TabbedView.types';
+import { TabMarkerPosition, TabsIndicatorProps } from './TabbedLayout.types';
 
 export const TabsWrapper = styled.div`
   position: relative;

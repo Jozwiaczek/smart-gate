@@ -2,9 +2,9 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import React, { MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 
-import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
-import TabbedView from '.';
-import { TabProps, TabsProps } from './TabbedView.types';
+import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../../icons';
+import TabbedLayout from '.';
+import { TabProps, TabsProps } from './TabbedLayout.types';
 
 const MockRoot = styled.div`
   width: 100%;
@@ -20,8 +20,8 @@ const MockTabsWrapper = styled.div`
 `;
 
 export default {
-  title: 'Elements/Tabbed View',
-  component: TabbedView.Tabs,
+  title: 'Elements/layouts/Tabbed',
+  component: TabbedLayout.Tabs,
 } as Meta;
 
 const Template: Story<TabsProps> = ({ options }) => {
@@ -52,26 +52,26 @@ const Template: Story<TabsProps> = ({ options }) => {
   return (
     <MockRoot>
       <MockTabsWrapper>
-        <TabbedView.Tabs value={value} onChange={handleChange} options={options}>
+        <TabbedLayout.Tabs value={value} onChange={handleChange} options={options}>
           {tabs.map((tabProps) => (
-            <TabbedView.Tab key={tabProps.label} {...tabProps} />
+            <TabbedLayout.Tab key={tabProps.label} {...tabProps} />
           ))}
-        </TabbedView.Tabs>
+        </TabbedLayout.Tabs>
       </MockTabsWrapper>
-      <TabbedView.TabPanel value={value} index={0}>
+      <TabbedLayout.TabPanel value={value} index={0}>
         <p>History panel</p>
-      </TabbedView.TabPanel>
+      </TabbedLayout.TabPanel>
       {value === 1 && (
         <div>
           <p>Raw div with render condition</p>
         </div>
       )}
-      <TabbedView.TabPanel value={value} index={2}>
+      <TabbedLayout.TabPanel value={value} index={2}>
         <p>Settings panel</p>
-      </TabbedView.TabPanel>
-      <TabbedView.TabPanel value={value} index={3}>
+      </TabbedLayout.TabPanel>
+      <TabbedLayout.TabPanel value={value} index={3}>
         <p>Admin panel - accessible only for logged admin users</p>
-      </TabbedView.TabPanel>
+      </TabbedLayout.TabPanel>
     </MockRoot>
   );
 };
