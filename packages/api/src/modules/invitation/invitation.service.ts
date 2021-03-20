@@ -21,4 +21,8 @@ export class InvitationService {
       roles,
     });
   }
+
+  async findOneOrFail(id: string, email: string): Promise<InvitationEntity> {
+    return this.repository.findOneOrFail({ where: { id, email } });
+  }
 }
