@@ -20,7 +20,7 @@ const MockTabsWrapper = styled.div`
 `;
 
 export default {
-  title: 'Elements/layouts/Tabbed',
+  title: 'Elements/layouts/Tabbed Layout',
   component: TabbedLayout.Tabs,
 } as Meta;
 
