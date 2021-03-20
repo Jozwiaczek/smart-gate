@@ -1,9 +1,9 @@
-interface RippleEffectProps {
+export interface RippleEffectProps {
   color?: string;
   duration?: number;
 }
 
-interface Ripple {
+export interface Ripple {
   id: number;
   x: number;
   y: number;

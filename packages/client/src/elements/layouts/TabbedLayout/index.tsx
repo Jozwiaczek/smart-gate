@@ -75,7 +75,7 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
     setIndicatorLeft(
       getIndicatorPosition(value, totalsChildren, tabbedContainerWidth, tabWidth, tabIndicatorSize),
     );
-  }, [children, currentUser, tabWidth, value]);
+  }, [children, currentUser, tabIndicatorSize, tabWidth, value]);
 
   return (
     <TabsWrapper ref={tabsWrapperRef}>

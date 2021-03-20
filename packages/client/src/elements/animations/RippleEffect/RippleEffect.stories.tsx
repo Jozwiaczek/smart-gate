@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import RippleEffect from '.';
+import { RippleEffectProps } from './RippleEffect.types';
 
 export default {
   title: 'Elements/animations/Ripple effect',

@@ -1,6 +1,7 @@
 import React, { MouseEvent, useCallback, useState } from 'react';
 
 import { RippleContainer } from './RippleEffect.styled';
+import { Ripple, RippleEffectProps } from './RippleEffect.types';
 import useDebouncedRippleCleanUp from './useDebounceRippleCleanUp';
 
 const RippleEffect = ({ color = '#fff', duration = 850 }: RippleEffectProps) => {

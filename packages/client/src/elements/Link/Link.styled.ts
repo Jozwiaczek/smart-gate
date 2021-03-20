@@ -53,7 +53,7 @@ const baseLink = ({ theme: { palette }, $fullWidth, $asButton }: BaseLinkProps) 
   `};
 
   &:disabled {
-    color: ${palette.action.disabled};
+    color: ${palette.text.disabled};
     cursor: not-allowed;
     pointer-events: all !important;
   }
