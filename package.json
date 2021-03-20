@@ -1,6 +1,6 @@
 {
   "name": "smart-gate",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "private": true,
   "description": "Smart Gate project - for opening physical home/garage gate",
   "repository": "git@github.com:Jozwiaczek/smart-gate.git",
@@ -37,6 +37,7 @@
     "type-check": "lerna run type-check"
   },
   "dependencies": {
+    "base64url": "^3.0.1",
     "dotenv": "^8.2.0",
     "pg": "^8.5.1"
   },

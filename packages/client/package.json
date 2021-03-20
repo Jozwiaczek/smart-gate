@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "prebuild": "yarn clean",
@@ -20,6 +20,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@sentry/react": "^6.2.3",
+    "@sentry/tracing": "^6.2.3",
     "animejs": "^3.2.1",
     "axios": "^0.21.1",
     "i18next": "^19.9.0",

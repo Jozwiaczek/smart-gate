@@ -2,23 +2,24 @@ import 'dotenv/config';
 
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
-import csurf from 'csurf';
 import helmet from 'helmet';
 
 import { AppModule } from './modules/app.module';
+import { Config } from './modules/config/config';
+import { GlobalExceptionsFilter } from './modules/global-exceptions-filter/global-exceptions-filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const config = app.get(Config);
+
   app.enableCors({
-    origin: [
-      process.env.CLIENT_URL || 'http://localhost:8080',
-      process.env.ADMIN_URL || 'http://localhost:8081',
-    ],
+    origin: config.clientUrl,
     credentials: true,
   });
-  app.use(cookieParser(process.env.COOKIE_SECRET));
+  app.use(cookieParser(config.authSecrets.cookie));
   app.use(helmet());
-  app.use(csurf());
-  await app.listen(process.env.PORT || 3030);
+  app.useGlobalFilters(app.get(GlobalExceptionsFilter));
+
+  await app.listen(config.port || 3030);
 }
 bootstrap();

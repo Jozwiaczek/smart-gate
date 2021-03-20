@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "strictPropertyInitialization": false,
     "sourceMap": true,
+    "inlineSources": true,
     "noEmit": true
   }
 }
