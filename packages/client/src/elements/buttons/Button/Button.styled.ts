@@ -77,7 +77,7 @@ export const StyledButton = styled.button<ButtonProps>(
     }
   }
 
-  :focus {
+  :focus-visible {
     transition: box-shadow 150ms ease-in-out;
     box-shadow: 0 0 0 3px ${
       colorVariant === ThemeType.light ? palette.primary.dark : palette.primary.light

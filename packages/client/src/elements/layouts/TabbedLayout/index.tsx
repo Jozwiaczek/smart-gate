@@ -3,16 +3,13 @@ import React, {
   cloneElement,
   isValidElement,
   MouseEvent,
-  ReactNode,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Role } from '../../../enums/role.enum';
 import { useCurrentUser } from '../../../hooks';
-import { User } from '../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
 import { RippleEffect } from '../../animations';
 import {
   TabButton,
@@ -22,68 +19,47 @@ import {
   TabsWrapper,
 } from './TabbedLayout.styled';
 import { TabPanelProps, TabProps, TabsProps } from './TabbedLayout.types';
-
-const getIndicatorPosition = (
-  value: number,
-  totalChildren: number,
-  containerWidth: number,
-  tabWidth: number,
-  tabIndicatorSize: number,
-): number => {
-  console.log('L:32 | tabIndicatorSize: ', tabIndicatorSize); // TODO: handle indicator width diff
-
-  const totalChildrenWidth = totalChildren * tabWidth;
-  const totalEmptyWidth = containerWidth - totalChildrenWidth;
-  const singleEmptyWidth = totalEmptyWidth / (totalChildren + 1);
-  const trimmedSingleEmptyWidth = singleEmptyWidth <= 0 ? 0 : singleEmptyWidth;
-
-  if (value === 0) {
-    return trimmedSingleEmptyWidth;
-  }
-
-  const emptyWidthForValue = (value + 1) * trimmedSingleEmptyWidth;
-  const tabsWidthForValue = value * tabWidth;
-
-  return emptyWidthForValue + tabsWidthForValue;
-};
-
-const hasAccess = (onlyAdmin: boolean, user?: User) =>
-  !(onlyAdmin && !user?.roles.includes(Role.Admin));
-
-const countAvailableChildren = (children: ReactNode, user?: User) =>
-  Children.count(
-    Children.map(children, (child) => {
-      if (isValidElement(child)) {
-        const { onlyAdmin } = child.props;
-        if (hasAccess(onlyAdmin, user)) {
-          return child;
-        }
-      }
-    }),
-  );
+import { countAvailableChildren, getIndicatorPosition, hasAccess } from './TabbedLayout.utils';
 
 const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
   const tabsWrapperRef = useRef<HTMLDivElement>(null);
   const [indicatorLeft, setIndicatorLeft] = useState(0);
   const [currentUser] = useCurrentUser();
-  const { tabIndicatorPosition = 'bottom', tabWidth = 160, tabIndicatorSize = tabWidth } = options;
+  const [indicatorWidth, setIndicatorWidth] = useState(0);
 
-  // TODO: Create tabs items refs for dynamically calculating total children width, instead constant 'tabWidth'.
+  const {
+    tabIndicatorPosition = 'bottom',
+    tabWidth = 160,
+    tabIndicatorWidth: tabIndicatorWidthProp = tabWidth,
+    variant = 'default',
+  } = options;
+
   useLayoutEffect(() => {
     const tabbedContainerWidth = tabsWrapperRef.current?.offsetWidth || 0;
     const totalsChildren = countAvailableChildren(children, currentUser);
+    const indicatorWidthOnFullWidth = tabbedContainerWidth / totalsChildren;
     setIndicatorLeft(
-      getIndicatorPosition(value, totalsChildren, tabbedContainerWidth, tabWidth, tabIndicatorSize),
+      getIndicatorPosition(
+        value,
+        totalsChildren,
+        tabbedContainerWidth,
+        tabWidth,
+        tabIndicatorWidthProp,
+        variant,
+        indicatorWidthOnFullWidth,
+      ),
     );
-  }, [children, currentUser, tabIndicatorSize, tabWidth, value]);
+
+    if (variant === 'fullWidth') {
+      setIndicatorWidth(indicatorWidthOnFullWidth);
+    } else {
+      setIndicatorWidth(tabIndicatorWidthProp);
+    }
+  }, [children, currentUser, tabIndicatorWidthProp, tabWidth, value, variant]);
 
   return (
-    <TabsWrapper ref={tabsWrapperRef}>
-      <TabsIndicator
-        left={indicatorLeft}
-        position={tabIndicatorPosition}
-        width={tabIndicatorSize}
-      />
+    <TabsWrapper ref={tabsWrapperRef} variant={variant}>
+      <TabsIndicator left={indicatorLeft} position={tabIndicatorPosition} width={indicatorWidth} />
       {Children.map(children, (child, index) => {
         if (isValidElement(child)) {
           const tabInjectProps: TabProps = {
@@ -91,6 +67,7 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
             value,
             onChange,
             index,
+            variant,
             tabWidth,
           };
 
@@ -111,19 +88,30 @@ const Tab = ({
   index,
   onlyAdmin = false,
   tabWidth = 160,
+  variant = 'default',
 }: TabProps) => {
   const { t } = useTranslation();
   const [currentUser] = useCurrentUser();
+  const itemRef = useRef<HTMLButtonElement>(null);
 
   if (!hasAccess(onlyAdmin, currentUser)) {
     return null;
   }
 
-  const onClick = (event: MouseEvent) => onChange && onChange(event, index as number);
+  const onClick = (event: MouseEvent) => {
+    onChange && onChange(event, index as number);
+    itemRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end' });
+  };
   const isActive = value === index;
 
   return (
-    <TabButton onClick={onClick} width={tabWidth} isActive={isActive}>
+    <TabButton
+      ref={itemRef}
+      onClick={onClick}
+      width={tabWidth}
+      isActive={isActive}
+      variant={variant}
+    >
       {icon && icon}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <TabLabel isActive={isActive}>{t(label as any)}</TabLabel>

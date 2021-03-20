@@ -80,7 +80,7 @@ export const StyledInput = styled.input`
   height: 0;
   width: 0;
 
-  &:focus ~ ${Checkmark} {
+  &:focus-visible ~ ${Checkmark} {
     box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.primary.light};
   }
 

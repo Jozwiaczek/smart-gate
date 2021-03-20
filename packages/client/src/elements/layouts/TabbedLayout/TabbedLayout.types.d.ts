@@ -1,10 +1,12 @@
 import { MouseEvent, ReactElement, ReactNode } from 'react';
 
 type TabMarkerPosition = 'top' | 'bottom' | 'left' | 'right';
+type TabsVariant = 'scrollable' | 'fullWidth' | 'default';
 
 interface TabsOpt {
+  variant?: TabsVariant;
   tabIndicatorPosition?: TabMarkerPosition;
-  tabIndicatorSize?: number;
+  tabIndicatorWidth?: number;
   tabWidth?: number;
 }
 
@@ -29,10 +31,25 @@ interface TabProps {
   onChange?: (event: MouseEvent, newValue: number) => void;
   index?: number;
   tabWidth?: number;
+  variant?: TabsVariant;
 }
 
 interface TabPanelProps {
   value: number;
   index: number;
   children: ReactNode;
+}
+
+interface TabsWrapperProps {
+  variant: TabsVariant;
+}
+
+interface TabButtonProps {
+  width: number;
+  isActive: boolean;
+  variant: TabsVariant;
+}
+
+interface TabLabelProps {
+  isActive: boolean;
 }

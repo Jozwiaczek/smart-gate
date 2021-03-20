@@ -1,13 +1,25 @@
 import styled from 'styled-components';
 
-import { TabMarkerPosition, TabsIndicatorProps } from './TabbedLayout.types';
+import {
+  TabButtonProps,
+  TabLabelProps,
+  TabMarkerPosition,
+  TabsIndicatorProps,
+  TabsWrapperProps,
+} from './TabbedLayout.types';
 
-export const TabsWrapper = styled.div`
+export const TabsWrapper = styled.div<TabsWrapperProps>`
   position: relative;
+  overflow-x: auto;
   display: flex;
   height: 100%;
   width: 100%;
-  justify-content: space-evenly;
+
+  ${({ variant }) => {
+    if (variant === 'fullWidth') {
+      return 'justify-content: space-evenly;';
+    }
+  }}
 `;
 
 const getTabsIndicatorPosition = ({ position }: { position: TabMarkerPosition }) => {
@@ -31,17 +43,17 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
   border-radius: 12px;
 `;
 
-export const TabLabel = styled.p<{ isActive: boolean }>`
+export const TabLabel = styled.p<TabLabelProps>`
   font-size: 14px;
   color: ${({ theme, isActive }) =>
     isActive ? theme.palette.text.primary : theme.palette.text.secondary};
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
 
-export const TabButton = styled.button<{ width: number; isActive: boolean }>`
+export const TabButton = styled.button<TabButtonProps>`
   position: relative;
   overflow: hidden;
-  width: ${({ width }) => width}px;
+  width: ${({ width, variant }) => (variant === 'fullWidth' ? '100%' : `${width}px`)};
   height: 100%;
   display: flex;
   background: transparent;

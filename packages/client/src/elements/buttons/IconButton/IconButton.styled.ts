@@ -29,7 +29,7 @@ export const StyledButton = styled.button<{ color: string }>(
     }
   }
 
-  :focus {
+  :focus-visible {
     background: ${hexToRgba(getCssColor({ color, theme }), 0.1)};
   }
 

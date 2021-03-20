@@ -7,8 +7,8 @@ import TabbedLayout from '.';
 import { TabProps, TabsProps } from './TabbedLayout.types';
 
 const MockRoot = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 1000px;
+  height: 568px;
   border: 2px solid white;
 `;
 
@@ -69,7 +69,7 @@ const Template: Story<TabsProps> = ({ options }) => {
       <TabbedLayout.TabPanel value={value} index={2}>
         <p>Settings panel</p>
       </TabbedLayout.TabPanel>
-      <TabbedLayout.TabPanel value={value} index={3}>
+      <TabbedLayout.TabPanel value={value} index={6}>
         <p>Admin panel - accessible only for logged admin users</p>
       </TabbedLayout.TabPanel>
     </MockRoot>
@@ -81,6 +81,7 @@ Default.args = {
   options: {
     tabWidth: 160,
     tabIndicatorPosition: 'bottom',
-    tabIndicatorSize: 160,
+    tabIndicatorWidth: 160,
+    variant: 'fullWidth',
   },
 };
