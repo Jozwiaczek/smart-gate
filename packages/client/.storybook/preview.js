@@ -14,7 +14,7 @@ const ViewportContainer = styled.div`
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={getTheme(ThemeType.light)}>
+    <ThemeProvider theme={getTheme(ThemeType.dark)}>
       <GlobalStyles />
       <ViewportContainer>
         <Story />
