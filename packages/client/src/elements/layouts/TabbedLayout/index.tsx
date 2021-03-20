@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Role } from '../../../enums/role.enum';
 import { useCurrentUser } from '../../../hooks';
 import { User } from '../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
+import { RippleEffect } from '../../animations';
 import {
   TabButton,
   TabLabel,
@@ -121,15 +122,16 @@ const Tab = ({
   const onClick = (event: MouseEvent) => onChange && onChange(event, index as number);
   const isActive = value === index;
 
-  // TODO: Create abstracted as a component ripple effect
   return (
     <TabButton onClick={onClick} width={tabWidth} isActive={isActive}>
       {icon && icon}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <TabLabel isActive={isActive}>{t(label as any)}</TabLabel>
+      <RippleEffect />
     </TabButton>
   );
 };
+
 const TabPanel = ({ value, index, children }: TabPanelProps) => {
   if (value !== index) {
     return null;

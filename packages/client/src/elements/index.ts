@@ -1,4 +1,12 @@
-export { AnimatedLogo, Heaven, Hell, PageLoader, PaperPlane, Spinner } from './animations';
+export {
+  AnimatedLogo,
+  Heaven,
+  Hell,
+  PageLoader,
+  PaperPlane,
+  RippleEffect,
+  Spinner,
+} from './animations';
 export { default as AppBar } from './AppBar';
 export { default as BackgroundSideLogo } from './BackgroundSideLogo';
 export { Button, IconButton } from './buttons';

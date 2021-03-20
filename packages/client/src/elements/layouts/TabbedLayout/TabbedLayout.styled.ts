@@ -39,6 +39,8 @@ export const TabLabel = styled.p<{ isActive: boolean }>`
 `;
 
 export const TabButton = styled.button<{ width: number; isActive: boolean }>`
+  position: relative;
+  overflow: hidden;
   width: ${({ width }) => width}px;
   height: 100%;
   display: flex;
