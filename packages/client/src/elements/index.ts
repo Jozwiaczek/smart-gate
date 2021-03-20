@@ -9,3 +9,4 @@ export { Checkbox, TextField } from './inputs';
 export { CardLayout, DefaultLayout, GlobalLayout } from './layouts';
 export { default as Link } from './Link';
 export { default as Snackbar } from './Snackbar';
+export { default as Tabs } from './TabbedView';
