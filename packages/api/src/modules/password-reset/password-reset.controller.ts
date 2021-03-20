@@ -11,20 +11,11 @@ export class PasswordResetController {
 
   @Post('create')
   async create(@Body(new ValidationPipe()) { email }: CreatePasswordResetDto) {
-    try {
-      await this.passwordResetService.createAndSend(email);
-    } catch (e) {
-      console.log(e);
-    }
+    await this.passwordResetService.createAndSend(email).catch(() => {});
   }
 
   @Post('recover')
   async recover(@Body(new ValidationPipe()) { email, code, password }: RecoverPasswordDto) {
-    try {
-      await this.passwordResetService.recover(email, code, password);
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    await this.passwordResetService.recover(email, code, password);
   }
 }
