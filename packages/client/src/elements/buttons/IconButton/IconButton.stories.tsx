@@ -3,7 +3,7 @@ import React from 'react';
 
 import LockIcon from '../../../icons/LockIcon';
 import IconButton from '.';
-import { IconButtonProps } from './ButtonIcon.types';
+import { IconButtonProps } from './IconButton.types';
 
 export default {
   title: 'Elements/buttons/Icon Button',

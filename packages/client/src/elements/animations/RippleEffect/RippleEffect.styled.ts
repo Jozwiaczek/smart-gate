@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const RippleContainer = styled.div<{ duration: number }>`
+export const RippleContainer = styled.div<RippleContainerProps>`
   position: absolute;
   top: 0;
   right: 0;
@@ -11,8 +11,8 @@ export const RippleContainer = styled.div<{ duration: number }>`
     transform: scale(0);
     border-radius: 100%;
     position: absolute;
-    opacity: 0.3;
-    background-color: ${({ color }) => color};
+    opacity: ${({ opacity }) => opacity};
+    background: ${({ color }) => color};
     animation-name: ripple;
     animation-duration: ${({ duration }) => duration}ms;
   }

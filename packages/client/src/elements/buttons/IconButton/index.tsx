@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { RippleEffect } from '../../animations';
-import { StyledButton } from './ButtonIcon.styled';
-import { IconButtonProps } from './ButtonIcon.types';
+import { StyledButton } from './IconButton.styled';
+import { IconButtonProps } from './IconButton.types';
 
-const IconButton = ({ children, disabled, ...rest }: IconButtonProps) => (
-  <StyledButton disabled={disabled} data-testid="icon-button" {...rest}>
+const IconButton = ({ children, color = '#fff', disabled, ...rest }: IconButtonProps) => (
+  <StyledButton color={color} disabled={disabled} data-testid="icon-button" {...rest}>
     {children}
     {!disabled && <RippleEffect />}
   </StyledButton>

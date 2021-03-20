@@ -1,11 +1,17 @@
-export interface RippleEffectProps {
+interface RippleEffectProps {
   color?: string;
   duration?: number;
+  opacity?: number;
 }
 
-export interface Ripple {
+interface Ripple {
   id: number;
   x: number;
   y: number;
   size: number;
+}
+
+interface RippleContainerProps {
+  duration: number;
+  opacity: number;
 }

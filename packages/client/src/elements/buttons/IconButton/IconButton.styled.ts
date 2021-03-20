@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import { getCssColor } from '../../../utils';
 import hexToRgba from '../../../utils/hexToRgba';
-import { RippleEffect } from '../../animations';
+import { RippleContainer } from '../../animations/RippleEffect/RippleEffect.styled';
 
-export const StyledButton = styled.button(
+export const StyledButton = styled.button<{ color: string }>(
   ({ color, theme }) => `
   position: relative;
   overflow: hidden;
@@ -23,17 +23,19 @@ export const StyledButton = styled.button(
   outline: none;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   
-  ${RippleEffect} {
-    background: ${getCssColor({ color, theme })}
+  ${RippleContainer} {
+    span {
+      background: ${getCssColor({ color, theme })};
+    }
   }
 
   :focus {
-    background: ${hexToRgba('#fff', 0.1)};
+    background: ${hexToRgba(getCssColor({ color, theme }), 0.1)};
   }
 
   :hover,
   :active {
-    background: ${hexToRgba('#fff', 0.2)};
+    background: ${hexToRgba(getCssColor({ color, theme }), 0.2)};
   }
   
   :disabled {

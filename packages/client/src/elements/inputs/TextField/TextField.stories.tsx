@@ -24,10 +24,3 @@ WithIcon.args = {
   startAdornment: <UserIcon />,
   name: 'firstName',
 };
-
-export const Password = Template.bind({});
-Password.args = {
-  placeholder: 'Example placeholder',
-  name: 'password',
-  required: true,
-};

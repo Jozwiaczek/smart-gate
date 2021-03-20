@@ -1,10 +1,9 @@
 import React, { MouseEvent, useCallback, useState } from 'react';
 
 import { RippleContainer } from './RippleEffect.styled';
-import { Ripple, RippleEffectProps } from './RippleEffect.types';
 import useDebouncedRippleCleanUp from './useDebounceRippleCleanUp';
 
-const RippleEffect = ({ color = '#fff', duration = 850 }: RippleEffectProps) => {
+const RippleEffect = ({ color = '#fff', duration = 850, opacity = 0.3 }: RippleEffectProps) => {
   const [rippleArray, setRippleArray] = useState<Array<Ripple>>([]);
   const rippleTotals = rippleArray.length;
   useDebouncedRippleCleanUp(rippleTotals, duration, () => setRippleArray([]));
@@ -33,6 +32,7 @@ const RippleEffect = ({ color = '#fff', duration = 850 }: RippleEffectProps) => 
       data-testid="rippleEffect"
       duration={duration}
       color={color}
+      opacity={opacity}
       onMouseDown={addRipple}
     >
       {rippleTotals > 0 &&
