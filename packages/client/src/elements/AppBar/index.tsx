@@ -2,7 +2,7 @@ import React, { MouseEvent, useState } from 'react';
 
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
 import TabbedLayout from '../layouts/TabbedLayout';
-import { TabProps } from '../layouts/TabbedLayout/TabbedLayout.types';
+import { TabProps } from '../layouts/TabbedLayout/Tab/Tab.types';
 import { Wrapper } from './AppBar.styled';
 
 const AppBar = () => {

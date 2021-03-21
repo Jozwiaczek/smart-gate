@@ -2,24 +2,16 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
-  MouseEvent,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { useCurrentUser } from '../../../hooks';
-import { RippleEffect } from '../../animations';
-import {
-  TabButton,
-  TabLabel,
-  TabPanelWrapper,
-  TabsIndicator,
-  TabsWrapper,
-} from './TabbedLayout.styled';
-import { TabPanelProps, TabProps, TabsProps } from './TabbedLayout.types';
-import { countAvailableChildren, getIndicatorPosition, hasAccess } from './TabbedLayout.utils';
+import { useCurrentUser } from '../../../../hooks';
+import { TabProps } from '../Tab/Tab.types';
+import { TabsIndicator, TabsWrapper } from './Tabs.styled';
+import { TabsProps } from './Tabs.types';
+import { countAvailableChildren, getIndicatorPosition } from './Tabs.utils';
 
 const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
   const tabsWrapperRef = useRef<HTMLDivElement>(null);
@@ -82,55 +74,4 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
   );
 };
 
-const Tab = ({
-  value,
-  onChange,
-  label,
-  icon,
-  index,
-  onlyAdmin = false,
-  tabWidth = 160,
-  variant = 'default',
-}: TabProps) => {
-  const { t } = useTranslation();
-  const [currentUser] = useCurrentUser();
-  const itemRef = useRef<HTMLButtonElement>(null);
-
-  if (!hasAccess(onlyAdmin, currentUser)) {
-    return null;
-  }
-
-  const onClick = (event: MouseEvent) => {
-    onChange && onChange(event, index as number);
-    itemRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end' });
-  };
-  const isActive = value === index;
-
-  return (
-    <TabButton
-      ref={itemRef}
-      onClick={onClick}
-      width={tabWidth}
-      isActive={isActive}
-      variant={variant}
-    >
-      {icon && icon}
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      {label && <TabLabel isActive={isActive}>{t(label as any)}</TabLabel>}
-      <RippleEffect />
-    </TabButton>
-  );
-};
-
-const TabPanel = ({ value, index, children }: TabPanelProps) => {
-  if (value !== index) {
-    return null;
-  }
-  return <TabPanelWrapper>{children}</TabPanelWrapper>;
-};
-
-export default {
-  Tabs,
-  Tab,
-  TabPanel,
-};
+export default Tabs;

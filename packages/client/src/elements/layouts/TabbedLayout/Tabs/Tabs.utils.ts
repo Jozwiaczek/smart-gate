@@ -1,8 +1,8 @@
 import { Children, isValidElement, ReactNode } from 'react';
 
-import { Role } from '../../../enums/role.enum';
-import { User } from '../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
-import { TabsVariant } from './TabbedLayout.types';
+import { Role } from '../../../../enums/role.enum';
+import { User } from '../../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
+import { TabsVariant } from './Tabs.types';
 
 export const getIndicatorPosition = (
   value: number,

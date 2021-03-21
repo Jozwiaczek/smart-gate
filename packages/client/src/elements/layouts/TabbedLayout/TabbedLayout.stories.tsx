@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../../icons';
 import TabbedLayout from '.';
-import { TabProps, TabsOpt } from './TabbedLayout.types';
+import { TabProps } from './Tab/Tab.types';
+import { TabsOpt } from './Tabs/Tabs.types';
 
 const MockRoot = styled.div`
-  width: 1000px;
+  width: 1440px;
   height: 568px;
-  border: 2px solid white;
+  border: 2px solid #fff;
 `;
 
 const MockTabsWrapper = styled.div`
@@ -83,7 +84,7 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
       <TabbedLayout.TabPanel value={value} index={2}>
         <p>Settings panel</p>
       </TabbedLayout.TabPanel>
-      <TabbedLayout.TabPanel value={value} index={6}>
+      <TabbedLayout.TabPanel value={value} index={3}>
         <p>Admin panel - accessible only for logged admin users</p>
       </TabbedLayout.TabPanel>
     </MockRoot>

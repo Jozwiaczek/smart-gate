@@ -1,4 +1,6 @@
-import { MouseEvent, ReactElement, ReactNode } from 'react';
+import { MouseEvent, ReactElement } from 'react';
+
+import { TabProps } from '../Tab/Tab.types';
 
 type TabMarkerPosition = 'top' | 'bottom' | 'left' | 'right';
 type TabsVariant = 'scrollable' | 'fullWidth' | 'default';
@@ -23,33 +25,6 @@ interface TabsIndicatorProps {
   position: TabMarkerPosition;
 }
 
-interface TabProps {
-  label?: string;
-  icon?: ReactNode;
-  onlyAdmin?: boolean;
-  value?: number;
-  onChange?: (event: MouseEvent, newValue: number) => void;
-  index?: number;
-  tabWidth?: number;
-  variant?: TabsVariant;
-}
-
-interface TabPanelProps {
-  value: number;
-  index: number;
-  children: ReactNode;
-}
-
 interface TabsWrapperProps {
   variant: TabsVariant;
-}
-
-interface TabButtonProps {
-  width: number;
-  isActive: boolean;
-  variant: TabsVariant;
-}
-
-interface TabLabelProps {
-  isActive: boolean;
 }
