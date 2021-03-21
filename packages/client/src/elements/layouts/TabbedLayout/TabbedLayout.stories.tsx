@@ -8,8 +8,8 @@ import { TabProps } from './Tab/Tab.types';
 import { TabsOpt } from './Tabs/Tabs.types';
 
 const MockRoot = styled.div`
-  width: 1440px;
-  height: 568px;
+  width: 100%;
+  height: 250px;
   border: 2px solid #fff;
 `;
 
