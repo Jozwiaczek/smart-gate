@@ -19,4 +19,7 @@ const Template: Story = (args) => (
   </MockWrapper>
 );
 
-export const Default = Template.bind({});
+export const defaultView = Template.bind({});
+defaultView.parameters = {
+  jest: ['AppBar.test.tsx'],
+};

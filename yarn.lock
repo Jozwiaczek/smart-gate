@@ -2916,7 +2916,7 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@pmmmwh/react-refresh-webpack-plugin@^0.4.2":
+"@pmmmwh/react-refresh-webpack-plugin@^0.4.2", "@pmmmwh/react-refresh-webpack-plugin@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.4.3.tgz#1eec460596d200c0236bf195b078a5d1df89b766"
   integrity sha512-br5Qwvh8D2OQqSXpd1g/xqXKnK0r+Jz6qVKBbWmpUcrbGOxUrf39V5oZ1876084CGn18uMdR5uvPqBv9UqtBjQ==
@@ -3229,6 +3229,22 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-jest@^6.1.21":
+  version "6.1.21"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-jest/-/addon-jest-6.1.21.tgz#4198af064b880655e4c27934dacc9d92f950d277"
+  integrity sha512-b5CXArtVrY6UuF57zodqmrE1cGZuCGWj+42zHk0lbcSf3BudcJyEKO4+gLteK7TDAPpq/Rq0HywC9d8tUB3Aow==
+  dependencies:
+    "@storybook/addons" "6.1.21"
+    "@storybook/api" "6.1.21"
+    "@storybook/components" "6.1.21"
+    "@storybook/core-events" "6.1.21"
+    "@storybook/theming" "6.1.21"
+    core-js "^3.0.1"
+    global "^4.3.2"
+    react-sizeme "^2.5.2"
+    regenerator-runtime "^0.13.7"
+    upath "^1.1.0"
+
 "@storybook/addon-links@^6.1.20":
   version "6.1.21"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.1.21.tgz#59b04c4a0bd1c8dc86fecea64a2531154df382e6"
@@ -3295,7 +3311,7 @@
     prop-types "^15.7.2"
     regenerator-runtime "^0.13.7"
 
-"@storybook/addons@6.1.21":
+"@storybook/addons@6.1.21", "@storybook/addons@^6.1.21":
   version "6.1.21"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-6.1.21.tgz#94bb66fc51d1dfee80d0fe84f5b83c10045651b5"
   integrity sha512-xo5TGu9EZVCqgh3D1veVnfuGzyKDWWsvOMo18phVqRxj21G3/+hScVyfIYwNTv7Ys5/Ahp9JxJUMXL3V3ny+tw==
@@ -3555,6 +3571,19 @@
   dependencies:
     core-js "^3.0.1"
 
+"@storybook/preset-create-react-app@^3.1.7":
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/@storybook/preset-create-react-app/-/preset-create-react-app-3.1.7.tgz#e48df77768bdcc4863e3918c11965c45e4110ac8"
+  integrity sha512-SR+HGSWCrhHA5sszuIHJYdh2tWNi/zu858WB5RM74OBW4ogo8Bv4/7td4p53eWbdm0zBDbnKcrBmwRrAYqwL9Q==
+  dependencies:
+    "@pmmmwh/react-refresh-webpack-plugin" "^0.4.3"
+    "@types/babel__core" "^7.1.7"
+    "@types/webpack" "^4.41.13"
+    babel-plugin-react-docgen "^4.1.0"
+    pnp-webpack-plugin "^1.6.4"
+    react-docgen-typescript-plugin "^0.6.2"
+    semver "^7.3.2"
+
 "@storybook/react@^6.1.20":
   version "6.1.21"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.1.21.tgz#1c4d01dba8d8f130f9b7da4038a380eeb9c61f38"
@@ -3619,7 +3648,7 @@
     regenerator-runtime "^0.13.7"
     source-map "^0.7.3"
 
-"@storybook/theming@6.1.21":
+"@storybook/theming@6.1.21", "@storybook/theming@^6.1.21":
   version "6.1.21"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.1.21.tgz#b8e612e5a39b77f7e63a5f9ea322ed62adb0d5b0"
   integrity sha512-yq7+/mpdljRdSRJYw/In/9tnDGXIUDe//mhyMftFfrB2mq6zi1yAZpowCerWhiDE2ipGkrfzIYx/Sn7bcaXgqg==
@@ -4368,7 +4397,7 @@
     "@types/source-list-map" "*"
     source-map "^0.7.3"
 
-"@types/webpack@4.41.26", "@types/webpack@^4.41.8":
+"@types/webpack@4.41.26", "@types/webpack@^4.41.13", "@types/webpack@^4.41.8":
   version "4.41.26"
   resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.26.tgz#27a30d7d531e16489f9c7607c747be6bc1a459ef"
   integrity sha512-7ZyTfxjCRwexh+EJFwRUM+CDB2XvgHl4vfuqf1ZKrgGvcS5BrNvPQqJh3tsZ0P6h6Aa1qClVHaJZszLPzpqHeA==
@@ -5689,7 +5718,7 @@ babel-plugin-polyfill-regenerator@^0.1.2:
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.1.5"
 
-babel-plugin-react-docgen@^4.2.1:
+babel-plugin-react-docgen@^4.1.0, babel-plugin-react-docgen@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-docgen/-/babel-plugin-react-docgen-4.2.1.tgz#7cc8e2f94e8dc057a06e953162f0810e4e72257b"
   integrity sha512-UQ0NmGHj/HAqi5Bew8WvNfCk8wSsmdgNd8ZdMjBCICtyCJCq9LiqgqvjCYe570/Wg7AQArSq1VQ60Dd/CHN7mQ==
@@ -15039,7 +15068,7 @@ pluralize@8.0.0:
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
   integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
 
-pnp-webpack-plugin@1.6.4:
+pnp-webpack-plugin@1.6.4, pnp-webpack-plugin@^1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/pnp-webpack-plugin/-/pnp-webpack-plugin-1.6.4.tgz#c9711ac4dc48a685dabafc86f8b6dd9f8df84149"
   integrity sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==
@@ -19262,7 +19291,7 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-upath@^1.1.1, upath@^1.1.2, upath@^1.2.0:
+upath@^1.1.0, upath@^1.1.1, upath@^1.1.2, upath@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==

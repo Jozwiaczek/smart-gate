@@ -1,5 +1,8 @@
 import React from 'react';
 import { ThemeDecorator, I18nDecorator } from './decorators';
+import { withTests } from '@storybook/addon-jest';
+
+import testResults from '../src/jest-test-results.json';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -35,4 +38,10 @@ export const globalTypes = {
   },
 };
 
-export const decorators = [ThemeDecorator, I18nDecorator];
+export const decorators = [
+  ThemeDecorator,
+  I18nDecorator,
+  withTests({
+    results: testResults,
+  }),
+];
