@@ -1,5 +1,4 @@
 export interface WelcomeTemplateProps extends BaseEmailTemplatesProps {
-  firstName: string;
   link: string;
 }
 

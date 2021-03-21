@@ -10,6 +10,7 @@ import { InvitationModule } from './invitation/invitation.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { RefreshTokenModule } from './refresh-token/refresh-token.module';
+import { RepositoryModule } from './repository/repository.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -28,8 +29,10 @@ import { UsersModule } from './users/users.module';
         limit: config.rateLimiter.minTime,
       }),
     }),
+    RepositoryModule,
     InvitationModule,
     PasswordResetModule,
+    RepositoryModule,
   ],
 })
 export class AppModule {}

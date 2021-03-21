@@ -1,12 +1,10 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 import { Role } from '../../auth/role.enum';
+import { BaseEntity } from './base.entity';
 
 @Entity('invitations')
-export class InvitationEntity {
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
-
+export class InvitationEntity extends BaseEntity {
   @Column({
     type: 'varchar',
   })
@@ -24,9 +22,4 @@ export class InvitationEntity {
     enum: Role,
   })
   public roles: Array<Role>;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-  })
-  public createdAt: number;
 }
