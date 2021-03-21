@@ -18,7 +18,7 @@ const greyDark = '#515151';
 const disabledOpacity = 0.3;
 
 export const getTheme = (themeType: ThemeType) => ({
-  type: themeType,
+  name: themeType,
   breakpoints: {
     xs: 375,
     sm: 600,
