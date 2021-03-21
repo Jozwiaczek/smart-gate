@@ -1,22 +1,38 @@
-import GlobalStyles from '../src/theme/GlobalStyles';
-import { getTheme, ThemeType } from '../src/theme/Theme';
-import { addDecorator } from '@storybook/react';
-import { withThemesProvider } from 'storybook-addon-styled-component-theme';
-import i18n from '../src/i18n';
-import { I18nextProvider } from 'react-i18next';
 import React from 'react';
+import { ThemeDecorator, I18nDecorator } from './decorators';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   layout: 'centered',
 };
 
-addDecorator((story) => (
-  <I18nextProvider i18n={i18n}>
-    <GlobalStyles />
-    {story()}
-  </I18nextProvider>
-));
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'dark',
+    toolbar: {
+      icon: 'circlehollow',
+      items: [
+        { value: 'light', icon: 'circlehollow', title: 'Light' },
+        { value: 'dark', icon: 'circle', title: 'Dark' },
+        { value: 'side-by-side', icon: 'sidebar', title: 'Side by side' },
+        { value: 'stacked', icon: 'bottombar', title: 'Stacked' },
+      ],
+    },
+  },
+  locale: {
+    name: 'Locale',
+    description: 'Internationalization locale',
+    defaultValue: 'en',
+    toolbar: {
+      icon: 'globe',
+      items: [
+        { value: 'en', right: '🇺🇸', title: 'English' },
+        { value: 'pl', right: '🇵🇱', title: 'Polski' },
+      ],
+    },
+  },
+};
 
-const themes = [getTheme(ThemeType.dark), getTheme(ThemeType.light)];
-addDecorator(withThemesProvider(themes));
+export const decorators = [ThemeDecorator, I18nDecorator];
