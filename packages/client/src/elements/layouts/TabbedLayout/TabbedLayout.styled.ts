@@ -40,7 +40,7 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
   height: 5px;
   width: ${({ width }) => width}px;
   transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
 export const TabLabel = styled.p<TabLabelProps>`
@@ -66,6 +66,7 @@ export const TabButton = styled.button<TabButtonProps>`
   color: ${({ theme, isActive }) =>
     isActive ? theme.palette.primary.light : theme.palette.text.secondary};
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
   svg {
     margin-bottom: 4px;
   }
@@ -74,6 +75,11 @@ export const TabButton = styled.button<TabButtonProps>`
     ${TabLabel} {
       color: ${({ theme }) => theme.palette.text.primary};
     }
+  }
+
+  :focus-visible {
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.palette.primary.light};
+    border-radius: ${({ theme }) => theme.sizes.borderRadius};
   }
 `;
 

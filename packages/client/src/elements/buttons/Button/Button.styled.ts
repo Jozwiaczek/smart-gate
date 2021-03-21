@@ -43,13 +43,13 @@ const getBaseColor = ({ colorVariant, palette: { colors, primary } }: HelperStyl
 };
 
 export const StyledButton = styled.button<ButtonProps>(
-  ({ colorVariant, fullWidth, margin, theme: { palette } }) => `
+  ({ colorVariant, fullWidth, margin, theme: { palette, sizes } }) => `
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
+  border-radius: ${sizes.borderRadius};
   font-size: 16px;
   background-color: ${getBaseColor({ colorVariant, palette })};
   color: ${getFontColor({ colorVariant, palette })};

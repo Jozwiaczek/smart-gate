@@ -89,7 +89,7 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
   transform: translateX(-50%);
   bottom: ${bottomMargin};
   box-shadow: ${({ theme: { palette } }) => palette.boxShadow.default};
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
   transition: visibility 0.3s;
   font-size: 16px;
   line-height: 150%;
