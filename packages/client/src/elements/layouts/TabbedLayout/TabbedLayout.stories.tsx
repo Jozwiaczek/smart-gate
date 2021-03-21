@@ -92,8 +92,8 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  tabWidth: 160,
+  tabWidth: undefined,
   indicatorPosition: 'bottom',
-  indicatorWidth: 50,
+  indicatorWidth: undefined,
   variant: 'default',
 };
