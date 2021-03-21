@@ -1,28 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { Connection } from 'typeorm';
 
+import { urlEncodedParams } from '../../utils';
 import { Role } from '../auth/role.enum';
-import { InvitationEntity } from '../database/entities/invitation.entity';
 import { MailerService } from '../mailer/mailer.service';
+import { InvitationRepository } from '../repository/invitation.repository';
+import { UserRepository } from '../repository/user.repository';
+import { InvitationConfigService } from './Config/invitation-config.service';
 
 @Injectable()
 export class InvitationService {
   constructor(
     private readonly mailerService: MailerService,
-    private readonly connection: Connection,
+    private readonly invitationRepository: InvitationRepository,
+    private readonly userRepository: UserRepository,
+    private readonly invitationConfigService: InvitationConfigService,
   ) {}
 
-  private repository = this.connection.getRepository(InvitationEntity);
+  async send(email: string, roles?: Array<Role>): Promise<void> {
+    const user = await this.userRepository.findOneByEmail(email);
+    if (user) {
+      throw new Error(`Cannot send invitation because user with email: '${email}' exists.`);
+    }
+    const { id: invitationId } = await this.invitationRepository.create({ email, roles });
 
-  async create(email: string, roles?: Array<Role>): Promise<InvitationEntity> {
-    return this.repository.save({
+    const link = urlEncodedParams(
+      this.invitationConfigService.getBaseMagicLinkUrl(),
       email,
-      expirationDate: new Date(Date.now() + 1000 * 60 * 30),
-      roles,
-    });
-  }
+      invitationId,
+    );
 
-  async findOneOrFail(id: string, email: string): Promise<InvitationEntity> {
-    return this.repository.findOneOrFail({ where: { id, email } });
+    await this.mailerService.sendInvitation(email, link);
   }
 }
