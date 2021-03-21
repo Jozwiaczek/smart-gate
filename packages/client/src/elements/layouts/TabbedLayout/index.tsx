@@ -28,38 +28,40 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
   const [indicatorWidth, setIndicatorWidth] = useState(0);
 
   const {
-    tabIndicatorPosition = 'bottom',
+    indicatorPosition = 'bottom',
     tabWidth = 160,
-    tabIndicatorWidth: tabIndicatorWidthProp = tabWidth,
+    indicatorWidth: tabIndicatorWidthProp,
     variant = 'default',
   } = options;
 
   useLayoutEffect(() => {
     const tabbedContainerWidth = tabsWrapperRef.current?.offsetWidth || 0;
     const totalsChildren = countAvailableChildren(children, currentUser);
-    const indicatorWidthOnFullWidth = tabbedContainerWidth / totalsChildren;
+    const tabWidthOnFullWidth = tabbedContainerWidth / totalsChildren;
+
+    const internalIndicatorWidth =
+      variant === 'fullWidth'
+        ? tabIndicatorWidthProp || tabWidthOnFullWidth
+        : tabIndicatorWidthProp || tabWidth;
+    const internalTabWidth = variant === 'fullWidth' ? tabWidthOnFullWidth : tabWidth;
+
     setIndicatorLeft(
       getIndicatorPosition(
         value,
         totalsChildren,
         tabbedContainerWidth,
-        tabWidth,
-        tabIndicatorWidthProp,
+        internalTabWidth,
+        internalIndicatorWidth,
         variant,
-        indicatorWidthOnFullWidth,
       ),
     );
 
-    if (variant === 'fullWidth') {
-      setIndicatorWidth(indicatorWidthOnFullWidth);
-    } else {
-      setIndicatorWidth(tabIndicatorWidthProp);
-    }
+    setIndicatorWidth(internalIndicatorWidth);
   }, [children, currentUser, tabIndicatorWidthProp, tabWidth, value, variant]);
 
   return (
     <TabsWrapper ref={tabsWrapperRef} variant={variant}>
-      <TabsIndicator left={indicatorLeft} position={tabIndicatorPosition} width={indicatorWidth} />
+      <TabsIndicator left={indicatorLeft} position={indicatorPosition} width={indicatorWidth} />
       {Children.map(children, (child, index) => {
         if (isValidElement(child)) {
           const tabInjectProps: TabProps = {
@@ -114,7 +116,7 @@ const Tab = ({
     >
       {icon && icon}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <TabLabel isActive={isActive}>{t(label as any)}</TabLabel>
+      {label && <TabLabel isActive={isActive}>{t(label as any)}</TabLabel>}
       <RippleEffect />
     </TabButton>
   );

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../../icons';
 import TabbedLayout from '.';
-import { TabProps, TabsProps } from './TabbedLayout.types';
+import { TabProps, TabsOpt } from './TabbedLayout.types';
 
 const MockRoot = styled.div`
   width: 1000px;
@@ -22,9 +22,23 @@ const MockTabsWrapper = styled.div`
 export default {
   title: 'Elements/layouts/Tabbed Layout',
   component: TabbedLayout.Tabs,
+  argTypes: {
+    variant: {
+      control: {
+        type: 'select',
+        options: ['default', 'fullWidth', 'scrollable - TODO'],
+      },
+    },
+    indicatorPosition: {
+      control: {
+        type: 'select',
+        options: ['bottom', 'top', 'left - TODO', 'right - TODO'],
+      },
+    },
+  },
 } as Meta;
 
-const Template: Story<TabsProps> = ({ options }) => {
+const Template: Story<TabsOpt> = (tabsOptions) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: MouseEvent, newValue: number) => setValue(newValue);
@@ -52,7 +66,7 @@ const Template: Story<TabsProps> = ({ options }) => {
   return (
     <MockRoot>
       <MockTabsWrapper>
-        <TabbedLayout.Tabs value={value} onChange={handleChange} options={options}>
+        <TabbedLayout.Tabs value={value} onChange={handleChange} options={tabsOptions}>
           {tabs.map((tabProps) => (
             <TabbedLayout.Tab key={tabProps.label} {...tabProps} />
           ))}
@@ -78,10 +92,8 @@ const Template: Story<TabsProps> = ({ options }) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  options: {
-    tabWidth: 160,
-    tabIndicatorPosition: 'bottom',
-    tabIndicatorWidth: 160,
-    variant: 'fullWidth',
-  },
+  tabWidth: 160,
+  indicatorPosition: 'bottom',
+  indicatorWidth: 50,
+  variant: 'default',
 };

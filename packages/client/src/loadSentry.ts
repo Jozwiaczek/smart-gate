@@ -10,12 +10,11 @@ const {
   REACT_APP_SENTRY_DSN,
 } = process.env;
 
-if (REACT_APP_SENTRY_ENABLED) {
-  onlyOnDevEnv(() => console.log('Initializing sentry'));
-  Sentry.init({
-    dsn: REACT_APP_SENTRY_DSN,
-    integrations: [new Integrations.BrowserTracing()],
-    debug: Boolean(REACT_APP_SENTRY_DEBUG),
-    environment: REACT_APP_SENTRY_ENVIRONMENT || 'production',
-  });
-}
+onlyOnDevEnv(() => console.log('Initializing sentry'));
+Sentry.init({
+  dsn: REACT_APP_SENTRY_DSN,
+  integrations: [new Integrations.BrowserTracing()],
+  debug: REACT_APP_SENTRY_DEBUG === 'true',
+  enabled: REACT_APP_SENTRY_ENABLED === 'true',
+  environment: REACT_APP_SENTRY_ENVIRONMENT || 'production',
+});

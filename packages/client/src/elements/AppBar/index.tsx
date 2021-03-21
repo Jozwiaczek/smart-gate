@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
-import { Item, ItemLabel, StyledIconButton, Wrapper } from './AppBar.styled';
-import { AppBarItem, ItemTitle } from './AppBar.types';
+import TabbedLayout from '../layouts/TabbedLayout';
+import { TabProps } from '../layouts/TabbedLayout/TabbedLayout.types';
+import { Wrapper } from './AppBar.styled';
 
 const AppBar = () => {
-  const [activeItem, setActiveItem] = useState<ItemTitle>('Dashboard');
+  const [activeTab, setActiveTab] = useState<number>(1);
 
-  const items: Array<AppBarItem> = [
+  const handleChange = (event: MouseEvent, newValue: number) => setActiveTab(newValue);
+
+  const tabs: Array<TabProps> = [
     {
-      title: 'History',
+      label: 'menu.history',
       icon: <HistoryIcon />,
     },
     {
-      title: 'Dashboard',
+      label: 'menu.dashboard',
       icon: <DashboardIcon />,
     },
     {
-      title: 'Settings',
+      label: 'menu.settings',
       icon: <SettingsIcon />,
     },
     {
-      title: 'Admin',
+      label: 'menu.admin',
       icon: <AdminIcon />,
       onlyAdmin: true,
     },
@@ -29,18 +32,15 @@ const AppBar = () => {
 
   return (
     <Wrapper data-testid="appBar">
-      {items.map(({ title, icon }) => {
-        const isActive = activeItem === title;
-
-        return (
-          <Item key={title}>
-            <StyledIconButton isActive={isActive} onClick={() => setActiveItem(title)}>
-              {icon}
-            </StyledIconButton>
-            <ItemLabel isActive={isActive}>{title}</ItemLabel>
-          </Item>
-        );
-      })}
+      <TabbedLayout.Tabs
+        value={activeTab}
+        onChange={handleChange}
+        options={{ indicatorPosition: 'top', indicatorWidth: 80, variant: 'fullWidth' }}
+      >
+        {tabs.map((tabProps) => (
+          <TabbedLayout.Tab key={tabProps.label} {...tabProps} />
+        ))}
+      </TabbedLayout.Tabs>
     </Wrapper>
   );
 };

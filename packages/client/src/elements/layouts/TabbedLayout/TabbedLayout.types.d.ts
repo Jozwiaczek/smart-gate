@@ -5,8 +5,8 @@ type TabsVariant = 'scrollable' | 'fullWidth' | 'default';
 
 interface TabsOpt {
   variant?: TabsVariant;
-  tabIndicatorPosition?: TabMarkerPosition;
-  tabIndicatorWidth?: number;
+  indicatorPosition?: TabMarkerPosition;
+  indicatorWidth?: number;
   tabWidth?: number;
 }
 
@@ -24,7 +24,7 @@ interface TabsIndicatorProps {
 }
 
 interface TabProps {
-  label: string;
+  label?: string;
   icon?: ReactNode;
   onlyAdmin?: boolean;
   value?: number;
