@@ -5,3 +5,8 @@ export interface RegistrationInputs {
   password: string;
   confirmPassword: string;
 }
+
+export interface RegistrationParams {
+  code: string;
+  email: string;
+}

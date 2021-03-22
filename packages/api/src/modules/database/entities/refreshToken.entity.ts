@@ -1,13 +1,11 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
+import { BaseEntity } from './base.entity';
 // eslint-disable-next-line import/no-cycle
 import { UserEntity } from './user.entity';
 
 @Entity('refresh_tokens')
-export class RefreshTokenEntity {
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
-
+export class RefreshTokenEntity extends BaseEntity {
   @Column({
     type: 'timestamp',
   })
@@ -21,9 +19,4 @@ export class RefreshTokenEntity {
 
   @Column({ type: 'uuid' })
   public userId: string;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-  })
-  public createdAt: number;
 }

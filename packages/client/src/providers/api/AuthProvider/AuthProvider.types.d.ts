@@ -14,6 +14,7 @@ export interface LoginData {
 }
 
 export interface RegistrationData {
+  code: string;
   firstName: string;
   lastName: string;
   email: string;

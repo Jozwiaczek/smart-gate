@@ -1,25 +1,16 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, Index, OneToMany } from 'typeorm';
 
-import { Role } from '../../auth/role.enum';
+import { Role } from '../../../enums/role.enum';
+import { BaseEntity } from './base.entity';
 // eslint-disable-next-line import/no-cycle
 import { RefreshTokenEntity } from './refreshToken.entity';
 
 @Entity('users')
-export class UserEntity {
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
-
+export class UserEntity extends BaseEntity {
   @Column({
     unique: true,
   })
-  @Index()
+  @Index({ unique: true })
   public email: string;
 
   @Column({
@@ -47,14 +38,4 @@ export class UserEntity {
 
   @OneToMany(() => RefreshTokenEntity, (token) => token.user)
   public refreshTokens: Promise<[RefreshTokenEntity]>;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-  })
-  public createdAt: number;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-  })
-  public updatedAt: number;
 }

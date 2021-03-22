@@ -2,7 +2,7 @@ import mjml2html from 'mjml';
 
 import { WelcomeTemplateProps } from './emailTemplates.types';
 
-const welcomeTemplate = ({ firstName, link, clientUrl }: WelcomeTemplateProps) => {
+const welcomeTemplate = ({ link, clientUrl }: WelcomeTemplateProps) => {
   const { html, errors } = mjml2html(
     `
     <mjml>
@@ -25,7 +25,7 @@ const welcomeTemplate = ({ firstName, link, clientUrl }: WelcomeTemplateProps) =
             </mj-text>
             <mj-image src='${clientUrl}/email-images/paper-plane.png' height='160px' width='160px' alt="paper plane image" />
             <mj-text font-size="24px">
-            Hi <b>${firstName}</b>,
+            Hi,
             </mj-text>
             <mj-text>
             It’s look like that administrator invites you to group<br/> in Smart Gate system. Click on the button to<br/> create your account.

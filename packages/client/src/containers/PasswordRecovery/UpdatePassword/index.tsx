@@ -1,12 +1,10 @@
-import base64url from 'base64url';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 
 import { routes } from '../../../constants';
 import { Button, CardLayout, Form, Link, TextField } from '../../../elements';
-import { useAuth, useSnackbar } from '../../../hooks';
+import { useAuth, useEncodedParams, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
 import { ConfirmLockIcon, ShieldLock } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
@@ -16,9 +14,7 @@ const UpdatePassword = () => {
   const { updatePassword } = useAuth();
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
-  const { email: emailBase64, code: codeBase64 } = useParams<UpdatePasswordParams>();
-  const email = base64url.decode(emailBase64);
-  const code = base64url.decode(codeBase64);
+  const { email, code } = useEncodedParams<UpdatePasswordParams>();
   const [isSent, setIsSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({

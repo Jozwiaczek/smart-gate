@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
-import { passwordResetTemplate } from '../../emailTemplates';
+import { passwordResetTemplate, welcomeTemplate } from '../../emailTemplates';
 import { Config } from '../config/config';
 import { MailerConfigService } from './config/mailer-config.service';
 
@@ -34,6 +34,17 @@ export class MailerService {
       subject: 'Smart Gate - Password recovery',
       html: passwordResetTemplate({
         firstName,
+        link,
+        clientUrl: this.mailerConfigService.getClientUrl(),
+      }),
+    });
+  }
+
+  async sendInvitation(email: string, link: string): Promise<void> {
+    await this.sendEmail({
+      to: email,
+      subject: 'Smart Gate - Invitation',
+      html: welcomeTemplate({
         link,
         clientUrl: this.mailerConfigService.getClientUrl(),
       }),

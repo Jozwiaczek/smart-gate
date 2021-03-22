@@ -5,14 +5,14 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { urlEncodedParams } from '../../utils';
 import { MailerService } from '../mailer/mailer.service';
-import { UsersService } from '../users/users.service';
+import { UserRepository } from '../repository/user.repository';
 import { PasswordResetConfigService } from './config/password-reset-config.service';
 
 @Injectable()
 export class PasswordResetService {
   constructor(
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-    private readonly usersService: UsersService,
+    private readonly userRepository: UserRepository,
     private readonly mailerService: MailerService,
     private readonly passwordResetConfigService: PasswordResetConfigService,
   ) {}
@@ -22,7 +22,7 @@ export class PasswordResetService {
   private readonly passwordResetTtl = this.passwordResetConfigService.getTtl();
 
   async createAndSend(email: string): Promise<string> {
-    const { firstName } = await this.usersService.findOneByEmail(email);
+    const { firstName } = await this.userRepository.findOneByEmailOrFail(email);
     const generatedUuid = uuidV4();
     await this.cacheManager.set(email, generatedUuid, { ttl: this.passwordResetTtl });
 
@@ -50,6 +50,6 @@ export class PasswordResetService {
 
     const salt = bcrypt.genSaltSync();
     const hashPassword = bcrypt.hashSync(password, salt);
-    await this.usersService.updatePassword(email, hashPassword);
+    await this.userRepository.updatePassword(email, hashPassword);
   }
 }

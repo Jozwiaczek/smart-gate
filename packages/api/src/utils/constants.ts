@@ -19,5 +19,6 @@ const tokenConfig = {
 };
 const clientEndpoints = {
   passwordMagicLink: '/passwordRecovery/magicLink',
+  registrationMagicLink: '/registration',
 };
 export default { tokenConfig, clientEndpoints };

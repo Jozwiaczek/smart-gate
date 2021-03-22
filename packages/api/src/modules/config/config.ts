@@ -6,6 +6,8 @@ export class Config {
 
   clientUrl: string;
 
+  superAdminEmails: string | undefined;
+
   database: {
     database: string;
     databaseTest: string;
@@ -53,6 +55,10 @@ export class Config {
 
   passwordReset: {
     passwordResetTime: number | undefined;
+  };
+
+  invitation: {
+    expirationDate: string;
   };
 
   environment: {

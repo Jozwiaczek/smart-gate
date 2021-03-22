@@ -19,15 +19,19 @@ import {
 import { constants } from '../../utils';
 import { UserEntity } from '../database/entities/user.entity';
 import { RefreshTokenService } from '../refresh-token/refresh-token.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
+import { InvitationRepository } from '../repository/invitation.repository';
+import { UserRepository } from '../repository/user.repository';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
+import { RegisterDto } from './dto/register.dto';
 
 export class AuthService {
   constructor(
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
     private readonly refreshTokenService: RefreshTokenService,
+    private readonly invitationRepository: InvitationRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   public async login({
@@ -213,19 +217,32 @@ export class AuthService {
     await this.refreshTokenService.deleteAllForUser(userId);
   }
 
-  async register(user: CreateUserDto): Promise<UserEntity> {
-    const { password, firstName, lastName, email } = user;
+  async register(registerDto: RegisterDto): Promise<UserEntity> {
+    const { password, firstName, lastName, email, code } = registerDto;
+
+    const { roles, expirationDate } = await this.invitationRepository.findWithCredentialsOrFail(
+      email,
+      code,
+    );
+
+    if (expirationDate.getTime() < Date.now()) {
+      throw new Error('Invitation expired');
+    }
 
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
 
-    const newUser: CreateUserDto = {
+    const newUser = await this.userRepository.create({
+      password: hash,
       firstName,
       lastName,
       email,
-      password: hash,
-    };
-    return this.usersService.create(newUser);
+      roles,
+    });
+
+    await this.invitationRepository.deleteById(code);
+
+    return newUser;
   }
 
   async validateUser(email: string, password: string): Promise<UserEntity> {
