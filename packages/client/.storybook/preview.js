@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeDecorator, I18nDecorator } from './decorators';
+import { ThemeDecorator, I18nDecorator, LayoutDecorator } from './decorators';
 import { withTests } from '@storybook/addon-jest';
 
 import testResults from '../src/jest-test-results.json';
@@ -38,6 +38,7 @@ export const globalTypes = {
 };
 
 export const decorators = [
+  LayoutDecorator,
   ThemeDecorator,
   I18nDecorator,
   withTests({

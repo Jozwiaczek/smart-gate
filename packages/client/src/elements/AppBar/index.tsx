@@ -8,7 +8,7 @@ import { TabsWrapper, Wrapper } from './AppBar.styled';
 
 const AppBar = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
-  const { isTablet } = useMediaDevice();
+  const { isMobile } = useMediaDevice();
 
   const handleChange = (event: MouseEvent, newValue: number) => setActiveTab(newValue);
 
@@ -32,10 +32,18 @@ const AppBar = () => {
     },
   ];
 
-  const orientation = isTablet ? 'horizontal' : 'vertical';
+  const orientation = isMobile ? 'horizontal' : 'vertical';
 
   return (
     <Wrapper data-testid="appBar" orientation={orientation}>
+      <TabbedLayout.TabPanel value={activeTab} index={0}>
+        <p>History panel</p>
+      </TabbedLayout.TabPanel>
+
+      <TabbedLayout.TabPanel value={activeTab} index={1}>
+        <p>Dashboard</p>
+      </TabbedLayout.TabPanel>
+
       <TabsWrapper orientation={orientation}>
         <TabbedLayout.Tabs
           value={activeTab}
@@ -43,7 +51,7 @@ const AppBar = () => {
           options={{
             indicatorPosition: 'top',
             indicatorWidth: 80,
-            variant: isTablet ? 'fullWidth' : 'default',
+            variant: isMobile ? 'fullWidth' : 'default',
             orientation,
           }}
         >
@@ -52,14 +60,6 @@ const AppBar = () => {
           ))}
         </TabbedLayout.Tabs>
       </TabsWrapper>
-
-      <TabbedLayout.TabPanel value={activeTab} index={0}>
-        <p>History panel</p>
-      </TabbedLayout.TabPanel>
-
-      <TabbedLayout.TabPanel value={activeTab} index={1}>
-        <p>Dashboard</p>
-      </TabbedLayout.TabPanel>
     </Wrapper>
   );
 };
