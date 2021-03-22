@@ -1,6 +1,6 @@
 import { Type } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeepPartial, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import { DeepPartial, DeleteResult, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 
 import { BaseEntity } from '../database/entities/base.entity';
 
@@ -12,12 +12,16 @@ export interface BaseRepositoryType<T> {
   findById: (id: string) => Promise<T | undefined>;
   findByIdOrFail: (id: string) => Promise<T>;
 
-  findOne: (options: FindOneOptions) => Promise<T | undefined>;
-  findOneOrFail: (options: FindOneOptions) => Promise<T>;
+  findOne: (options: FindOneOptions<T>) => Promise<T | undefined>;
+  findOneOrFail: (options: FindOneOptions<T>) => Promise<T>;
 
-  find: (options: FindManyOptions) => Promise<T[]>;
+  find: (options: FindManyOptions<T>) => Promise<T[]>;
 
   update: (id: string, dataToUpdate: DeepPartial<T>) => Promise<T>;
+
+  deleteById: (id: string) => Promise<DeleteResult>;
+
+  count: () => Promise<number>;
 }
 
 type Constructor<T> = new (...args: never[]) => T;
@@ -67,7 +71,6 @@ export function BaseRepository<T extends BaseEntity>(
         ...dataToUpdate,
         updatedAt: new Date(),
       };
-
       try {
         return await this.repository.save(entityToUpdate);
       } catch (err) {
@@ -77,6 +80,14 @@ export function BaseRepository<T extends BaseEntity>(
           )}'`,
         );
       }
+    }
+
+    async deleteById(id: string): Promise<DeleteResult> {
+      return this.repository.delete(id);
+    }
+
+    count(): Promise<number> {
+      return this.repository.count();
     }
   }
 

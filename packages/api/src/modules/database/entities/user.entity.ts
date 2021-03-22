@@ -10,7 +10,7 @@ export class UserEntity extends BaseEntity {
   @Column({
     unique: true,
   })
-  @Index()
+  @Index({ unique: true })
   public email: string;
 
   @Column({

@@ -11,9 +11,9 @@ import { CreateInvitationDto } from './dto/create-invitation.dto';
 export class InvitationService {
   constructor(
     private readonly mailerService: MailerService,
+    private readonly invitationConfigService: InvitationConfigService,
     private readonly invitationRepository: InvitationRepository,
     private readonly userRepository: UserRepository,
-    private readonly invitationConfigService: InvitationConfigService,
   ) {}
 
   async send({ email, roles }: CreateInvitationDto): Promise<void> {
@@ -25,6 +25,8 @@ export class InvitationService {
     }
 
     const expirationDate = this.invitationConfigService.getExpirationDate();
+
+    await this.invitationRepository.clean();
 
     const { id: invitationId } = await this.invitationRepository.create({
       email,

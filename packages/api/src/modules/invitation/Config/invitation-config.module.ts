@@ -4,7 +4,8 @@ import { ConfigModule } from '../../config/config.module';
 import { InvitationConfigService } from './invitation-config.service';
 
 @Module({
-  providers: [InvitationConfigService, ConfigModule],
+  imports: [ConfigModule],
+  providers: [InvitationConfigService],
   exports: [InvitationConfigService],
 })
 export class InvitationConfigModule {}

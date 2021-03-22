@@ -1,10 +1,11 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 
 import { Role } from '../../../enums/role.enum';
 import { BaseEntity } from './base.entity';
 
 @Entity('invitations')
 export class InvitationEntity extends BaseEntity {
+  @Index({ unique: true })
   @Column({
     type: 'varchar',
   })
