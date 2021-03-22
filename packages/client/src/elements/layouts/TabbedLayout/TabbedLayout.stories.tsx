@@ -9,7 +9,7 @@ import { TabsOpt, TabsOrientation } from './Tabs/Tabs.types';
 
 const MockRoot = styled.div<{ orientation?: TabsOrientation }>`
   width: 800px;
-  height: 100%;
+  height: 800px;
   border: 2px solid ${({ theme }) => theme.palette.divider.default};
   ${({ orientation }) =>
     orientation === 'vertical' &&
@@ -27,6 +27,7 @@ const MockTabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
     orientation === 'vertical' &&
     `
       height: 100%;
+      width: 160px;
   `};
 `;
 
@@ -50,6 +51,31 @@ export default {
       control: {
         type: 'select',
         options: ['horizontal', 'vertical'],
+      },
+    },
+    indicatorThin: {
+      control: {
+        type: 'number',
+      },
+    },
+    indicatorWidth: {
+      control: {
+        type: 'number',
+      },
+    },
+    indicatorHeight: {
+      control: {
+        type: 'number',
+      },
+    },
+    tabWidth: {
+      control: {
+        type: 'number',
+      },
+    },
+    tabHeight: {
+      control: {
+        type: 'number',
       },
     },
   },
@@ -108,10 +134,6 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
 };
 
 export const defaultView = Template.bind({});
-defaultView.args = {
-  indicatorWidth: undefined,
-  tabWidth: undefined,
-};
 
 export const fullWidthView = Template.bind({});
 fullWidthView.args = {

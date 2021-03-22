@@ -15,6 +15,8 @@ const Tab = ({
   index,
   onlyAdmin = false,
   tabWidth = 160,
+  tabHeight = 160,
+  orientation = 'horizontal',
   variant = 'default',
 }: TabProps) => {
   const { t } = useTranslation();
@@ -27,15 +29,24 @@ const Tab = ({
 
   const onClick = (event: MouseEvent) => {
     onChange && onChange(event, index as number);
-    itemRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end' });
+    variant === 'scrollable' &&
+      itemRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end' });
   };
   const isActive = value === index;
+
+  let width = variant === 'fullWidth' ? '100%' : `${tabWidth}px`;
+  let height = '100%';
+  if (orientation === 'vertical') {
+    width = `${tabWidth}px`;
+    height = variant === 'fullWidth' ? '100%' : `${tabHeight}px`;
+  }
 
   return (
     <TabButton
       ref={itemRef}
       onClick={onClick}
-      width={tabWidth}
+      width={width}
+      height={height}
       isActive={isActive}
       variant={variant}
     >

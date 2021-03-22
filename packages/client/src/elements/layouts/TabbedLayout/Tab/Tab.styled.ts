@@ -12,8 +12,8 @@ export const TabLabel = styled.p<TabLabelProps>`
 export const TabButton = styled.button<TabButtonProps>`
   position: relative;
   overflow: hidden;
-  width: ${({ width, variant }) => (variant === 'fullWidth' ? '100%' : `${width}px`)};
-  height: 100%;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   display: flex;
   background: transparent;
   flex-direction: column;

@@ -14,6 +14,7 @@ interface TabsOpt {
   indicatorHeight?: number;
   indicatorThin?: number;
   tabWidth?: number;
+  tabHeight?: number;
 }
 
 interface TabsProps {
@@ -24,10 +25,11 @@ interface TabsProps {
 }
 
 interface TabsIndicatorProps {
-  left: number;
+  animationSpace: number;
   width: number;
   height: number;
   position: TabMarkerPosition;
+  orientation: TabsOrientation;
 }
 
 interface TabsWrapperProps {
@@ -35,12 +37,12 @@ interface TabsWrapperProps {
   orientation?: TabsOrientation;
 }
 
-interface GetIndicatorLeft {
+interface GetIndicatorAnimationSpace {
   value: number;
   totalChildren: number;
-  containerWidth: number;
-  tabWidth: number;
-  indicatorWidth: number;
+  containerSize: number;
+  tabSize: number;
+  indicatorSize: number;
   variant: TabsVariant;
 }
 

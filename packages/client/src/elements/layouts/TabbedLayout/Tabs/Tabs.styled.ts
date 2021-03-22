@@ -22,9 +22,18 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
   position: absolute;
   background: ${({ theme }) => theme.palette.primary.light};
   ${({ position }) => `${position}: 0`};
-  left: ${({ left }) => `${left}px`};
   height: ${({ height }) => height}px;
   width: ${({ width }) => width}px;
-  transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: ${({ theme }) => theme.sizes.borderRadius};
+
+  ${({ orientation, animationSpace }) =>
+    orientation === 'vertical'
+      ? `
+    transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    top: ${animationSpace}px;
+  `
+      : `
+    transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    left: ${animationSpace}px;
+  `}
 `;

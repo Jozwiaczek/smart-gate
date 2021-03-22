@@ -2,29 +2,29 @@ import { Children, isValidElement, ReactNode } from 'react';
 
 import { Role } from '../../../../enums/role.enum';
 import { User } from '../../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
-import { GetIndicatorLeft, GetIndicatorSizeProps, IndicatorSize } from './Tabs.types';
+import { GetIndicatorAnimationSpace, GetIndicatorSizeProps, IndicatorSize } from './Tabs.types';
 
-export const getIndicatorLeft = ({
+export const getIndicatorAnimationSpace = ({
   value,
   totalChildren,
-  containerWidth,
-  tabWidth,
-  indicatorWidth,
+  containerSize,
+  tabSize,
+  indicatorSize,
   variant,
-}: GetIndicatorLeft): number => {
-  const totalChildrenWidth = totalChildren * tabWidth;
-  const totalEmptyWidth = containerWidth - totalChildrenWidth;
+}: GetIndicatorAnimationSpace): number => {
+  const totalChildrenSize = totalChildren * tabSize;
+  const totalEmptyWidth = containerSize - totalChildrenSize;
   const singleEmptyWidth = variant === 'default' ? 0 : totalEmptyWidth / (totalChildren + 1);
   const trimmedSingleEmptyWidth = singleEmptyWidth <= 0 ? 0 : singleEmptyWidth;
   const additionalSpaceForIndicatorWidth =
-    tabWidth !== indicatorWidth ? (tabWidth - indicatorWidth) / 2 : 0;
+    tabSize !== indicatorSize ? (tabSize - indicatorSize) / 2 : 0;
 
   if (value === 0) {
     return trimmedSingleEmptyWidth + additionalSpaceForIndicatorWidth;
   }
 
   const emptyWidthForValue = (value + 1) * trimmedSingleEmptyWidth;
-  const tabsWidthForValue = value * tabWidth;
+  const tabsWidthForValue = value * tabSize;
 
   return emptyWidthForValue + tabsWidthForValue + additionalSpaceForIndicatorWidth;
 };
