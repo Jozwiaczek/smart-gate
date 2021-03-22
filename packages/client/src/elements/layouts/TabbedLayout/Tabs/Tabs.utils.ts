@@ -2,16 +2,16 @@ import { Children, isValidElement, ReactNode } from 'react';
 
 import { Role } from '../../../../enums/role.enum';
 import { User } from '../../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
-import { TabsVariant } from './Tabs.types';
+import { GetIndicatorLeft, GetIndicatorSizeProps, IndicatorSize } from './Tabs.types';
 
-export const getIndicatorPosition = (
-  value: number,
-  totalChildren: number,
-  containerWidth: number,
-  tabWidth: number,
-  indicatorWidth: number,
-  variant: TabsVariant,
-): number => {
+export const getIndicatorLeft = ({
+  value,
+  totalChildren,
+  containerWidth,
+  tabWidth,
+  indicatorWidth,
+  variant,
+}: GetIndicatorLeft): number => {
   const totalChildrenWidth = totalChildren * tabWidth;
   const totalEmptyWidth = containerWidth - totalChildrenWidth;
   const singleEmptyWidth = variant === 'default' ? 0 : totalEmptyWidth / (totalChildren + 1);
@@ -43,3 +43,22 @@ export const countAvailableChildren = (children: ReactNode, user?: User) =>
       }
     }),
   );
+
+export const getIndicatorSize = ({
+  defaultThin,
+  tabSize,
+  width,
+  height,
+  orientation,
+}: GetIndicatorSizeProps): IndicatorSize => {
+  if (orientation === 'horizontal') {
+    return {
+      width: width || tabSize,
+      height: defaultThin,
+    };
+  }
+  return {
+    width: defaultThin,
+    height: height || tabSize,
+  };
+};

@@ -5,19 +5,29 @@ import styled from 'styled-components';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../../icons';
 import TabbedLayout from '.';
 import { TabProps } from './Tab/Tab.types';
-import { TabsOpt } from './Tabs/Tabs.types';
+import { TabsOpt, TabsOrientation } from './Tabs/Tabs.types';
 
-const MockRoot = styled.div`
-  width: 100%;
-  height: 250px;
-  border: 2px solid #fff;
+const MockRoot = styled.div<{ orientation?: TabsOrientation }>`
+  width: 800px;
+  height: 100%;
+  border: 2px solid ${({ theme }) => theme.palette.divider.default};
+  ${({ orientation }) =>
+    orientation === 'vertical' &&
+    `
+      display: flex;
+  `};
 `;
 
-const MockTabsWrapper = styled.div`
+const MockTabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
   width: 100%;
   height: 90px;
   background: ${({ theme }) => theme.palette.background.paper};
   box-shadow: ${({ theme }) => theme.palette.boxShadow.default};
+  ${({ orientation }) =>
+    orientation === 'vertical' &&
+    `
+      height: 100%;
+  `};
 `;
 
 export default {
@@ -33,7 +43,13 @@ export default {
     indicatorPosition: {
       control: {
         type: 'select',
-        options: ['bottom', 'top', 'left - TODO', 'right - TODO'],
+        options: ['bottom', 'top', 'left', 'right'],
+      },
+    },
+    orientation: {
+      control: {
+        type: 'select',
+        options: ['horizontal', 'vertical'],
       },
     },
   },
@@ -65,8 +81,8 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
   ];
 
   return (
-    <MockRoot>
-      <MockTabsWrapper>
+    <MockRoot orientation={tabsOptions.orientation}>
+      <MockTabsWrapper orientation={tabsOptions.orientation}>
         <TabbedLayout.Tabs value={value} onChange={handleChange} options={tabsOptions}>
           {tabs.map((tabProps) => (
             <TabbedLayout.Tab key={tabProps.label} {...tabProps} />
@@ -91,10 +107,18 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  tabWidth: undefined,
-  indicatorPosition: 'bottom',
+export const defaultView = Template.bind({});
+defaultView.args = {
   indicatorWidth: undefined,
-  variant: 'default',
+  tabWidth: undefined,
+};
+
+export const fullWidthView = Template.bind({});
+fullWidthView.args = {
+  variant: 'fullWidth',
+};
+
+export const verticalView = Template.bind({});
+verticalView.args = {
+  orientation: 'vertical',
 };

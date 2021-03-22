@@ -6,7 +6,6 @@ import testResults from '../src/jest-test-results.json';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
-  layout: 'centered',
 };
 
 export const globalTypes = {

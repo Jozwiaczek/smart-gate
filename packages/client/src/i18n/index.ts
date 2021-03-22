@@ -10,6 +10,8 @@ export enum SGLocale {
   en = 'en',
 }
 
+const { STORYBOOK, NODE_ENV } = process.env;
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -17,7 +19,7 @@ i18n
     resources,
     fallbackLng: SGLocale.en,
     supportedLngs: Object.values(SGLocale),
-    debug: process.env.NODE_ENV === environments.DEV,
+    debug: !STORYBOOK && NODE_ENV === environments.DEV,
   });
 
 export default i18n;
