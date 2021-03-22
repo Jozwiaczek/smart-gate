@@ -11,11 +11,7 @@ const MockRoot = styled.div<{ orientation?: TabsOrientation }>`
   width: 800px;
   height: 800px;
   border: 2px solid ${({ theme }) => theme.palette.divider.default};
-  ${({ orientation }) =>
-    orientation === 'vertical' &&
-    `
-      display: flex;
-  `};
+  ${({ orientation }) => orientation === 'vertical' && 'display: flex'};
 `;
 
 const MockTabsWrapper = styled.div<{ orientation?: TabsOrientation }>`

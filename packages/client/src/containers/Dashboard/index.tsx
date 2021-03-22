@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AppBar, Button } from '../../elements';
+import { Button } from '../../elements';
 import { useAuth, useThemeType } from '../../hooks';
 import { SGLocale } from '../../i18n';
 import { ThemeType } from '../../theme/Theme';
@@ -55,7 +55,6 @@ const Dashboard = () => {
       <Button onClick={changeLocale} color="secondary">
         Change locale to {i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl}
       </Button>
-      <AppBar />
     </Container>
   );
 };

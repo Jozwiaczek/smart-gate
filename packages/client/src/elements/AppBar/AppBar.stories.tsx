@@ -10,7 +10,8 @@ export default {
 } as Meta;
 
 const MockWrapper = styled.div`
-  width: 400px;
+  width: 100%;
+  height: 100%;
 `;
 
 const Template: Story = (args) => (
@@ -19,7 +20,7 @@ const Template: Story = (args) => (
   </MockWrapper>
 );
 
-export const defaultView = Template.bind({});
-defaultView.parameters = {
+export const DefaultView = Template.bind({});
+DefaultView.parameters = {
   jest: ['AppBar.test.tsx'],
 };
