@@ -21,6 +21,3 @@ const Template: Story = (args) => (
 );
 
 export const DefaultView = Template.bind({});
-DefaultView.parameters = {
-  jest: ['AppBar.test.tsx'],
-};
