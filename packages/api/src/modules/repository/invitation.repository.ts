@@ -10,7 +10,7 @@ export class InvitationRepository extends BaseRepository(InvitationEntity) {
         expirationDate: LessThan(new Date()),
       },
     });
-    return await this.repository.remove(oldInvitations);
+    return this.repository.remove(oldInvitations);
   }
 
   async findWithCredentialsOrFail(email: string, code: string): Promise<InvitationEntity> {
