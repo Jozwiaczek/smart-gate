@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 
-import { Role } from '../../auth/role.enum';
+import { Role } from '../../../enums/role.enum';
 import { BaseEntity } from './base.entity';
 
 @Entity('invitations')

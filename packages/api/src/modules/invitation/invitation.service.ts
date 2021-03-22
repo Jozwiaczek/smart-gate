@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
 import { urlEncodedParams } from '../../utils';
-import { Role } from '../auth/role.enum';
 import { MailerService } from '../mailer/mailer.service';
 import { InvitationRepository } from '../repository/invitation.repository';
 import { UserRepository } from '../repository/user.repository';
 import { InvitationConfigService } from './Config/invitation-config.service';
+import { CreateInvitationDto } from './dto/create-invitation.dto';
 
 @Injectable()
 export class InvitationService {
@@ -16,12 +16,21 @@ export class InvitationService {
     private readonly invitationConfigService: InvitationConfigService,
   ) {}
 
-  async send(email: string, roles?: Array<Role>): Promise<void> {
+  async send({ email, roles }: CreateInvitationDto): Promise<void> {
     const user = await this.userRepository.findOneByEmail(email);
     if (user) {
-      throw new Error(`Cannot send invitation because user with email: '${email}' exists.`);
+      throw new Error(
+        `Cannot send invitation because user with email: '${email}' already exists in database.`,
+      );
     }
-    const { id: invitationId } = await this.invitationRepository.create({ email, roles });
+
+    const expirationDate = this.invitationConfigService.getExpirationDate();
+
+    const { id: invitationId } = await this.invitationRepository.create({
+      email,
+      roles,
+      expirationDate,
+    });
 
     const link = urlEncodedParams(
       this.invitationConfigService.getBaseMagicLinkUrl(),

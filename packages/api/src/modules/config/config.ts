@@ -55,6 +55,10 @@ export class Config {
     passwordResetTime: number | undefined;
   };
 
+  invitation: {
+    expirationDate: string;
+  };
+
   environment: {
     isDev: boolean;
     isProd: boolean;

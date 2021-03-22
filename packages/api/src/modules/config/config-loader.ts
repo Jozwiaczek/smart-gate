@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { Config } from './config';
+import defaultValues from './defaultValues';
 import { EnvConfigService } from './env-config/env-config.service';
 
 @Injectable()
@@ -12,6 +13,8 @@ export class ConfigLoader {
     const isProd = nodeENV === 'production';
     const isTest = nodeENV === 'test';
     const isDev = nodeENV === 'development';
+
+    const convertToBoolean = (str: string) => str === 'true';
 
     return {
       port: this.envConfigService.get('PORT', isProd, Number),
@@ -27,7 +30,7 @@ export class ConfigLoader {
         port: this.envConfigService.get('DB_PORT', false, Number),
         username: this.envConfigService.get('DB_USERNAME', true),
         password: this.envConfigService.get('DB_PASSWORD', true),
-        logging: this.envConfigService.get('DB_LOGGING', false, Boolean),
+        logging: this.envConfigService.get('DB_LOGGING', false, convertToBoolean),
       },
       pgAdmin: {
         defaultEmail: this.envConfigService.get('PGADMIN_DEFAULT_EMAIL'),
@@ -43,6 +46,11 @@ export class ConfigLoader {
       passwordReset: {
         passwordResetTime: this.envConfigService.get('PASSWORD_RESET_TIME', false, Number),
       },
+      invitation: {
+        expirationDate:
+          this.envConfigService.get('INVITATION_EXPIRATION_DATE', false) ||
+          defaultValues.invitation.expirationDate,
+      },
       mailer: {
         sendGridSecret: this.envConfigService.get('SENDGRID_API_KEY', isProd),
         etherealAuth: {
@@ -53,9 +61,9 @@ export class ConfigLoader {
         replyTo: this.envConfigService.get('REPLY_TO', isProd),
       },
       sentry: {
-        debug: this.envConfigService.get('SENTRY_DEBUG', false, Boolean),
+        debug: this.envConfigService.get('SENTRY_DEBUG', false, convertToBoolean),
         dsn: this.envConfigService.get('SENTRY_DSN', isProd),
-        enabled: this.envConfigService.get('SENTRY_ENABLED', isProd, Boolean),
+        enabled: this.envConfigService.get('SENTRY_ENABLED', isProd, convertToBoolean),
         environment: this.envConfigService.get('SENTRY_ENVIRONMENT', false),
       },
       environment: {

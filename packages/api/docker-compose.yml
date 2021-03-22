@@ -15,6 +15,14 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 512M
+        reservations:
+          cpus: '0.01'
+          memory: 256M
 
   pgadmin:
     container_name: pgadmin_container
@@ -29,6 +37,14 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 512M
+        reservations:
+          cpus: '0.01'
+          memory: 256M
 
 networks:
   postgres:

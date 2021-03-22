@@ -1,6 +1,6 @@
 import { Column, Entity, Index, OneToMany } from 'typeorm';
 
-import { Role } from '../../auth/role.enum';
+import { Role } from '../../../enums/role.enum';
 import { BaseEntity } from './base.entity';
 // eslint-disable-next-line import/no-cycle
 import { RefreshTokenEntity } from './refreshToken.entity';
