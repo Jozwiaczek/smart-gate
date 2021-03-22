@@ -6,6 +6,8 @@ export class Config {
 
   clientUrl: string;
 
+  superAdminEmails: string | undefined;
+
   database: {
     database: string;
     databaseTest: string;

@@ -19,6 +19,7 @@ export class ConfigLoader {
     return {
       port: this.envConfigService.get('PORT', isProd, Number),
       clientUrl: this.envConfigService.get('CLIENT_URL'),
+      superAdminEmails: this.envConfigService.get('SUPER_ADMIN_EMAILS', false),
       rateLimiter: {
         minTime: this.envConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),
         maxConcurrent: this.envConfigService.get('RATE_LIMIT_MAX_CONCURRENT', isProd, Number),
