@@ -1,5 +1,12 @@
 name: 'Chromatic'
-on: push
+on:
+  push:
+    paths:
+      - 'packages/client/**'
+
+defaults:
+  run:
+    working-directory: packages/client
 
 jobs:
   chromatic-deployment:
