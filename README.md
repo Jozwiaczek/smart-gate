@@ -22,6 +22,10 @@
     <br>
     PRD:
     <a href="https://docs.google.com/document/d/14E-0rzD669n-rqC-OYjqsSLxrUU7D3bg7K5M9_AFOvs/edit#heading=h.gqa5vpc8p3qt"><strong>docs.google.com</strong></a>
+    <br>
+    <br>
+    Storybook:
+    <a href="https://main--6059282c88843d002106b484.chromatic.com"><strong>smart-gate.chromatic.com</strong></a>
 </p>
 
 <hr>
