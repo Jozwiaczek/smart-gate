@@ -51,8 +51,7 @@ const Tab = ({
       variant={variant}
     >
       {icon && icon}
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      {label && <TabLabel isActive={isActive}>{t(label as any)}</TabLabel>}
+      {label && <TabLabel isActive={isActive}>{t(label as never)}</TabLabel>}
       <RippleEffect />
     </TabButton>
   );

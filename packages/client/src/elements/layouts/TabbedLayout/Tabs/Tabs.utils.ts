@@ -15,9 +15,9 @@ export const getIndicatorAnimationSpace = ({
   const totalChildrenSize = totalChildren * tabSize;
   const totalEmptyWidth = containerSize - totalChildrenSize;
   const singleEmptyWidth = variant === 'default' ? 0 : totalEmptyWidth / (totalChildren + 1);
-  const trimmedSingleEmptyWidth = singleEmptyWidth <= 0 ? 0 : singleEmptyWidth;
+  const trimmedSingleEmptyWidth = Math.abs(singleEmptyWidth);
   const additionalSpaceForIndicatorWidth =
-    tabSize !== indicatorSize ? (tabSize - indicatorSize) / 2 : 0;
+    tabSize === indicatorSize ? 0 : (tabSize - indicatorSize) / 2;
 
   if (value === 0) {
     return trimmedSingleEmptyWidth + additionalSpaceForIndicatorWidth;
