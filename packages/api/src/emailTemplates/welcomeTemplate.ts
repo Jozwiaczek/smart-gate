@@ -1,11 +1,8 @@
 import mjml2html from 'mjml';
 
-interface WelcomeTemplateProps {
-  firstName: string;
-  link: string;
-}
+import { WelcomeTemplateProps } from './emailTemplates.types';
 
-const welcomeTemplate = ({ firstName, link }: WelcomeTemplateProps) => {
+const welcomeTemplate = ({ link, clientUrl }: WelcomeTemplateProps) => {
   const { html, errors } = mjml2html(
     `
     <mjml>
@@ -18,7 +15,7 @@ const welcomeTemplate = ({ firstName, link }: WelcomeTemplateProps) => {
       <mj-body>
         <mj-section border-radius='12px 12px 0 0' background-color="#22343C" padding='0'>
           <mj-column>
-            <mj-image src='${process.env.CLIENT_URL}/email-images/sg-logo.png' height='140px' width='140px' alt="header image" />
+            <mj-image src='${clientUrl}/email-images/sg-logo.png' height='140px' width='140px' alt="header image" />
           </mj-column>
         </mj-section>
         <mj-section padding-bottom="20px" padding-top="10px" border-radius='0 0 12px 12px' background-color="#30444E">
@@ -26,9 +23,9 @@ const welcomeTemplate = ({ firstName, link }: WelcomeTemplateProps) => {
             <mj-text padding="50px 25px" font-size="40px" line-height='47px'>
               You’ve been invited <br/> to <b>Smart Gate</b>!
             </mj-text>
-            <mj-image src='${process.env.CLIENT_URL}/email-images/paper-plane.png' height='160px' width='160px' alt="paper plane image" />
+            <mj-image src='${clientUrl}/email-images/paper-plane.png' height='160px' width='160px' alt="paper plane image" />
             <mj-text font-size="24px">
-            Hi <b>${firstName}</b>,
+            Hi,
             </mj-text>
             <mj-text>
             It’s look like that administrator invites you to group<br/> in Smart Gate system. Click on the button to<br/> create your account.

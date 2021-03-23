@@ -9,22 +9,20 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { welcomeTemplate } from '../../emailTemplates';
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { TokenPayload } from '../../interfaces/token-types';
 import { constants, cookiesUtils } from '../../utils';
 import { ValidationPipe } from '../../utils/validation.pipe';
-import { MailerService } from '../mailer/mailer.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
+import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService, private readonly mailerService: MailerService) {}
+  constructor(private authService: AuthService) {}
 
   @Post('login')
   async login(
@@ -54,17 +52,18 @@ export class AuthController {
 
   @Post('register')
   async register(
-    @Body(new ValidationPipe()) user: CreateUserDto,
+    @Body(new ValidationPipe()) registerDto: RegisterDto,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const newUser = await this.authService.register(user).catch(() => {
+    const newUser = await this.authService.register(registerDto).catch((e) => {
+      console.log(e);
       throw new BadRequestException('User already exists');
     });
 
     const loginUser: LoginUserDto = {
       email: newUser.email,
       keepMeLoggedIn: false,
-      password: user.password,
+      password: registerDto.password,
     };
 
     const [genTokens] = await this.authService.login(loginUser);
@@ -81,12 +80,6 @@ export class AuthController {
       },
       expirationDate: genTokens.expiration.getTime(),
     };
-
-    await this.mailerService.sendEmail({
-      to: email,
-      subject: 'Welcome in Smart Gate system 🔑',
-      html: welcomeTemplate({ firstName, link: '' }),
-    });
 
     return loginUserInfo;
   }

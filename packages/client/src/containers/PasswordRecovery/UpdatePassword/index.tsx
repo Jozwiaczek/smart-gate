@@ -4,7 +4,7 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import { routes } from '../../../constants';
 import { Button, CardLayout, Form, Link, TextField } from '../../../elements';
-import { useAuth, useSnackbar } from '../../../hooks';
+import { useAuth, useEncodedParams, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
 import { ConfirmLockIcon, ShieldLock } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
@@ -14,6 +14,7 @@ const UpdatePassword = () => {
   const { updatePassword } = useAuth();
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
+  const { email, code } = useEncodedParams<UpdatePasswordParams>();
   const [isSent, setIsSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
@@ -39,7 +40,7 @@ const UpdatePassword = () => {
   const onSubmit = async ({ password }: UpdatePasswordInputs) => {
     setLoading(true);
     try {
-      await updatePassword({ password, email: 'EMAIL_HERE' });
+      await updatePassword({ password, email, code });
       reset();
       setIsSent(true);
     } catch (error) {
@@ -56,7 +57,7 @@ const UpdatePassword = () => {
       <CardLayout.Description>
         <Trans
           i18nKey="routes.passwordRecovery.updatePassword.description"
-          values={{ email: 'EMAIL_HERE' }}
+          values={{ email }}
           components={{ b: <b /> }}
         />
       </CardLayout.Description>

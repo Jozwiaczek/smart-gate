@@ -4,7 +4,9 @@ import { Injectable } from '@nestjs/common';
 export class Config {
   port: number | undefined;
 
-  clientUrl: string | undefined;
+  clientUrl: string;
+
+  superAdminEmails: string | undefined;
 
   database: {
     database: string;
@@ -49,6 +51,14 @@ export class Config {
     };
     sender: string | undefined;
     replyTo: string | undefined;
+  };
+
+  passwordReset: {
+    passwordResetTime: number | undefined;
+  };
+
+  invitation: {
+    expirationDate: string;
   };
 
   environment: {

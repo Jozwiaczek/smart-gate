@@ -14,6 +14,7 @@ export interface LoginData {
 }
 
 export interface RegistrationData {
+  code: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -30,6 +31,7 @@ export interface SendPasswordRecoveryEmailData {
 
 interface UpdatePasswordData {
   email: string;
+  code: string;
   password: string;
 }
 

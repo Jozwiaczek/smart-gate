@@ -5,12 +5,13 @@ import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
 import { CardLayout, Form, Link, TextField } from '../../elements';
-import { useAuth, useSnackbar } from '../../hooks';
+import { useAuth, useEncodedParams, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
 import { ConfirmLockIcon, EmailIcon, UserIcon } from '../../icons';
+import { RegistrationData } from '../../providers/api/AuthProvider/AuthProvider.types';
 import { onlyOnDevEnv } from '../../utils';
 import { StyledButton } from './Registration.styled';
-import { RegistrationInputs } from './Registration.types';
+import { RegistrationInputs, RegistrationParams } from './Registration.types';
 
 const Registration = () => {
   const { register: registerUser } = useAuth();
@@ -18,6 +19,7 @@ const Registration = () => {
   const history = useHistory();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const { code, email } = useEncodedParams<RegistrationParams>();
   const { trigger: triggerCardShake, ref: animatedCardRef } = useAnimated<HTMLDivElement>({
     type: 'shake',
     opt: { autoTrigger: false },
@@ -38,12 +40,18 @@ const Registration = () => {
     }
   };
 
-  const onSubmit = async (values: RegistrationInputs) => {
+  const onSubmit = async ({ firstName, lastName, password }: RegistrationInputs) => {
     setLoading(true);
     try {
-      // eslint-disable-next-line no-unused-vars
-      const { confirmPassword, ...formValues } = values;
-      await registerUser(formValues);
+      const registrationDate: RegistrationData = {
+        code,
+        email,
+        firstName,
+        lastName,
+        password,
+      };
+
+      await registerUser(registrationDate);
       reset();
       history.push(routes.HOME);
     } catch (error) {
@@ -71,7 +79,7 @@ const Registration = () => {
           required
           startAdornment={<UserIcon />}
         />
-        <TextField name="email" validationType="email" startAdornment={<EmailIcon />} required />
+        <TextField name="email" disabled value={email} startAdornment={<EmailIcon />} required />
         <TextField
           name="password"
           label={t('user.password')}

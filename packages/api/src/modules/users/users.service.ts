@@ -10,31 +10,34 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersService {
   constructor(private readonly connection: Connection) {}
 
+  private readonly repository = this.connection.getRepository(UserEntity);
+
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-    return this.connection.getRepository(UserEntity).save(createUserDto);
+    return this.repository.save(createUserDto);
   }
 
   async findAll(): Promise<GetList<UserEntity>> {
-    const allUsers = await this.connection.getRepository(UserEntity).find();
+    const allUsers = await this.repository.find();
     return { data: allUsers, total: allUsers.length };
   }
 
   async findOne(id: string): Promise<UserEntity> {
-    return this.connection
-      .getRepository(UserEntity)
-      .findOneOrFail({ id })
-      .catch(() => {
-        throw new NotFoundException(`User with id: ${id} not found`);
-      });
+    return this.repository.findOneOrFail({ id }).catch(() => {
+      throw new NotFoundException(`User with id: ${id} not found`);
+    });
   }
 
   async findOneByEmail(email: string): Promise<UserEntity> {
-    return this.connection
-      .getRepository(UserEntity)
-      .findOneOrFail({ email })
-      .catch(() => {
-        throw new NotFoundException(`User with email: ${email} not found`);
-      });
+    return this.repository.findOneOrFail({ email }).catch(() => {
+      throw new NotFoundException(`User with email: ${email} not found`);
+    });
+  }
+
+  async updatePassword(email: string, hashPassword: string): Promise<UserEntity> {
+    const user = await this.findOneByEmail(email);
+    user.password = hashPassword;
+
+    return this.repository.save(user);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<UserEntity | undefined> {
@@ -47,7 +50,7 @@ export class UsersService {
     if (updateUserDto.firstName !== undefined) foundUser.firstName = updateUserDto.firstName;
     if (updateUserDto.lastName !== undefined) foundUser.lastName = updateUserDto.lastName;
 
-    await this.connection.getRepository(UserEntity).save(foundUser);
+    await this.repository.save(foundUser);
     return foundUser;
   }
 
