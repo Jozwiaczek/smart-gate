@@ -27,10 +27,10 @@ export class ConfigLoader {
       database: {
         database: this.envConfigService.get('DB_DATABASE', !isTest) || '',
         databaseTest: this.envConfigService.get('DB_DATABASE_TEST', isTest) || '',
-        host: this.envConfigService.get('DB_HOST', true),
+        host: this.envConfigService.get('DB_HOST'),
         port: this.envConfigService.get('DB_PORT', false, Number),
-        username: this.envConfigService.get('DB_USERNAME', true),
-        password: this.envConfigService.get('DB_PASSWORD', true),
+        username: this.envConfigService.get('DB_USERNAME'),
+        password: this.envConfigService.get('DB_PASSWORD'),
         logging: this.envConfigService.get('DB_LOGGING', false, convertToBoolean),
       },
       pgAdmin: {
@@ -38,11 +38,36 @@ export class ConfigLoader {
         defaultPassword: this.envConfigService.get('PGADMIN_DEFAULT_PASSWORD'),
         port: this.envConfigService.get('PGADMIN_PORT', false, Number),
       },
-      authSecrets: {
-        cookie: this.envConfigService.get('COOKIE_SECRET', !isTest),
-        access: this.envConfigService.get('ACCESS_SECRET', !isTest),
-        refresh: this.envConfigService.get('REFRESH_SECRET', !isTest),
-        logout: this.envConfigService.get('LOGOUT_SECRET', !isTest),
+      cookie: {
+        secret: this.envConfigService.get('COOKIE_SECRET', !isTest),
+      },
+      tokens: {
+        accessToken: {
+          secret: this.envConfigService.get('ACCESS_SECRET'),
+          name:
+            this.envConfigService.get('ACCESS_NAME', false) ||
+            defaultValues.tokens.accessToken.name,
+          expirationTime:
+            this.envConfigService.get('ACCESS_EXPIRATION_TIME', false) ||
+            defaultValues.tokens.accessToken.expirationTime,
+        },
+        logoutToken: {
+          secret: this.envConfigService.get('LOGOUT_SECRET'),
+          name:
+            this.envConfigService.get('LOGOUT_NAME', false) ||
+            defaultValues.tokens.logoutToken.name,
+        },
+        refreshToken: {
+          name:
+            this.envConfigService.get('REFRESH_NAME', false) ||
+            defaultValues.tokens.refreshToken.name,
+          expirationTimeWithKeepMeLoggedIn:
+            this.envConfigService.get('REFRESH_EXPIRATION_TIME_WITH_KEEP_ME_LOGGED_IN', false) ||
+            defaultValues.tokens.refreshToken.expirationTimeWithKeepMeLoggedIn,
+          expirationTimeWithoutKeepMeLoggedIn:
+            this.envConfigService.get('REFRESH_EXPIRATION_TIME_WITHOUT_KEEP_ME_LOGGED_IN', false) ||
+            defaultValues.tokens.refreshToken.expirationTimeWithoutKeepMeLoggedIn,
+        },
       },
       passwordReset: {
         passwordResetTime: this.envConfigService.get('PASSWORD_RESET_TIME', false, Number),

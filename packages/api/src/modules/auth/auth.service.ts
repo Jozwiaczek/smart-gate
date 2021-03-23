@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
-import ms from 'ms';
 
 import {
   AccessPayload,
@@ -24,6 +23,7 @@ import { UserRepository } from '../repository/user.repository';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
+import { TokenService } from './token/token.service';
 
 export class AuthService {
   constructor(
@@ -32,6 +32,7 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService,
     private readonly invitationRepository: InvitationRepository,
     private readonly userRepository: UserRepository,
+    private readonly tokenService: TokenService,
   ) {}
 
   public async login({
@@ -41,43 +42,28 @@ export class AuthService {
   }: LoginUserDto): Promise<[GeneratedTokens, UserEntity]> {
     const user = await this.validateUser(email, password);
 
-    const {
-      tokenConfig: { refreshToken, logoutToken },
-    } = constants;
-    const { sign } = jsonwebtoken;
-    const { LOGOUT_SECRET } = process.env;
-    if (!LOGOUT_SECRET) {
-      throw new Error('Secrets not set');
-    }
-
-    const refreshExpiresIn = keepMeLoggedIn
-      ? refreshToken.keepMeLoggedIn.expiresIn
-      : refreshToken.withOutKeepMeLoggedIn.expiresIn;
-    const refreshExpiration = new Date(Date.now() + ms(refreshExpiresIn));
-
-    const newRefreshToken = await this.refreshTokenService.create(
+    const [refreshToken, expirationDate] = await this.tokenService.generateToken(
+      'REFRESH',
       user,
       keepMeLoggedIn,
-      refreshExpiration,
     );
-    const newAccessToken = this.generateAccessTokens(user, keepMeLoggedIn);
 
-    const tokens: Tokens = {
-      accessToken: newAccessToken,
-      refreshToken: newRefreshToken,
-    };
+    const [accessToken] = await this.tokenService.generateToken('ACCESS', user, keepMeLoggedIn);
+
+    let logoutToken: string | undefined;
 
     if (!keepMeLoggedIn) {
-      const logoutPayload: BasePayload = { sub: user.id, type: logoutToken.name };
-      tokens.logoutToken = sign(logoutPayload, LOGOUT_SECRET, {
-        expiresIn: logoutToken.expiresIn,
-      });
+      [logoutToken] = await this.tokenService.generateToken('LOGOUT', user, keepMeLoggedIn);
     }
 
     return [
       {
-        tokens,
-        expiration: refreshExpiration,
+        tokens: {
+          logoutToken,
+          accessToken,
+          refreshToken,
+        },
+        expiration: expirationDate,
       },
       user,
     ];

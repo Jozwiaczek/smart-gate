@@ -8,9 +8,16 @@ import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { OnlyAuthenticatedGuard } from './guards/only-authenticated.guard';
+import { TokenModule } from './token/token.module';
 
 @Module({
-  imports: [forwardRef(() => UsersModule), RefreshTokenModule, MailerModule, RepositoryModule],
+  imports: [
+    forwardRef(() => UsersModule),
+    RefreshTokenModule,
+    MailerModule,
+    RepositoryModule,
+    TokenModule,
+  ],
   providers: [AuthService, OnlyAuthenticatedGuard],
   exports: [AuthService, OnlyAuthenticatedGuard],
   controllers: [AuthController],

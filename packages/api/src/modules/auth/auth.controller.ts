@@ -29,7 +29,8 @@ export class AuthController {
     @Body(new ValidationPipe()) loginUser: LoginUserDto,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const [genTokens, user] = await this.authService.login(loginUser).catch(() => {
+    const [genTokens, user] = await this.authService.login(loginUser).catch((e) => {
+      console.log(e);
       throw new UnauthorizedException('Invalid credentials');
     });
 

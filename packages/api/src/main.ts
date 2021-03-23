@@ -17,7 +17,7 @@ async function bootstrap() {
     origin: config.clientUrl,
     credentials: true,
   });
-  app.use(cookieParser(config.authSecrets.cookie));
+  app.use(cookieParser(config.cookie.secret));
   app.use(helmet());
   app.useGlobalFilters(app.get(GlobalExceptionsFilter));
 
