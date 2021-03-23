@@ -17,6 +17,7 @@ jobs:
         run: yarn
 
       - name: 'Run unit tests'
+        working-directory: packages/client
         run: yarn test
 
       # 👇 Checks if the branch is not main and runs Chromatic
