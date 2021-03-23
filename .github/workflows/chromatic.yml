@@ -16,6 +16,9 @@ jobs:
       - name: 'Install dependencies'
         run: yarn
 
+      - name: 'Run unit tests'
+        run: yarn test
+
       # 👇 Checks if the branch is not main and runs Chromatic
       - name: 'Publish to Chromatic'
         if: github.ref != 'refs/heads/main'
