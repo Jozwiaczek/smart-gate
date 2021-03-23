@@ -47,7 +47,7 @@ const en = {
       },
       registration: {
         title: 'Registration',
-        description: 'Create your account for<br/><b>{{email}}</b> email.',
+        description: 'Create your account for<br/> <b>{{email}}</b> email.',
         createAccount: 'Create my account',
         alreadyHaveAccount: 'Already have an account?',
         login: 'Log in',
