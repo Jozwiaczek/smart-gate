@@ -4,10 +4,6 @@ on:
     paths:
       - 'packages/client/**'
 
-defaults:
-  run:
-    working-directory: packages/client
-
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
@@ -25,6 +21,7 @@ jobs:
         if: github.ref != 'refs/heads/main'
         uses: chromaui/action@v1
         with:
+          workingDir: packages/client
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: true
@@ -34,6 +31,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: chromaui/action@v1
         with:
+          workingDir: packages/client
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           autoAcceptChanges: true
