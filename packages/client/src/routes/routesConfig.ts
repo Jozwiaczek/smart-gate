@@ -1,14 +1,11 @@
 import { routes } from '../constants';
+import { Login, PageNotFound, PasswordRecovery, Registration, UpdatePassword } from '../containers';
+import { AppBar } from '../elements';
 import {
-  Dashboard,
-  Login,
-  PageNotFound,
-  PasswordRecovery,
-  Registration,
-  UpdatePassword,
-} from '../containers';
-import { Role } from '../enums/role.enum';
-import { BasicRouteProps, ConditionRouteProps } from './ConditionRoute/Condition.types';
+  BasicRouteProps,
+  ConditionRouteProps,
+  OnlyAuthenticatedRouteProps,
+} from './ConditionRoute/Condition.types';
 import {
   allowAll,
   onlyAuthenticated,
@@ -16,14 +13,10 @@ import {
   onlyUnauthenticated,
 } from './conditions';
 
-interface OnlyAuthenticatedRouteProps extends BasicRouteProps {
-  roles?: [Role];
-}
 const onlyAuthenticatedRoutes: Array<ConditionRouteProps> = (<Array<OnlyAuthenticatedRouteProps>>[
   {
     path: routes.HOME,
-    component: Dashboard,
-    exact: true,
+    component: AppBar,
   },
 ]).map(({ roles, ...props }) => ({
   ...props,
@@ -35,6 +28,7 @@ const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRoute
   {
     path: routes.LOGIN,
     component: Login,
+    exact: true,
   },
   {
     path: routes.REGISTRATION,
@@ -62,7 +56,7 @@ const allowAllRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[
 }));
 
 export const routesArray: Array<ConditionRouteProps> = [
-  ...onlyAuthenticatedRoutes,
-  ...onlyUnauthenticatedRoutes,
   ...allowAllRoutes,
+  ...onlyUnauthenticatedRoutes,
+  ...onlyAuthenticatedRoutes,
 ];

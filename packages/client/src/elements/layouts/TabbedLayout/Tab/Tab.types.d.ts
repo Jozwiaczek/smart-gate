@@ -4,11 +4,12 @@ type TabsVariant = 'scrollable' | 'fullWidth' | 'default';
 type TabsOrientation = 'horizontal' | 'vertical';
 
 interface TabProps {
+  path?: string;
   label?: string;
   icon?: ReactNode;
   onlyAdmin?: boolean;
   value?: number;
-  onChange?: (event: MouseEvent, newValue: number) => void;
+  onChange?: (event: MouseEvent, newValue: number, path: string) => void;
   index?: number;
   tabWidth?: number;
   tabHeight?: number;

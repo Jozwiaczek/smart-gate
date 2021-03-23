@@ -1,5 +1,6 @@
 import { RouteProps } from 'react-router';
 
+import { Role } from '../../enums/role.enum';
 import { User } from '../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
 
 export interface ConditionFuncProps {
@@ -18,3 +19,7 @@ export interface BasicRouteProps extends RouteProps {
 }
 
 export interface ConditionRouteProps extends BasicConditionProps, BasicRouteProps {}
+
+interface OnlyAuthenticatedRouteProps extends BasicRouteProps {
+  roles?: [Role];
+}
