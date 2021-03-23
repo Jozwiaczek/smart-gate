@@ -80,16 +80,16 @@ export const StyledInput = styled.input`
   height: 0;
   width: 0;
 
-  &:focus ~ ${Checkmark} {
+  :focus-visible ~ ${Checkmark} {
     box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.primary.light};
   }
 
-  &:hover ~ p,
-  &:active ~ p {
+  :hover ~ p,
+  :active ~ p {
     color: ${({ theme }) => theme.palette.text.primary};
   }
 
-  &:checked ~ ${Checkmark}::after, &:checked ~ ${Checkmark} > svg {
+  :checked ~ ${Checkmark}::after, &:checked ~ ${Checkmark} > svg {
     opacity: 1;
   }
 `;

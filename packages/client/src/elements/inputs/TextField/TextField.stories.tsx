@@ -1,5 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
+import styled from 'styled-components';
 
 import { UserIcon } from '../../../icons';
 import TextField from '.';
@@ -10,7 +11,15 @@ export default {
   component: TextField,
 } as Meta;
 
-const Template: Story<TextFieldProps> = (args) => <TextField {...args} />;
+const MockWrapper = styled.div`
+  width: 300px;
+`;
+
+const Template: Story<TextFieldProps> = (args) => (
+  <MockWrapper>
+    <TextField {...args} />
+  </MockWrapper>
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -25,9 +34,12 @@ WithIcon.args = {
   name: 'firstName',
 };
 
-export const Password = Template.bind({});
-Password.args = {
+export const PasswordType = Template.bind({});
+PasswordType.args = {
   placeholder: 'Example placeholder',
-  name: 'password',
-  required: true,
+  name: 'Password',
+  type: 'password',
+};
+PasswordType.parameters = {
+  jest: ['TextField.test.tsx'],
 };

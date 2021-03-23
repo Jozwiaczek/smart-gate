@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ArrowIcon } from '../../../icons';
 import { ThemeType } from '../../../theme/Theme';
+import { RippleEffect } from '../../animations';
 import Spinner from '../../animations/Spinner';
 import Link from '../../Link';
 import { IconContainer, StyledButton } from './Button.styled';
@@ -19,6 +20,7 @@ const Button = ({
 }: ButtonProps) => {
   const baseButton = (
     <StyledButton
+      data-testid="button"
       colorVariant={colorVariant}
       fullWidth={fullWidth}
       disabled={loading ? true : disabled}
@@ -31,6 +33,7 @@ const Button = ({
           <ArrowIcon />
         </IconContainer>
       )}
+      {!loading && !disabled && <RippleEffect />}
     </StyledButton>
   );
 
@@ -44,5 +47,7 @@ const Button = ({
 
   return baseButton;
 };
+
+Button.displayName = 'Button';
 
 export default Button;

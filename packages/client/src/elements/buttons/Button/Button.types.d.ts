@@ -4,7 +4,7 @@ import { ITheme, ThemeType } from '../../../theme/Theme';
 
 type ButtonColorVariant = ThemeType | 'red' | 'blue';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   colorVariant?: ButtonColorVariant;
   fullWidth?: boolean;
@@ -13,7 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   withArrow?: boolean;
 }
 
-export interface HelperStyledFunction {
+interface HelperStyledFunction {
   palette: ITheme.palette;
   colorVariant?: ButtonColorVariant;
 }

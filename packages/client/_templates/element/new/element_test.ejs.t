@@ -3,7 +3,7 @@ to: "<%= isTest ? `src/elements/${h.changeCase.pascal(Name)}/${h.changeCase.pasc
 ---
 import React from 'react';
 
-import { render, screen } from '../../utils/test-utils';
+import { render, screen } from '../../utils/testingLibraryInstance';
 import <%= h.changeCase.pascal(Name) %> from '.';
 
 describe('<%= h.changeCase.pascal(Name) %>', () => {

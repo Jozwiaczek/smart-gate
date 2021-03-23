@@ -5,6 +5,12 @@ const en = {
       lastName: 'Last name',
       password: 'Password',
     },
+    menu: {
+      history: 'History',
+      dashboard: 'Dashboard',
+      settings: 'Settings',
+      admin: 'Admin',
+    },
     form: {
       errors: {
         onSubmitError: 'Oops! Something went wrong. Operation failed.',

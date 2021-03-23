@@ -15,4 +15,5 @@ export const Default = Template.bind({});
 Default.args = {
   children: <>Lorem Ipsum</>,
   withArrow: true,
+  disabled: false,
 };

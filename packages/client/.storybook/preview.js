@@ -1,24 +1,47 @@
-import styled, { ThemeProvider } from 'styled-components';
-import GlobalStyles from '../src/theme/GlobalStyles';
-import { getTheme, ThemeType } from '../src/theme/Theme';
+import React from 'react';
+import { ThemeDecorator, I18nDecorator, LayoutDecorator } from './decorators';
+import { withTests } from '@storybook/addon-jest';
+
+import testResults from '../src/jest-test-results.json';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
-  layout: 'centered',
 };
 
-const ViewportContainer = styled.div`
-  width: 1440px;
-  height: 900px;
-`;
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'dark',
+    toolbar: {
+      icon: 'circlehollow',
+      items: [
+        { value: 'light', icon: 'circlehollow', title: 'Light' },
+        { value: 'dark', icon: 'circle', title: 'Dark' },
+        { value: 'side-by-side', icon: 'sidebar', title: 'Side by side' },
+        { value: 'stacked', icon: 'bottombar', title: 'Stacked' },
+      ],
+    },
+  },
+  locale: {
+    name: 'Locale',
+    description: 'Internationalization locale',
+    defaultValue: 'en',
+    toolbar: {
+      icon: 'globe',
+      items: [
+        { value: 'en', right: '🇺🇸', title: 'English' },
+        { value: 'pl', right: '🇵🇱', title: 'Polski' },
+      ],
+    },
+  },
+};
 
 export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={getTheme(ThemeType.light)}>
-      <GlobalStyles />
-      <ViewportContainer>
-        <Story />
-      </ViewportContainer>
-    </ThemeProvider>
-  ),
+  LayoutDecorator,
+  ThemeDecorator,
+  I18nDecorator,
+  withTests({
+    results: testResults,
+  }),
 ];

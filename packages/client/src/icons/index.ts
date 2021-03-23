@@ -1,7 +1,11 @@
+export { default as AdminIcon } from './AdminIcon';
 export { default as ArrowIcon } from './ArrowIcon';
 export { default as ConfirmLockIcon } from './ConfirmLockIcon';
+export { default as DashboardIcon } from './DashboardIcon';
 export { default as EmailIcon } from './EmailIcon';
+export { default as HistoryIcon } from './HistoryIcon';
 export { default as LockIcon } from './LockIcon';
+export { default as SettingsIcon } from './SettingsIcon';
 export { default as ShieldLock } from './ShieldLock';
 export { default as SmartGateBackgroundLogoIcon } from './SmartGateBackgroundLogoIcon';
 export { default as SmartGateLogoIcon } from './SmartGateLogoIcon';

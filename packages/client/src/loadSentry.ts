@@ -11,11 +11,10 @@ const {
 } = process.env;
 
 onlyOnDevEnv(() => console.log('Initializing sentry'));
-
 Sentry.init({
   dsn: REACT_APP_SENTRY_DSN,
   integrations: [new Integrations.BrowserTracing()],
-  debug: Boolean(REACT_APP_SENTRY_DEBUG),
+  debug: REACT_APP_SENTRY_DEBUG === 'true',
+  enabled: REACT_APP_SENTRY_ENABLED === 'true',
   environment: REACT_APP_SENTRY_ENVIRONMENT || 'production',
-  enabled: Boolean(REACT_APP_SENTRY_ENABLED),
 });

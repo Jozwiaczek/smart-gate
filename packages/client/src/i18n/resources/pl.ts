@@ -7,6 +7,12 @@ const pl: TranslationStructure = {
       lastName: 'Nazwisko',
       password: 'Hasło',
     },
+    menu: {
+      history: 'Historia',
+      dashboard: 'Pulpit',
+      settings: 'Ustawienia',
+      admin: 'Zarządzanie',
+    },
     form: {
       errors: {
         onSubmitError: 'Oops! Coś poszło nie tak.',

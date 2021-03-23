@@ -123,3 +123,4 @@ build
 .env.production.local
 
 .idea
+jest-test-results.json
