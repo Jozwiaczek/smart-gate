@@ -6,6 +6,7 @@ on:
 
 jobs:
   chromatic-deployment:
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: 'Git checkout'
@@ -16,27 +17,14 @@ jobs:
       - name: 'Install dependencies'
         run: yarn
 
-      - name: 'Run unit tests'
+      - name: 'Run client unit tests'
         working-directory: packages/client
         run: yarn test
 
-      # 👇 Checks if the branch is not main and runs Chromatic
       - name: 'Publish to Chromatic'
-        if: github.ref != 'refs/heads/main'
         uses: chromaui/action@v1
         with:
           workingDir: packages/client
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          exitZeroOnChanges: true
-
-      # 👇 Checks if the branch is main and accepts all changes in Chromatic
-      - name: 'Publish to Chromatic and auto accept changes'
-        if: github.ref == 'refs/heads/main'
-        uses: chromaui/action@v1
-        with:
-          workingDir: packages/client
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          autoAcceptChanges: true
           exitZeroOnChanges: true
