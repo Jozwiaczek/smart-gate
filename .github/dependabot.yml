@@ -4,21 +4,15 @@ version: 2
 updates:
   - package-ecosystem: 'npm'
     directory: '/'
-    reviewers:
-      - 'Jozwiaczek'
-      - 'Mefjus'
     schedule:
-      interval: 'monthly'
+      interval: 'weekly'
       day: 'friday'
       time: '16:00'
       timezone: 'Europe/Warsaw'
   - package-ecosystem: 'github-actions'
     directory: '/'
-    reviewers:
-      - 'Jozwiaczek'
-      - 'Mefjus'
     schedule:
-      interval: 'monthly'
+      interval: 'weekly'
       day: 'friday'
       time: '16:00'
       timezone: 'Europe/Warsaw'
