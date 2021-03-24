@@ -2,7 +2,8 @@ name: 'Publish to Chromatic'
 on:
   push:
     paths:
-      - 'packages/client/**'
+      - 'packages/client/src/**'
+      - 'packages/client/.storybook/**'
       - '.github/workflows/chromatic.yml'
 
 jobs:
@@ -16,13 +17,13 @@ jobs:
 
       # Beginning of yarn setup, keep in sync between all workflows, see continous-integration.yml
       - name: Use node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/ # Needed for auth
       - name: 'Use cached node_modules'
         id: cache-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-v${{ matrix.node-version }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
@@ -31,7 +32,7 @@ jobs:
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: 'Cache global yarn cache'
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         if: steps.cache-modules.outputs.cache-hit != 'true'
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
