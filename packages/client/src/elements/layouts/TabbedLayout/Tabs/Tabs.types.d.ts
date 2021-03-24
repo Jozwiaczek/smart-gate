@@ -20,7 +20,7 @@ interface TabsOpt {
 interface TabsProps {
   children: Array<ReactElement<TabProps>> | ReactElement<TabProps>;
   value: number;
-  onChange: (event: MouseEvent, newValue: number) => void;
+  onChange: (event: MouseEvent, newValue: number, path: string) => void;
   options?: TabsOpt;
 }
 

@@ -1,17 +1,11 @@
 import { ReactNode } from 'react';
 
-export type ItemTitle = 'Dashboard' | 'History' | 'Settings' | 'Admin';
+import { TabProps } from '../layouts/TabbedLayout/Tab/Tab.types';
 
-export interface AppBarItem {
-  title: ItemTitle;
-  icon: ReactNode;
-  onlyAdmin?: boolean;
-}
-
-export interface StyledIconButtonProps {
-  isActive: boolean;
-}
-
-export interface ItemLabelProps {
-  isActive: boolean;
+interface AppBarItem extends TabProps {
+  index: number;
+  indexMobile?: number;
+  component: ReactNode;
+  path: string;
+  exact?: boolean;
 }

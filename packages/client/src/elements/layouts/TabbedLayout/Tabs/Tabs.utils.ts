@@ -29,7 +29,7 @@ export const getIndicatorAnimationSpace = ({
   return emptyWidthForValue + tabsWidthForValue + additionalSpaceForIndicatorWidth;
 };
 
-export const hasAccess = (onlyAdmin: boolean, user?: User) =>
+export const hasAccess = (onlyAdmin?: boolean, user?: User) =>
   !(onlyAdmin && !user?.roles?.includes(Role.Admin));
 
 export const countAvailableChildren = (children: ReactNode, user?: User) =>

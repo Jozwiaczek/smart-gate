@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '../../elements';
+import { Button } from '../../elements/buttons';
 import { useAuth, useThemeType } from '../../hooks';
 import { SGLocale } from '../../i18n';
 import { ThemeType } from '../../theme/Theme';
