@@ -2,7 +2,8 @@ name: 'Publish to Chromatic'
 on:
   push:
     paths:
-      - 'packages/client/**'
+      - 'packages/client/src/**'
+      - 'packages/client/.storybook/**'
       - '.github/workflows/chromatic.yml'
 
 jobs:
