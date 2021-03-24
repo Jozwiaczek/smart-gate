@@ -56,7 +56,7 @@ const AppBar = () => {
           const { index, indexMobile } = tab;
           const reindexTab = tab;
           if (isMobile) {
-            reindexTab.index = indexMobile !== undefined ? indexMobile : index;
+            reindexTab.index = indexMobile ?? index;
           }
           return reindexTab;
         })
