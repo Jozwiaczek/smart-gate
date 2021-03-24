@@ -17,7 +17,7 @@ export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
   width: 100%;
   height: 90px;
   background: ${({ theme }) => theme.palette.background.paper};
-  box-shadow: ${({ theme }) => theme.palette.boxShadow.default};
+  box-shadow: ${({ theme }) => theme.palette.boxShadow.big};
   overflow: hidden;
   border-radius: 25px 25px 0 0;
   ${({ orientation }) =>
