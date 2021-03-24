@@ -18,3 +18,6 @@ Default.args = {
   size: '20px',
   margin: '0',
 };
+Default.parameters = {
+  chromatic: { disable: true },
+};

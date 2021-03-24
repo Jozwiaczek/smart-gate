@@ -17,8 +17,7 @@
     "test": "react-scripts test --watchAll=false --passWithNoTests --json --outputFile=./src/jest-test-results.json",
     "test:coverage": "yarn test --coverage",
     "test:watch": "yarn test --watchAll=true",
-    "type-check": "tsc --noEmit",
-    "chromatic": "npx chromatic"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@sentry/react": "^6.2.3",
