@@ -39,6 +39,7 @@ const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRoute
   {
     path: routes.REGISTRATION,
     component: Registration,
+    exact: true,
   },
   {
     path: routes.PASSWORD_RECOVERY,

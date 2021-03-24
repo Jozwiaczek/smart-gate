@@ -1,10 +1,4 @@
-import {
-  BadRequestException,
-  forwardRef,
-  Inject,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 
@@ -19,6 +13,7 @@ import { constants } from '../../utils';
 import { UserEntity } from '../database/entities/user.entity';
 import { RefreshTokenService } from '../refresh-token/refresh-token.service';
 import { InvitationRepository } from '../repository/invitation.repository';
+import { RefreshTokenRepository } from '../repository/refresh-token.repository';
 import { UserRepository } from '../repository/user.repository';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
@@ -33,6 +28,7 @@ export class AuthService {
     private readonly invitationRepository: InvitationRepository,
     private readonly userRepository: UserRepository,
     private readonly tokenService: TokenService,
+    private readonly refreshTokenRepository: RefreshTokenRepository,
   ) {}
 
   public async login({
@@ -173,34 +169,17 @@ export class AuthService {
   }
 
   public async getUser(userId: string): Promise<UserEntity> {
-    return this.usersService.findOne(userId).catch(() => {
-      throw new BadRequestException('Invalid request');
-    });
+    return this.userRepository.findOneByEmailOrFail(userId);
   }
 
-  public async logout(refreshToken: string, accessToken: string) {
-    const { verify } = jsonwebtoken;
-    const { ACCESS_SECRET } = process.env;
-    if (!ACCESS_SECRET) {
-      throw new Error('Secret not set');
-    }
-
-    const payload = verify(accessToken, ACCESS_SECRET, { ignoreExpiration: true }) as AccessPayload;
-    await this.refreshTokenService.delete(refreshToken, payload.sub);
+  public async logout(refreshToken: string, userId: string) {
+    await this.refreshTokenRepository.repository.delete({ id: refreshToken, userId });
   }
 
   async logoutFromAllDevices(accessToken: string) {
-    const { verify } = jsonwebtoken;
-    const { ACCESS_SECRET } = process.env;
-    if (!ACCESS_SECRET) {
-      throw new Error('Secret not set');
-    }
+    const { userId } = await this.refreshTokenRepository.findByIdOrFail(accessToken);
 
-    const { sub: userId } = verify(accessToken, ACCESS_SECRET, {
-      ignoreExpiration: true,
-    }) as AccessPayload;
-
-    await this.refreshTokenService.deleteAllForUser(userId);
+    await this.refreshTokenRepository.deleteAllWithUserId(userId);
   }
 
   async register(registerDto: RegisterDto): Promise<UserEntity> {

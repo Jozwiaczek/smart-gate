@@ -10,4 +10,14 @@ export class RefreshTokenRepository extends BaseRepository(RefreshTokenEntity) {
       },
     });
   }
+
+  async deleteAllWithUserId(userId: string): Promise<RefreshTokenEntity[]> {
+    const entitiesToDelete = await this.find({
+      where: {
+        userId,
+      },
+    });
+
+    return this.repository.remove(entitiesToDelete);
+  }
 }

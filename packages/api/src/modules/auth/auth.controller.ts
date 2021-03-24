@@ -11,7 +11,7 @@ import {
 
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { LoginUserInfo } from '../../interfaces/login-user-info';
-import { TokenPayload } from '../../interfaces/token-types';
+import { BasePayload, TokenPayload } from '../../interfaces/token-types';
 import { constants, cookiesUtils } from '../../utils';
 import { ValidationPipe } from '../../utils/validation.pipe';
 import { LoginUserDto } from '../users/dto/login-user.dto';
@@ -101,10 +101,12 @@ export class AuthController {
     return loginUserInfo;
   }
 
+  @Auth()
   @Get('logout')
   async logout(
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
+    @CookiePayload() payload: BasePayload,
   ) {
     const { tokenConfig } = constants;
     const { getCookies, clearCookies } = cookiesUtils;
@@ -112,10 +114,9 @@ export class AuthController {
     const cookies = getCookies(request);
 
     const refreshToken = cookies[tokenConfig.refreshToken.name];
-    const accessToken = cookies[tokenConfig.accessToken.name];
 
     try {
-      await this.authService.logout(refreshToken, accessToken);
+      await this.authService.logout(refreshToken, payload.sub);
     } finally {
       clearCookies(response);
     }

@@ -23,13 +23,13 @@ export class TokenService {
   verifyJWTToken(
     tokenType: 'ACCESS',
     token: string,
-    userId: string,
+    userId?: string,
     ignoreExpiration?: boolean,
   ): AccessPayload;
   verifyJWTToken(
     tokenType: JWTTokenType,
     token: string,
-    userId: string,
+    userId?: string,
     ignoreExpiration?: boolean,
   ): BasePayload {
     const { verify } = jsonwebtoken;
@@ -40,12 +40,12 @@ export class TokenService {
     switch (tokenType) {
       case 'ACCESS':
         payload = verify(token, accessToken.secret, { ignoreExpiration }) as AccessPayload;
-        TokenService.validatePayload(payload, userId, accessToken.name);
+        TokenService.validatePayload(payload, accessToken.name, userId);
         break;
 
       case 'LOGOUT':
         payload = verify(token, logoutToken.secret, { ignoreExpiration }) as BasePayload;
-        TokenService.validatePayload(payload, userId, logoutToken.name);
+        TokenService.validatePayload(payload, logoutToken.name, userId);
         break;
 
       default:
@@ -54,10 +54,10 @@ export class TokenService {
     return payload;
   }
 
-  private static validatePayload(payload: BasePayload, userId: string, type: string): void {
+  private static validatePayload(payload: BasePayload, type: string, userId?: string): void {
     const { sub, type: payloadType } = payload;
 
-    if (sub !== userId) {
+    if (userId && sub !== userId) {
       throw Error('Invalid subscriber ID');
     }
 
