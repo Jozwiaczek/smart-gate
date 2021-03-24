@@ -82,7 +82,7 @@ const AppBar = () => {
     [history.location.pathname, sortedItems],
   );
 
-  const defaultActiveTab = activeTabFromUrl === undefined ? 1 : activeTabFromUrl;
+  const defaultActiveTab = activeTabFromUrl ?? 1;
   const [activeTab, setActiveTab] = useState<number>(defaultActiveTab);
 
   useEffect(() => {
