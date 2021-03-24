@@ -24,7 +24,7 @@
     "@sentry/tracing": "^6.2.3",
     "animejs": "^3.2.1",
     "axios": "^0.21.1",
-    "i18next": "^19.9.0",
+    "i18next": "^20.0.0",
     "i18next-browser-languagedetector": "^6.0.1",
     "intersection-observer": "^0.12.0",
     "react": "^17.0.1",
