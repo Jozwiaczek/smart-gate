@@ -77,7 +77,7 @@ const AppBar = () => {
         if (tab.path === '/') {
           return historyPath === tab.path;
         }
-        return historyPath.startsWith(tab.path!);
+        return historyPath.startsWith(tab.path);
       })?.index,
     [history.location.pathname, sortedItems],
   );
