@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
 import { CardLayout, Form, Link, TextField } from '../../elements';
 import { useAuth, useEncodedParams, useSnackbar } from '../../hooks';
 import useAnimated from '../../hooks/useAnimated';
-import { ConfirmLockIcon, EmailIcon, UserIcon } from '../../icons';
+import { ConfirmLockIcon, UserIcon } from '../../icons';
 import { RegistrationData } from '../../providers/api/AuthProvider/AuthProvider.types';
 import { onlyOnDevEnv } from '../../utils';
 import { StyledButton } from './Registration.styled';
@@ -65,6 +65,13 @@ const Registration = () => {
   return (
     <CardLayout.Container ref={animatedCardRef}>
       <CardLayout.Title>{t('routes.registration.title')}</CardLayout.Title>
+      <CardLayout.Description>
+        <Trans
+          i18nKey="routes.registration.description"
+          values={{ email }}
+          components={{ b: <b /> }}
+        />
+      </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextField
           name="firstName"
@@ -79,7 +86,6 @@ const Registration = () => {
           required
           startAdornment={<UserIcon />}
         />
-        <TextField name="email" disabled value={email} startAdornment={<EmailIcon />} required />
         <TextField
           name="password"
           label={t('user.password')}

@@ -79,9 +79,6 @@ const Login = () => {
         <Link to={routes.PASSWORD_RECOVERY} colorVariant="grey">
           {t('routes.login.forgotPassword')}
         </Link>
-        <Link to={routes.REGISTRATION} colorVariant="colour">
-          {t('routes.login.register')}
-        </Link>
       </CardLayout.ActionsContainer>
     </CardLayout.Container>
   );
