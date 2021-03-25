@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
 const MockLayout = styled.div`
   position: absolute;
@@ -13,9 +14,11 @@ const MockLayout = styled.div`
 `;
 
 const LayoutDecorator = (StoryFn) => (
-  <MockLayout>
-    <StoryFn />
-  </MockLayout>
+  <BrowserRouter>
+    <MockLayout>
+      <StoryFn />
+    </MockLayout>
+  </BrowserRouter>
 );
 
 export default LayoutDecorator;

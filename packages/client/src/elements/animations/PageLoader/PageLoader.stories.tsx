@@ -11,3 +11,6 @@ export default {
 const Template: Story = (args) => <PageLoader {...args} />;
 
 export const Default = Template.bind({});
+Default.parameters = {
+  chromatic: { disable: true },
+};

@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import { routes } from '../../constants';
-import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextField } from '../../elements';
-import { useAuth, useSnackbar } from '../../hooks';
-import useAnimated from '../../hooks/useAnimated';
-import { EmailIcon } from '../../icons';
-import { onlyOnDevEnv } from '../../utils';
+import { routes } from '../../../constants';
+import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextField } from '../../../elements';
+import { useAuth, useSnackbar } from '../../../hooks';
+import useAnimated from '../../../hooks/useAnimated';
+import { EmailIcon } from '../../../icons';
+import { onlyOnDevEnv } from '../../../utils';
 import { StyledButton } from './Login.styled';
 import { LoginInputs } from './Login.types';
 
@@ -78,9 +78,6 @@ const Login = () => {
       <CardLayout.ActionsContainer>
         <Link to={routes.PASSWORD_RECOVERY} colorVariant="grey">
           {t('routes.login.forgotPassword')}
-        </Link>
-        <Link to={routes.REGISTRATION} colorVariant="colour">
-          {t('routes.login.register')}
         </Link>
       </CardLayout.ActionsContainer>
     </CardLayout.Container>

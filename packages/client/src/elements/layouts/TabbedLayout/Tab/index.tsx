@@ -13,6 +13,7 @@ const Tab = ({
   label,
   icon,
   index,
+  path,
   onlyAdmin = false,
   tabWidth = 160,
   tabHeight = 160,
@@ -28,7 +29,7 @@ const Tab = ({
   }
 
   const onClick = (event: MouseEvent) => {
-    onChange && onChange(event, index as number);
+    onChange && onChange(event, index as number, path as string);
     variant === 'scrollable' &&
       itemRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end' });
   };

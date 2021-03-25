@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Button } from '../../elements';
+import { Button } from '../../../elements/buttons';
 
 export const StyledButton = styled(Button)(
   ({ theme: { breakpoints, down } }) => `

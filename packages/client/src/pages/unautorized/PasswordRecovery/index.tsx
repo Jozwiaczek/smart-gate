@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { routes } from '../../constants';
-import { Button, CardLayout, Form, Link, PaperPlane, TextField } from '../../elements';
-import { useAuth, useSnackbar } from '../../hooks';
-import useAnimated from '../../hooks/useAnimated';
-import { EmailIcon } from '../../icons';
-import { onlyOnDevEnv } from '../../utils';
+import { routes } from '../../../constants';
+import { Button, CardLayout, Form, Link, PaperPlane, TextField } from '../../../elements';
+import { useAuth, useSnackbar } from '../../../hooks';
+import useAnimated from '../../../hooks/useAnimated';
+import { EmailIcon } from '../../../icons';
+import { onlyOnDevEnv } from '../../../utils';
 import { PaperPlaneWrapper } from './PasswordRecovery.styled';
 import { PasswordRecoveryInputs } from './PasswordRecovery.types';
 

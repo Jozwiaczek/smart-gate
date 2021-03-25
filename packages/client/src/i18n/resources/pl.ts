@@ -49,6 +49,7 @@ const pl: TranslationStructure = {
       },
       registration: {
         title: 'Rejestracja',
+        description: 'Utwórz konto dla tego adresu<br/>email <b>{{email}}</b>.',
         createAccount: 'Utwórz konto',
         alreadyHaveAccount: 'Masz już konto?',
         login: 'Zaloguj',
