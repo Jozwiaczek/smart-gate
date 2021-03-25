@@ -25,7 +25,13 @@ export class TokenService {
     token: string,
     userId?: string,
     ignoreExpiration?: boolean,
-  ): AccessPayload;
+  ): TokenPayload;
+  verifyJWTToken(
+    tokenType: JWTTokenType,
+    token: string,
+    userId?: string,
+    ignoreExpiration?: boolean,
+  ): BasePayload;
   verifyJWTToken(
     tokenType: JWTTokenType,
     token: string,
@@ -124,14 +130,17 @@ export class TokenService {
     return [token, expirationDate];
   }
 
-  async validateRefreshToken(refreshTokenId: string, userId: string): Promise<void> {
-    const { expirationDate, id } = await this.refreshTokenRepository.findOneWithUserIdOrFail(
+  async validateRefreshToken(refreshTokenId: string, userId: string): Promise<RefreshTokenEntity> {
+    const refreshTokenEntity = await this.refreshTokenRepository.findOneWithUserIdOrFail(
       refreshTokenId,
       userId,
     );
+    const { expirationDate, id } = refreshTokenEntity;
 
     if (expirationDate.getTime() < Date.now()) {
       throw new Error(`Refresh token with id: '${id}' expired.`);
     }
+
+    return refreshTokenEntity;
   }
 }

@@ -51,7 +51,7 @@ export class TokenCookieService {
     }
   }
 
-  clearAllCookieTokens(tokenType: TokenType, res: CookieResponse): void {
+  clearAllCookieTokens(res: CookieResponse): void {
     const { accessToken, refreshToken, logoutToken } = this.tokenConfigService.getTokenConfig();
 
     this.cookieService.clearCookie(res, accessToken.name);

@@ -12,7 +12,6 @@ import {
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { BasePayload, TokenPayload } from '../../interfaces/token-types';
-import { constants, cookiesUtils } from '../../utils';
 import { ValidationPipe } from '../../utils/validation.pipe';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
@@ -29,8 +28,7 @@ export class AuthController {
     @Body(new ValidationPipe()) loginUser: LoginUserDto,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    return await this.authService.login(loginUser, response).catch((e) => {
-      console.log(e);
+    return this.authService.login(loginUser, response).catch(() => {
       throw new UnauthorizedException('Invalid credentials');
     });
   }
@@ -40,8 +38,7 @@ export class AuthController {
     @Body(new ValidationPipe()) registerDto: RegisterDto,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const newUser = await this.authService.register(registerDto).catch((e) => {
-      console.log(e);
+    const newUser = await this.authService.register(registerDto).catch(() => {
       throw new BadRequestException('User already exists');
     });
 
@@ -51,7 +48,7 @@ export class AuthController {
       password: registerDto.password,
     };
 
-    return await this.authService.login(loginUser, response);
+    return this.authService.login(loginUser, response);
   }
 
   @Auth()
@@ -77,36 +74,15 @@ export class AuthController {
     @Res({ passthrough: true }) response: CookieResponse,
     @CookiePayload() payload: BasePayload,
   ) {
-    const { tokenConfig } = constants;
-    const { getCookies, clearCookies } = cookiesUtils;
-
-    const cookies = getCookies(request);
-
-    const refreshToken = cookies[tokenConfig.refreshToken.name];
-
-    try {
-      await this.authService.logout(refreshToken, payload.sub);
-    } finally {
-      clearCookies(response);
-    }
+    await this.authService.logout(response, payload.sub);
   }
 
   @Get('logoutFromAllDevices')
   async logoutFromAllDevices(
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
+    @CookiePayload() payload: BasePayload,
   ) {
-    const { tokenConfig } = constants;
-    const { getCookies, clearCookies } = cookiesUtils;
-
-    const cookies = getCookies(request);
-
-    const accessToken = cookies[tokenConfig.accessToken.name];
-
-    try {
-      await this.authService.logoutFromAllDevices(accessToken);
-    } finally {
-      clearCookies(response);
-    }
+    await this.authService.logoutFromAllDevices(response, payload.sub);
   }
 }
