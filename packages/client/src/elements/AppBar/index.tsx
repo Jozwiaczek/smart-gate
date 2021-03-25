@@ -66,7 +66,7 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
           reindexTab.index = index;
           return reindexTab;
         }),
-    [currentUser, isMobile],
+    [currentUser, isMobile, tabs],
   );
 
   const history = useHistory();
