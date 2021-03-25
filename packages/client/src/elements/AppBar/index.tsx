@@ -121,6 +121,7 @@ const AppBar = () => {
           value={activeTab}
           onChange={handleChange}
           options={{
+            tabWidth: isMobile ? 160 : 130,
             indicatorPosition: isMobile ? 'top' : 'right',
             indicatorWidth: 80,
             variant: isMobile ? 'fullWidth' : 'default',

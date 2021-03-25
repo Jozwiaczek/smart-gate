@@ -1,20 +1,19 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
 
 import { Button } from '../../elements/buttons';
 import { useAuth, useThemeType } from '../../hooks';
 import { SGLocale } from '../../i18n';
+import { User } from '../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
 import { ThemeType } from '../../theme/Theme';
 import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
-  const { logout, logoutFromAllDevices, checkAuth } = useAuth();
+  const { logout, logoutFromAllDevices } = useAuth();
   const { themeType, setThemeType } = useThemeType();
-
-  const getMe = async () => {
-    console.log(await checkAuth());
-  };
+  const { data } = useQuery<User[]>('/users');
 
   const logoutUser = async () => {
     await logout();
@@ -49,12 +48,12 @@ const Dashboard = () => {
       <Button onClick={onChangeTheme} margin="20px">
         Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
       </Button>
-      <Button onClick={getMe} color="secondary" margin="20px">
-        Test Get Me
-      </Button>
       <Button onClick={changeLocale} color="secondary">
         Change locale to {i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl}
       </Button>
+      {data?.map((user) => (
+        <p key={user.email}>{user.email}</p>
+      ))}
     </Container>
   );
 };

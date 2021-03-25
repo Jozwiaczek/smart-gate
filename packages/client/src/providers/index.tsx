@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import i18n from '../i18n';
-import { AuthProvider, AxiosProvider } from './api';
-import UserProvider from './api/CurrentUserProvider';
+import { AuthProvider, AxiosProvider, CurrentUserProvider, ReactQueryProvider } from './api';
 import SnackbarProvider from './SnackbarProvider';
 import StylesProvider from './StylesProvider';
 
@@ -12,17 +11,19 @@ interface ProvidersProps {
 }
 
 const Providers = ({ children }: ProvidersProps) => (
-  <UserProvider>
+  <CurrentUserProvider>
     <AxiosProvider>
       <AuthProvider>
-        <StylesProvider>
-          <I18nextProvider i18n={i18n}>
-            <SnackbarProvider>{children}</SnackbarProvider>
-          </I18nextProvider>
-        </StylesProvider>
+        <ReactQueryProvider>
+          <StylesProvider>
+            <I18nextProvider i18n={i18n}>
+              <SnackbarProvider>{children}</SnackbarProvider>
+            </I18nextProvider>
+          </StylesProvider>
+        </ReactQueryProvider>
       </AuthProvider>
     </AxiosProvider>
-  </UserProvider>
+  </CurrentUserProvider>
 );
 
 export default Providers;

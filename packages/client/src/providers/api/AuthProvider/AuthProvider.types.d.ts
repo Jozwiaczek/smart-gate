@@ -41,6 +41,6 @@ export interface AuthProps {
   checkAuth: () => Promise<User | undefined>;
   logout: () => void;
   logoutFromAllDevices: () => void;
-  sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<boolean>;
-  updatePassword: (user: UpdatePasswordData) => Promise<boolean>;
+  sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<void>;
+  updatePassword: (user: UpdatePasswordData) => Promise<void>;
 }
