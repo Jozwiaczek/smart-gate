@@ -20545,13 +20545,21 @@ workbox-strategies@^6.1.2:
   dependencies:
     workbox-core "^6.1.2"
 
-workbox-streams@^5.1.3, workbox-streams@^5.1.4:
+workbox-streams@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/workbox-streams/-/workbox-streams-5.1.4.tgz#05754e5e3667bdc078df2c9315b3f41210d8cac0"
   integrity sha512-xU8yuF1hI/XcVhJUAfbQLa1guQUhdLMPQJkdT0kn6HP5CwiPOGiXnSFq80rAG4b1kJUChQQIGPrq439FQUNVrw==
   dependencies:
     workbox-core "^5.1.4"
     workbox-routing "^5.1.4"
+
+workbox-streams@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/workbox-streams/-/workbox-streams-6.1.2.tgz#d7c2fd49bca6e0594e046144248730a245294c6d"
+  integrity sha512-iAHamHNZPSfN8k2QMrfei6/2FrReSHCkQUi4gU4B+tDXi4lY33/iU3+xlWLsMunLzoJhtPChDLG10s+EU5egvQ==
+  dependencies:
+    workbox-core "^6.1.2"
+    workbox-routing "^6.1.2"
 
 workbox-sw@^5.1.4:
   version "5.1.4"
