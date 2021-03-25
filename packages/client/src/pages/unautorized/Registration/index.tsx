@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import { routes } from '../../constants';
-import { CardLayout, Form, Link, TextField } from '../../elements';
-import { useAuth, useEncodedParams, useSnackbar } from '../../hooks';
-import useAnimated from '../../hooks/useAnimated';
-import { ConfirmLockIcon, UserIcon } from '../../icons';
-import { RegistrationData } from '../../providers/api/AuthProvider/AuthProvider.types';
-import { onlyOnDevEnv } from '../../utils';
+import { routes } from '../../../constants';
+import { CardLayout, Form, Link, TextField } from '../../../elements';
+import { useAuth, useEncodedParams, useSnackbar } from '../../../hooks';
+import useAnimated from '../../../hooks/useAnimated';
+import { ConfirmLockIcon, UserIcon } from '../../../icons';
+import { RegistrationData } from '../../../providers/api/AuthProvider/AuthProvider.types';
+import { onlyOnDevEnv } from '../../../utils';
 import { StyledButton } from './Registration.styled';
 import { RegistrationInputs, RegistrationParams } from './Registration.types';
 

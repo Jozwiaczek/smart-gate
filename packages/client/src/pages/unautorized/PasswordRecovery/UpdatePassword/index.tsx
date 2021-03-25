@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { routes } from '../../../constants';
-import { Button, CardLayout, Form, Link, TextField } from '../../../elements';
-import { useAuth, useEncodedParams, useSnackbar } from '../../../hooks';
-import useAnimated from '../../../hooks/useAnimated';
-import { ConfirmLockIcon, ShieldLock } from '../../../icons';
-import { onlyOnDevEnv } from '../../../utils';
+import { routes } from '../../../../constants';
+import { Button, CardLayout, Form, Link, TextField } from '../../../../elements';
+import { useAuth, useEncodedParams, useSnackbar } from '../../../../hooks';
+import useAnimated from '../../../../hooks/useAnimated';
+import { ConfirmLockIcon, ShieldLock } from '../../../../icons';
+import { onlyOnDevEnv } from '../../../../utils';
 import { ShieldIconWrapper } from './UpdatePassword.styled';
 
 const UpdatePassword = () => {

@@ -2,11 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
-import { Button } from '../../elements/buttons';
-import { useAuth, useThemeType } from '../../hooks';
-import { SGLocale } from '../../i18n';
-import { User } from '../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
-import { ThemeType } from '../../theme/Theme';
+import { Button } from '../../../elements/buttons';
+import { useAuth, useThemeType } from '../../../hooks';
+import { SGLocale } from '../../../i18n';
+import { User } from '../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
+import { ThemeType } from '../../../theme/Theme';
 import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
