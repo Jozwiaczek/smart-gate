@@ -2,6 +2,8 @@ import { forwardRef, Inject, NotFoundException, UnauthorizedException } from '@n
 import * as bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 
+import { CookieResponse } from '../../interfaces/cookie-types';
+import { LoginUserInfo } from '../../interfaces/login-user-info';
 import {
   AccessPayload,
   BasePayload,
@@ -19,6 +21,7 @@ import { LoginUserDto } from '../users/dto/login-user.dto';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { TokenService } from './token/token.service';
+import { TokenCookieService } from './token/token-cookie.service';
 
 export class AuthService {
   constructor(
@@ -29,13 +32,13 @@ export class AuthService {
     private readonly userRepository: UserRepository,
     private readonly tokenService: TokenService,
     private readonly refreshTokenRepository: RefreshTokenRepository,
+    private readonly tokenCookieService: TokenCookieService,
   ) {}
 
-  public async login({
-    email,
-    password,
-    keepMeLoggedIn,
-  }: LoginUserDto): Promise<[GeneratedTokens, UserEntity]> {
+  public async login(
+    { email, password, keepMeLoggedIn }: LoginUserDto,
+    res: CookieResponse,
+  ): Promise<LoginUserInfo> {
     const user = await this.validateUser(email, password);
 
     const [refreshToken, expirationDate] = await this.tokenService.generateToken(
@@ -52,17 +55,28 @@ export class AuthService {
       [logoutToken] = await this.tokenService.generateToken('LOGOUT', user, keepMeLoggedIn);
     }
 
-    return [
-      {
-        tokens: {
-          logoutToken,
-          accessToken,
-          refreshToken,
-        },
-        expiration: expirationDate,
+    const generateTokens: GeneratedTokens = {
+      tokens: {
+        logoutToken,
+        accessToken,
+        refreshToken,
       },
-      user,
-    ];
+      expiration: expirationDate,
+    };
+
+    this.tokenCookieService.setCookieTokens(generateTokens, res);
+
+    const { firstName, lastName, roles } = user;
+
+    return {
+      user: {
+        email,
+        firstName,
+        lastName,
+        roles,
+      },
+      expirationDate: expirationDate.getTime(),
+    };
   }
 
   public generateAccessTokens(user: UserEntity, keepMeLoggedIn: boolean): string {
@@ -169,7 +183,7 @@ export class AuthService {
   }
 
   public async getUser(userId: string): Promise<UserEntity> {
-    return this.userRepository.findOneByEmailOrFail(userId);
+    return this.userRepository.findByIdOrFail(userId);
   }
 
   public async logout(refreshToken: string, userId: string) {

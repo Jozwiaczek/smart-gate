@@ -5,7 +5,7 @@ import { Config } from '../../../config/config';
 
 @Injectable()
 export class CookieConfigService {
-  private readonly config: Config;
+  constructor(private readonly config: Config) {}
 
   getIsProduction() {
     return this.config.environment.isProd;

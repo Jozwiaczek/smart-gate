@@ -22,33 +22,17 @@ import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   async login(
     @Body(new ValidationPipe()) loginUser: LoginUserDto,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
-    const [genTokens, user] = await this.authService.login(loginUser).catch((e) => {
+    return await this.authService.login(loginUser, response).catch((e) => {
       console.log(e);
       throw new UnauthorizedException('Invalid credentials');
     });
-
-    const { setCookies } = cookiesUtils;
-    setCookies(genTokens, response);
-
-    const { email, firstName, lastName, roles } = user;
-    const loginUserInfo: LoginUserInfo = {
-      user: {
-        email,
-        firstName,
-        lastName,
-        roles,
-      },
-      expirationDate: genTokens.expiration.getTime(),
-    };
-
-    return loginUserInfo;
   }
 
   @Post('register')
@@ -67,22 +51,7 @@ export class AuthController {
       password: registerDto.password,
     };
 
-    const [genTokens] = await this.authService.login(loginUser);
-    const { setCookies } = cookiesUtils;
-    setCookies(genTokens, response);
-
-    const { email, firstName, lastName, roles } = newUser;
-    const loginUserInfo: LoginUserInfo = {
-      user: {
-        email,
-        firstName,
-        lastName,
-        roles,
-      },
-      expirationDate: genTokens.expiration.getTime(),
-    };
-
-    return loginUserInfo;
+    return await this.authService.login(loginUser, response);
   }
 
   @Auth()

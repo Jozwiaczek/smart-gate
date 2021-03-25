@@ -9,7 +9,7 @@ import { RefreshTokenRepository } from '../../repository/refresh-token.repositor
 import { TokenConfigService } from './config/token-config.service';
 
 type JWTTokenType = 'ACCESS' | 'LOGOUT';
-type TokenType = JWTTokenType | 'REFRESH';
+export type TokenType = JWTTokenType | 'REFRESH';
 
 @Injectable()
 export class TokenService {
@@ -124,7 +124,7 @@ export class TokenService {
     return [token, expirationDate];
   }
 
-  async validateRefreshToken(refreshTokenId: string, userId: string) {
+  async validateRefreshToken(refreshTokenId: string, userId: string): Promise<void> {
     const { expirationDate, id } = await this.refreshTokenRepository.findOneWithUserIdOrFail(
       refreshTokenId,
       userId,
