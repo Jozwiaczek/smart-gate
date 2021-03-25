@@ -8,8 +8,8 @@ const defaultValues: AuthProps = {
   logoutFromAllDevices: () => {},
   login: () => Promise.resolve(false),
   register: () => Promise.resolve(false),
-  sendPasswordRecoveryEmail: () => Promise.resolve(false),
-  updatePassword: () => Promise.resolve(false),
+  sendPasswordRecoveryEmail: () => Promise.resolve(),
+  updatePassword: () => Promise.resolve(),
 };
 
 export const AuthContext = createContext<AuthProps>(defaultValues);

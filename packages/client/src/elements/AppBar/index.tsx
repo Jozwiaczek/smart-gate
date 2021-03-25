@@ -8,9 +8,9 @@ import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons
 import TabbedLayout from '../layouts/TabbedLayout';
 import { hasAccess } from '../layouts/TabbedLayout/Tabs/Tabs.utils';
 import { TabPageWrapper, TabsWrapper, Wrapper } from './AppBar.styled';
-import { AppBarItem } from './AppBar.types';
+import { AppBarItem, AppBarProps } from './AppBar.types';
 
-const tabs: Array<AppBarItem> = [
+const defaultTabs: Array<AppBarItem> = [
   {
     index: 0,
     indexMobile: 1,
@@ -45,7 +45,7 @@ const tabs: Array<AppBarItem> = [
   },
 ];
 
-const AppBar = () => {
+const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
   const { isMobile } = useMediaDevice();
   const [currentUser] = useCurrentUser();
   const sortedItems = useMemo(
@@ -66,7 +66,7 @@ const AppBar = () => {
           reindexTab.index = index;
           return reindexTab;
         }),
-    [currentUser, isMobile],
+    [currentUser, isMobile, tabs],
   );
 
   const history = useHistory();
@@ -121,6 +121,7 @@ const AppBar = () => {
           value={activeTab}
           onChange={handleChange}
           options={{
+            tabWidth: isMobile ? 160 : 130,
             indicatorPosition: isMobile ? 'top' : 'right',
             indicatorWidth: 80,
             variant: isMobile ? 'fullWidth' : 'default',

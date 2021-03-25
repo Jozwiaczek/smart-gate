@@ -9,3 +9,7 @@ interface AppBarItem extends TabProps {
   path: string;
   exact?: boolean;
 }
+
+interface AppBarProps {
+  tabs?: Array<AppBarItem>;
+}

@@ -24,7 +24,7 @@ export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
     orientation === 'vertical' &&
     `
       height: 100%;
-      width: 160px;
+      width: 130px;
       border-radius: 0;
   `};
 `;
