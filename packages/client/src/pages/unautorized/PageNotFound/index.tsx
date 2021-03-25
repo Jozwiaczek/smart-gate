@@ -1,10 +1,10 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { routes } from '../../constants';
-import { Button, CardLayout, Heaven, Hell } from '../../elements';
-import { useCurrentUser, useThemeType } from '../../hooks';
-import { ThemeType } from '../../theme/Theme';
+import { routes } from '../../../constants';
+import { Button, CardLayout, Heaven, Hell } from '../../../elements';
+import { useCurrentUser, useThemeType } from '../../../hooks';
+import { ThemeType } from '../../../theme/Theme';
 import { ContentWrapper, Description, IllustrationWrapper, Title } from './PageNotFound.styled';
 
 const PageNotFound = () => {

@@ -1,6 +1,6 @@
 import { routes } from '../constants';
-import { Login, PageNotFound, PasswordRecovery, Registration, UpdatePassword } from '../containers';
 import { AppBar } from '../elements';
+import { Login, PageNotFound, PasswordRecovery, Registration, UpdatePassword } from '../pages';
 import {
   BasicRouteProps,
   ConditionRouteProps,

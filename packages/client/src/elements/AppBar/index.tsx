@@ -2,9 +2,9 @@ import React, { MouseEvent, useEffect, useMemo, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { routes } from '../../constants';
-import { Dashboard } from '../../containers';
 import { useCurrentUser, useMediaDevice } from '../../hooks';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
+import { Dashboard } from '../../pages';
 import TabbedLayout from '../layouts/TabbedLayout';
 import { hasAccess } from '../layouts/TabbedLayout/Tabs/Tabs.utils';
 import { TabPageWrapper, TabsWrapper, Wrapper } from './AppBar.styled';
