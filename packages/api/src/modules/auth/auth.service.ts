@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
-import { CookieResponse } from '../../interfaces/cookie-types';
-import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { GeneratedTokens } from '../../interfaces/token-types';
 import { UserEntity } from '../database/entities/user.entity';
 import { InvitationRepository } from '../repository/invitation.repository';
 import { RefreshTokenRepository } from '../repository/refresh-token.repository';
 import { UserRepository } from '../repository/user.repository';
+import { CookieResponse } from './cookie/interfaces/cookie-types';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { LoginUserInfo } from './interfaces/login-user-info';
 import { TokenService } from './token/token.service';
 import { TokenCookieService } from './token/token-cookie.service';
 

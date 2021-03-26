@@ -9,15 +9,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
-import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { BasePayload, TokenPayload } from '../../interfaces/token-types';
 import { ValidationPipe } from '../../utils/validation.pipe';
 import { AuthService } from './auth.service';
+import { CookieRequest, CookieResponse } from './cookie/interfaces/cookie-types';
 import { Auth } from './decorators/auth.decorator';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { LoginUserInfo } from './interfaces/login-user-info';
 
 @Controller('auth')
 export class AuthController {

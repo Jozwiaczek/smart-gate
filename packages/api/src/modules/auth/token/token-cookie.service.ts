@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { CookieResponse } from '../../../interfaces/cookie-types';
 import { GeneratedTokens } from '../../../interfaces/token-types';
 import { CookieService } from '../cookie/cookie.service';
+import { CookieResponse } from '../cookie/interfaces/cookie-types';
 import { TokenConfigService } from './config/token-config.service';
 import { TokenType } from './token.service';
 
