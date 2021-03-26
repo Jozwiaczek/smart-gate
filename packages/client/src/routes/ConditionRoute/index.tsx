@@ -12,7 +12,7 @@ const ConditionRoute = ({ redirectTo, condition, ...props }: ConditionRouteProps
     data: false,
     state: 'loading',
   });
-
+  // eslint-disable-next-line react/destructuring-assignment
   useEffect(() => {
     let isActive = true;
 

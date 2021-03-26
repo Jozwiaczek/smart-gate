@@ -1,11 +1,9 @@
+import { RouteProps } from 'react-router';
+
 import { routes } from '../constants';
 import { AppBar } from '../elements';
 import { Login, PageNotFound, PasswordRecovery, Registration, UpdatePassword } from '../pages';
-import {
-  BasicRouteProps,
-  ConditionRouteProps,
-  OnlyAuthenticatedRouteProps,
-} from './ConditionRoute/Condition.types';
+import { ConditionRouteProps, OnlyAuthenticatedRouteProps } from './ConditionRoute/Condition.types';
 import {
   allowAll,
   onlyAuthenticated,
@@ -15,8 +13,9 @@ import {
 
 const onlyAuthenticatedRoutes: Array<ConditionRouteProps> = (<Array<OnlyAuthenticatedRouteProps>>[
   {
-    path: routes.HOME,
+    path: [routes.HOME, routes.SETTINGS, routes.ADMIN, routes.HISTORY],
     component: AppBar,
+    exact: true,
   },
 ]).map(({ roles, ...props }) => ({
   ...props,
@@ -24,7 +23,7 @@ const onlyAuthenticatedRoutes: Array<ConditionRouteProps> = (<Array<OnlyAuthenti
   condition: onlyAuthenticatedCondition(roles),
 }));
 
-const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[
+const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<RouteProps>>[
   {
     path: routes.LOGIN,
     component: Login,
@@ -46,7 +45,7 @@ const onlyUnauthenticatedRoutes: Array<ConditionRouteProps> = (<Array<BasicRoute
   },
 ]).map((props) => ({ ...props, ...onlyUnauthenticated }));
 
-const allowAllRoutes: Array<ConditionRouteProps> = (<Array<BasicRouteProps>>[
+const allowAllRoutes: Array<ConditionRouteProps> = (<Array<RouteProps>>[
   {
     path: routes.PAGE_NOT_FOUND,
     component: PageNotFound,
