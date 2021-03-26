@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
 import { CookieResponse } from '../../interfaces/cookie-types';
@@ -13,6 +13,7 @@ import { RegisterDto } from './dto/register.dto';
 import { TokenService } from './token/token.service';
 import { TokenCookieService } from './token/token-cookie.service';
 
+@Injectable()
 export class AuthService {
   constructor(
     private readonly invitationRepository: InvitationRepository,
