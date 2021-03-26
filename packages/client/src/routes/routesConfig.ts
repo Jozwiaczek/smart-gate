@@ -1,5 +1,5 @@
 import { routes } from '../constants';
-import { AppBar } from '../elements';
+import AppBar from '../elements/AppBar';
 import { Login, PageNotFound, PasswordRecovery, Registration, UpdatePassword } from '../pages';
 import {
   BasicRouteProps,

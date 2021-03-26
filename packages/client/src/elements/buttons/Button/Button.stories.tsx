@@ -14,6 +14,21 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   children: <>Lorem Ipsum</>,
-  withArrow: true,
-  disabled: false,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  children: <>Lorem Ipsum</>,
+  loading: true,
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  children: <>Lorem Ipsum</>,
+  disabled: true,
+};
+
+export const WithTranslationLabel = Template.bind({});
+WithTranslationLabel.args = {
+  label: 'routes.login.login',
 };

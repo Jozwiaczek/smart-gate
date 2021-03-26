@@ -36,14 +36,9 @@ export const CardWrapper = styled.div`
   justify-content: center;
 `;
 
-export const StyledTitle = styled.h1(
-  ({ theme: { breakpoints, down } }) => `
+export const StyledTitle = styled.h1`
   margin: 30px 0 20px;
-  ${down(breakpoints.xs)} {
-    font-size: 40px;
-  }
-`,
-);
+`;
 
 export const StyledDescription = styled.p`
   color: ${({ theme: { palette } }) => palette.text.secondary};

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ArrowIcon } from '../../../icons';
 import { ThemeType } from '../../../theme/Theme';
@@ -12,12 +13,15 @@ const Button = ({
   children,
   colorVariant = ThemeType.light,
   loading,
+  label,
   to,
   disabled,
   withArrow,
   fullWidth,
   ...rest
 }: ButtonProps) => {
+  const { t } = useTranslation();
+
   const baseButton = (
     <StyledButton
       data-testid="button"
@@ -27,7 +31,7 @@ const Button = ({
       {...rest}
     >
       {loading && <Spinner margin="0 8px 0 0" />}
-      {children}
+      {t(label as never) || children}
       {withArrow && (
         <IconContainer>
           <ArrowIcon />

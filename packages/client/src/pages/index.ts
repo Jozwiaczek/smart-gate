@@ -1,3 +1,4 @@
+export { default as Admin } from './autorized/Admin';
 export { default as Dashboard } from './autorized/Dashboard';
 export { default as Login } from './unautorized/Login';
 export { default as PageNotFound } from './unautorized/PageNotFound';
