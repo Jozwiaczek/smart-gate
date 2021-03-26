@@ -1,6 +1,8 @@
-import { IsEmail, IsString, Length, Matches } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
-export class RegisterDto {
+import { PasswordDto } from './password.dto';
+
+export class RegisterDto extends PasswordDto {
   @IsString()
   code: string;
 
@@ -12,12 +14,4 @@ export class RegisterDto {
 
   @IsEmail()
   email: string;
-
-  @IsString()
-  @Length(8)
-  @Matches(/[a-z]/)
-  @Matches(/[A-Z]/)
-  @Matches(/[0-9]/)
-  @Matches(/[^A-Za-z0-9]/)
-  password: string;
 }

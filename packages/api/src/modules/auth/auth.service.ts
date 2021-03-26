@@ -8,7 +8,7 @@ import { UserEntity } from '../database/entities/user.entity';
 import { InvitationRepository } from '../repository/invitation.repository';
 import { RefreshTokenRepository } from '../repository/refresh-token.repository';
 import { UserRepository } from '../repository/user.repository';
-import { LoginUserDto } from '../users/dto/login-user.dto';
+import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { TokenService } from './token/token.service';
 import { TokenCookieService } from './token/token-cookie.service';
@@ -24,7 +24,7 @@ export class AuthService {
   ) {}
 
   public async login(
-    { email, password, keepMeLoggedIn }: LoginUserDto,
+    { email, password, keepMeLoggedIn }: LoginDto,
     res: CookieResponse,
   ): Promise<LoginUserInfo> {
     const user = await this.validateUser(email, password);

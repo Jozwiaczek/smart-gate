@@ -13,10 +13,10 @@ import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { LoginUserInfo } from '../../interfaces/login-user-info';
 import { BasePayload, TokenPayload } from '../../interfaces/token-types';
 import { ValidationPipe } from '../../utils/validation.pipe';
-import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
+import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
@@ -25,7 +25,7 @@ export class AuthController {
 
   @Post('login')
   async login(
-    @Body(new ValidationPipe()) loginUser: LoginUserDto,
+    @Body(new ValidationPipe()) loginUser: LoginDto,
     @Res({ passthrough: true }) response: CookieResponse,
   ) {
     return this.authService.login(loginUser, response).catch(() => {
@@ -42,7 +42,7 @@ export class AuthController {
       throw new BadRequestException('User already exists');
     });
 
-    const loginUser: LoginUserDto = {
+    const loginUser: LoginDto = {
       email: newUser.email,
       keepMeLoggedIn: false,
       password: registerDto.password,
