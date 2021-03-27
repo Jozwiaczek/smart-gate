@@ -11,7 +11,7 @@ const pl: TranslationStructure = {
       history: 'Historia',
       dashboard: 'Pulpit',
       settings: 'Ustawienia',
-      admin: 'Zarządzanie',
+      admin: 'Admin',
     },
     form: {
       errors: {
@@ -40,6 +40,16 @@ const pl: TranslationStructure = {
       dashboard: {
         logout: 'Wyloguj się',
         logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+      },
+      admin: {
+        title: 'Admin panel',
+        items: {
+          device: 'Urządzenie',
+          users: 'Użytkownicy',
+          invitations: 'Zaproszenia',
+          privileges: 'Grupy dostępu',
+          statistics: 'Statystyki',
+        },
       },
       login: {
         keepMeLoggedIn: 'Nie wylogowuj mnie',

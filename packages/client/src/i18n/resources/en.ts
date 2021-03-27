@@ -39,6 +39,16 @@ const en = {
         logout: 'Logout',
         logoutFromAllDevices: 'Logout from all devices',
       },
+      admin: {
+        title: 'Admin panel',
+        items: {
+          device: 'Device configuration',
+          users: 'Users management',
+          invitations: 'Invitations',
+          privileges: 'Privileges groups',
+          statistics: 'Statistics',
+        },
+      },
       login: {
         keepMeLoggedIn: 'Keep me logged in',
         forgotPassword: 'Forgot password',

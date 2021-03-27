@@ -27,12 +27,17 @@ const getFontColor = ({
   }
 };
 
-const getBaseColor = ({ colorVariant, palette: { colors, primary } }: HelperStyledFunction) => {
+const getBaseColor = ({
+  colorVariant,
+  palette: { colors, primary, background },
+}: HelperStyledFunction) => {
   switch (colorVariant) {
     case 'blue':
       return colors.blue;
     case 'red':
       return colors.red;
+    case 'card':
+      return background.paper;
     case ThemeType.dark:
       return primary.dark;
     case ThemeType.light:
@@ -46,6 +51,7 @@ export const StyledButton = styled.button<ButtonProps>(
   ({ colorVariant, fullWidth, margin, theme: { palette, sizes } }) => `
   position: relative;
   overflow: hidden;
+  
   display: flex;
   justify-content: center;
   align-items: center;

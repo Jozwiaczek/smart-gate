@@ -4,10 +4,11 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { routes } from '../../constants';
 import { useCurrentUser, useMediaDevice } from '../../hooks';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
-import { Dashboard } from '../../pages';
+import { Admin, Dashboard } from '../../pages';
+import { BackgroundSideLogo } from '../index';
 import TabbedLayout from '../layouts/TabbedLayout';
 import { hasAccess } from '../layouts/TabbedLayout/Tabs/Tabs.utils';
-import { TabPageWrapper, TabsWrapper, Wrapper } from './AppBar.styled';
+import { AppBarPageWrapper, TabPageWrapper, TabsWrapper, Wrapper } from './AppBar.styled';
 import { AppBarItem, AppBarProps } from './AppBar.types';
 
 const defaultTabs: Array<AppBarItem> = [
@@ -34,7 +35,7 @@ const defaultTabs: Array<AppBarItem> = [
     label: 'menu.admin',
     icon: <AdminIcon />,
     onlyAdmin: false,
-    component: <p>admin</p>,
+    component: <Admin />,
   },
   {
     index: 3,
@@ -107,7 +108,10 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
               path={path}
               render={() => (
                 <TabbedLayout.TabPanel value={activeTab} index={index} {...rest}>
-                  {component}
+                  <AppBarPageWrapper>
+                    <BackgroundSideLogo />
+                    {component}
+                  </AppBarPageWrapper>
                 </TabbedLayout.TabPanel>
               )}
             />
