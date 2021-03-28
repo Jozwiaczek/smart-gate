@@ -10,21 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: 12.x
-      DB_PORT: 5432
-      DB_HOST: postgres
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres_password
-      DB_DATABASE_TEST: smart_gate_db_test
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres_password
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - name: 'Git checkout'
         uses: actions/checkout@v2
@@ -58,23 +43,6 @@ jobs:
       - name: 'Install dependency'
         run: yarn install --frozen-lockfile
         # End of yarn setup
-
-      - name: 'Audit dependencies'
-        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
-      - name: 'Run Prettier'
-        run: yarn prettier
-      - name: 'Run ESLint'
-        run: yarn lint
-      - name: 'Setup test database'
-        run: yarn ci:setup:db
-      - name: 'Run unit tests'
-        run: yarn test
-      - name: 'Run E2E tests'
-        run: yarn test:e2e
-      - name: 'Build API'
-        run: cd packages/api && yarn build
-      - name: 'Build Client'
-        run: cd packages/client && yarn build
 
       - name: 'Semantic release'
         env:
