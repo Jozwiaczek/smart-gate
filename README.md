@@ -144,7 +144,7 @@ To run script, in terminal type `yarn {script}`.
 
 ## Changelog
 
-[Learn about the latest improvements](CHANGELOG).
+[Learn about the latest improvements](CHANGELOG.md).
 
 ## License
 
