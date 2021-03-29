@@ -11,7 +11,7 @@ const Routes = () => (
     <GlobalLayout>
       <Switch>
         {routesArray.map((props) => (
-          <ConditionRoute key={props.path} {...props} />
+          <ConditionRoute key={String(props.path)} {...props} />
         ))}
         <Redirect path="*" to={routes.PAGE_NOT_FOUND} />
       </Switch>

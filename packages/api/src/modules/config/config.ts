@@ -24,11 +24,22 @@ export class Config {
     port: number | undefined;
   };
 
-  authSecrets: {
-    cookie: string | undefined;
-    access: string | undefined;
-    refresh: string | undefined;
-    logout: string | undefined;
+  cookie: {
+    secret: string | undefined;
+  };
+
+  authTokens: {
+    accessToken: {
+      secret: string;
+      expirationTime: string;
+    };
+    logoutToken: {
+      secret: string;
+    };
+    refreshToken: {
+      expirationTimeWithKeepMeLoggedIn: string;
+      expirationTimeWithoutKeepMeLoggedIn: string;
+    };
   };
 
   rateLimiter: {

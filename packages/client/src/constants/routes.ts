@@ -1,5 +1,8 @@
 const routes = {
   HOME: '/',
+  SETTINGS: '/settings',
+  ADMIN: '/admin',
+  HISTORY: '/history',
   LOGIN: '/login',
   REGISTRATION: '/registration/:email/:code',
   PAGE_NOT_FOUND: '/pageNotFound',
