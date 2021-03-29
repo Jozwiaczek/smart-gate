@@ -10,6 +10,9 @@ export interface DatabaseConfig {
   database: string;
   synchronize: boolean;
   logging?: boolean;
+  ssl?: {
+    rejectUnauthorized: boolean;
+  };
 }
 
 @Injectable()
@@ -30,6 +33,16 @@ export class DatabaseConfigService {
       return {
         ...baseConfig,
         database: this.config.database.databaseTest,
+      };
+    }
+
+    if (this.config.environment.isProd) {
+      return {
+        ...baseConfig,
+        database: this.config.database.database,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       };
     }
 
