@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.2...v1.0.3) (2021-03-29)
+
+
+### Bug Fixes
+
+* **api:** set database ssl on ([695212a](https://github.com/Jozwiaczek/smart-gate/commit/695212a48cb0aea425f3648c2310d7ee7ef83f0d))
+
 ## [1.0.2](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.1...v1.0.2) (2021-03-29)
 
 
