@@ -1,8 +1,8 @@
 import { Inject, Injectable, Scope } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 
+import { CookieRequest, CookieResponse } from '../../../interfaces/cookie-types';
 import { CookieConfigService } from './config/cookie-config.service';
-import { CookieRequest, CookieResponse } from './interfaces/cookie-types';
 
 @Injectable({ scope: Scope.REQUEST })
 export class CookieService {
