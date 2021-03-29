@@ -14,12 +14,8 @@ export interface BasicConditionProps {
   redirectTo: string;
 }
 
-export interface BasicRouteProps extends RouteProps {
-  path: string;
-}
+export interface ConditionRouteProps extends BasicConditionProps, RouteProps {}
 
-export interface ConditionRouteProps extends BasicConditionProps, BasicRouteProps {}
-
-interface OnlyAuthenticatedRouteProps extends BasicRouteProps {
+interface OnlyAuthenticatedRouteProps extends RouteProps {
   roles?: [Role];
 }
