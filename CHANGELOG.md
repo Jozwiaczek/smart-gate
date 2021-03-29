@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.1...v1.0.2) (2021-03-29)
+
+
+### Bug Fixes
+
+* add merge pattern ([cba1d42](https://github.com/Jozwiaczek/smart-gate/commit/cba1d4205e7046fb1e51b9dd839ac18f300b4973))
+* package.json versions ([b999dfa](https://github.com/Jozwiaczek/smart-gate/commit/b999dfad6d2b56586195726c1c6f789cf4a8b590))
+
 ## [1.0.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.0...v1.0.1) (2021-03-28)
 
 
