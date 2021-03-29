@@ -34,6 +34,7 @@
 ![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ## 🚩 Table of Contents
 
@@ -45,6 +46,7 @@
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
 - [Available scripts](#-available-scripts)
+- [Changelog](#-changelog)
 - [License](#-license)
 
 ## 📖 About
@@ -140,6 +142,10 @@ To run script, in terminal type `yarn {script}`.
 | `test`              | Runs tests for all packages                               |                                            |
 | `test:e2e`          | Runs end to end tests for all packages                    |                                            |
 | `type-check`        | Checks TypeScript types for all packages                  |                                            |
+
+## Changelog
+
+[Learn about the latest improvements](CHANGELOG.md).
 
 ## License
 

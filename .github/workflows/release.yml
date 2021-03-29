@@ -1,32 +1,20 @@
-name: 'Continuous Integration'
-on: [pull_request]
+name: 'Release'
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  Validate:
-    name: 'Validate Pull Request'
-    timeout-minutes: 10
+  release:
+    name: 'Release'
     runs-on: ubuntu-latest
-    container: node
     env:
-      DB_PORT: 5432
-      DB_HOST: postgres
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres_password
-      DB_DATABASE_TEST: smart_gate_db_test
       NODE_VERSION: 12.x
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres_password
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - name: 'Git checkout'
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # Beginning of yarn setup, keep in sync between all workflows
       - name: Use node.js ${{ matrix.node-version }}
@@ -54,21 +42,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: 'Install dependency'
         run: yarn install --frozen-lockfile
-      # End of yarn setup
+        # End of yarn setup
 
-      - name: 'Audit dependencies'
-        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
-      - name: 'Run Prettier'
-        run: yarn prettier
-      - name: 'Run ESLint'
-        run: yarn lint
-      - name: 'Setup test database'
-        run: yarn ci:setup:db
-      - name: 'Run unit tests'
-        run: yarn test
-      - name: 'Run E2E tests'
-        run: yarn test:e2e
-      - name: 'Build API'
-        run: cd packages/api && yarn build
-      - name: 'Build Client'
-        run: cd packages/client && yarn build
+      - name: 'Semantic release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release

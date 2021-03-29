@@ -46,6 +46,11 @@ const GlobalStyles = createGlobalStyle`
   
   h1 {
     font-size: 60px;
+    ${({ theme: { breakpoints, down } }) => `
+      ${down(breakpoints.sm)} {
+        font-size: 44px;
+      }
+    `};
   }
   h2 {
     font-size: 40px;

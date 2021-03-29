@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { getCssColor } from '../../../utils';
 import hexToRgba from '../../../utils/hexToRgba';
 import { RippleContainer } from '../../animations/RippleEffect/RippleEffect.styled';
+import { StyledButtonProps } from './IconButton.types';
 
-export const StyledButton = styled.button<{ color: string }>(
+export const StyledButton = styled.button<StyledButtonProps>(
   ({ color, theme }) => `
   position: relative;
   overflow: hidden;

@@ -1,7 +1,7 @@
 import { RouteProps } from 'react-router';
 
 import { routes } from '../constants';
-import { AppBar } from '../elements';
+import AppBar from '../elements/AppBar';
 import { Login, PageNotFound, PasswordRecovery, Registration, UpdatePassword } from '../pages';
 import { ConditionRouteProps, OnlyAuthenticatedRouteProps } from './ConditionRoute/Condition.types';
 import {
