@@ -60,8 +60,9 @@ export class Config {
       user: string | undefined;
       pass: string | undefined;
     };
-    sender: string | undefined;
-    replyTo: string | undefined;
+    sender: string;
+    replyTo: string;
+    from: string;
   };
 
   passwordReset: {
