@@ -41,32 +41,23 @@ export class ConfigLoader {
       cookie: {
         secret: this.envConfigService.get('COOKIE_SECRET', !isTest),
       },
-      tokens: {
+      authTokens: {
         accessToken: {
           secret: this.envConfigService.get('ACCESS_SECRET'),
-          name:
-            this.envConfigService.get('ACCESS_NAME', false) ||
-            defaultValues.tokens.accessToken.name,
           expirationTime:
             this.envConfigService.get('ACCESS_EXPIRATION_TIME', false) ||
-            defaultValues.tokens.accessToken.expirationTime,
+            defaultValues.authTokens.accessToken.expirationTime,
         },
         logoutToken: {
           secret: this.envConfigService.get('LOGOUT_SECRET'),
-          name:
-            this.envConfigService.get('LOGOUT_NAME', false) ||
-            defaultValues.tokens.logoutToken.name,
         },
         refreshToken: {
-          name:
-            this.envConfigService.get('REFRESH_NAME', false) ||
-            defaultValues.tokens.refreshToken.name,
           expirationTimeWithKeepMeLoggedIn:
             this.envConfigService.get('REFRESH_EXPIRATION_TIME_WITH_KEEP_ME_LOGGED_IN', false) ||
-            defaultValues.tokens.refreshToken.expirationTimeWithKeepMeLoggedIn,
+            defaultValues.authTokens.refreshToken.expirationTimeWithKeepMeLoggedIn,
           expirationTimeWithoutKeepMeLoggedIn:
             this.envConfigService.get('REFRESH_EXPIRATION_TIME_WITHOUT_KEEP_ME_LOGGED_IN', false) ||
-            defaultValues.tokens.refreshToken.expirationTimeWithoutKeepMeLoggedIn,
+            defaultValues.authTokens.refreshToken.expirationTimeWithoutKeepMeLoggedIn,
         },
       },
       passwordReset: {

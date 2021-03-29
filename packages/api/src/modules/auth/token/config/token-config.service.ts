@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
+import { constants } from '../../../../utils';
 import { Config } from '../../../config/config';
 
 interface TokenConfig {
@@ -25,12 +26,29 @@ export class TokenConfigService {
 
   getTokenConfig(): TokenConfig {
     const {
-      tokens: { accessToken, refreshToken, logoutToken },
+      authTokens: {
+        accessToken: { name: accessTokenName },
+        refreshToken: { name: refreshTokenName },
+        logoutToken: { name: logoutTokenName },
+      },
+    } = constants;
+
+    const {
+      authTokens: { accessToken, refreshToken, logoutToken },
     } = this.config;
     return {
-      logoutToken,
-      accessToken,
-      refreshToken,
+      logoutToken: {
+        ...logoutToken,
+        name: logoutTokenName,
+      },
+      accessToken: {
+        ...accessToken,
+        name: accessTokenName,
+      },
+      refreshToken: {
+        ...refreshToken,
+        name: refreshTokenName,
+      },
     };
   }
 }

@@ -28,18 +28,15 @@ export class Config {
     secret: string | undefined;
   };
 
-  tokens: {
+  authTokens: {
     accessToken: {
-      name: string;
       secret: string;
       expirationTime: string;
     };
     logoutToken: {
-      name: string;
       secret: string;
     };
     refreshToken: {
-      name: string;
       expirationTimeWithKeepMeLoggedIn: string;
       expirationTimeWithoutKeepMeLoggedIn: string;
     };
