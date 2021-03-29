@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.0...v1.0.1) (2021-03-28)
+
+
+### Bug Fixes
+
+* **client:** add netlify ignore command ([edcb5b7](https://github.com/Jozwiaczek/smart-gate/commit/edcb5b7e368b8acd3f3fb6e9e1177774d20d4f68))
+* ignore changelog for prettier format ([bb8a89d](https://github.com/Jozwiaczek/smart-gate/commit/bb8a89de9d705cbb344499e84dc47c1f8d5a01ea))
+
 # 1.0.0 (2021-03-28)
 
 
