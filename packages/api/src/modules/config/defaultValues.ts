@@ -12,6 +12,12 @@ const defaultValues = {
       expirationTimeWithoutKeepMeLoggedIn: '12h',
     },
   },
+
+  mailer: {
+    from: 'no-reply@sg.com',
+    sender: 'Smart Gate',
+    replyTo: 'sg@gmail.com',
+  },
 };
 
 export default defaultValues;
