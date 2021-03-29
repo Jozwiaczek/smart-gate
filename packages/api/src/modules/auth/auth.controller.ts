@@ -27,7 +27,7 @@ export class AuthController {
   async login(
     @Body(new ValidationPipe()) loginUser: LoginDto,
     @Res({ passthrough: true }) response: CookieResponse,
-  ) {
+  ): Promise<LoginUserInfo> {
     return this.authService.login(loginUser, response).catch(() => {
       throw new UnauthorizedException('Invalid credentials');
     });
@@ -37,7 +37,7 @@ export class AuthController {
   async register(
     @Body(new ValidationPipe()) registerDto: RegisterDto,
     @Res({ passthrough: true }) response: CookieResponse,
-  ) {
+  ): Promise<LoginUserInfo> {
     const newUser = await this.authService.register(registerDto).catch(() => {
       throw new BadRequestException('User already exists');
     });
@@ -53,9 +53,10 @@ export class AuthController {
 
   @Auth()
   @Get('me')
-  async me(@CookiePayload() { sub, exp }: TokenPayload) {
+  async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<LoginUserInfo> {
     const { email, firstName, lastName, roles } = await this.authService.getUser(sub);
-    const loginUserInfo: LoginUserInfo = {
+
+    return {
       user: {
         email,
         firstName,
@@ -64,7 +65,6 @@ export class AuthController {
       },
       expirationDate: exp * 1000,
     };
-    return loginUserInfo;
   }
 
   @Auth()
@@ -73,7 +73,7 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
     @CookiePayload() payload: BasePayload,
-  ) {
+  ): Promise<void> {
     await this.authService.logout(response, payload.sub);
   }
 
@@ -82,7 +82,7 @@ export class AuthController {
     @Req() request: CookieRequest,
     @Res({ passthrough: true }) response: CookieResponse,
     @CookiePayload() payload: BasePayload,
-  ) {
+  ): Promise<void> {
     await this.authService.logoutFromAllDevices(response, payload.sub);
   }
 }
