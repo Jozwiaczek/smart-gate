@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, ReactElement, ReactNode } from 'react';
+import { InputHTMLAttributes, ReactElement, ReactNode } from 'react';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 import { ValidationType } from '../../Form/Form.types';
@@ -14,13 +14,6 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   endAdornment?: ReactNode;
   validationType?: ValidationType;
 }
-
-export type ITextFieldProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> &
-  InputProps &
-  HTMLInputElement;
 
 export interface LabelProps {
   required?: boolean;

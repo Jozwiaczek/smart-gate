@@ -66,6 +66,7 @@ export const StyledButton = styled.button<ButtonProps>(
   cursor: pointer;
   line-height: 16px;
   outline: none;
+  box-shadow: ${palette.boxShadow.default};
   transition: box-shadow 150ms ease-in-out;
   
   ${fullWidth && 'width: 100%'};

@@ -1,1 +1,1 @@
-export type localStorageKey = 'loginExpirationDate' | 'themeType';
+export type LocalStorageKey = 'loginExpirationDate' | 'themeType';

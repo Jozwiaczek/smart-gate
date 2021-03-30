@@ -6,9 +6,9 @@ import { LockIcon } from '../../../icons';
 import { getLabelFromSource, getPlaceholderFromSource } from '../../../utils';
 import PasswordIconButton from './PasswordIconButton';
 import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
-import { ITextFieldProps, TextFieldProps } from './TextField.types';
+import { TextFieldProps } from './TextField.types';
 
-const TextField = forwardRef<ITextFieldProps, TextFieldProps>(
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       placeholder,

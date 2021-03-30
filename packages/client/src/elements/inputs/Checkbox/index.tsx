@@ -4,9 +4,9 @@ import { TickIcon } from '../../../icons';
 import { getLabelFromSource } from '../../../utils';
 import { Error } from '../TextField/TextField.styled';
 import { CheckboxLabel, CheckboxWrapper, Checkmark, StyledInput } from './Checkbox.styled';
-import { CheckboxProps, ICheckboxProps } from './Checkbox.types';
+import { CheckboxProps } from './Checkbox.types';
 
-const Checkbox = forwardRef<ICheckboxProps, CheckboxProps>(
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ name, required, error, margin, label, ...rest }, ref) => (
     <CheckboxWrapper margin={margin}>
       <CheckboxLabel htmlFor={name} required={required}>
@@ -18,7 +18,8 @@ const Checkbox = forwardRef<ICheckboxProps, CheckboxProps>(
           required={required}
           {...rest}
         />
-        <p>{label || getLabelFromSource(name)}</p>
+        {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+        {(label || name) && <p>{label || getLabelFromSource(name!)}</p>}
         <Checkmark isError={Boolean(error)}>
           <TickIcon />
         </Checkmark>

@@ -15,4 +15,5 @@ export { default as Form } from './Form';
 export { Checkbox, TextField } from './inputs';
 export { CardLayout, DefaultLayout, GlobalLayout, TabbedLayout } from './layouts';
 export { default as Link } from './Link';
+export { default as List } from './List';
 export { default as Snackbar } from './Snackbar';
