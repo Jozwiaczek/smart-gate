@@ -1,7 +1,7 @@
-export { default as Admin } from './autorized/Admin';
-export { default as Dashboard } from './autorized/Dashboard';
-export { default as Login } from './unautorized/Login';
-export { default as PageNotFound } from './unautorized/PageNotFound';
-export { default as PasswordRecovery } from './unautorized/PasswordRecovery';
-export { default as UpdatePassword } from './unautorized/PasswordRecovery/UpdatePassword';
-export { default as Registration } from './unautorized/Registration';
+export { default as Admin } from './authorized/Admin';
+export { default as Dashboard } from './authorized/Dashboard';
+export { default as Login } from './unauthorized/Login';
+export { default as PageNotFound } from './unauthorized/PageNotFound';
+export { default as PasswordRecovery } from './unauthorized/PasswordRecovery';
+export { default as UpdatePassword } from './unauthorized/PasswordRecovery/UpdatePassword';
+export { default as Registration } from './unauthorized/Registration';

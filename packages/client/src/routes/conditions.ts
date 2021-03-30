@@ -27,17 +27,20 @@ const onlyUnauthenticatedCondition: ConditionFunc = ({ currentUser }) => !curren
 
 const allowAllCondition: ConditionFunc = () => true;
 
+const { LOGIN } = routes.unauthorized;
+const { HOME } = routes.authorized.appBar;
+
 export const onlyAuthenticated: BasicConditionProps = {
   condition: onlyAuthenticatedCondition(),
-  redirectTo: routes.LOGIN,
+  redirectTo: LOGIN,
 };
 
 export const onlyUnauthenticated: BasicConditionProps = {
   condition: onlyUnauthenticatedCondition,
-  redirectTo: routes.HOME,
+  redirectTo: HOME,
 };
 
 export const allowAll: BasicConditionProps = {
   condition: allowAllCondition,
-  redirectTo: routes.HOME,
+  redirectTo: HOME,
 };

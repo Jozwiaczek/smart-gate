@@ -6,7 +6,7 @@ interface AppBarItem extends TabProps {
   index: number;
   indexMobile?: number;
   component: ReactNode;
-  path: string;
+  path: string | Array<string>;
   exact?: boolean;
 }
 

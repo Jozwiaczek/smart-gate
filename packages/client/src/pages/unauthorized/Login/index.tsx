@@ -36,7 +36,7 @@ const Login = () => {
     try {
       await login(values);
       reset();
-      history.push(routes.HOME);
+      history.push(routes.authorized.appBar.HOME);
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
@@ -76,7 +76,7 @@ const Login = () => {
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to={routes.PASSWORD_RECOVERY} colorVariant="grey">
+        <Link to={routes.unauthorized.PASSWORD_RECOVERY} colorVariant="grey">
           {t('routes.login.forgotPassword')}
         </Link>
       </CardLayout.ActionsContainer>

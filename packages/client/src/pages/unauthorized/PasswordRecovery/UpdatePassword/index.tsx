@@ -89,7 +89,7 @@ const UpdatePassword = () => {
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to={routes.LOGIN} colorVariant="colour">
+        <Link to={routes.unauthorized.LOGIN} colorVariant="colour">
           {t('routes.passwordRecovery.iRememberPassword')}
         </Link>
       </CardLayout.ActionsContainer>
@@ -104,7 +104,7 @@ const UpdatePassword = () => {
       <ShieldIconWrapper>
         <ShieldLock />
       </ShieldIconWrapper>
-      <Button fullWidth withArrow to={routes.HOME}>
+      <Button fullWidth withArrow to={routes.authorized.appBar.HOME}>
         {t('routes.passwordRecovery.updatePasswordConfirmation.back')}
       </Button>
     </>

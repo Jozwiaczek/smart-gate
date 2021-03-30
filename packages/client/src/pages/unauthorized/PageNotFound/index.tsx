@@ -35,7 +35,7 @@ const PageNotFound = () => {
         </Description>
       </ContentWrapper>
       <Button
-        to={currentUser ? routes.HOME : routes.LOGIN}
+        to={currentUser ? routes.authorized.appBar.HOME : routes.unauthorized.LOGIN}
         fullWidth
         withArrow
         colorVariant={isLightTheme ? 'blue' : 'red'}
