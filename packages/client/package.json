@@ -34,7 +34,7 @@
     "react-query": "^3.13.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4",
+    "web-vitals": "^1.1.1",
     "workbox-background-sync": "^6.1.2",
     "workbox-broadcast-update": "^6.1.2",
     "workbox-cacheable-response": "^5.1.3",
