@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { routes } from '../../../../constants';
+import { Link } from '../../../../elements';
 import {
   DeviceIcon,
   InvitationIcon,
@@ -12,10 +13,14 @@ import {
 } from '../../../../icons';
 import Users from '../Users';
 import {
+  BackButtonWrapper,
   CardButton,
   CardButtonLabel,
+  CardIconWrapper,
   CardsWrapper,
-  IconWrapper,
+  RouteIconWrapper,
+  RouteTopContainer,
+  RouteWrapper,
   Title,
 } from './AdminDashboard.styled';
 import { AdminRoute } from './AdminDashboard.typed';
@@ -29,12 +34,18 @@ const {
   STATISTICS,
 } = routes.authorized.appBar.admin;
 
+const Device = () => <p>Device</p>;
+const Invitations = () => <p>Invitations</p>;
+const Privileges = () => <p>Privileges</p>;
+const Statistics = () => <p>Statistics</p>;
+
 const adminRoutes: Array<AdminRoute> = [
   {
     index: 0,
     title: 'routes.admin.items.device',
     icon: <DeviceIcon />,
     path: DEVICE,
+    component: Device,
   },
   {
     index: 1,
@@ -48,18 +59,21 @@ const adminRoutes: Array<AdminRoute> = [
     title: 'routes.admin.items.invitations',
     icon: <InvitationIcon />,
     path: INVITATIONS,
+    component: Invitations,
   },
   {
     index: 3,
     title: 'routes.admin.items.privileges',
     icon: <PrivilegesGroupIcon />,
     path: PRIVILEGES,
+    component: Privileges,
   },
   {
     index: 4,
     title: 'routes.admin.items.statistics',
     icon: <StatisticsIcon />,
     path: STATISTICS,
+    component: Statistics,
   },
 ];
 
@@ -76,15 +90,31 @@ const AdminDashboard = () => {
           <CardsWrapper>
             {adminRoutes.map(({ index, title, icon, path }) => (
               <CardButton key={index} colorVariant="card" onClick={() => history.push(path)}>
-                <IconWrapper>{icon}</IconWrapper>
+                <CardIconWrapper>{icon}</CardIconWrapper>
                 <CardButtonLabel>{t(title as never)}</CardButtonLabel>
               </CardButton>
             ))}
           </CardsWrapper>
         </Route>
 
-        {adminRoutes.map(({ index, component, exact, path }) => (
-          <Route path={path} key={index} component={component} exact={exact} />
+        {adminRoutes.map(({ index, title, icon, component: Component, exact, path }) => (
+          <Route
+            path={path}
+            key={index}
+            exact={exact}
+            render={(routeProps) => (
+              <RouteWrapper>
+                <RouteTopContainer>
+                  <BackButtonWrapper>
+                    <Link to={routes.authorized.appBar.admin.ADMIN}>Back</Link>
+                  </BackButtonWrapper>
+                  <h1>{t(title as never)}</h1>
+                  <RouteIconWrapper>{icon}</RouteIconWrapper>
+                </RouteTopContainer>
+                <Component {...routeProps} />
+              </RouteWrapper>
+            )}
+          />
         ))}
 
         <Redirect to={routes.unauthorized.PAGE_NOT_FOUND} />

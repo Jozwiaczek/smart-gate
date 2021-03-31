@@ -54,9 +54,8 @@ export const Title = styled.h1(
 `,
 );
 
-export const IconWrapper = styled.div(
+export const CardIconWrapper = styled.div(
   ({ theme: { breakpoints, down, palette } }) => `
-  font-size: 36px;
   width: 32px;
   color: ${palette.text.primary};
   margin-bottom: 10px;
@@ -68,3 +67,24 @@ export const IconWrapper = styled.div(
   }
 `,
 );
+
+export const RouteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const RouteTopContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+`;
+
+export const RouteIconWrapper = styled.div`
+  width: 52px;
+  color: ${({ theme }) => theme.palette.text.primary};
+  margin-left: 21px;
+`;
+
+export const BackButtonWrapper = styled.div`
+  margin-right: 70px;
+`;

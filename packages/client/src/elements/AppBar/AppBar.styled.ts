@@ -43,9 +43,9 @@ export const TabPageWrapper = styled.div<{ orientation?: TabsOrientation }>`
 export const AppBarPageWrapper = styled.div(
   ({ theme: { breakpoints, down } }) => `
   height: 100%;
-  padding: 60px;
+  padding: 40px;
   ${down(breakpoints.md)} {
-    padding: 60px 20px;
+    padding: 40px 20px;
   }
 `,
 );

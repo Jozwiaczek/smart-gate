@@ -6,7 +6,7 @@ interface AdminRoute {
   index: number;
   title: string;
   icon: ReactNode;
-  component?: React.ComponentType<RouteComponentProps<unknown>> | React.ComponentType<unknown>;
+  component: React.ComponentType<RouteComponentProps<unknown>> | React.ComponentType<unknown>;
   path: string;
   exact?: boolean;
 }
