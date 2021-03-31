@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Button } from '../../../elements';
+import { Button } from '../../../../elements';
 
 export const CardsWrapper = styled.div(
   ({ theme: { breakpoints, up } }) => `

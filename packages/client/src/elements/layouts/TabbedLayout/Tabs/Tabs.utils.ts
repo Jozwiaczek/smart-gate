@@ -1,7 +1,7 @@
 import { Children, isValidElement, ReactNode } from 'react';
 
 import { Role } from '../../../../enums/role.enum';
-import { User } from '../../../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
+import { ApiUser } from '../../../../interfaces/api.types';
 import { GetIndicatorAnimationSpace, GetIndicatorSizeProps, IndicatorSize } from './Tabs.types';
 
 export const getIndicatorAnimationSpace = ({
@@ -29,10 +29,10 @@ export const getIndicatorAnimationSpace = ({
   return emptyWidthForValue + tabsWidthForValue + additionalSpaceForIndicatorWidth;
 };
 
-export const hasAccess = (onlyAdmin?: boolean, user?: User) =>
+export const hasAccess = (onlyAdmin?: boolean, user?: ApiUser) =>
   !(onlyAdmin && !user?.roles?.includes(Role.Admin));
 
-export const countAvailableChildren = (children: ReactNode, user?: User) =>
+export const countAvailableChildren = (children: ReactNode, user?: ApiUser) =>
   Children.count(
     Children.map(children, (child) => {
       if (isValidElement(child)) {

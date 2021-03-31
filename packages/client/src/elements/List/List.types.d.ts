@@ -1,15 +1,14 @@
-import { MouseEvent, ReactNode } from 'react';
+import { MouseEvent } from 'react';
+
+import { BaseApiResource } from '../../interfaces/api.types';
 
 interface ListHeader {
-  label: string;
+  key: string;
+  label?: string;
 }
 
-type ListCellValue = string | number | boolean | Date | ReactNode;
-
-type ListId = string | number;
-
-interface ListData<T> {
-  id: ListId;
+interface Row<T> {
+  id: string;
   row: T;
 }
 
@@ -25,9 +24,12 @@ interface Sort {
   order: OrderVariant;
 }
 
-export interface ListProps<T extends Record<string, unknown>> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type BaseListData = Record<string, any> & BaseApiResource;
+
+export interface ListProps<T extends BaseListData> {
   headers: Array<ListHeader>;
-  data: Array<ListData<T>>;
+  data: Array<T>;
   onRowClick?: (event: MouseEvent) => void;
   total: number;
   filter?: unknown;

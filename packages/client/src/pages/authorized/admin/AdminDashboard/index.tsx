@@ -2,16 +2,23 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
-import { routes } from '../../../constants';
+import { routes } from '../../../../constants';
 import {
   DeviceIcon,
   InvitationIcon,
   PrivilegesGroupIcon,
   StatisticsIcon,
   UsersIcon,
-} from '../../../icons';
-import { CardButton, CardButtonLabel, CardsWrapper, IconWrapper, Title } from './Admin.styled';
-import { AdminRoute } from './Admin.typed';
+} from '../../../../icons';
+import Users from '../Users';
+import {
+  CardButton,
+  CardButtonLabel,
+  CardsWrapper,
+  IconWrapper,
+  Title,
+} from './AdminDashboard.styled';
+import { AdminRoute } from './AdminDashboard.typed';
 
 const {
   ADMIN,
@@ -21,8 +28,6 @@ const {
   PRIVILEGES,
   STATISTICS,
 } = routes.authorized.appBar.admin;
-
-const Users = () => <p>users</p>;
 
 const adminRoutes: Array<AdminRoute> = [
   {
@@ -35,7 +40,7 @@ const adminRoutes: Array<AdminRoute> = [
     index: 1,
     title: 'routes.admin.items.users',
     icon: <UsersIcon />,
-    componentPage: Users,
+    component: Users,
     path: USERS,
   },
   {
@@ -58,7 +63,7 @@ const adminRoutes: Array<AdminRoute> = [
   },
 ];
 
-const Admin = () => {
+const AdminDashboard = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -78,8 +83,8 @@ const Admin = () => {
           </CardsWrapper>
         </Route>
 
-        {adminRoutes.map(({ index, componentPage, exact, path }) => (
-          <Route path={path} key={index} component={componentPage} exact={exact} />
+        {adminRoutes.map(({ index, component, exact, path }) => (
+          <Route path={path} key={index} component={component} exact={exact} />
         ))}
 
         <Redirect to={routes.unauthorized.PAGE_NOT_FOUND} />
@@ -88,4 +93,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminDashboard;

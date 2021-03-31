@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { routes } from '../../constants';
 import { useCurrentUser, useMediaDevice } from '../../hooks';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
-import { Admin, Dashboard } from '../../pages';
+import { AdminDashboard, Dashboard } from '../../pages';
 import mapRoutesToArray from '../../utils/mapRoutesToArray';
 import { BackgroundSideLogo } from '../index';
 import TabbedLayout from '../layouts/TabbedLayout';
@@ -14,6 +14,9 @@ import { AppBarItem, AppBarProps } from './AppBar.types';
 
 const { HOME, HISTORY, SETTINGS, admin } = routes.authorized.appBar;
 
+const Settings = () => <p>Settings</p>;
+const History = () => <p>History</p>;
+
 const defaultTabs: Array<AppBarItem> = [
   {
     index: 0,
@@ -22,7 +25,7 @@ const defaultTabs: Array<AppBarItem> = [
     exact: true,
     label: 'menu.dashboard',
     icon: <DashboardIcon />,
-    component: <Dashboard />,
+    component: Dashboard,
   },
   {
     index: 1,
@@ -30,7 +33,7 @@ const defaultTabs: Array<AppBarItem> = [
     path: HISTORY,
     label: 'menu.history',
     icon: <HistoryIcon />,
-    component: <p>history</p>,
+    component: History,
   },
   {
     index: 2,
@@ -38,7 +41,7 @@ const defaultTabs: Array<AppBarItem> = [
     label: 'menu.admin',
     icon: <AdminIcon />,
     onlyAdmin: false,
-    component: <Admin />,
+    component: AdminDashboard,
     exact: true,
   },
   {
@@ -46,7 +49,7 @@ const defaultTabs: Array<AppBarItem> = [
     path: SETTINGS,
     label: 'menu.settings',
     icon: <SettingsIcon />,
-    component: <p>settings</p>,
+    component: Settings,
   },
 ];
 
@@ -115,16 +118,16 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
     <Wrapper data-testid="appBar" orientation={orientation}>
       <TabPageWrapper orientation={orientation}>
         <Switch>
-          {sortedItems.map(({ component, exact, path, index, ...rest }) => (
+          {sortedItems.map(({ component: Component, exact, path, index, ...rest }) => (
             <Route
               exact={exact}
               key={index}
               path={path}
-              render={() => (
+              render={(routeProps) => (
                 <TabbedLayout.TabPanel value={activeTab} index={index} {...rest}>
                   <AppBarPageWrapper>
                     <BackgroundSideLogo />
-                    {component}
+                    <Component {...routeProps} />
                   </AppBarPageWrapper>
                 </TabbedLayout.TabPanel>
               )}

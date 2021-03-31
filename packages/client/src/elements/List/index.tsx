@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getLabelFromSource } from '../../utils';
 import { Checkbox } from '../inputs';
@@ -14,22 +14,23 @@ import {
   TableHeadRow,
   TableRow,
 } from './List.styled';
-import { ListCellValue, ListId, ListProps } from './List.types';
+import { BaseListData, ListProps } from './List.types';
 
-const List = <T extends Record<string, ListCellValue>>({
+const List = <T extends BaseListData>({
   headers,
   data,
   onRowClick,
   total,
   pagination: { page = 1 },
 }: ListProps<T>) => {
-  const [selectedRows, setSelectedRows] = useState<Array<ListId>>([]);
+  const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const areAllRowsSelected = Boolean(selectedRows.length === data.length);
   const containerRef = useRef<HTMLTableElement>(null);
   const headerRowRef = useRef<HTMLTableRowElement>(null);
-  const [perPage, setPerPage] = useState(0);
+  const [perPage, setPerPage] = useState(3);
+  const headersKeys = headers.map(({ key }) => key);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (containerRef.current && headerRowRef.current) {
       const tableHeight = containerRef.current.offsetHeight;
       const rowHeight = headerRowRef.current.offsetHeight;
@@ -38,9 +39,9 @@ const List = <T extends Record<string, ListCellValue>>({
     }
   }, []);
 
-  const totalPages = Math.round(total / perPage);
+  const totalPages = useMemo(() => Math.round(total / perPage), [perPage, total]);
 
-  const checkIsRowSelected = useCallback((id: ListId): boolean => selectedRows.includes(id), [
+  const checkIsRowSelected = useCallback((id: string): boolean => selectedRows.includes(id), [
     selectedRows,
   ]);
 
@@ -54,7 +55,7 @@ const List = <T extends Record<string, ListCellValue>>({
   }, [areAllRowsSelected, data]);
 
   const onMarkRow = useCallback(
-    (id: ListId) => {
+    (id: string) => {
       if (checkIsRowSelected(id)) {
         setSelectedRows((prev) => prev.filter((selectedRowId) => selectedRowId !== id));
         return;
@@ -65,6 +66,17 @@ const List = <T extends Record<string, ListCellValue>>({
     [checkIsRowSelected],
   );
 
+  const formattedRows = useMemo(() => {
+    const slicedByPage = data.slice((page - 1) * perPage, perPage + 1);
+    return slicedByPage.map((row) => {
+      const cells = Object.entries(row);
+      const sorted = cells.sort(
+        ([aKey], [bKey]) => headersKeys.indexOf(aKey) - headersKeys.indexOf(bKey),
+      );
+      return Object.fromEntries(sorted);
+    });
+  }, [data, page, perPage, headersKeys]);
+
   return (
     <StyledCard ref={containerRef}>
       <Table>
@@ -73,28 +85,30 @@ const List = <T extends Record<string, ListCellValue>>({
             <TableHeaderCheckbox>
               <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
             </TableHeaderCheckbox>
-            {headers.map(({ label }) => (
-              <TableHeader key={label}>{getLabelFromSource(label)}</TableHeader>
+            {headers.map(({ label, key }) => (
+              <TableHeader key={key}>{label || getLabelFromSource(key)}</TableHeader>
             ))}
           </TableRow>
         </TableHeadRow>
         <TableBody>
-          {data.slice((page - 1) * perPage, perPage + 1).map(({ id, row }) => {
-            const cells = Object.values(row);
-            return (
-              <TableRow key={id}>
-                <TableCellCheckbox>
-                  <Checkbox onChange={() => onMarkRow(id)} checked={checkIsRowSelected(id)} />
-                </TableCellCheckbox>
-                {cells.map((cell, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <TableCell onClick={onRowClick} key={index}>
-                    {cell}
+          {formattedRows.map((row) => (
+            <TableRow key={row.id}>
+              <TableCellCheckbox>
+                <Checkbox onChange={() => onMarkRow(row.id)} checked={checkIsRowSelected(row.id)} />
+              </TableCellCheckbox>
+              {Object.entries(row).map(([cellKey, cellValue]) => {
+                if (!headersKeys.includes(cellKey)) {
+                  return null;
+                }
+
+                return (
+                  <TableCell onClick={onRowClick} key={`${row.id}-${cellKey}`}>
+                    {cellValue}
                   </TableCell>
-                ))}
-              </TableRow>
-            );
-          })}
+                );
+              })}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
       {totalPages > 0 && (

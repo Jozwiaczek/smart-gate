@@ -35,7 +35,7 @@ export const Checkmark = styled.span<CheckmarkProps>(
   left: 0;
   height: 26px;
   width: 26px;
-  background-color: ${palette.background.paper};
+  background-color: transparent;
   border: 3px solid ${palette.primary.dark};
   border-radius: 6px;
 

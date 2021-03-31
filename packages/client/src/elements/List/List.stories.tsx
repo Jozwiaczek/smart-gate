@@ -2,11 +2,12 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import styled from 'styled-components';
 
+import { BaseApiResource } from '../../interfaces/api.types';
 import List from '.';
 import { ListProps } from './List.types';
 
 export default {
-  title: 'Elements/List',
+  title: 'Elements/ApiList',
   component: List,
 } as Meta;
 
@@ -16,25 +17,26 @@ const MockWrapper = styled.div`
   height: 100%;
 `;
 
-type MockDataRow = {
+interface MockDataRow extends BaseApiResource {
   firstName: string;
   lastName: string;
-};
+}
 
 const data = [...Array(30)].map((_, id) => ({
-  id,
-  row: {
-    firstName: `${id}-First Name`,
-    lastName: `${id}-Last Name`,
-  },
+  id: id.toString(),
+  firstName: `${id}-First Name`,
+  lastName: `${id}-Last Name`,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 }));
 
 const headers = [
   {
+    key: 'firstName',
     label: 'First name',
   },
   {
-    label: 'Last name',
+    key: 'lastName',
   },
 ];
 

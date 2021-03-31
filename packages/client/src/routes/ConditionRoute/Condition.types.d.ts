@@ -1,10 +1,10 @@
 import { RouteProps } from 'react-router';
 
 import { Role } from '../../enums/role.enum';
-import { User } from '../../providers/api/CurrentUserProvider/CurrentUserProvider.types';
+import { ApiUser } from '../../interfaces/api.types';
 
 export interface ConditionFuncProps {
-  currentUser: User | undefined;
+  currentUser: ApiUser | undefined;
 }
 
 export type ConditionFunc = (props: ConditionFuncProps) => boolean;
