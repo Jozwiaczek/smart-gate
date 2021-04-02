@@ -27,7 +27,7 @@ const List = <T extends BaseListData>({
   const areAllRowsSelected = Boolean(selectedRows.length === data.length);
   const containerRef = useRef<HTMLTableElement>(null);
   const headerRowRef = useRef<HTMLTableRowElement>(null);
-  const [perPage, setPerPage] = useState(3);
+  const [perPage, setPerPage] = useState(25);
   const headersKeys = headers.map(({ key }) => key);
 
   useEffect(() => {
@@ -113,7 +113,12 @@ const List = <T extends BaseListData>({
       </Table>
       {totalPages > 0 && (
         <PaginationWrapper>
+          <p>
+            <b>{total}</b>
+          </p>
+          &nbsp; &nbsp; &nbsp;
           <p>1-25 of 900</p>
+          &nbsp; &nbsp; &nbsp;
           <p>1 2 3 ... 36</p>
         </PaginationWrapper>
       )}
