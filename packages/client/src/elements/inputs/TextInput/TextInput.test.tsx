@@ -1,19 +1,19 @@
 import React from 'react';
 
 import { fireEvent, render, screen } from '../../../utils/testingLibraryInstance';
-import TextField from '.';
+import TextInput from '.';
 
-describe('TextField', () => {
+describe('TextInput', () => {
   it('properly change input type', () => {
-    render(<TextField name="firstName" type="password" />);
-    const passwordInput = screen.getByTestId('textField');
+    render(<TextInput name="firstName" type="password" />);
+    const passwordInput = screen.getByTestId('textInput');
     fireEvent.change(passwordInput, { target: { value: '123456' } });
     expect(passwordInput).toHaveAttribute('type', 'password');
 
-    fireEvent.click(screen.getByTestId('textField-password-icon-button'));
+    fireEvent.click(screen.getByTestId('textInput-password-icon-button'));
     expect(passwordInput).toHaveAttribute('type', 'text');
 
-    fireEvent.click(screen.getByTestId('textField-password-icon-button'));
+    fireEvent.click(screen.getByTestId('textInput-password-icon-button'));
     expect(passwordInput).toHaveAttribute('type', 'password');
   });
 });

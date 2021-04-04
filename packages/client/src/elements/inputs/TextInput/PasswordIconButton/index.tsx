@@ -45,7 +45,7 @@ const PasswordIconButton = ({ setPasswordMasked }: PasswordIconButtonProps) => {
   return (
     <StyledIconButton
       type="button"
-      data-testid="textField-password-icon-button"
+      data-testid="textInput-password-icon-button"
       aria-label="Toggle password visibility"
       onClick={togglePasswordMask}
     >

@@ -44,6 +44,7 @@ export const AppBarPageWrapper = styled.div(
   ({ theme: { breakpoints, down } }) => `
   height: 100%;
   padding: 40px;
+  overflow: auto;
   ${down(breakpoints.md)} {
     padding: 40px 20px;
   }

@@ -3,21 +3,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { UserIcon } from '../../../icons';
-import TextField from '.';
-import { TextFieldProps } from './TextField.types';
+import TextInput from '.';
+import { TextInputProps } from './TextInput.types';
 
 export default {
-  title: 'Elements/inputs/Text Field',
-  component: TextField,
+  title: 'Elements/inputs/Text Input',
+  component: TextInput,
 } as Meta;
 
 const MockWrapper = styled.div`
   width: 300px;
 `;
 
-const Template: Story<TextFieldProps> = (args) => (
+const Template: Story<TextInputProps> = (args) => (
   <MockWrapper>
-    <TextField {...args} />
+    <TextInput {...args} />
   </MockWrapper>
 );
 
@@ -41,5 +41,5 @@ PasswordType.args = {
   type: 'password',
 };
 PasswordType.parameters = {
-  jest: ['TextField.test.tsx'],
+  jest: ['TextInput.test.tsx'],
 };

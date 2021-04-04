@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { routes } from '../../../../constants';
-import { Button, CardLayout, Form, Link, TextField } from '../../../../elements';
+import { Button, CardLayout, Form, Link, TextInput } from '../../../../elements';
 import { useAuth, useEncodedParams, useSnackbar } from '../../../../hooks';
 import useAnimated from '../../../../hooks/useAnimated';
 import { ConfirmLockIcon, ShieldLock } from '../../../../icons';
@@ -62,14 +62,14 @@ const UpdatePassword = () => {
         />
       </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextField
+        <TextInput
           name="password"
           label={t('user.password')}
           type="password"
           validationType="password"
           required
         />
-        <TextField
+        <TextInput
           name={t('form.inputs.confirmPassword')}
           type="password"
           placeholder={t('form.inputs.repeatPassword')}

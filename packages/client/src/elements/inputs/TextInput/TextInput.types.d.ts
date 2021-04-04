@@ -3,7 +3,7 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 import { ValidationType } from '../../Form/Form.types';
 
-export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   maxWidth?: string;
   error?: string;
   name: string;
@@ -32,6 +32,6 @@ export interface StyledInputProps extends InputHTMLAttributes<HTMLInputElement> 
   isError?: boolean;
 }
 
-export interface TextFieldContainerProps {
+export interface TextInputContainerProps {
   isPasswordMasked?: boolean;
 }

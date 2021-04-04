@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { routes } from '../../../constants';
-import { Button, CardLayout, Form, Link, PaperPlane, TextField } from '../../../elements';
+import { Button, CardLayout, Form, Link, PaperPlane, TextInput } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
 import { EmailIcon } from '../../../icons';
@@ -50,7 +50,7 @@ const PasswordRecovery = () => {
         {t('routes.passwordRecovery.intro.description')}
       </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextField
+        <TextInput
           autoFocus
           required
           name="email"

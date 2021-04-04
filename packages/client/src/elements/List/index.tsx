@@ -1,9 +1,24 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  Children,
+  cloneElement,
+  isValidElement,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
+import { useMutation, useQuery } from 'react-query';
 
+import { CancelIcon, TrashIcon } from '../../icons';
+import { ApiList } from '../../interfaces/api.types';
 import { getLabelFromSource } from '../../utils';
+import { IconButton } from '../buttons';
+import { BaseFieldProps, BaseRecordField } from '../fields/Fields.types';
 import { Checkbox } from '../inputs';
 import {
-  PaginationWrapper,
+  BulkActionsWrapper,
+  BulkCancelButton,
+  BulkCancelWrapper,
+  DeleteButton,
   StyledCard,
   Table,
   TableBody,
@@ -11,48 +26,66 @@ import {
   TableCellCheckbox,
   TableHeader,
   TableHeaderCheckbox,
-  TableHeadRow,
   TableRow,
 } from './List.styled';
-import { BaseListData, ListProps } from './List.types';
+import { ListProps } from './List.types';
+import Pagination from './Pagination';
 
-const List = <T extends BaseListData>({
-  headers,
-  data,
-  onRowClick,
-  total,
-  pagination: { page = 1 },
-}: ListProps<T>) => {
+const List = ({ onRowClick, children, resource }: ListProps) => {
+  const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+  const removeUser = async (id: string) => {
+    console.log('Removed:', id);
+  };
+  const deleteMutation = useMutation(removeUser);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
-  const areAllRowsSelected = Boolean(selectedRows.length === data.length);
-  const containerRef = useRef<HTMLTableElement>(null);
-  const headerRowRef = useRef<HTMLTableRowElement>(null);
-  const [perPage, setPerPage] = useState(25);
-  const headersKeys = headers.map(({ key }) => key);
+  const [perPage, setPerPage] = useState<number>(25);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  useEffect(() => {
-    if (containerRef.current && headerRowRef.current) {
-      const tableHeight = containerRef.current.offsetHeight;
-      const rowHeight = headerRowRef.current.offsetHeight;
-      const rowsPerPage = Math.floor((tableHeight - 2 * rowHeight) / rowHeight);
-      setPerPage(rowsPerPage);
+  const totalRecords = useMemo((): number => {
+    if (queryResult) {
+      return queryResult.total;
     }
-  }, []);
+    return 0;
+  }, [queryResult]);
 
-  const totalPages = useMemo(() => Math.round(total / perPage), [perPage, total]);
+  const headers = useMemo((): Array<BaseFieldProps<BaseRecordField>> => {
+    const headersFromChildren = Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        return child.props;
+      }
+    });
+    return headersFromChildren ?? [];
+  }, [children]);
+
+  const areAllRowsSelected = useMemo((): boolean => Boolean(selectedRows.length === totalRecords), [
+    selectedRows.length,
+    totalRecords,
+  ]);
+
+  const totalPages = useMemo((): number => Math.ceil(totalRecords / perPage), [
+    perPage,
+    totalRecords,
+  ]);
 
   const checkIsRowSelected = useCallback((id: string): boolean => selectedRows.includes(id), [
     selectedRows,
   ]);
 
-  const onMarkAllRows = useCallback(() => {
+  const unselectAllRows = () => {
+    setSelectedRows([]);
+  };
+
+  const onMarkAllRows = useCallback((): void => {
     if (areAllRowsSelected) {
-      setSelectedRows([]);
+      unselectAllRows();
       return;
     }
 
-    setSelectedRows(data.map(({ id }) => id));
-  }, [areAllRowsSelected, data]);
+    if (queryResult) {
+      const { data } = queryResult;
+      setSelectedRows(data.map(({ id }) => id));
+    }
+  }, [areAllRowsSelected, queryResult]);
 
   const onMarkRow = useCallback(
     (id: string) => {
@@ -66,44 +99,71 @@ const List = <T extends BaseListData>({
     [checkIsRowSelected],
   );
 
-  const formattedRows = useMemo(() => {
-    const slicedByPage = data.slice((page - 1) * perPage, perPage + 1);
-    return slicedByPage.map((row) => {
-      const cells = Object.entries(row);
-      const sorted = cells.sort(
-        ([aKey], [bKey]) => headersKeys.indexOf(aKey) - headersKeys.indexOf(bKey),
-      );
-      return Object.fromEntries(sorted);
+  const slicedRecords = useMemo((): Array<BaseRecordField> => {
+    if (queryResult) {
+      const { data } = queryResult;
+      const sliceFrom = perPage * currentPage - perPage;
+      const sliceTo = perPage * currentPage;
+      return data.slice(sliceFrom, sliceTo);
+    }
+    return [];
+  }, [queryResult, currentPage, perPage]);
+
+  const isBulkActionsOpen = Boolean(selectedRows.length);
+
+  const removeSelectedItems = useCallback(() => {
+    selectedRows.forEach((id) => {
+      deleteMutation.mutate(id);
     });
-  }, [data, page, perPage, headersKeys]);
+    setSelectedRows([]);
+  }, [deleteMutation, selectedRows]);
 
   return (
-    <StyledCard ref={containerRef}>
+    <StyledCard isBulkActionsOpen={isBulkActionsOpen}>
+      <BulkActionsWrapper isOpen={isBulkActionsOpen}>
+        <BulkCancelWrapper>
+          <BulkCancelButton onClick={unselectAllRows}>
+            <CancelIcon />
+          </BulkCancelButton>
+          {selectedRows.length} {selectedRows.length > 1 ? 'items' : 'item'} selected
+        </BulkCancelWrapper>
+        <DeleteButton color="red" onClick={removeSelectedItems}>
+          <TrashIcon />
+          Delete
+        </DeleteButton>
+      </BulkActionsWrapper>
       <Table>
-        <TableHeadRow>
-          <TableRow ref={headerRowRef}>
+        <thead>
+          <TableRow>
             <TableHeaderCheckbox>
               <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
             </TableHeaderCheckbox>
-            {headers.map(({ label, key }) => (
-              <TableHeader key={key}>{label || getLabelFromSource(key)}</TableHeader>
+            {headers.map(({ label, source }) => (
+              <TableHeader key={label || source}>
+                {label || getLabelFromSource(source || '')}
+              </TableHeader>
             ))}
           </TableRow>
-        </TableHeadRow>
+        </thead>
         <TableBody>
-          {formattedRows.map((row) => (
-            <TableRow key={row.id}>
+          {slicedRecords.map((record) => (
+            <TableRow key={record.id}>
               <TableCellCheckbox>
-                <Checkbox onChange={() => onMarkRow(row.id)} checked={checkIsRowSelected(row.id)} />
+                <Checkbox
+                  onChange={() => onMarkRow(record.id)}
+                  checked={checkIsRowSelected(record.id)}
+                />
               </TableCellCheckbox>
-              {Object.entries(row).map(([cellKey, cellValue]) => {
-                if (!headersKeys.includes(cellKey)) {
+              {Children.map(children, (child) => {
+                if (!isValidElement(child)) {
                   return null;
                 }
 
+                const { source } = child.props;
+
                 return (
-                  <TableCell onClick={onRowClick} key={`${row.id}-${cellKey}`}>
-                    {cellValue}
+                  <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>
+                    {cloneElement(child, { record })}
                   </TableCell>
                 );
               })}
@@ -111,17 +171,14 @@ const List = <T extends BaseListData>({
           ))}
         </TableBody>
       </Table>
-      {totalPages > 0 && (
-        <PaginationWrapper>
-          <p>
-            <b>{total}</b>
-          </p>
-          &nbsp; &nbsp; &nbsp;
-          <p>1-25 of 900</p>
-          &nbsp; &nbsp; &nbsp;
-          <p>1 2 3 ... 36</p>
-        </PaginationWrapper>
-      )}
+      <Pagination
+        perPage={perPage}
+        setPerPage={setPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalRecords={totalRecords}
+        totalPages={totalPages}
+      />
     </StyledCard>
   );
 };

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { TickIcon } from '../../../icons';
 import { getLabelFromSource } from '../../../utils';
-import { Error } from '../TextField/TextField.styled';
+import { Error } from '../TextInput/TextInput.styled';
 import { CheckboxLabel, CheckboxWrapper, Checkmark, StyledInput } from './Checkbox.styled';
 import { CheckboxProps } from './Checkbox.types';
 

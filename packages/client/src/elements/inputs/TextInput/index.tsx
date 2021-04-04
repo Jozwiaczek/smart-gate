@@ -5,10 +5,10 @@ import { useTheme } from 'styled-components';
 import { LockIcon } from '../../../icons';
 import { getLabelFromSource, getPlaceholderFromSource } from '../../../utils';
 import PasswordIconButton from './PasswordIconButton';
-import { Container, Error, InputAdornment, Label, StyledInput } from './TextField.styled';
-import { TextFieldProps } from './TextField.types';
+import { Container, Error, InputAdornment, Label, StyledInput } from './TextInput.styled';
+import { TextInputProps } from './TextInput.types';
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       placeholder,
@@ -50,7 +50,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <Container isPasswordMasked={isPasswordMasked}>
         <StyledInput
-          data-testid="textField"
+          data-testid="textInput"
           ref={ref}
           id={name}
           maxWidth={maxWidth}
@@ -81,4 +81,4 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   },
 );
 
-export default TextField;
+export default TextInput;

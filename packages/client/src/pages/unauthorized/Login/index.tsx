@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../../constants';
-import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextField } from '../../../elements';
+import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextInput } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
 import { EmailIcon } from '../../../icons';
@@ -48,14 +48,14 @@ const Login = () => {
     <CardLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextField
+        <TextInput
           autoFocus
           required
           name="email"
           validationType="email"
           startAdornment={<EmailIcon />}
         />
-        <TextField
+        <TextInput
           required
           name="password"
           type="password"

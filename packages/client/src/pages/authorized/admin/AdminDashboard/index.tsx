@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { routes } from '../../../../constants';
-import { Link } from '../../../../elements';
+import { BackButton, Link } from '../../../../elements';
 import {
   DeviceIcon,
   InvitationIcon,
@@ -106,7 +106,7 @@ const AdminDashboard = () => {
               <RouteWrapper>
                 <RouteTopContainer>
                   <BackButtonWrapper>
-                    <Link to={routes.authorized.appBar.admin.ADMIN}>Back</Link>
+                    <BackButton />
                   </BackButtonWrapper>
                   <h1>{t(title as never)}</h1>
                   <RouteIconWrapper>{icon}</RouteIconWrapper>

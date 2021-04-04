@@ -4,8 +4,8 @@ import {
   InputAdornmentProps,
   LabelProps,
   StyledInputProps,
-  TextFieldContainerProps,
-} from './TextField.types';
+  TextInputContainerProps,
+} from './TextInput.types';
 import { getInputPadding, inputAdornmentSize, inputBasePadding } from './utils';
 
 export const InputAdornment = styled.span<InputAdornmentProps>`
@@ -92,7 +92,7 @@ export const StyledInput = styled.input<StyledInputProps>(
 `,
 );
 
-export const Container = styled.div<TextFieldContainerProps>(
+export const Container = styled.div<TextInputContainerProps>(
   ({ isPasswordMasked, theme: { sizes, palette } }) => `
   position: relative;
   padding: 28px 0 0;
