@@ -11,7 +11,6 @@ import { useMutation, useQuery } from 'react-query';
 import { CancelIcon, TrashIcon } from '../../icons';
 import { ApiList } from '../../interfaces/api.types';
 import { getLabelFromSource } from '../../utils';
-import { IconButton } from '../buttons';
 import { BaseFieldProps, BaseRecordField } from '../fields/Fields.types';
 import { Checkbox } from '../inputs';
 import {

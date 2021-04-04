@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { routes } from '../../../../constants';
-import { BackButton, Link } from '../../../../elements';
+import { BackButton } from '../../../../elements';
 import {
   DeviceIcon,
   InvitationIcon,
