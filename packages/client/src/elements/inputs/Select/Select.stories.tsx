@@ -5,7 +5,7 @@ import Select from './index';
 import { SelectProps } from './Select.types';
 
 export default {
-  title: 'Elements/Select',
+  title: 'Elements/inputs/Select',
   component: Select,
 } as Meta;
 
