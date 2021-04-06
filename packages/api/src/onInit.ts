@@ -8,7 +8,7 @@ import { InvitationService } from './modules/invitation/invitation.service';
 import { InvitationRepository } from './modules/repository/invitation.repository';
 import { UserRepository } from './modules/repository/user.repository';
 
-function initSentry(app: INestApplication, config: Config) {
+const initSentry = (app: INestApplication, config: Config) => {
   if (!config.sentry.isEnable) {
     return;
   }
@@ -22,14 +22,14 @@ function initSentry(app: INestApplication, config: Config) {
     ],
     tracesSampleRate: config.sentry.tracesSampleRate,
   });
-}
+};
 
-async function sendAdminInvitation(
+const sendAdminInvitation = async (
   userRepository: UserRepository,
   invitationRepository: InvitationRepository,
   invitationService: InvitationService,
   config: Config,
-) {
+) => {
   if (!(await userRepository.count()) && config.superAdminEmails) {
     await invitationRepository.repository.clear();
 
@@ -37,9 +37,9 @@ async function sendAdminInvitation(
       invitationService.send({ email: email.trim(), roles: [Role.SuperAdmin] });
     });
   }
-}
+};
 
-export async function onInit(app: INestApplication) {
+const onInit = async (app: INestApplication) => {
   const config = app.get(Config);
   const userRepository = app.get(UserRepository);
   const invitationRepository = app.get(InvitationRepository);
@@ -47,4 +47,6 @@ export async function onInit(app: INestApplication) {
 
   await sendAdminInvitation(userRepository, invitationRepository, invitationService, config);
   initSentry(app, config);
-}
+};
+
+export default onInit;

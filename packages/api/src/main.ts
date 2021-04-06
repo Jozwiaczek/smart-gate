@@ -7,9 +7,9 @@ import helmet from 'helmet';
 import { AppModule } from './modules/app.module';
 import { Config } from './modules/config/config';
 import { SentryInterceptor } from './modules/sentry/sentry.interceptor';
-import { onInit } from './OnInit';
+import onInit from './onInit';
 
-async function bootstrap() {
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
   const config = app.get(Config);
 
@@ -23,6 +23,6 @@ async function bootstrap() {
 
   await app.listen(config.port || 3030);
   return app;
-}
+};
 
 bootstrap().then(onInit);
