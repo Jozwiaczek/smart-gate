@@ -79,6 +79,7 @@ export default {
 
 const Template: Story<TabsOpt> = (tabsOptions) => {
   const [value, setValue] = useState(0);
+  const { orientation } = tabsOptions;
 
   const handleChange = (event: MouseEvent, newValue: number) => setValue(newValue);
 
@@ -103,8 +104,8 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
   ];
 
   return (
-    <MockRoot orientation={tabsOptions.orientation}>
-      <MockTabsWrapper orientation={tabsOptions.orientation}>
+    <MockRoot orientation={orientation}>
+      <MockTabsWrapper orientation={orientation}>
         <TabbedLayout.Tabs value={value} onChange={handleChange} options={tabsOptions}>
           {tabs.map((tabProps) => (
             <TabbedLayout.Tab key={tabProps.label} {...tabProps} />
