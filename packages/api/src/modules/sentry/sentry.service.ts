@@ -1,36 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import * as sentry from '@sentry/node';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import * as Sentry from '@sentry/node';
 
-import { Config } from '../config/config';
+import { SentryConfigService } from './config/sentry-config.service';
 
 @Injectable()
-export class SentryService {
-  constructor(private readonly config: Config) {}
+export class SentryService implements OnApplicationBootstrap {
+  constructor(private readonly sentryConfigService: SentryConfigService) {}
 
-  public async captureException(exception: unknown): Promise<void> {
-    if (!this.config.sentry.enabled) {
-      return;
+  onApplicationBootstrap(): void {
+    if (this.sentryConfigService.getIsSentryEnable()) {
+      Sentry.init(this.sentryConfigService.getSentryOptions());
     }
-
-    const sentryClient = this.getClient();
-
-    console.log('Sending issue to Sentry');
-    sentryClient.captureException(exception);
-    await sentryClient.flush(5000);
-  }
-
-  private getClient(): sentry.NodeClient {
-    if (!sentry.getCurrentHub().getClient()) {
-      // Initialisation might take few seconds
-      console.log('Initializing Sentry client');
-
-      sentry.init({
-        debug: this.config.sentry.debug,
-        dsn: this.config.sentry.dsn,
-        environment: this.config.sentry.environment || 'production',
-      });
-    }
-
-    return sentry.getCurrentHub().getClient() as sentry.NodeClient;
   }
 }

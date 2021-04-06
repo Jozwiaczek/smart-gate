@@ -78,10 +78,17 @@ export class ConfigLoader {
         replyTo: this.envConfigService.get('REPLY_TO', isProd),
       },
       sentry: {
+        tracesSampleRate:
+          this.envConfigService.get('SENTRY_TRACES_SAMPLE_RATE', false, Number) ??
+          defaultValues.sentry.tracesSampleRate,
         debug: this.envConfigService.get('SENTRY_DEBUG', false, convertToBoolean),
         dsn: this.envConfigService.get('SENTRY_DSN', isProd),
-        enabled: this.envConfigService.get('SENTRY_ENABLED', isProd, convertToBoolean),
-        environment: this.envConfigService.get('SENTRY_ENVIRONMENT', false),
+        enabled:
+          this.envConfigService.get('SENTRY_ENABLED', isProd, convertToBoolean) ||
+          defaultValues.sentry.enable,
+        environment:
+          this.envConfigService.get('SENTRY_ENVIRONMENT', false) ||
+          defaultValues.sentry.environment,
       },
       environment: {
         isProd,

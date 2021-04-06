@@ -1,10 +1,12 @@
 import { Body, Controller, Post } from '@nestjs/common';
 
 import { ValidationPipe } from '../../utils/validation.pipe';
+import { UseSentryTransaction } from '../sentry/decorators/use-sentry-transaction.decorator';
 import { CreatePasswordResetDto } from './dto/create-password-reset.dto';
 import { RecoverPasswordDto } from './dto/recover-password.dto';
 import { PasswordResetService } from './password-reset.service';
 
+@UseSentryTransaction()
 @Controller('passwordReset')
 export class PasswordResetController {
   constructor(private readonly passwordResetService: PasswordResetService) {}

@@ -12,6 +12,12 @@ const defaultValues = {
       expirationTimeWithoutKeepMeLoggedIn: '12h',
     },
   },
+
+  sentry: {
+    enable: false,
+    environment: 'development',
+    tracesSampleRate: 1.0,
+  },
 };
 
 export default defaultValues;

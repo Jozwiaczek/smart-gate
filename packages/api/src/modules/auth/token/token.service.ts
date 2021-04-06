@@ -74,7 +74,7 @@ export class TokenService {
 
   async generateToken(
     tokenType: TokenType,
-    { id: userId, roles }: UserEntity,
+    { id: userId, email, roles }: UserEntity,
     keepMeLoggedIn: boolean,
   ): Promise<[string, Date]> {
     const { sign, decode } = jsonwebtoken;
@@ -83,6 +83,7 @@ export class TokenService {
     const logoutPayload: BasePayload = { sub: userId, type: logoutToken.name };
     const accessPayload: AccessPayload = {
       sub: userId,
+      email,
       type: accessToken.name,
       keepMeLoggedIn,
       roles,

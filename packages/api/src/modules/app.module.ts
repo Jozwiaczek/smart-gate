@@ -5,7 +5,6 @@ import { AuthModule } from './auth/auth.module';
 import { Config } from './config/config';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
-import { GlobalExceptionsFilterModule } from './global-exceptions-filter/global-exceptions-filter.module';
 import { InvitationModule } from './invitation/invitation.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
@@ -17,7 +16,6 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     DatabaseModule,
     UsersModule,
-    GlobalExceptionsFilterModule,
     MailerModule,
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],
