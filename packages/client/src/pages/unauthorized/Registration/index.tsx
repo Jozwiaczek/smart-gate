@@ -99,9 +99,8 @@ const Registration = () => {
           placeholder={t('form.inputs.repeatPassword')}
           startAdornment={<ConfirmLockIcon />}
           validation={{
-            pattern: {
-              value: RegExp(getValues().password),
-              message: t('form.validation.repeatPasswordError'),
+            validate: (value) => {
+              return value === getValues().password || t('form.validation.repeatPasswordError');
             },
           }}
           required
