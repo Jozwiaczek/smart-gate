@@ -14,7 +14,7 @@ export const StyledButton = styled.button<StyledButtonProps>(
   align-items: center;
   position: relative;
   border-radius: 50%;
-  padding: 12px;
+  padding: 16px;
   font-size: 16px;
   background: transparent;
   color: ${getCssColor({ color, theme })};

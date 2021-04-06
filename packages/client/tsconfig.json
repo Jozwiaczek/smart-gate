@@ -8,7 +8,8 @@
     "jsx": "react-jsx",
     "target": "es5",
     "module": "esnext",
-    "allowJs": true
+    "allowJs": true,
+    "downlevelIteration": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "test", "build", "**/*spec.ts"]

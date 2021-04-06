@@ -13,11 +13,17 @@ const ThemeBlock = styled.div`
   bottom: 0;
   overflow: auto;
   padding: 10px;
-  ${({ side }) =>
+  ${({
+    side,
+    theme: {
+      palette: { text },
+    },
+  }) =>
     side === 'left'
       ? `
           left: 0;
           right: 50vw;
+          background: ${text.light};
         `
       : `
           right: 0;
@@ -27,7 +33,18 @@ const ThemeBlock = styled.div`
 
 const ThemeStack = styled.div`
   position: relative;
-  min-height: calc(50vh - 15px);
+  min-height: calc(50vh - 20px);
+  ${({
+    side,
+    theme: {
+      palette: { text },
+    },
+  }) =>
+    side === 'top'
+      ? `
+          background: ${text.light};
+        `
+      : ''};
 `;
 
 const ThemeDecorator = (StoryFn, { globals: { theme } }) => {
@@ -55,13 +72,13 @@ const ThemeDecorator = (StoryFn, { globals: { theme } }) => {
         <>
           <ThemeProvider theme={getTheme(ThemeType.light)}>
             <GlobalStyles />
-            <ThemeStack side="left" data-side="left">
+            <ThemeStack side="top" data-side="top">
               <StoryFn />
             </ThemeStack>
           </ThemeProvider>
           <ThemeProvider theme={getTheme(ThemeType.dark)}>
             <GlobalStyles />
-            <ThemeStack side="right" data-side="right">
+            <ThemeStack side="down" data-side="down">
               <StoryFn />
             </ThemeStack>
           </ThemeProvider>

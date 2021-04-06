@@ -1,9 +1,12 @@
 import React, { MouseEvent, useCallback, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 import { RippleContainer } from './RippleEffect.styled';
 import useDebouncedRippleCleanUp from './useDebounceRippleCleanUp';
 
-const RippleEffect = ({ color = '#fff', duration = 850, opacity = 0.3 }: RippleEffectProps) => {
+const RippleEffect = ({ color, duration = 850, opacity = 0.3 }: RippleEffectProps) => {
+  const theme = useTheme();
+  const internalColor = color || theme.palette.text.primary;
   const [rippleArray, setRippleArray] = useState<Array<Ripple>>([]);
   const rippleTotals = rippleArray.length;
   useDebouncedRippleCleanUp(rippleTotals, duration, () => setRippleArray([]));
@@ -31,7 +34,7 @@ const RippleEffect = ({ color = '#fff', duration = 850, opacity = 0.3 }: RippleE
     <RippleContainer
       data-testid="rippleEffect"
       duration={duration}
-      color={color}
+      color={internalColor}
       opacity={opacity}
       onMouseDown={addRipple}
     >

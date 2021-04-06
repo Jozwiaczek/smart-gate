@@ -13,7 +13,7 @@ const getLinkColor = ({
     case 'default':
       return text.primary;
     case 'colour':
-      return primary.main;
+      return primary.mainInvert;
 
     case 'grey':
       return text.secondary;
@@ -32,7 +32,7 @@ const getHoverLinkColor = ({
     case 'default':
       return text.secondary;
     case 'colour':
-      return primary.mainInvert;
+      return primary.main;
 
     case 'grey':
       return text.primary;

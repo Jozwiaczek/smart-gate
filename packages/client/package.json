@@ -16,7 +16,7 @@
     "start:storybook": "yarn test && STORYBOOK=true start-storybook -s ./public -p 6006",
     "test": "react-scripts test --watchAll=false --passWithNoTests --json --outputFile=./src/jest-test-results.json",
     "test:coverage": "yarn test --coverage",
-    "test:watch": "yarn test --watchAll=true",
+    "test:watch": "react-scripts test",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
