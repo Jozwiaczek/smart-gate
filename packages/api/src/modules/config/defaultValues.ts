@@ -13,6 +13,12 @@ const defaultValues = {
     },
   },
 
+  mailer: {
+    from: 'no-reply@sg.com',
+    sender: 'Smart Gate',
+    replyTo: 'sg@gmail.com',
+  },
+
   sentry: {
     isEnable: false,
     environment: 'development',

@@ -74,8 +74,9 @@ export class ConfigLoader {
           user: this.envConfigService.get('ETHEREAL_USER'),
           pass: this.envConfigService.get('ETHEREAL_PASSWORD'),
         },
-        sender: this.envConfigService.get('SENDER'),
-        replyTo: this.envConfigService.get('REPLY_TO', isProd),
+        sender: this.envConfigService.get('SENDER', false) || defaultValues.mailer.sender,
+        replyTo: this.envConfigService.get('REPLY_TO', false) || defaultValues.mailer.replyTo,
+        from: this.envConfigService.get('FROM', false) || defaultValues.mailer.from,
       },
       sentry: {
         tracesSampleRate:

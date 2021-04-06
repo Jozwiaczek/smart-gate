@@ -18,6 +18,7 @@ interface MailerConfig<T = MailerAuthConfig> {
 
 interface SendEmailConfig {
   sender: string;
+  from: string;
   replyTo: string;
 }
 
@@ -60,8 +61,9 @@ export class MailerConfigService {
 
   public getSendEmailConfig(): SendEmailConfig {
     return {
-      sender: this.config.mailer.sender || 'Smart Gate',
-      replyTo: this.config.mailer.replyTo || 'sg@gmail.com',
+      from: this.config.mailer.from,
+      sender: this.config.mailer.sender,
+      replyTo: this.config.mailer.replyTo,
     };
   }
 

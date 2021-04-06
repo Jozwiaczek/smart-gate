@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.3...v1.0.4) (2021-03-29)
+
+
+### Bug Fixes
+
+* **api:** add mail from header ([1874353](https://github.com/Jozwiaczek/smart-gate/commit/1874353fadfa43bcf926d977454c47932f570ddf))
+* bump package.json versions ([1105002](https://github.com/Jozwiaczek/smart-gate/commit/11050025ea4c5f7f965ad15a0f3d1e13db3f2230))
+
 ## [1.0.3](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.2...v1.0.3) (2021-03-29)
 
 
