@@ -61,11 +61,6 @@ const List = ({ onRowClick, children, resource }: ListProps) => {
     totalRecords,
   ]);
 
-  const totalPages = useMemo((): number => Math.ceil(totalRecords / perPage), [
-    perPage,
-    totalRecords,
-  ]);
-
   const checkIsRowSelected = useCallback((id: string): boolean => selectedRows.includes(id), [
     selectedRows,
   ]);
@@ -176,7 +171,6 @@ const List = ({ onRowClick, children, resource }: ListProps) => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalRecords={totalRecords}
-        totalPages={totalPages}
       />
     </StyledCard>
   );

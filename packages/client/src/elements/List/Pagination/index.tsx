@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Select } from 'src/elements';
 
 import {
@@ -16,8 +16,12 @@ const Pagination = ({
   currentPage,
   setCurrentPage,
   totalRecords,
-  totalPages,
 }: PaginationProps) => {
+  const totalPages = useMemo((): number => Math.ceil(totalRecords / perPage), [
+    perPage,
+    totalRecords,
+  ]);
+
   return (
     <PaginationWrapper>
       <PerPageWrapper>

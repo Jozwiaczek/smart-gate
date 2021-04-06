@@ -4,5 +4,4 @@ interface PaginationProps {
   currentPage: number;
   setCurrentPage: (currentPage: number) => void;
   totalRecords: number;
-  totalPages: number;
 }
