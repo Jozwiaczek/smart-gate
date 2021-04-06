@@ -7,8 +7,14 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+      include_scope: false
   - package-ecosystem: 'github-actions'
     target-branch: 'dev'
     directory: '/'
     schedule:
       interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+      include_scope: false
