@@ -9,12 +9,8 @@ import { InvitationRepository } from './modules/repository/invitation.repository
 import { UserRepository } from './modules/repository/user.repository';
 
 const initSentry = (app: INestApplication, config: Config) => {
-  if (!config.sentry.isEnable) {
-    return;
-  }
-
   Sentry.init({
-    dsn: config.sentry.dsn,
+    dsn: config.sentry.isEnable ? config.sentry.dsn : undefined,
     environment: config.sentry.environment,
     integrations: [
       new Sentry.Integrations.Http({ tracing: true }),
