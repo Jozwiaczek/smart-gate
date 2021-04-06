@@ -83,9 +83,9 @@ export class ConfigLoader {
           defaultValues.sentry.tracesSampleRate,
         debug: this.envConfigService.get('SENTRY_DEBUG', false, convertToBoolean),
         dsn: this.envConfigService.get('SENTRY_DSN', isProd),
-        enabled:
+        isEnable:
           this.envConfigService.get('SENTRY_ENABLED', isProd, convertToBoolean) ||
-          defaultValues.sentry.enable,
+          defaultValues.sentry.isEnable,
         environment:
           this.envConfigService.get('SENTRY_ENVIRONMENT', false) ||
           defaultValues.sentry.environment,

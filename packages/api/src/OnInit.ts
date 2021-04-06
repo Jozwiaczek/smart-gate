@@ -9,7 +9,7 @@ import { InvitationRepository } from './modules/repository/invitation.repository
 import { UserRepository } from './modules/repository/user.repository';
 
 function initSentry(app: INestApplication, config: Config) {
-  if (!config.sentry.enabled) {
+  if (!config.sentry.isEnable) {
     return;
   }
 

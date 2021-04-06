@@ -50,7 +50,7 @@ export class Config {
   sentry: {
     debug: boolean | undefined;
     dsn: string | undefined;
-    enabled: boolean;
+    isEnable: boolean;
     environment: string;
     tracesSampleRate: number;
   };

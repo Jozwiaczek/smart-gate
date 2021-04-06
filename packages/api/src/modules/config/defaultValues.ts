@@ -14,7 +14,7 @@ const defaultValues = {
   },
 
   sentry: {
-    enable: false,
+    isEnable: false,
     environment: 'development',
     tracesSampleRate: 1.0,
   },
