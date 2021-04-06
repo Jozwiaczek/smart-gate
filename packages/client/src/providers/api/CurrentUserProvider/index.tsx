@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react';
 import React, { useMemo, useState } from 'react';
 
 import { useLocalStorageMemory } from '../../../hooks';
@@ -23,6 +24,18 @@ const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
   ) => {
     setExpiration(expirationDate);
     setStoreUser(() => newUser);
+
+    if (newUser) {
+      Sentry.setUser({
+        id: newUser.id,
+        email: newUser.email,
+        username: `${newUser.firstName} ${newUser.lastName}`,
+      });
+      Sentry.setTag('roles', String(newUser.roles));
+    } else {
+      Sentry.setUser(null);
+      Sentry.setTag('roles', undefined);
+    }
   };
 
   return (
