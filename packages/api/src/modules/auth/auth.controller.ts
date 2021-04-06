@@ -12,6 +12,8 @@ import {
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { BasePayload, TokenPayload } from '../../interfaces/token-types';
 import { ValidationPipe } from '../../utils/validation.pipe';
+import { SentryIgnoreException } from '../sentry/decorators/sentry-ignore-exception.decorator';
+import { UseSentryTransaction } from '../sentry/decorators/use-sentry-transaction.decorator';
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
@@ -19,6 +21,8 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { LoginUserInfo } from './interfaces/login-user-info';
 
+@UseSentryTransaction()
+@SentryIgnoreException()
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -55,7 +59,6 @@ export class AuthController {
   @Get('me')
   async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<LoginUserInfo> {
     const { email, firstName, lastName, roles } = await this.authService.getUser(sub);
-
     return {
       user: {
         email,

@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { ConfigModule } from '../config/config.module';
-import { SentryService } from './sentry.service';
+import { SentryInterceptor } from './sentry.interceptor';
 
 @Module({
-  imports: [ConfigModule],
-  providers: [SentryService],
-  exports: [SentryService],
+  imports: [],
+  providers: [SentryInterceptor],
+  exports: [SentryInterceptor],
 })
 export class SentryModule {}

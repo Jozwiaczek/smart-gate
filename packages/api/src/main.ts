@@ -6,7 +6,7 @@ import helmet from 'helmet';
 
 import { AppModule } from './modules/app.module';
 import { Config } from './modules/config/config';
-import { GlobalExceptionsFilter } from './modules/global-exceptions-filter/global-exceptions-filter';
+import { SentryInterceptor } from './modules/sentry/sentry.interceptor';
 import { onInit } from './OnInit';
 
 async function bootstrap() {
@@ -19,7 +19,7 @@ async function bootstrap() {
   });
   app.use(cookieParser(config.cookie.secret));
   app.use(helmet());
-  app.useGlobalFilters(app.get(GlobalExceptionsFilter));
+  app.useGlobalInterceptors(app.get(SentryInterceptor));
 
   await app.listen(config.port || 3030);
   return app;

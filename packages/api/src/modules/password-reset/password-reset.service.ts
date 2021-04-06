@@ -1,4 +1,5 @@
 import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
+import * as Sentry from '@sentry/node';
 import * as bcrypt from 'bcrypt';
 import { Cache } from 'cache-manager';
 import { v4 as uuidV4 } from 'uuid';
@@ -30,6 +31,7 @@ export class PasswordResetService {
 
     await this.mailerService.sendPasswordRecovery(email, firstName, link).catch((error) => {
       this.cacheManager.del(email);
+      Sentry.captureException(error);
       throw error;
     });
 

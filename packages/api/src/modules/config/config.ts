@@ -50,8 +50,9 @@ export class Config {
   sentry: {
     debug: boolean | undefined;
     dsn: string | undefined;
-    enabled: boolean | undefined;
-    environment: string | undefined;
+    isEnable: boolean;
+    environment: string;
+    tracesSampleRate: number;
   };
 
   mailer: {

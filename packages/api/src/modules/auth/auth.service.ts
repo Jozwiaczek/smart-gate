@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import * as Sentry from '@sentry/node';
 import * as bcrypt from 'bcrypt';
 
 import { CookieResponse } from '../../interfaces/cookie-types';
@@ -29,42 +30,47 @@ export class AuthService {
   ): Promise<LoginUserInfo> {
     const user = await this.validateUser(email, password);
 
-    const [refreshToken, expirationDate] = await this.tokenService.generateToken(
-      'REFRESH',
-      user,
-      keepMeLoggedIn,
-    );
+    try {
+      const [refreshToken, expirationDate] = await this.tokenService.generateToken(
+        'REFRESH',
+        user,
+        keepMeLoggedIn,
+      );
 
-    const [accessToken] = await this.tokenService.generateToken('ACCESS', user, keepMeLoggedIn);
+      const [accessToken] = await this.tokenService.generateToken('ACCESS', user, keepMeLoggedIn);
 
-    let logoutToken: string | undefined;
+      let logoutToken: string | undefined;
 
-    if (!keepMeLoggedIn) {
-      [logoutToken] = await this.tokenService.generateToken('LOGOUT', user, keepMeLoggedIn);
+      if (!keepMeLoggedIn) {
+        [logoutToken] = await this.tokenService.generateToken('LOGOUT', user, keepMeLoggedIn);
+      }
+
+      const generateTokens: GeneratedTokens = {
+        tokens: {
+          logoutToken,
+          accessToken,
+          refreshToken,
+        },
+        expiration: expirationDate,
+      };
+
+      this.tokenCookieService.setCookieTokens(generateTokens, res);
+
+      const { firstName, lastName, roles } = user;
+
+      return {
+        user: {
+          email,
+          firstName,
+          lastName,
+          roles,
+        },
+        expirationDate: expirationDate.getTime(),
+      };
+    } catch (e) {
+      Sentry.captureException(e);
+      throw e;
     }
-
-    const generateTokens: GeneratedTokens = {
-      tokens: {
-        logoutToken,
-        accessToken,
-        refreshToken,
-      },
-      expiration: expirationDate,
-    };
-
-    this.tokenCookieService.setCookieTokens(generateTokens, res);
-
-    const { firstName, lastName, roles } = user;
-
-    return {
-      user: {
-        email,
-        firstName,
-        lastName,
-        roles,
-      },
-      expirationDate: expirationDate.getTime(),
-    };
   }
 
   public async getUser(userId: string): Promise<UserEntity> {
@@ -78,7 +84,7 @@ export class AuthService {
     try {
       await this.refreshTokenRepository.repository.delete({ id: refreshToken, userId });
     } catch (e) {
-      console.log(e);
+      Sentry.captureException(e);
     }
   }
 
@@ -91,7 +97,7 @@ export class AuthService {
 
       await this.refreshTokenRepository.deleteAllWithUserId(userId);
     } catch (e) {
-      console.log(e);
+      Sentry.captureException(e);
     }
   }
 

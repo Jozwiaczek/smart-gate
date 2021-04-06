@@ -1,4 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import * as Sentry from '@sentry/node';
 
 import { UserRepository } from '../../repository/user.repository';
 import { TokenService } from '../token/token.service';
@@ -26,6 +27,14 @@ export class OnlyAuthenticatedGuard implements CanActivate {
       );
 
       request.payload = payload;
+
+      Sentry.configureScope((scope) => {
+        scope.setUser({
+          id: payload.sub,
+          email: payload.email,
+        });
+        scope.setTag('roles', String(payload.roles));
+      });
 
       const { exp: accessTokenExp, sub: accessTokenSub, keepMeLoggedIn } = payload;
 
