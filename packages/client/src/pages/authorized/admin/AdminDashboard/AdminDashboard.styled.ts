@@ -5,10 +5,11 @@ import { Button } from '../../../../elements';
 export const CardsWrapper = styled.div(
   ({ theme: { breakpoints, up } }) => `
   display: grid;
-  gap: 60px;
   width: 100%;
   margin-top: 60px;
   grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  row-gap: 60px;
+  column-gap: 60px;
   
   ${up(breakpoints.md)} {
     max-width: 800px;

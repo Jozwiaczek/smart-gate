@@ -2,8 +2,8 @@ import React, { forwardRef, memo, Ref, SVGProps } from 'react';
 
 const FiltersIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
   <svg
-    width="24"
-    height="26"
+    width="29"
+    height="31"
     viewBox="0 0 24 26"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

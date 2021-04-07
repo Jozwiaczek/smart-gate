@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { FiltersIcon } from '../../icons';
 import { IconButton } from '../buttons';
 import Card from '../Card';
 
@@ -11,14 +10,10 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const StyledFiltersIcon = styled(FiltersIcon)`
-  color: ${({ theme }) => theme.palette.primary.light};
-`;
-
 export const StyledCard = styled(Card)`
   position: relative;
   width: 100%;
-  max-width: 350px;
+  max-width: 340px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -42,7 +37,13 @@ export const StyledCard = styled(Card)`
   `};
 `;
 
-export const StyledIconButton = styled(IconButton)`
+export const FiltersButton = styled(IconButton)`
+  svg {
+    color: ${({ theme }) => theme.palette.primary.light};
+  }
+`;
+
+export const EditButton = styled(IconButton)`
   position: absolute;
   top: 10px;
   right: 10px;
@@ -56,7 +57,17 @@ export const CardsWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 40px;
+  > *:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
+  ${({ theme: { up, breakpoints } }) => `
+    ${up(breakpoints.md)} {
+      > *:nth-child(2n + 1) {
+        margin-right: 40px;
+      }    
+    }
+  `};
 `;
 
 export const TitleWrapper = styled.div`
@@ -74,4 +85,8 @@ export const FiltersContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   max-width: 740px;
+`;
+
+export const CardFieldContainer = styled.div`
+  display: flex;
 `;

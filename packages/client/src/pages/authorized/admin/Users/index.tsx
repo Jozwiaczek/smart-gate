@@ -16,8 +16,8 @@ const Users = () => {
             asTitle
             render={({ firstName, lastName }) => `${firstName} ${lastName}`}
           />
-          <TextField source="email" />
-          <DateField source="createdAt" showTime />
+          <TextField source="email" noLabel />
+          <DateField source="createdAt" />
         </CardList>
       ) : (
         <ListContainer>
