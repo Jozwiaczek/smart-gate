@@ -37,6 +37,9 @@
     "test:e2e": "lerna run test:e2e",
     "type-check": "lerna run type-check"
   },
+  "resolutions": {
+    "babel-loader": "8.1.0"
+  },
   "dependencies": {
     "base64url": "^3.0.1",
     "dotenv": "^8.2.0",
