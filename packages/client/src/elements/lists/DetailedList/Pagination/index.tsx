@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { Select } from 'src/elements';
+import { useTranslation } from 'react-i18next';
+import { Select } from 'src/elements/index';
 
 import {
   PageNavigation,
@@ -17,6 +18,8 @@ const Pagination = ({
   setCurrentPage,
   totalRecords,
 }: PaginationProps) => {
+  const { t } = useTranslation();
+
   const totalPages = useMemo((): number => Math.ceil(totalRecords / perPage), [
     perPage,
     totalRecords,
@@ -25,7 +28,7 @@ const Pagination = ({
   return (
     <PaginationWrapper>
       <PerPageWrapper>
-        <PerPageLabel>Rows per page:</PerPageLabel>
+        <PerPageLabel>{t('lists.detailedList.perPage')}:</PerPageLabel>
         <Select<number>
           value={perPage}
           onChange={(selectedOption) => setPerPage(selectedOption.value)}
@@ -36,14 +39,15 @@ const Pagination = ({
         </Select>
       </PerPageWrapper>
       <TotalsLabel>
-        {perPage * currentPage - perPage + 1}-{Math.min(perPage * currentPage, totalRecords)} of{' '}
+        {perPage * currentPage - perPage + 1}-{Math.min(perPage * currentPage, totalRecords)}&nbsp;
+        {t('lists.detailedList.ofTotal')}&nbsp;
         {totalRecords}
       </TotalsLabel>
       {totalPages > 1 && (
         <>
           {currentPage !== 1 && (
             <PaginationButton color="primary" onClick={() => setCurrentPage(currentPage - 1)}>
-              prev
+              {t('lists.detailedList.prev')}
             </PaginationButton>
           )}
           <PageNavigation>
@@ -61,7 +65,7 @@ const Pagination = ({
             })}
             {currentPage !== totalPages && (
               <PaginationButton color="primary" onClick={() => setCurrentPage(currentPage + 1)}>
-                next
+                {t('lists.detailedList.next')}
               </PaginationButton>
             )}
           </PageNavigation>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { IconButton } from '../../buttons';
+import { IconButton } from '../../../buttons';
 
 export const PaginationWrapper = styled.div`
   border-top: 1px solid ${({ theme }) => theme.palette.divider.paper};

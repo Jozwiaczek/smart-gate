@@ -1,20 +1,92 @@
 import React, { forwardRef, memo, Ref, SVGProps } from 'react';
+import { useTheme } from 'styled-components';
 
-const FiltersIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
-  <svg
-    width="29"
-    height="31"
-    viewBox="0 0 24 26"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    ref={svgRef}
-    {...props}
-  >
-    <path
-      d="M22.6667 0H1.33333C0.596 0 0 0.596 0 1.33333V4.78667C0 5.484 0.284 6.16933 0.777333 6.66267L8 13.8853V24C8 24.4627 8.24 24.8907 8.63333 25.1347C8.84667 25.2667 9.08933 25.3333 9.33333 25.3333C9.53733 25.3333 9.74133 25.2867 9.92933 25.1933L15.2627 22.5267C15.7147 22.3 16 21.8387 16 21.3333V13.8853L23.2227 6.66267C23.716 6.16933 24 5.484 24 4.78667V1.33333C24 0.596 23.404 0 22.6667 0ZM13.724 12.3907C13.4733 12.64 13.3333 12.9787 13.3333 13.3333V20.5093L10.6667 21.8427V13.3333C10.6667 12.9787 10.5267 12.64 10.276 12.3907L2.66667 4.78667V2.66667H21.3347L21.3373 4.77733L13.724 12.3907Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+const FiltersIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => {
+  const { palette } = useTheme();
+  const background = palette.primary.dark;
+  return (
+    <svg
+      width="100%"
+      viewBox="0 0 25 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ref={svgRef}
+      {...props}
+    >
+      <rect
+        x="0.546875"
+        y="2.19678"
+        width="23.7656"
+        height="1.91803"
+        rx="0.959017"
+        fill="currentColor"
+      />
+      <rect
+        x="0.546875"
+        y="8.90991"
+        width="23.7656"
+        height="1.91803"
+        rx="0.959017"
+        fill="currentColor"
+      />
+      <rect
+        x="0.546875"
+        y="15.623"
+        width="23.7656"
+        height="1.91803"
+        rx="0.959017"
+        fill="currentColor"
+      />
+      <rect
+        x="16.0156"
+        y="0.278809"
+        width="5.625"
+        height="5.90164"
+        rx="2.8125"
+        fill="currentColor"
+      />
+      <rect
+        x="10.3906"
+        y="6.91797"
+        width="5.625"
+        height="5.90164"
+        rx="2.8125"
+        fill="currentColor"
+      />
+      <rect
+        x="3.35938"
+        y="13.5574"
+        width="5.625"
+        height="5.90164"
+        rx="2.8125"
+        fill="currentColor"
+      />
+      <rect
+        x="17.4219"
+        y="1.75415"
+        width="2.8125"
+        height="2.95082"
+        rx="1.40625"
+        fill={background}
+      />
+      <rect
+        x="11.7969"
+        y="8.39355"
+        width="2.8125"
+        height="2.95082"
+        rx="1.40625"
+        fill={background}
+      />
+      <rect
+        x="4.76562"
+        y="15.0327"
+        width="2.8125"
+        height="2.95082"
+        rx="1.40625"
+        fill={background}
+      />
+    </svg>
+  );
+};
 
 export default memo(forwardRef(FiltersIcon));

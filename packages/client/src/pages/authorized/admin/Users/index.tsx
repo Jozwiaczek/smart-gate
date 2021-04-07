@@ -1,18 +1,20 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { CardList, DateField, FunctionField, List, TextField } from '../../../../elements';
+import { CardList, DateField, DetailedList, FunctionField, TextField } from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
 import { ListContainer, Wrapper } from './Users.styled';
 
 const Users = () => {
   const isMobile = useMediaQuery(({ breakpoints, down }) => down(breakpoints.lg));
+  const { t } = useTranslation();
 
   return (
     <Wrapper>
       {isMobile ? (
         <CardList resource="users">
           <FunctionField
-            label="User"
+            label={t('user.user')}
             asTitle
             render={({ firstName, lastName }) => `${firstName} ${lastName}`}
           />
@@ -21,14 +23,14 @@ const Users = () => {
         </CardList>
       ) : (
         <ListContainer>
-          <List resource="users">
+          <DetailedList resource="users">
             <FunctionField
-              label="User"
+              label={t('user.user')}
               render={({ firstName, lastName }) => `${firstName} ${lastName}`}
             />
             <TextField source="email" />
             <DateField source="createdAt" showTime />
-          </List>
+          </DetailedList>
         </ListContainer>
       )}
     </Wrapper>

@@ -6,13 +6,13 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
 
-import { CancelIcon, TrashIcon } from '../../icons';
-import { ApiList } from '../../interfaces/api.types';
-import { getLabelFromSource } from '../../utils';
-import { BaseFieldProps, BaseRecordField } from '../fields/Fields.types';
-import { Checkbox } from '../inputs';
+import { CancelIcon, TrashIcon } from '../../../icons';
+import { ApiList } from '../../../interfaces/api.types';
+import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
+import { Checkbox } from '../../inputs';
 import {
   BulkActionsWrapper,
   BulkCancelButton,
@@ -26,19 +26,20 @@ import {
   TableHeader,
   TableHeaderCheckbox,
   TableRow,
-} from './List.styled';
-import { ListProps } from './List.types';
+} from './DetailedList.styled';
+import { DetailedListProps } from './DetailedList.types';
 import Pagination from './Pagination';
 
-const List = ({ onRowClick, children, resource }: ListProps) => {
-  const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => {
   const removeUser = async (id: string) => {
     console.log('Removed:', id);
   };
   const deleteMutation = useMutation(removeUser);
+  const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<number>(25);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const { t } = useTranslation();
 
   const totalRecords = useMemo((): number => {
     if (queryResult) {
@@ -119,11 +120,12 @@ const List = ({ onRowClick, children, resource }: ListProps) => {
           <BulkCancelButton onClick={unselectAllRows}>
             <CancelIcon />
           </BulkCancelButton>
-          {selectedRows.length} {selectedRows.length > 1 ? 'items' : 'item'} selected
+          {selectedRows.length}&nbsp;
+          {selectedRows.length > 1 ? t('lists.detailedList.items') : t('lists.detailedList.item')}
         </BulkCancelWrapper>
         <DeleteButton color="red" onClick={removeSelectedItems}>
           <TrashIcon />
-          Delete
+          {t('actions.delete')}
         </DeleteButton>
       </BulkActionsWrapper>
       <Table>
@@ -134,7 +136,7 @@ const List = ({ onRowClick, children, resource }: ListProps) => {
             </TableHeaderCheckbox>
             {headers.map(({ label, source }) => (
               <TableHeader key={label || source}>
-                {label || getLabelFromSource(source || '')}
+                {label || t(`baseApiFields.${source}` as never)}
               </TableHeader>
             ))}
           </TableRow>
@@ -176,6 +178,6 @@ const List = ({ onRowClick, children, resource }: ListProps) => {
   );
 };
 
-List.displayName = 'List';
+DetailedList.displayName = 'DetailedList';
 
-export default List;
+export default DetailedList;

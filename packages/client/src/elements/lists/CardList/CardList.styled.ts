@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { IconButton } from '../buttons';
-import Card from '../Card';
+import { Button, IconButton } from '../../buttons';
+import Card from '../../Card';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -37,10 +37,11 @@ export const StyledCard = styled(Card)`
   `};
 `;
 
-export const FiltersButton = styled(IconButton)`
-  svg {
-    color: ${({ theme }) => theme.palette.primary.light};
-  }
+export const FiltersButton = styled(Button)`
+  min-width: 0;
+  width: 55px;
+  height: 55px;
+  padding: 10px;
 `;
 
 export const EditButton = styled(IconButton)`
@@ -81,7 +82,7 @@ export const TitleWrapper = styled.div`
 export const FiltersContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 40px 20px;
+  padding: 40px 0;
   justify-content: space-between;
   align-items: center;
   max-width: 740px;

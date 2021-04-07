@@ -1,12 +1,13 @@
 import React, { Children, cloneElement, isValidElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
-import { routes } from '../../constants';
-import { EditIcon, FiltersIcon } from '../../icons';
-import { ApiList } from '../../interfaces/api.types';
-import { getLabelFromSource } from '../../utils';
-import { BaseFieldProps, BaseRecordField } from '../fields/Fields.types';
+import { routes } from '../../../constants';
+import { EditIcon, FiltersIcon } from '../../../icons';
+import { ApiList } from '../../../interfaces/api.types';
+import { ThemeType } from '../../../theme/Theme';
+import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import {
   CardFieldContainer,
   CardsWrapper,
@@ -23,6 +24,7 @@ const CardList = ({ children, resource }: CardListProps) => {
   const queryResult = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const records = queryResult.data?.data;
   const history = useHistory();
+  const { t } = useTranslation();
 
   const onClickEdit = (id: string) => {
     // TODO: move to user details
@@ -35,7 +37,7 @@ const CardList = ({ children, resource }: CardListProps) => {
       <FiltersContainer>
         {/* TODO: add search input */}
         <p>Search</p>
-        <FiltersButton>
+        <FiltersButton colorVariant={ThemeType.dark}>
           <FiltersIcon />
         </FiltersButton>
       </FiltersContainer>
@@ -58,7 +60,7 @@ const CardList = ({ children, resource }: CardListProps) => {
                   return <TitleWrapper>{cloneElement(child, { record })}</TitleWrapper>;
                 }
 
-                const internalLabel = label || getLabelFromSource(source || '');
+                const internalLabel = label || t(`baseApiFields.${source}` as never);
 
                 return (
                   <CardFieldContainer key={`${id}-${source}`}>
