@@ -4,12 +4,20 @@ import { TabsIndicatorProps, TabsWrapperProps } from './Tabs.types';
 
 export const TabsWrapper = styled.div<TabsWrapperProps>`
   position: relative;
-  overflow-x: auto;
   display: flex;
   height: 100%;
   width: 100%;
-
+  -webkit-overflow-scrolling: touch;
+  "scrollbar-width": "none;";
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   ${({ orientation }) => orientation === 'vertical' && 'flex-direction: column'};
+  ${({ orientation }) => `
+      overflow-x: ${orientation === 'vertical' ? 'hidden' : 'auto'};
+      overflow-y: ${orientation === 'vertical' ? 'auto' : 'hidden'};    
+  `};
 
   ${({ variant }) => {
     if (variant === 'fullWidth') {

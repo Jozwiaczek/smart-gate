@@ -12,6 +12,7 @@ export const TabLabel = styled.p<TabLabelProps>`
 export const TabButton = styled.button<TabButtonProps>`
   position: relative;
   overflow: hidden;
+  min-width: ${({ variant, width }) => (variant === 'fullWidth' ? 0 : width)};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   display: flex;
@@ -25,10 +26,17 @@ export const TabButton = styled.button<TabButtonProps>`
   color: ${({ theme, isActive }) =>
     isActive ? theme.palette.primary.light : theme.palette.text.secondary};
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-
   svg {
     margin-bottom: 4px;
   }
+
+  ${({ variant }) =>
+    variant === 'scrollable' &&
+    `
+    position: relative;
+    flex: 1 1 auto;
+    white-space: nowrap;
+  `};
 
   :hover {
     ${TabLabel} {
