@@ -32,11 +32,12 @@ export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
 export const TabPageWrapper = styled.div<{ orientation?: TabsOrientation }>`
   width: 100%;
   height: 100%;
-  margin-bottom: 90px;
+  padding-bottom: 90px;
   ${({ orientation }) =>
     orientation === 'vertical' &&
     `
-      margin-left: 160px;
+      padding-bottom: 0;
+      padding-left: 160px;
   `};
 `;
 

@@ -76,7 +76,12 @@ export const RouteWrapper = styled.div`
 export const RouteTopContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 60px;
+  flex-wrap: wrap;
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const RouteIconWrapper = styled.div`
@@ -86,5 +91,5 @@ export const RouteIconWrapper = styled.div`
 `;
 
 export const BackButtonWrapper = styled.div`
-  margin-right: 70px;
+  margin-right: 50px;
 `;
