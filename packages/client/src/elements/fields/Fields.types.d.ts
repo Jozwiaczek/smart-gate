@@ -4,6 +4,8 @@ interface BaseFieldProps<T> {
   label?: string;
   source: keyof T;
   record?: T;
+  asTitle?: boolean;
+  noLabel?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -22,7 +22,7 @@ Default.args = {
   source: 'createdAt',
   record: {
     id: 'z1s234sd',
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date('04.03.2021'),
+    updatedAt: new Date('04.03.2021'),
   },
 };

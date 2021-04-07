@@ -5,10 +5,11 @@ import { Button } from '../../../../elements';
 export const CardsWrapper = styled.div(
   ({ theme: { breakpoints, up } }) => `
   display: grid;
-  gap: 60px;
   width: 100%;
   margin-top: 60px;
   grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  row-gap: 60px;
+  column-gap: 60px;
   
   ${up(breakpoints.md)} {
     max-width: 800px;
@@ -76,7 +77,12 @@ export const RouteWrapper = styled.div`
 export const RouteTopContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 60px;
+  flex-wrap: wrap;
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const RouteIconWrapper = styled.div`
@@ -86,5 +92,5 @@ export const RouteIconWrapper = styled.div`
 `;
 
 export const BackButtonWrapper = styled.div`
-  margin-right: 70px;
+  margin-right: 50px;
 `;

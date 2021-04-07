@@ -24,7 +24,7 @@ Default.args = {
   record: {
     id: 'z1s234sd',
     email: 'joe.doe@email.com',
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date('04.03.2021'),
+    updatedAt: new Date('04.03.2021'),
   },
 };

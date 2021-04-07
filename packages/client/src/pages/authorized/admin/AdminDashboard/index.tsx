@@ -22,6 +22,7 @@ import {
   RouteTopContainer,
   RouteWrapper,
   Title,
+  TitleWrapper,
 } from './AdminDashboard.styled';
 import { AdminRoute } from './AdminDashboard.typed';
 
@@ -108,8 +109,10 @@ const AdminDashboard = () => {
                   <BackButtonWrapper>
                     <BackButton />
                   </BackButtonWrapper>
-                  <h1>{t(title as never)}</h1>
-                  <RouteIconWrapper>{icon}</RouteIconWrapper>
+                  <TitleWrapper>
+                    <h2>{t(title as never)}</h2>
+                    <RouteIconWrapper>{icon}</RouteIconWrapper>
+                  </TitleWrapper>
                 </RouteTopContainer>
                 <Component {...routeProps} />
               </RouteWrapper>

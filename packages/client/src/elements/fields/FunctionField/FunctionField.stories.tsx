@@ -25,8 +25,8 @@ Default.args = {
     id: 'z1s234sd',
     firstName: 'Joe',
     lastName: 'Doe',
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date('04.03.2021'),
+    updatedAt: new Date('04.03.2021'),
   },
   render: ({ firstName, lastName }) => `${firstName} ${lastName}`,
 };
