@@ -65,7 +65,7 @@ export const CardsWrapper = styled.div`
     ${up(breakpoints.md)} {
       > *:nth-child(2n + 1) {
         margin-right: 40px;
-      }    
+      }
     }
   `};
 `;
