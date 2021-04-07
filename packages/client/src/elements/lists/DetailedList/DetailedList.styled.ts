@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { IconButton } from '../buttons';
-import Card from '../Card';
+import { IconButton } from '../../buttons';
+import Card from '../../Card';
 
 export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
   padding: 0;
