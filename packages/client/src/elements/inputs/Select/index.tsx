@@ -11,7 +11,12 @@ import {
 } from './Select.styled';
 import { SelectOption, SelectProps } from './Select.types';
 
-const Select = <T extends unknown>({ value, onChange, children }: SelectProps<T>) => {
+const Select = <T extends unknown>({
+  value,
+  onChange,
+  children,
+  openDirection = 'down',
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState(value);
   const selectRef = useRef(null);
@@ -56,13 +61,15 @@ const Select = <T extends unknown>({ value, onChange, children }: SelectProps<T>
     return null;
   }
 
+  console.log('test');
+
   return (
     <SelectWrapper ref={selectRef} data-testid="select">
       <SelectInput onClick={() => setIsOpen((prevState) => !prevState)}>
         <CurrentlySelectedLabel>{currentOption.label}</CurrentlySelectedLabel>
         <ChevronDownIcon />
       </SelectInput>
-      <SelectList isOpen={isOpen}>
+      <SelectList isOpen={isOpen} openDirection={openDirection}>
         {allOptions?.map((option) => (
           <SelectListItem key={option.value} onClick={() => onOptionClick(option)}>
             {option.label}

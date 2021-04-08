@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Select } from 'src/elements/index';
 
+import { SelectOption } from '../../../inputs/Select/Select.types';
 import {
   PageNavigation,
   PaginationButton,
@@ -25,14 +26,18 @@ const Pagination = ({
     totalRecords,
   ]);
 
+  const changePerPageValue = (selectedOption: SelectOption<number>) => {
+    setPerPage(selectedOption.value);
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
+  };
+
   return (
     <PaginationWrapper>
       <PerPageWrapper>
         <PerPageLabel>{t('lists.detailedList.perPage')}:</PerPageLabel>
-        <Select<number>
-          value={perPage}
-          onChange={(selectedOption) => setPerPage(selectedOption.value)}
-        >
+        <Select<number> openDirection="up" value={perPage} onChange={changePerPageValue}>
           <option value={5}>5</option>
           <option value={15}>15</option>
           <option value={25}>25</option>

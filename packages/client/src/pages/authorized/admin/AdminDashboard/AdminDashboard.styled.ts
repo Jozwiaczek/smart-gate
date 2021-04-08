@@ -72,6 +72,7 @@ export const CardIconWrapper = styled.div(
 export const RouteWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const RouteTopContainer = styled.div`

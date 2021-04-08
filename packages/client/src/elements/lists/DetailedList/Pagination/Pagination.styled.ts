@@ -7,7 +7,11 @@ export const PaginationWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  min-height: 60px;
   height: 60px;
+  position: sticky;
+  bottom: 0;
+  background: ${({ theme }) => theme.palette.background.paper};
 `;
 
 export const PaginationButton = styled(IconButton)`

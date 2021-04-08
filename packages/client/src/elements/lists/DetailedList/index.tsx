@@ -23,6 +23,7 @@ import {
   TableBody,
   TableCell,
   TableCellCheckbox,
+  TableHead,
   TableHeader,
   TableHeaderCheckbox,
   TableRow,
@@ -129,7 +130,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
         </DeleteButton>
       </BulkActionsWrapper>
       <Table>
-        <thead>
+        <TableHead>
           <TableRow>
             <TableHeaderCheckbox>
               <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
@@ -140,7 +141,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
               </TableHeader>
             ))}
           </TableRow>
-        </thead>
+        </TableHead>
         <TableBody>
           {slicedRecords.map((record) => (
             <TableRow key={record.id}>

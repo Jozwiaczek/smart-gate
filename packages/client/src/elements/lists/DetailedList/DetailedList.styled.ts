@@ -18,11 +18,20 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
       sizes: { borderRadius },
     },
   }) => (isBulkActionsOpen ? `0 0 ${borderRadius} ${borderRadius}` : borderRadius)};
+
+  overflow-y: auto;
+  thead th {
+    position: sticky;
+    top: 0;
+  }
+  th {
+    background: ${({ theme }) => theme.palette.background.paper};
+    z-index: 999;
+  }
 `;
 
 export const Table = styled.table`
   width: 100%;
-  display: table;
   border-collapse: collapse;
 `;
 
@@ -42,6 +51,8 @@ export const TableRow = styled.tr`
   border-bottom: 1px solid ${({ theme }) => theme.palette.divider.paper};
   height: 60px;
 `;
+
+export const TableHead = styled.thead``;
 
 export const TableCell = styled.td`
   color: ${({ theme }) => theme.palette.text.primary};
