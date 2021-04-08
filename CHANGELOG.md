@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.4...v1.1.0) (2021-04-08)
+
+
+### Bug Fixes
+
+* dependabot auto approve workflow scope ([d320c31](https://github.com/Jozwiaczek/smart-gate/commit/d320c3111bf1b1976598acc4bc9c0b3f91cdfbae))
+* **api:** error message on sentry disable ([#227](https://github.com/Jozwiaczek/smart-gate/issues/227)) ([78793a2](https://github.com/Jozwiaczek/smart-gate/commit/78793a2a917a2852a6c00ec63914859722dfe47f))
+
+
+### Features
+
+* **client:** add base card list ([#233](https://github.com/Jozwiaczek/smart-gate/issues/233)) ([a7979b0](https://github.com/Jozwiaczek/smart-gate/commit/a7979b034b59aeebbde5b6e7d407fd350084867e))
+
 ## [1.0.4](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.3...v1.0.4) (2021-03-29)
 
 
