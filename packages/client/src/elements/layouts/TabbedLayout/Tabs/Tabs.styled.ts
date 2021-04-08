@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-import { TabsIndicatorProps, TabsWrapperProps } from './Tabs.types';
+import { ScrollButtonWrapperProps, TabsIndicatorProps, TabsWrapperProps } from './Tabs.types';
+
+export const TabsRoot = styled.div`
+  position: relative;
+  height: 100%;
+`;
 
 export const TabsWrapper = styled.div<TabsWrapperProps>`
   position: relative;
@@ -44,4 +49,31 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
     transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     left: ${animationSpace}px;
   `}
+`;
+
+export const ScrollButtonWrapper = styled.div<ScrollButtonWrapperProps>`
+  position: absolute;
+  top: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
+  bottom: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
+  left: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
+  right: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
+  height: ${({ orientation }) => (orientation === 'horizontal' ? '100%' : '50px')};
+  width: ${({ orientation }) => (orientation === 'vertical' ? '100%' : '50px')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
+
+export const ScrollIconWrapper = styled.div<ScrollButtonWrapperProps>`
+  width: 50px;
+  height: 50px;
+  transform: rotate(
+    ${({ displayType, orientation }) => {
+      if (displayType === 'start') {
+        return orientation === 'vertical' ? '-90deg' : '180deg';
+      }
+      return orientation === 'vertical' ? '90deg' : '0deg';
+    }}
+  );
 `;

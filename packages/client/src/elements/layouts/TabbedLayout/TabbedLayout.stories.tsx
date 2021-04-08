@@ -149,5 +149,5 @@ verticalView.args = {
 export const scrollableView = Template.bind({});
 scrollableView.args = {
   variant: 'scrollable',
-  mockRootWidth: '250px',
+  mockRootWidth: '300px',
 };

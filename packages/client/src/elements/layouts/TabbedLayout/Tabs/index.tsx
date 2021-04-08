@@ -2,15 +2,25 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
 
 import { useCurrentUser } from '../../../../hooks';
+import { ArrowIcon } from '../../../../icons';
+import { IconButton } from '../../../buttons';
 import { TabProps } from '../Tab/Tab.types';
-import { TabsIndicator, TabsWrapper } from './Tabs.styled';
-import { DisplayScroll, IndicatorSize, TabsProps } from './Tabs.types';
+import {
+  ScrollButtonWrapper,
+  ScrollIconWrapper,
+  TabsIndicator,
+  TabsRoot,
+  TabsWrapper,
+} from './Tabs.styled';
+import { DisplayScroll, IndicatorSize, OnChange, TabsProps } from './Tabs.types';
 import { countAvailableChildren, getIndicatorAnimationSpace, getIndicatorSize } from './Tabs.utils';
 
 const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
@@ -22,8 +32,11 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
     start: false,
     end: false,
   });
+  const itemsRef = useRef<Array<HTMLButtonElement | null>>([]);
 
-  console.log('display scroll', displayScroll.start, displayScroll.end);
+  useEffect(() => {
+    itemsRef.current = itemsRef.current.splice(0, Children.count(children));
+  }, [children]);
 
   const {
     tabWidth = 160,
@@ -89,15 +102,23 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
     variant,
   ]);
 
-  const onScroll = () => {
+  const onScroll = useCallback(() => {
     const tabsWrapperNode = tabsWrapperRef.current;
     if (!tabsWrapperNode) {
       return;
     }
-    const { clientWidth, scrollWidth } = tabsWrapperNode;
+    const { clientWidth, clientHeight, scrollWidth, scrollTop, scrollHeight } = tabsWrapperNode;
 
-    const showStartScroll = tabsWrapperNode.scrollLeft > 1;
-    const showEndScroll = tabsWrapperNode.scrollLeft < scrollWidth - clientWidth - 1;
+    let showStartScroll: boolean;
+    let showEndScroll: boolean;
+
+    if (orientation === 'horizontal') {
+      showStartScroll = tabsWrapperNode.scrollLeft > 1;
+      showEndScroll = tabsWrapperNode.scrollLeft < scrollWidth - clientWidth - 1;
+    } else {
+      showStartScroll = scrollTop > 1;
+      showEndScroll = scrollTop < scrollHeight - clientHeight - 1;
+    }
 
     if (showStartScroll !== displayScroll.start || showEndScroll !== displayScroll.end) {
       setDisplayScroll({
@@ -105,41 +126,99 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
         end: showEndScroll,
       });
     }
+  }, [displayScroll.end, displayScroll.start, orientation]);
+
+  useEffect(() => {
+    if (variant === 'scrollable') {
+      onScroll();
+    }
+  }, [onScroll, variant]);
+
+  const onTabSelect: OnChange = (event, newValue) => {
+    if (newValue < 0 || newValue > Children.count(children) - 1) {
+      return;
+    }
+
+    onChange(event, newValue);
+    if (variant === 'scrollable') {
+      itemsRef.current[newValue]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
+    }
   };
 
   return (
-    <TabsWrapper
-      ref={tabsWrapperRef}
-      variant={variant}
-      orientation={orientation}
-      onScroll={() => onScroll()}
-    >
-      <TabsIndicator
+    <TabsRoot>
+      {displayScroll.start && (
+        <ScrollButtonWrapper
+          displayType="start"
+          orientation={orientation}
+          onClick={(event) => {
+            onTabSelect(event, value - 1);
+          }}
+        >
+          <ScrollIconWrapper orientation={orientation} displayType="start">
+            <IconButton size={50}>
+              <ArrowIcon />
+            </IconButton>
+          </ScrollIconWrapper>
+        </ScrollButtonWrapper>
+      )}
+      <TabsWrapper
+        ref={tabsWrapperRef}
+        variant={variant}
         orientation={orientation}
-        animationSpace={indicatorAnimationSpace}
-        position={internalIndicatorPosition}
-        width={indicatorSize.width}
-        height={indicatorSize.height}
-      />
-      {Children.map(children, (child, index) => {
-        if (isValidElement(child)) {
-          const tabInjectProps: TabProps = {
-            ...child.props,
-            value,
-            onChange,
-            index,
-            variant,
-            orientation,
-            tabWidth,
-            tabHeight,
-          };
+        onScroll={() => onScroll()}
+      >
+        <TabsIndicator
+          orientation={orientation}
+          animationSpace={indicatorAnimationSpace}
+          position={internalIndicatorPosition}
+          width={indicatorSize.width}
+          height={indicatorSize.height}
+        />
+        {Children.map(children, (child, index) => {
+          if (isValidElement(child)) {
+            const tabInjectProps: TabProps = {
+              ...child.props,
+              value,
+              onChange: onTabSelect,
+              index,
+              variant,
+              orientation,
+              tabWidth,
+              tabHeight,
+            };
 
-          return cloneElement(child, tabInjectProps);
-        }
+            return cloneElement(child, {
+              ...tabInjectProps,
+              ref: (node: HTMLButtonElement) => {
+                itemsRef.current[index] = node;
+              },
+            });
+          }
 
-        return child;
-      })}
-    </TabsWrapper>
+          return child;
+        })}
+      </TabsWrapper>
+      {displayScroll.end && (
+        <ScrollButtonWrapper
+          displayType="end"
+          orientation={orientation}
+          onClick={(event) => {
+            onTabSelect(event, value + 1);
+          }}
+        >
+          <ScrollIconWrapper orientation={orientation} displayType="end">
+            <IconButton size={50}>
+              <ArrowIcon />
+            </IconButton>
+          </ScrollIconWrapper>
+        </ScrollButtonWrapper>
+      )}
+    </TabsRoot>
   );
 };
 

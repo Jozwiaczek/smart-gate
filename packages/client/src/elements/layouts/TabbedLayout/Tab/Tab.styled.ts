@@ -13,6 +13,7 @@ export const TabButton = styled.button<TabButtonProps>`
   position: relative;
   overflow: hidden;
   min-width: ${({ variant, width }) => (variant === 'fullWidth' ? 0 : width)};
+  min-height: ${({ variant, height }) => (variant === 'fullWidth' ? 0 : height)};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   display: flex;
