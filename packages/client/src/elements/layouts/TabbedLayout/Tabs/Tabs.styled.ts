@@ -21,7 +21,7 @@ export const TabsWrapper = styled.div<TabsWrapperProps>`
   ${({ orientation }) => orientation === 'vertical' && 'flex-direction: column'};
   ${({ orientation }) => `
       overflow-x: ${orientation === 'vertical' ? 'hidden' : 'auto'};
-      overflow-y: ${orientation === 'vertical' ? 'auto' : 'hidden'};    
+      overflow-y: ${orientation === 'vertical' ? 'auto' : 'hidden'};
   `};
 
   ${({ variant }) => {
