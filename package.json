@@ -38,8 +38,7 @@
     "type-check": "lerna run type-check"
   },
   "resolutions": {
-    "babel-loader": "8.1.0",
-    "webpack": "4.44.2"
+    "babel-loader": "8.1.0"
   },
   "dependencies": {
     "base64url": "^3.0.1",
