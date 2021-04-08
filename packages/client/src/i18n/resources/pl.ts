@@ -2,16 +2,37 @@ import { TranslationStructure } from './en';
 
 const pl: TranslationStructure = {
   translation: {
+    baseApiFields: {
+      id: 'Id',
+      email: 'Email',
+      createdAt: 'Data utworzenia',
+      updatedAt: 'Data aktualizacji',
+    },
     user: {
+      user: 'Użytkownik',
       firstName: 'Imię',
       lastName: 'Nazwisko',
       password: 'Hasło',
+    },
+    actions: {
+      back: 'Wróć',
+      delete: 'Usuń',
     },
     menu: {
       history: 'Historia',
       dashboard: 'Pulpit',
       settings: 'Ustawienia',
       admin: 'Admin',
+    },
+    lists: {
+      detailedList: {
+        items: 'wierszy',
+        item: 'wiersz',
+        perPage: 'Wierszy na stronę',
+        ofTotal: 'z',
+        next: 'następny',
+        prev: 'poprzedni',
+      },
     },
     form: {
       errors: {

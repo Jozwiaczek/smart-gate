@@ -4,47 +4,62 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { routes } from '../../constants';
 import { useCurrentUser, useMediaDevice } from '../../hooks';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
-import { Admin, Dashboard } from '../../pages';
+import { AdminDashboard, Dashboard } from '../../pages';
+import mapRoutesToArray from '../../utils/mapRoutesToArray';
 import { BackgroundSideLogo } from '../index';
 import TabbedLayout from '../layouts/TabbedLayout';
 import { hasAccess } from '../layouts/TabbedLayout/Tabs/Tabs.utils';
 import { AppBarPageWrapper, TabPageWrapper, TabsWrapper, Wrapper } from './AppBar.styled';
 import { AppBarItem, AppBarProps } from './AppBar.types';
 
+const { HOME, HISTORY, SETTINGS, admin } = routes.authorized.appBar;
+
+const Settings = () => <p>Settings</p>;
+const History = () => <p>History</p>;
+
 const defaultTabs: Array<AppBarItem> = [
   {
     index: 0,
     indexMobile: 1,
-    path: '/',
+    path: HOME,
     exact: true,
     label: 'menu.dashboard',
     icon: <DashboardIcon />,
-    component: <Dashboard />,
+    component: Dashboard,
   },
   {
     index: 1,
     indexMobile: 0,
-    path: '/history',
+    path: HISTORY,
     label: 'menu.history',
     icon: <HistoryIcon />,
-    component: <p>history</p>,
+    component: History,
   },
   {
     index: 2,
-    path: '/admin',
+    path: mapRoutesToArray(admin),
     label: 'menu.admin',
     icon: <AdminIcon />,
     onlyAdmin: false,
-    component: <Admin />,
+    component: AdminDashboard,
+    exact: true,
   },
   {
     index: 3,
-    path: '/settings',
+    path: SETTINGS,
     label: 'menu.settings',
     icon: <SettingsIcon />,
-    component: <p>settings</p>,
+    component: Settings,
   },
 ];
+
+const getTabPath = (tab: AppBarItem): string => {
+  let internalTabPath = tab.path;
+  if (Array.isArray(internalTabPath)) {
+    [internalTabPath] = tab.path;
+  }
+  return internalTabPath;
+};
 
 const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
   const { isMobile } = useMediaDevice();
@@ -75,10 +90,12 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
     () =>
       sortedItems.find((tab) => {
         const historyPath = history.location.pathname;
-        if (tab.path === '/') {
-          return historyPath === tab.path;
+        const internalTabPath = getTabPath(tab);
+
+        if (internalTabPath === '/') {
+          return historyPath === internalTabPath;
         }
-        return historyPath.startsWith(tab.path);
+        return historyPath.startsWith(internalTabPath);
       })?.index,
     [history.location.pathname, sortedItems],
   );
@@ -101,22 +118,22 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
     <Wrapper data-testid="appBar" orientation={orientation}>
       <TabPageWrapper orientation={orientation}>
         <Switch>
-          {sortedItems.map(({ component, exact, path, index, ...rest }) => (
+          {sortedItems.map(({ component: Component, exact, path, index, ...rest }) => (
             <Route
               exact={exact}
               key={index}
               path={path}
-              render={() => (
+              render={(routeProps) => (
                 <TabbedLayout.TabPanel value={activeTab} index={index} {...rest}>
                   <AppBarPageWrapper>
                     <BackgroundSideLogo />
-                    {component}
+                    <Component {...routeProps} />
                   </AppBarPageWrapper>
                 </TabbedLayout.TabPanel>
               )}
             />
           ))}
-          <Redirect to={routes.PAGE_NOT_FOUND} />
+          <Redirect to={routes.unauthorized.PAGE_NOT_FOUND} />
         </Switch>
       </TabPageWrapper>
 
@@ -133,7 +150,11 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
           }}
         >
           {sortedItems.map((tabProps) => (
-            <TabbedLayout.Tab key={tabProps.path} {...tabProps} />
+            <TabbedLayout.Tab
+              {...tabProps}
+              key={getTabPath(tabProps)}
+              path={getTabPath(tabProps)}
+            />
           ))}
         </TabbedLayout.Tabs>
       </TabsWrapper>

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface DefaultQueryFn {
-  queryKey: string;
+  queryKey: string | readonly unknown[];
 }
 
 interface ReactQueryProviderProps {

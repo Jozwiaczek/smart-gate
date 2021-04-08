@@ -11,10 +11,17 @@ const getBoxShadow = (strength: number): string => `0 1px 1px rgba(0,0,0,${stren
               0 8px 8px rgba(0,0,0,${strength}),
               0 16px 16px rgba(0,0,0,${strength})`;
 
-const primaryLight = '#3ED598';
-const primaryDark = '#257D69';
+const greenLight = '#3ED598';
+const greenDark = '#257D69';
 const greyLight = '#96A7AF';
 const greyDark = '#515151';
+const white = '#fff';
+const whiteDark = '#efefef';
+const navyBlueDark = '#22343C';
+const navyBlueLight = '#30444E';
+const blue = '#40AFDF';
+const red = '#D32F2F';
+const orange = '#FFB400';
 const disabledOpacity = 0.3;
 
 export const getTheme = (themeType: ThemeType) => ({
@@ -31,45 +38,45 @@ export const getTheme = (themeType: ThemeType) => ({
   },
   palette: {
     primary: {
-      main: themeType === ThemeType.light ? primaryLight : primaryDark,
-      mainInvert: themeType === ThemeType.light ? primaryDark : primaryLight,
-      light: primaryLight,
-      dark: primaryDark,
-      linear: 'linear-gradient(180deg, #257D69 17.63%, #40DF9F 78.98%)',
-      disabled: hexToRgba(
-        themeType === ThemeType.light ? primaryLight : primaryDark,
-        disabledOpacity,
-      ),
+      main: themeType === ThemeType.light ? greenLight : greenDark,
+      mainInvert: themeType === ThemeType.light ? greenDark : greenLight,
+      light: greenLight,
+      dark: greenDark,
+      linear: `linear-gradient(180deg, ${greenDark} 20%, ${greenLight} 80%)`,
+      disabled: hexToRgba(themeType === ThemeType.light ? greenLight : greenDark, disabledOpacity),
     },
     text: {
-      primary: themeType === ThemeType.light ? '#22343C' : '#fff',
+      primary: themeType === ThemeType.light ? navyBlueDark : white,
       secondary: themeType === ThemeType.light ? greyDark : greyLight,
-      light: '#fff',
-      dark: '#22343C',
+      light: white,
+      dark: navyBlueDark,
       greyLight,
       greyDark,
-      disabled: hexToRgba(themeType === ThemeType.light ? '#22343C' : '#fff', disabledOpacity),
+      disabled: hexToRgba(themeType === ThemeType.light ? navyBlueDark : white, disabledOpacity),
     },
     background: {
-      default: themeType === ThemeType.light ? '#fff' : '#22343C',
-      paper: themeType === ThemeType.light ? '#FBFBFB' : '#30444E',
-      disabled: hexToRgba('#30444E', disabledOpacity),
+      default: themeType === ThemeType.light ? whiteDark : navyBlueDark,
+      paper: themeType === ThemeType.light ? white : navyBlueLight,
+      paperHover:
+        themeType === ThemeType.light ? hexToRgba(navyBlueLight, 0.05) : hexToRgba(whiteDark, 0.05),
+      disabled: hexToRgba(navyBlueLight, disabledOpacity),
     },
     colors: {
-      blue: '#40AFDF',
-      red: '#D32F2F',
-      orange: '#FFB400',
+      blue,
+      red,
+      orange,
     },
     action: {
-      error: '#D32F2F',
-      warning: '#FFB400',
+      error: red,
+      warning: orange,
     },
     divider: {
-      default: themeType === ThemeType.light ? '#EAECED' : '#30444E',
+      default: themeType === ThemeType.light ? hexToRgba(greyDark, 0.1) : navyBlueLight,
+      paper: hexToRgba(greyLight, 0.3),
     },
     boxShadow: {
-      default: getBoxShadow(0.04),
-      small: getBoxShadow(0.02),
+      default: getBoxShadow(0.03),
+      small: getBoxShadow(0.015),
       big: getBoxShadow(0.08),
       getBoxShadow,
     },

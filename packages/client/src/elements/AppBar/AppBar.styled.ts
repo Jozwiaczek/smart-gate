@@ -5,7 +5,7 @@ import { TabsOrientation } from '../layouts/TabbedLayout/Tabs/Tabs.types';
 export const Wrapper = styled.div<{ orientation: TabsOrientation }>(
   ({ orientation }) => `
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   ${orientation === 'vertical' ? 'display: flex' : ''};
 `,
@@ -32,19 +32,22 @@ export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
 export const TabPageWrapper = styled.div<{ orientation?: TabsOrientation }>`
   width: 100%;
   height: 100%;
-  margin-bottom: 90px;
+  padding-bottom: 90px;
   ${({ orientation }) =>
     orientation === 'vertical' &&
     `
-      margin-left: 160px;
+      padding-bottom: 0;
+      padding-left: 160px;
   `};
 `;
 
 export const AppBarPageWrapper = styled.div(
   ({ theme: { breakpoints, down } }) => `
-  padding: 60px;
+  height: 100%;
+  padding: 40px;
+  overflow: auto;
   ${down(breakpoints.md)} {
-    padding: 60px 20px;
+    padding: 40px 20px;
   }
 `,
 );

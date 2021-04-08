@@ -1,15 +1,36 @@
 const en = {
   translation: {
+    baseApiFields: {
+      id: 'Id',
+      email: 'Email',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at',
+    },
     user: {
+      user: 'User',
       firstName: 'First name',
       lastName: 'Last name',
       password: 'Password',
+    },
+    actions: {
+      back: 'Back',
+      delete: 'Delete',
     },
     menu: {
       history: 'History',
       dashboard: 'Dashboard',
       settings: 'Settings',
       admin: 'Admin',
+    },
+    lists: {
+      detailedList: {
+        items: 'items',
+        item: 'item',
+        perPage: 'Rows per page',
+        ofTotal: 'of',
+        next: 'next',
+        prev: 'prev',
+      },
     },
     form: {
       errors: {

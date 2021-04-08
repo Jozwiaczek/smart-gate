@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { localStorageKey } from './useLocalStorage.types';
+import { LocalStorageKey } from './useLocalStorage.types';
 import useLocalStorageMemory from './useLocalStorageMemory';
 
 const useLocalStorage = <T>(
-  key: localStorageKey,
+  key: LocalStorageKey,
   defaultValue: T,
 ): [T, (val: T) => void, () => void] => {
   const [getLocalStorageMemory, setLocalStorageMemory] = useLocalStorageMemory<T>(key);

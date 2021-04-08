@@ -18,6 +18,12 @@ const defaultValues = {
     sender: 'Smart Gate',
     replyTo: 'sg@gmail.com',
   },
+
+  sentry: {
+    isEnable: false,
+    environment: 'development',
+    tracesSampleRate: 1.0,
+  },
 };
 
 export default defaultValues;

@@ -7,8 +7,12 @@ interface GetColorProps {
 
 const getCssColor = ({ color, theme: { palette } }: GetColorProps): string => {
   switch (color) {
+    case 'text-primary':
+      return palette.text.primary;
     case 'primary':
-      return palette.primary.dark;
+      return palette.primary.main;
+    case 'red':
+      return palette.colors.red;
     default:
       return color;
   }

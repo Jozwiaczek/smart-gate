@@ -13,7 +13,7 @@ const Routes = () => (
         {routesArray.map((props) => (
           <ConditionRoute key={String(props.path)} {...props} />
         ))}
-        <Redirect path="*" to={routes.PAGE_NOT_FOUND} />
+        <Redirect path="*" to={routes.unauthorized.PAGE_NOT_FOUND} />
       </Switch>
     </GlobalLayout>
   </BrowserRouter>

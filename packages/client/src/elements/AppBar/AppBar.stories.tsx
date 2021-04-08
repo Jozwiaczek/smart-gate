@@ -22,6 +22,11 @@ const Template: Story<AppBarProps> = (args) => (
   </MockWrapper>
 );
 
+const Dashboard = () => <p>Dashboard</p>;
+const Admin = () => <p>Admin</p>;
+const Settings = () => <p>Settings</p>;
+const History = () => <p>History</p>;
+
 export const DefaultView = Template.bind({});
 DefaultView.args = {
   tabs: [
@@ -32,7 +37,7 @@ DefaultView.args = {
       exact: true,
       label: 'menu.dashboard',
       icon: <DashboardIcon />,
-      component: <p>Dashboard</p>,
+      component: Dashboard,
     },
     {
       index: 1,
@@ -40,7 +45,7 @@ DefaultView.args = {
       path: '/history',
       label: 'menu.history',
       icon: <HistoryIcon />,
-      component: <p>history</p>,
+      component: History,
     },
     {
       index: 2,
@@ -48,14 +53,14 @@ DefaultView.args = {
       label: 'menu.admin',
       icon: <AdminIcon />,
       onlyAdmin: false,
-      component: <p>admin</p>,
+      component: Admin,
     },
     {
       index: 3,
       path: '/settings',
       label: 'menu.settings',
       icon: <SettingsIcon />,
-      component: <p>settings</p>,
+      component: Settings,
     },
   ],
 };

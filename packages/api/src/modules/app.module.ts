@@ -5,11 +5,11 @@ import { AuthModule } from './auth/auth.module';
 import { Config } from './config/config';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
-import { GlobalExceptionsFilterModule } from './global-exceptions-filter/global-exceptions-filter.module';
 import { InvitationModule } from './invitation/invitation.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { RepositoryModule } from './repository/repository.module';
+import { SentryModule } from './sentry/sentry.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -17,7 +17,6 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     DatabaseModule,
     UsersModule,
-    GlobalExceptionsFilterModule,
     MailerModule,
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],
@@ -27,6 +26,7 @@ import { UsersModule } from './users/users.module';
         limit: config.rateLimiter.minTime,
       }),
     }),
+    SentryModule,
     RepositoryModule,
     InvitationModule,
     PasswordResetModule,

@@ -4,6 +4,7 @@ export interface BasePayload {
 }
 
 export interface AccessPayload extends BasePayload {
+  email: string;
   roles: Array<string>;
   keepMeLoggedIn: boolean;
 }

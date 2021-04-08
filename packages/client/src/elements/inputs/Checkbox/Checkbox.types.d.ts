@@ -1,19 +1,12 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 
-export interface CheckboxProps {
-  name: string;
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+  name?: string;
   label?: string;
   error?: string;
   required?: boolean;
   margin?: string;
 }
-
-export type ICheckboxProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> &
-  InputProps &
-  HTMLInputElement;
 
 export interface CheckboxLabelProps {
   required?: boolean;
