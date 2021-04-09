@@ -20,7 +20,7 @@ import {
   TabsRoot,
   TabsWrapper,
 } from './Tabs.styled';
-import { DisplayScroll, IndicatorSize, OnChange, TabsProps } from './Tabs.types';
+import { DisplayScroll, IndicatorSize, ScrollDirectionType, TabsProps } from './Tabs.types';
 import { countAvailableChildren, getIndicatorAnimationSpace, getIndicatorSize } from './Tabs.utils';
 
 const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
@@ -32,11 +32,6 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
     start: false,
     end: false,
   });
-  const itemsRef = useRef<Array<HTMLButtonElement | null>>([]);
-
-  useEffect(() => {
-    itemsRef.current = itemsRef.current.splice(0, Children.count(children));
-  }, [children]);
 
   const {
     tabWidth = 160,
@@ -134,33 +129,34 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
     }
   }, [onScroll, variant]);
 
-  const onTabSelect: OnChange = (event, newValue) => {
-    if (newValue < 0 || newValue > Children.count(children) - 1) {
+  const scroll = (scrollDirection: ScrollDirectionType) => {
+    if (!tabsWrapperRef.current) {
       return;
     }
+    const { scrollLeft, scrollTop, clientWidth, clientHeight } = tabsWrapperRef.current;
 
-    onChange(event, newValue);
-    if (variant === 'scrollable') {
-      itemsRef.current[newValue]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-      });
+    let scrollPositionLeft = 0;
+    let scrollPositionTop = 0;
+
+    if (orientation === 'horizontal') {
+      scrollPositionLeft = scrollLeft + (scrollDirection === 'start' ? -clientWidth : clientWidth);
+    } else {
+      scrollPositionTop = scrollTop + (scrollDirection === 'start' ? -clientHeight : clientHeight);
     }
+
+    tabsWrapperRef.current.scroll({
+      behavior: 'smooth',
+      left: scrollPositionLeft,
+      top: scrollPositionTop,
+    });
   };
 
   return (
     <TabsRoot>
       {displayScroll.start && (
-        <ScrollButtonWrapper
-          displayType="start"
-          orientation={orientation}
-          onClick={(event) => {
-            onTabSelect(event, value - 1);
-          }}
-        >
+        <ScrollButtonWrapper displayType="start" orientation={orientation}>
           <ScrollIconWrapper orientation={orientation} displayType="start">
-            <IconButton size={50}>
+            <IconButton size={50} onClick={() => scroll('start')}>
               <ArrowIcon />
             </IconButton>
           </ScrollIconWrapper>
@@ -184,7 +180,7 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
             const tabInjectProps: TabProps = {
               ...child.props,
               value,
-              onChange: onTabSelect,
+              onChange,
               index,
               variant,
               orientation,
@@ -194,9 +190,6 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
 
             return cloneElement(child, {
               ...tabInjectProps,
-              ref: (node: HTMLButtonElement) => {
-                itemsRef.current[index] = node;
-              },
             });
           }
 
@@ -207,9 +200,7 @@ const Tabs = ({ children, onChange, value, options = {} }: TabsProps) => {
         <ScrollButtonWrapper
           displayType="end"
           orientation={orientation}
-          onClick={(event) => {
-            onTabSelect(event, value + 1);
-          }}
+          onClick={() => scroll('end')}
         >
           <ScrollIconWrapper orientation={orientation} displayType="end">
             <IconButton size={50}>

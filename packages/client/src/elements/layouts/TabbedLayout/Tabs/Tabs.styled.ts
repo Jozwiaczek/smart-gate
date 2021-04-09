@@ -52,6 +52,7 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
 `;
 
 export const ScrollButtonWrapper = styled.div<ScrollButtonWrapperProps>`
+  pointer-events: none;
   position: absolute;
   top: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
   bottom: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
@@ -66,6 +67,7 @@ export const ScrollButtonWrapper = styled.div<ScrollButtonWrapperProps>`
 `;
 
 export const ScrollIconWrapper = styled.div<ScrollButtonWrapperProps>`
+  pointer-events: all;
   width: 50px;
   height: 50px;
   transform: rotate(

@@ -64,9 +64,9 @@ interface DisplayScroll {
   start: boolean;
   end: boolean;
 }
-type ScrollButtonWrapperType = 'start' | 'end';
+type ScrollDirectionType = 'start' | 'end';
 
 interface ScrollButtonWrapperProps {
-  displayType: ScrollButtonWrapperType;
+  displayType: ScrollDirectionType;
   orientation: TabsOrientation;
 }

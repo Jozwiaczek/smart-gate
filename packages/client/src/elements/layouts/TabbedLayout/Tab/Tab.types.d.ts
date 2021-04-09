@@ -17,7 +17,6 @@ interface TabProps {
   tabHeight?: number;
   variant?: TabsVariant;
   orientation?: TabsOrientation;
-  ref?: (ref: HTMLButtonElement) => void;
 }
 
 interface TabButtonProps {
