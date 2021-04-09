@@ -34,7 +34,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['default', 'fullWidth', 'scrollable - TODO'],
+        options: ['default', 'fullWidth', 'scrollable'],
       },
     },
     indicatorPosition: {
