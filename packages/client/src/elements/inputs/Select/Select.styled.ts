@@ -31,10 +31,10 @@ export const SelectList = styled.div<{ isOpen: boolean; openDirection: SelectOpe
   overflow: hidden;
   transition: transform 150ms ease-in-out;
   transform-origin: ${({ openDirection }) => (openDirection === 'down' ? 'top' : 'bottom')};
-  ${({ isOpen, openDirection }) =>
+  ${({ isOpen }) =>
     isOpen
       ? `
-      transform: ${openDirection === 'down' ? 'scaleY(1)' : 'scaleY(1)'};
+      transform: scaleY(1);
     `
       : `
       transform: scaleY(0);
