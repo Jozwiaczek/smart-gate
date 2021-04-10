@@ -13,7 +13,6 @@ const Tab = ({
   label,
   icon,
   index,
-  path,
   onlyAdmin = false,
   tabWidth = 160,
   tabHeight = 160,
@@ -22,16 +21,18 @@ const Tab = ({
 }: TabProps) => {
   const { t } = useTranslation();
   const [currentUser] = useCurrentUser();
-  const itemRef = useRef<HTMLButtonElement>(null);
+  const tabRef = useRef<HTMLButtonElement>(null);
 
   if (!hasAccess(onlyAdmin, currentUser)) {
     return null;
   }
 
   const onClick = (event: MouseEvent) => {
-    onChange && onChange(event, index as number, path as string);
-    variant === 'scrollable' &&
-      itemRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end' });
+    onChange && onChange(event, index as number);
+
+    if (variant === 'scrollable') {
+      tabRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+    }
   };
   const isActive = value === index;
 
@@ -44,7 +45,7 @@ const Tab = ({
 
   return (
     <TabButton
-      ref={itemRef}
+      ref={tabRef}
       onClick={onClick}
       width={width}
       height={height}

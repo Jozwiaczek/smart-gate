@@ -107,9 +107,12 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
     setActiveTab(defaultActiveTab);
   }, [defaultActiveTab, isMobile]);
 
-  const handleChange = (event: MouseEvent, newValue: number, path: string) => {
+  const handleChange = (event: MouseEvent, newValue: number) => {
     setActiveTab(newValue);
-    history.push(path);
+    const selectedTab = tabs.find((tab) => newValue === (isMobile ? tab.indexMobile : tab.index));
+    if (selectedTab) {
+      history.push(getTabPath(selectedTab));
+    }
   };
 
   const orientation = isMobile ? 'horizontal' : 'vertical';
@@ -150,11 +153,7 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
           }}
         >
           {sortedItems.map((tabProps) => (
-            <TabbedLayout.Tab
-              {...tabProps}
-              key={getTabPath(tabProps)}
-              path={getTabPath(tabProps)}
-            />
+            <TabbedLayout.Tab {...tabProps} key={getTabPath(tabProps)} />
           ))}
         </TabbedLayout.Tabs>
       </TabsWrapper>

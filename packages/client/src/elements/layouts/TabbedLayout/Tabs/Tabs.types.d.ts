@@ -1,12 +1,13 @@
 import { MouseEvent, ReactElement } from 'react';
 
+// eslint-disable-next-line import/no-cycle
 import { TabProps } from '../Tab/Tab.types';
 
 type TabMarkerPosition = 'top' | 'bottom' | 'left' | 'right';
 type TabsVariant = 'scrollable' | 'fullWidth' | 'default';
 type TabsOrientation = 'horizontal' | 'vertical';
 
-interface TabsOpt {
+interface TabsOptions {
   variant?: TabsVariant;
   orientation?: TabsOrientation;
   indicatorPosition?: TabMarkerPosition;
@@ -17,11 +18,12 @@ interface TabsOpt {
   tabHeight?: number;
 }
 
+type OnChange = (event: MouseEvent, newValue: number) => void;
 interface TabsProps {
   children: Array<ReactElement<TabProps>> | ReactElement<TabProps>;
   value: number;
-  onChange: (event: MouseEvent, newValue: number, path: string) => void;
-  options?: TabsOpt;
+  onChange: OnChange;
+  options?: TabsOptions;
 }
 
 interface TabsIndicatorProps {
@@ -57,4 +59,14 @@ interface GetIndicatorSizeProps {
 interface IndicatorSize {
   width: number;
   height: number;
+}
+interface DisplayScroll {
+  start: boolean;
+  end: boolean;
+}
+type ScrollDirectionType = 'start' | 'end';
+
+interface ScrollButtonWrapperProps {
+  displayType: ScrollDirectionType;
+  orientation: TabsOrientation;
 }
