@@ -61,8 +61,6 @@ const Select = <T extends unknown>({
     return null;
   }
 
-  console.log('test');
-
   return (
     <SelectWrapper ref={selectRef} data-testid="select">
       <SelectInput onClick={() => setIsOpen((prevState) => !prevState)}>

@@ -22,7 +22,7 @@ export const SelectInput = styled(IconButton)`
 
 export const SelectList = styled.div<{ isOpen: boolean; openDirection: SelectOpenDirection }>`
   position: absolute;
-  top: ${({ openDirection }) => (openDirection === 'down' ? '-15px' : '-150px')};
+  top: ${({ openDirection }) => (openDirection === 'down' ? '-15px' : '-180px')};
   max-height: 317px;
   min-width: 50px;
   background: ${({ theme }) => theme.palette.background.paper};

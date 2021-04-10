@@ -28,6 +28,21 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
     background: ${({ theme }) => theme.palette.background.paper};
     z-index: 999;
   }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.palette.text.greyDark};
+    border-radius: 0 12px 12px 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.palette.text.greyLight};
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+  }
 `;
 
 export const Table = styled.table`
