@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.4.0...v1.5.0) (2021-04-11)
+
+
+### Features
+
+* test semantic release ([2886cdb](https://github.com/Jozwiaczek/smart-gate/commit/2886cdbb8f1ea74cc9c7cae854e85451a705c8b3))
+
 # [1.4.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.3.1...v1.4.0) (2021-04-11)
 
 
