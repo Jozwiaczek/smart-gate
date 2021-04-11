@@ -55,9 +55,9 @@ jobs:
       - name: 'Create update dev PR'
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "chore: bump changelog"
+          commit-message: 'chore: bump changelog'
           delete-branch: true
-          title: "Bump dev CHANGELOG"
-      - name: "Check created PR output"
+          title: 'Bump dev CHANGELOG'
+      - name: 'Check created PR output'
         run: |
           echo "Bump Dev Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
