@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.2.0...v1.3.0) (2021-04-11)
+
+
+### Bug Fixes
+
+* prettier formatting ([3b18726](https://github.com/Jozwiaczek/smart-gate/commit/3b18726092c3f7c3908bc1c23018de1adb058ebf))
+
+
+### Features
+
+* add ci job with auto dev update pr ([053a846](https://github.com/Jozwiaczek/smart-gate/commit/053a8461ae9de14110c444f7499f1f96f895abdb))
+
 # [1.2.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.1.0...v1.2.0) (2021-04-11)
 
 
