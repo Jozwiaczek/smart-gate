@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.1.0...v1.2.0) (2021-04-11)
+
+
+### Bug Fixes
+
+* **client:** remove unneeded select transform condition ([07721a9](https://github.com/Jozwiaczek/smart-gate/commit/07721a963ecfe53fa2645e06193f35e747dc87fc))
+* detailed list ([9b22008](https://github.com/Jozwiaczek/smart-gate/commit/9b22008b571e6a8ba2d90504686047f59ac17c34))
+* **client:** make DetailedList as full height ([6d1485f](https://github.com/Jozwiaczek/smart-gate/commit/6d1485fdfe772086a8dc67016aa511c040b64783))
+
+
+### Features
+
+* test semantic release ([a4d88f7](https://github.com/Jozwiaczek/smart-gate/commit/a4d88f72a54943736316d6cc00098ac91f1dba10))
+* update yarn.lock ([ab86986](https://github.com/Jozwiaczek/smart-gate/commit/ab869864a4e532cc1b151cd3b50c90401b545122))
+
 # [1.1.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.0.4...v1.1.0) (2021-04-08)
 
 
