@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.3.1...v1.4.0) (2021-04-11)
+
+
+### Features
+
+* adjust update dev job ([1105b2e](https://github.com/Jozwiaczek/smart-gate/commit/1105b2e559c467ac31fb5c2c133b604ef5a4ae07))
+
 ## [1.3.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.3.0...v1.3.1) (2021-04-11)
 
 
