@@ -150,4 +150,4 @@ To run script, in terminal type `yarn {script}`.
 ## License
 
 Copyright 2020 Jakub Jóźwiak.
-Licensed under the [MIT license](LICENSE).
+Licensed under the [MIT license](LICENSE)

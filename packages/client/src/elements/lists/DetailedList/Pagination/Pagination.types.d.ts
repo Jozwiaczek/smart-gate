@@ -1,6 +1,8 @@
+import { PerPage } from '../DetailedList.types';
+
 interface PaginationProps {
-  perPage: number;
-  setPerPage: (perPage: number) => void;
+  perPage: PerPage;
+  setPerPage: (perPage: PerPage) => void;
   currentPage: number;
   setCurrentPage: (currentPage: number) => void;
   totalRecords: number;

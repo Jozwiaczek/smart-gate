@@ -23,11 +23,12 @@ import {
   TableBody,
   TableCell,
   TableCellCheckbox,
+  TableHead,
   TableHeader,
   TableHeaderCheckbox,
   TableRow,
 } from './DetailedList.styled';
-import { DetailedListProps } from './DetailedList.types';
+import { DetailedListProps, PerPage } from './DetailedList.types';
 import Pagination from './Pagination';
 
 const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => {
@@ -37,7 +38,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
   const deleteMutation = useMutation(removeUser);
   const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
-  const [perPage, setPerPage] = useState<number>(25);
+  const [perPage, setPerPage] = useState<PerPage>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { t } = useTranslation();
 
@@ -129,7 +130,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
         </DeleteButton>
       </BulkActionsWrapper>
       <Table>
-        <thead>
+        <TableHead>
           <TableRow>
             <TableHeaderCheckbox>
               <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
@@ -140,7 +141,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
               </TableHeader>
             ))}
           </TableRow>
-        </thead>
+        </TableHead>
         <TableBody>
           {slicedRecords.map((record) => (
             <TableRow key={record.id}>
