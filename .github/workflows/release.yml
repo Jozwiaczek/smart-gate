@@ -58,7 +58,6 @@ jobs:
           base: dev
           branch: 'chore/bump-dev-changelog'
           commit-message: 'chore: bump changelog'
-          author: 'semantic-release-bot'
           delete-branch: true
           title: 'Bump dev CHANGELOG'
       - name: 'Check created PR output'
