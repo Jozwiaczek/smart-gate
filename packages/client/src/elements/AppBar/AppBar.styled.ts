@@ -37,7 +37,7 @@ export const TabPageWrapper = styled.div<{ orientation?: TabsOrientation }>`
     orientation === 'vertical' &&
     `
       padding-bottom: 0;
-      padding-left: 160px;
+      padding-left: 130px;
   `};
 `;
 

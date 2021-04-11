@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { IconButton } from '../../buttons';
+import { SelectOpenDirection } from './Select.types';
 
 export const SelectWrapper = styled.div`
   display: flex;
@@ -19,9 +20,9 @@ export const SelectInput = styled(IconButton)`
   }
 `;
 
-export const SelectList = styled.div<{ isOpen: boolean }>`
+export const SelectList = styled.div<{ isOpen: boolean; openDirection: SelectOpenDirection }>`
   position: absolute;
-  top: -15px;
+  top: ${({ openDirection }) => (openDirection === 'down' ? '-15px' : '-180px')};
   max-height: 317px;
   min-width: 50px;
   background: ${({ theme }) => theme.palette.background.paper};
@@ -29,7 +30,7 @@ export const SelectList = styled.div<{ isOpen: boolean }>`
   border-radius: ${({ theme }) => theme.sizes.borderRadius};
   overflow: hidden;
   transition: transform 150ms ease-in-out;
-  transform-origin: top;
+  transform-origin: ${({ openDirection }) => (openDirection === 'down' ? 'top' : 'bottom')};
   ${({ isOpen }) =>
     isOpen
       ? `

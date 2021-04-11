@@ -5,3 +5,5 @@ export interface DetailedListProps {
   resource: string;
   children: ReactNode;
 }
+
+type PerPage = 5 | 10 | 15 | 25;
