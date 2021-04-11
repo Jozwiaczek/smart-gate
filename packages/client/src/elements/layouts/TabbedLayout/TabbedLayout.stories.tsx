@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../../icons';
 import TabbedLayout from '.';
 import { TabProps } from './Tab/Tab.types';
-import { TabsOpt, TabsOrientation } from './Tabs/Tabs.types';
+import { TabsOptions, TabsOrientation } from './Tabs/Tabs.types';
 
-const MockRoot = styled.div<{ orientation?: TabsOrientation }>`
-  width: 800px;
-  height: 800px;
+const MockRoot = styled.div<{ orientation?: TabsOrientation; width?: string }>`
+  ${({ width }) => `width: ${width ?? '800px'};`};
+  height: 80%;
   border: 2px solid ${({ theme }) => theme.palette.divider.default};
   ${({ orientation }) => orientation === 'vertical' && 'display: flex'};
 `;
@@ -34,7 +34,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['default', 'fullWidth', 'scrollable - TODO'],
+        options: ['default', 'fullWidth', 'scrollable'],
       },
     },
     indicatorPosition: {
@@ -77,9 +77,13 @@ export default {
   },
 } as Meta;
 
-const Template: Story<TabsOpt> = (tabsOptions) => {
+interface TabbedLayoutStoriesOptions extends TabsOptions {
+  mockRootWidth?: string;
+}
+
+const Template: Story<TabbedLayoutStoriesOptions> = (tabsOptions) => {
   const [value, setValue] = useState(0);
-  const { orientation } = tabsOptions;
+  const { orientation, mockRootWidth } = tabsOptions;
 
   const handleChange = (event: MouseEvent, newValue: number) => setValue(newValue);
 
@@ -104,7 +108,7 @@ const Template: Story<TabsOpt> = (tabsOptions) => {
   ];
 
   return (
-    <MockRoot orientation={orientation}>
+    <MockRoot orientation={orientation} width={mockRootWidth}>
       <MockTabsWrapper orientation={orientation}>
         <TabbedLayout.Tabs value={value} onChange={handleChange} options={tabsOptions}>
           {tabs.map((tabProps) => (
@@ -140,4 +144,10 @@ fullWidthView.args = {
 export const verticalView = Template.bind({});
 verticalView.args = {
   orientation: 'vertical',
+};
+
+export const scrollableView = Template.bind({});
+scrollableView.args = {
+  variant: 'scrollable',
+  mockRootWidth: '250px',
 };

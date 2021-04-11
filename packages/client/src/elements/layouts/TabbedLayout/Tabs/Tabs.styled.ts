@@ -1,15 +1,28 @@
 import styled from 'styled-components';
 
-import { TabsIndicatorProps, TabsWrapperProps } from './Tabs.types';
+import { ScrollButtonWrapperProps, TabsIndicatorProps, TabsWrapperProps } from './Tabs.types';
+
+export const TabsRoot = styled.div`
+  position: relative;
+  height: 100%;
+`;
 
 export const TabsWrapper = styled.div<TabsWrapperProps>`
   position: relative;
-  overflow-x: auto;
   display: flex;
   height: 100%;
   width: 100%;
-
+  -webkit-overflow-scrolling: touch;
+  "scrollbar-width": "none;";
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   ${({ orientation }) => orientation === 'vertical' && 'flex-direction: column'};
+  ${({ orientation }) => `
+      overflow-x: ${orientation === 'vertical' ? 'hidden' : 'auto'};
+      overflow-y: ${orientation === 'vertical' ? 'auto' : 'hidden'};
+  `};
 
   ${({ variant }) => {
     if (variant === 'fullWidth') {
@@ -36,4 +49,33 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
     transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     left: ${animationSpace}px;
   `}
+`;
+
+export const ScrollButtonWrapper = styled.div<ScrollButtonWrapperProps>`
+  pointer-events: none;
+  position: absolute;
+  top: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
+  bottom: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
+  left: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
+  right: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
+  height: ${({ orientation }) => (orientation === 'horizontal' ? '100%' : '50px')};
+  width: ${({ orientation }) => (orientation === 'vertical' ? '100%' : '50px')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
+
+export const ScrollIconWrapper = styled.div<ScrollButtonWrapperProps>`
+  pointer-events: all;
+  width: 50px;
+  height: 50px;
+  transform: rotate(
+    ${({ displayType, orientation }) => {
+      if (displayType === 'start') {
+        return orientation === 'vertical' ? '-90deg' : '180deg';
+      }
+      return orientation === 'vertical' ? '90deg' : '0deg';
+    }}
+  );
 `;

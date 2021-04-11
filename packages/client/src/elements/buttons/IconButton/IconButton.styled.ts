@@ -6,7 +6,7 @@ import { RippleContainer } from '../../animations/RippleEffect/RippleEffect.styl
 import { StyledButtonProps } from './IconButton.types';
 
 export const StyledButton = styled.button<StyledButtonProps>(
-  ({ color, theme }) => `
+  ({ color, theme, size }) => `
   position: relative;
   overflow: hidden;
   display: flex;
@@ -23,6 +23,9 @@ export const StyledButton = styled.button<StyledButtonProps>(
   cursor: pointer;
   outline: none;
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  
+  width: ${size !== undefined ? `${size}px` : 'auto'};
+  height: ${size !== undefined ? `${size}px` : 'auto'};
   
   ${RippleContainer} {
     span {

@@ -1,15 +1,17 @@
-import { MouseEvent, ReactNode } from 'react';
+import { ReactNode } from 'react';
+
+// eslint-disable-next-line import/no-cycle
+import { OnChange } from '../Tabs/Tabs.types';
 
 type TabsVariant = 'scrollable' | 'fullWidth' | 'default';
 type TabsOrientation = 'horizontal' | 'vertical';
 
 interface TabProps {
-  path?: string | Array<string>;
   label?: string;
   icon?: ReactNode;
   onlyAdmin?: boolean;
   value?: number;
-  onChange?: (event: MouseEvent, newValue: number, path: string) => void;
+  onChange?: OnChange;
   index?: number;
   tabWidth?: number;
   tabHeight?: number;
@@ -26,4 +28,8 @@ interface TabButtonProps {
 
 interface TabLabelProps {
   isActive: boolean;
+}
+
+interface ScrollButtonProps {
+  orientation: TabsOrientation;
 }
