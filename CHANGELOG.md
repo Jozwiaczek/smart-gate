@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.5.0...v1.5.1) (2021-04-11)
+
+
+### Bug Fixes
+
+* auto approve workflow ([a512717](https://github.com/Jozwiaczek/smart-gate/commit/a512717d29c58ae1164feea45249f502c012c3fc))
+* semantic release create pr author ([ca1ce20](https://github.com/Jozwiaczek/smart-gate/commit/ca1ce2056dc090f20de38f21549ca315a022469c))
+
 # [1.5.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.4.0...v1.5.0) (2021-04-11)
 
 
