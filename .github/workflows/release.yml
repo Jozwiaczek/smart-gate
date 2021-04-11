@@ -55,6 +55,7 @@ jobs:
       - name: 'Create update dev PR'
         uses: peter-evans/create-pull-request@v3
         with:
+          base: dev
           commit-message: 'chore: bump changelog'
           delete-branch: true
           title: 'Bump dev CHANGELOG'
