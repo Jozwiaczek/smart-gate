@@ -21,12 +21,17 @@ export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
   overflow: hidden;
   border-radius: 25px 25px 0 0;
   ${({ orientation }) =>
-    orientation === 'vertical' &&
-    `
-      height: 100%;
-      width: 130px;
-      border-radius: 0;
-  `};
+    orientation === 'vertical'
+      ? `
+        height: 100%;
+        width: 130px;
+        border-radius: 0;
+      `
+      : `
+        button {
+          padding-bottom: 10px;
+        }
+      `};
 `;
 
 export const TabPageWrapper = styled.div<{ orientation?: TabsOrientation }>`
