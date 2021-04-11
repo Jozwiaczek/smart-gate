@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.3.0...v1.3.1) (2021-04-11)
+
+
+### Bug Fixes
+
+* add base branch in update dev job ([c539d65](https://github.com/Jozwiaczek/smart-gate/commit/c539d65ac0a4ed139ce0f8e11136bdaff6a0534e))
+
 # [1.3.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.2.0...v1.3.0) (2021-04-11)
 
 
