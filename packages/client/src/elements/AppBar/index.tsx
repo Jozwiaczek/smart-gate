@@ -109,7 +109,9 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
 
   const handleChange = (event: MouseEvent, newValue: number) => {
     setActiveTab(newValue);
-    const selectedTab = tabs.find((tab) => newValue === (isMobile ? tab.indexMobile : tab.index));
+    const selectedTab = tabs.find(
+      (tab) => newValue === (isMobile ? tab.indexMobile ?? tab.index : tab.index),
+    );
     if (selectedTab) {
       history.push(getTabPath(selectedTab));
     }
