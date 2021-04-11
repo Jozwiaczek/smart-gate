@@ -51,3 +51,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+
+      - name: 'Create update dev PR'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "chore: bump changelog"
+          delete-branch: true
+          title: "Bump dev CHANGELOG"
+      - name: "Check created PR output"
+        run: |
+          echo "Bump Dev Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
