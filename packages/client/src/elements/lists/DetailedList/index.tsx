@@ -33,10 +33,11 @@ import { DetailedListProps, PerPage } from './DetailedList.types';
 import Pagination from './Pagination';
 
 const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => {
-  const removeUser = async (id: string) => {
-    console.log('Removed:', id);
+  const removeUsers = async (ids: Array<string>) => {
+    console.log('Ids to remove:', ids);
+    // TODO: axios DELETE request
   };
-  const deleteMutation = useMutation(removeUser);
+  const deleteMutation = useMutation(removeUsers);
   const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<PerPage>(10);
@@ -109,9 +110,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
   const isBulkActionsOpen = Boolean(selectedRows.length);
 
   const removeSelectedItems = useCallback(() => {
-    selectedRows.forEach((id) => {
-      deleteMutation.mutate(id);
-    });
+    deleteMutation.mutate(selectedRows);
     setSelectedRows([]);
   }, [deleteMutation, selectedRows]);
 
