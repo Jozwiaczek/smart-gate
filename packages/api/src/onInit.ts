@@ -4,9 +4,9 @@ import * as SentryTracing from '@sentry/tracing';
 
 import { Role } from './enums/role.enum';
 import { Config } from './modules/config/config';
-import { InvitationService } from './modules/invitation/invitation.service';
-import { InvitationRepository } from './modules/repository/invitation.repository';
-import { UserRepository } from './modules/repository/user.repository';
+import { InvitationsService } from './modules/invitations/invitations.service';
+import { InvitationsRepository } from './modules/repository/invitations.repository';
+import { UsersRepository } from './modules/repository/users.repository';
 
 const initSentry = (app: INestApplication, config: Config) => {
   Sentry.init({
@@ -21,9 +21,9 @@ const initSentry = (app: INestApplication, config: Config) => {
 };
 
 const sendAdminInvitation = async (
-  userRepository: UserRepository,
-  invitationRepository: InvitationRepository,
-  invitationService: InvitationService,
+  userRepository: UsersRepository,
+  invitationRepository: InvitationsRepository,
+  invitationService: InvitationsService,
   config: Config,
 ) => {
   if (!(await userRepository.count()) && config.superAdminEmails) {
@@ -37,9 +37,9 @@ const sendAdminInvitation = async (
 
 const onInit = async (app: INestApplication) => {
   const config = app.get(Config);
-  const userRepository = app.get(UserRepository);
-  const invitationRepository = app.get(InvitationRepository);
-  const invitationService = app.get(InvitationService);
+  const userRepository = app.get(UsersRepository);
+  const invitationRepository = app.get(InvitationsRepository);
+  const invitationService = app.get(InvitationsService);
 
   await sendAdminInvitation(userRepository, invitationRepository, invitationService, config);
   initSentry(app, config);

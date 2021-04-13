@@ -6,14 +6,14 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { urlEncodedParams } from '../../utils';
 import { MailerService } from '../mailer/mailer.service';
-import { UserRepository } from '../repository/user.repository';
+import { UsersRepository } from '../repository/users.repository';
 import { PasswordResetConfigService } from './config/password-reset-config.service';
 
 @Injectable()
 export class PasswordResetService {
   constructor(
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: UsersRepository,
     private readonly mailerService: MailerService,
     private readonly passwordResetConfigService: PasswordResetConfigService,
   ) {}

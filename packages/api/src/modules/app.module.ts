@@ -5,7 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { Config } from './config/config';
 import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
-import { InvitationModule } from './invitation/invitation.module';
+import { InvitationsModule } from './invitations/invitations.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { RepositoryModule } from './repository/repository.module';
@@ -28,7 +28,7 @@ import { UsersModule } from './users/users.module';
     }),
     SentryModule,
     RepositoryModule,
-    InvitationModule,
+    InvitationsModule,
     PasswordResetModule,
     RepositoryModule,
   ],

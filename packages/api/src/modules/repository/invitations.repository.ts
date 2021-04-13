@@ -3,7 +3,7 @@ import { LessThan } from 'typeorm';
 import { InvitationEntity } from '../database/entities/invitation.entity';
 import { BaseRepository } from './base.repository';
 
-export class InvitationRepository extends BaseRepository(InvitationEntity) {
+export class InvitationsRepository extends BaseRepository(InvitationEntity) {
   async clean(): Promise<InvitationEntity[]> {
     const oldInvitations = await this.find({
       where: {
