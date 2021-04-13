@@ -5,7 +5,7 @@ import constants from '../../../utils/constants';
 import { Config } from '../../config/config';
 
 @Injectable()
-export class InvitationConfigService {
+export class InvitationsConfigService {
   constructor(private readonly config: Config) {}
 
   getExpirationDate(): Date {
