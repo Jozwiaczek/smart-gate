@@ -88,29 +88,6 @@ describe('Invitations Service', () => {
     });
   });
 
-  describe('create()', () => {
-    it('rejects with Exception when invitation with the same email already exists', async () => {
-      await testClearRepository(connection, InvitationEntity);
-      const randomInvitation = await testCreateRandomInvitation(connection);
-      const invitation: CreateInvitationDto = {
-        email: randomInvitation.email,
-      };
-
-      await expect(invitationsService.send(invitation)).rejects.toBeInstanceOf(QueryFailedError);
-    });
-
-    it('returns valid created invitation', async () => {
-      await testClearRepository(connection, InvitationEntity);
-      const invitation: CreateInvitationDto = {
-        email: 'smart@gate.com',
-      };
-
-      await expect(invitationsService.send(invitation)).resolves.toEqual(
-        expect.objectContaining(invitation),
-      );
-    });
-  });
-
   describe('update()', () => {
     it('rejects with NotFoundException when invitation has wrong id', async () => {
       const repository = await testClearRepository(connection, InvitationEntity);
