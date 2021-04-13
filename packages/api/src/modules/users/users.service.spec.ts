@@ -72,30 +72,6 @@ describe('Users Service', () => {
     });
   });
 
-  describe('findOneByEmail()', () => {
-    it('rejects with NotFoundException when user is not found', async () => {
-      await testClearRepository(connection, UserEntity);
-
-      await expect(usersService.findOneByEmail('some@email.com')).rejects.toBeInstanceOf(
-        NotFoundException,
-      );
-    });
-
-    it('returns valid userEntity when user is found', async () => {
-      const repository = await testClearRepository(connection, UserEntity);
-      const userEntity: UserEntity = new UserEntity();
-      userEntity.firstName = 'firstName';
-      userEntity.lastName = 'lastName';
-      userEntity.email = 'some@email.com';
-      userEntity.password = 'some_password';
-
-      await repository.save(userEntity);
-      const selectedUserEntity = await usersService.findOneByEmail('some@email.com');
-
-      expect(userEntity).toStrictEqual(selectedUserEntity);
-    });
-  });
-
   describe('create()', () => {
     it('rejects with Exception when user with the same email already exists', async () => {
       await testClearRepository(connection, UserEntity);
@@ -151,13 +127,15 @@ describe('Users Service', () => {
         firstName: `${Date.now()}`,
         lastName: `${Date.now()}`,
       };
+      // eslint-disable-next-line no-unused-vars
+      const { updatedAt: _, ...userToCompare } = newUser;
 
       await expect(repository.count()).resolves.toStrictEqual(1);
       await expect(usersService.update(newUser.id, noChanges)).resolves.toEqual(
-        expect.objectContaining(newUser),
+        expect.objectContaining(userToCompare),
       );
       await expect(usersService.update(newUser.id, nameChange)).resolves.toEqual(
-        expect.objectContaining({ ...newUser, ...nameChange }),
+        expect.objectContaining({ ...userToCompare, ...nameChange }),
       );
     });
   });
