@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 import { urlEncodedParams } from '../../utils';
 import { MailerService } from '../mailer/mailer.service';
-import { InvitationsRepository } from '../repository/invitations.repository';
-import { UsersRepository } from '../repository/users.repository';
+import { InvitationRepository } from '../repository/invitation.repository';
+import { UserRepository } from '../repository/user.repository';
 import { InvitationsConfigService } from './Config/invitations-config.service';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
 
@@ -12,8 +12,8 @@ export class InvitationsService {
   constructor(
     private readonly mailerService: MailerService,
     private readonly invitationsConfigService: InvitationsConfigService,
-    private readonly invitationsRepository: InvitationsRepository,
-    private readonly usersRepository: UsersRepository,
+    private readonly invitationsRepository: InvitationRepository,
+    private readonly usersRepository: UserRepository,
   ) {}
 
   async send({ email, roles }: CreateInvitationDto): Promise<void> {

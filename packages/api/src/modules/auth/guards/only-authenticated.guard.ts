@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 
-import { UsersRepository } from '../../repository/users.repository';
+import { UserRepository } from '../../repository/user.repository';
 import { TokenService } from '../token/token.service';
 import { TokenCookieService } from '../token/token-cookie.service';
 
@@ -10,7 +10,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
   constructor(
     private readonly tokenService: TokenService,
     private readonly tokenCookieService: TokenCookieService,
-    private readonly usersRepository: UsersRepository,
+    private readonly usersRepository: UserRepository,
   ) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {

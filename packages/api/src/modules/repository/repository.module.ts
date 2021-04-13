@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import entities from '../database/entities';
-import { InvitationsRepository } from './invitations.repository';
+import { InvitationRepository } from './invitation.repository';
 import { RefreshTokenRepository } from './refresh-token.repository';
-import { UsersRepository } from './users.repository';
+import { UserRepository } from './user.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature(entities)],
-  providers: [UsersRepository, InvitationsRepository, RefreshTokenRepository],
-  exports: [UsersRepository, InvitationsRepository, RefreshTokenRepository],
+  providers: [UserRepository, InvitationRepository, RefreshTokenRepository],
+  exports: [UserRepository, InvitationRepository, RefreshTokenRepository],
 })
 export class RepositoryModule {}

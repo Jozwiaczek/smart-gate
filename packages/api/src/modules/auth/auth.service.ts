@@ -5,9 +5,9 @@ import * as bcrypt from 'bcrypt';
 import { CookieResponse } from '../../interfaces/cookie-types';
 import { GeneratedTokens } from '../../interfaces/token-types';
 import { UserEntity } from '../database/entities/user.entity';
-import { InvitationsRepository } from '../repository/invitations.repository';
+import { InvitationRepository } from '../repository/invitation.repository';
 import { RefreshTokenRepository } from '../repository/refresh-token.repository';
-import { UsersRepository } from '../repository/users.repository';
+import { UserRepository } from '../repository/user.repository';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { LoginUserInfo } from './interfaces/login-user-info';
@@ -17,8 +17,8 @@ import { TokenCookieService } from './token/token-cookie.service';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly invitationsRepository: InvitationsRepository,
-    private readonly usersRepository: UsersRepository,
+    private readonly invitationsRepository: InvitationRepository,
+    private readonly usersRepository: UserRepository,
     private readonly tokenService: TokenService,
     private readonly refreshTokenRepository: RefreshTokenRepository,
     private readonly tokenCookieService: TokenCookieService,

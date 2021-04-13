@@ -5,8 +5,8 @@ import * as SentryTracing from '@sentry/tracing';
 import { Role } from './enums/role.enum';
 import { Config } from './modules/config/config';
 import { InvitationsService } from './modules/invitations/invitations.service';
-import { InvitationsRepository } from './modules/repository/invitations.repository';
-import { UsersRepository } from './modules/repository/users.repository';
+import { InvitationRepository } from './modules/repository/invitation.repository';
+import { UserRepository } from './modules/repository/user.repository';
 
 const initSentry = (app: INestApplication, config: Config) => {
   Sentry.init({
@@ -21,8 +21,8 @@ const initSentry = (app: INestApplication, config: Config) => {
 };
 
 const sendAdminInvitation = async (
-  usersRepository: UsersRepository,
-  invitationsRepository: InvitationsRepository,
+  usersRepository: UserRepository,
+  invitationsRepository: InvitationRepository,
   invitationsService: InvitationsService,
   config: Config,
 ) => {
@@ -37,8 +37,8 @@ const sendAdminInvitation = async (
 
 const onInit = async (app: INestApplication) => {
   const config = app.get(Config);
-  const userRepository = app.get(UsersRepository);
-  const invitationRepository = app.get(InvitationsRepository);
+  const userRepository = app.get(UserRepository);
+  const invitationRepository = app.get(InvitationRepository);
   const invitationService = app.get(InvitationsService);
 
   await sendAdminInvitation(userRepository, invitationRepository, invitationService, config);
