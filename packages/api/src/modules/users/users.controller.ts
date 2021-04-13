@@ -14,6 +14,7 @@ import {
 import { AuthService } from '../auth/auth.service';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CreateUserDto } from './dto/create-user.dto';
+import { DeleteUsersDto } from './dto/delete-users.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 
@@ -49,5 +50,10 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+
+  @Post('removeMany')
+  removeMany(@Body() deleteUsersDto: DeleteUsersDto) {
+    return this.usersService.removeMany(deleteUsersDto);
   }
 }

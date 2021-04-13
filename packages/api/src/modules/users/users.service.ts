@@ -1,14 +1,20 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import * as Sentry from '@sentry/node';
 import { Connection } from 'typeorm';
 
 import { GetList } from '../../interfaces/react-admin-types';
 import { UserEntity } from '../database/entities/user.entity';
+import { UserRepository } from '../repository/user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
+import { DeleteUsersDto } from './dto/delete-users.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly connection: Connection) {}
+  constructor(
+    private readonly connection: Connection,
+    private readonly userRepository: UserRepository,
+  ) {}
 
   private readonly repository = this.connection.getRepository(UserEntity);
 
@@ -63,5 +69,14 @@ export class UsersService {
       .execute();
 
     return true;
+  }
+
+  async removeMany(deleteUsersDto: DeleteUsersDto): Promise<void> {
+    try {
+      await this.userRepository.deleteManyById(deleteUsersDto.ids);
+    } catch (err) {
+      Sentry.captureException(err);
+      throw new BadRequestException('Invalid ids list');
+    }
   }
 }

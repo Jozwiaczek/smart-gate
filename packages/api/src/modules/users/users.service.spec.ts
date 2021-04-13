@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { Connection, QueryFailedError } from 'typeorm';
 
@@ -7,6 +7,7 @@ import { testClearRepository } from '../../../test/utils/testClearRepository';
 import { testCreateRandomUser } from '../../../test/utils/testCreateRandomUser';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';
+import { RepositoryModule } from '../repository/repository.module';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
@@ -19,7 +20,7 @@ describe('UsersService', () => {
     await clearTestDatabase();
 
     const testingModule = await Test.createTestingModule({
-      imports: [DatabaseModule],
+      imports: [DatabaseModule, RepositoryModule],
       providers: [UsersService],
     }).compile();
 
@@ -177,6 +178,31 @@ describe('UsersService', () => {
 
       await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
       await expect(usersService.remove(firstUser.id)).resolves.toStrictEqual(true);
+      await expect(repository.find()).resolves.toStrictEqual([secondUser]);
+      await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
+    });
+  });
+
+  describe('removeMany()', () => {
+    it('rejects with Exception when user has wrong id', async () => {
+      const repository = await testClearRepository(connection, UserEntity);
+      await testCreateRandomUser(connection);
+
+      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(usersService.removeMany({ ids: [`${Date.now()}`] })).rejects.toBeInstanceOf(
+        BadRequestException,
+      );
+    });
+
+    it('resolves and remove user', async () => {
+      const repository = await testClearRepository(connection, UserEntity);
+      const firstUser = await testCreateRandomUser(connection);
+      const secondUser = await testCreateRandomUser(connection);
+
+      await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
+      await expect(usersService.removeMany({ ids: [firstUser.id] })).resolves.toStrictEqual(
+        undefined,
+      );
       await expect(repository.find()).resolves.toStrictEqual([secondUser]);
       await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
     });

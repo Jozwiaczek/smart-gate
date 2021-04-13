@@ -14,7 +14,7 @@ export class RefreshTokenEntity extends BaseEntity {
   @Column({ type: 'boolean' })
   public keepMeLoggedIn: boolean;
 
-  @ManyToOne(() => UserEntity, (user) => user.refreshTokens)
+  @ManyToOne(() => UserEntity, (user) => user.refreshTokens, { onDelete: 'CASCADE' })
   public user: Promise<UserEntity>;
 
   @Column({ type: 'uuid' })

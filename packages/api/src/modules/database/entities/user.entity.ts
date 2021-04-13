@@ -36,6 +36,6 @@ export class UserEntity extends BaseEntity {
   })
   public roles: Array<Role>;
 
-  @OneToMany(() => RefreshTokenEntity, (token) => token.user)
+  @OneToMany(() => RefreshTokenEntity, (token) => token.user, { onDelete: 'CASCADE' })
   public refreshTokens: Promise<[RefreshTokenEntity]>;
 }

@@ -21,6 +21,8 @@ export interface BaseRepositoryType<T> {
 
   deleteById: (id: string) => Promise<DeleteResult>;
 
+  deleteManyById: (ids: Array<string>) => Promise<void>;
+
   count: () => Promise<number>;
 }
 
@@ -84,6 +86,15 @@ export function BaseRepository<T extends BaseEntity>(
 
     async deleteById(id: string): Promise<DeleteResult> {
       return this.repository.delete(id);
+    }
+
+    async deleteManyById(ids: Array<string>): Promise<void> {
+      await this.repository.manager.transaction(async (transactionalEntityManager) => {
+        const deleteResult = await transactionalEntityManager.delete(entityType, ids);
+        if (!deleteResult.affected || deleteResult.affected !== ids.length) {
+          throw Error(`Unable to delete all entities: [${ids}]`);
+        }
+      });
     }
 
     count(): Promise<number> {
