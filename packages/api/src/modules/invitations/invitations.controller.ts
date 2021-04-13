@@ -10,11 +10,11 @@ import { InvitationsService } from './invitations.service';
 @UseSentryTransaction()
 @Controller('invitations')
 export class InvitationsController {
-  constructor(private readonly invitationService: InvitationsService) {}
+  constructor(private readonly invitationsService: InvitationsService) {}
 
   @Auth(Role.SuperAdmin)
   @Post()
   async send(@Body(new ValidationPipe()) createInvitationDto: CreateInvitationDto) {
-    await this.invitationService.send(createInvitationDto);
+    await this.invitationsService.send(createInvitationDto);
   }
 }

@@ -21,16 +21,16 @@ const initSentry = (app: INestApplication, config: Config) => {
 };
 
 const sendAdminInvitation = async (
-  userRepository: UsersRepository,
-  invitationRepository: InvitationsRepository,
-  invitationService: InvitationsService,
+  usersRepository: UsersRepository,
+  invitationsRepository: InvitationsRepository,
+  invitationsService: InvitationsService,
   config: Config,
 ) => {
-  if (!(await userRepository.count()) && config.superAdminEmails) {
-    await invitationRepository.repository.clear();
+  if (!(await usersRepository.count()) && config.superAdminEmails) {
+    await invitationsRepository.repository.clear();
 
     config.superAdminEmails.split(';').forEach((email) => {
-      invitationService.send({ email: email.trim(), roles: [Role.SuperAdmin] });
+      invitationsService.send({ email: email.trim(), roles: [Role.SuperAdmin] });
     });
   }
 };

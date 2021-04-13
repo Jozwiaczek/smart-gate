@@ -13,7 +13,7 @@ import { PasswordResetConfigService } from './config/password-reset-config.servi
 export class PasswordResetService {
   constructor(
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-    private readonly userRepository: UsersRepository,
+    private readonly usersRepository: UsersRepository,
     private readonly mailerService: MailerService,
     private readonly passwordResetConfigService: PasswordResetConfigService,
   ) {}
@@ -23,7 +23,7 @@ export class PasswordResetService {
   private readonly passwordResetTtl = this.passwordResetConfigService.getTtl();
 
   async createAndSend(email: string): Promise<string> {
-    const { firstName } = await this.userRepository.findOneByEmailOrFail(email);
+    const { firstName } = await this.usersRepository.findOneByEmailOrFail(email);
     const generatedUuid = uuidV4();
     await this.cacheManager.set(email, generatedUuid, { ttl: this.passwordResetTtl });
 
@@ -52,6 +52,6 @@ export class PasswordResetService {
 
     const salt = bcrypt.genSaltSync();
     const hashPassword = bcrypt.hashSync(password, salt);
-    await this.userRepository.updatePassword(email, hashPassword);
+    await this.usersRepository.updatePassword(email, hashPassword);
   }
 }
