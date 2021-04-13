@@ -5,16 +5,16 @@ import { ValidationPipe } from '../../utils/validation.pipe';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { UseSentryTransaction } from '../sentry/decorators/use-sentry-transaction.decorator';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
-import { InvitationService } from './invitation.service';
+import { InvitationsService } from './invitations.service';
 
 @UseSentryTransaction()
-@Controller('invitation')
-export class InvitationController {
-  constructor(private readonly invitationService: InvitationService) {}
+@Controller('invitations')
+export class InvitationsController {
+  constructor(private readonly invitationsService: InvitationsService) {}
 
   @Auth(Role.SuperAdmin)
   @Post()
   async send(@Body(new ValidationPipe()) createInvitationDto: CreateInvitationDto) {
-    await this.invitationService.send(createInvitationDto);
+    await this.invitationsService.send(createInvitationDto);
   }
 }
