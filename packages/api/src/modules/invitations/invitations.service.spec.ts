@@ -6,8 +6,6 @@ import { clearTestDatabase } from '../../../test/utils/clearTestDatabase';
 import { testClearRepository } from '../../../test/utils/testClearRepository';
 import { testCreateRandomInvitation } from '../../../test/utils/testCreateRandomInvitation';
 import { Role } from '../../enums/role.enum';
-import { AuthModule } from '../auth/auth.module';
-import { TokenModule } from '../auth/token/token.module';
 import { DatabaseModule } from '../database/database.module';
 import { InvitationEntity } from '../database/entities/invitation.entity';
 import { MailerModule } from '../mailer/mailer.module';
@@ -35,6 +33,19 @@ describe('Invitations Service', () => {
 
   afterEach(async () => {
     await connection.close();
+  });
+
+  describe('send()', () => {
+    it('returns valid created invitations', async () => {
+      await testClearRepository(connection, InvitationEntity);
+      const invitation: CreateInvitationDto = {
+        email: 'smart@gate.com',
+      };
+
+      await expect(invitationsService.send(invitation)).resolves.toEqual(
+        expect.objectContaining(invitation),
+      );
+    });
   });
 
   describe('findAll()', () => {
