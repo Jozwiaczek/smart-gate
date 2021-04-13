@@ -172,7 +172,7 @@ describe('Users Service', () => {
       );
     });
 
-    it('resolves and remove user', async () => {
+    it('removes many users', async () => {
       const repository = await testClearRepository(connection, UserEntity);
       const firstUser = await testCreateRandomUser(connection);
       const secondUser = await testCreateRandomUser(connection);
