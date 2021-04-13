@@ -44,6 +44,6 @@ export class UserEntity extends BaseEntity {
   @OneToMany(() => InvitationEntity, (invitation) => invitation.createdBy)
   public createdInvitations: Array<InvitationEntity>;
 
-  @OneToMany(() => InvitationEntity, (invitation) => invitation.createdBy)
+  @OneToMany(() => InvitationEntity, (invitation) => invitation.updatedBy)
   public updatedInvitations: Array<InvitationEntity>;
 }
