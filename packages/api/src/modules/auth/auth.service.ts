@@ -17,8 +17,8 @@ import { TokenCookieService } from './token/token-cookie.service';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly invitationsRepository: InvitationRepository,
-    private readonly usersRepository: UserRepository,
+    private readonly invitationRepository: InvitationRepository,
+    private readonly userRepository: UserRepository,
     private readonly tokenService: TokenService,
     private readonly refreshTokenRepository: RefreshTokenRepository,
     private readonly tokenCookieService: TokenCookieService,
@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   public async getUser(userId: string): Promise<UserEntity> {
-    return this.usersRepository.findByIdOrFail(userId);
+    return this.userRepository.findByIdOrFail(userId);
   }
 
   public async logout(response: CookieResponse, userId: string): Promise<void> {
@@ -104,7 +104,7 @@ export class AuthService {
   public async register(registerDto: RegisterDto): Promise<UserEntity> {
     const { password, firstName, lastName, email, code } = registerDto;
 
-    const { roles, expirationDate } = await this.invitationsRepository.findWithCredentialsOrFail(
+    const { roles, expirationDate } = await this.invitationRepository.findWithCredentialsOrFail(
       email,
       code,
     );
@@ -116,7 +116,7 @@ export class AuthService {
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
 
-    const newUser = await this.usersRepository.create({
+    const newUser = await this.userRepository.create({
       password: hash,
       firstName,
       lastName,
@@ -124,13 +124,13 @@ export class AuthService {
       roles,
     });
 
-    await this.invitationsRepository.deleteById(code);
+    await this.invitationRepository.deleteById(code);
 
     return newUser;
   }
 
   private async validateUser(email: string, password: string): Promise<UserEntity> {
-    const user = await this.usersRepository.findOneByEmailOrFail(email);
+    const user = await this.userRepository.findOneByEmailOrFail(email);
     const { password: passwordHash } = user;
     const isMatch = await bcrypt.compare(password, passwordHash);
     if (!isMatch) {

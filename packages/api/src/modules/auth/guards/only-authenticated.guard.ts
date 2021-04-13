@@ -10,7 +10,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
   constructor(
     private readonly tokenService: TokenService,
     private readonly tokenCookieService: TokenCookieService,
-    private readonly usersRepository: UserRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -53,7 +53,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
         accessTokenSub,
       );
 
-      const user = await this.usersRepository.findByIdOrFail(accessTokenSub);
+      const user = await this.userRepository.findByIdOrFail(accessTokenSub);
       const [newAccessToken] = await this.tokenService.generateToken(
         'ACCESS',
         user,

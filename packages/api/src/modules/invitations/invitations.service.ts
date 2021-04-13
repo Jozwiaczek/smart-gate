@@ -12,12 +12,12 @@ export class InvitationsService {
   constructor(
     private readonly mailerService: MailerService,
     private readonly invitationsConfigService: InvitationsConfigService,
-    private readonly invitationsRepository: InvitationRepository,
-    private readonly usersRepository: UserRepository,
+    private readonly invitationRepository: InvitationRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   async send({ email, roles }: CreateInvitationDto): Promise<void> {
-    const user = await this.usersRepository.findOneByEmail(email);
+    const user = await this.userRepository.findOneByEmail(email);
     if (user) {
       throw new Error(
         `Cannot send invitation because user with email: '${email}' already exists in database.`,
@@ -26,9 +26,9 @@ export class InvitationsService {
 
     const expirationDate = this.invitationsConfigService.getExpirationDate();
 
-    await this.invitationsRepository.clean();
+    await this.invitationRepository.clean();
 
-    const { id: invitationId } = await this.invitationsRepository.create({
+    const { id: invitationId } = await this.invitationRepository.create({
       email,
       roles,
       expirationDate,
