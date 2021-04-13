@@ -41,9 +41,9 @@ export class UserEntity extends BaseEntity {
   @OneToMany(() => RefreshTokenEntity, (token) => token.user, { onDelete: 'CASCADE' })
   public refreshTokens: Promise<[RefreshTokenEntity]>;
 
-  @OneToMany(() => InvitationEntity, (invitation) => invitation.createdBy)
+  @OneToMany(() => InvitationEntity, (invitation) => invitation.createdBy, { onDelete: 'CASCADE' })
   public createdInvitations: Array<InvitationEntity>;
 
-  @OneToMany(() => InvitationEntity, (invitation) => invitation.updatedBy)
+  @OneToMany(() => InvitationEntity, (invitation) => invitation.updatedBy, { onDelete: 'CASCADE' })
   public updatedInvitations: Array<InvitationEntity>;
 }
