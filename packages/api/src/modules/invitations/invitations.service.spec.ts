@@ -116,7 +116,7 @@ describe('Invitations Service', () => {
       const repository = await testClearRepository(connection, InvitationEntity);
       const randomInvitation = await testCreateRandomInvitation(connection);
       const invitation: UpdateInvitationDto = {
-        email: randomInvitation.email,
+        roles: randomInvitation.roles,
       };
 
       await expect(repository.count()).resolves.toStrictEqual(1);

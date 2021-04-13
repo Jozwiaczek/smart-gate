@@ -1,5 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { IsArray, IsOptional } from 'class-validator';
 
-import { CreateInvitationDto } from './create-invitation.dto';
+import { Role } from '../../../enums/role.enum';
 
-export class UpdateInvitationDto extends PartialType(CreateInvitationDto) {}
+export class UpdateInvitationDto {
+  @IsOptional()
+  @IsArray()
+  roles?: Array<Role>;
+}

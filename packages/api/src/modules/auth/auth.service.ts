@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 import * as bcrypt from 'bcrypt';
 
+import { InvitationStatus } from '../../enums/invitationStatus.enum';
 import { CookieResponse } from '../../interfaces/cookie-types';
 import { GeneratedTokens } from '../../interfaces/token-types';
 import { UserEntity } from '../database/entities/user.entity';
@@ -116,7 +117,7 @@ export class AuthService {
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
 
-    const newUser = await this.userRepository.create({
+    const newUserPromise = this.userRepository.create({
       password: hash,
       firstName,
       lastName,
@@ -124,7 +125,11 @@ export class AuthService {
       roles,
     });
 
-    await this.invitationRepository.deleteById(code);
+    const newUser = await newUserPromise;
+
+    await this.invitationRepository.update(code, {
+      status: InvitationStatus.Accepted,
+    });
 
     return newUser;
   }

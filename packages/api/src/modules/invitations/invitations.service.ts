@@ -4,6 +4,7 @@ import { Connection } from 'typeorm';
 import { GetList } from '../../interfaces/react-admin-types';
 import { urlEncodedParams } from '../../utils';
 import { InvitationEntity } from '../database/entities/invitation.entity';
+import { UserEntity } from '../database/entities/user.entity';
 import { MailerService } from '../mailer/mailer.service';
 import { InvitationRepository } from '../repository/invitation.repository';
 import { UserRepository } from '../repository/user.repository';
@@ -23,7 +24,10 @@ export class InvitationsService {
 
   private readonly repository = this.connection.getRepository(InvitationEntity);
 
-  async send({ email, roles }: CreateInvitationDto): Promise<InvitationEntity> {
+  async send(
+    { email, roles }: CreateInvitationDto,
+    currentUserPromise?: Promise<UserEntity>,
+  ): Promise<InvitationEntity> {
     const user = await this.userRepository.findOneByEmail(email);
     if (user) {
       throw new Error(
@@ -33,9 +37,16 @@ export class InvitationsService {
 
     const expirationDate = this.invitationsConfigService.getExpirationDate();
 
-    await this.invitationRepository.clean();
+    let metaDetails = {};
+    if (currentUserPromise) {
+      metaDetails = {
+        createdBy: currentUserPromise,
+        updatedBy: currentUserPromise,
+      };
+    }
 
     const createdInvitation = await this.invitationRepository.create({
+      ...metaDetails,
       email,
       roles,
       expirationDate,
@@ -48,6 +59,18 @@ export class InvitationsService {
     );
 
     await this.mailerService.sendInvitation(email, link);
+
+    if (currentUserPromise) {
+      const {
+        id: currentUserId,
+        createdInvitations,
+        updatedInvitations,
+      } = await currentUserPromise;
+      await this.userRepository.update(currentUserId, {
+        createdInvitations: [...createdInvitations, createdInvitation],
+        updatedInvitations: [...updatedInvitations, createdInvitation],
+      });
+    }
 
     return createdInvitation;
   }
@@ -66,6 +89,7 @@ export class InvitationsService {
   async update(
     id: string,
     updateInvitationDto: UpdateInvitationDto,
+    currentUserPromise?: Promise<UserEntity>,
   ): Promise<InvitationEntity | undefined> {
     const foundInvitation = await this.findOne(id);
 
@@ -73,8 +97,18 @@ export class InvitationsService {
       throw new NotFoundException(`Invitation with id: ${id} not found`);
     }
 
-    if (updateInvitationDto.email !== undefined) foundInvitation.email = updateInvitationDto.email;
-    if (updateInvitationDto.roles !== undefined) foundInvitation.roles = updateInvitationDto.roles;
+    if (updateInvitationDto.roles !== undefined) {
+      foundInvitation.roles = updateInvitationDto.roles;
+    }
+
+    if (currentUserPromise) {
+      const currentUser = await currentUserPromise;
+      const currentUpdatedBy = await foundInvitation.updatedBy;
+
+      if (currentUser.id !== currentUpdatedBy.id) {
+        foundInvitation.updatedBy = currentUserPromise;
+      }
+    }
 
     await this.repository.save(foundInvitation);
     return foundInvitation;
