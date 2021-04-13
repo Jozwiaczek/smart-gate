@@ -15,11 +15,13 @@ export interface BaseRepositoryType<T> {
   findOne: (options: FindOneOptions<T>) => Promise<T | undefined>;
   findOneOrFail: (options: FindOneOptions<T>) => Promise<T>;
 
-  find: (options: FindManyOptions<T>) => Promise<T[]>;
+  find: (options?: FindManyOptions<T>) => Promise<T[]>;
 
   update: (id: string, dataToUpdate: DeepPartial<T>) => Promise<T>;
 
   deleteById: (id: string) => Promise<DeleteResult>;
+
+  deleteManyById: (ids: Array<string>) => Promise<void>;
 
   count: () => Promise<number>;
 }
@@ -61,7 +63,7 @@ export function BaseRepository<T extends BaseEntity>(
       return this.repository.findOneOrFail(options);
     }
 
-    async find(options: FindManyOptions): Promise<T[]> {
+    async find(options?: FindManyOptions): Promise<T[]> {
       return this.repository.find(options);
     }
 
@@ -84,6 +86,15 @@ export function BaseRepository<T extends BaseEntity>(
 
     async deleteById(id: string): Promise<DeleteResult> {
       return this.repository.delete(id);
+    }
+
+    async deleteManyById(ids: Array<string>): Promise<void> {
+      await this.repository.manager.transaction(async (transactionalEntityManager) => {
+        const deleteResult = await transactionalEntityManager.delete(entityType, ids);
+        if (!deleteResult.affected || deleteResult.affected !== ids.length) {
+          throw Error(`Unable to delete all entities: [${ids}]`);
+        }
+      });
     }
 
     count(): Promise<number> {
