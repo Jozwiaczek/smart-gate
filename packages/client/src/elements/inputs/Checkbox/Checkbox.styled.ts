@@ -55,6 +55,7 @@ export const Checkmark = styled.span<CheckmarkProps>(
     top: 6px;
     left: 6px;
     transition: opacity 200ms ease-out;
+    color: ${palette.text.light};
   }
 
   &::after {

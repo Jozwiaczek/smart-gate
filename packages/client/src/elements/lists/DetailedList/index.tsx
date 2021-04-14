@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
+import { useTheme } from 'styled-components';
 
 import { CancelIcon, TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
@@ -32,7 +33,8 @@ import {
 import { DetailedListProps, PerPage } from './DetailedList.types';
 import Pagination from './Pagination';
 
-const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => {
+const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedListProps) => {
+  const theme = useTheme();
   const removeUsers = async (ids: Array<string>) => {
     console.log('Ids to remove:', ids);
     // TODO: axios DELETE request
@@ -144,29 +146,32 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
             </TableRow>
           </TableHead>
           <TableBody>
-            {slicedRecords.map((record) => (
-              <TableRow key={record.id}>
-                <TableCellCheckbox>
-                  <Checkbox
-                    onChange={() => onMarkRow(record.id)}
-                    checked={checkIsRowSelected(record.id)}
-                  />
-                </TableCellCheckbox>
-                {Children.map(children, (child) => {
-                  if (!isValidElement(child)) {
-                    return null;
-                  }
+            {slicedRecords.map((record) => {
+              const injectedRowStyle = rowStyle ? rowStyle(record, theme) : undefined;
+              return (
+                <TableRow key={record.id} style={injectedRowStyle}>
+                  <TableCellCheckbox>
+                    <Checkbox
+                      onChange={() => onMarkRow(record.id)}
+                      checked={checkIsRowSelected(record.id)}
+                    />
+                  </TableCellCheckbox>
+                  {Children.map(children, (child) => {
+                    if (!isValidElement(child)) {
+                      return null;
+                    }
 
-                  const { source } = child.props;
+                    const { source } = child.props;
 
-                  return (
-                    <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>
-                      {cloneElement(child, { record })}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
+                    return (
+                      <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>
+                        {cloneElement(child, { record })}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
         <Pagination
