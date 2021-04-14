@@ -24,10 +24,8 @@ const Users = () => {
       ) : (
         <ListContainer>
           <DetailedList resource="users">
-            <FunctionField
-              label={t('user.user')}
-              render={({ firstName, lastName }) => `${firstName} ${lastName}`}
-            />
+            <TextField source="firstName" />
+            <TextField source="lastName" />
             <TextField source="email" />
             <DateField source="createdAt" showTime />
           </DetailedList>

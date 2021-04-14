@@ -33,7 +33,7 @@ import {
 import { DetailedListProps, PerPage } from './DetailedList.types';
 import Pagination from './Pagination';
 
-const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => {
+const DetailedList = ({ onRowClick, children, resource, sortable = false }: DetailedListProps) => {
   const axios = useAxios();
   const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
@@ -125,6 +125,10 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
     setSelectedRows([]);
   }, [deleteMutation, selectedRows]);
 
+  const onHeaderClick = (property: string) => {
+    console.log(property);
+  };
+
   return (
     <ListWrapper>
       <StyledCard isBulkActionsOpen={isBulkActionsOpen}>
@@ -148,7 +152,7 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
                 <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
               </TableHeaderCheckbox>
               {headers.map(({ label, source }) => (
-                <TableHeader key={label || source}>
+                <TableHeader key={label || source} onClick={() => onHeaderClick(source)}>
                   {label || t(`baseApiFields.${source}` as never)}
                 </TableHeader>
               ))}

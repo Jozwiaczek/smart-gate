@@ -5,6 +5,8 @@ const en = {
       email: 'Email',
       createdAt: 'Created at',
       updatedAt: 'Updated at',
+      firstName: 'First name',
+      lastName: 'Last name',
     },
     user: {
       user: 'User',

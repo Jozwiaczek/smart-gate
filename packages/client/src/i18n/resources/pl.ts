@@ -7,6 +7,8 @@ const pl: TranslationStructure = {
       email: 'Email',
       createdAt: 'Data utworzenia',
       updatedAt: 'Data aktualizacji',
+      firstName: 'Imię',
+      lastName: 'Nazwisko',
     },
     user: {
       user: 'Użytkownik',

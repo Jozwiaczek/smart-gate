@@ -19,10 +19,12 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
   }) => (isBulkActionsOpen ? `0 0 ${borderRadius} ${borderRadius}` : borderRadius)};
 
   overflow-y: auto;
+
   thead th {
     position: sticky;
     top: 0;
   }
+
   th {
     background: ${({ theme }) => theme.palette.background.paper};
     z-index: 999;
@@ -53,6 +55,10 @@ export const TableHeader = styled.th`
   font-weight: 700;
   color: ${({ theme }) => theme.palette.text.primary};
   text-align: left;
+`;
+
+export const TableHeaderProperty = styled.div`
+  cursor: pointer;
 `;
 
 export const TableHeaderCheckbox = styled.th`
@@ -138,6 +144,7 @@ export const BulkCancelWrapper = styled.div`
 export const DeleteButton = styled(IconButton)`
   height: 36px;
   border-radius: ${({ theme }) => theme.sizes.borderRadius};
+
   svg {
     margin-right: 10px;
   }
