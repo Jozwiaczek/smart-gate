@@ -10,8 +10,7 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  transition: border-radius 200ms ease-in-out;
+  transition: border-radius 150ms;
   border-radius: ${({
     isBulkActionsOpen,
     theme: {
@@ -88,6 +87,12 @@ export const TableBody = styled.tbody`
   }
 `;
 
+export const ListWrapper = styled.div`
+  position: relative;
+  height: 100%;
+  width: 100%;
+`;
+
 export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
   position: absolute;
   display: flex;
@@ -99,7 +104,7 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
   top: -50px;
   left: 0;
   right: 0;
-  transition: transform 200ms ease-in-out;
+  transition: transform 150ms;
 
   transform-origin: bottom;
   border-radius: ${({

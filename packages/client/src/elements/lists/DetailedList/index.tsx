@@ -9,6 +9,7 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
 
+import { useAxios, useSnackbar } from '../../../hooks';
 import { CancelIcon, TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
@@ -18,6 +19,7 @@ import {
   BulkCancelButton,
   BulkCancelWrapper,
   DeleteButton,
+  ListWrapper,
   StyledCard,
   Table,
   TableBody,
@@ -32,15 +34,26 @@ import { DetailedListProps, PerPage } from './DetailedList.types';
 import Pagination from './Pagination';
 
 const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => {
-  const removeUser = async (id: string) => {
-    console.log('Removed:', id);
-  };
-  const deleteMutation = useMutation(removeUser);
-  const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+  const axios = useAxios();
+  const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<PerPage>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const snackbar = useSnackbar();
   const { t } = useTranslation();
+
+  const removeMany = async (ids: Array<string>) => {
+    await axios
+      .post(`/${resource}/removeMany`, { ids })
+      .catch((err) => {
+        snackbar({ message: t('lists.detailedList.removeManyError'), severity: 'error' });
+        throw err;
+      })
+      .then(() => {
+        refetch();
+      });
+  };
+  const deleteMutation = useMutation(removeMany);
 
   const totalRecords = useMemo((): number => {
     if (queryResult) {
@@ -108,74 +121,74 @@ const DetailedList = ({ onRowClick, children, resource }: DetailedListProps) => 
   const isBulkActionsOpen = Boolean(selectedRows.length);
 
   const removeSelectedItems = useCallback(() => {
-    selectedRows.forEach((id) => {
-      deleteMutation.mutate(id);
-    });
+    deleteMutation.mutate(selectedRows);
     setSelectedRows([]);
   }, [deleteMutation, selectedRows]);
 
   return (
-    <StyledCard isBulkActionsOpen={isBulkActionsOpen}>
-      <BulkActionsWrapper isOpen={isBulkActionsOpen}>
-        <BulkCancelWrapper>
-          <BulkCancelButton onClick={unselectAllRows}>
-            <CancelIcon />
-          </BulkCancelButton>
-          {selectedRows.length}&nbsp;
-          {selectedRows.length > 1 ? t('lists.detailedList.items') : t('lists.detailedList.item')}
-        </BulkCancelWrapper>
-        <DeleteButton color="red" onClick={removeSelectedItems}>
-          <TrashIcon />
-          {t('actions.delete')}
-        </DeleteButton>
-      </BulkActionsWrapper>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableHeaderCheckbox>
-              <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
-            </TableHeaderCheckbox>
-            {headers.map(({ label, source }) => (
-              <TableHeader key={label || source}>
-                {label || t(`baseApiFields.${source}` as never)}
-              </TableHeader>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {slicedRecords.map((record) => (
-            <TableRow key={record.id}>
-              <TableCellCheckbox>
-                <Checkbox
-                  onChange={() => onMarkRow(record.id)}
-                  checked={checkIsRowSelected(record.id)}
-                />
-              </TableCellCheckbox>
-              {Children.map(children, (child) => {
-                if (!isValidElement(child)) {
-                  return null;
-                }
-
-                const { source } = child.props;
-
-                return (
-                  <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>
-                    {cloneElement(child, { record })}
-                  </TableCell>
-                );
-              })}
+    <ListWrapper>
+      <StyledCard isBulkActionsOpen={isBulkActionsOpen}>
+        <BulkActionsWrapper isOpen={isBulkActionsOpen}>
+          <BulkCancelWrapper>
+            <BulkCancelButton onClick={unselectAllRows}>
+              <CancelIcon />
+            </BulkCancelButton>
+            {selectedRows.length}&nbsp;
+            {selectedRows.length > 1 ? t('lists.detailedList.items') : t('lists.detailedList.item')}
+          </BulkCancelWrapper>
+          <DeleteButton color="red" onClick={removeSelectedItems}>
+            <TrashIcon />
+            {t('actions.delete')}
+          </DeleteButton>
+        </BulkActionsWrapper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeaderCheckbox>
+                <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
+              </TableHeaderCheckbox>
+              {headers.map(({ label, source }) => (
+                <TableHeader key={label || source}>
+                  {label || t(`baseApiFields.${source}` as never)}
+                </TableHeader>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Pagination
-        perPage={perPage}
-        setPerPage={setPerPage}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalRecords={totalRecords}
-      />
-    </StyledCard>
+          </TableHead>
+          <TableBody>
+            {slicedRecords.map((record) => (
+              <TableRow key={record.id}>
+                <TableCellCheckbox>
+                  <Checkbox
+                    onChange={() => onMarkRow(record.id)}
+                    checked={checkIsRowSelected(record.id)}
+                  />
+                </TableCellCheckbox>
+                {Children.map(children, (child) => {
+                  if (!isValidElement(child)) {
+                    return null;
+                  }
+
+                  const { source } = child.props;
+
+                  return (
+                    <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>
+                      {cloneElement(child, { record })}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Pagination
+          perPage={perPage}
+          setPerPage={setPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalRecords={totalRecords}
+        />
+      </StyledCard>
+    </ListWrapper>
   );
 };
 

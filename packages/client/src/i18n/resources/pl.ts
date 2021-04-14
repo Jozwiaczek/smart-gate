@@ -32,6 +32,7 @@ const pl: TranslationStructure = {
         ofTotal: 'z',
         next: 'następny',
         prev: 'poprzedni',
+        removeManyError: 'Coś poszło nie tak podczas operacji usuwania!',
       },
     },
     form: {
