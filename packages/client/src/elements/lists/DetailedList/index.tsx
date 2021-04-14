@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
 import { useTheme } from 'styled-components';
 
+import { useAxios, useSnackbar } from '../../../hooks';
 import { CancelIcon, TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
@@ -35,16 +36,26 @@ import Pagination from './Pagination';
 
 const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedListProps) => {
   const theme = useTheme();
-  const removeUsers = async (ids: Array<string>) => {
-    console.log('Ids to remove:', ids);
-    // TODO: axios DELETE request
-  };
-  const deleteMutation = useMutation(removeUsers);
-  const { data: queryResult } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+  const axios = useAxios();
+  const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<PerPage>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const snackbar = useSnackbar();
   const { t } = useTranslation();
+
+  const removeMany = async (ids: Array<string>) => {
+    await axios
+      .post(`/${resource}/removeMany`, { ids })
+      .catch((err) => {
+        snackbar({ message: t('lists.detailedList.removeManyError'), severity: 'error' });
+        throw err;
+      })
+      .then(() => {
+        refetch();
+      });
+  };
+  const deleteMutation = useMutation(removeMany);
 
   const totalRecords = useMemo((): number => {
     if (queryResult) {

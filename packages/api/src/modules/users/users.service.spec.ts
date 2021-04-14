@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { Connection, QueryFailedError } from 'typeorm';
 
@@ -7,6 +7,7 @@ import { testClearRepository } from '../../../test/utils/testClearRepository';
 import { testCreateRandomUser } from '../../../test/utils/testCreateRandomUser';
 import { DatabaseModule } from '../database/database.module';
 import { UserEntity } from '../database/entities/user.entity';
+import { RepositoryModule } from '../repository/repository.module';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
@@ -19,7 +20,7 @@ describe('Users Service', () => {
     await clearTestDatabase();
 
     const testingModule = await Test.createTestingModule({
-      imports: [DatabaseModule],
+      imports: [DatabaseModule, RepositoryModule],
       providers: [UsersService],
     }).compile();
 
@@ -66,30 +67,6 @@ describe('Users Service', () => {
 
       const userEntity = await testCreateRandomUser(connection);
       const selectedUserEntity = await usersService.findOne(userEntity.id);
-
-      expect(userEntity).toStrictEqual(selectedUserEntity);
-    });
-  });
-
-  describe('findOneByEmail()', () => {
-    it('rejects with NotFoundException when user is not found', async () => {
-      await testClearRepository(connection, UserEntity);
-
-      await expect(usersService.findOneByEmail('some@email.com')).rejects.toBeInstanceOf(
-        NotFoundException,
-      );
-    });
-
-    it('returns valid userEntity when user is found', async () => {
-      const repository = await testClearRepository(connection, UserEntity);
-      const userEntity: UserEntity = new UserEntity();
-      userEntity.firstName = 'firstName';
-      userEntity.lastName = 'lastName';
-      userEntity.email = 'some@email.com';
-      userEntity.password = 'some_password';
-
-      await repository.save(userEntity);
-      const selectedUserEntity = await usersService.findOneByEmail('some@email.com');
 
       expect(userEntity).toStrictEqual(selectedUserEntity);
     });
@@ -150,13 +127,15 @@ describe('Users Service', () => {
         firstName: `${Date.now()}`,
         lastName: `${Date.now()}`,
       };
+      // eslint-disable-next-line no-unused-vars
+      const { updatedAt: _, ...userToCompare } = newUser;
 
       await expect(repository.count()).resolves.toStrictEqual(1);
       await expect(usersService.update(newUser.id, noChanges)).resolves.toEqual(
-        expect.objectContaining(newUser),
+        expect.objectContaining(userToCompare),
       );
       await expect(usersService.update(newUser.id, nameChange)).resolves.toEqual(
-        expect.objectContaining({ ...newUser, ...nameChange }),
+        expect.objectContaining({ ...userToCompare, ...nameChange }),
       );
     });
   });
@@ -177,6 +156,31 @@ describe('Users Service', () => {
 
       await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
       await expect(usersService.remove(firstUser.id)).resolves.toStrictEqual(true);
+      await expect(repository.find()).resolves.toStrictEqual([secondUser]);
+      await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
+    });
+  });
+
+  describe('removeMany()', () => {
+    it('rejects with Exception when user has wrong id', async () => {
+      const repository = await testClearRepository(connection, UserEntity);
+      await testCreateRandomUser(connection);
+
+      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(usersService.removeMany({ ids: [`${Date.now()}`] })).rejects.toBeInstanceOf(
+        BadRequestException,
+      );
+    });
+
+    it('removes many users', async () => {
+      const repository = await testClearRepository(connection, UserEntity);
+      const firstUser = await testCreateRandomUser(connection);
+      const secondUser = await testCreateRandomUser(connection);
+
+      await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
+      await expect(usersService.removeMany({ ids: [firstUser.id] })).resolves.toStrictEqual(
+        undefined,
+      );
       await expect(repository.find()).resolves.toStrictEqual([secondUser]);
       await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
     });

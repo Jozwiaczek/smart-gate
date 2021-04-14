@@ -30,6 +30,7 @@ const en = {
         ofTotal: 'of',
         next: 'next',
         prev: 'prev',
+        removeManyError: 'Something went wrong during the delete operation!',
       },
     },
     form: {
