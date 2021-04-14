@@ -1,3 +1,29 @@
+# [1.6.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.5.1...v1.6.0) (2021-04-14)
+
+
+### Bug Fixes
+
+* **api:** remove create invitations redundant unit tests ([adeacf3](https://github.com/Jozwiaczek/smart-gate/commit/adeacf321768f6f6d3fd152f543099d838f87a4f))
+* **api:** rename user service test case ([372937f](https://github.com/Jozwiaczek/smart-gate/commit/372937f5cb34f475d852e9d6547d53fa6b9cfa1c))
+* **api:** userEntity on delete 'cascade' ([50b45f6](https://github.com/Jozwiaczek/smart-gate/commit/50b45f6cbe0f953b98e5e1ca4a1578c4e5831f6d))
+* **client:** add additional bottom padding for mobile app bar ([5c2823e](https://github.com/Jozwiaczek/smart-gate/commit/5c2823eafa69718cb4d0f9f9038ffbd287cebe58))
+* **client:** change remove users into array of ids ([fa0089a](https://github.com/Jozwiaczek/smart-gate/commit/fa0089a6e089c711eb7cbedd63f9dbf6458e7a98))
+* **client:** mobile tabbed view routing ([c2a5a97](https://github.com/Jozwiaczek/smart-gate/commit/c2a5a9775a6d5952d6ca8a56e2dc63be0737a357))
+* **client:** opening list bulk actions ([fc41317](https://github.com/Jozwiaczek/smart-gate/commit/fc41317165380618d9094cbc1fff4492a632761b))
+* remove auto dev updates job ([b589b6f](https://github.com/Jozwiaczek/smart-gate/commit/b589b6f5169d7590454bb3e503072217f08e9a1e))
+
+
+### Features
+
+* **api:** add auth guard in userController ([ba4b794](https://github.com/Jozwiaczek/smart-gate/commit/ba4b794be90ba7449877a2e8584edcd36cded1cf))
+* **api:** add delete cascade between user and invitation entities ([c7d6a18](https://github.com/Jozwiaczek/smart-gate/commit/c7d6a185654657bd0aab96cc5653ea6cab142923))
+* **api:** add invitations endpoints ([9a1f5b7](https://github.com/Jozwiaczek/smart-gate/commit/9a1f5b75e6d805af78bb42a7ddd42fffba09dd38))
+* **api:** add invitations send method unit test ([aa570e0](https://github.com/Jozwiaczek/smart-gate/commit/aa570e0211d1f47533043b5cb77a858dc924315b))
+* **api:** add many users remove endpoint ([d31c73a](https://github.com/Jozwiaczek/smart-gate/commit/d31c73abb1108f9f7e49b751d427ebccb3ef43ea))
+* **api:** add migration and fix user entity ([28e930d](https://github.com/Jozwiaczek/smart-gate/commit/28e930d92455c9dd00503c294fe873f7e072b73a))
+* **api:** handle invitations created and updated by ([dd9e755](https://github.com/Jozwiaczek/smart-gate/commit/dd9e7550bcd5e5f9f28625b6fa26f4aad86ab80f))
+* **client:** add axios request to delete many items from list ([fcb424f](https://github.com/Jozwiaczek/smart-gate/commit/fcb424f768c39442de4cb4fcab25c1446890a8b5))
+
 ## [1.5.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.5.0...v1.5.1) (2021-04-11)
 
 
