@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.6.0...v1.6.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* **api:** set cookie samesite to 'strict' ([a3cc635](https://github.com/Jozwiaczek/smart-gate/commit/a3cc635a8f37215d948afb08b05164e772307f98))
+
 # [1.6.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.5.1...v1.6.0) (2021-04-14)
 
 
