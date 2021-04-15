@@ -151,7 +151,7 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
               </TableHeaderCheckbox>
               {headers.map(({ label, source }) => (
                 <TableHeader key={label || source}>
-                  {label || t(`baseApiFields.${source}` as never)}
+                  {t(label as never) || t(`baseApiFields.${source}` as never)}
                 </TableHeader>
               ))}
             </TableRow>

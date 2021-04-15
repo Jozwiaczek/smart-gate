@@ -19,6 +19,7 @@ import {
   LockIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
+  SendEmailIcon,
   SettingsIcon,
   StatisticsIcon,
   TickIcon,
@@ -60,6 +61,7 @@ const AllIconsPanel = () => (
     <LockIcon />
     <PrivilegesGroupIcon />
     <QuestionMarkIcon />
+    <SendEmailIcon />
     <SettingsIcon />
     <StatisticsIcon />
     <TickIcon />

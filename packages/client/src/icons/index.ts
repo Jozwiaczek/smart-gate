@@ -14,6 +14,7 @@ export { default as InvitationIcon } from './InvitationIcon';
 export { default as LockIcon } from './LockIcon';
 export { default as PrivilegesGroupIcon } from './PrivilegesGroupIcon';
 export { default as QuestionMarkIcon } from './QuestionMarkIcon';
+export { default as SendEmailIcon } from './SendEmailIcon';
 export { default as SettingsIcon } from './SettingsIcon';
 export { default as ShieldLock } from './ShieldLock';
 export { default as SmartGateBackgroundLogoIcon } from './SmartGateBackgroundLogoIcon';

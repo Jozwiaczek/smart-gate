@@ -1,7 +1,7 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
-  Button,
   CardList,
   DateField,
   DetailedList,
@@ -9,17 +9,17 @@ import {
   TextField,
 } from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
+import { SendEmailIcon } from '../../../../icons';
 import { ThemeType } from '../../../../theme/Theme';
-import { CreateButtonContainer, ListContainer, Wrapper } from './Invitations.styled';
+import { ListContainer, SendInvitationButton, Wrapper } from './Invitations.styled';
 import { getRowStyle } from './Invitations.utils';
 
 const Invitations = () => {
   const isMobile = useMediaQuery(({ breakpoints, down }) => down(breakpoints.lg));
+  const { t } = useTranslation();
+
   return (
     <Wrapper>
-      <CreateButtonContainer>
-        <Button colorVariant={ThemeType.dark}>Send invitation</Button>
-      </CreateButtonContainer>
       {isMobile ? (
         <CardList resource="invitations">
           <TextField source="email" noLabel />
@@ -27,11 +27,15 @@ const Invitations = () => {
         </CardList>
       ) : (
         <ListContainer>
+          <SendInvitationButton colorVariant={ThemeType.dark}>
+            {t('routes.invitations.sendInvitation')}
+            <SendEmailIcon />
+          </SendInvitationButton>
           <DetailedList resource="invitations" rowStyle={getRowStyle}>
             <TextField source="email" />
-            <TextField source="createdBy" label="Inviter" />
+            <TextField source="createdBy" label="invitation.inviter" />
             <InvitationStatusField label="Status" />
-            <DateField source="createdAt" label="Send date" showTime />
+            <DateField source="createdAt" label="invitation.sendDate" showTime />
           </DetailedList>
         </ListContainer>
       )}

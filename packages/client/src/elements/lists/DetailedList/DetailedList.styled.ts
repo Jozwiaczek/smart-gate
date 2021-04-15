@@ -100,6 +100,7 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
   padding: 0 7px;
   align-items: center;
   background: ${({ theme }) => theme.palette.primary.main};
+  box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(1)};
   height: 50px;
   top: -50px;
   left: 0;
