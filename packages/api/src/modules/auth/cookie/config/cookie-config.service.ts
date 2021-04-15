@@ -21,7 +21,7 @@ export class CookieConfigService {
       path: '/',
       secure: isProd,
       signed: isProd,
-      sameSite: isProd ? 'none' : undefined,
+      sameSite: isProd ? 'strict' : undefined,
     };
   }
 }
