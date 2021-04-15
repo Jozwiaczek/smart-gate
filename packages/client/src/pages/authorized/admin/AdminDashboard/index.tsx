@@ -11,6 +11,7 @@ import {
   StatisticsIcon,
   UsersIcon,
 } from '../../../../icons';
+import Invitations from '../Invitations';
 import Users from '../Users';
 import {
   BackButtonWrapper,
@@ -36,7 +37,6 @@ const {
 } = routes.authorized.appBar.admin;
 
 const Device = () => <p>Device</p>;
-const Invitations = () => <p>Invitations</p>;
 const Privileges = () => <p>Privileges</p>;
 const Statistics = () => <p>Statistics</p>;
 
