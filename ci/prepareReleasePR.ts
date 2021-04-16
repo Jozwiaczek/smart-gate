@@ -3,6 +3,8 @@ export const prepareReleasePR = async ({ github, context }: { github: any; conte
 	👋 Thanks for testing#1!
   `;
 
+  console.log(context.issue);
+
   const commentInfo = {
     ...context.repo,
     issue_number: context.issue.number,
@@ -18,7 +20,6 @@ export const prepareReleasePR = async ({ github, context }: { github: any; conte
   for (let i = comments.length; i--; ) {
     const c = comments[i];
     if (c.user.type === 'Bot' && c.body.includes(signature)) {
-      console.log(c);
       commentId = c.id;
       break;
     }
