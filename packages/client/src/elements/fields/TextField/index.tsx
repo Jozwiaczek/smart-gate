@@ -8,7 +8,7 @@ const TextField = <T extends BaseRecordField>({ source, record }: TextFieldProps
     return null;
   }
 
-  return <p data-testid="textField">{record[source]}</p>;
+  return <p data-testid="textField">{record[source] ?? <strong>-</strong>}</p>;
 };
 
 TextField.displayName = 'TextField';

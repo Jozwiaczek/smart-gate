@@ -7,10 +7,15 @@ const en = {
       updatedAt: 'Updated at',
     },
     user: {
-      user: 'User',
+      name: 'User',
       firstName: 'First name',
       lastName: 'Last name',
       password: 'Password',
+    },
+    invitation: {
+      name: 'Invitation',
+      inviter: 'Inviter',
+      sendDate: 'Send date',
     },
     actions: {
       back: 'Back',
@@ -70,6 +75,9 @@ const en = {
           privileges: 'Privileges groups',
           statistics: 'Statistics',
         },
+      },
+      invitations: {
+        sendInvitation: 'Send Invitation',
       },
       login: {
         keepMeLoggedIn: 'Keep me logged in',
