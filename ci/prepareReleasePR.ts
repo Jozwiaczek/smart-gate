@@ -24,6 +24,8 @@ export const prepareReleasePR = async ({ github, context }: { github: any; conte
   }
 
   if (commentId) {
+    console.log(commentId);
+
     await github.issues.updateComment({
       ...context.repo,
       comment_id: commentId,
