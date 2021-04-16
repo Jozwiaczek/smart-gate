@@ -1,4 +1,21 @@
-export const prepareReleasePR = async ({ github, context }: { github: any; context: any }) => {
+export const prepareReleasePR = async ({
+  github,
+  context,
+  core,
+}: {
+  github: any;
+  context: any;
+  core: any;
+}) => {
+  const request = {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    pull_number: context.issue.number,
+  };
+  core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`);
+  const PR = await github.pulls.get(request);
+  console.log(PR);
+
   const newMessage = `
 	👋 Thanks for testing#1!
   `;
