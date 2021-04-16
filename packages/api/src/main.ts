@@ -13,6 +13,10 @@ const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
   const config = app.get(Config);
 
+  app.enableCors({
+    origin: config.clientUrl,
+    credentials: true,
+  });
   app.use(cookieParser(config.cookie.secret));
   app.use(helmet());
   app.useGlobalInterceptors(app.get(SentryInterceptor));
