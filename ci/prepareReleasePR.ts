@@ -18,14 +18,13 @@ export const prepareReleasePR = async ({ github, context }: { github: any; conte
   for (let i = comments.length; i--; ) {
     const c = comments[i];
     if (c.user.type === 'Bot' && c.body.includes(signature)) {
+      console.log(c);
       commentId = c.id;
       break;
     }
   }
 
   if (commentId) {
-    console.log(commentId);
-
     await github.issues.updateComment({
       ...context.repo,
       comment_id: commentId,
