@@ -1,3 +1,19 @@
+# [1.7.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.6.1...v1.7.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* **api:** add client api proxy ([46e4553](https://github.com/Jozwiaczek/smart-gate/commit/46e4553135e11481be657120a74260ac04a8db54))
+
+
+### Features
+
+* **client:** add base invitations list ([c5d2054](https://github.com/Jozwiaczek/smart-gate/commit/c5d2054c845e79b8003af39bea5ec02595771853))
+* **client:** add invitation status styling, add icons story ([b3f7302](https://github.com/Jozwiaczek/smart-gate/commit/b3f7302b64a8da36b20d2ee56606ca255690a450))
+* **client:** add invitations utils file ([0b346bd](https://github.com/Jozwiaczek/smart-gate/commit/0b346bd3e6369b3c2b7f7bb00b781930c0b40a56))
+* **client:** add send invitation btn and translation ([89d49fa](https://github.com/Jozwiaczek/smart-gate/commit/89d49fa0ecc2f33a3f92be6fdcdeb64419461902))
+* **client:** add send invitation btn and translation ([13dc9b9](https://github.com/Jozwiaczek/smart-gate/commit/13dc9b9715a02a69e60393b7fe2e8d0e5ca96692))
+
 ## [1.6.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.6.0...v1.6.1) (2021-04-15)
 
 
