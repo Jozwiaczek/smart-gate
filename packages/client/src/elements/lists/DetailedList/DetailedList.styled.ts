@@ -106,6 +106,7 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
   padding: 0 7px;
   align-items: center;
   background: ${({ theme }) => theme.palette.primary.main};
+  box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(1)};
   height: 50px;
   top: -50px;
   left: 0;
@@ -132,6 +133,9 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
 export const BulkCancelButton = styled(IconButton)`
   margin-right: 9px;
   color: ${({ theme }) => theme.palette.text.dark};
+  svg {
+    width: 14px;
+  }
 `;
 
 export const BulkCancelWrapper = styled.div`

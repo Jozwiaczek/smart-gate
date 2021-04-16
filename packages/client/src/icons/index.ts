@@ -1,5 +1,6 @@
 export { default as AdminIcon } from './AdminIcon';
 export { default as ArrowIcon } from './ArrowIcon';
+export { default as BackArrowIcon } from './BackArrowIcon';
 export { default as CancelIcon } from './CancelIcon';
 export { default as ChevronDownIcon } from './ChevronDownIcon';
 export { default as ConfirmLockIcon } from './ConfirmLockIcon';
@@ -12,6 +13,8 @@ export { default as HistoryIcon } from './HistoryIcon';
 export { default as InvitationIcon } from './InvitationIcon';
 export { default as LockIcon } from './LockIcon';
 export { default as PrivilegesGroupIcon } from './PrivilegesGroupIcon';
+export { default as QuestionMarkIcon } from './QuestionMarkIcon';
+export { default as SendEmailIcon } from './SendEmailIcon';
 export { default as SettingsIcon } from './SettingsIcon';
 export { default as ShieldLock } from './ShieldLock';
 export { default as SmartGateBackgroundLogoIcon } from './SmartGateBackgroundLogoIcon';

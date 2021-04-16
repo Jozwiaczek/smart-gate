@@ -1,3 +1,4 @@
+import { InvitationStatus } from '../enums/invitationStatus.enum';
 import { Role } from '../enums/role.enum';
 
 interface BaseApiResource {
@@ -11,6 +12,15 @@ interface ApiUser extends BaseApiResource {
   firstName: string;
   lastName: string;
   roles: Array<Role>;
+}
+
+interface ApiInvitation extends BaseApiResource {
+  email: string;
+  expirationDate: Date;
+  status: InvitationStatus;
+  roles: Array<Role>;
+  createdBy?: ApiUser;
+  updatedBy?: ApiUser;
 }
 
 interface ApiList<T> {

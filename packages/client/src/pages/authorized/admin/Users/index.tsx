@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { CardList, DateField, DetailedList, FunctionField, TextField } from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
@@ -7,14 +6,13 @@ import { ListContainer, Wrapper } from './Users.styled';
 
 const Users = () => {
   const isMobile = useMediaQuery(({ breakpoints, down }) => down(breakpoints.lg));
-  const { t } = useTranslation();
 
   return (
     <Wrapper>
       {isMobile ? (
         <CardList resource="users">
           <FunctionField
-            label={t('user.user')}
+            label="user.name"
             asTitle
             render={({ firstName, lastName }) => `${firstName} ${lastName}`}
           />

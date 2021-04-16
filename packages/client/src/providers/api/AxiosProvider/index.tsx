@@ -6,11 +6,10 @@ import { AxiosContext } from './AxiosProvider.context';
 import { AxiosProviderProps } from './AxiosProvider.types';
 
 const AxiosProvider = ({ children }: AxiosProviderProps) => {
-  const API_URL = process.env.REACT_APP_API_URL;
   const [, setUser] = useCurrentUser();
 
   const AxiosOverriddenInstance = axios.create({
-    baseURL: API_URL,
+    baseURL: '/api',
     headers: {
       'Content-Type': 'application/json',
     },

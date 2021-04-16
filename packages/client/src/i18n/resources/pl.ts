@@ -11,10 +11,15 @@ const pl: TranslationStructure = {
       lastName: 'Nazwisko',
     },
     user: {
-      user: 'Użytkownik',
+      name: 'Użytkownik',
       firstName: 'Imię',
       lastName: 'Nazwisko',
       password: 'Hasło',
+    },
+    invitation: {
+      name: 'Zaproszenie',
+      inviter: 'Zapraszający',
+      sendDate: 'Data wysłania',
     },
     actions: {
       back: 'Wróć',
@@ -74,6 +79,9 @@ const pl: TranslationStructure = {
           privileges: 'Grupy dostępu',
           statistics: 'Statystyki',
         },
+      },
+      invitations: {
+        sendInvitation: 'Nowe zaproszenie',
       },
       login: {
         keepMeLoggedIn: 'Nie wylogowuj mnie',

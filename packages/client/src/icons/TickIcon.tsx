@@ -12,7 +12,7 @@ const TickIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =
   >
     <path
       d="M1 3l2.143 2.5L7 1"
-      stroke="#fff"
+      stroke="currentColor"
       strokeWidth={2}
       strokeMiterlimit={10}
       strokeLinecap="round"
