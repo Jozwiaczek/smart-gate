@@ -15,6 +15,11 @@ export const prepareReleasePR = async ({
   core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`);
   const PR = await github.pulls.get(request);
   console.log(PR);
+  console.log('\n\n---------------\n\n');
+  const prTitle = PR.data.title;
+  console.log(prTitle);
+
+  await github.pulls.update({ ...request, title: 'Hello world' });
 
   const newMessage = `
 	👋 Thanks for testing#1!
