@@ -14,7 +14,8 @@ export const prepareReleasePR = async ({
   };
   core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`);
   const PR = await github.pulls.get(request);
-  console.log(PR);
+  const prs = await github.pulls.list({ owner: context.repo.owner, repo: context.repo.repo });
+  console.log('L:18 | prs: ', prs);
   console.log('\n\n---------------\n\n');
   const prTitle = PR.data.title;
   console.log(prTitle);
