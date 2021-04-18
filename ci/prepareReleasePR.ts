@@ -29,9 +29,13 @@ export const prepareReleasePR = async ({
   github: OctoGithub;
   context: OctoContext;
 }) => {
-  const prs = await github.pulls.list({
+  const baseRequest = {
     owner: context.repo.owner,
     repo: context.repo.repo,
+  };
+
+  const prs = await github.pulls.list({
+    ...baseRequest,
     state: 'closed',
     sort: 'updated',
   });
@@ -41,8 +45,7 @@ export const prepareReleasePR = async ({
 
   const updatedPRTitle = getReleasePRTitle(prsReleasedToday.length);
   await github.pulls.update({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    ...baseRequest,
     pull_number: context.issue.number,
     title: updatedPRTitle,
   });
@@ -51,28 +54,21 @@ export const prepareReleasePR = async ({
     'This pull request will trigger new Release. Request code owners for code review.';
 
   const commentInfo = {
-    ...context.repo,
+    ...baseRequest,
     issue_number: context.issue.number,
   };
   const signature = 'via Smart Gate GitHub Actions 🔑';
   const comment = {
     ...commentInfo,
-    body: `${newMessage}\n\n\n${signature}`,
+    body: `${newMessage}\n${signature}`,
   };
 
-  let commentId;
   const comments = (await github.issues.listComments(commentInfo)).data;
-  for (let i = comments.length; i--; ) {
-    const c = comments[i];
-    if (c.user.type === 'Bot' && c.body.includes(signature)) {
-      commentId = c.id;
-      break;
-    }
-  }
+  const commentId = comments.find((c) => c.user.type === 'Bot' && c.body.includes(signature))?.id;
 
   if (commentId) {
     await github.issues.updateComment({
-      ...context.repo,
+      ...baseRequest,
       comment_id: commentId,
       body: comment.body,
     });

@@ -33,6 +33,12 @@ interface OctoPullRequest {
   active_lock_reason?: any;
 }
 
+interface OctoComment {
+  id: number;
+  user: any;
+  body: string;
+}
+
 interface OctoResponse<T> {
   status: number;
   url: string;
@@ -98,8 +104,8 @@ interface OctoGithub {
     update: (opt: PullsUpdateOpt) => Promise<OctoResponse<OctoPullRequest>>;
   };
   issues: {
-    listComments: (opt: CommentsListOpt) => Promise<OctoResponse<any>>;
-    updateComment: (opt: CommentUpdateOpt) => Promise<OctoResponse<any>>;
-    createComment: (opt: CommentCreateOpt) => Promise<OctoResponse<any>>;
+    listComments: (opt: CommentsListOpt) => Promise<OctoResponse<Array<OctoComment>>>;
+    updateComment: (opt: CommentUpdateOpt) => Promise<OctoResponse<OctoComment>>;
+    createComment: (opt: CommentCreateOpt) => Promise<OctoResponse<OctoComment>>;
   };
 }
