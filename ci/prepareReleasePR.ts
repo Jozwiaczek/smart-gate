@@ -22,6 +22,68 @@ const getReleasePRTitle = (currentDayCounterRelease: number): string => {
   return `Release - ${currentFormattedDate}${counterTag}`;
 };
 
+const getMergedTodayReleasePRs = async (
+  github: OctoGithub,
+  context: OctoContext,
+): Promise<Array<OctoPullRequest>> => {
+  const prs = await github.pulls.list({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    state: 'closed',
+    sort: 'updated',
+  });
+  return prs.data.filter(({ merged_at, title }) => isToday(merged_at) && title.includes('Release'));
+};
+
+const setReleasePrWarning = async (github: OctoGithub, context: OctoContext): Promise<void> => {
+  const baseRequest = {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+  };
+
+  const baseCommentRequest = {
+    ...baseRequest,
+    issue_number: context.issue.number,
+  };
+  const commentSignature = 'via Smart Gate GitHub Actions 🔑';
+  const comment = {
+    ...baseCommentRequest,
+    body: `This pull request will trigger new Release. Request code owners for code review.\n${commentSignature}`,
+  };
+
+  const pullRequestComments = (await github.issues.listComments(baseCommentRequest)).data;
+  const alreadyExistCommentId = pullRequestComments.find(
+    (existedComment) =>
+      existedComment.user.type === 'Bot' && existedComment.body.includes(commentSignature),
+  )?.id;
+
+  if (alreadyExistCommentId) {
+    await github.issues.updateComment({
+      ...baseRequest,
+      comment_id: alreadyExistCommentId,
+      body: comment.body,
+    });
+  }
+
+  if (!alreadyExistCommentId) {
+    await github.issues.createComment(comment);
+  }
+};
+
+const updateReleasePrTitle = async (
+  github: OctoGithub,
+  context: OctoContext,
+  releasedPrsTodayTotal: number,
+): Promise<void> => {
+  const updatedPRTitle = getReleasePRTitle(releasedPrsTodayTotal);
+  await github.pulls.update({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    pull_number: context.issue.number,
+    title: updatedPRTitle,
+  });
+};
+
 export const prepareReleasePR = async ({
   github,
   context,
@@ -29,52 +91,9 @@ export const prepareReleasePR = async ({
   github: OctoGithub;
   context: OctoContext;
 }) => {
-  const baseRequest = {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-  };
+  const prsReleasedToday = await getMergedTodayReleasePRs(github, context);
+  const releasedPrsTodayTotal = prsReleasedToday.length;
+  await updateReleasePrTitle(github, context, releasedPrsTodayTotal);
 
-  const prs = await github.pulls.list({
-    ...baseRequest,
-    state: 'closed',
-    sort: 'updated',
-  });
-  const prsReleasedToday = prs.data.filter(
-    ({ merged_at, title }) => isToday(merged_at) && title.includes('Release'),
-  );
-
-  const updatedPRTitle = getReleasePRTitle(prsReleasedToday.length);
-  await github.pulls.update({
-    ...baseRequest,
-    pull_number: context.issue.number,
-    title: updatedPRTitle,
-  });
-
-  const newMessage =
-    'This pull request will trigger new Release. Request code owners for code review.';
-
-  const commentInfo = {
-    ...baseRequest,
-    issue_number: context.issue.number,
-  };
-  const signature = 'via Smart Gate GitHub Actions 🔑';
-  const comment = {
-    ...commentInfo,
-    body: `${newMessage}\n${signature}`,
-  };
-
-  const comments = (await github.issues.listComments(commentInfo)).data;
-  const commentId = comments.find((c) => c.user.type === 'Bot' && c.body.includes(signature))?.id;
-
-  if (commentId) {
-    await github.issues.updateComment({
-      ...baseRequest,
-      comment_id: commentId,
-      body: comment.body,
-    });
-  }
-
-  if (!commentId) {
-    await github.issues.createComment(comment);
-  }
+  await setReleasePrWarning(github, context);
 };
