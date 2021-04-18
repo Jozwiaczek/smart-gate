@@ -4,7 +4,8 @@
     "composite": true,
     "outDir": "./build",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "commonjs"
+    "module": "commonjs",
+    "noEmit": false
   },
   "include": ["src"]
 }
