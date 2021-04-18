@@ -47,7 +47,8 @@ export const prepareReleasePR = async ({
     title: updatedPRTitle,
   });
 
-  const newMessage = 'This pull request will trigger new Release. Request code owners for review.';
+  const newMessage =
+    'This pull request will trigger new Release. Request code owners for code review.';
 
   const commentInfo = {
     ...context.repo,
@@ -56,7 +57,7 @@ export const prepareReleasePR = async ({
   const signature = 'via Smart Gate GitHub Actions 🔑';
   const comment = {
     ...commentInfo,
-    body: `${newMessage}\n\n${signature}`,
+    body: `${newMessage}\n\n\n${signature}`,
   };
 
   let commentId;
