@@ -47,23 +47,13 @@ export const prepareReleasePR = async ({
     title: updatedPRTitle,
   });
 
-  const commits = await github.pulls.listCommits({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    pull_number: context.issue.number,
-  });
-
-  console.log('L:56 | commits: ', commits);
-
-  const newMessage = `
-	👋 Thanks for testing#1!
-  `;
+  const newMessage = 'This pull request will trigger new Release. Request code owners for review.';
 
   const commentInfo = {
     ...context.repo,
     issue_number: context.issue.number,
   };
-  const signature = 'via JJ GitHub Actions 🇵🇱';
+  const signature = 'via Smart Gate GitHub Actions 🔑';
   const comment = {
     ...commentInfo,
     body: `${newMessage}\n\n${signature}`,
