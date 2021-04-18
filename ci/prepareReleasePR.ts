@@ -1,8 +1,4 @@
-const isToday = (someDate?: Date): boolean => {
-  if (!someDate) {
-    return false;
-  }
-
+const isToday = (someDate: Date): boolean => {
   const today = new Date();
   return (
     someDate.getDate() === today.getDate() &&
@@ -47,7 +43,9 @@ export const prepareReleasePR = async ({
     sort: 'updated',
   });
   console.log('L:18 | prs: ', prs);
-  const prsReleasedToday = prs.data.filter(({ merged_at }) => isToday(merged_at));
+  const prsReleasedToday = prs.data.filter(
+    ({ merged_at }) => merged_at && isToday(new Date(merged_at)),
+  );
   console.log('L:40 | prsReleasedToday: ', prsReleasedToday);
 
   const updatedPRTitle = getReleasePRTitle(0);

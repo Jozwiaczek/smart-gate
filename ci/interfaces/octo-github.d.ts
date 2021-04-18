@@ -11,10 +11,10 @@ interface OctoPullRequest {
   locked: boolean;
   title: string;
   user: any;
-  created_at: Date;
-  updated_at: Date;
-  closed_at?: Date;
-  merged_at?: Date;
+  created_at: string;
+  updated_at: string;
+  closed_at?: string;
+  merged_at?: string;
   merge_commit_sha: string;
   assignee?: any;
   assignees: any[];
