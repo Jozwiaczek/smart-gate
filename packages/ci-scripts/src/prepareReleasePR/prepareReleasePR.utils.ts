@@ -22,7 +22,7 @@ const getReleasePRTitle = (currentDayCounterRelease: number): string => {
   return `Release - ${currentFormattedDate}${counterTag}`;
 };
 
-const getMergedTodayReleasePRs = async (
+export const getMergedTodayReleasePRs = async (
   github: OctoGithub,
   context: OctoContext,
 ): Promise<Array<OctoPullRequest>> => {
@@ -35,7 +35,10 @@ const getMergedTodayReleasePRs = async (
   return prs.data.filter(({ merged_at, title }) => isToday(merged_at) && title.includes('Release'));
 };
 
-const setReleasePrWarning = async (github: OctoGithub, context: OctoContext): Promise<void> => {
+export const setReleasePrWarning = async (
+  github: OctoGithub,
+  context: OctoContext,
+): Promise<void> => {
   const baseRequest = {
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -70,7 +73,7 @@ const setReleasePrWarning = async (github: OctoGithub, context: OctoContext): Pr
   }
 };
 
-const updateReleasePrTitle = async (
+export const updateReleasePrTitle = async (
   github: OctoGithub,
   context: OctoContext,
   releasedPrsTodayTotal: number,
@@ -82,18 +85,4 @@ const updateReleasePrTitle = async (
     pull_number: context.issue.number,
     title: updatedPRTitle,
   });
-};
-
-export const prepareReleasePR = async ({
-  github,
-  context,
-}: {
-  github: OctoGithub;
-  context: OctoContext;
-}) => {
-  const prsReleasedToday = await getMergedTodayReleasePRs(github, context);
-  const releasedPrsTodayTotal = prsReleasedToday.length;
-  await updateReleasePrTitle(github, context, releasedPrsTodayTotal);
-
-  await setReleasePrWarning(github, context);
 };
