@@ -63,7 +63,7 @@ jobs:
       - name: 'Run ESLint'
         run: yarn lint
       - name: 'Setup test database'
-        run: yarn ci:setup:db
+        run: cd packages/ci-scripts && yarn setup:testDB
       - name: 'Run unit tests'
         run: yarn test
       - name: 'Run E2E tests'

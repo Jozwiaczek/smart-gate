@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./build",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "commonjs"
+  },
+  "include": ["src"]
+}
