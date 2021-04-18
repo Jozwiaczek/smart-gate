@@ -49,5 +49,5 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const { prepareReleasePR } = require(`${process.env.GITHUB_WORKSPACE}/packages/ci-scripts/build/prepareReleasePR.js`)
+            const { prepareReleasePR } = require(`${process.env.GITHUB_WORKSPACE}/packages/ci-scripts/prepareReleasePR.js`)
             prepareReleasePR({ github, context })
