@@ -17,7 +17,6 @@ const getReleasePRTitle = (currentDayCounterRelease: number): string => {
     dateStyle: 'short',
   });
   const currentFormattedDate = formatter.format(new Date());
-
   const counterTag = currentDayCounterRelease > 0 ? ` - #${currentDayCounterRelease}` : '';
 
   return `Release - ${currentFormattedDate}${counterTag}`;
@@ -36,7 +35,6 @@ export const prepareReleasePR = async ({
     state: 'closed',
     sort: 'updated',
   });
-  console.log('L:18 | prs: ', prs);
   const prsReleasedToday = prs.data.filter(
     ({ merged_at, title }) => isToday(merged_at) && title.includes('Release'),
   );
@@ -48,6 +46,14 @@ export const prepareReleasePR = async ({
     pull_number: context.issue.number,
     title: updatedPRTitle,
   });
+
+  const commits = await github.pulls.listCommits({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    pull_number: context.issue.number,
+  });
+
+  console.log('L:56 | commits: ', commits);
 
   const newMessage = `
 	👋 Thanks for testing#1!
