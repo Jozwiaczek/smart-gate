@@ -2,7 +2,6 @@
   "name": "ci-scripts",
   "version": "1.0.3",
   "private": true,
-  "main": "build/src",
   "scripts": {
     "prebuild": "yarn clean",
     "build": "tsc --project tsconfig.json",
