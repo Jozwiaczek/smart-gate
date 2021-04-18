@@ -1,19 +1,24 @@
-const isToday = (someDate: Date): boolean => {
+const isToday = (someDate?: string): boolean => {
+  if (!someDate) {
+    return false;
+  }
+
+  const inputDate = new Date(someDate);
   const today = new Date();
   return (
-    someDate.getDate() === today.getDate() &&
-    someDate.getMonth() === today.getMonth() &&
-    someDate.getFullYear() === today.getFullYear()
+    inputDate.getDate() === today.getDate() &&
+    inputDate.getMonth() === today.getMonth() &&
+    inputDate.getFullYear() === today.getFullYear()
   );
 };
 
 const getReleasePRTitle = (currentDayCounterRelease: number): string => {
-  const formatter = new Intl.DateTimeFormat('pl', {
+  const formatter = new Intl.DateTimeFormat('en', {
     dateStyle: 'short',
   });
   const currentFormattedDate = formatter.format(new Date());
 
-  const counterTag = currentDayCounterRelease > 0 ? ` - #${currentDayCounterRelease}` : null;
+  const counterTag = currentDayCounterRelease > 0 ? ` - #${currentDayCounterRelease}` : '';
 
   return `Release - ${currentFormattedDate}${counterTag}`;
 };
@@ -25,17 +30,6 @@ export const prepareReleasePR = async ({
   github: OctoGithub;
   context: OctoContext;
 }) => {
-  const request = {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    pull_number: context.issue.number,
-  };
-  const currentPR = await github.pulls.get(request);
-  const prTitle = currentPR.data.title;
-  console.log(prTitle);
-
-  console.log('\n\n---------------\n\n');
-
   const prs = await github.pulls.list({
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -44,18 +38,20 @@ export const prepareReleasePR = async ({
   });
   console.log('L:18 | prs: ', prs);
   const prsReleasedToday = prs.data.filter(
-    ({ merged_at }) => merged_at && isToday(new Date(merged_at)),
+    ({ merged_at, title }) => isToday(merged_at) && title.includes('Release'),
   );
-  console.log('L:40 | prsReleasedToday: ', prsReleasedToday);
 
-  const updatedPRTitle = getReleasePRTitle(0);
-  await github.pulls.update({ ...request, title: updatedPRTitle });
+  const updatedPRTitle = getReleasePRTitle(prsReleasedToday.length);
+  await github.pulls.update({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    pull_number: context.issue.number,
+    title: updatedPRTitle,
+  });
 
   const newMessage = `
 	👋 Thanks for testing#1!
   `;
-
-  console.log(context.issue);
 
   const commentInfo = {
     ...context.repo,
