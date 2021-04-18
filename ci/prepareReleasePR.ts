@@ -1,30 +1,57 @@
+const isToday = (someDate?: Date): boolean => {
+  if (!someDate) {
+    return false;
+  }
+
+  const today = new Date();
+  return (
+    someDate.getDate() === today.getDate() &&
+    someDate.getMonth() === today.getMonth() &&
+    someDate.getFullYear() === today.getFullYear()
+  );
+};
+
+const getReleasePRTitle = (currentDayCounterRelease: number): string => {
+  const formatter = new Intl.DateTimeFormat('pl', {
+    dateStyle: 'short',
+  });
+  const currentFormattedDate = formatter.format(new Date());
+
+  const counterTag = currentDayCounterRelease > 0 ? ` - #${currentDayCounterRelease}` : null;
+
+  return `Release - ${currentFormattedDate}${counterTag}`;
+};
+
 export const prepareReleasePR = async ({
   github,
   context,
-  core,
 }: {
-  github: any;
-  context: any;
-  core: any;
+  github: OctoGithub;
+  context: OctoContext;
 }) => {
   const request = {
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: context.issue.number,
   };
-  core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`);
-  const PR = await github.pulls.get(request);
+  const currentPR = await github.pulls.get(request);
+  const prTitle = currentPR.data.title;
+  console.log(prTitle);
+
+  console.log('\n\n---------------\n\n');
+
   const prs = await github.pulls.list({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    state: 'all',
+    state: 'closed',
+    sort: 'updated',
   });
   console.log('L:18 | prs: ', prs);
-  console.log('\n\n---------------\n\n');
-  const prTitle = PR.data.title;
-  console.log(prTitle);
+  const prsReleasedToday = prs.data.filter(({ merged_at }) => isToday(merged_at));
+  console.log('L:40 | prsReleasedToday: ', prsReleasedToday);
 
-  await github.pulls.update({ ...request, title: 'Hello world' });
+  const updatedPRTitle = getReleasePRTitle(0);
+  await github.pulls.update({ ...request, title: updatedPRTitle });
 
   const newMessage = `
 	👋 Thanks for testing#1!

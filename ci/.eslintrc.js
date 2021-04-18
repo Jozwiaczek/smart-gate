@@ -3,5 +3,6 @@ module.exports = {
   rules: {
     'react/display-name': 0,
     'no-plusplus': 0,
+    '@typescript-eslint/no-explicit-any': 0,
   },
 };

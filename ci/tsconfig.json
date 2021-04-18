@@ -12,5 +12,5 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["prepareReleasePR.ts"]
+  "include": ["prepareReleasePR.ts", "interfaces/*"]
 }
