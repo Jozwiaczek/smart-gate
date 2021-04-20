@@ -34,7 +34,7 @@ const Invitations = () => {
           <DetailedList resource="invitations" rowStyle={getRowStyle}>
             <TextField source="email" />
             <TextField source="createdBy" label="invitation.inviter" />
-            <InvitationStatusField label="Status" />
+            <InvitationStatusField label="Status" noTranslation />
             <DateField source="createdAt" label="invitation.sendDate" showTime />
           </DetailedList>
         </ListContainer>
