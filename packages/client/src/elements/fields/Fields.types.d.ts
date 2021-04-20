@@ -6,6 +6,7 @@ interface BaseFieldProps<T> {
   record?: T;
   asTitle?: boolean;
   noLabel?: boolean;
+  noTranslation?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
