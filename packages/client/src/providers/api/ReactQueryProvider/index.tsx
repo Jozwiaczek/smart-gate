@@ -8,7 +8,7 @@ import { DefaultQueryFn, ReactQueryProviderProps } from './ReactQueryProvider';
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const axios = useAxios();
   const defaultQueryFn = async ({ queryKey }: DefaultQueryFn) => {
-    const { data } = await axios.get(queryKey[0] as string);
+    const { data } = await axios.get(queryKey as string);
     return data;
   };
 
