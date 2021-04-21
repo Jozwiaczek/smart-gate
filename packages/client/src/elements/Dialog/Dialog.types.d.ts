@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 
 interface DialogProps {
-  children: ReactNode;
-  open: boolean;
-  onClose: () => void;
+  children?: ReactNode;
+  isOpen: boolean;
+  close: () => void;
+  title?: string;
+  description?: string;
 }

@@ -19,5 +19,15 @@ const Template: Story<DialogProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children: <>Lorem Ipsum</>,
+  title: 'Example Dialog',
+  description: 'Nobilis luna vix dignuss vigil est.',
+  isOpen: true,
+  close: () => console.log('test'),
+  children: (
+    <>
+      <p>Lorem Ipsum#1</p>
+      <p>Lorem Ipsum#2</p>
+      <button>test btn</button>
+    </>
+  ),
 };
