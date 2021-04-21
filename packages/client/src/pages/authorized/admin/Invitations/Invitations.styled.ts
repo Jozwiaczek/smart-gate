@@ -31,3 +31,13 @@ export const SendInvitationButton = styled(Button)`
     width: 26px;
   }
 `;
+
+export const DialogContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledSendButton = styled(Button)`
+  margin-top: 40px;
+`;
