@@ -85,6 +85,7 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
   text-align: center;
   padding: 16px 62px 16px 16px;
   position: fixed;
+  z-index: 9999;
   left: 50%;
   transform: translateX(-50%);
   bottom: ${bottomMargin};
