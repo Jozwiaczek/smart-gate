@@ -7,7 +7,6 @@ import { routes } from '../../../constants';
 import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextInput } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
-import { EmailIcon } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
 import { StyledButton } from './Login.styled';
 import { LoginInputs } from './Login.types';
@@ -48,13 +47,7 @@ const Login = () => {
     <CardLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextInput
-          autoFocus
-          required
-          name="email"
-          validationType="email"
-          startAdornment={<EmailIcon />}
-        />
+        <TextInput autoFocus required name="email" validationType="email" />
         <TextInput
           required
           name="password"
