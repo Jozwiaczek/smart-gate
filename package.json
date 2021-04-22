@@ -21,11 +21,12 @@
   ],
   "scripts": {
     "build": "lerna run build",
-    "check": "yarn lint:fix && yarn prettier:fix && yarn type-check && yarn test && yarn test:e2e && yarn sortPackageJson",
+    "check": "yarn lint:fix && yarn prettier:fix && yarn stylelint && yarn type-check && yarn test && yarn test:e2e && yarn sortPackageJson",
     "heroku-postbuild": "yarn install && cd packages/api && yarn typeorm-migration:run && yarn build",
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
+    "stylelint": "stylelint '**/*.styled.ts' --config .stylelintrc.js",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "prepare": "husky install",
@@ -71,7 +72,11 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "sort-package-json": "^1.49.0"
+    "sort-package-json": "^1.49.0",
+    "stylelint": "^13.12.0",
+    "stylelint-config-recommended": "^4.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0"
   },
   "engines": {
     "node": ">=12",

@@ -10,6 +10,14 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+export const TitleWrapper = styled.div`
+  * {
+    font-size: 24px;
+    line-height: 23px;
+    font-weight: 700;
+  }
+`;
+
 export const StyledCard = styled(Card)`
   position: relative;
   width: 100%;
@@ -69,14 +77,6 @@ export const CardsWrapper = styled.div`
       }
     }
   `};
-`;
-
-export const TitleWrapper = styled.div`
-  * {
-    font-size: 24px;
-    line-height: 23px;
-    font-weight: 700;
-  }
 `;
 
 export const FiltersContainer = styled.div`

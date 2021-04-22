@@ -13,7 +13,7 @@ export const TabsWrapper = styled.div<TabsWrapperProps>`
   height: 100%;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  "scrollbar-width": "none;";
+  scrollbar-width: none;
   -ms-overflow-style: none;
   ::-webkit-scrollbar {
     display: none;

@@ -19,13 +19,15 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
   }) => (isBulkActionsOpen ? `0 0 ${borderRadius} ${borderRadius}` : borderRadius)};
 
   overflow-y: auto;
-  thead th {
-    position: sticky;
-    top: 0;
-  }
+
   th {
     background: ${({ theme }) => theme.palette.background.paper};
     z-index: 999;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
   }
 
   ::-webkit-scrollbar {

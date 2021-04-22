@@ -13,12 +13,11 @@ export const CubeGrid = styled.div<GridProps>(
 
 const cubeGridScaleDelay = keyframes`
   0%, 70%, 100% {
-    -webkit-transform: scale3D(1, 1, 1);
     transform: scale3D(1, 1, 1);
-  } 35% {
-      -webkit-transform: scale3D(0, 0, 1);
+  } 
+  35% {
       transform: scale3D(0, 0, 1);
-    }
+  }
 `;
 
 export const Cube = styled.div<CubeProps>`
