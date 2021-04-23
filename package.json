@@ -26,7 +26,7 @@
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Use yarn for installing')\"",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
-    "stylelint": "stylelint '**/*.styled.ts' --config .stylelintrc.js",
+    "stylelint": "stylelint '**/*.{styled.ts,tsx}'",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "prepare": "husky install",
