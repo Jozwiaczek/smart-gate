@@ -15,11 +15,6 @@ import { Checkbox, TextInput } from '../inputs';
 import { FormBaseInputProps, FormProps, ValidationType } from './Form.types';
 
 // Every input in app which is used with Form component must be declared here
-
-console.log('test');
-console.log('test');
-console.log('test');
-console.log('test');
 const formInputs: Array<ReactNode> = [Checkbox, TextInput];
 const isFormInput = (child: ReactElement) => formInputs.includes(child.type);
 
