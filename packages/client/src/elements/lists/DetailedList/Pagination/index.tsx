@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Select } from 'src/elements/index';
 
+import { Select } from '../../../inputs';
 import { SelectOption } from '../../../inputs/Select/Select.types';
 import { PerPage } from '../DetailedList.types';
 import {
