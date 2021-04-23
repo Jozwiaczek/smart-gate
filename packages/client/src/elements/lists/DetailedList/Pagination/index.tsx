@@ -59,6 +59,7 @@ const Pagination = ({
             </PaginationButton>
           )}
           <PageNavigation>
+            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
             {[...Array(totalPages)].map((_, index) => {
               const pageKey = index + 1;
               return (

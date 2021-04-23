@@ -17,6 +17,7 @@ export class MailerService {
     const transporterBaseConfig = await this.mailerConfigService.getTransporterConfig();
     const transporter = nodemailer.createTransport(transporterBaseConfig);
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const emailResult = await transporter.sendMail({
       ...this.mailerConfigService.getSendEmailConfig(),
       ...options,

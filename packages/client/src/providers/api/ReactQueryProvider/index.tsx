@@ -3,12 +3,16 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { useAxios } from '../../../hooks';
-import { DefaultQueryFn, ReactQueryProviderProps } from './ReactQueryProvider';
+import {
+  DefaultQueryFn,
+  DefaultQueryFnResult,
+  ReactQueryProviderProps,
+} from './ReactQueryProvider';
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const axios = useAxios();
   const defaultQueryFn = async ({ queryKey }: DefaultQueryFn) => {
-    const { data } = await axios.get(queryKey as string);
+    const { data } = await axios.get<DefaultQueryFnResult>(queryKey as string);
     return data;
   };
 

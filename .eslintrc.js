@@ -1,17 +1,24 @@
 module.exports = {
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  parser: '@typescript-eslint/parser',
   extends: [
-    'airbnb-typescript', // Uses the recommended rules from @airbnb-typescript
-    'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
-    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
-    'plugin:prettier/recommended', // Align prettier settings with eslint
+    'eslint:recommended',
+    'airbnb-typescript',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  plugins: ['react-hooks', 'simple-import-sort', 'import', 'eslint-plugin-prettier'],
+  plugins: ['simple-import-sort', 'import', '@typescript-eslint'],
   parserOptions: {
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
+    ecmaVersion: 2021,
+    sourceType: 'module',
+    project: ['./packages/*/tsconfig.json', './packages/*/tsconfig.dev.json', 'tsconfig.dev.json'],
+    tsconfigRootDir: __dirname,
+    EXPERIMENTAL_useSourceOfProjectReferenceRedirect: true,
     ecmaFeatures: {
-      jsx: true, // Allows for the parsing of JSX
+      jsx: true,
     },
   },
   rules: {
@@ -21,26 +28,20 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    'no-unused-vars': [
-      1,
-      {
-        vars: 'all',
-        args: 'after-used',
-        ignoreRestSiblings: false,
-        argsIgnorePattern: '^_',
-      },
-    ],
+    '@typescript-eslint/no-floating-promises': 0,
+    '@typescript-eslint/unbound-method': 0, // TODO: Remove with react-hook-form migration
+    '@typescript-eslint/no-unsafe-member-access': 0,
+    'react/display-name': 0,
+    '@typescript-eslint/no-explicit-any': 0,
     'react/require-default-props': 0,
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-    'sort-imports': 'off',
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'consistent-return': 0,
-    '@typescript-eslint/return-await': 0,
     '@typescript-eslint/no-var-requires': 0,
     'import/prefer-default-export': 0,
     '@typescript-eslint/no-implied-eval': 0,

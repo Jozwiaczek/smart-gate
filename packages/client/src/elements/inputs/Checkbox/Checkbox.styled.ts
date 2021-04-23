@@ -40,10 +40,11 @@ export const Checkmark = styled.span<CheckmarkProps>(
   border-radius: 6px;
 
   ${
-    isError &&
-    `
+    isError
+      ? `
       border: 2px solid ${palette.action.error};
   `
+      : ''
   };
 
   svg {

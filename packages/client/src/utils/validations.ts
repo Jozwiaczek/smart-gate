@@ -15,14 +15,17 @@ export const hasUppercaseLetter = (value: string, quantity = 1): boolean =>
 export const hasLowercaseLetter = (value: string, quantity = 1): boolean =>
   new RegExp(`[a-z]{${quantity}}`).test(value);
 
-// eslint-disable-next-line
-export const composeValidation = (...fns: Array<any>) => (value?: string): boolean =>
-  fns.reduceRight((acc, fn) => [...acc, fn(value)], []).every(Boolean);
-
 export const isValidEmail = (email: string): boolean => {
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return emailRegex.test(email);
 };
+
+export const composeValidation = (...fns: ((value: string, ...opt: any[]) => boolean)[]) => (
+  value: string,
+): boolean =>
+  fns
+    .reduceRight((acc: Array<boolean>, fn): Array<boolean> => [...acc, fn(value)], [])
+    .every(Boolean);
 
 export const isValidPassword = composeValidation(
   isValidLength,

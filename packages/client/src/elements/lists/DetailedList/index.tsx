@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
-import { useTheme } from 'styled-components';
+import { CSSProperties, useTheme } from 'styled-components';
 
 import { useAxios, useSnackbar } from '../../../hooks';
 import { CancelIcon, TrashIcon } from '../../../icons';
@@ -52,8 +52,8 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
         snackbar({ message: t('lists.detailedList.removeManyError'), severity: 'error' });
         throw err;
       })
-      .then(() => {
-        refetch();
+      .then(async () => {
+        await refetch();
       });
   };
   const deleteMutation = useMutation(removeMany);
@@ -68,7 +68,7 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
   const headers = useMemo((): Array<BaseFieldProps<BaseRecordField>> => {
     const headersFromChildren = Children.map(children, (child) => {
       if (isValidElement(child)) {
-        return child.props;
+        return child.props as BaseFieldProps<BaseRecordField>;
       }
     });
     return headersFromChildren ?? [];
@@ -167,7 +167,9 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
           </TableHead>
           <TableBody>
             {slicedRecords.map((record) => {
-              const injectedRowStyle = rowStyle ? rowStyle(record, theme) : undefined;
+              const injectedRowStyle = rowStyle
+                ? (rowStyle(record, theme) as CSSProperties)
+                : undefined;
               return (
                 <TableRow key={record.id} style={injectedRowStyle}>
                   <TableCellCheckbox>
@@ -181,7 +183,7 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
                       return null;
                     }
 
-                    const { source } = child.props;
+                    const { source } = child.props as BaseFieldProps<BaseRecordField>;
 
                     return (
                       <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>

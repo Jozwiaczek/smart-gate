@@ -5,16 +5,16 @@ import { CubeProps, GridProps } from './Spinner.types';
 
 export const CubeGrid = styled.div<GridProps>(
   ({ size, margin }) => `
-    width: ${size};
-    height: ${size};
-    margin: ${margin};
+    width: ${size ?? '18px'};
+    height: ${size ?? '18px'};
+    ${margin ? `margin: ${margin}` : ''};
   `,
 );
 
 const cubeGridScaleDelay = keyframes`
   0%, 70%, 100% {
     transform: scale3D(1, 1, 1);
-  } 
+  }
   35% {
       transform: scale3D(0, 0, 1);
   }

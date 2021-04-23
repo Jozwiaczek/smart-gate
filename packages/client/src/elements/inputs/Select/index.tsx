@@ -29,10 +29,14 @@ const Select = <T extends unknown>({
   useOnClickOutside(selectRef, closeOptionsList);
 
   const allOptions = useMemo(
-    () =>
+    (): Array<SelectOption<T>> =>
       Children.map(children, (child, index) => {
         if (isValidElement(child)) {
-          const { value: childValue, label: childLabel, children: childChildren } = child.props;
+          const {
+            value: childValue,
+            label: childLabel,
+            children: childChildren,
+          } = child.props as SelectOption<T>;
           return {
             index,
             value: childValue,
@@ -69,7 +73,7 @@ const Select = <T extends unknown>({
       </SelectInput>
       <SelectList isOpen={isOpen} openDirection={openDirection}>
         {allOptions?.map((option) => (
-          <SelectListItem key={option.value} onClick={() => onOptionClick(option)}>
+          <SelectListItem key={option.value as never} onClick={() => onOptionClick(option)}>
             {option.label}
           </SelectListItem>
         ))}

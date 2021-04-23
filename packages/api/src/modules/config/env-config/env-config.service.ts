@@ -4,7 +4,6 @@ type CustomValueParser<SourceType, TargetType> = (valueRaw: SourceType) => Targe
 
 @Injectable()
 export class EnvConfigService {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private readonly config: Record<string, any> = {};
 
   public get(key: string, required?: true): ReturnType<CustomValueParser<string, string>>;
@@ -42,6 +41,7 @@ export class EnvConfigService {
         this.config[key] = parser ? parser(value) : value;
       }
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.config[key];
   }
 }

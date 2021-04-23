@@ -13,7 +13,7 @@ import { EnvConfigModule } from './env-config/env-config.module';
     },
     {
       provide: Config,
-      useFactory: async (configLoader: ConfigLoader) => configLoader.loadConfig(),
+      useFactory: (configLoader: ConfigLoader) => configLoader.loadConfig(),
       inject: [ConfigLoader],
     },
   ],
