@@ -18,15 +18,8 @@ module.exports = {
     'no-console': 0,
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
 
-    '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
-    '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    '@typescript-eslint/dot-notation': 0,
-    '@typescript-eslint/no-throw-literal': 0,
-    '@typescript-eslint/no-implied-eval': 0,
-    '@typescript-eslint/explicit-function-return-type': 0, // Disabled to improve code readability. No needed during writing React components
-    '@typescript-eslint/indent': 0, // Disabled because prettier will handle this rule
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],
     '@typescript-eslint/no-floating-promises': [2, { ignoreIIFE: true, ignoreVoid: true }],
     '@typescript-eslint/naming-convention': [
@@ -54,9 +47,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/require-default-props': 0,
     'react/jsx-boolean-value': [2, 'never'],
-    'react/jsx-one-expression-per-line': 0, // Disabled because of prettier rules
     'react/jsx-props-no-spreading': 0,
-    'react/jsx-fragments': 0,
     'react/display-name': 0,
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)

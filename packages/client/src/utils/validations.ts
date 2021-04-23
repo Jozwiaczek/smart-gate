@@ -20,6 +20,7 @@ export const isValidEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const composeValidation = (...fns: ((value: string, ...opt: any[]) => boolean)[]) => (
   value: string,
 ): boolean =>
