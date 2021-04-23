@@ -1,29 +1,14 @@
-name: 'Continuous Integration'
-on: [pull_request]
+name: 'Prepare release PR'
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  Validate:
-    name: 'Validate Pull Request'
+  Prepare:
+    name: 'Prepare release pr'
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    container: node
-    env:
-      DB_PORT: 5432
-      DB_HOST: postgres
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres_password
-      DB_DATABASE_TEST: smart_gate_db_test
-      NODE_VERSION: 12.x
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres_password
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - name: 'Git checkout'
         uses: actions/checkout@v2
@@ -56,19 +41,13 @@ jobs:
         run: yarn install --frozen-lockfile
       # End of yarn setup
 
-      - name: 'Audit dependencies'
-        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
-      - name: 'Run Prettier'
-        run: yarn prettier
-      - name: 'Run ESLint'
-        run: yarn lint
-      - name: 'Setup test database'
-        run: cd packages/ci-scripts && yarn setup:testDB
-      - name: 'Run unit tests'
-        run: yarn test
-      - name: 'Run E2E tests'
-        run: yarn test:e2e
-      - name: 'Build API'
-        run: cd packages/api && yarn build
-      - name: 'Build Client'
-        run: cd packages/client && yarn build
+      - name: 'Build CI scripts'
+        run: cd packages/ci-scripts && yarn build
+
+      - name: 'Prepare PR'
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { prepareReleasePR } = require(`${process.env.GITHUB_WORKSPACE}/packages/ci-scripts/build/src/prepareReleasePR`)
+            prepareReleasePR({ github, context })

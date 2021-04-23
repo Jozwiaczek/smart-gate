@@ -42,7 +42,7 @@ const setupTestDatabase = async (): Promise<void> => {
   }
 
   const adminClient = await createClientAndConnect({
-    host: process.env.DB_HOST,
+    host: process.env.DB_HOST as string,
     port: +(process.env.DB_PORT as string),
     user: process.env.DB_USERNAME as string,
     password: process.env.DB_PASSWORD as string,
@@ -51,7 +51,7 @@ const setupTestDatabase = async (): Promise<void> => {
   await adminClient.query(`CREATE DATABASE ${process.env.DB_DATABASE_TEST}`);
 
   const testDatabaseClient = await createClientAndConnect({
-    host: process.env.DB_HOST,
+    host: process.env.DB_HOST as string,
     port: +(process.env.DB_PORT as string),
     user: process.env.DB_USERNAME as string,
     password: process.env.DB_PASSWORD as string,

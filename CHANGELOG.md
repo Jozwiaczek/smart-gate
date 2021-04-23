@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.7.0...v1.8.0) (2021-04-16)
+
+
+### Features
+
+* **api:** add api cors ([4b5aeea](https://github.com/Jozwiaczek/smart-gate/commit/4b5aeea3ca2f5f5a4130218ae45519ab2ed76cb6))
+
 # [1.7.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.6.1...v1.7.0) (2021-04-16)
 
 

@@ -13,6 +13,7 @@ import { useTheme } from 'styled-components';
 import { useAxios, useSnackbar } from '../../../hooks';
 import { CancelIcon, TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
+import { getLabelFromSource } from '../../../utils';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import { Checkbox } from '../../inputs';
 import {
@@ -133,6 +134,14 @@ const DetailedList = ({
     setSelectedRows([]);
   }, [deleteMutation, selectedRows]);
 
+  const getHeaderLabel = (source: string, label?: string, noTranslation?: boolean) => {
+    if (noTranslation) {
+      return label || getLabelFromSource(source);
+    }
+
+    return t(label as never) || t(`baseApiFields.${source}` as never);
+  };
+
   const onHeaderClick = (property: string) => {
     console.log(property);
   };
@@ -159,9 +168,9 @@ const DetailedList = ({
               <TableHeaderCheckbox>
                 <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
               </TableHeaderCheckbox>
-              {headers.map(({ label, source }) => (
+              {headers.map(({ label, source, noTranslation }) => (
                 <TableHeader key={label || source} onClick={() => onHeaderClick(source)}>
-                  {t(label as never) || t(`baseApiFields.${source}` as never)}
+                  {getHeaderLabel(source, label, noTranslation)}
                 </TableHeader>
               ))}
             </TableRow>
