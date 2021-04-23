@@ -1,36 +1,23 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'airbnb-typescript',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'plugin:prettier/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-  ],
-  plugins: ['simple-import-sort', 'import', '@typescript-eslint'],
   parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
     project: ['./packages/*/tsconfig.json', './packages/*/tsconfig.dev.json', 'tsconfig.dev.json'],
     tsconfigRootDir: __dirname,
     EXPERIMENTAL_useSourceOfProjectReferenceRedirect: true,
-    ecmaFeatures: {
-      jsx: true,
-    },
   },
+  extends: [
+    'airbnb/hooks',
+    'airbnb-typescript',
+    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+  ],
+  plugins: ['simple-import-sort'],
   rules: {
     'no-void': 0,
     'consistent-return': 0,
     'no-console': 0,
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
 
-    '@typescript-eslint/unbound-method': 0, // TODO: Remove with react-hook-form migration
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/no-explicit-any': 0,
@@ -70,6 +57,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0, // Disabled because of prettier rules
     'react/jsx-props-no-spreading': 0,
     'react/jsx-fragments': 0,
+    'react/display-name': 0,
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
 
