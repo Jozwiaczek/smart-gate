@@ -21,7 +21,7 @@ const Dashboard = () => {
   };
 
   const changeLocale = () => {
-    i18n.changeLanguage(i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl);
+    void i18n.changeLanguage(i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl);
   };
 
   const onChangeTheme = () => {
