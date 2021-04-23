@@ -12,8 +12,8 @@ export default {
 } as Meta;
 
 const MockWrapper = styled.div`
-  width: 100%;
   height: 100%;
+  width: 100%;
 `;
 
 const Template: Story<AppBarProps> = (args) => (

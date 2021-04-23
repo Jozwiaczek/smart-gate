@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { ScrollButtonWrapperProps, TabsIndicatorProps, TabsWrapperProps } from './Tabs.types';
 
 export const TabsRoot = styled.div`
-  position: relative;
   height: 100%;
+  position: relative;
 `;
 
 export const TabsWrapper = styled.div<TabsWrapperProps>`
-  position: relative;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   height: 100%;
-  width: 100%;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
   scrollbar-width: none;
-  -ms-overflow-style: none;
+  width: 100%;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -32,12 +32,12 @@ export const TabsWrapper = styled.div<TabsWrapperProps>`
 `;
 
 export const TabsIndicator = styled.span<TabsIndicatorProps>`
-  position: absolute;
   background: ${({ theme }) => theme.palette.primary.light};
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
   ${({ position }) => `${position}: 0`};
   height: ${({ height }) => height}px;
+  position: absolute;
   width: ${({ width }) => width}px;
-  border-radius: ${({ theme }) => theme.sizes.borderRadius};
 
   ${({ orientation, animationSpace }) =>
     orientation === 'vertical'
@@ -52,24 +52,23 @@ export const TabsIndicator = styled.span<TabsIndicatorProps>`
 `;
 
 export const ScrollButtonWrapper = styled.div<ScrollButtonWrapperProps>`
+  align-items: center;
+  bottom: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
+  display: flex;
+  height: ${({ orientation }) => (orientation === 'horizontal' ? '100%' : '50px')};
+  justify-content: center;
+  left: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
   pointer-events: none;
   position: absolute;
-  top: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
-  bottom: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
-  left: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
   right: ${({ displayType }) => (displayType === 'end' ? 0 : 'auto')};
-  height: ${({ orientation }) => (orientation === 'horizontal' ? '100%' : '50px')};
+  top: ${({ displayType }) => (displayType === 'start' ? 0 : 'auto')};
   width: ${({ orientation }) => (orientation === 'vertical' ? '100%' : '50px')};
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1;
 `;
 
 export const ScrollIconWrapper = styled.div<ScrollButtonWrapperProps>`
-  pointer-events: all;
-  width: 50px;
   height: 50px;
+  pointer-events: all;
   transform: rotate(
     ${({ displayType, orientation }) => {
       if (displayType === 'start') {
@@ -78,4 +77,5 @@ export const ScrollIconWrapper = styled.div<ScrollButtonWrapperProps>`
       return orientation === 'vertical' ? '90deg' : '0deg';
     }}
   );
+  width: 50px;
 `;

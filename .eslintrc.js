@@ -11,7 +11,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  plugins: ['simple-import-sort'],
+  plugins: ['simple-import-sort', 'better-styled-components'],
   rules: {
     'no-void': 0,
     'consistent-return': 0,
@@ -51,6 +51,8 @@ module.exports = {
     'react/display-name': 0,
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
+
+    'better-styled-components/sort-declarations-alphabetically': 2,
 
     'prettier/prettier': [
       2,

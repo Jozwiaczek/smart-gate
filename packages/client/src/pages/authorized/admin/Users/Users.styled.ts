@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  padding-top: 60px;
   height: 100%;
   overflow-x: auto;
+  padding-top: 60px;
 `;

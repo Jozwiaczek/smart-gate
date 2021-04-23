@@ -3,31 +3,31 @@ import styled from 'styled-components';
 import { Button } from '../../../../elements';
 
 export const Wrapper = styled.div`
-  position: relative;
-  z-index: 999;
   height: 100%;
+  position: relative;
   width: 100%;
+  z-index: 999;
 `;
 
 export const ListContainer = styled.div`
-  padding-top: 60px;
   height: 100%;
   overflow-x: auto;
+  padding-top: 60px;
 `;
 
 export const SendInvitationButton = styled(Button)`
-  position: absolute;
-  right: 0;
-  top: -12px;
-  height: 50px;
   display: flex;
+  height: 50px;
   justify-content: center;
   padding-left: 64px;
   padding-right: 64px;
+  position: absolute;
+  right: 0;
+  top: -12px;
 
   svg {
-    margin-left: 10px;
     height: 26px;
+    margin-left: 10px;
     width: 26px;
   }
 `;

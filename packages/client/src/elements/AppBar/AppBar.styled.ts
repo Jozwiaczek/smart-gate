@@ -12,14 +12,14 @@ export const Wrapper = styled.div<{ orientation: TabsOrientation }>(
 );
 
 export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 90px;
   background: ${({ theme }) => theme.palette.background.paper};
-  box-shadow: ${({ theme }) => theme.palette.boxShadow.big};
-  overflow: hidden;
   border-radius: 25px 25px 0 0;
+  bottom: 0;
+  box-shadow: ${({ theme }) => theme.palette.boxShadow.big};
+  height: 90px;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
   ${({ orientation }) =>
     orientation === 'vertical'
       ? `
@@ -35,9 +35,9 @@ export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
 `;
 
 export const TabPageWrapper = styled.div<{ orientation?: TabsOrientation }>`
-  width: 100%;
   height: 100%;
   padding-bottom: 90px;
+  width: 100%;
   ${({ orientation }) =>
     orientation === 'vertical' &&
     `

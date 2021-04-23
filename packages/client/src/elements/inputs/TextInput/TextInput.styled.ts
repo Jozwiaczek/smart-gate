@@ -9,11 +9,11 @@ import {
 import { getInputPadding, inputAdornmentSize, inputBasePadding } from './utils';
 
 export const InputAdornment = styled.span<InputAdornmentProps>`
+  color: ${({ theme }) => theme.palette.colors.orange};
   position: absolute;
   top: 44px;
-  z-index: 2;
   ${({ position }) => `${position === 'start' ? 'left:' : 'right:'} ${inputBasePadding}px`};
-  color: ${({ theme }) => theme.palette.colors.orange};
+  z-index: 2;
   svg {
     font-size: ${inputAdornmentSize}px;
   }
@@ -162,10 +162,10 @@ export const Container = styled.div<TextInputContainerProps>(
 export const Error = styled.div`
   color: ${({ theme: { palette } }) => palette.action.error};
   font-size: 13px;
+  height: 13px;
+  left: 10px;
   margin-left: 5px;
   margin-top: 5px;
-  height: 13px;
   position: absolute;
   top: 85px;
-  left: 10px;
 `;

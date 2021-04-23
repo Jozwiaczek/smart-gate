@@ -21,11 +21,11 @@ const cubeGridScaleDelay = keyframes`
 `;
 
 export const Cube = styled.div<CubeProps>`
-  width: 33%;
-  height: 33%;
+  animation: ${cubeGridScaleDelay} 1.3s infinite ease-in-out;
+  animation-delay: ${({ animationDelay }) => `${animationDelay}ms`};
   background-color: ${({ color, theme: { palette } }) =>
     color === ThemeType.light ? palette.primary.light : palette.primary.dark};
   float: left;
-  animation: ${cubeGridScaleDelay} 1.3s infinite ease-in-out;
-  animation-delay: ${({ animationDelay }) => `${animationDelay}ms`};
+  height: 33%;
+  width: 33%;
 `;

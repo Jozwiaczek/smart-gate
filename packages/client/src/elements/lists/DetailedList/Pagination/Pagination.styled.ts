@@ -3,40 +3,40 @@ import styled from 'styled-components';
 import { IconButton } from '../../../buttons';
 
 export const PaginationWrapper = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.palette.divider.paper};
-  display: flex;
-  justify-content: flex-end;
   align-items: center;
-  min-height: 60px;
-  height: 60px;
-  position: sticky;
-  bottom: 0;
   background: ${({ theme }) => theme.palette.background.paper};
+  border-top: 1px solid ${({ theme }) => theme.palette.divider.paper};
+  bottom: 0;
+  display: flex;
+  height: 60px;
+  justify-content: flex-end;
+  min-height: 60px;
+  position: sticky;
 `;
 
 export const PaginationButton = styled(IconButton)`
-  height: 16px;
   border-radius: ${({ theme }) => theme.sizes.borderRadius};
   color: ${({ theme }) => theme.palette.text.primary};
+  height: 16px;
 `;
 
 export const PerPageWrapper = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   margin-right: 40px;
 `;
 
 export const PerPageLabel = styled.p`
-  margin-right: 10px;
   color: ${({ theme }) => theme.palette.text.secondary};
+  margin-right: 10px;
 `;
 
 export const TotalsLabel = styled.p`
-  margin-right: 20px;
   color: ${({ theme }) => theme.palette.text.secondary};
+  margin-right: 20px;
 `;
 
 export const PageNavigation = styled.div`
-  margin-right: 20px;
   display: flex;
+  margin-right: 20px;
 `;

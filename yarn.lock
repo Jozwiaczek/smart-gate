@@ -4652,7 +4652,7 @@
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
-"@typescript-eslint/parser@^4.21.0", "@typescript-eslint/parser@^4.4.1", "@typescript-eslint/parser@^4.5.0":
+"@typescript-eslint/parser@^4.4.1", "@typescript-eslint/parser@^4.5.0":
   version "4.22.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.22.0.tgz#e1637327fcf796c641fe55f73530e90b16ac8fe8"
   integrity sha512-z/bGdBJJZJN76nvAY9DkJANYgK3nlRstRRi74WHm3jjgf2I8AglrSY+6l7ogxOmn55YJ6oKZCLLy+6PW70z15Q==
@@ -8881,17 +8881,6 @@ eslint-import-resolver-node@^0.3.4:
   dependencies:
     debug "^2.6.9"
     resolve "^1.13.1"
-
-eslint-loader@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-loader/-/eslint-loader-4.0.2.tgz#386a1e21bcb613b3cf2d252a3b708023ccfb41ec"
-  integrity sha512-EDpXor6lsjtTzZpLUn7KmXs02+nIjGcgees9BYjNkWra3jVq5vVa8IoCKgzT2M7dNNeoMBtaSG83Bd40N3poLw==
-  dependencies:
-    find-cache-dir "^3.3.1"
-    fs-extra "^8.1.0"
-    loader-utils "^2.0.0"
-    object-hash "^2.0.3"
-    schema-utils "^2.6.5"
 
 eslint-module-utils@^2.6.0:
   version "2.6.0"
@@ -14527,7 +14516,7 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-hash@2.1.1, object-hash@^2.0.3:
+object-hash@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.1.1.tgz#9447d0279b4fcf80cff3259bf66a1dc73afabe09"
   integrity sha512-VOJmgmS+7wvXf8CjbQmimtCnEx3IAoLxI3fp2fbWehxrWBcAQFbk+vcwb6vzR0VZv/eNCJ/27j151ZTwqW/JeQ==

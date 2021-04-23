@@ -4,21 +4,21 @@ import { IconButton } from '../../buttons';
 import Card from '../../Card';
 
 export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: border-radius 150ms;
   border-radius: ${({
     isBulkActionsOpen,
     theme: {
       sizes: { borderRadius },
     },
   }) => (isBulkActionsOpen ? `0 0 ${borderRadius} ${borderRadius}` : borderRadius)};
-
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   overflow-y: auto;
+  padding: 0;
+  transition: border-radius 150ms;
+
+  width: 100%;
 
   th {
     background: ${({ theme }) => theme.palette.background.paper};
@@ -47,20 +47,20 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
 `;
 
 export const Table = styled.table`
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 `;
 
 export const TableHeader = styled.th`
-  font-weight: 700;
   color: ${({ theme }) => theme.palette.text.primary};
+  font-weight: 700;
   text-align: left;
 `;
 
 export const TableHeaderCheckbox = styled.th`
-  width: 24px;
-  padding: 0 12px 0 16px;
   align-self: start;
+  padding: 0 12px 0 16px;
+  width: 24px;
 `;
 
 export const TableRow = styled.tr`
@@ -75,8 +75,8 @@ export const TableCell = styled.td`
 `;
 
 export const TableCellCheckbox = styled.td`
-  width: 24px;
   padding: 0 12px 0 16px;
+  width: 24px;
 `;
 
 export const TableBody = styled.tbody`
@@ -90,31 +90,31 @@ export const TableBody = styled.tbody`
 `;
 
 export const ListWrapper = styled.div`
-  position: relative;
   height: 100%;
+  position: relative;
   width: 100%;
 `;
 
 export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 7px;
   align-items: center;
   background: ${({ theme }) => theme.palette.primary.main};
-  box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(1)};
-  height: 50px;
-  top: -50px;
-  left: 0;
-  right: 0;
-  transition: transform 150ms;
-
-  transform-origin: bottom;
   border-radius: ${({
     theme: {
       sizes: { borderRadius },
     },
   }) => `${borderRadius} ${borderRadius} 0 0`};
+  box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(1)};
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  left: 0;
+  padding: 0 7px;
+  position: absolute;
+  right: 0;
+  top: -50px;
+
+  transform-origin: bottom;
+  transition: transform 150ms;
 
   ${({ isOpen }) =>
     isOpen
@@ -127,23 +127,23 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
 `;
 
 export const BulkCancelButton = styled(IconButton)`
-  margin-right: 9px;
   color: ${({ theme }) => theme.palette.text.dark};
+  margin-right: 9px;
   svg {
     width: 14px;
   }
 `;
 
 export const BulkCancelWrapper = styled.div`
+  align-items: center;
   color: ${({ theme }) => theme.palette.text.primary};
   display: flex;
-  align-items: center;
   height: 100%;
 `;
 
 export const DeleteButton = styled(IconButton)`
-  height: 36px;
   border-radius: ${({ theme }) => theme.sizes.borderRadius};
+  height: 36px;
   svg {
     margin-right: 10px;
   }
