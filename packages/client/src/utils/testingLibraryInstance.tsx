@@ -19,7 +19,7 @@ const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'queries'>
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation((query: string) => ({
     matches: false,
     media: query,
     onchange: null,

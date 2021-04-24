@@ -2,7 +2,7 @@ import { BaseApiResource } from '../../interfaces/api.types';
 
 interface BaseFieldProps<T> {
   label?: string;
-  source: keyof T;
+  source: keyof T & string;
   record?: T;
   asTitle?: boolean;
   noLabel?: boolean;

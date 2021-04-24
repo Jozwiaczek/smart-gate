@@ -13,7 +13,9 @@ const StoryWrapper = (props: SnackbarProps) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>Open</button>
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open
+      </button>
       <Snackbar {...props} onClose={() => setIsOpen(false)} open={isOpen}>
         Lorem ipsum Oops, Something Went Wrong
       </Snackbar>

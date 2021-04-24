@@ -45,9 +45,9 @@ jobs:
         run: cd packages/ci-scripts && yarn build
 
       - name: 'Prepare PR'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v4.0.1
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const { prepareReleasePR } = require(`${process.env.GITHUB_WORKSPACE}/packages/ci-scripts/build/src/prepareReleasePR`)
+            const { prepareReleasePR } = require(`./packages/ci-scripts/build/src/prepareReleasePR`)
             prepareReleasePR({ github, context })

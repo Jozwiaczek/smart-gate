@@ -29,15 +29,15 @@ import {
 } from '.';
 
 const IconsWrapper = styled.div`
+  align-items: flex-start;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 80%;
-  align-items: flex-start;
-  flex-wrap: wrap;
 
   > * {
-    margin-right: 10px;
     color: ${({ theme: { palette } }) => palette.primary.main};
+    margin-right: 10px;
     width: 30px;
   }
 `;

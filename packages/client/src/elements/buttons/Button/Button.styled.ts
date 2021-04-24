@@ -12,38 +12,38 @@ const getFontColor = ({
   palette: {
     text: { light, dark },
   },
-}: HelperStyledFunction) => {
+}: HelperStyledFunction): string => {
   switch (colorVariant) {
     case 'blue':
-      return light;
+      return light as string;
     case 'red':
-      return light;
+      return light as string;
     case ThemeType.dark:
-      return light;
+      return light as string;
     case ThemeType.light:
-      return dark;
+      return dark as string;
     default:
-      return dark;
+      return dark as string;
   }
 };
 
 const getBaseColor = ({
   colorVariant,
   palette: { colors, primary, background },
-}: HelperStyledFunction) => {
+}: HelperStyledFunction): string => {
   switch (colorVariant) {
     case 'blue':
-      return colors.blue;
+      return colors.blue as string;
     case 'red':
-      return colors.red;
+      return colors.red as string;
     case 'card':
-      return background.paper;
+      return background.paper as string;
     case ThemeType.dark:
-      return primary.dark;
+      return primary.dark as string;
     case ThemeType.light:
-      return primary.light;
+      return primary.light as string;
     default:
-      return primary.dark;
+      return primary.dark as string;
   }
 };
 
@@ -51,7 +51,7 @@ export const StyledButton = styled.button<ButtonProps>(
   ({ colorVariant, fullWidth, margin, theme: { palette, sizes } }) => `
   position: relative;
   overflow: hidden;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@ export const StyledButton = styled.button<ButtonProps>(
   background-color: ${getBaseColor({ colorVariant, palette })};
   color: ${getFontColor({ colorVariant, palette })};
   padding: 21px 14px;
-  margin: ${margin};
+  ${margin ? `margin: ${margin}` : ''};
   border: none;
   min-width: 100px;
   cursor: pointer;
@@ -68,9 +68,9 @@ export const StyledButton = styled.button<ButtonProps>(
   outline: none;
   box-shadow: ${palette.boxShadow.default};
   transition: box-shadow 150ms ease-in-out;
-  
-  ${fullWidth && 'width: 100%'};
-  
+
+  ${fullWidth ? 'width: 100%' : ''};
+
   svg {
     transition: transform 150ms ease-in-out;
   }
@@ -90,7 +90,7 @@ export const StyledButton = styled.button<ButtonProps>(
       colorVariant === ThemeType.light ? palette.primary.dark : palette.primary.light
     };
   }
-  
+
   &:disabled {
     transition: none;
     background-color: ${palette.background.disabled};

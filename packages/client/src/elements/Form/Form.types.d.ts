@@ -20,3 +20,14 @@ export interface FormProps extends HTMLForm {
 }
 
 export type ValidationType = 'email' | 'required' | 'password';
+
+interface Validation {
+  [key: string]: string | ((value: string) => boolean | string);
+}
+
+interface FormBaseInputProps {
+  name: string;
+  required?: boolean;
+  validation: Validation;
+  validationType: ValidationType;
+}

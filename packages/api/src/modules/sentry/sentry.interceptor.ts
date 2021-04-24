@@ -22,7 +22,7 @@ export class SentryInterceptor implements NestInterceptor {
       Constants.PATH_METADATA,
       context.getHandler(),
     );
-    const { method } = context.switchToHttp().getRequest();
+    const { method } = context.switchToHttp().getRequest<{ method: string }>();
 
     Sentry.configureScope((scope) => {
       scope.setFingerprint(['{{ default }}', method, classPath, handlerPath]);
@@ -55,6 +55,8 @@ export class SentryInterceptor implements NestInterceptor {
 
         throw error;
       }),
+      // TODO: check is it working with promises
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       finalize(async () => {
         transaction?.finish();
         await Sentry.flush();

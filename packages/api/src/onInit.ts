@@ -29,8 +29,8 @@ const sendAdminInvitation = async (
   if (!(await userRepository.count()) && config.superAdminEmails) {
     await invitationRepository.repository.clear();
 
-    config.superAdminEmails.split(';').forEach((email) => {
-      invitationsService.send({ email: email.trim(), roles: [Role.SuperAdmin] });
+    config.superAdminEmails.split(';').map(async (email) => {
+      await invitationsService.send({ email: email.trim(), roles: [Role.SuperAdmin] });
     });
   }
 };

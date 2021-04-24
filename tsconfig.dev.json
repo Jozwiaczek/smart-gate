@@ -1,0 +1,3 @@
+{
+  "include": [".eslintrc.js", ".prettierrc.js", "lint-staged.config.js"] // Left for @typescript-eslint requirements
+}

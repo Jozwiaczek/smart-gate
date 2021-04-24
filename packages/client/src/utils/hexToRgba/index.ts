@@ -1,6 +1,7 @@
 const hexToRgba = (hex: string, opacity = 1): string => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  const shorthandHex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands,@typescript-eslint/no-unsafe-return
+  const shorthandHex = hex.replace(shorthandRegex, (_, r, g, b): string => r + r + g + g + b + b);
 
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(shorthandHex);
   if (!result) {

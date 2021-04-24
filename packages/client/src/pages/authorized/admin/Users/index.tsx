@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CardList, DateField, DetailedList, FunctionField, TextField } from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
+import { ApiUser } from '../../../../interfaces/api.types';
 import { ListContainer, Wrapper } from './Users.styled';
 
 const Users = () => {
@@ -11,7 +12,7 @@ const Users = () => {
     <Wrapper>
       {isMobile ? (
         <CardList resource="users">
-          <FunctionField
+          <FunctionField<ApiUser>
             label="user.name"
             asTitle
             render={({ firstName, lastName }) => `${firstName} ${lastName}`}
@@ -22,7 +23,7 @@ const Users = () => {
       ) : (
         <ListContainer>
           <DetailedList resource="users">
-            <FunctionField
+            <FunctionField<ApiUser>
               label="user.name"
               render={({ firstName, lastName }) => `${firstName} ${lastName}`}
             />

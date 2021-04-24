@@ -76,20 +76,20 @@ export const RouteWrapper = styled.div`
 `;
 
 export const RouteTopContainer = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
 `;
 
 export const TitleWrapper = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
 `;
 
 export const RouteIconWrapper = styled.div`
-  width: 52px;
   color: ${({ theme }) => theme.palette.text.primary};
   margin-left: 21px;
+  width: 52px;
 `;
 
 export const BackButtonWrapper = styled.div`

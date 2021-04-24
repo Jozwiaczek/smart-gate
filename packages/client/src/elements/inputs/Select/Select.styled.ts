@@ -9,28 +9,28 @@ export const SelectWrapper = styled.div`
 `;
 
 export const SelectInput = styled(IconButton)`
-  width: 100%;
-  color: ${({ theme }) => theme.palette.text.primary};
-  height: 16px;
-  border-radius: ${({ theme }) => theme.sizes.borderRadius};
-  display: flex;
   align-items: center;
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
+  color: ${({ theme }) => theme.palette.text.primary};
+  display: flex;
+  height: 16px;
+  width: 100%;
   svg {
     margin-top: 3px;
   }
 `;
 
 export const SelectList = styled.div<{ isOpen: boolean; openDirection: SelectOpenDirection }>`
-  position: absolute;
-  top: ${({ openDirection }) => (openDirection === 'down' ? '-15px' : '-180px')};
+  background: ${({ theme }) => theme.palette.background.paper};
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
+  box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(0.15)};
   max-height: 317px;
   min-width: 50px;
-  background: ${({ theme }) => theme.palette.background.paper};
-  box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(0.15)};
-  border-radius: ${({ theme }) => theme.sizes.borderRadius};
   overflow: hidden;
-  transition: transform 150ms ease-in-out;
+  position: absolute;
+  top: ${({ openDirection }) => (openDirection === 'down' ? '-15px' : '-180px')};
   transform-origin: ${({ openDirection }) => (openDirection === 'down' ? 'top' : 'bottom')};
+  transition: transform 150ms ease-in-out;
   ${({ isOpen }) =>
     isOpen
       ? `
@@ -42,19 +42,19 @@ export const SelectList = styled.div<{ isOpen: boolean; openDirection: SelectOpe
 `;
 
 export const SelectListItem = styled.button`
-  font-size: 16px;
-  cursor: pointer;
-  min-height: 50px;
-  width: 100%;
-  line-height: 16px;
-  outline: none;
-  border: none;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.palette.text.primary};
   background: ${({ theme }) => theme.palette.background.paper};
+  border: none;
+  color: ${({ theme }) => theme.palette.text.primary};
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  line-height: 16px;
+  min-height: 50px;
+  outline: none;
   transition: box-shadow 150ms ease-in-out;
+  width: 100%;
 
   :hover {
     background: ${({ theme }) => theme.palette.background.paperHover};

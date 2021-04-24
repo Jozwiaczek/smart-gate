@@ -10,6 +10,7 @@ const DateField = <T extends BaseRecordField>({ source, record, showTime }: Date
   if (!record) {
     return null;
   }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const date = new Date(record[source].toString());
   const formatter = new Intl.DateTimeFormat(i18n.language, {
     timeStyle: showTime ? 'medium' : undefined,

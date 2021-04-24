@@ -12,5 +12,6 @@ interface SelectProps<T> {
 interface SelectOption<T> {
   index: number;
   value: T;
-  label: string;
+  label: string | ReactNode;
+  children?: string | ReactNode;
 }

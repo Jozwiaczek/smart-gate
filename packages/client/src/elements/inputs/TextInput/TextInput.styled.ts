@@ -9,11 +9,11 @@ import {
 import { getInputPadding, inputAdornmentSize, inputBasePadding } from './utils';
 
 export const InputAdornment = styled.span<InputAdornmentProps>`
+  color: ${({ theme }) => theme.palette.colors.orange};
   position: absolute;
   top: 44px;
-  z-index: 2;
   ${({ position }) => `${position === 'start' ? 'left:' : 'right:'} ${inputBasePadding}px`};
-  color: ${({ theme }) => theme.palette.colors.orange};
+  z-index: 2;
   svg {
     font-size: ${inputAdornmentSize}px;
   }
@@ -35,13 +35,14 @@ export const Label = styled.label<LabelProps>(
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
   ${
-    required &&
-    `
+    required
+      ? `
       :after {
         content: '*';
         color: ${palette.action.error};
       }
   `
+      : ''
   }
 `,
 );
@@ -64,12 +65,12 @@ export const StyledInput = styled.input<StyledInputProps>(
   border: 1px solid transparent;
   border-radius: ${sizes.borderRadius};
   outline: none;
-  max-width: ${maxWidth};
+  ${maxWidth ? `max-width: ${maxWidth}` : ''};
   cursor: text;
   position: absolute;
   z-index: 1;
   font-size: 16px;
-  
+
   // Resolves issue with native background color on field autofill
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -78,13 +79,13 @@ export const StyledInput = styled.input<StyledInputProps>(
     -webkit-background-clip: text;
     -webkit-text-fill-color: ${showPassword ? palette.text.dark : palette.text.light};
   }
-  
+
   &:focus {
     border: 2px solid ${palette.primary.light};
   }
-  
-  ${isError && `border: 1px solid ${palette.action.error}`};
-  
+
+  ${isError ? `border: 1px solid ${palette.action.error}` : ''};
+
   ::placeholder {
     color: ${showPassword ? palette.text.dark : palette.text.light};
     opacity: 0.6;
@@ -151,7 +152,7 @@ export const Container = styled.div<TextInputContainerProps>(
   & input:focus + label {
     color: ${palette.text.primary};
   }
-  
+
   & input:hover + label {
     color: ${palette.text.primary};
   }
@@ -161,10 +162,10 @@ export const Container = styled.div<TextInputContainerProps>(
 export const Error = styled.div`
   color: ${({ theme: { palette } }) => palette.action.error};
   font-size: 13px;
+  height: 13px;
+  left: 10px;
   margin-left: 5px;
   margin-top: 5px;
-  height: 13px;
   position: absolute;
   top: 85px;
-  left: 10px;
 `;
