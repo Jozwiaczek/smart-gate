@@ -24,42 +24,42 @@ const fadeOut = keyframes`
 `;
 
 export const Overlay = styled.div<{ isVisible: boolean }>`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  animation: ${({ isVisible }) => (isVisible ? fadeIn : fadeOut)} 400ms linear;
   background: ${({ theme }) => hexToRgba(theme.palette.background.default, 0.85)};
   display: inline-block;
-  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
-  animation: ${({ isVisible }) => (isVisible ? fadeIn : fadeOut)} 400ms linear;
+  height: 100%;
+  position: absolute;
   transition: visibility 400ms linear;
+  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
+  width: 100%;
 `;
 
 export const Wrapper = styled.div`
-  position: fixed;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   left: 0;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 9999;
 `;
 
 export const StyledCard = styled(Card)`
-  position: relative;
-  padding: 40px 60px;
-  z-index: 1;
   margin: 15px;
+  padding: 40px 60px;
+  position: relative;
+  z-index: 1;
 `;
 
 export const CardContent = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   flex-direction: column;
-  text-align: center;
+  justify-content: center;
   max-width: 400px;
+  text-align: center;
   width: 100%;
 `;
 
@@ -82,6 +82,6 @@ export const Title = styled.h2`
 
 export const CloseButtonWrapper = styled.div`
   position: absolute;
-  top: 16px;
   right: 16px;
+  top: 16px;
 `;

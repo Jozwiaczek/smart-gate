@@ -27,7 +27,7 @@ Default.args = {
     <>
       <p>Lorem Ipsum#1</p>
       <p>Lorem Ipsum#2</p>
-      <button>test btn</button>
+      <button type="button">test btn</button>
     </>
   ),
 };
