@@ -8,7 +8,7 @@ import { EnvConfigService } from './env-config/env-config.service';
 export class ConfigLoader {
   constructor(private readonly envConfigService: EnvConfigService) {}
 
-  public async loadConfig(): Promise<Config> {
+  public loadConfig(): Config {
     const nodeENV = this.envConfigService.get('NODE_ENV', true);
     const isProd = nodeENV === 'production';
     const isTest = nodeENV === 'test';

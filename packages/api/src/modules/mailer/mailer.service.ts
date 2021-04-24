@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import SESTransport from 'nodemailer/lib/ses-transport';
 
 import { passwordResetTemplate, welcomeTemplate } from '../../emailTemplates';
 import { Config } from '../config/config';
@@ -17,10 +18,10 @@ export class MailerService {
     const transporterBaseConfig = await this.mailerConfigService.getTransporterConfig();
     const transporter = nodemailer.createTransport(transporterBaseConfig);
 
-    const emailResult = await transporter.sendMail({
+    const emailResult = (await transporter.sendMail({
       ...this.mailerConfigService.getSendEmailConfig(),
       ...options,
-    });
+    })) as SESTransport.SentMessageInfo;
 
     if (this.config.environment.isDev) {
       console.log('Message sent: %s', emailResult.messageId);

@@ -28,13 +28,13 @@ const fadeOut = keyframes`
 `;
 
 const HideAnimation = () => css`
-  visibility: hidden;
   animation: ${fadeOut} 0.5s;
+  visibility: hidden;
 `;
 
 const OpenAnimation = () => css`
-  visibility: visible;
   animation: ${fadeIn} 0.5s;
+  visibility: visible;
 `;
 
 interface GetSnackbarColorsProps {
@@ -77,25 +77,25 @@ const getSnackbarBackground = ({ severity, theme }: GetSnackbarColorsProps) => {
 };
 
 export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
-  display: flex;
-  justify-content: center;
   align-items: center;
-  min-width: 250px;
-  min-height: 50px;
-  text-align: center;
-  padding: 16px 62px 16px 16px;
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+  background: ${getSnackbarBackground};
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
   bottom: ${bottomMargin};
   box-shadow: ${({ theme: { palette } }) => palette.boxShadow.default};
-  border-radius: ${({ theme }) => theme.sizes.borderRadius};
-  transition: visibility 0.3s;
-  font-size: 16px;
-  line-height: 150%;
-
-  background: ${getSnackbarBackground};
   color: ${getSnackbarColor};
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  left: 50%;
+  line-height: 150%;
+  min-height: 50px;
+  min-width: 250px;
+  padding: 16px 62px 16px 16px;
+  position: fixed;
+  text-align: center;
+
+  transform: translateX(-50%);
+  transition: visibility 0.3s;
 
   ${({ open }) => (open ? OpenAnimation : HideAnimation)}
 `;
@@ -103,24 +103,24 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
 const closeButtonSize = '21px';
 
 export const CloseButton = styled.div<CloseButtonProps>`
+  height: ${closeButtonSize};
+  opacity: 1;
   position: absolute;
+  right: ${closeButtonSize};
   top: 17px;
   width: ${closeButtonSize};
-  height: ${closeButtonSize};
-  right: ${closeButtonSize};
-  opacity: 1;
   :hover {
-    opacity: 0.5;
     cursor: pointer;
+    opacity: 0.5;
   }
   :before,
   :after {
-    position: absolute;
-    left: calc(${closeButtonSize} / 2);
+    background-color: ${({ severity, theme }) => getSnackbarColor({ severity, theme })};
     content: '';
     height: ${closeButtonSize};
+    left: calc(${closeButtonSize} / 2);
+    position: absolute;
     width: 2px;
-    background-color: ${({ severity, theme }) => getSnackbarColor({ severity, theme })};
   }
   :before {
     transform: rotate(45deg);

@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 
 import { useCurrentUser, useLocalStorageMemory } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
+import { ApiUser } from '../../../interfaces/api.types';
 import { AuthContext } from './AuthProvider.context';
 import {
   AuthProps,
@@ -19,7 +20,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useCurrentUser();
   const [getExpiration] = useLocalStorageMemory('loginExpirationDate');
 
-  const checkAuth = useCallback(async () => {
+  const checkAuth = useCallback(async (): Promise<ApiUser | undefined> => {
     if (currentUser) {
       return currentUser;
     }
@@ -67,15 +68,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 
   const logout = useCallback(async () => {
-    const response = await axios.get('/auth/logout');
+    await axios.get('/auth/logout');
     setCurrentUser(undefined);
-    return response.data;
   }, [axios, setCurrentUser]);
 
   const logoutFromAllDevices = useCallback(async () => {
-    const response = await axios.get('/auth/logoutFromAllDevices');
+    await axios.get('/auth/logoutFromAllDevices');
     setCurrentUser(undefined);
-    return response.data;
   }, [axios, setCurrentUser]);
 
   const sendPasswordRecoveryEmail = useCallback(

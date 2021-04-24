@@ -62,6 +62,8 @@ jobs:
         run: yarn prettier
       - name: 'Run ESLint'
         run: yarn lint
+      - name: 'Run StyleLint'
+        run: yarn stylelint
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
       - name: 'Run unit tests'

@@ -37,8 +37,9 @@ export function BaseRepository<T extends BaseEntity>(
 
     async create(dataToCreate: DeepPartial<T>): Promise<T> {
       try {
-        return this.repository.save(dataToCreate);
+        return await this.repository.save(dataToCreate);
       } catch (err) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Cannot create entity with data ${dataToCreate}`);
       }
     }
@@ -49,7 +50,7 @@ export function BaseRepository<T extends BaseEntity>(
 
     async findByIdOrFail(id: string): Promise<T> {
       try {
-        return this.repository.findOneOrFail({ where: { id } });
+        return await this.repository.findOneOrFail({ where: { id } });
       } catch (err) {
         throw new Error(`Entity with id: '${id}' dose not exists!`);
       }
@@ -92,6 +93,7 @@ export function BaseRepository<T extends BaseEntity>(
       await this.repository.manager.transaction(async (transactionalEntityManager) => {
         const deleteResult = await transactionalEntityManager.delete(entityType, ids);
         if (!deleteResult.affected || deleteResult.affected !== ids.length) {
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           throw Error(`Unable to delete all entities: [${ids}]`);
         }
       });

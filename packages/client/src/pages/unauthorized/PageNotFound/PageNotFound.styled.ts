@@ -15,20 +15,20 @@ export const Description = styled.h5<DescriptionProps>`
 `;
 
 export const IllustrationWrapper = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 80%;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 80%;
 `;
 
 export const ContentWrapper = styled.div<ContentWrapperProps>`
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
+  display: flex;
   flex-direction: column;
+  height: ${({ illustrationHeight }) => illustrationHeight + 40}px;
+  justify-content: flex-start;
+  margin-bottom: 40px;
   position: relative;
   width: 100%;
-  height: ${({ illustrationHeight }) => illustrationHeight + 40}px;
-  margin-bottom: 40px;
 `;

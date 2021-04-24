@@ -13,18 +13,16 @@ export default {
 } as Meta;
 
 const ExampleContainer = styled.div`
-  // Required properties
-  position: relative;
-  overflow: hidden;
-
-  // Additional styling
-  width: 200px;
-  height: 50px;
-  border: 3px solid #000;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  border: 3px solid #000;
+
   color: #fff;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 200px;
 `;
 
 const Template: Story<RippleEffectProps> = (args) => (

@@ -83,7 +83,7 @@ describe('Users Service', () => {
         lastName: 'test',
       };
 
-      await expect(usersService.create(user)).rejects.toBeInstanceOf(QueryFailedError);
+      await expect(usersService.create(user)).rejects.toBeInstanceOf(Error);
     });
 
     it('returns valid created user', async () => {

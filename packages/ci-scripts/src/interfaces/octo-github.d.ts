@@ -33,9 +33,13 @@ interface OctoPullRequest {
   active_lock_reason?: any;
 }
 
+interface OctoUser {
+  type: string;
+}
+
 interface OctoComment {
   id: number;
-  user: any;
+  user: OctoUser;
   body: string;
 }
 

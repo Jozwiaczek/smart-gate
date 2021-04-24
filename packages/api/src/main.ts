@@ -1,5 +1,6 @@
 import 'dotenv/config';
 
+import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
@@ -9,7 +10,7 @@ import { Config } from './modules/config/config';
 import { SentryInterceptor } from './modules/sentry/sentry.interceptor';
 import onInit from './onInit';
 
-const bootstrap = async () => {
+const bootstrap = async (): Promise<INestApplication> => {
   const app = await NestFactory.create(AppModule);
   const config = app.get(Config);
 
@@ -25,4 +26,6 @@ const bootstrap = async () => {
   return app;
 };
 
-bootstrap().then(onInit);
+bootstrap()
+  .then(onInit)
+  .catch((error) => new Error(`NestApp bootstrap error: ${error as string}`));

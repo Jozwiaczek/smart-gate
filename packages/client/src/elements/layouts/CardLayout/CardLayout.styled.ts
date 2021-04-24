@@ -5,14 +5,14 @@ import { StyledLink, StyledOutLink } from '../../Link/Link.styled';
 import { ActionsContainerProps } from './CardLayout.types';
 
 export const StyledActionsContainer = styled.div<ActionsContainerProps>`
-  width: 100%;
-  height: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
+  flex-direction: ${({ direction }) => direction};
+  flex-wrap: wrap;
+  height: 100%;
   justify-content: space-between;
   margin-top: 30px;
-  flex-wrap: wrap;
-  flex-direction: ${({ direction }) => direction};
+  width: 100%;
 
   ${StyledLink}:not(:last-child), ${StyledOutLink}:not(:last-child) {
     margin-bottom: 16px;
@@ -20,20 +20,20 @@ export const StyledActionsContainer = styled.div<ActionsContainerProps>`
 `;
 
 export const StyledCard = styled(Card)`
-  max-width: 500px;
-  width: 100%;
-  margin: 15px;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 15px;
+  max-width: 500px;
   text-align: center;
+  width: 100%;
 `;
 
 export const CardWrapper = styled.div`
-  width: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 export const StyledTitle = styled.h1`

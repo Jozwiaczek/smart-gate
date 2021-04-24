@@ -5,6 +5,8 @@ export type UseAnimatedType = AnimationType | [AnimationType, AnimationType];
 
 export type AnimationTargets = Element | ReadonlyArray<Element> | null;
 
+type FunctionBasedParameter = (element: HTMLElement, index: number, length: number) => number;
+
 export interface AnimationOptions {
   maxDebounceSize?: number;
   duration?: number | FunctionBasedParameter;

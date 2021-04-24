@@ -29,8 +29,8 @@ export class PasswordResetService {
 
     const link = urlEncodedParams(this.baseMagicLinkUrl, email, generatedUuid);
 
-    await this.mailerService.sendPasswordRecovery(email, firstName, link).catch((error) => {
-      this.cacheManager.del(email);
+    await this.mailerService.sendPasswordRecovery(email, firstName, link).catch(async (error) => {
+      await this.cacheManager.del(email);
       Sentry.captureException(error);
       throw error;
     });

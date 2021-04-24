@@ -1,6 +1,6 @@
 module.exports = {
   extends: '../../.eslintrc.js',
   rules: {
-    'react/display-name': 0,
+    '@typescript-eslint/unbound-method': 0, // TODO: Remove with react-hook-form migration
   },
 };

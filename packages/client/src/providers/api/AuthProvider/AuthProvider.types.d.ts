@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-import { User } from '../CurrentUserProvider/CurrentUserProvider.types';
+import { ApiUser } from '../../../interfaces/api.types';
 
 export interface LoginUserInfo {
-  user: User;
+  user: ApiUser;
   expirationDate: number;
 }
 
@@ -38,9 +38,9 @@ interface UpdatePasswordData {
 export interface AuthProps {
   login: (user: LoginData) => Promise<string | boolean>;
   register: (user: RegistrationData) => Promise<string | boolean>;
-  checkAuth: () => Promise<User | undefined>;
-  logout: () => void;
-  logoutFromAllDevices: () => void;
+  checkAuth: () => Promise<ApiUser | undefined>;
+  logout: () => Promise<void>;
+  logoutFromAllDevices: () => Promise<void>;
   sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<void>;
   updatePassword: (user: UpdatePasswordData) => Promise<void>;
 }

@@ -60,10 +60,10 @@ const CardList = ({ children, resource }: CardListProps) => {
                   return <TitleWrapper>{cloneElement(child, { record })}</TitleWrapper>;
                 }
 
-                const internalLabel = label || t(`baseApiFields.${source}` as never);
+                const internalLabel = label || t(`baseApiFields.${source as string}` as never);
 
                 return (
-                  <CardFieldContainer key={`${id}-${source}`}>
+                  <CardFieldContainer key={`${id}-${source as string}`}>
                     {!noLabel && <p>{internalLabel}:&nbsp;</p>}
                     {cloneElement(child, { record })}
                   </CardFieldContainer>

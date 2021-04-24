@@ -48,7 +48,7 @@ const setupTestDatabase = async (): Promise<void> => {
     password: process.env.DB_PASSWORD as string,
   });
 
-  await adminClient.query(`CREATE DATABASE ${process.env.DB_DATABASE_TEST}`);
+  await adminClient.query(`CREATE DATABASE ${process.env.DB_DATABASE_TEST as string}`);
 
   const testDatabaseClient = await createClientAndConnect({
     host: process.env.DB_HOST as string,

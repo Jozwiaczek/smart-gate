@@ -4,7 +4,7 @@ import { TokenPayload } from '../../../interfaces/token-types';
 
 export const CookiePayload = createParamDecorator<unknown, ExecutionContext, TokenPayload>(
   (data: unknown, context: ExecutionContext): TokenPayload => {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<{ payload: TokenPayload }>();
     if (!request.payload) {
       throw new UnauthorizedException('Invalid token payload');
     }

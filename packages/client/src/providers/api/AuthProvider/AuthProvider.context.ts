@@ -4,8 +4,8 @@ import { AuthProps } from './AuthProvider.types';
 
 const defaultValues: AuthProps = {
   checkAuth: () => Promise.resolve(undefined),
-  logout: () => {},
-  logoutFromAllDevices: () => {},
+  logout: () => Promise.resolve(),
+  logoutFromAllDevices: () => Promise.resolve(),
   login: () => Promise.resolve(false),
   register: () => Promise.resolve(false),
   sendPasswordRecoveryEmail: () => Promise.resolve(),

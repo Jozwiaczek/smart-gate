@@ -4,21 +4,29 @@ import { Button, IconButton } from '../../buttons';
 import Card from '../../Card';
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: flex-start;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const TitleWrapper = styled.div`
+  * {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 23px;
+  }
 `;
 
 export const StyledCard = styled(Card)`
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 340px;
+  padding: 24px;
   position: relative;
   width: 100%;
-  max-width: 340px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  padding: 24px;
 
   > * {
     display: block;
@@ -38,26 +46,26 @@ export const StyledCard = styled(Card)`
 `;
 
 export const FiltersButton = styled(Button)`
-  min-width: 0;
-  width: 55px;
   height: 55px;
+  min-width: 0;
   padding: 10px;
+  width: 55px;
 `;
 
 export const EditButton = styled(IconButton)`
   position: absolute;
-  top: 10px;
   right: 10px;
+  top: 10px;
   svg {
     color: ${({ theme }) => theme.palette.text.primary};
   }
 `;
 
 export const CardsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: flex-start;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   > *:not(:last-child) {
     margin-bottom: 40px;
   }
@@ -71,21 +79,13 @@ export const CardsWrapper = styled.div`
   `};
 `;
 
-export const TitleWrapper = styled.div`
-  * {
-    font-size: 24px;
-    line-height: 23px;
-    font-weight: 700;
-  }
-`;
-
 export const FiltersContainer = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 40px 0;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
+  justify-content: space-between;
   max-width: 740px;
+  padding: 40px 0;
+  width: 100%;
 `;
 
 export const CardFieldContainer = styled.div`
