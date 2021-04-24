@@ -11,6 +11,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:regexp/recommended',
+    'plugin:security/recommended',
   ],
   plugins: ['simple-import-sort', 'better-styled-components'],
   rules: {
@@ -34,6 +35,10 @@ module.exports = {
         },
       },
     ],
+
+    'security/detect-non-literal-regexp': 0,
+    'security/detect-object-injection': 0,
+    'security/detect-unsafe-regex': 0,
 
     'simple-import-sort/imports': 2,
     'simple-import-sort/exports': 2,
