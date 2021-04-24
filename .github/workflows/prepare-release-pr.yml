@@ -2,7 +2,7 @@ name: 'Prepare release PR'
 on:
   pull_request:
     branches:
-      - dev
+      - main
 
 jobs:
   Prepare:
