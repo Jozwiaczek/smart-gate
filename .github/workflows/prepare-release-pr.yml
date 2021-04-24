@@ -2,7 +2,7 @@ name: 'Prepare release PR'
 on:
   pull_request:
     branches:
-      - main
+      - dev
 
 jobs:
   Prepare:
@@ -49,5 +49,5 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const { prepareReleasePR } = require(`${process.env.GITHUB_WORKSPACE}/packages/ci-scripts/build/src/prepareReleasePR`)
+            const { prepareReleasePR } = require(`./packages/ci-scripts/build/src/prepareReleasePR`)
             prepareReleasePR({ github, context })
