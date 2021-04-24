@@ -10,6 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:regexp/recommended',
   ],
   plugins: ['simple-import-sort', 'better-styled-components'],
   rules: {
