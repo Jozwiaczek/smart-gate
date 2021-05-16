@@ -1,8 +1,8 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useHotkeys } from '../../hooks';
-import useAnimated from '../../hooks/useAnimated';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import { CloseButton } from '../buttons';
 import {
@@ -19,26 +19,17 @@ import { DialogProps } from './Dialog.types';
 
 const Dialog = ({ children, isOpen = false, close, title, description }: DialogProps) => {
   const { t } = useTranslation();
-  const cardAnimation = useAnimated<HTMLDivElement>({
-    type: 'slideInUp',
-    opt: { autoTrigger: false, animationOpt: { delay: 1000 } },
-  });
-  useOnClickOutside(cardAnimation.ref, close);
+  const cardRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(cardRef, close);
   useHotkeys('Escape', close);
-
-  useLayoutEffect(() => {
-    if (isOpen) {
-      cardAnimation.trigger();
-    }
-  }, [cardAnimation, isOpen]);
 
   if (!isOpen) {
     return null;
   }
 
-  return (
+  return createPortal(
     <Wrapper data-testid="dialog">
-      <StyledCard ref={cardAnimation.ref}>
+      <StyledCard ref={cardRef}>
         <CardContent>
           <CloseButtonWrapper>
             <CloseButton autoFocus onClick={close} />
@@ -49,7 +40,8 @@ const Dialog = ({ children, isOpen = false, close, title, description }: DialogP
         </CardContent>
       </StyledCard>
       <Overlay isVisible={isOpen} />
-    </Wrapper>
+    </Wrapper>,
+    document.body,
   );
 };
 

@@ -1,3 +1,9 @@
 {
-  "include": [".eslintrc.js", ".prettierrc.js", "lint-staged.config.js"] // Left for @typescript-eslint requirements
+  "include": [
+    ".eslintrc.js",
+    ".prettierrc.js",
+    "lint-staged.config.js",
+    "release.config.js",
+    "commitlint.config.js"
+  ] // Left for @typescript-eslint requirements
 }

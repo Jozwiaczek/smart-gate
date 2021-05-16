@@ -95,7 +95,7 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
   text-align: center;
   transform: translateX(-50%);
   transition: visibility 0.3s;
-  z-index: 9999;
+  z-index: 99999;
 
   ${({ open }) => (open ? OpenAnimation : HideAnimation)}
 `;

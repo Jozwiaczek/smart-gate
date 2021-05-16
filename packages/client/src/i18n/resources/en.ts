@@ -78,6 +78,13 @@ const en = {
       },
       invitations: {
         sendInvitation: 'Send Invitation',
+        createDialog: {
+          title: 'Invite New Member',
+          description:
+            'Invite new members by email to join your Smart Gate. After sent, you will still be able to cancel invitation.',
+          addAsAdmin: 'Add as admin',
+          send: 'Send invite',
+        },
       },
       login: {
         keepMeLoggedIn: 'Keep me logged in',

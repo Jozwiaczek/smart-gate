@@ -80,6 +80,13 @@ const pl: TranslationStructure = {
       },
       invitations: {
         sendInvitation: 'Nowe zaproszenie',
+        createDialog: {
+          title: 'Nowe zaproszenie',
+          description:
+            'Zaproś nowego użytkownika poprzez email aby dodać go do systemu Smart Gate. Po wysłaniu nadal możesz anulować zaproszenie',
+          addAsAdmin: 'Dodaj jako administrator',
+          send: 'Wyślij zaproszenie',
+        },
       },
       login: {
         keepMeLoggedIn: 'Nie wylogowuj mnie',

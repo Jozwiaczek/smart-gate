@@ -47,8 +47,6 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledCard = styled(Card)`
-  margin: 15px;
-  padding: 40px 60px;
   position: relative;
   z-index: 1;
 `;

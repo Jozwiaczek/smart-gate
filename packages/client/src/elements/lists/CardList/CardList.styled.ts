@@ -45,6 +45,15 @@ export const StyledCard = styled(Card)`
   `};
 `;
 
+export const ActionButtons = styled.div`
+  align-items: center;
+  display: flex;
+
+  > *:not(:last-child) {
+    margin-right: 16px;
+  }
+`;
+
 export const FiltersButton = styled(Button)`
   height: 55px;
   min-width: 0;
