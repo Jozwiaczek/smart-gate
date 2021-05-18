@@ -20,7 +20,12 @@ const PasswordRecovery = () => {
     type: 'shake',
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, trigger } = useForm<PasswordRecoveryInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+  } = useForm<PasswordRecoveryInputs>();
   const [emailSentAddress, setEmailSentAddress] = useState<undefined | string>(undefined);
 
   const onBeforeSubmit = async () => {

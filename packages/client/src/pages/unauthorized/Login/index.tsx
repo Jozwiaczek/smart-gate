@@ -22,7 +22,13 @@ const Login = () => {
     type: 'shake',
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    trigger,
+  } = useForm<LoginInputs>();
 
   const onBeforeSubmit = async () => {
     const isValid = await trigger();

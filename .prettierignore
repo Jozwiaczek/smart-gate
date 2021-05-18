@@ -4,3 +4,4 @@ dist
 build
 coverage
 CHANGELOG.md
+jest-test-results.json
