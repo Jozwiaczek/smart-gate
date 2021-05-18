@@ -22,7 +22,13 @@ const SendInvitationButtonWithDialog = () => {
   const axios = useAxios();
   const showSnackbar = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors, reset, trigger } = useForm<CreateInvitationValues>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    trigger,
+  } = useForm<CreateInvitationValues>();
 
   const closeCreateDialog = () => {
     setIsCreateDialogOpen(false);
