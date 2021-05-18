@@ -21,7 +21,7 @@ const Users = () => {
         </CardList>
       ) : (
         <ListContainer>
-          <DetailedList resource="users">
+          <DetailedList resource="users" sortable>
             <TextField source="firstName" />
             <TextField source="lastName" />
             <TextField source="email" />

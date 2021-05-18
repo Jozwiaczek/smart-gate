@@ -32,8 +32,9 @@ import {
   TableHeaderCheckbox,
   TableRow,
 } from './DetailedList.styled';
-import { DetailedListProps, PerPage } from './DetailedList.types';
+import { DetailedListProps, PerPage, Sort } from './DetailedList.types';
 import Pagination from './Pagination';
+import TableSortLabel from './TableSortLabel';
 
 const DetailedList = ({
   onRowClick,
@@ -44,7 +45,13 @@ const DetailedList = ({
 }: DetailedListProps) => {
   const theme = useTheme();
   const axios = useAxios();
-  const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+  const [sort, setSort] = useState<Sort | undefined>(undefined);
+  const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>([
+    `/${resource}`,
+    {
+      ...sort,
+    },
+  ]);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<PerPage>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -170,7 +177,13 @@ const DetailedList = ({
               </TableHeaderCheckbox>
               {headers.map(({ label, source, noTranslation }) => (
                 <TableHeader key={label || source} onClick={() => onHeaderClick(source)}>
-                  {getHeaderLabel(source, label, noTranslation)}
+                  <TableSortLabel
+                    sortable={sortable}
+                    active={sort?.sortBy === source}
+                    direction={sort?.sortDir || 'asc'}
+                  >
+                    {getHeaderLabel(source, label, noTranslation)}
+                  </TableSortLabel>
                 </TableHeader>
               ))}
             </TableRow>

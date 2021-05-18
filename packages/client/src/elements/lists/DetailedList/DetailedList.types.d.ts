@@ -12,3 +12,9 @@ export interface DetailedListProps {
 }
 
 type PerPage = 5 | 10 | 15 | 25;
+
+type SortDir = 'desc' | 'asc';
+export interface Sort {
+  sortBy: string;
+  sortDir: SortDir;
+}
