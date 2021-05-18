@@ -9,6 +9,7 @@ import { ApiList } from '../../../interfaces/api.types';
 import { ThemeType } from '../../../theme/Theme';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import {
+  ActionButtons,
   CardFieldContainer,
   CardsWrapper,
   EditButton,
@@ -20,7 +21,7 @@ import {
 } from './CardList.styled';
 import { CardListProps } from './CardList.types';
 
-const CardList = ({ children, resource }: CardListProps) => {
+const CardList = ({ children, resource, actionButton }: CardListProps) => {
   const queryResult = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
   const records = queryResult.data?.data;
   const history = useHistory();
@@ -37,9 +38,12 @@ const CardList = ({ children, resource }: CardListProps) => {
       <FiltersContainer>
         {/* TODO: add search input */}
         <p>Search</p>
-        <FiltersButton colorVariant={ThemeType.dark}>
-          <FiltersIcon />
-        </FiltersButton>
+        <ActionButtons>
+          <FiltersButton colorVariant={ThemeType.dark}>
+            <FiltersIcon />
+          </FiltersButton>
+          {actionButton && actionButton}
+        </ActionButtons>
       </FiltersContainer>
       <CardsWrapper>
         {records?.map((record) => {

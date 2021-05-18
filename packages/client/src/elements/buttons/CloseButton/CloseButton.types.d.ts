@@ -1,0 +1,1 @@
+type CloseButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;

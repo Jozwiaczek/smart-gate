@@ -6,7 +6,6 @@ import { routes } from '../../../constants';
 import { Button, CardLayout, Form, Link, PaperPlane, TextInput } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
-import { EmailIcon } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
 import { PaperPlaneWrapper } from './PasswordRecovery.styled';
 import { PasswordRecoveryInputs } from './PasswordRecovery.types';
@@ -55,13 +54,7 @@ const PasswordRecovery = () => {
         {t('routes.passwordRecovery.intro.description')}
       </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextInput
-          autoFocus
-          required
-          name="email"
-          validationType="email"
-          startAdornment={<EmailIcon />}
-        />
+        <TextInput autoFocus required name="email" validationType="email" />
         <CardLayout.ActionsContainer direction="row">
           <Button type="submit" fullWidth disabled={loading} withArrow onClick={onBeforeSubmit}>
             {t('routes.passwordRecovery.intro.sendRecoveryEmail')}
