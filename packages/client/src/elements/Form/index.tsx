@@ -70,7 +70,8 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
 
           return cloneElement(child, {
             error: fieldError?.message,
-            ref: register(validation),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+            ...register(name, validation),
             disabled: Boolean(loading),
           });
         }

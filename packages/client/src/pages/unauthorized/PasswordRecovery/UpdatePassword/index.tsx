@@ -24,7 +24,7 @@ const UpdatePassword = () => {
   const {
     register,
     handleSubmit,
-    errors,
+    formState: { errors },
     reset,
     trigger,
     getValues,
