@@ -9,6 +9,14 @@ export const Wrapper = styled.div`
   z-index: 999;
 `;
 
+export const SendButton = styled(Button)`
+  margin-top: 40px;
+  svg {
+    height: 19px;
+    margin-left: 8px;
+  }
+`;
+
 export const ListContainer = styled.div`
   height: 100%;
   overflow-x: auto;
@@ -56,8 +64,4 @@ export const DialogForm = styled(Form)`
   > *:not(:last-child) {
     margin-bottom: 12px;
   }
-`;
-
-export const SendButton = styled(Button)`
-  margin-top: 40px;
 `;

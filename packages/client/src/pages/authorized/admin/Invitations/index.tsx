@@ -4,10 +4,13 @@ import {
   CardList,
   DateField,
   DetailedList,
+  FunctionField,
   InvitationStatusField,
   TextField,
 } from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
+import { ApiInvitation } from '../../../../interfaces/api.types';
+import { getLabelFromSource } from '../../../../utils';
 import { ListContainer, Wrapper } from './Invitations.styled';
 import { getRowStyle } from './Invitations.utils';
 import SendInvitationButtonWithDialog from './SendInvitationButtonWithDialog';
@@ -29,6 +32,12 @@ const Invitations = () => {
             <TextField source="createdBy" label="invitation.inviter" />
             <InvitationStatusField label="Status" noTranslation />
             <DateField source="createdAt" label="invitation.sendDate" showTime />
+            <FunctionField<ApiInvitation>
+              label="Role"
+              render={({ roles }) =>
+                roles.toString() ? getLabelFromSource(roles.toString()) : 'User'
+              }
+            />
           </DetailedList>
         </ListContainer>
       )}

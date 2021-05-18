@@ -78,12 +78,10 @@ const SendInvitationButtonWithDialog = () => {
         >
           <TextInput autoFocus name="email" required validationType="email" />
           <Checkbox name="isAdmin" label="routes.invitations.createDialog.addAsAdmin" />
-          <SendButton
-            type="submit"
-            withArrow
-            label="routes.invitations.createDialog.send"
-            onClick={onBeforeSubmit}
-          />
+          <SendButton type="submit" onClick={onBeforeSubmit}>
+            {t('routes.invitations.createDialog.send')}
+            <SendEmailIcon />
+          </SendButton>
         </DialogForm>
       </Dialog>
     </>
