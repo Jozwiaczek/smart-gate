@@ -14,6 +14,8 @@ const {
 onlyOnDevEnv(() => console.log('Initializing sentry'));
 Sentry.init({
   dsn: REACT_APP_SENTRY_DSN,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   integrations: [new Integrations.BrowserTracing()],
   debug: REACT_APP_SENTRY_DEBUG === 'true',
   enabled: REACT_APP_SENTRY_ENABLED === 'true',
