@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Button } from '../../../../elements';
+import { Button } from '../../../elements';
 
 export const CardsWrapper = styled.div(
   ({ theme: { breakpoints, up } }) => `
@@ -10,7 +10,7 @@ export const CardsWrapper = styled.div(
   grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
   row-gap: 60px;
   column-gap: 60px;
-  
+
   ${up(breakpoints.md)} {
     max-width: 800px;
   }
@@ -47,20 +47,12 @@ export const CardButtonLabel = styled.h4(
 `,
 );
 
-export const Title = styled.h1(
-  ({ theme: { breakpoints, down } }) => `
-  ${down(breakpoints.sm)} {
-    text-align: center;
-  }
-`,
-);
-
 export const CardIconWrapper = styled.div(
   ({ theme: { breakpoints, down, palette } }) => `
   width: 32px;
   color: ${palette.text.primary};
   margin-bottom: 10px;
-  
+
   ${down(breakpoints.md)} {
     width: 22px;
     margin-bottom: 0;
