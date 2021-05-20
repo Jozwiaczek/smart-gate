@@ -16,17 +16,18 @@ export const hasLowercaseLetter = (value: string, quantity = 1): boolean =>
   new RegExp(`[a-z]{${quantity}}`).test(value);
 
 export const isValidEmail = (email: string): boolean => {
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(\\".+\\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(\\".+\\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/;
   return emailRegex.test(email);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const composeValidation = (...fns: ((value: string, ...opt: any[]) => boolean)[]) => (
-  value: string,
-): boolean =>
-  fns
-    .reduceRight((acc: Array<boolean>, fn): Array<boolean> => [...acc, fn(value)], [])
-    .every(Boolean);
+export const composeValidation =
+  (...fns: ((value: string, ...opt: any[]) => boolean)[]) =>
+  (value: string): boolean =>
+    fns
+      .reduceRight((acc: Array<boolean>, fn): Array<boolean> => [...acc, fn(value)], [])
+      .every(Boolean);
 
 export const isValidPassword = composeValidation(
   isValidLength,

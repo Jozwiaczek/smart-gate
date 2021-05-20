@@ -11,6 +11,7 @@ import { PasswordResetModule } from './password-reset/password-reset.module';
 import { RepositoryModule } from './repository/repository.module';
 import { SentryModule } from './sentry/sentry.module';
 import { UsersModule } from './users/users.module';
+import { WebsocketModule } from './websocket/websocket.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { UsersModule } from './users/users.module';
     InvitationsModule,
     PasswordResetModule,
     RepositoryModule,
+    WebsocketModule,
   ],
 })
 export class AppModule {}

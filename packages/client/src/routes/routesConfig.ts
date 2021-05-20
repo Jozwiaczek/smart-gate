@@ -12,13 +12,8 @@ import {
   onlyUnauthenticated,
 } from './conditions';
 
-const {
-  LOGIN,
-  REGISTRATION,
-  PAGE_NOT_FOUND,
-  PASSWORD_RECOVERY,
-  PASSWORD_RECOVERY_UPDATE,
-} = routes.unauthorized;
+const { LOGIN, REGISTRATION, PAGE_NOT_FOUND, PASSWORD_RECOVERY, PASSWORD_RECOVERY_UPDATE } =
+  routes.unauthorized;
 
 const onlyAuthenticatedRoutes: Array<ConditionRouteProps> = (<Array<OnlyAuthenticatedRouteProps>>[
   {

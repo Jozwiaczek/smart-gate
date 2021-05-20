@@ -23,10 +23,10 @@ const Pagination = ({
 }: PaginationProps) => {
   const { t } = useTranslation();
 
-  const totalPages = useMemo((): number => Math.ceil(totalRecords / perPage), [
-    perPage,
-    totalRecords,
-  ]);
+  const totalPages = useMemo(
+    (): number => Math.ceil(totalRecords / perPage),
+    [perPage, totalRecords],
+  );
 
   const changePerPageValue = (selectedOption: SelectOption<PerPage>) => {
     setPerPage(selectedOption.value);
