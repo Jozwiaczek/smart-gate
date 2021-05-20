@@ -12,6 +12,7 @@ import { MailerModule } from '../mailer/mailer.module';
 import { RepositoryModule } from '../repository/repository.module';
 import { InvitationsConfigModule } from './Config/invitations-config.module';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
+import { InvitationItemDto } from './dto/invitation-item.dto';
 import { UpdateInvitationDto } from './dto/update-invitation.dto';
 import { InvitationsService } from './invitations.service';
 
@@ -63,9 +64,21 @@ describe('Invitations Service', () => {
       const firstInvitation = await testCreateRandomInvitation(connection);
       const secondInvitation = await testCreateRandomInvitation(connection);
 
+      const firstInvitationDto: InvitationItemDto = {
+        ...firstInvitation,
+        updatedBy: undefined,
+        createdBy: undefined,
+      };
+
+      const secondInvitationDto: InvitationItemDto = {
+        ...secondInvitation,
+        updatedBy: undefined,
+        createdBy: undefined,
+      };
+
       const allInvitations = await invitationsService.findAll();
       expect(allInvitations.total).toEqual(2);
-      expect(allInvitations.data).toStrictEqual([firstInvitation, secondInvitation]);
+      expect(allInvitations.data).toStrictEqual([firstInvitationDto, secondInvitationDto]);
     });
   });
 
