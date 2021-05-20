@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { Checkbox, Dialog, TextInput } from '../../../../elements';
 import { Role } from '../../../../enums/role.enum';
 import { useAxios, useMediaQuery, useSnackbar } from '../../../../hooks';
 import { SendEmailIcon } from '../../../../icons';
+import { ApiInvitation } from '../../../../interfaces/api.types';
 import { ThemeType } from '../../../../theme/Theme';
 import { DialogForm, SendButton, SendInvitationButton } from './Invitations.styled';
 
@@ -42,21 +43,56 @@ const SendInvitationButtonWithDialog = () => {
     await trigger();
   };
 
-  const sendInvitationMutation = useMutation(async (values: CreateInvitationValues) => {
-    setLoading(true);
-    try {
-      const { email, isAdmin } = values;
-      const roles = isAdmin ? [Role.Admin] : [];
-      await axios.post(`/invitations`, { email, roles });
-      reset();
-      closeCreateDialog();
-    } catch (error) {
-      showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  });
+  const queryClient = useQueryClient();
+  const invitationsQueryKey = '/invitations';
+  const sendInvitationMutation = useMutation(
+    async (values: CreateInvitationValues) => {
+      setLoading(true);
+      try {
+        const { email, isAdmin } = values;
+        const roles = isAdmin ? [Role.Admin] : [];
+        await axios.post(`/invitations`, { email, roles });
+        reset();
+        closeCreateDialog();
+        showSnackbar({
+          message: t('routes.invitations.createDialog.invitationsSentSuccessfully'),
+          severity: 'success',
+        });
+      } catch (error) {
+        showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    },
+    {
+      onMutate: async (sentInvitation) => {
+        await queryClient.cancelQueries(invitationsQueryKey);
+
+        const previousInvitations = queryClient.getQueryData(invitationsQueryKey);
+
+        queryClient.setQueryData(
+          invitationsQueryKey,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          ({ data, total }: { data: Array<ApiInvitation>; total: number }) => {
+            return {
+              data: [...data, sentInvitation],
+              total: total + 1,
+            };
+          },
+        );
+
+        return { previousInvitations };
+      },
+      onError: (err, newTodo, context) =>
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        queryClient.setQueryData(invitationsQueryKey, context.previousInvitations),
+      onSettled: async () => queryClient.invalidateQueries(invitationsQueryKey),
+    },
+  );
 
   return (
     <>

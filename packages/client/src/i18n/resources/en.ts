@@ -11,6 +11,7 @@ const en = {
       firstName: 'First name',
       lastName: 'Last name',
       password: 'Password',
+      role: 'Role',
     },
     invitation: {
       name: 'Invitation',
@@ -96,6 +97,7 @@ const en = {
             'Invite new members by email to join your Smart Gate. After sent, you will still be able to cancel invitation.',
           addAsAdmin: 'Add as admin',
           send: 'Send invite',
+          invitationsSentSuccessfully: 'Invitation sent successfully',
         },
       },
       login: {
