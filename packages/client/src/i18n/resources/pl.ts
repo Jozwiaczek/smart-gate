@@ -13,6 +13,7 @@ const pl: TranslationStructure = {
       firstName: 'Imię',
       lastName: 'Nazwisko',
       password: 'Hasło',
+      role: 'Rola',
     },
     invitation: {
       name: 'Zaproszenie',
@@ -98,6 +99,7 @@ const pl: TranslationStructure = {
             'Zaproś nowego użytkownika poprzez email aby dodać go do systemu Smart Gate. Po wysłaniu nadal możesz anulować zaproszenie',
           addAsAdmin: 'Dodaj jako administrator',
           send: 'Wyślij zaproszenie',
+          invitationsSentSuccessfully: 'Zaproszenie wysłane',
         },
       },
       login: {

@@ -36,9 +36,9 @@ const Invitations = () => {
             <InvitationStatusField label="Status" noTranslation />
             <DateField source="createdAt" label="invitation.sendDate" showTime />
             <FunctionField<ApiInvitation>
-              label="Role"
+              label="user.role"
               render={({ roles }) =>
-                roles.toString() ? getLabelFromSource(roles.toString()) : 'User'
+                roles?.toString() ? getLabelFromSource(roles.toString()) : 'User'
               }
             />
           </DetailedList>
