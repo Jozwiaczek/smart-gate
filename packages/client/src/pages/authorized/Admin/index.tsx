@@ -2,17 +2,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
-import { routes } from '../../../../constants';
-import { BackButton } from '../../../../elements';
+import { routes } from '../../../constants';
+import { BackButton } from '../../../elements';
 import {
   DeviceIcon,
   InvitationIcon,
   PrivilegesGroupIcon,
   StatisticsIcon,
   UsersIcon,
-} from '../../../../icons';
-import Invitations from '../Invitations';
-import Users from '../Users';
+} from '../../../icons';
+import { Title } from '../AuthorizedPages.styled';
 import {
   BackButtonWrapper,
   CardButton,
@@ -22,10 +21,11 @@ import {
   RouteIconWrapper,
   RouteTopContainer,
   RouteWrapper,
-  Title,
   TitleWrapper,
-} from './AdminDashboard.styled';
-import { AdminRoute } from './AdminDashboard.typed';
+} from './Admin.styled';
+import { AdminRoute } from './Admin.typed';
+import Invitations from './Invitations';
+import Users from './Users';
 
 const {
   ADMIN,
@@ -78,7 +78,7 @@ const adminRoutes: Array<AdminRoute> = [
   },
 ];
 
-const AdminDashboard = () => {
+const Admin = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -126,4 +126,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default Admin;

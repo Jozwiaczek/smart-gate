@@ -62,9 +62,16 @@ const en = {
       },
     },
     routes: {
+      general: {
+        sectionInConstruction: 'This section is under construction',
+      },
       dashboard: {
-        logout: 'Logout',
-        logoutFromAllDevices: 'Logout from all devices',
+        title: 'Dashboard',
+        toggleGate: 'Toggle gate',
+        toggleSuccess: 'Gate successfully toggled',
+      },
+      history: {
+        title: 'History',
       },
       admin: {
         title: 'Admin panel',
@@ -75,6 +82,11 @@ const en = {
           privileges: 'Privileges groups',
           statistics: 'Statistics',
         },
+      },
+      settings: {
+        title: 'Settings',
+        logout: 'Logout',
+        logoutFromAllDevices: 'Logout from all devices',
       },
       invitations: {
         sendInvitation: 'Send Invitation',

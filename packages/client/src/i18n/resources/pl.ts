@@ -64,9 +64,16 @@ const pl: TranslationStructure = {
       },
     },
     routes: {
+      general: {
+        sectionInConstruction: 'Ta sekcja jest w budowie',
+      },
       dashboard: {
-        logout: 'Wyloguj się',
-        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+        title: 'Pulpit',
+        toggleGate: 'Aktywuj bramę',
+        toggleSuccess: 'Brama aktywowana pomyślnie',
+      },
+      history: {
+        title: 'Historia',
       },
       admin: {
         title: 'Admin panel',
@@ -77,6 +84,11 @@ const pl: TranslationStructure = {
           privileges: 'Grupy dostępu',
           statistics: 'Statystyki',
         },
+      },
+      settings: {
+        title: 'Ustawienia',
+        logout: 'Wyloguj się',
+        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
       },
       invitations: {
         sendInvitation: 'Nowe zaproszenie',
