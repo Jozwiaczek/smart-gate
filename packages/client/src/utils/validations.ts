@@ -22,8 +22,10 @@ export const isValidEmail = (email: string): boolean => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+type NestedCompose = (value: string, ...opt: any[]) => boolean;
+
 export const composeValidation =
-  (...fns: ((value: string, ...opt: any[]) => boolean)[]) =>
+  (...fns: NestedCompose[]) =>
   (value: string): boolean =>
     fns
       .reduceRight((acc: Array<boolean>, fn): Array<boolean> => [...acc, fn(value)], [])
