@@ -34,9 +34,15 @@ export class InvitationEntity extends BaseEntity {
   })
   public roles: Array<Role>;
 
-  @ManyToOne(() => UserEntity, (user) => user.createdInvitations, { onDelete: 'CASCADE' })
-  public createdBy: Promise<UserEntity>;
+  @ManyToOne(() => UserEntity, (user) => user.createdInvitations, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  public createdBy?: UserEntity;
 
-  @ManyToOne(() => UserEntity, (user) => user.updatedInvitations, { onDelete: 'CASCADE' })
-  public updatedBy: Promise<UserEntity>;
+  @ManyToOne(() => UserEntity, (user) => user.updatedInvitations, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  public updatedBy?: UserEntity;
 }

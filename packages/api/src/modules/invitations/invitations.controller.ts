@@ -8,6 +8,7 @@ import { Auth } from '../auth/decorators/auth.decorator';
 import { CookiePayload } from '../auth/decorators/cookiePayload.decorator';
 import { UseSentryTransaction } from '../sentry/decorators/use-sentry-transaction.decorator';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
+import { RemoveManyInvitationDto } from './dto/removeMany-invitation.dto';
 import { UpdateInvitationDto } from './dto/update-invitation.dto';
 import { InvitationsService } from './invitations.service';
 
@@ -25,8 +26,8 @@ export class InvitationsController {
     @CookiePayload() { sub }: TokenPayload,
     @Body(new ValidationPipe()) createInvitationDto: CreateInvitationDto,
   ) {
-    const getCurrentUserPromise = this.authService.getUser(sub);
-    await this.invitationsService.send(createInvitationDto, getCurrentUserPromise);
+    const getCurrentUser = await this.authService.getUser(sub);
+    await this.invitationsService.send(createInvitationDto, getCurrentUser);
   }
 
   @Get()
@@ -40,17 +41,22 @@ export class InvitationsController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @CookiePayload() { sub }: TokenPayload,
     @Param('id') id: string,
-    @Body() updateUserDto: UpdateInvitationDto,
+    @Body(new ValidationPipe()) updateUserDto: UpdateInvitationDto,
   ) {
-    const getCurrentUserPromise = this.authService.getUser(sub);
-    return this.invitationsService.update(id, updateUserDto, getCurrentUserPromise);
+    const getCurrentUser = await this.authService.getUser(sub);
+    return this.invitationsService.update(id, updateUserDto, getCurrentUser);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.invitationsService.remove(id);
+  }
+
+  @Post('removeMany')
+  removeMany(@Body(new ValidationPipe()) { ids }: RemoveManyInvitationDto) {
+    return this.invitationsService.removeMany(ids);
   }
 }

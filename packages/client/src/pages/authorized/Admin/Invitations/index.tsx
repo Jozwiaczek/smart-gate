@@ -29,7 +29,10 @@ const Invitations = () => {
           <SendInvitationButtonWithDialog />
           <DetailedList resource="invitations" rowStyle={getRowStyle}>
             <TextField source="email" />
-            <TextField source="createdBy" label="invitation.inviter" />
+            <FunctionField<ApiInvitation>
+              label="invitation.inviter"
+              render={({ createdBy }) => (createdBy ? createdBy.email : '-')}
+            />
             <InvitationStatusField label="Status" noTranslation />
             <DateField source="createdAt" label="invitation.sendDate" showTime />
             <FunctionField<ApiInvitation>
