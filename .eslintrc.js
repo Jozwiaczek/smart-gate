@@ -59,12 +59,5 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
 
     'better-styled-components/sort-declarations-alphabetically': 2,
-
-    'prettier/prettier': [
-      2,
-      {
-        endOfLine: 'auto',
-      },
-    ],
   },
 };
