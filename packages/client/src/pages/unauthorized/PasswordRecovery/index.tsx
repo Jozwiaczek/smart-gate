@@ -54,7 +54,13 @@ const PasswordRecovery = () => {
         {t('routes.passwordRecovery.intro.description')}
       </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextInput autoFocus required name="email" validationType="email" />
+        <TextInput
+          data-testid="input-email"
+          autoFocus
+          required
+          name="email"
+          validationType="email"
+        />
         <CardLayout.ActionsContainer direction="row">
           <Button type="submit" fullWidth disabled={loading} withArrow onClick={onBeforeSubmit}>
             {t('routes.passwordRecovery.intro.sendRecoveryEmail')}
