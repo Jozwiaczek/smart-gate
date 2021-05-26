@@ -1,11 +1,9 @@
-/// <reference types="cypress" />
-
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 // @ts-ignore
-module.exports = (on, config) => {
+export default (on, config) => {
   // eslint-disable-next-line no-param-reassign
   config.env = process.env;
 
