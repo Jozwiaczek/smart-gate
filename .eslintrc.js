@@ -12,6 +12,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:regexp/recommended',
     'plugin:security/recommended',
+    'plugin:cypress/recommended',
   ],
   plugins: ['simple-import-sort', 'better-styled-components'],
   rules: {

@@ -75,7 +75,7 @@ const Login = () => {
           label={t('user.password')}
         />
         <CardLayout.ActionsContainer direction="row">
-          <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
+          <Checkbox name="keepMeLoggedIn" label="routes.login.keepMeLoggedIn" />
           <StyledButton
             type="submit"
             fullWidth

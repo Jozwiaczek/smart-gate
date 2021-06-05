@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 const loginUser = () => {
   cy.dataTestId('input-email').type(Cypress.env('EXISTED_USER_EMAIL'));
   cy.dataTestId('input-password').type(Cypress.env('EXISTED_USER_PASSWORD'));

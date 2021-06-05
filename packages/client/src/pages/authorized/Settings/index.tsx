@@ -36,7 +36,7 @@ const Settings = () => {
     <>
       <Title>{t('routes.settings.title')}</Title>
       <h2>{t('routes.general.sectionInConstruction')}</h2>
-      <Button data-testId="button-logout" onClick={logoutUser} margin="20px 0">
+      <Button data-testid="button-logout" onClick={logoutUser} margin="20px 0">
         {t('routes.settings.logout')}
       </Button>
       <Button onClick={logoutUserFromAllDevices} margin="20px 0">
