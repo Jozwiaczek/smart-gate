@@ -74,11 +74,15 @@ jobs:
         with:
           project: ./packages/e2e
           start: yarn start:ci
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
           spec: packages/e2e/src/**/*.spec.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PORT: 8080
+          API_PORT: 3030
+          REACT_APP_API_URL: 'http://localhost:3030'
+          NODE_ENV: 'test'
 
       - name: 'Build API'
         run: cd packages/api && yarn build
