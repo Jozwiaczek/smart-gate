@@ -33,8 +33,8 @@
     "removeNodeModules": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "sortPackageJson": "sort-package-json && lerna exec sort-package-json",
     "start": "cd packages/api && yarn start:prod",
+    "start:ci": "concurrently \"cd packages/client && yarn start\" \"cd packages/api && yarn start\"",
     "test": "lerna run test",
-    "test:e2e": "lerna run test:e2e",
     "type-check": "lerna run type-check"
   },
   "resolutions": {
@@ -46,6 +46,7 @@
     "pg": "^8.5.1"
   },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@commitlint/config-lerna-scopes": "^12.1.1",

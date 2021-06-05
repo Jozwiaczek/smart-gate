@@ -16,7 +16,6 @@
     "test": "jest --runInBand",
     "test:cov": "yarn test --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json --passWithNoTests",
     "test:watch": "yarn test --watch",
     "type-check": "tsc --noEmit",
     "typeorm": "ts-node ../../node_modules/typeorm/cli.js",

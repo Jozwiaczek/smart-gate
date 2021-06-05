@@ -4,7 +4,7 @@ on: [pull_request]
 jobs:
   Validate:
     name: 'Validate Pull Request'
-    timeout-minutes: 10
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     container: node
     env:
@@ -64,12 +64,22 @@ jobs:
         run: yarn lint
       - name: 'Run StyleLint'
         run: yarn stylelint
+
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
       - name: 'Run unit tests'
         run: yarn test
       - name: 'Run E2E tests'
-        run: yarn test:e2e
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./packages/e2e
+          start: yarn start:ci
+          wait-on: "http://localhost:8080"
+          wait-on-timeout: 120
+          spec: packages/e2e/src/**/*.spec.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: 'Build API'
         run: cd packages/api && yarn build
       - name: 'Build Client'
