@@ -83,6 +83,11 @@ jobs:
           API_PORT: 3030
           REACT_APP_API_URL: 'http://localhost:3030'
           NODE_ENV: 'test'
+          TEST_USER_EMAIL: 'joe.doe@gmail.com'
+          TEST_USER_PASSWORD: '@12345Aa'
+          TEST_USER_FIRSTNAME: 'Joe'
+          TEST_USER_LASTNAME: 'Doe'
+          TEST_USER_ROLE: 'Admin'
 
       - name: 'Build API'
         run: cd packages/api && yarn build

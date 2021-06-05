@@ -1,6 +1,6 @@
 const loginUser = () => {
-  cy.dataTestId('input-email').type(Cypress.env('EXISTED_USER_EMAIL'));
-  cy.dataTestId('input-password').type(Cypress.env('EXISTED_USER_PASSWORD'));
+  cy.dataTestId('input-email').type(Cypress.env('TEST_USER_EMAIL'));
+  cy.dataTestId('input-password').type(Cypress.env('TEST_USER_PASSWORD'));
   cy.get('form').submit();
 };
 

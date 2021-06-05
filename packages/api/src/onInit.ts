@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 import * as SentryTracing from '@sentry/tracing';
+import * as bcrypt from 'bcrypt';
 
 import { Role } from './enums/role.enum';
 import { Config } from './modules/config/config';
@@ -35,6 +36,26 @@ const sendAdminInvitation = async (
   }
 };
 
+const createTestUser = async (
+  userRepository: UserRepository,
+  { environment, testUser }: Config,
+) => {
+  if (environment.isTest && testUser) {
+    const { email, password, role, firstName, lastName } = testUser;
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(password as string, salt);
+    const roles = [role as Role];
+
+    await userRepository.create({
+      password: hash,
+      firstName,
+      lastName,
+      email,
+      roles,
+    });
+  }
+};
+
 const onInit = async (app: INestApplication) => {
   const config = app.get(Config);
   const userRepository = app.get(UserRepository);
@@ -42,6 +63,7 @@ const onInit = async (app: INestApplication) => {
   const invitationService = app.get(InvitationsService);
 
   await sendAdminInvitation(userRepository, invitationRepository, invitationService, config);
+  await createTestUser(userRepository, config);
   initSentry(app, config);
 };
 

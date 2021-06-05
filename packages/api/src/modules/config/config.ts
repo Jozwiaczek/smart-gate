@@ -8,6 +8,14 @@ export class Config {
 
   superAdminEmails: string | undefined;
 
+  testUser: {
+    email: string | undefined;
+    password: string | undefined;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    role: string | undefined;
+  };
+
   database: {
     database: string;
     databaseTest: string;

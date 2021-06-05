@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
+import { Role } from '../../enums/role.enum';
 import { Config } from './config';
 import defaultValues from './defaultValues';
 import { EnvConfigService } from './env-config/env-config.service';
@@ -20,6 +21,13 @@ export class ConfigLoader {
       port: this.envConfigService.get('API_PORT', isProd, Number),
       clientUrl: this.envConfigService.get('CLIENT_URL'),
       superAdminEmails: this.envConfigService.get('SUPER_ADMIN_EMAILS', false),
+      testUser: {
+        email: this.envConfigService.get('TEST_USER_EMAIL', isTest),
+        password: this.envConfigService.get('TEST_USER_PASSWORD', isTest),
+        firstName: this.envConfigService.get('TEST_USER_FIRSTNAME', isTest),
+        lastName: this.envConfigService.get('TEST_USER_LASTNAME', isTest),
+        role: this.envConfigService.get('TEST_USER_ROLE', isTest),
+      },
       rateLimiter: {
         minTime: this.envConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),
         maxConcurrent: this.envConfigService.get('RATE_LIMIT_MAX_CONCURRENT', isProd, Number),
