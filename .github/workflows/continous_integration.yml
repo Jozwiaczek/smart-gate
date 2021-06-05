@@ -90,6 +90,10 @@ jobs:
           REACT_APP_API_URL: 'http://localhost:3030'
           NODE_ENV: 'test'
           CLIENT_URL: 'http://localhost:8080'
+          COOKIE_SECRET: '1234'
+          ACCESS_SECRET: '1234'
+          REFRESH_SECRET: '1234'
+          LOGOUT_SECRET: '1234'
 
       - name: 'Build API'
         run: cd packages/api && yarn build

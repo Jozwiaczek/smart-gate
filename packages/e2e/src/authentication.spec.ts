@@ -37,7 +37,7 @@ context('Authentication', () => {
 
   it('send recovery email', () => {
     cy.dataTestId('link-forgotPassword').click();
-    cy.dataTestId('input-email').type(Cypress.env('EXISTED_USER_EMAIL'));
+    cy.dataTestId('input-email').type(Cypress.env('TEST_USER_EMAIL'));
     cy.get('form').submit();
     cy.get('body').contains('Email has been sent');
   });
