@@ -89,6 +89,7 @@ jobs:
           API_PORT: 3030
           REACT_APP_API_URL: 'http://localhost:3030'
           NODE_ENV: 'test'
+          CLIENT_URL: 'http://localhost:8080'
 
       - name: 'Build API'
         run: cd packages/api && yarn build

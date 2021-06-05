@@ -53,6 +53,8 @@ const createTestUser = async (
       email,
       roles,
     });
+
+    console.log('Test user created');
   }
 };
 
