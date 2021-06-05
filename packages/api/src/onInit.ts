@@ -40,10 +40,12 @@ const createTestUser = async (
   userRepository: UserRepository,
   { environment, testUser }: Config,
 ) => {
-  if (environment.isTest && testUser) {
+  console.log('createTestUser');
+
+  if (environment.isTest && testUser.email && testUser.password) {
     const { email, password, role, firstName, lastName } = testUser;
     const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password as string, salt);
+    const hash = await bcrypt.hash(password, salt);
     const roles = [role as Role];
 
     await userRepository.create({
