@@ -74,7 +74,7 @@ jobs:
         with:
           project: ./packages/e2e
           start: yarn start:ci
-          wait-on: "http://localhost:8080"
+          wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
           spec: packages/e2e/src/**/*.spec.ts
         env:
