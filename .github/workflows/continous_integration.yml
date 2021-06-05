@@ -6,7 +6,7 @@ jobs:
     name: 'Validate Pull Request'
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    container: node
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     env:
       DB_PORT: 5432
       DB_HOST: postgres
