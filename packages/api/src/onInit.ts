@@ -42,6 +42,12 @@ const createTestUser = async (
 ) => {
   console.log('createTestUser');
 
+  console.log(environment);
+  console.log(environment.isTest);
+  console.log(environment.isDev);
+  console.log(environment.isProd);
+  console.log(testUser);
+
   if (environment.isTest && testUser.email && testUser.password) {
     const { email, password, role, firstName, lastName } = testUser;
     const salt = await bcrypt.genSalt();
