@@ -26,7 +26,6 @@ export class ConfigLoader {
         password: this.envConfigService.get('TEST_USER_PASSWORD', isTest),
         firstName: this.envConfigService.get('TEST_USER_FIRSTNAME', isTest),
         lastName: this.envConfigService.get('TEST_USER_LASTNAME', isTest),
-        role: this.envConfigService.get('TEST_USER_ROLE', isTest),
       },
       rateLimiter: {
         minTime: this.envConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),

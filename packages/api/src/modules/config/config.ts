@@ -13,7 +13,6 @@ export class Config {
     password: string | undefined;
     firstName: string | undefined;
     lastName: string | undefined;
-    role: string | undefined;
   };
 
   database: {

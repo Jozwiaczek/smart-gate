@@ -4,7 +4,6 @@
   "fixturesFolder": "fixtures",
   "integrationFolder": "src",
   "supportFile": "support/index.ts",
-  "screenshotOnRunFailure": false,
   "video": false,
   "pluginsFile": "plugins/index.ts",
   "viewportWidth": 1280,

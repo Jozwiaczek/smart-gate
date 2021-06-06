@@ -40,29 +40,24 @@ const createTestUser = async (
   userRepository: UserRepository,
   { environment, testUser }: Config,
 ) => {
-  console.log('createTestUser');
-
-  console.log(environment);
-  console.log(environment.isTest);
-  console.log(environment.isDev);
-  console.log(environment.isProd);
-  console.log(testUser);
-
   if (environment.isTest && testUser.email && testUser.password) {
-    const { email, password, role, firstName, lastName } = testUser;
+    const { email, password, firstName, lastName } = testUser;
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
-    const roles = [role as Role];
+    const roles = [Role.SuperAdmin];
 
-    await userRepository.create({
-      password: hash,
-      firstName,
-      lastName,
-      email,
-      roles,
-    });
-
-    console.log('Test user created');
+    try {
+      await userRepository.create({
+        password: hash,
+        firstName,
+        lastName,
+        email,
+        roles,
+      });
+      console.log('Test user created');
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 
