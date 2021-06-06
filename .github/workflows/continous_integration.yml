@@ -2,23 +2,71 @@ name: 'Continuous Integration'
 on: [pull_request]
 
 jobs:
-  Validate:
-    name: 'Validate Pull Request'
+  basics:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 12.x
+
+    steps:
+      - name: 'Git checkout'
+        uses: actions/checkout@v2.3.4
+
+      # Beginning of yarn setup, keep in sync between all workflows
+      - name: Use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/ # Needed for auth
+      - name: 'Use cached node_modules'
+        id: cache-modules
+        uses: actions/cache@v2.1.5
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-v${{ matrix.node-version }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
+      - name: 'Find location of global yarn cache'
+        id: yarn-cache
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: 'Cache global yarn cache'
+        uses: actions/cache@v2.1.5
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: 'Install dependency'
+        run: yarn install --frozen-lockfile
+      # End of yarn setup
+
+      - name: 'Audit dependencies'
+        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
+      - name: 'Run Prettier'
+        run: yarn prettier
+      - name: 'Run ESLint'
+        run: yarn lint
+      - name: 'Run StyleLint'
+        run: yarn stylelint
+      - name: 'Run Type check'
+        run: yarn type-check
+      - name: 'Build API'
+        run: cd packages/api && yarn build
+      - name: 'Build Client'
+        run: cd packages/client && yarn build
+
+  tests:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
     env:
+      NODE_VERSION: 12.x
+      NODE_ENV: 'test'
       DB_PORT: 5432
       DB_HOST: postgres
       DB_USERNAME: postgres
       DB_PASSWORD: postgres_password
       DB_DATABASE_TEST: smart_gate_db_test
-      NODE_VERSION: 12.x
-      TEST_USER_EMAIL: 'joe.doe@gmail.com'
-      TEST_USER_PASSWORD: '@12345Aa'
-      TEST_USER_FIRSTNAME: 'Joe'
-      TEST_USER_LASTNAME: 'Doe'
-      TEST_USER_ROLE: 'Admin'
 
     services:
       postgres:
@@ -62,15 +110,6 @@ jobs:
         run: yarn install --frozen-lockfile
       # End of yarn setup
 
-      - name: 'Audit dependencies'
-        run: /bin/sh -c 'yarn audit --level high; [[ $? -ge 8 ]] && exit 1 || exit 0'
-      - name: 'Run Prettier'
-        run: yarn prettier
-      - name: 'Run ESLint'
-        run: yarn lint
-      - name: 'Run StyleLint'
-        run: yarn stylelint
-
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
       - name: 'Run unit tests'
@@ -85,20 +124,18 @@ jobs:
           record: true
           spec: packages/e2e/src/**/*.spec.ts
         env:
-          CYPRESS_PROJECT_ID: 'x4q1ri'
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_PROJECT_ID: 'x4q1ri'
+          TEST_USER_EMAIL: 'joe.doe@gmail.com'
+          TEST_USER_PASSWORD: '@12345Aa'
+          TEST_USER_FIRSTNAME: 'Joe'
+          TEST_USER_LASTNAME: 'Doe'
           PORT: 8080
           API_PORT: 3030
           REACT_APP_API_URL: 'http://localhost:3030'
-          NODE_ENV: 'test'
           CLIENT_URL: 'http://localhost:8080'
           COOKIE_SECRET: '1234'
           ACCESS_SECRET: '1234'
           REFRESH_SECRET: '1234'
           LOGOUT_SECRET: '1234'
-
-      - name: 'Build API'
-        run: cd packages/api && yarn build
-      - name: 'Build Client'
-        run: cd packages/client && yarn build
