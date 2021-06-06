@@ -67,6 +67,10 @@ jobs:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres_password
       DB_DATABASE_TEST: smart_gate_db_test
+      TEST_USER_EMAIL: 'joe.doe@gmail.com'
+      TEST_USER_PASSWORD: '@12345Aa'
+      TEST_USER_FIRSTNAME: 'Joe'
+      TEST_USER_LASTNAME: 'Doe'
 
     services:
       postgres:
@@ -127,10 +131,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_PROJECT_ID: 'x4q1ri'
-          TEST_USER_EMAIL: 'joe.doe@gmail.com'
-          TEST_USER_PASSWORD: '@12345Aa'
-          TEST_USER_FIRSTNAME: 'Joe'
-          TEST_USER_LASTNAME: 'Doe'
           PORT: 8080
           API_PORT: 3030
           REACT_APP_API_URL: 'http://localhost:3030'
