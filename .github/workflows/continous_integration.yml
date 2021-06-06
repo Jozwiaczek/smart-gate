@@ -82,6 +82,7 @@ jobs:
           start: yarn start:ci
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
+          record: true
           spec: packages/e2e/src/**/*.spec.ts
         env:
           CYPRESS_PROJECT_ID: 'x4q1ri'
