@@ -71,6 +71,8 @@ jobs:
       TEST_USER_PASSWORD: '@12345Aa'
       TEST_USER_FIRSTNAME: 'Joe'
       TEST_USER_LASTNAME: 'Doe'
+      ETHEREAL_USER: ${{ secrets.ETHEREAL_USER }}
+      ETHEREAL_PASSWORD: ${{ secrets.ETHEREAL_PASSWORD }}
 
     services:
       postgres:

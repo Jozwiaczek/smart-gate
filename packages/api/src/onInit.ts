@@ -25,39 +25,23 @@ const sendAdminInvitation = async (
   userRepository: UserRepository,
   invitationRepository: InvitationRepository,
   invitationsService: InvitationsService,
-  config: Config,
+  { superAdminEmails }: Config,
 ) => {
-  if (!(await userRepository.count()) && config.superAdminEmails) {
+  if (!(await userRepository.count()) && superAdminEmails) {
     await invitationRepository.repository.clear();
 
-    config.superAdminEmails.split(';').map(async (email) => {
+    superAdminEmails.split(';').map(async (email) => {
       await invitationsService.send({ email: email.trim(), roles: [Role.SuperAdmin] });
     });
   }
 };
 
-const createTestUser = async (
-  userRepository: UserRepository,
-  { environment, testUser }: Config,
+const sendTestUserInvitation = async (
+  invitationsService: InvitationsService,
+  { environment: { isTest }, testUser: { email, password } }: Config,
 ) => {
-  if (environment.isTest && testUser.email && testUser.password) {
-    const { email, password, firstName, lastName } = testUser;
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
-    const roles = [Role.SuperAdmin];
-
-    try {
-      await userRepository.create({
-        password: hash,
-        firstName,
-        lastName,
-        email,
-        roles,
-      });
-      console.log('Test user created');
-    } catch (e) {
-      console.error(e);
-    }
+  if (isTest && email && password) {
+    await invitationsService.send({ email: email.trim(), roles: [Role.Admin] });
   }
 };
 
@@ -65,10 +49,10 @@ const onInit = async (app: INestApplication) => {
   const config = app.get(Config);
   const userRepository = app.get(UserRepository);
   const invitationRepository = app.get(InvitationRepository);
-  const invitationService = app.get(InvitationsService);
+  const invitationsService = app.get(InvitationsService);
 
-  await sendAdminInvitation(userRepository, invitationRepository, invitationService, config);
-  await createTestUser(userRepository, config);
+  await sendAdminInvitation(userRepository, invitationRepository, invitationsService, config);
+  await sendTestUserInvitation(invitationsService, config);
   initSentry(app, config);
 };
 
