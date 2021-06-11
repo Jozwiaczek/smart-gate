@@ -3,10 +3,12 @@ on: [pull_request, push]
 
 jobs:
   basics:
+    name: 'Static tests and build'
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    env:
-      NODE_VERSION: 12.x
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
 
     steps:
       - name: 'Git checkout'
@@ -17,7 +19,6 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/ # Needed for auth
       - name: 'Use cached node_modules'
         id: cache-modules
         uses: actions/cache@v2.1.5
@@ -56,11 +57,14 @@ jobs:
         run: cd packages/client && yarn build
 
   tests:
+    name: 'Unit and E2E tests'
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
     env:
-      NODE_VERSION: 12.x
       NODE_ENV: 'test'
       DB_PORT: 5432
       DB_HOST: postgres
@@ -93,7 +97,6 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/ # Needed for auth
       - name: 'Use cached node_modules'
         id: cache-modules
         uses: actions/cache@v2.1.5

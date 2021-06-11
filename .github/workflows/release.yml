@@ -8,8 +8,10 @@ jobs:
   release:
     name: 'Release'
     runs-on: ubuntu-latest
-    env:
-      NODE_VERSION: 12.x
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+
     steps:
       - name: 'Git checkout'
         uses: actions/checkout@v2.3.4
@@ -22,7 +24,6 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/ # Needed for auth
       - name: 'Use cached node_modules'
         id: cache-modules
         uses: actions/cache@v2.1.5
