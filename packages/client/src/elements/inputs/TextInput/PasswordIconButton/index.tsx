@@ -18,8 +18,7 @@ const PasswordIconButton = ({ setPasswordMasked }: PasswordIconButtonProps) => {
       .add(
         {
           targets: eyeLid.current,
-          d:
-            'M -5,-5 V 37 H 15.6 C 15.6,37 21.35124,23.469343 34.312131,23.469343 47.273022,23.469343 53.4,37 53.4,37 H 77 V -5 Z',
+          d: 'M -5,-5 V 37 H 15.6 C 15.6,37 21.35124,23.469343 34.312131,23.469343 47.273022,23.469343 53.4,37 53.4,37 H 77 V -5 Z',
         },
         0,
       )

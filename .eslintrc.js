@@ -1,15 +1,15 @@
 module.exports = {
   parserOptions: {
-    project: ['./packages/*/tsconfig.json', './packages/*/tsconfig.dev.json', 'tsconfig.dev.json'],
+    project: ['./packages/*/tsconfig.json', 'tsconfig.dev.json'],
     tsconfigRootDir: __dirname,
     EXPERIMENTAL_useSourceOfProjectReferenceRedirect: true,
   },
   extends: [
     'airbnb/hooks',
     'airbnb-typescript',
-    'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:prettier/recommended',
     'plugin:regexp/recommended',
     'plugin:security/recommended',
   ],
@@ -59,12 +59,5 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
 
     'better-styled-components/sort-declarations-alphabetically': 2,
-
-    'prettier/prettier': [
-      2,
-      {
-        endOfLine: 'auto',
-      },
-    ],
   },
 };

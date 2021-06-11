@@ -74,14 +74,15 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
     return headersFromChildren ?? [];
   }, [children]);
 
-  const areAllRowsSelected = useMemo((): boolean => Boolean(selectedRows.length === totalRecords), [
-    selectedRows.length,
-    totalRecords,
-  ]);
+  const areAllRowsSelected = useMemo(
+    (): boolean => Boolean(selectedRows.length === totalRecords),
+    [selectedRows.length, totalRecords],
+  );
 
-  const checkIsRowSelected = useCallback((id: string): boolean => selectedRows.includes(id), [
-    selectedRows,
-  ]);
+  const checkIsRowSelected = useCallback(
+    (id: string): boolean => selectedRows.includes(id),
+    [selectedRows],
+  );
 
   const unselectAllRows = () => {
     setSelectedRows([]);
