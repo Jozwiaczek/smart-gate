@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "composite": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "isolatedModules": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

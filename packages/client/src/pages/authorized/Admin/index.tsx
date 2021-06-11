@@ -27,14 +27,8 @@ import { AdminRoute } from './Admin.typed';
 import Invitations from './Invitations';
 import Users from './Users';
 
-const {
-  ADMIN,
-  USERS,
-  DEVICE,
-  INVITATIONS,
-  PRIVILEGES,
-  STATISTICS,
-} = routes.authorized.appBar.admin;
+const { ADMIN, USERS, DEVICE, INVITATIONS, PRIVILEGES, STATISTICS } =
+  routes.authorized.appBar.admin;
 
 const Device = () => <p>Device</p>;
 const Privileges = () => <p>Privileges</p>;
