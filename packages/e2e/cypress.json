@@ -6,6 +6,7 @@
   "supportFile": "support/index.ts",
   "video": false,
   "pluginsFile": "plugins/index.ts",
+  "screenshotsFolder": "screenshots",
   "viewportWidth": 1280,
   "viewportHeight": 720
 }

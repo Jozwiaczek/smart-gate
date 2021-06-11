@@ -124,3 +124,5 @@ build
 
 .idea
 jest-test-results.json
+
+**/e2e/screenshots
