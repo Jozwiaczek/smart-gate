@@ -30,23 +30,4 @@ context('Authentication', () => {
     cy.dataTestId('button-logout').click();
     cy.get('body').contains('Log in');
   });
-
-  it('send recovery email', () => {
-    cy.dataTestId('link-forgotPassword').click();
-    cy.dataTestId('input-email').type(Cypress.env('TEST_USER_EMAIL'));
-    cy.get('form').submit();
-    cy.get('body').contains('Email has been sent');
-
-    cy.recurseGoToEmail('getLastRecoveryEmail');
-    cy.aNavWithoutTarget('http://localhost:8080/passwordRecovery');
-
-    const newPassword = `new${Cypress.env('TEST_USER_PASSWORD') as string}`;
-    cy.dataTestId('input-password').type(newPassword);
-    cy.dataTestId('input-confirm-password').type(newPassword);
-    cy.get('form').submit();
-    cy.dataTestId('btn-confirm-and-back').click();
-
-    cy.login(Cypress.env('TEST_USER_EMAIL'), newPassword);
-    cy.get('body').contains('Dashboard');
-  });
 });
