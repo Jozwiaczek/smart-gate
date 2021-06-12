@@ -30,5 +30,11 @@ declare namespace Cypress {
      * @example cy.aNavWithoutTarget('http://localhost:8080/passwordRecovery')
      */
     aNavWithoutTarget(hrefStartsWith: string): Chainable<Element>;
+
+    /**
+     * Custom command to switch current theme type.
+     * @example cy.switchTheme()
+     */
+    switchTheme(): Chainable<Element>;
   }
 }

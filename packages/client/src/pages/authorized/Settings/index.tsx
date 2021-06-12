@@ -42,7 +42,7 @@ const Settings = () => {
       <Button onClick={logoutUserFromAllDevices} margin="20px 0">
         {t('routes.settings.logoutFromAllDevices')}
       </Button>
-      <Button onClick={onChangeTheme} margin="20px 0">
+      <Button data-testid="btn-switch-theme" onClick={onChangeTheme} margin="20px 0">
         Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
       </Button>
       <Button onClick={changeLocale} color="secondary">

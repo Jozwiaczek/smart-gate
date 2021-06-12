@@ -25,3 +25,8 @@ Cypress.Commands.add('aNavWithoutTarget', (hrefStartsWith: string) => {
   cy.get(`a[href^="${hrefStartsWith}"]`).invoke('removeAttr', 'target');
   return cy.get(`a[href^="${hrefStartsWith}"]`).click();
 });
+
+Cypress.Commands.add('switchTheme', () => {
+  cy.mainNavTo('settings');
+  return cy.dataTestId('btn-switch-theme').click();
+});
