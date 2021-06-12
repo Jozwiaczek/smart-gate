@@ -12,6 +12,6 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "ts-jest": "^26.5.5"
+    "ts-node": "^10.0.0"
   }
 }
