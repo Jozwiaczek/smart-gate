@@ -9,7 +9,7 @@ declare namespace Cypress {
     /**
      * Custom command to login as a test user from login page.
      * @example cy.login()
-     * @example cy.login('example@mail.com', '@1Asqwe3')
+     * @example cy.login('example\@mail.com', '\@1Asqwe3')
      */
     login(email?: string, password?: string): Chainable<Element>;
 
