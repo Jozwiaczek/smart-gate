@@ -20,6 +20,6 @@ describe('hexToRgba', () => {
   });
 
   it('throws error for invalid hex', () => {
-    expect(() => hexToRgba('#INVALID_HEX')).toThrowError(new Error('Invalid hex color'));
+    expect(() => hexToRgba('#INVALID_HEX')).toThrow(new Error('Invalid hex color'));
   });
 });

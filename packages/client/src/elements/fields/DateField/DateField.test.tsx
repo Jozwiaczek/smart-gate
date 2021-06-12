@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen } from '../../../utils/testingLibraryInstance';
 import DateField from './index';
 
-describe('DateField', () => {
+describe('dateField', () => {
   const mockDate = new Date('04.03.2021');
 
   const mockRecord = {

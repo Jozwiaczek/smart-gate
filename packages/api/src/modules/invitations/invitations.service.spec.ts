@@ -16,7 +16,7 @@ import { InvitationItemDto } from './dto/invitation-item.dto';
 import { UpdateInvitationDto } from './dto/update-invitation.dto';
 import { InvitationsService } from './invitations.service';
 
-describe('Invitations Service', () => {
+describe('invitations service', () => {
   let connection: Connection;
   let invitationsService: InvitationsService;
 
@@ -155,9 +155,7 @@ describe('Invitations Service', () => {
       await expect(repository.find()).resolves.toStrictEqual([firstInvitation, secondInvitation]);
       await expect(invitationsService.remove(firstInvitation.id)).resolves.toStrictEqual(true);
       await expect(repository.find()).resolves.toStrictEqual([secondInvitation]);
-      await expect(repository.findOne({ id: firstInvitation.id })).resolves.toStrictEqual(
-        undefined,
-      );
+      await expect(repository.findOne({ id: firstInvitation.id })).resolves.toBeUndefined();
     });
   });
 });

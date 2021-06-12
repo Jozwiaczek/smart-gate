@@ -3,7 +3,7 @@ import React from 'react';
 import { fireEvent, render, screen } from '../../../utils/testingLibraryInstance';
 import TextInput from '.';
 
-describe('TextInput', () => {
+describe('textInput', () => {
   it('properly change input type', () => {
     render(<TextInput name="firstName" type="password" />);
     const passwordInput = screen.getByTestId('textInput');

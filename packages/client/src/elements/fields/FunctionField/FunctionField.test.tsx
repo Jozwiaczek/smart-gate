@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen } from '../../../utils/testingLibraryInstance';
 import FunctionField from './index';
 
-describe('FunctionField', () => {
+describe('functionField', () => {
   const mockDate = new Date('04.03.2021');
   const mockRecord = {
     firstName: 'Joe',
