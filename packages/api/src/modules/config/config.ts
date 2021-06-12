@@ -10,6 +10,7 @@ export class Config {
 
   testUser: {
     email: string | undefined;
+    emailToInvite: string | undefined;
     password: string | undefined;
     firstName: string | undefined;
     lastName: string | undefined;

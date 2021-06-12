@@ -16,7 +16,7 @@ context('404 Page not found', () => {
   it('displays heaven animation for light theme', () => {
     cy.visit('/');
     cy.login();
-    cy.get('body').contains('Dashboard');
+    cy.contains('Dashboard');
     cy.switchTheme();
     cy.visit('/invalid-endpoint');
     cy.dataTestId('"heaven-animation"');

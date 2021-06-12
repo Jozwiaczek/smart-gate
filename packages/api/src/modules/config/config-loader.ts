@@ -22,6 +22,7 @@ export class ConfigLoader {
       superAdminEmails: this.envConfigService.get('SUPER_ADMIN_EMAILS', false),
       testUser: {
         email: this.envConfigService.get('TEST_USER_EMAIL', isTest),
+        emailToInvite: this.envConfigService.get('TEST_INVITE_USER_EMAIL', isTest),
         password: this.envConfigService.get('TEST_USER_PASSWORD', isTest),
         firstName: this.envConfigService.get('TEST_USER_FIRSTNAME', isTest),
         lastName: this.envConfigService.get('TEST_USER_LASTNAME', isTest),
