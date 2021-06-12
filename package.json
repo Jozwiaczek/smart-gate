@@ -33,7 +33,7 @@
     "removeNodeModules": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "sortPackageJson": "sort-package-json && lerna exec sort-package-json",
     "start": "cd packages/api && yarn start:prod",
-    "start:ci": "concurrently \"cd packages/client && yarn start\" \"cd packages/api && yarn start\"",
+    "start:ci": "concurrently \"cd packages/client && NODE_ENV=test yarn start\" \"cd packages/api && NODE_ENV=test yarn start\"",
     "test": "lerna run test",
     "type-check": "lerna run type-check"
   },

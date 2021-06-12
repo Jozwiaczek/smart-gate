@@ -8,7 +8,7 @@ const makeEmailAccount = () => {
   };
 
   if (!testAccount.user || !testAccount.password) {
-    throw Error('Missing email account details');
+    throw new Error('Missing email account details');
   }
 
   const emailConfig = {

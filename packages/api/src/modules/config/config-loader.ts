@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 
-import { Role } from '../../enums/role.enum';
 import { Config } from './config';
 import defaultValues from './defaultValues';
 import { EnvConfigService } from './env-config/env-config.service';

@@ -1,7 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 import * as SentryTracing from '@sentry/tracing';
-import * as bcrypt from 'bcrypt';
 
 import { Role } from './enums/role.enum';
 import { Config } from './modules/config/config';
@@ -38,10 +37,21 @@ const sendAdminInvitation = async (
 
 const sendTestUserInvitation = async (
   invitationsService: InvitationsService,
+  invitationRepository: InvitationRepository,
+  userRepository: UserRepository,
   { environment: { isTest }, testUser: { email, password } }: Config,
 ) => {
   if (isTest && email && password) {
-    await invitationsService.send({ email: email.trim(), roles: [Role.Admin] });
+    try {
+      const existedTestUser = await userRepository.findOneByEmail(email);
+      if (existedTestUser) {
+        await userRepository.deleteById(existedTestUser.id);
+      }
+      await invitationRepository.repository.clear();
+      await invitationsService.send({ email: email.trim(), roles: [Role.Admin] });
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 
@@ -52,7 +62,7 @@ const onInit = async (app: INestApplication) => {
   const invitationsService = app.get(InvitationsService);
 
   await sendAdminInvitation(userRepository, invitationRepository, invitationsService, config);
-  await sendTestUserInvitation(invitationsService, config);
+  await sendTestUserInvitation(invitationsService, invitationRepository, userRepository, config);
   initSentry(app, config);
 };
 
