@@ -11,8 +11,9 @@ const SnackbarProvider = ({ children }: SnackbarProviderProps) => {
   const [isOpen, setOpen] = useState(false);
   const [messageInternal, setMessageInternal] = useState('');
   const [severityInternal, setSeverityInternal] = useState<SnackbarSeverity>('info');
-  const [timeOutInternal, setTimeOutInternal] =
-    useState<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const [timeOutInternal, setTimeOutInternal] = useState<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
   const snackbarContainerRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
