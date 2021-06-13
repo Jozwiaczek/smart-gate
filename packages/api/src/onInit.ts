@@ -23,8 +23,8 @@ const onInit = async (app: INestApplication) => {
     invitationsService,
     config,
   );
-  await sendTestUserInvitation(invitationsService, invitationRepository, userRepository, config);
   await createTestUser(userRepository, config);
+  await sendTestUserInvitation(invitationsService, invitationRepository, userRepository, config);
   initSentry(app, config);
 };
 
