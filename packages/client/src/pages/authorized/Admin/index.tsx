@@ -84,7 +84,12 @@ const Admin = () => {
 
           <CardsWrapper>
             {adminRoutes.map(({ index, title, icon, path }) => (
-              <CardButton key={index} colorVariant="card" onClick={() => history.push(path)}>
+              <CardButton
+                data-testid={`button-${path}`}
+                key={index}
+                colorVariant="card"
+                onClick={() => history.push(path)}
+              >
                 <CardIconWrapper>{icon}</CardIconWrapper>
                 <CardButtonLabel>{t(title as never)}</CardButtonLabel>
               </CardButton>

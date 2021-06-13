@@ -45,6 +45,7 @@ const Tab = ({
 
   return (
     <TabButton
+      data-testid={`tab-${label as string}`}
       ref={tabRef}
       onClick={onClick}
       width={width}

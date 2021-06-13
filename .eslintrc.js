@@ -23,6 +23,7 @@ module.exports = {
     'plugin:jest/recommended',
     'plugin:jest/style',
     'plugin:testing-library/react',
+    'plugin:cypress/recommended',
   ],
   plugins: ['simple-import-sort', 'better-styled-components', 'eslint-plugin-tsdoc'],
   rules: {
@@ -31,6 +32,7 @@ module.exports = {
     'no-console': 0,
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
 
+    '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],

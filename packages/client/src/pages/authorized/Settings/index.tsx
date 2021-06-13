@@ -36,13 +36,13 @@ const Settings = () => {
     <>
       <Title>{t('routes.settings.title')}</Title>
       <h2>{t('routes.general.sectionInConstruction')}</h2>
-      <Button onClick={logoutUser} margin="20px 0">
+      <Button data-testid="button-logout" onClick={logoutUser} margin="20px 0">
         {t('routes.settings.logout')}
       </Button>
       <Button onClick={logoutUserFromAllDevices} margin="20px 0">
         {t('routes.settings.logoutFromAllDevices')}
       </Button>
-      <Button onClick={onChangeTheme} margin="20px 0">
+      <Button data-testid="btn-switch-theme" onClick={onChangeTheme} margin="20px 0">
         Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
       </Button>
       <Button onClick={changeLocale} color="secondary">

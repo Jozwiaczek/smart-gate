@@ -52,9 +52,22 @@ const Login = () => {
   return (
     <CardLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
-      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
-        <TextInput autoFocus required name="email" validationType="email" />
+      <Form
+        data-testid="form-login"
+        onSubmit={handleSubmit(onSubmit)}
+        errors={errors}
+        loading={loading}
+        register={register}
+      >
         <TextInput
+          data-testid="input-email"
+          autoFocus
+          required
+          name="email"
+          validationType="email"
+        />
+        <TextInput
+          data-testid="input-password"
           required
           name="password"
           type="password"
@@ -62,8 +75,9 @@ const Login = () => {
           label={t('user.password')}
         />
         <CardLayout.ActionsContainer direction="row">
-          <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
+          <Checkbox name="keepMeLoggedIn" label="routes.login.keepMeLoggedIn" />
           <StyledButton
+            data-testid="btn-login"
             type="submit"
             fullWidth
             loading={loading}
@@ -75,7 +89,11 @@ const Login = () => {
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to={routes.unauthorized.PASSWORD_RECOVERY} colorVariant="grey">
+        <Link
+          data-testid="link-forgotPassword"
+          to={routes.unauthorized.PASSWORD_RECOVERY}
+          colorVariant="grey"
+        >
           {t('routes.login.forgotPassword')}
         </Link>
       </CardLayout.ActionsContainer>
