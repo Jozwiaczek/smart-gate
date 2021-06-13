@@ -153,7 +153,7 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
             {t('actions.delete')}
           </DeleteButton>
         </BulkActionsWrapper>
-        <Table>
+        <Table data-testid={`table-${resource}`}>
           <TableHead>
             <TableRow>
               <TableHeaderCheckbox>

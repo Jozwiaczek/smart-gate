@@ -10,6 +10,7 @@ import { IconContainer, StyledButton } from './Button.styled';
 import { ButtonProps } from './Button.types';
 
 const Button = ({
+  'data-testid': dataTestId,
   children,
   colorVariant = ThemeType.light,
   loading,
@@ -24,7 +25,7 @@ const Button = ({
 
   const baseButton = (
     <StyledButton
-      data-testid="button"
+      data-testid={dataTestId ?? 'button'}
       colorVariant={colorVariant}
       fullWidth={fullWidth}
       disabled={loading ? true : disabled}

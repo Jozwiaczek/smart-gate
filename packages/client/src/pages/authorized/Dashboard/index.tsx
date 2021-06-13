@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Title>{t('routes.dashboard.title')}</Title>
+      <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
       <ToggleButton margin="40px" onClick={onToggle}>
         {t('routes.dashboard.toggleGate')}
       </ToggleButton>
