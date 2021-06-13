@@ -13,6 +13,8 @@ import { Server, Socket } from 'socket.io';
 export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
 
+  private deviceClient: Socket | undefined;
+
   private logger: Logger = new Logger('WebSockets');
 
   afterInit() {
@@ -26,6 +28,11 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
   @SubscribeMessage('newMessageApi')
   handleMessage(client: Socket, newMessage: string): void {
     this.server.emit('newMessage', newMessage);
+  }
+
+  @SubscribeMessage('checkDeviceConnection')
+  checkDeviceConnection(client: Socket): void {
+    client.send(Boolean(this.deviceClient));
   }
 
   handleDisconnect(client: Socket) {
