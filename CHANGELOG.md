@@ -1,3 +1,43 @@
+# [1.9.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.8.0...v1.9.0) (2021-06-13)
+
+
+### Bug Fixes
+
+* **api:** creating test user ([e2cc1f3](https://github.com/Jozwiaczek/smart-gate/commit/e2cc1f3c3c8858b9a767f0ef8364e9fc6b0edb32))
+* **api:** send test user invitation ([25b30a4](https://github.com/Jozwiaczek/smart-gate/commit/25b30a4a6e956ea63b55ae0083a09d9d9dd7789e))
+* **client:** storybook build issue ([59c62e3](https://github.com/Jozwiaczek/smart-gate/commit/59c62e34b1c1d3882f5846fddd3cb0ab3a0e7478))
+* **e2e:** use test id instead of matching over text ([845e0b4](https://github.com/Jozwiaczek/smart-gate/commit/845e0b44262f1681f5f70bdf8643211a10d0601c))
+* client test id and i18n, add eslint cypress plugin ([4fa514e](https://github.com/Jozwiaczek/smart-gate/commit/4fa514ea610307c58a8453ddabe0ce93f2ddf0c5))
+* eslint issues after merge ([f263ff3](https://github.com/Jozwiaczek/smart-gate/commit/f263ff3e26175d7d0043fd192cd77f2879cf564d))
+* extract cypress types and add .env.example ([f600cb4](https://github.com/Jozwiaczek/smart-gate/commit/f600cb43d6f036c0012f3621141bb0db62648f88))
+* invitation list ([70c51e0](https://github.com/Jozwiaczek/smart-gate/commit/70c51e0de67dd4f5592a0a085e2c4619ae82c3d5))
+* invitation service test ([a8643ba](https://github.com/Jozwiaczek/smart-gate/commit/a8643ba190498525708700e3593d5556b348ac7c))
+* remove prettier rule from eslint config ([14504ba](https://github.com/Jozwiaczek/smart-gate/commit/14504ba049bbca56e652fba43f173569af6c0e47))
+* **ci-scripts:** add eslintignore ([2f682b7](https://github.com/Jozwiaczek/smart-gate/commit/2f682b758622e09cc3dc7eaa0c8132aa56ee755a))
+* **client:** add highest z-index for snackbar ([a57f582](https://github.com/Jozwiaczek/smart-gate/commit/a57f58227273f2e891bb24118a2094f27d43beff))
+* **client:** disable sentry integration type error ([220abc0](https://github.com/Jozwiaczek/smart-gate/commit/220abc07550aacc79b2032097b46257f87b091c1))
+* **client:** handle axios base url for development environment ([b0c0fe7](https://github.com/Jozwiaczek/smart-gate/commit/b0c0fe71c9769cbd776a74b9d42591cc49e403dd))
+* **client:** handle list no translation ([fc4d62b](https://github.com/Jozwiaczek/smart-gate/commit/fc4d62be0d81cbec3008aef78fccbed649e162e4))
+* **client:** react query default query key ([d2f2539](https://github.com/Jozwiaczek/smart-gate/commit/d2f2539cdf7aba934ddc2a76d50dd15425ab1ab5))
+
+
+### Features
+
+* **client:** handle optimistic update on sent invitation ([47891f0](https://github.com/Jozwiaczek/smart-gate/commit/47891f0179cc2befa41d315057982348d9bdd91e))
+* setup device package ([7b20bfd](https://github.com/Jozwiaczek/smart-gate/commit/7b20bfdde72cd23a01482d91daad615532c89663))
+* **ci-scripts:** setup ci-scripts package ([8facdf7](https://github.com/Jozwiaczek/smart-gate/commit/8facdf7b6e606b7a0d8b169db5e5116b5d7e9cb3))
+* **client:** add CloseButton and base dialog components ([43aeed1](https://github.com/Jozwiaczek/smart-gate/commit/43aeed16e659e2458086c4d0217c88e0d92aa678))
+* **client:** add default icon for email input ([1cecce7](https://github.com/Jozwiaczek/smart-gate/commit/1cecce768fad4e510a88f614b75b4f1a7a9e2a3d))
+* **client:** add dialog animations and default labels ([e496d4b](https://github.com/Jozwiaczek/smart-gate/commit/e496d4b4f7dedbd250868ae0781aa8663f3817c3))
+* **client:** add icon component generator ([55077bd](https://github.com/Jozwiaczek/smart-gate/commit/55077bd982b1eb532b7818cf7c6d5afb90ca77c0))
+* **client:** add icon generator run script ([072fa81](https://github.com/Jozwiaczek/smart-gate/commit/072fa8190435baa8c0c3677b789486a8b8a7550f))
+* **client:** add role field to invitations list and fix send button ([54a0bbd](https://github.com/Jozwiaczek/smart-gate/commit/54a0bbdb99f9570206e18b8110205f94fe818c0c))
+* **client:** add send invitation dialog ([41088e1](https://github.com/Jozwiaczek/smart-gate/commit/41088e11c08937967256f029347a458b284f58e4))
+* **client:** add stylelint ([b5450d1](https://github.com/Jozwiaczek/smart-gate/commit/b5450d1c96c09c66c66e222f620154d9d5091ebc))
+* **client:** create invitation dialog ([0ef1807](https://github.com/Jozwiaczek/smart-gate/commit/0ef1807e61a3f7606fc8e672fc9176522f4175e5))
+* **client:** migrate react-hook-form to v7 ([3f843c5](https://github.com/Jozwiaczek/smart-gate/commit/3f843c58d12c54f524c0db364ef685aa0b9e9282))
+* add base prepare release pr script ([f2816de](https://github.com/Jozwiaczek/smart-gate/commit/f2816deb78737d5e21c0db2956d850cc255b7e18))
+
 # [1.8.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.7.0...v1.8.0) (2021-04-16)
 
 
