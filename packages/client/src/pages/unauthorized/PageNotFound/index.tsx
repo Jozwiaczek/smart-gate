@@ -39,6 +39,7 @@ const PageNotFound = () => {
         </Description>
       </ContentWrapper>
       <Button
+        data-testid="btn-404-nav"
         to={currentUser ? routes.authorized.appBar.HOME : routes.unauthorized.LOGIN}
         fullWidth
         withArrow

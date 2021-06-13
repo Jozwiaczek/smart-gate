@@ -77,6 +77,7 @@ const Login = () => {
         <CardLayout.ActionsContainer direction="row">
           <Checkbox name="keepMeLoggedIn" label="routes.login.keepMeLoggedIn" />
           <StyledButton
+            data-testid="btn-login"
             type="submit"
             fullWidth
             loading={loading}

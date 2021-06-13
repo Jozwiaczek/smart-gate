@@ -5,7 +5,6 @@ context('404 Page not found', () => {
   });
 
   it('displays proper page', () => {
-    cy.contains('Oops, Seems it’s Wrong gate');
     cy.url().should('eq', `${Cypress.config().baseUrl as string}/pageNotFound`);
   });
 
@@ -16,23 +15,23 @@ context('404 Page not found', () => {
   it('displays heaven animation for light theme', () => {
     cy.visit('/');
     cy.login();
-    cy.contains('Dashboard');
     cy.switchTheme();
     cy.visit('/invalid-endpoint');
-    cy.dataTestId('"heaven-animation"');
+    cy.url().should('eq', `${Cypress.config().baseUrl as string}/pageNotFound`);
+    cy.dataTestId('heaven-animation');
   });
 
   it('displays navigation to login for not authorized user', () => {
-    cy.contains('Go to Login page').click();
+    cy.dataTestId('btn-404-nav').click();
     cy.url().should('eq', `${Cypress.config().baseUrl as string}/login`);
   });
 
   it('displays navigation to dashboard for authorized user', () => {
     cy.visit('/');
     cy.login();
-    cy.contains('Dashboard');
+    cy.dataTestId('dashboard-title');
     cy.visit('/invalid-endpoint');
-    cy.contains('Go to Dashboard').click();
+    cy.dataTestId('btn-404-nav').click();
     cy.url().should('eq', `${Cypress.config().baseUrl as string}/`);
   });
 });

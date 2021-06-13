@@ -5,7 +5,7 @@ context('Authentication', () => {
 
   it('returns error for not existed user', () => {
     cy.login('invalid@gmail.com', '@1Invalid#');
-    cy.dataTestId('snackbar').contains('Oops! Something went wrong. Operation failed.');
+    cy.dataTestId('snackbar-error');
   });
 
   it('register user', () => {
@@ -16,18 +16,18 @@ context('Authentication', () => {
     cy.dataTestId('input-password').type(Cypress.env('TEST_USER_PASSWORD'));
     cy.dataTestId('input-confirm-password').type(Cypress.env('TEST_USER_PASSWORD'));
     cy.get('form').submit();
-    cy.get('body').contains('Dashboard');
+    cy.dataTestId('dashboard-title');
   });
 
   it('login user', () => {
     cy.login();
-    cy.get('body').contains('Dashboard');
+    cy.dataTestId('dashboard-title');
   });
 
   it('logout user', () => {
     cy.login();
     cy.dataTestId('"tab-menu.settings"').click();
     cy.dataTestId('button-logout').click();
-    cy.get('body').contains('Log in');
+    cy.dataTestId('btn-login');
   });
 });
