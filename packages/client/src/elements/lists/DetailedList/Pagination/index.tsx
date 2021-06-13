@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Select } from 'src/elements/index';
 
+import { Select } from '../../../inputs';
 import { SelectOption } from '../../../inputs/Select/Select.types';
 import { PerPage } from '../DetailedList.types';
 import {
@@ -23,10 +23,10 @@ const Pagination = ({
 }: PaginationProps) => {
   const { t } = useTranslation();
 
-  const totalPages = useMemo((): number => Math.ceil(totalRecords / perPage), [
-    perPage,
-    totalRecords,
-  ]);
+  const totalPages = useMemo(
+    (): number => Math.ceil(totalRecords / perPage),
+    [perPage, totalRecords],
+  );
 
   const changePerPageValue = (selectedOption: SelectOption<PerPage>) => {
     setPerPage(selectedOption.value);
@@ -59,6 +59,7 @@ const Pagination = ({
             </PaginationButton>
           )}
           <PageNavigation>
+            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
             {[...Array(totalPages)].map((_, index) => {
               const pageKey = index + 1;
               return (

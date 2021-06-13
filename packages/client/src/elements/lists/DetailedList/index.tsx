@@ -8,11 +8,12 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
-import { useTheme } from 'styled-components';
+import { CSSProperties, useTheme } from 'styled-components';
 
 import { useAxios, useSnackbar } from '../../../hooks';
 import { CancelIcon, TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
+import { getLabelFromSource } from '../../../utils';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import { Checkbox } from '../../inputs';
 import {
@@ -51,8 +52,8 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
         snackbar({ message: t('lists.detailedList.removeManyError'), severity: 'error' });
         throw err;
       })
-      .then(() => {
-        refetch();
+      .then(async () => {
+        await refetch();
       });
   };
   const deleteMutation = useMutation(removeMany);
@@ -67,20 +68,21 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
   const headers = useMemo((): Array<BaseFieldProps<BaseRecordField>> => {
     const headersFromChildren = Children.map(children, (child) => {
       if (isValidElement(child)) {
-        return child.props;
+        return child.props as BaseFieldProps<BaseRecordField>;
       }
     });
     return headersFromChildren ?? [];
   }, [children]);
 
-  const areAllRowsSelected = useMemo((): boolean => Boolean(selectedRows.length === totalRecords), [
-    selectedRows.length,
-    totalRecords,
-  ]);
+  const areAllRowsSelected = useMemo(
+    (): boolean => Boolean(selectedRows.length === totalRecords),
+    [selectedRows.length, totalRecords],
+  );
 
-  const checkIsRowSelected = useCallback((id: string): boolean => selectedRows.includes(id), [
-    selectedRows,
-  ]);
+  const checkIsRowSelected = useCallback(
+    (id: string): boolean => selectedRows.includes(id),
+    [selectedRows],
+  );
 
   const unselectAllRows = () => {
     setSelectedRows([]);
@@ -127,6 +129,14 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
     setSelectedRows([]);
   }, [deleteMutation, selectedRows]);
 
+  const getHeaderLabel = (source: string, label?: string, noTranslation?: boolean) => {
+    if (noTranslation) {
+      return label || getLabelFromSource(source);
+    }
+
+    return t(label as never) || t(`baseApiFields.${source}` as never);
+  };
+
   return (
     <ListWrapper>
       <StyledCard isBulkActionsOpen={isBulkActionsOpen}>
@@ -143,22 +153,24 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
             {t('actions.delete')}
           </DeleteButton>
         </BulkActionsWrapper>
-        <Table>
+        <Table data-testid={`table-${resource}`}>
           <TableHead>
             <TableRow>
               <TableHeaderCheckbox>
                 <Checkbox onChange={onMarkAllRows} checked={areAllRowsSelected} />
               </TableHeaderCheckbox>
-              {headers.map(({ label, source }) => (
+              {headers.map(({ label, source, noTranslation }) => (
                 <TableHeader key={label || source}>
-                  {t(label as never) || t(`baseApiFields.${source}` as never)}
+                  {getHeaderLabel(source, label, noTranslation)}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {slicedRecords.map((record) => {
-              const injectedRowStyle = rowStyle ? rowStyle(record, theme) : undefined;
+              const injectedRowStyle = rowStyle
+                ? (rowStyle(record, theme) as CSSProperties)
+                : undefined;
               return (
                 <TableRow key={record.id} style={injectedRowStyle}>
                   <TableCellCheckbox>
@@ -172,7 +184,7 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
                       return null;
                     }
 
-                    const { source } = child.props;
+                    const { source } = child.props as BaseFieldProps<BaseRecordField>;
 
                     return (
                       <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>

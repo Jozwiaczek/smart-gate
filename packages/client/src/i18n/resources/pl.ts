@@ -13,6 +13,7 @@ const pl: TranslationStructure = {
       firstName: 'Imię',
       lastName: 'Nazwisko',
       password: 'Hasło',
+      role: 'Rola',
     },
     invitation: {
       name: 'Zaproszenie',
@@ -64,9 +65,16 @@ const pl: TranslationStructure = {
       },
     },
     routes: {
+      general: {
+        sectionInConstruction: 'Ta sekcja jest w budowie',
+      },
       dashboard: {
-        logout: 'Wyloguj się',
-        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+        title: 'Pulpit',
+        toggleGate: 'Aktywuj bramę',
+        toggleSuccess: 'Brama aktywowana pomyślnie',
+      },
+      history: {
+        title: 'Historia',
       },
       admin: {
         title: 'Admin panel',
@@ -78,8 +86,21 @@ const pl: TranslationStructure = {
           statistics: 'Statystyki',
         },
       },
+      settings: {
+        title: 'Ustawienia',
+        logout: 'Wyloguj się',
+        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+      },
       invitations: {
         sendInvitation: 'Nowe zaproszenie',
+        createDialog: {
+          title: 'Nowe zaproszenie',
+          description:
+            'Zaproś nowego użytkownika poprzez email aby dodać go do systemu Smart Gate. Po wysłaniu nadal możesz anulować zaproszenie',
+          addAsAdmin: 'Dodaj jako administrator',
+          send: 'Wyślij zaproszenie',
+          invitationsSentSuccessfully: 'Zaproszenie wysłane',
+        },
       },
       login: {
         keepMeLoggedIn: 'Nie wylogowuj mnie',

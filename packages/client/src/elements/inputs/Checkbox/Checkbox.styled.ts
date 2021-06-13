@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import { CheckboxLabelProps, CheckboxWrapperProps, CheckmarkProps } from './Checkbox.types';
 
 export const CheckboxLabel = styled.label<CheckboxLabelProps>`
-  display: flex;
   align-items: center;
-  height: 26px;
-  position: relative;
-  padding-left: 36px;
   cursor: pointer;
+  display: flex;
+  height: 26px;
+  padding-left: 36px;
+  position: relative;
   user-select: none;
 
   p {
+    color: ${({ theme }) => theme.palette.text.secondary};
     transition: color;
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
-    color: ${({ theme }) => theme.palette.text.secondary};
   }
 
   ${({ required, theme }) =>
@@ -40,10 +40,11 @@ export const Checkmark = styled.span<CheckmarkProps>(
   border-radius: 6px;
 
   ${
-    isError &&
-    `
+    isError
+      ? `
       border: 2px solid ${palette.action.error};
   `
+      : ''
   };
 
   svg {
@@ -75,10 +76,10 @@ export const Checkmark = styled.span<CheckmarkProps>(
 );
 
 export const StyledInput = styled.input`
-  position: absolute;
-  opacity: 0;
   cursor: pointer;
   height: 0;
+  opacity: 0;
+  position: absolute;
   width: 0;
 
   :focus-visible ~ ${Checkmark} {

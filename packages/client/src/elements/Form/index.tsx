@@ -1,4 +1,5 @@
 import React, { Children, cloneElement, isValidElement, ReactElement, ReactNode } from 'react';
+import { FieldError } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -11,7 +12,7 @@ import {
   isValidLength,
 } from '../../utils/validations';
 import { Checkbox, TextInput } from '../inputs';
-import { FormProps, ValidationType } from './Form.types';
+import { FormBaseInputProps, FormProps, ValidationType } from './Form.types';
 
 // Every input in app which is used with Form component must be declared here
 const formInputs: Array<ReactNode> = [Checkbox, TextInput];
@@ -24,8 +25,13 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
     Children.map(childrenList, (child) => {
       if (isValidElement(child)) {
         if (isFormInput(child)) {
-          const { name, required, validation = {}, validationType } = child.props;
-          const fieldError = errors && errors[name];
+          const {
+            name,
+            required,
+            validation = {},
+            validationType,
+          } = child.props as FormBaseInputProps;
+          const fieldError = errors && (errors[name] as FieldError | undefined);
           const internalValidationType: ValidationType = validationType;
 
           if (required || internalValidationType === 'required') {
@@ -58,12 +64,14 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
               if (!hasSpecialChar(value)) {
                 return `${basePasswordErrorMsg} 1 ${t('form.validation.specialCharacter')}`;
               }
+              return true;
             };
           }
 
           return cloneElement(child, {
             error: fieldError?.message,
-            ref: register(validation),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+            ...register(name, validation),
             disabled: Boolean(loading),
           });
         }

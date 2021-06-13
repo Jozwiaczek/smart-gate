@@ -1,0 +1,3 @@
+{
+  "include": ["**/*.js", "**/.eslintrc.js"] // Left for @typescript-eslint requirements
+}

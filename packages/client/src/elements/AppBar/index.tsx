@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { routes } from '../../constants';
 import { useCurrentUser, useMediaDevice } from '../../hooks';
 import { AdminIcon, DashboardIcon, HistoryIcon, SettingsIcon } from '../../icons';
-import { AdminDashboard, Dashboard } from '../../pages';
+import { AdminDashboard, Dashboard, History, Settings } from '../../pages';
 import mapRoutesToArray from '../../utils/mapRoutesToArray';
 import { BackgroundSideLogo } from '../index';
 import TabbedLayout from '../layouts/TabbedLayout';
@@ -13,9 +13,6 @@ import { AppBarPageWrapper, TabPageWrapper, TabsWrapper, Wrapper } from './AppBa
 import { AppBarItem, AppBarProps } from './AppBar.types';
 
 const { HOME, HISTORY, SETTINGS, admin } = routes.authorized.appBar;
-
-const Settings = () => <p>Settings</p>;
-const History = () => <p>History</p>;
 
 const defaultTabs: Array<AppBarItem> = [
   {

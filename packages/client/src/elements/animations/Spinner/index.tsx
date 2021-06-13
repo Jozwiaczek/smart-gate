@@ -6,7 +6,7 @@ import { SpinnerProps } from './Spinner.types';
 
 const cubeDelaysInOrder = [200, 300, 400, 100, 200, 300, 0, 100, 200];
 
-const Spinner = ({ color = ThemeType.dark, size = '18px', margin }: SpinnerProps) => (
+const Spinner = ({ color = ThemeType.dark, size, margin }: SpinnerProps) => (
   <CubeGrid size={size} margin={margin}>
     {cubeDelaysInOrder.map((animationDelay, index) => (
       // eslint-disable-next-line react/no-array-index-key

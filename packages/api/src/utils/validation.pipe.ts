@@ -8,8 +8,9 @@ export class ValidationPipe implements PipeTransform {
     if (!metatype || !ValidationPipe.toValidate(metatype)) {
       return value;
     }
-    const object = plainToClass(metatype, value);
-    const errors = await validate(object);
+    const objectClass = plainToClass<unknown, unknown>(metatype, value);
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const errors = await validate(objectClass as object);
     if (errors.length > 0) {
       throw new BadRequestException('Validation failed');
     }

@@ -1,0 +1,26 @@
+{
+  "name": "e2e",
+  "version": "1.0.3",
+  "private": true,
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:verify": "cypress verify",
+    "cypress:info": "cypress info",
+    "cypress:version": "cypress version",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
+    "lint:fix": "yarn lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/imap-simple": "^4.2.4",
+    "@types/mailparser": "^3.0.2",
+    "cypress": "^7.4.0",
+    "cypress-recurse": "^1.8.1",
+    "dotenv": "^10.0.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "imap-simple": "^5.1.0",
+    "mailparser": "^3.2.0",
+    "typescript": "^4.2.4"
+  }
+}

@@ -7,9 +7,10 @@ import { DateFieldProps } from './DateField.types';
 const DateField = <T extends BaseRecordField>({ source, record, showTime }: DateFieldProps<T>) => {
   const { i18n } = useTranslation();
 
-  if (!record) {
-    return null;
+  if (!record || !record[source]) {
+    return <p data-testid="dateField">-</p>;
   }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const date = new Date(record[source].toString());
   const formatter = new Intl.DateTimeFormat(i18n.language, {
     timeStyle: showTime ? 'medium' : undefined,

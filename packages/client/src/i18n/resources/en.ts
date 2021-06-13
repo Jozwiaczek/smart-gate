@@ -11,6 +11,7 @@ const en = {
       firstName: 'First name',
       lastName: 'Last name',
       password: 'Password',
+      role: 'Role',
     },
     invitation: {
       name: 'Invitation',
@@ -62,9 +63,16 @@ const en = {
       },
     },
     routes: {
+      general: {
+        sectionInConstruction: 'This section is under construction',
+      },
       dashboard: {
-        logout: 'Logout',
-        logoutFromAllDevices: 'Logout from all devices',
+        title: 'Dashboard',
+        toggleGate: 'Toggle gate',
+        toggleSuccess: 'Gate successfully toggled',
+      },
+      history: {
+        title: 'History',
       },
       admin: {
         title: 'Admin panel',
@@ -76,8 +84,21 @@ const en = {
           statistics: 'Statistics',
         },
       },
+      settings: {
+        title: 'Settings',
+        logout: 'Logout',
+        logoutFromAllDevices: 'Logout from all devices',
+      },
       invitations: {
         sendInvitation: 'Send Invitation',
+        createDialog: {
+          title: 'Invite New Member',
+          description:
+            'Invite new members by email to join your Smart Gate. After sent, you will still be able to cancel invitation.',
+          addAsAdmin: 'Add as admin',
+          send: 'Send invite',
+          invitationsSentSuccessfully: 'Invitation sent successfully',
+        },
       },
       login: {
         keepMeLoggedIn: 'Keep me logged in',

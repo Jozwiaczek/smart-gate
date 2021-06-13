@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen } from '../../../utils/testingLibraryInstance';
 import TextField from './index';
 
-describe('TextField', () => {
+describe('textField', () => {
   const mockDate = new Date('04.03.2021');
   const mockRecord = {
     email: 'joe.doe@hotmail.com',

@@ -9,16 +9,16 @@ import { TabsOptions, TabsOrientation } from './Tabs/Tabs.types';
 
 const MockRoot = styled.div<{ orientation?: TabsOrientation; width?: string }>`
   ${({ width }) => `width: ${width ?? '800px'};`};
-  height: 80%;
   border: 2px solid ${({ theme }) => theme.palette.divider.default};
+  height: 80%;
   ${({ orientation }) => orientation === 'vertical' && 'display: flex'};
 `;
 
 const MockTabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
-  width: 100%;
-  height: 90px;
   background: ${({ theme }) => theme.palette.background.paper};
   box-shadow: ${({ theme }) => theme.palette.boxShadow.default};
+  height: 90px;
+  width: 100%;
   ${({ orientation }) =>
     orientation === 'vertical' &&
     `

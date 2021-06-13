@@ -17,7 +17,7 @@ const ConditionRoute = ({ redirectTo, condition, ...props }: ConditionRouteProps
     let isActive = true;
 
     checkAuth()
-      .then((currentUser) => {
+      .then((currentUser): void => {
         if (isActive) {
           const routeCondition = condition({ currentUser });
           setLazyLoading(() => ({ state: 'data', data: routeCondition }));

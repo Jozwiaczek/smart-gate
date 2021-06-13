@@ -5,6 +5,7 @@ import { ITheme, ThemeType } from '../../../theme/Theme';
 type ButtonColorVariant = ThemeType | 'red' | 'blue' | 'card';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  'data-testid'?: string;
   label?: string;
   loading?: boolean;
   colorVariant?: ButtonColorVariant;

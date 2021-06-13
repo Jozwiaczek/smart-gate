@@ -10,6 +10,7 @@ import { InvitationRepository } from '../repository/invitation.repository';
 import { UserRepository } from '../repository/user.repository';
 import { InvitationsConfigService } from './Config/invitations-config.service';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
+import { InvitationItemDto } from './dto/invitation-item.dto';
 import { UpdateInvitationDto } from './dto/update-invitation.dto';
 
 @Injectable()
@@ -26,7 +27,7 @@ export class InvitationsService {
 
   async send(
     { email, roles }: CreateInvitationDto,
-    currentUserPromise?: Promise<UserEntity>,
+    currentUser?: UserEntity,
   ): Promise<InvitationEntity> {
     const user = await this.userRepository.findOneByEmail(email);
     if (user) {
@@ -38,10 +39,10 @@ export class InvitationsService {
     const expirationDate = this.invitationsConfigService.getExpirationDate();
 
     let metaDetails = {};
-    if (currentUserPromise) {
+    if (currentUser) {
       metaDetails = {
-        createdBy: currentUserPromise,
-        updatedBy: currentUserPromise,
+        createdBy: currentUser,
+        updatedBy: currentUser,
       };
     }
 
@@ -60,24 +61,52 @@ export class InvitationsService {
 
     await this.mailerService.sendInvitation(email, link);
 
-    if (currentUserPromise) {
-      const {
-        id: currentUserId,
-        createdInvitations,
-        updatedInvitations,
-      } = await currentUserPromise;
-      await this.userRepository.update(currentUserId, {
-        createdInvitations: [...createdInvitations, createdInvitation],
-        updatedInvitations: [...updatedInvitations, createdInvitation],
-      });
-    }
-
     return createdInvitation;
   }
 
-  async findAll(): Promise<GetList<InvitationEntity>> {
-    const allInvitations = await this.repository.find();
-    return { data: allInvitations, total: allInvitations.length };
+  async findAll(): Promise<GetList<InvitationItemDto>> {
+    const invitations = await this.repository.find({ relations: ['createdBy', 'updatedBy'] });
+    const resultInvitation = invitations.map(
+      ({
+        email,
+        id,
+        roles,
+        expirationDate,
+        status,
+        createdBy,
+        updatedBy,
+        createdAt,
+        updatedAt,
+      }): InvitationItemDto => {
+        return {
+          id,
+          email,
+          roles,
+          createdAt,
+          updatedAt,
+          expirationDate,
+          status,
+          createdBy: createdBy
+            ? {
+                email: createdBy.email,
+                roles: createdBy.roles,
+                firstName: createdBy.firstName,
+                lastName: createdBy.lastName,
+              }
+            : undefined,
+          updatedBy: updatedBy
+            ? {
+                email: updatedBy.email,
+                roles: updatedBy.roles,
+                firstName: updatedBy.firstName,
+                lastName: updatedBy.lastName,
+              }
+            : undefined,
+        };
+      },
+    );
+
+    return { data: resultInvitation, total: resultInvitation.length };
   }
 
   async findOne(id: string): Promise<InvitationEntity> {
@@ -89,7 +118,7 @@ export class InvitationsService {
   async update(
     id: string,
     updateInvitationDto: UpdateInvitationDto,
-    currentUserPromise?: Promise<UserEntity>,
+    currentUser?: UserEntity,
   ): Promise<InvitationEntity | undefined> {
     const foundInvitation = await this.findOne(id);
 
@@ -101,17 +130,20 @@ export class InvitationsService {
       foundInvitation.roles = updateInvitationDto.roles;
     }
 
-    if (currentUserPromise) {
-      const currentUser = await currentUserPromise;
-      const currentUpdatedBy = await foundInvitation.updatedBy;
+    if (currentUser) {
+      const currentUpdatedBy = foundInvitation.updatedBy;
 
-      if (currentUser.id !== currentUpdatedBy.id) {
-        foundInvitation.updatedBy = currentUserPromise;
+      if (currentUser.id !== currentUpdatedBy?.id) {
+        foundInvitation.updatedBy = currentUser;
       }
     }
 
     await this.repository.save(foundInvitation);
     return foundInvitation;
+  }
+
+  async removeMany(ids: Array<string>) {
+    await this.repository.delete(ids);
   }
 
   async remove(id: string): Promise<true> {

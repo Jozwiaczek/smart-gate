@@ -6,7 +6,6 @@ import { routes } from '../../../constants';
 import { Button, CardLayout, Form, Link, PaperPlane, TextInput } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
-import { EmailIcon } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
 import { PaperPlaneWrapper } from './PasswordRecovery.styled';
 import { PasswordRecoveryInputs } from './PasswordRecovery.types';
@@ -20,7 +19,12 @@ const PasswordRecovery = () => {
     type: 'shake',
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, trigger } = useForm<PasswordRecoveryInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+  } = useForm<PasswordRecoveryInputs>();
   const [emailSentAddress, setEmailSentAddress] = useState<undefined | string>(undefined);
 
   const onBeforeSubmit = async () => {
@@ -51,11 +55,11 @@ const PasswordRecovery = () => {
       </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextInput
+          data-testid="input-email"
           autoFocus
           required
           name="email"
           validationType="email"
-          startAdornment={<EmailIcon />}
         />
         <CardLayout.ActionsContainer direction="row">
           <Button type="submit" fullWidth disabled={loading} withArrow onClick={onBeforeSubmit}>

@@ -47,7 +47,7 @@ export class TokenCookieService {
       case 'REFRESH':
         return this.cookieService.getCookie(refreshToken.name);
       default:
-        throw Error(`Invalid token type: '${tokenType}'.`);
+        throw Error(`Invalid token type: '${tokenType as string}'.`);
     }
   }
 

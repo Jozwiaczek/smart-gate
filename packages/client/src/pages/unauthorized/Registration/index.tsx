@@ -27,7 +27,7 @@ const Registration = () => {
   const {
     register,
     handleSubmit,
-    errors,
+    formState: { errors },
     reset,
     trigger,
     getValues,
@@ -72,8 +72,15 @@ const Registration = () => {
           components={{ b: <b /> }}
         />
       </CardLayout.Description>
-      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
+      <Form
+        data-testid="form-registration"
+        onSubmit={handleSubmit(onSubmit)}
+        errors={errors}
+        loading={loading}
+        register={register}
+      >
         <TextInput
+          data-testid="input-firstName"
           name="firstName"
           label={t('user.firstName')}
           autoFocus
@@ -81,12 +88,14 @@ const Registration = () => {
           startAdornment={<UserIcon />}
         />
         <TextInput
+          data-testid="input-lastName"
           name="lastName"
           label={t('user.lastName')}
           required
           startAdornment={<UserIcon />}
         />
         <TextInput
+          data-testid="input-password"
           name="password"
           label={t('user.password')}
           type="password"
@@ -94,6 +103,7 @@ const Registration = () => {
           required
         />
         <TextInput
+          data-testid="input-confirm-password"
           name={t('form.inputs.confirmPassword')}
           type="password"
           placeholder={t('form.inputs.repeatPassword')}

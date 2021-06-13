@@ -7,7 +7,6 @@ import { routes } from '../../../constants';
 import { AnimatedLogo, CardLayout, Checkbox, Form, Link, TextInput } from '../../../elements';
 import { useAuth, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
-import { EmailIcon } from '../../../icons';
 import { onlyOnDevEnv } from '../../../utils';
 import { StyledButton } from './Login.styled';
 import { LoginInputs } from './Login.types';
@@ -22,7 +21,13 @@ const Login = () => {
     type: 'shake',
     opt: { autoTrigger: false },
   });
-  const { register, handleSubmit, errors, reset, trigger } = useForm<LoginInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    trigger,
+  } = useForm<LoginInputs>();
 
   const onBeforeSubmit = async () => {
     const isValid = await trigger();
@@ -47,15 +52,22 @@ const Login = () => {
   return (
     <CardLayout.Container ref={animatedCardRef}>
       <AnimatedLogo margin="10px 0" />
-      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
+      <Form
+        data-testid="form-login"
+        onSubmit={handleSubmit(onSubmit)}
+        errors={errors}
+        loading={loading}
+        register={register}
+      >
         <TextInput
+          data-testid="input-email"
           autoFocus
           required
           name="email"
           validationType="email"
-          startAdornment={<EmailIcon />}
         />
         <TextInput
+          data-testid="input-password"
           required
           name="password"
           type="password"
@@ -63,8 +75,9 @@ const Login = () => {
           label={t('user.password')}
         />
         <CardLayout.ActionsContainer direction="row">
-          <Checkbox name="keepMeLoggedIn" label={t('routes.login.keepMeLoggedIn')} />
+          <Checkbox name="keepMeLoggedIn" label="routes.login.keepMeLoggedIn" />
           <StyledButton
+            data-testid="btn-login"
             type="submit"
             fullWidth
             loading={loading}
@@ -76,7 +89,11 @@ const Login = () => {
         </CardLayout.ActionsContainer>
       </Form>
       <CardLayout.ActionsContainer>
-        <Link to={routes.unauthorized.PASSWORD_RECOVERY} colorVariant="grey">
+        <Link
+          data-testid="link-forgotPassword"
+          to={routes.unauthorized.PASSWORD_RECOVERY}
+          colorVariant="grey"
+        >
           {t('routes.login.forgotPassword')}
         </Link>
       </CardLayout.ActionsContainer>

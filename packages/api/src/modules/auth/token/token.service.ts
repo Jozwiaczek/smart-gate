@@ -55,7 +55,7 @@ export class TokenService {
         break;
 
       default:
-        throw new Error(`Invalid token type: '${tokenType}'.`);
+        throw new Error(`Invalid token type: '${tokenType as string}'.`);
     }
     return payload;
   }
@@ -126,7 +126,7 @@ export class TokenService {
         break;
 
       default:
-        throw Error(`Invalid token type: '${tokenType}'.`);
+        throw Error(`Invalid token type: '${tokenType as string}'.`);
     }
     return [token, expirationDate];
   }

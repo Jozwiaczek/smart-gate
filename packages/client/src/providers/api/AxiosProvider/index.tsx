@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import React from 'react';
 
+import { environments } from '../../../constants';
 import { useCurrentUser } from '../../../hooks';
 import { AxiosContext } from './AxiosProvider.context';
 import { AxiosProviderProps } from './AxiosProvider.types';
@@ -8,8 +9,10 @@ import { AxiosProviderProps } from './AxiosProvider.types';
 const AxiosProvider = ({ children }: AxiosProviderProps) => {
   const [, setUser] = useCurrentUser();
 
+  const { REACT_APP_API_URL, NODE_ENV } = process.env;
+
   const AxiosOverriddenInstance = axios.create({
-    baseURL: '/api',
+    baseURL: NODE_ENV === environments.DEV ? REACT_APP_API_URL : '/api',
     headers: {
       'Content-Type': 'application/json',
     },

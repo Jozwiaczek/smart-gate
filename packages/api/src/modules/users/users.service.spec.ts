@@ -12,7 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 
-describe('Users Service', () => {
+describe('users service', () => {
   let connection: Connection;
   let usersService: UsersService;
 
@@ -83,7 +83,7 @@ describe('Users Service', () => {
         lastName: 'test',
       };
 
-      await expect(usersService.create(user)).rejects.toBeInstanceOf(QueryFailedError);
+      await expect(usersService.create(user)).rejects.toBeInstanceOf(Error);
     });
 
     it('returns valid created user', async () => {
@@ -157,7 +157,7 @@ describe('Users Service', () => {
       await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
       await expect(usersService.remove(firstUser.id)).resolves.toStrictEqual(true);
       await expect(repository.find()).resolves.toStrictEqual([secondUser]);
-      await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
+      await expect(repository.findOne({ id: firstUser.id })).resolves.toBeUndefined();
     });
   });
 
@@ -178,11 +178,9 @@ describe('Users Service', () => {
       const secondUser = await testCreateRandomUser(connection);
 
       await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
-      await expect(usersService.removeMany({ ids: [firstUser.id] })).resolves.toStrictEqual(
-        undefined,
-      );
+      await expect(usersService.removeMany({ ids: [firstUser.id] })).resolves.toBeUndefined();
       await expect(repository.find()).resolves.toStrictEqual([secondUser]);
-      await expect(repository.findOne({ id: firstUser.id })).resolves.toStrictEqual(undefined);
+      await expect(repository.findOne({ id: firstUser.id })).resolves.toBeUndefined();
     });
   });
 });

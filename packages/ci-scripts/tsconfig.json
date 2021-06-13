@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./build",
+    "module": "commonjs",
+    "noEmit": false
+  },
+  "include": ["src"]
+}

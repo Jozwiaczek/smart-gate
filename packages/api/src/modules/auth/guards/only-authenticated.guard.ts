@@ -1,6 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 
+import { CookieResponse } from '../../../interfaces/cookie-types';
+import { TokenPayload } from '../../../interfaces/token-types';
 import { UserRepository } from '../../repository/user.repository';
 import { TokenService } from '../token/token.service';
 import { TokenCookieService } from '../token/token-cookie.service';
@@ -15,16 +17,11 @@ export class OnlyAuthenticatedGuard implements CanActivate {
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
-      const request = context.switchToHttp().getRequest();
-      const response = context.switchToHttp().getResponse();
+      const request = context.switchToHttp().getRequest<{ payload: TokenPayload }>();
+      const response = context.switchToHttp().getResponse<CookieResponse>();
 
       const accessToken = this.tokenCookieService.getCookieToken('ACCESS');
-      const payload = await this.tokenService.verifyJWTToken(
-        'ACCESS',
-        accessToken,
-        undefined,
-        true,
-      );
+      const payload = this.tokenService.verifyJWTToken('ACCESS', accessToken, undefined, true);
 
       request.payload = payload;
 

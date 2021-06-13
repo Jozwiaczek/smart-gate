@@ -1,0 +1,17 @@
+{
+  "name": "ci-scripts",
+  "version": "1.0.3",
+  "private": true,
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "tsc --project tsconfig.json",
+    "clean": "rimraf build",
+    "setup:testDB": "yarn ts-node src/setupTestDatabase.ts",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
+    "lint:fix": "yarn lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "ts-node": "^10.0.0"
+  }
+}

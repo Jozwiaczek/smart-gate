@@ -28,13 +28,18 @@ const PageNotFound = () => {
       </Title>
       <ContentWrapper illustrationHeight={illustrationHeight}>
         <IllustrationWrapper ref={illustrationWrapperRef}>
-          {isLightTheme ? <Heaven /> : <Hell />}
+          {isLightTheme ? (
+            <Heaven data-testid="heaven-animation" />
+          ) : (
+            <Hell data-testid="hell-animation" />
+          )}
         </IllustrationWrapper>
         <Description illustrationHeight={illustrationHeight}>
           <Trans i18nKey="routes.pageNotFound.description" components={{ b: <b /> }} />
         </Description>
       </ContentWrapper>
       <Button
+        data-testid="btn-404-nav"
         to={currentUser ? routes.authorized.appBar.HOME : routes.unauthorized.LOGIN}
         fullWidth
         withArrow

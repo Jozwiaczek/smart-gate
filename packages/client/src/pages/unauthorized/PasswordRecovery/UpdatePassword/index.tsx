@@ -24,7 +24,7 @@ const UpdatePassword = () => {
   const {
     register,
     handleSubmit,
-    errors,
+    formState: { errors },
     reset,
     trigger,
     getValues,
@@ -63,6 +63,7 @@ const UpdatePassword = () => {
       </CardLayout.Description>
       <Form onSubmit={handleSubmit(onSubmit)} errors={errors} loading={loading} register={register}>
         <TextInput
+          data-testid="input-password"
           name="password"
           label={t('user.password')}
           type="password"
@@ -70,6 +71,7 @@ const UpdatePassword = () => {
           required
         />
         <TextInput
+          data-testid="input-confirm-password"
           name={t('form.inputs.confirmPassword')}
           type="password"
           placeholder={t('form.inputs.repeatPassword')}
@@ -103,7 +105,12 @@ const UpdatePassword = () => {
       <ShieldIconWrapper>
         <ShieldLock />
       </ShieldIconWrapper>
-      <Button fullWidth withArrow to={routes.authorized.appBar.HOME}>
+      <Button
+        data-testid="btn-confirm-and-back"
+        fullWidth
+        withArrow
+        to={routes.authorized.appBar.HOME}
+      >
         {t('routes.passwordRecovery.updatePasswordConfirmation.back')}
       </Button>
     </>

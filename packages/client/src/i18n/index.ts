@@ -12,6 +12,7 @@ export enum SGLocale {
 
 const { STORYBOOK, NODE_ENV } = process.env;
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)

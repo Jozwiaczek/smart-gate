@@ -1,0 +1,56 @@
+name: 'Prepare release PR'
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Prepare:
+    name: 'Prepare release pr'
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: 'Git checkout'
+        uses: actions/checkout@v2.3.4
+
+      # Beginning of yarn setup, keep in sync between all workflows
+      - name: Use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: 'Use cached node_modules'
+        id: cache-modules
+        uses: actions/cache@v2.1.6
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-v${{ matrix.node-version }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
+      - name: 'Find location of global yarn cache'
+        id: yarn-cache
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: 'Cache global yarn cache'
+        uses: actions/cache@v2.1.6
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: 'Install dependency'
+        run: yarn install --frozen-lockfile
+      # End of yarn setup
+
+      - name: 'Build CI scripts'
+        run: cd packages/ci-scripts && yarn build
+
+      - name: 'Prepare PR'
+        uses: actions/github-script@v4.0.2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { prepareReleasePR } = require(`./packages/ci-scripts/build/src/prepareReleasePR`)
+            prepareReleasePR({ github, context })

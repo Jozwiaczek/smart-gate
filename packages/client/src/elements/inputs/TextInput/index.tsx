@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 
-import { LockIcon } from '../../../icons';
+import { EmailIcon, LockIcon } from '../../../icons';
 import { getLabelFromSource, getPlaceholderFromSource } from '../../../utils';
 import PasswordIconButton from './PasswordIconButton';
 import { Container, Error, InputAdornment, Label, StyledInput } from './TextInput.styled';
@@ -35,6 +35,10 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     if (isPassword) {
       internalStartAdornment = startAdornment || <LockIcon color={theme.palette.colors.red} />;
       internalEndAdornment = <PasswordIconButton setPasswordMasked={setPasswordMasked} />;
+    }
+
+    if (name === 'email' && !startAdornment) {
+      internalStartAdornment = <EmailIcon />;
     }
 
     useEffect(() => {

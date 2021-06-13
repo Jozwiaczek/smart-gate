@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 50px;
+import { Button } from '../../../elements';
+
+export const ToggleButton = styled(Button)`
+  font-size: 32px;
+  font-weight: 700;
+  height: 200px;
+  width: 300px;
 `;

@@ -1,54 +1,26 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '../../../elements/buttons';
-import { useAuth, useThemeType } from '../../../hooks';
-import { SGLocale } from '../../../i18n';
-import { ThemeType } from '../../../theme/Theme';
-import { Container } from './Dashboard.styled';
+import { useSnackbar } from '../../../hooks';
+import { Title } from '../AuthorizedPages.styled';
+import { ToggleButton } from './Dashboard.styled';
 
 const Dashboard = () => {
-  const { t, i18n } = useTranslation();
-  const { logout, logoutFromAllDevices } = useAuth();
-  const { themeType, setThemeType } = useThemeType();
+  const { t } = useTranslation();
+  const showSnackbar = useSnackbar();
 
-  const logoutUser = async () => {
-    await logout();
-  };
-
-  const logoutUserFromAllDevices = async () => {
-    await logoutFromAllDevices();
-  };
-
-  const changeLocale = () => {
-    i18n.changeLanguage(i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl);
-  };
-
-  const onChangeTheme = () => {
-    if (themeType === ThemeType.light) {
-      setThemeType(ThemeType.dark);
-    } else {
-      setThemeType(ThemeType.light);
-    }
+  const onToggle = () => {
+    console.count('toggledGate');
+    showSnackbar({ message: t('routes.dashboard.toggleSuccess'), severity: 'success' });
   };
 
   return (
-    <Container>
-      <h1>Smart Gate</h1>
-      <h2>Dashboard</h2>
-      <Button onClick={logoutUser} margin="20px">
-        {t('routes.dashboard.logout')}
-      </Button>
-      <Button onClick={logoutUserFromAllDevices} margin="20px">
-        {t('routes.dashboard.logoutFromAllDevices')}
-      </Button>
-      <Button onClick={onChangeTheme} margin="20px">
-        Change to {themeType === ThemeType.light ? 'dark' : 'light'} theme
-      </Button>
-      <Button onClick={changeLocale} color="secondary">
-        Change locale to {i18n.language === SGLocale.pl ? SGLocale.en : SGLocale.pl}
-      </Button>
-    </Container>
+    <>
+      <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
+      <ToggleButton margin="40px" onClick={onToggle}>
+        {t('routes.dashboard.toggleGate')}
+      </ToggleButton>
+    </>
   );
 };
 
