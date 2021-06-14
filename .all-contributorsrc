@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "nikofiko123",
+      "name": "nikofiko123",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39961079?v=4",
+      "profile": "https://github.com/nikofiko123",
+      "contributions": [
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "smart-gate",
+  "projectOwner": "Jozwiaczek",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
