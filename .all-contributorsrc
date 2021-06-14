@@ -18,6 +18,17 @@
         "infra",
         "review"
       ]
+    },
+    {
+      "login": "Mefjus",
+      "name": "Mefjus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29005327?v=4",
+      "profile": "https://github.com/Mefjus",
+      "contributions": [
+        "code",
+        "ideas",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
