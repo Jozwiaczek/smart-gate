@@ -45,6 +45,7 @@
 - [Hygen - Code generator](#-hygen-code-generator)
 - [Available root scripts](#-available-root-scripts)
 - [Changelog](#-changelog)
+- [Contributors](#-contributors)
 - [License](#-license)
 
 ## 📖 About
@@ -150,11 +151,6 @@ To run script, in terminal type `yarn {script}`.
 
 [Learn about the latest improvements](CHANGELOG.md).
 
-## License
-
-Copyright 2020 Jakub Jóźwiak.
-Licensed under the [MIT license](LICENSE).
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -174,3 +170,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+Copyright 2020 Jakub Jóźwiak.
+Licensed under the [MIT license](LICENSE).
