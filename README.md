@@ -1,6 +1,6 @@
 <h1 align="center">Smart Gate</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">
@@ -170,6 +170,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Jozwiaczek"><img src="https://avatars.githubusercontent.com/u/29049653?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Jóźwiak</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Code">💻</a> <a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Documentation">📖</a> <a href="#design-Jozwiaczek" title="Design">🎨</a> <a href="#ideas-Jozwiaczek" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-Jozwiaczek" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AJozwiaczek" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/nikofiko123"><img src="https://avatars.githubusercontent.com/u/39961079?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nikofiko123</b></sub></a><br /><a href="#design-nikofiko123" title="Design">🎨</a></td>
   </tr>
 </table>
 
