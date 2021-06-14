@@ -5,7 +5,7 @@
         <img src="./readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
     </a>
     <br>
-    <i>🔐 System for handling access to any physical entry gate.</i>
+    <i>🔐 Open source system for handling access to any physical entry gate.</i>
     <br>
     <br>
     <i>Created by <b>Jakub Jóźwiak</b> and <b>Mateusz Nestorowicz</b></i>
