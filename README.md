@@ -1,7 +1,4 @@
 <h1 align="center">Smart Gate</h1>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">
     <a href="https://github.com/Jozwiaczek/smart-gate">
@@ -23,10 +20,6 @@
     <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
     <br>
-    PRD:
-    <a href="https://docs.google.com/document/d/14E-0rzD669n-rqC-OYjqsSLxrUU7D3bg7K5M9_AFOvs/edit#heading=h.gqa5vpc8p3qt"><strong>docs.google.com</strong></a>
-    <br>
-    <br>
     Storybook:
     <a href="https://main--6059282c88843d002106b484.chromatic.com"><strong>smart-gate.chromatic.com</strong></a>
 </p>
@@ -34,10 +27,12 @@
 <hr>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
-![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
-![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
+[![CI](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml/badge.svg?branch=dev)](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)](https://github.com/Jozwiaczek/smart-gate/commits)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](#contributors-)
+[![Star on GitHub](https://img.shields.io/github/stars/Jozwiaczek/smart-gate.svg?style=social)](https://github.com/Jozwiaczek/smart-gate)
 
 ## 🚩 Table of Contents
 
