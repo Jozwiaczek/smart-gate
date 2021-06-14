@@ -28,23 +28,25 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
           const {
             name,
             required,
-            validation = {},
+            registerOptions = {},
             validationType,
           } = child.props as FormBaseInputProps;
           const fieldError = errors && (errors[name] as FieldError | undefined);
           const internalValidationType: ValidationType = validationType;
 
           if (required || internalValidationType === 'required') {
-            validation.required = t('form.validation.required');
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            registerOptions.required = t('form.validation.required') as string;
           }
 
           if (internalValidationType === 'email') {
-            validation.validate = (value: string) =>
-              isValidEmail(value) || t('form.validation.invalidEmail');
+            registerOptions.validate = (value: string) =>
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+              isValidEmail(value) || (t('form.validation.invalidEmail') as string);
           }
 
           if (internalValidationType === 'password') {
-            validation.validate = (value: string) => {
+            registerOptions.validate = (value: string) => {
               const basePasswordErrorMsg = t('form.validation.basePassword');
               if (!isValidLength(value)) {
                 return `${basePasswordErrorMsg} 8 ${t('form.validation.characters')}`;
@@ -71,7 +73,7 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
           return cloneElement(child, {
             error: fieldError?.message,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
-            ...register(name, validation),
+            ...register(name, registerOptions),
             disabled: Boolean(loading),
           });
         }
