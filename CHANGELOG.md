@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.9.0...v1.9.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* **e2e:** criteria for searching emails ([cff557a](https://github.com/Jozwiaczek/smart-gate/commit/cff557afc3143b8d032a65c0b447791924277767))
+
 # [1.9.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.8.0...v1.9.0) (2021-06-13)
 
 
