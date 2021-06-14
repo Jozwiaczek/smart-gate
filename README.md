@@ -1,4 +1,7 @@
 <h1 align="center">Smart Gate</h1>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">
     <a href="https://github.com/Jozwiaczek/smart-gate">
@@ -45,7 +48,7 @@
 - [Packages Docs](#-packages-docs)
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
-- [Available scripts](#-available-scripts)
+- [Available root scripts](#-available-root-scripts)
 - [Changelog](#-changelog)
 - [License](#-license)
 
@@ -70,8 +73,12 @@ yarn
 
 - Backend:
   - [Api](./packages/api/README.md)
+  - [Device](./packages/device/README.md)
 - Frontend:
   - [Client](./packages/client/README.md)
+- Utils:
+  - [CI scripts](./packages/ci-scipts/README.md)
+  - [E2E tests](./packages/e2e/README.md)
 
 ## 📏 Conventional Commits
 
@@ -121,7 +128,7 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 | ------- | --------------- | ------------------------------------------------------------- |
 | client  | `hygen:element` | Creates new standardize React component, story and style file |
 
-## 📝 Available scripts
+## 📝 Available root scripts
 
 To run script, in terminal type `yarn {script}`.
 
@@ -129,18 +136,19 @@ To run script, in terminal type `yarn {script}`.
 | ------------------- | --------------------------------------------------------- | ------------------------------------------ |
 | `build`             |                                                           |                                            |
 | `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
-| `ci:setup:db`       | Creates mock database for continous integration           | It's should be used only by Github Actions |
 | `heroku-postbuild`  | It runs on heroku before api build                        |                                            |
 | `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
 | `lint`              | Checks linter rules                                       |                                            |
 | `lint:fix`          | Fix linter                                                |                                            |
+| `stylelint`         | Checks stylelint rules for styled-components              |                                            |
 | `prettier`          | Checks prettier rules                                     |                                            |
 | `prettier:fix`      | Fix prettier                                              |                                            |
+| `prepare`           | Install husky                                             | It runs automatically after every install  |
 | `removeNodeModules` | Remove all node_modules from project (all packages)       |                                            |
 | `sortPackageJson`   | Sort alphabetical all package.json in project             |                                            |
 | `start`             | Used to run api package on heroku                         |                                            |
+| `start:ci`          | Start concurrently api and client in test mode            |                                            |
 | `test`              | Runs tests for all packages                               |                                            |
-| `test:e2e`          | Runs end to end tests for all packages                    |                                            |
 | `type-check`        | Checks TypeScript types for all packages                  |                                            |
 
 ## Changelog
@@ -151,3 +159,23 @@ To run script, in terminal type `yarn {script}`.
 
 Copyright 2020 Jakub Jóźwiak.
 Licensed under the [MIT license](LICENSE).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Jozwiaczek"><img src="https://avatars.githubusercontent.com/u/29049653?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Jóźwiak</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Code">💻</a> <a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Documentation">📖</a> <a href="#design-Jozwiaczek" title="Design">🎨</a> <a href="#ideas-Jozwiaczek" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-Jozwiaczek" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AJozwiaczek" title="Reviewed Pull Requests">👀</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

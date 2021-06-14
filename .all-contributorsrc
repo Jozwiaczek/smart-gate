@@ -1,0 +1,29 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Jozwiaczek",
+      "name": "Jakub Jóźwiak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29049653?v=4",
+      "profile": "https://github.com/Jozwiaczek",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "ideas",
+        "infra",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "smart-gate",
+  "projectOwner": "Jozwiaczek",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
