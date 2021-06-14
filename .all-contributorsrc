@@ -29,6 +29,15 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "nikofiko123",
+      "name": "nikofiko123",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39961079?v=4",
+      "profile": "https://github.com/nikofiko123",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
