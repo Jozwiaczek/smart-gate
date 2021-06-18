@@ -5,7 +5,7 @@
         <img src="./readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
     </a>
     <br>
-    <i>🔐 System for handling access to any physical entry gate.</i>
+    <i>🔐 Open source system for handling access to any physical entry gate.</i>
     <br>
     <br>
     <i>Created by <b>Jakub Jóźwiak</b> and <b>Mateusz Nestorowicz</b></i>
@@ -20,10 +20,6 @@
     <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
     <br>
-    PRD:
-    <a href="https://docs.google.com/document/d/14E-0rzD669n-rqC-OYjqsSLxrUU7D3bg7K5M9_AFOvs/edit#heading=h.gqa5vpc8p3qt"><strong>docs.google.com</strong></a>
-    <br>
-    <br>
     Storybook:
     <a href="https://main--6059282c88843d002106b484.chromatic.com"><strong>smart-gate.chromatic.com</strong></a>
 </p>
@@ -31,10 +27,12 @@
 <hr>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
-![CI](https://github.com/Jozwiaczek/smart-gate/workflows/Continuous%20Integration/badge.svg)
-![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)
+[![CI](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml/badge.svg?branch=dev)](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)](https://github.com/Jozwiaczek/smart-gate/commits)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg)](#contributors-)
+[![Star on GitHub](https://img.shields.io/github/stars/Jozwiaczek/smart-gate.svg?style=social)](https://github.com/Jozwiaczek/smart-gate)
 
 ## 🚩 Table of Contents
 
@@ -45,8 +43,9 @@
 - [Packages Docs](#-packages-docs)
 - [Conventional Commits](#-conventional-commits)
 - [Hygen - Code generator](#-hygen-code-generator)
-- [Available scripts](#-available-scripts)
+- [Available root scripts](#-available-root-scripts)
 - [Changelog](#-changelog)
+- [Contributors](#-contributors)
 - [License](#-license)
 
 ## 📖 About
@@ -70,8 +69,12 @@ yarn
 
 - Backend:
   - [Api](./packages/api/README.md)
+  - [Device](./packages/device/README.md)
 - Frontend:
   - [Client](./packages/client/README.md)
+- Utils:
+  - [CI scripts](./packages/ci-scipts/README.md)
+  - [E2E tests](./packages/e2e/README.md)
 
 ## 📏 Conventional Commits
 
@@ -121,7 +124,7 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 | ------- | --------------- | ------------------------------------------------------------- |
 | client  | `hygen:element` | Creates new standardize React component, story and style file |
 
-## 📝 Available scripts
+## 📝 Available root scripts
 
 To run script, in terminal type `yarn {script}`.
 
@@ -129,23 +132,46 @@ To run script, in terminal type `yarn {script}`.
 | ------------------- | --------------------------------------------------------- | ------------------------------------------ |
 | `build`             |                                                           |                                            |
 | `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
-| `ci:setup:db`       | Creates mock database for continous integration           | It's should be used only by Github Actions |
 | `heroku-postbuild`  | It runs on heroku before api build                        |                                            |
 | `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
 | `lint`              | Checks linter rules                                       |                                            |
 | `lint:fix`          | Fix linter                                                |                                            |
+| `stylelint`         | Checks stylelint rules for styled-components              |                                            |
 | `prettier`          | Checks prettier rules                                     |                                            |
 | `prettier:fix`      | Fix prettier                                              |                                            |
+| `prepare`           | Install husky                                             | It runs automatically after every install  |
 | `removeNodeModules` | Remove all node_modules from project (all packages)       |                                            |
 | `sortPackageJson`   | Sort alphabetical all package.json in project             |                                            |
 | `start`             | Used to run api package on heroku                         |                                            |
+| `start:ci`          | Start concurrently api and client in test mode            |                                            |
 | `test`              | Runs tests for all packages                               |                                            |
-| `test:e2e`          | Runs end to end tests for all packages                    |                                            |
 | `type-check`        | Checks TypeScript types for all packages                  |                                            |
 
 ## Changelog
 
 [Learn about the latest improvements](CHANGELOG.md).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Jozwiaczek"><img src="https://avatars.githubusercontent.com/u/29049653?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Jóźwiak</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Code">💻</a> <a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Documentation">📖</a> <a href="#design-Jozwiaczek" title="Design">🎨</a> <a href="#ideas-Jozwiaczek" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-Jozwiaczek" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AJozwiaczek" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/Mefjus"><img src="https://avatars.githubusercontent.com/u/29005327?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mefjus</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Mefjus" title="Code">💻</a> <a href="#ideas-Mefjus" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AMefjus" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/nikofiko123"><img src="https://avatars.githubusercontent.com/u/39961079?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nikofiko123</b></sub></a><br /><a href="#design-nikofiko123" title="Design">🎨</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License
 

@@ -26,7 +26,10 @@ const makeEmailAccount = () => {
     const connection = await imaps.connect(emailConfig);
 
     await connection.openBox('INBOX');
-    const searchCriteria = ['1:20'];
+    const delay = 5 * 60 * 1000; // 5 min
+    const searchDate = new Date();
+    searchDate.setTime(Date.now() - delay);
+    const searchCriteria = ['UNSEEN', ['SINCE', searchDate.toISOString()]];
     const fetchOptions = {
       bodies: [''],
     };

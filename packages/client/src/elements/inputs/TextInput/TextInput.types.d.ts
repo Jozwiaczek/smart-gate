@@ -9,7 +9,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   icon?: ReactElement;
   label?: string;
-  validation?: RegisterOptions;
+  registerOptions?: RegisterOptions;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
   validationType?: ValidationType;

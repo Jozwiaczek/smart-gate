@@ -6,4 +6,3 @@
     base = "packages/client"
     publish = "build"
     command = "yarn build"
-    ignore = "git diff --quiet main ."

@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, FormHTMLAttributes, ReactNode } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 type HTMLForm = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
@@ -12,13 +13,9 @@ export interface FormProps extends HTMLForm {
 
 export type ValidationType = 'email' | 'required' | 'password';
 
-interface Validation {
-  [key: string]: string | ((value: string) => boolean | string);
-}
-
 interface FormBaseInputProps {
   name: string;
   required?: boolean;
-  validation: Validation;
+  registerOptions?: RegisterOptions<TFieldValues, TFieldName>;
   validationType: ValidationType;
 }
