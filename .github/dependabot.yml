@@ -9,9 +9,8 @@ updates:
       interval: 'daily'
     commit-message:
       prefix: 'chore'
-      include_scope: false
     ignore:
-      - dependency-name: *
+      - dependency-name: '*'
         update-types: ['version-update:semver-patch']
   - package-ecosystem: 'github-actions'
     target-branch: 'dev'
@@ -20,7 +19,6 @@ updates:
       interval: 'daily'
     commit-message:
       prefix: 'chore'
-      include_scope: false
     ignore:
-      - dependency-name: *
+      - dependency-name: '*'
         update-types: ['version-update:semver-minor', 'version-update:semver-patch']
