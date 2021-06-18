@@ -3271,6 +3271,17 @@
     "@sentry/utils" "6.6.0"
     tslib "^1.9.3"
 
+"@sentry/core@6.7.1":
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-6.7.1.tgz#c3aaa6415d06bec65ac446b13b84f073805633e3"
+  integrity sha512-VAv8OR/7INn2JfiLcuop4hfDcyC7mfL9fdPndQEhlacjmw8gRrgXjR7qyhnCTgzFLkHI7V5bcdIzA83TRPYQpA==
+  dependencies:
+    "@sentry/hub" "6.7.1"
+    "@sentry/minimal" "6.7.1"
+    "@sentry/types" "6.7.1"
+    "@sentry/utils" "6.7.1"
+    tslib "^1.9.3"
+
 "@sentry/hub@6.6.0":
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-6.6.0.tgz#1b9fa22ee104b7d6afd2dc4c40a1459fda259366"
@@ -3308,15 +3319,15 @@
     tslib "^1.9.3"
 
 "@sentry/node@^6.6.0":
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-6.6.0.tgz#e535e1e679cf894752810529ffdee93cbfd078f0"
-  integrity sha512-heKie/AOanYq3mCsKR1igPn1sUIxBmGibBp79Xc0iSAgliPKnnLkqUjvAIKu6mcevL9UOUhpMDLzhilkaG+bAA==
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-6.7.1.tgz#b09e2eca8e187168feba7bd865a23935bf0f5cc0"
+  integrity sha512-rtZo1O8ROv4lZwuljQz3iFZW89oXSlgXCG2VqkxQyRspPWu89abROpxLjYzsWwQ8djnur1XjFv51kOLDUTS6Qw==
   dependencies:
-    "@sentry/core" "6.6.0"
-    "@sentry/hub" "6.6.0"
-    "@sentry/tracing" "6.6.0"
-    "@sentry/types" "6.6.0"
-    "@sentry/utils" "6.6.0"
+    "@sentry/core" "6.7.1"
+    "@sentry/hub" "6.7.1"
+    "@sentry/tracing" "6.7.1"
+    "@sentry/types" "6.7.1"
+    "@sentry/utils" "6.7.1"
     cookie "^0.4.1"
     https-proxy-agent "^5.0.0"
     lru_map "^0.3.3"
@@ -3334,18 +3345,7 @@
     hoist-non-react-statics "^3.3.2"
     tslib "^1.9.3"
 
-"@sentry/tracing@6.6.0":
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-6.6.0.tgz#ce62fcb951faa6447cf47889f91efe3617b9eed2"
-  integrity sha512-tjXrmAOFfVBfx+ZmgE5bkpDPs/euNj0xrUg8MowCWGfCRn01W679tTb+dyNeP6faxQTo2RcaD68xD8oLroJwwA==
-  dependencies:
-    "@sentry/hub" "6.6.0"
-    "@sentry/minimal" "6.6.0"
-    "@sentry/types" "6.6.0"
-    "@sentry/utils" "6.6.0"
-    tslib "^1.9.3"
-
-"@sentry/tracing@^6.6.0":
+"@sentry/tracing@6.7.1", "@sentry/tracing@^6.6.0":
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-6.7.1.tgz#b11f0c17a6c5dc14ef44733e5436afb686683268"
   integrity sha512-wyS3nWNl5mzaC1qZ2AIp1hjXnfO9EERjMIJjCihs2LWBz1r3efxrHxJHs8wXlNWvrT3KLhq/7vvF5CdU82uPeQ==
