@@ -10,6 +10,9 @@ updates:
     commit-message:
       prefix: 'chore'
       include_scope: false
+    ignore:
+      - dependency-name: *
+        update-types: ['version-update:semver-patch']
   - package-ecosystem: 'github-actions'
     target-branch: 'dev'
     directory: '/'
@@ -18,3 +21,6 @@ updates:
     commit-message:
       prefix: 'chore'
       include_scope: false
+    ignore:
+      - dependency-name: *
+        update-types: ['version-update:semver-minor', 'version-update:semver-patch']
