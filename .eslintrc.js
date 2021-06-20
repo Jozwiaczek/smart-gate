@@ -24,8 +24,9 @@ module.exports = {
     'plugin:jest/style',
     'plugin:testing-library/react',
     'plugin:cypress/recommended',
+    'plugin:jsdoc/recommended',
   ],
-  plugins: ['simple-import-sort', 'better-styled-components', 'eslint-plugin-tsdoc'],
+  plugins: ['simple-import-sort', 'better-styled-components'],
   rules: {
     'no-void': 0,
     'consistent-return': 0,
@@ -48,8 +49,6 @@ module.exports = {
         },
       },
     ],
-
-    'tsdoc/syntax': 'warn',
 
     'security/detect-non-literal-regexp': 0,
     'security/detect-object-injection': 0,
@@ -88,5 +87,8 @@ module.exports = {
     'jest/consistent-test-it': 2,
     'jest/lowercase-name': 2,
     'jest/require-top-level-describe': 2,
+
+    'jsdoc/require-param-type': 0,
+    'jsdoc/require-returns-type': 0,
   },
 };

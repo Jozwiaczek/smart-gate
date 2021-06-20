@@ -1,7 +1,4 @@
-import socketClient from 'socket.io-client';
+import { onInit, onOpen } from './hooks';
 
-const socket = socketClient('ws://localhost:3030');
-
-socket.on('connection', () => {
-  console.log('test');
-});
+onInit();
+onOpen();
