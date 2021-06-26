@@ -50,6 +50,8 @@
 
 ## 📖 About
 
+![Smart gate info banner](banner-about.png)
+
 System for managing and handling access to any physical entry home gate.
 
 ## 🎓 Getting started
