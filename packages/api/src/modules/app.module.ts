@@ -10,6 +10,7 @@ import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { RepositoryModule } from './repository/repository.module';
 import { SentryModule } from './sentry/sentry.module';
+import { TicketModule } from './ticket/ticket.module';
 import { UsersModule } from './users/users.module';
 import { WebsocketModule } from './websocket/websocket.module';
 
@@ -33,6 +34,7 @@ import { WebsocketModule } from './websocket/websocket.module';
     PasswordResetModule,
     RepositoryModule,
     WebsocketModule,
+    TicketModule,
   ],
 })
 export class AppModule {}

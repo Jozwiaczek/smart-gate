@@ -82,6 +82,10 @@ export class Config {
     expirationDate: string;
   };
 
+  device: {
+    ticket: string;
+  };
+
   environment: {
     isDev: boolean;
     isProd: boolean;
