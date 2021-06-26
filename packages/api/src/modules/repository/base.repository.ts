@@ -28,9 +28,9 @@ export interface BaseRepositoryType<T> {
 
 type Constructor<T> = new (...args: never[]) => T;
 
-export function BaseRepository<T extends BaseEntity>(
+export const BaseRepository = <T extends BaseEntity>(
   entityType: Constructor<T>,
-): Type<BaseRepositoryType<T>> {
+): Type<BaseRepositoryType<T>> => {
   class BaseRepositoryHost implements BaseRepositoryType<T> {
     @InjectRepository(entityType)
     public readonly repository: Repository<T>;
@@ -105,4 +105,4 @@ export function BaseRepository<T extends BaseEntity>(
   }
 
   return BaseRepositoryHost;
-}
+};
