@@ -43,4 +43,5 @@ export interface AuthProps {
   logoutFromAllDevices: () => Promise<void>;
   sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<void>;
   updatePassword: (user: UpdatePasswordData) => Promise<void>;
+  generateTicket: () => Promise<string>;
 }

@@ -80,6 +80,7 @@ export class AuthController {
     await this.authService.logout(response, payload.sub);
   }
 
+  @Auth()
   @Get('logoutFromAllDevices')
   async logoutFromAllDevices(
     @Req() request: CookieRequest,

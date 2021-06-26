@@ -91,6 +91,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     [axios],
   );
 
+  const generateTicket = useCallback(async () => {
+    const { data } = await axios.get<string>('/ticket/generate');
+    return data;
+  }, [axios]);
+
   const AuthValue: AuthProps = {
     login,
     register,
@@ -99,6 +104,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     checkAuth,
     sendPasswordRecoveryEmail,
     updatePassword,
+    generateTicket,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;
