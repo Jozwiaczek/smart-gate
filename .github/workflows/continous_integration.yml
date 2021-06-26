@@ -94,17 +94,10 @@ jobs:
       - name: 'Git checkout'
         uses: actions/checkout@v2.3.4
 
-      # Beginning of yarn setup, keep in sync between all workflows
       - name: Use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
-      - name: 'Use cached node_modules'
-        id: cache-modules
-        uses: actions/cache@v2.1.6
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-v${{ matrix.node-version }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
       - name: 'Find location of global yarn cache'
         id: yarn-cache
         if: steps.cache-modules.outputs.cache-hit != 'true'
@@ -119,7 +112,6 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: 'Install dependency'
         run: yarn install --frozen-lockfile
-      # End of yarn setup
 
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB

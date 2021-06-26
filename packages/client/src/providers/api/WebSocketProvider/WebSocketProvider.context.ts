@@ -9,4 +9,5 @@ export const WebSocketContext = createContext<WebSocketContextValue>({
   disconnect: () => {},
   connectionState: ConnectionState.DISCONNECTED,
   deviceStatus: DeviceStatus.UNKNOWN,
+  toggleGate: () => {},
 });

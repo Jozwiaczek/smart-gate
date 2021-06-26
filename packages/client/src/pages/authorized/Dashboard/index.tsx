@@ -9,7 +9,8 @@ import { ToggleButton } from './Dashboard.styled';
 const Dashboard = () => {
   const { t } = useTranslation();
   const showSnackbar = useSnackbar();
-  const { connect, disconnect, connectionState, deviceStatus } = useContext(WebSocketContext);
+  const { connect, disconnect, toggleGate, connectionState, deviceStatus } =
+    useContext(WebSocketContext);
 
   useEffect(() => {
     void connect();
@@ -23,6 +24,7 @@ const Dashboard = () => {
 
   const onToggle = () => {
     console.count('toggledGate');
+    toggleGate();
     showSnackbar({ message: t('routes.dashboard.toggleSuccess'), severity: 'success' });
   };
 

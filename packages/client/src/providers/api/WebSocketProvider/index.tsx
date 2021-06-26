@@ -64,8 +64,16 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     }
   }, [socket]);
 
+  const toggleGate = useCallback(() => {
+    if (socket) {
+      socket.emit(WebSocketEvent.TOGGLE_GATE);
+    }
+  }, [socket]);
+
   return (
-    <WebSocketContext.Provider value={{ connect, disconnect, deviceStatus, connectionState }}>
+    <WebSocketContext.Provider
+      value={{ connect, disconnect, deviceStatus, connectionState, toggleGate }}
+    >
       {children}
     </WebSocketContext.Provider>
   );

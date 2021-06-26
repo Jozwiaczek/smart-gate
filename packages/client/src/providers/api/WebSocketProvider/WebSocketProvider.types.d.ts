@@ -8,6 +8,7 @@ export interface WebSocketContextValue {
   disconnect: () => void;
   connectionState: ConnectionState;
   deviceStatus: DeviceStatus;
+  toggleGate: () => void;
 }
 
 export interface WebSocketProviderProps {
