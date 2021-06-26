@@ -78,6 +78,7 @@ jobs:
       TEST_USER_LASTNAME: 'Doe'
       ETHEREAL_USER: ${{ secrets.ETHEREAL_USER }}
       ETHEREAL_PASSWORD: ${{ secrets.ETHEREAL_PASSWORD }}
+      DEVICE_TICKET: 'ticket'
 
     services:
       postgres:

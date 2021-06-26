@@ -98,6 +98,9 @@ export class ConfigLoader {
           this.envConfigService.get('SENTRY_ENVIRONMENT', false) ||
           defaultValues.sentry.environment,
       },
+      device: {
+        ticket: this.envConfigService.get('DEVICE_TICKET', true),
+      },
       environment: {
         isProd,
         isDev,

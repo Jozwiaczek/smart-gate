@@ -9,6 +9,7 @@
     "start": "ts-node --project tsconfig.json src/index.ts"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "rpio": "^2.4.2",
     "socket.io-client": "^2.4.0"
   },
