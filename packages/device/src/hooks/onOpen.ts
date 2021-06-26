@@ -7,10 +7,11 @@ const onOpen = () => {
   rpio.write(OPEN_STATUS_LIGHT_PIN, rpio.HIGH);
   rpio.write(CAMERA_POWER, rpio.LOW);
   rpio.write(LOCK_POWER, rpio.LOW);
-  rpio.sleep(10);
+  rpio.sleep(1);
   rpio.write(OPEN_STATUS_LIGHT_PIN, rpio.LOW);
   rpio.write(CAMERA_POWER, rpio.HIGH);
   rpio.write(LOCK_POWER, rpio.HIGH);
+  console.log('Closed');
 };
 
 export default onOpen;

@@ -5,7 +5,6 @@ import { onInit, onOpen } from './hooks';
 
 dotenv.config();
 onInit();
-onOpen();
 
 const socket = socketClient(process.env.API_URL ?? '', {
   query: {
@@ -14,6 +13,25 @@ const socket = socketClient(process.env.API_URL ?? '', {
   reconnection: true,
   reconnectionAttempts: 1000,
   reconnectionDelay: 1000,
+});
+
+enum WebSocketEvent {
+  CHECK_DEVICE_CONNECTION = 'checkDeviceConnection',
+  TOGGLE_GATE = 'toggleGate',
+}
+
+socket.on('message', (eventType: WebSocketEvent) => {
+  console.log('New message with eventType:', eventType);
+  switch (eventType) {
+    case WebSocketEvent.TOGGLE_GATE: {
+      onOpen();
+      break;
+    }
+    default: {
+      console.log('Unsupported event type:', eventType);
+      break;
+    }
+  }
 });
 
 socket.on('connect', () => {

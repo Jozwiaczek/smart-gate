@@ -56,6 +56,13 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
     this.logger.log(`Client connected: ${client.id} with userId: ${userId}`);
   }
 
+  @SubscribeMessage(WebSocketEvent.TOGGLE_GATE)
+  toggleGate(): void {
+    if (this.deviceClient) {
+      this.deviceClient.send(WebSocketEvent.TOGGLE_GATE);
+    }
+  }
+
   @SubscribeMessage(WebSocketEvent.CHECK_DEVICE_CONNECTION)
   checkDeviceConnection(client: Socket): void {
     this.logger.log(`client:${this.clients.get(client.id) ?? ''}`);
