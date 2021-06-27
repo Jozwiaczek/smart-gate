@@ -1,3 +1,11 @@
+## [1.10.2](https://github.com/Jozwiaczek/smart-gate/compare/v1.10.1...v1.10.2) (2021-06-27)
+
+
+### Bug Fixes
+
+* **api:** loading port env ([d71b7ab](https://github.com/Jozwiaczek/smart-gate/commit/d71b7abdcead078030fe40fee5622b4c27462076))
+* **api:** require port env only for prod ([332dc84](https://github.com/Jozwiaczek/smart-gate/commit/332dc84a24b8d4849db3582a71cc54783a55b877))
+
 ## [1.10.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.10.0...v1.10.1) (2021-06-27)
 
 
