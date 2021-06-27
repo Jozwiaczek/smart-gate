@@ -17,7 +17,9 @@ export class ConfigLoader {
     const convertToBoolean = (str: string) => str === 'true';
 
     return {
-      port: this.envConfigService.get('API_PORT', isProd, Number),
+      port:
+        this.envConfigService.get('API_PORT', false, Number) ||
+        this.envConfigService.get('PORT', isProd, Number),
       clientUrl: this.envConfigService.get('CLIENT_URL'),
       superAdminEmails: this.envConfigService.get('SUPER_ADMIN_EMAILS', false),
       testUser: {
