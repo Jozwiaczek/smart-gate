@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.10.0...v1.10.1) (2021-06-27)
+
+
+### Bug Fixes
+
+* **api:** types for prod env ([21a5471](https://github.com/Jozwiaczek/smart-gate/commit/21a547115cecb8c8ff1d3600e249dd2cd9142d62))
+
 # [1.10.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.9.1...v1.10.0) (2021-06-27)
 
 
