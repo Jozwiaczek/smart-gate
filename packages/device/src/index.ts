@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import socketClient from 'socket.io-client';
 
-import { onInit, onOpen } from './hooks';
+import { onInit, openDoor } from './hooks';
 
 dotenv.config();
 onInit();
@@ -21,10 +21,9 @@ enum WebSocketEvent {
 }
 
 socket.on('message', (eventType: WebSocketEvent) => {
-  console.log('New message with eventType:', eventType);
   switch (eventType) {
     case WebSocketEvent.TOGGLE_GATE: {
-      onOpen();
+      openDoor();
       break;
     }
     default: {
