@@ -4,8 +4,7 @@ type Handler = (e: BaseSyntheticEvent) => void;
 
 /**
  * Fire handler when user click outside referenced element
- *
- * cc: https://usehooks.com/useOnClickOutside/
+ * https://usehooks.com/useOnClickOutside/
  *
  * @param ref - element reference
  * @param handler - function perform on click outside element
