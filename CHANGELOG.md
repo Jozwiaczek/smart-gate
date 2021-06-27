@@ -1,3 +1,19 @@
+# [1.10.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.9.1...v1.10.0) (2021-06-27)
+
+
+### Bug Fixes
+
+* e2e and lint fix ([e3752cb](https://github.com/Jozwiaczek/smart-gate/commit/e3752cbfdca3a4cb602c4f137b580a0dca919a2f))
+* **api:** add auth guard for logoutFromAllDevices ([b3d0faa](https://github.com/Jozwiaczek/smart-gate/commit/b3d0faa2a33be6a27d48ebbd606b56dd9ecca7e4))
+
+
+### Features
+
+* add WebSocket authentication ([789f648](https://github.com/Jozwiaczek/smart-gate/commit/789f648a5c0b4fab93d38ee844aa1c7555fd6f14))
+* handle toggling gate ([2b8c391](https://github.com/Jozwiaczek/smart-gate/commit/2b8c391f3a547cc52e53c1e28b1fec9e04c8d6c9))
+* **client:** add socket.io package ([88d713f](https://github.com/Jozwiaczek/smart-gate/commit/88d713f87929a4e0b38407721f3a518b5cc3d18c))
+* **device:** add rpio library ([98648a8](https://github.com/Jozwiaczek/smart-gate/commit/98648a8d966c71ddabe654af2a9550962aed3e15))
+
 ## [1.9.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.9.0...v1.9.1) (2021-06-14)
 
 
