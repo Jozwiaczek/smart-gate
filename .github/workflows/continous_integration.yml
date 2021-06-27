@@ -52,9 +52,9 @@ jobs:
       - name: 'Run Type check'
         run: yarn type-check
       - name: 'Build API'
-        run: cd packages/api && yarn build
+        run: cd packages/api && NODE_ENV=production yarn build
       - name: 'Build Client'
-        run: cd packages/client && yarn build
+        run: cd packages/client && NODE_ENV=production yarn build
 
   tests:
     name: 'Unit and E2E tests'
