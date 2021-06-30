@@ -10,7 +10,7 @@ const openDoor = () => {
   rpio.write(OPEN_STATUS_LIGHT, rpio.HIGH);
   rpio.write(CAMERA_POWER, rpio.LOW);
   rpio.write(LOCK_POWER, rpio.LOW);
-  rpio.sleep(4);
+  rpio.sleep(1);
   rpio.write(OPEN_STATUS_LIGHT, rpio.LOW);
   rpio.write(CAMERA_POWER, rpio.HIGH);
   rpio.write(LOCK_POWER, rpio.HIGH);
