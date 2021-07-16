@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PushSubscription } from 'web-push';
 
+import { Auth } from '../auth/decorators/auth.decorator';
 import { PushNotificationsService } from './push-notifications.service';
 
-// @Auth()
+@Auth()
 @Controller('push-notifications')
 export class PushNotificationsController {
   constructor(private readonly pushNotificationsService: PushNotificationsService) {}
