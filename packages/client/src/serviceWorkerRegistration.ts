@@ -12,7 +12,7 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
-import { environments } from '../constants';
+import { environments } from './constants';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -39,11 +39,10 @@ export function register(config?: Config) {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/serviceWorker/service-worker.js`;
+      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         checkValidServiceWorker(swUrl, config);
 
         // Add some additional logging to localhost, pointing developers to the
@@ -56,18 +55,52 @@ export function register(config?: Config) {
         });
       } else {
         // Is not localhost. Just register service worker
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         registerValidSW(swUrl, config);
       }
     });
   }
 }
 
+const registerWebPush = async (registration: ServiceWorkerRegistration) => {
+  if (!('PushManager' in window)) {
+    console.log("Push isn't supported on this browser");
+    return;
+  }
+
+  const publicVapidKey = process.env.REACT_APP_PUSH_NOTIFICATION_PUBLIC_VAPID_KEY;
+
+  console.log('Registering Push...');
+
+  const isAlreadySubscribed = Boolean(await registration.pushManager.getSubscription());
+  if (isAlreadySubscribed) {
+    console.log('Push already subscribed');
+    return;
+  }
+
+  const subscription = await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: publicVapidKey,
+  });
+  console.log('Push Registered...');
+
+  console.log('Register Api Push...');
+  const apiUrl = process.env.REACT_APP_API_URL;
+  await fetch(`${apiUrl}/push-notifications`, {
+    method: 'POST',
+    body: JSON.stringify(subscription),
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+  console.log('Api Push Registered...');
+};
+
 function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
-    .then((registration) => {
-      // eslint-disable-next-line no-param-reassign
+    .then(async (registration) => {
+      await registerWebPush(registration);
+
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {

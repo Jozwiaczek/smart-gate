@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useLocalStorage from '../../hooks/useLocalStorage/useLocalStorage';
 import { ThemeType } from '../../theme/Theme';
@@ -15,6 +15,20 @@ const ThemeTypeProvider = ({ children }: ThemeProviderProps) => {
   const setSystemThemeType = () => {
     setThemeType(isSystemDarkTheme ? ThemeType.dark : ThemeType.light);
   };
+
+  useEffect(() => {
+    const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+    if (!themeColorMetaTag) {
+      return;
+    }
+
+    if (themeType === ThemeType.light) {
+      themeColorMetaTag.setAttribute('content', '#efefef');
+    }
+    if (themeType === ThemeType.dark) {
+      themeColorMetaTag.setAttribute('content', '#22343C');
+    }
+  }, [themeType]);
 
   return (
     <ThemeTypeContext.Provider
