@@ -81,6 +81,10 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('push', (event) => {
   const { title, options } = event.data?.json();
-  console.log('Push Received...');
-  self.registration.showNotification(title, options);
+  const optionsWithDefaults: NotificationOptions = {
+    icon: '/email-images/sg-logo.png',
+    ...options,
+  };
+
+  self.registration.showNotification(title, optionsWithDefaults);
 });

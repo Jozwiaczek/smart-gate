@@ -1,21 +1,34 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PushSubscription } from 'web-push';
 
+import { TokenPayload } from '../../interfaces/token-types';
+import { AuthService } from '../auth/auth.service';
 import { Auth } from '../auth/decorators/auth.decorator';
+import { CookiePayload } from '../auth/decorators/cookiePayload.decorator';
 import { PushNotificationsService } from './push-notifications.service';
 
 @Auth()
 @Controller('push-notifications')
 export class PushNotificationsController {
-  constructor(private readonly pushNotificationsService: PushNotificationsService) {}
+  constructor(
+    private readonly pushNotificationsService: PushNotificationsService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post()
-  subscribe(@Body() subscription: PushSubscription) {
-    this.pushNotificationsService.subscribe(subscription);
+  async subscribe(
+    @CookiePayload() { sub }: TokenPayload,
+    @Body() subscription: PushSubscription,
+  ): Promise<void> {
+    const userPromise = this.authService.getUser(sub);
+    await this.pushNotificationsService.subscribe({ subscription, userPromise });
   }
 
   @Get()
-  async send() {
-    await this.pushNotificationsService.send();
+  async send(): Promise<void> {
+    await this.pushNotificationsService.send({
+      title: 'Smart Gate',
+      body: 'Test msg',
+    });
   }
 }

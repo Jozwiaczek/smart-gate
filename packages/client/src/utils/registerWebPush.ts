@@ -1,7 +1,5 @@
 import { AxiosInstance } from 'axios';
 
-import { onlyOnDevEnv } from './index';
-
 const isPushNotificationSupported = () => 'serviceWorker' in navigator && 'PushManager' in window;
 
 const createNotificationSubscription = async (
@@ -14,21 +12,17 @@ const createNotificationSubscription = async (
   });
 };
 
-const saveSubscription = async (axios: AxiosInstance, subscription: PushSubscription) => {
-  await axios.post('/push-notifications', JSON.stringify(subscription));
-  onlyOnDevEnv(() => console.log('Web push registered'));
-};
+const saveSubscription = async (axios: AxiosInstance, subscription: PushSubscription) =>
+  axios.post('/push-notifications', JSON.stringify(subscription));
 
 const registerWebPush = async (axios: AxiosInstance) => {
   if (!isPushNotificationSupported) {
-    onlyOnDevEnv(() => console.log("Push isn't supported on this browser"));
     return;
   }
 
   const serviceWorker = await navigator.serviceWorker.ready;
   const isAlreadySubscribed = Boolean(await serviceWorker.pushManager.getSubscription());
   if (isAlreadySubscribed) {
-    onlyOnDevEnv(() => console.log('Web push already registered'));
     return;
   }
 

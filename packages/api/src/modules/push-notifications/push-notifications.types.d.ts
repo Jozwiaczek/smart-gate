@@ -17,7 +17,7 @@ interface PushNotificationOptions {
 
 interface PushNotificationPayload {
   title: string;
-  options: PushNotificationOptions;
+  options?: PushNotificationOptions;
 }
 
 type PushNotificationDirection = 'auto' | 'ltr' | 'rtl';
