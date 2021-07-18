@@ -32,12 +32,12 @@ export class PushNotificationsService {
     });
   }
 
-  private async getSubscriptions(roles: Array<Role> | undefined) {
+  private async getSubscriptions(roles?: [Role] | undefined) {
     if (!roles) {
       return this.pushNotificationRepository.find();
     }
 
-    return this.pushNotificationRepository.findByRoles([Role.SuperAdmin]);
+    return this.pushNotificationRepository.findByRoles(roles);
   }
 
   async send({ title, body, options, roles }: SendPushNotificationDto): Promise<void> {
