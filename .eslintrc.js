@@ -36,6 +36,8 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-unsafe-call': 0,
+    '@typescript-eslint/no-unsafe-return': 0,
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],
     '@typescript-eslint/no-floating-promises': [2, { ignoreIIFE: true, ignoreVoid: true }],
     '@typescript-eslint/naming-convention': [

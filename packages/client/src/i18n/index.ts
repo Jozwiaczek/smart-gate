@@ -10,7 +10,7 @@ export enum SGLocale {
   en = 'en',
 }
 
-const { STORYBOOK, NODE_ENV } = process.env;
+const { STORYBOOK, NODE_ENV, REACT_APP_I18N_DEBUG } = process.env;
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18n
@@ -20,7 +20,7 @@ i18n
     resources,
     fallbackLng: SGLocale.en,
     supportedLngs: Object.values(SGLocale),
-    debug: !STORYBOOK && NODE_ENV === environments.DEV,
+    debug: !STORYBOOK && NODE_ENV === environments.DEV && REACT_APP_I18N_DEBUG === 'true',
   });
 
 export default i18n;

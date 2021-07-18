@@ -15,7 +15,7 @@ const bootstrap = async (): Promise<INestApplication> => {
   const config = app.get(Config);
 
   app.enableCors({
-    origin: config.clientUrl,
+    origin: config.clientUrl.split(';'),
     credentials: true,
   });
   app.use(cookieParser(config.cookie.secret));

@@ -14,7 +14,7 @@ export class MailerService {
     private readonly config: Config,
   ) {}
 
-  async sendEmail(options: Mail.Options): Promise<void> {
+  private async sendEmail(options: Mail.Options): Promise<void> {
     const transporterBaseConfig = await this.mailerConfigService.getTransporterConfig();
     const transporter = nodemailer.createTransport(transporterBaseConfig);
 

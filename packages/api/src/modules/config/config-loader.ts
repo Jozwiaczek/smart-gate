@@ -29,6 +29,10 @@ export class ConfigLoader {
         firstName: this.envConfigService.get('TEST_USER_FIRSTNAME', isTest),
         lastName: this.envConfigService.get('TEST_USER_LASTNAME', isTest),
       },
+      pushNotifications: {
+        publicVapidKey: this.envConfigService.get('PUSH_NOTIFICATION_PUBLIC_VAPID_KEY', isProd),
+        privateVapidKey: this.envConfigService.get('PUSH_NOTIFICATION_PRIVATE_VAPID_KEY', isProd),
+      },
       rateLimiter: {
         minTime: this.envConfigService.get('RATE_LIMIT_MIN_TIME', isProd, Number),
         maxConcurrent: this.envConfigService.get('RATE_LIMIT_MAX_CONCURRENT', isProd, Number),

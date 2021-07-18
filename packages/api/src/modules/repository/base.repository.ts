@@ -39,8 +39,7 @@ export const BaseRepository = <T extends BaseEntity>(
       try {
         return await this.repository.save(dataToCreate);
       } catch (err) {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        throw new Error(`Cannot create entity with data ${dataToCreate}`);
+        throw new Error(`Cannot create entity with data ${JSON.stringify(dataToCreate)}`);
       }
     }
 
