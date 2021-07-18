@@ -17,8 +17,8 @@ export class Config {
   };
 
   pushNotifications: {
-    publicVapidKey: string;
-    privateVapidKey: string;
+    publicVapidKey?: string;
+    privateVapidKey?: string;
   };
 
   database: {

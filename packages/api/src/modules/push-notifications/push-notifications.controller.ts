@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { PushSubscription } from 'web-push';
 
-import { Role } from '../../enums/role.enum';
 import { TokenPayload } from '../../interfaces/token-types';
 import { AuthService } from '../auth/auth.service';
 import { Auth } from '../auth/decorators/auth.decorator';

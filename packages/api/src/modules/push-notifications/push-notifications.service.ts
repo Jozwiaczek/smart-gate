@@ -18,8 +18,9 @@ export class PushNotificationsService {
     const { pushNotifications, mailer } = config;
     const { publicVapidKey, privateVapidKey } = pushNotifications;
     const { replyTo } = mailer;
-
-    webPush.setVapidDetails(`mailto:${replyTo}`, publicVapidKey, privateVapidKey);
+    if (publicVapidKey && privateVapidKey) {
+      webPush.setVapidDetails(`mailto:${replyTo}`, publicVapidKey, privateVapidKey);
+    }
   }
 
   async subscribe({ subscription, userPromise }: SubscribePushNotificationDto): Promise<void> {
