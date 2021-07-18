@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { PushSubscription } from 'web-push';
 
+import { Role } from '../../enums/role.enum';
 import { TokenPayload } from '../../interfaces/token-types';
 import { AuthService } from '../auth/auth.service';
 import { Auth } from '../auth/decorators/auth.decorator';
@@ -22,13 +23,5 @@ export class PushNotificationsController {
   ): Promise<void> {
     const userPromise = this.authService.getUser(sub);
     await this.pushNotificationsService.subscribe({ subscription, userPromise });
-  }
-
-  @Get()
-  async send(): Promise<void> {
-    await this.pushNotificationsService.send({
-      title: 'Smart Gate',
-      body: 'Test msg',
-    });
   }
 }

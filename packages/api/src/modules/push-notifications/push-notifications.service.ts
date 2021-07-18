@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import webPush, { PushSubscription } from 'web-push';
 
+import { Role } from '../../enums/role.enum';
 import { Config } from '../config/config';
 import { PushNotificationRepository } from '../repository/push-notification.repository';
 import { SendPushNotificationDto } from './dto/send-push-notification.dto';
@@ -31,12 +32,20 @@ export class PushNotificationsService {
     });
   }
 
-  async send({ title, body, options }: SendPushNotificationDto): Promise<void> {
+  private async getSubscriptions(roles: Array<Role> | undefined) {
+    if (!roles) {
+      return this.pushNotificationRepository.find();
+    }
+
+    return this.pushNotificationRepository.findByRoles([Role.SuperAdmin]);
+  }
+
+  async send({ title, body, options, roles }: SendPushNotificationDto): Promise<void> {
     this.logger.log('Sending...');
 
-    const allSubscriptions = await this.pushNotificationRepository.find();
+    const subscriptions = await this.getSubscriptions(roles);
 
-    if (!allSubscriptions.length) {
+    if (!subscriptions.length) {
       this.logger.log('No push subscriptions');
       return;
     }
@@ -49,16 +58,14 @@ export class PushNotificationsService {
       },
     };
 
-    const sendNotificationsPromises = allSubscriptions.map(({ endpoint, p256dh, auth }) => {
+    const sendNotificationsPromises = subscriptions.map(({ endpoint, p256dh, auth }) => {
       const sub: PushSubscription = { endpoint, keys: { p256dh, auth } };
       return webPush.sendNotification(sub, JSON.stringify(payload));
     });
 
     await Promise.all(sendNotificationsPromises);
     this.logger.log(
-      `Sent ${allSubscriptions.length} ${
-        allSubscriptions.length > 1 ? 'notifications' : 'notification'
-      }`,
+      `Sent ${subscriptions.length} ${subscriptions.length > 1 ? 'notifications' : 'notification'}`,
     );
   }
 }

@@ -1,4 +1,6 @@
-import { IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator';
+
+import { Role } from '../../../enums/role.enum';
 
 export class SendPushNotificationDto {
   @IsString()
@@ -10,4 +12,8 @@ export class SendPushNotificationDto {
   @IsOptional()
   @ValidateNested()
   options?: PushNotificationOptions;
+
+  @IsOptional()
+  @IsArray()
+  roles?: [Role];
 }
