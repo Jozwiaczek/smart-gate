@@ -12,17 +12,26 @@ const createNotificationSubscription = async (
   });
 };
 
+const isWebPushGranted = async () => (await Notification.requestPermission()) === 'granted';
+
 const saveSubscription = async (axios: AxiosInstance, subscription: PushSubscription) =>
   axios.post('/push-notifications', JSON.stringify(subscription));
 
+const isAlreadySubscribed = async (serviceWorker: ServiceWorkerRegistration) =>
+  Boolean(await serviceWorker.pushManager.getSubscription());
+
 const registerWebPush = async (axios: AxiosInstance) => {
-  if (!isPushNotificationSupported) {
+  if (!isPushNotificationSupported()) {
+    return;
+  }
+
+  if (!(await isWebPushGranted())) {
     return;
   }
 
   const serviceWorker = await navigator.serviceWorker.ready;
-  const isAlreadySubscribed = Boolean(await serviceWorker.pushManager.getSubscription());
-  if (isAlreadySubscribed) {
+
+  if (await isAlreadySubscribed(serviceWorker)) {
     return;
   }
 
