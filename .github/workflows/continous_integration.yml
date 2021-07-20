@@ -76,8 +76,6 @@ jobs:
       TEST_USER_PASSWORD: '@12345Aa'
       TEST_USER_FIRSTNAME: 'Joe'
       TEST_USER_LASTNAME: 'Doe'
-      ETHEREAL_USER: 'josue.orn56@ethereal.email'
-      ETHEREAL_PASSWORD: 'jhDh48WNtTJrCbvngp'
       DEVICE_TICKET: 'ticket'
 
     services:
@@ -123,7 +121,7 @@ jobs:
           script: |
             const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
             return await createEmailTestAccount();
-      - name: 'Get Email Test Account Email'
+      - name: 'Get Email Test Account User'
         id: 'email-test-account-user'
         uses: actions/github-script@v4.0.2
         env:
@@ -133,18 +131,26 @@ jobs:
           result-encoding: string
           script: |
             const emailAccount = process.env.EMAIL_TEST_ACCOUNT;
-            console.log('Email account:', emailAccount);
-            const result = JSON.parse(emailAccount).user;
-            console.log('Result:', result);
-
-            return result;
-      - name: 'Get result'
-        run: echo "${{steps.email-test-account-user.outputs.result}}"
+            return JSON.parse(emailAccount).user;
+      - name: 'Get Email Test Account Password'
+        id: 'email-test-account-pass'
+        uses: actions/github-script@v4.0.2
+        env:
+          EMAIL_TEST_ACCOUNT: ${{steps.email-test-account.outputs.result}}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            const emailAccount = process.env.EMAIL_TEST_ACCOUNT;
+            return JSON.parse(emailAccount).pass;
 
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
       - name: 'Run unit tests'
         run: yarn test
+        env:
+          ETHEREAL_USER: ${{steps.email-test-account-user.outputs.result}}
+          ETHEREAL_PASSWORD: ${{steps.email-test-account-pass.outputs.result}}
       - name: 'Run E2E tests'
         uses: cypress-io/github-action@v2
         with:
@@ -166,3 +172,5 @@ jobs:
           ACCESS_SECRET: '1234'
           REFRESH_SECRET: '1234'
           LOGOUT_SECRET: '1234'
+          ETHEREAL_USER: ${{steps.email-test-account-user.outputs.result}}
+          ETHEREAL_PASSWORD: ${{steps.email-test-account-pass.outputs.result}}
