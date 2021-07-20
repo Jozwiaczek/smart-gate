@@ -15,7 +15,7 @@
   "devDependencies": {
     "@types/imap-simple": "^4.2.4",
     "@types/mailparser": "^3.0.2",
-    "cypress": "^7.4.0",
+    "cypress": "^8.0.0",
     "cypress-recurse": "^1.8.1",
     "dotenv": "^10.0.0",
     "eslint-plugin-cypress": "^2.11.3",
