@@ -56,8 +56,72 @@ jobs:
       - name: 'Build Client'
         run: cd packages/client && NODE_ENV=production yarn build
 
-  tests:
-    name: 'Unit and E2E tests'
+  unit-tests:
+    name: 'Unit tests'
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node12.18.3-chrome87-ff82
+    strategy:
+      matrix:
+        node-version: [14.x]
+    env:
+      NODE_ENV: 'test'
+      DB_PORT: 5432
+      DB_HOST: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres_password
+      DB_DATABASE_TEST: smart_gate_db_test
+      DEVICE_TICKET: 'ticket'
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: 'Git checkout'
+        uses: actions/checkout@v2.3.4
+
+      # Beginning of yarn setup, keep in sync between all workflows
+      - name: Use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: 'Use cached node_modules'
+        id: cache-modules
+        uses: actions/cache@v2.1.6
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-v${{ matrix.node-version }}-node_modules-${{ hashFiles('yarn.lock', '**/package.json') }}
+      - name: 'Find location of global yarn cache'
+        id: yarn-cache
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: 'Cache global yarn cache'
+        uses: actions/cache@v2.1.6
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: 'Install dependency'
+        run: yarn install --frozen-lockfile
+      # End of yarn setup
+
+      - name: 'Setup test database'
+        run: cd packages/ci-scripts && yarn setup:testDB
+      - name: 'Run unit tests'
+        run: yarn test
+
+  e2e-tests:
+    name: 'E2E tests'
+    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
@@ -115,8 +179,6 @@ jobs:
 
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
-      - name: 'Run unit tests'
-        run: yarn test
       - name: 'Run E2E tests'
         uses: cypress-io/github-action@v2
         with:
