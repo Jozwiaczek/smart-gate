@@ -18,13 +18,14 @@ export class PushNotificationsService {
     const { pushNotifications, mailer } = config;
     const { publicVapidKey, privateVapidKey } = pushNotifications;
     const { replyTo } = mailer;
+
     if (publicVapidKey && privateVapidKey) {
       webPush.setVapidDetails(`mailto:${replyTo}`, publicVapidKey, privateVapidKey);
     }
   }
 
   async subscribe({ subscription, userPromise }: SubscribePushNotificationDto): Promise<void> {
-    this.logger.log('New push subscriber');
+    this.logger.log('New subscriber');
     await this.pushNotificationRepository.create({
       user: userPromise,
       endpoint: subscription.endpoint,
@@ -47,7 +48,7 @@ export class PushNotificationsService {
     const subscriptions = await this.getSubscriptions(roles);
 
     if (!subscriptions.length) {
-      this.logger.log('No push subscriptions');
+      this.logger.log('No subscriptions');
       return;
     }
 
@@ -64,9 +65,13 @@ export class PushNotificationsService {
       return webPush.sendNotification(sub, JSON.stringify(payload));
     });
 
-    await Promise.all(sendNotificationsPromises);
-    this.logger.log(
-      `Sent ${subscriptions.length} ${subscriptions.length > 1 ? 'notifications' : 'notification'}`,
-    );
+    try {
+      await Promise.all(sendNotificationsPromises);
+
+      const sendTotal = sendNotificationsPromises.length;
+      this.logger.log(`Sent ${sendTotal} ${sendTotal > 1 ? 'notifications' : 'notification'}`);
+    } catch (error) {
+      this.logger.error(error);
+    }
   }
 }

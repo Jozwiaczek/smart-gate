@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
-import { Connection } from 'typeorm';
 
 import { GetList } from '../../interfaces/react-admin-types';
 import { UserEntity } from '../database/entities/user.entity';
