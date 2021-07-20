@@ -113,6 +113,31 @@ jobs:
       - name: 'Install dependency'
         run: yarn install --frozen-lockfile
 
+      - name: 'Build CI scripts'
+        run: cd packages/ci-scripts && yarn build
+      - name: 'Create Email Test Account'
+        id: 'email-test-account'
+        uses: actions/github-script@v4.0.2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
+            return await createEmailTestAccount()
+      - name: 'Test results'
+        run: echo "${{steps.email-test-account.result}}"
+
+      - name: 'Create Email Test Account 2'
+        id: 'email-test-account-2'
+        uses: actions/github-script@v4.0.2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
+            return await createEmailTestAccount()
+      - name: 'Test results'
+        run: echo "${{steps.email-test-account-2.result}}"
+
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
       - name: 'Run unit tests'
