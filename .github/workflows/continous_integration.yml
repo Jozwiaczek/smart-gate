@@ -127,7 +127,7 @@ jobs:
         id: 'email-test-account-user'
         uses: actions/github-script@v4.0.2
         env:
-          EMAIL_TEST_ACCOUNT: ${{email-test-account.outputs.result}}
+          EMAIL_TEST_ACCOUNT: ${{steps.email-test-account.outputs.result}}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
@@ -139,7 +139,7 @@ jobs:
 
             return result;
       - name: 'Get result'
-        run: echo "${{email-test-account-user.outputs.result}}"
+        run: echo "${{steps.email-test-account-user.outputs.result}}"
 
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
