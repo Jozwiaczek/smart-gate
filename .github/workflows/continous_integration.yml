@@ -123,20 +123,41 @@ jobs:
           result-encoding: string
           script: |
             const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
-            return await createEmailTestAccount()
-      - name: 'Test results'
-        run: echo "${{steps.email-test-account.result}}"
 
-      - name: 'Create Email Test Account 2'
+            const result = await createEmailTestAccount();
+            console.log('Result:', result);
+
+            return result;
+      - name: 'Test results 1'
+        run: echo "${{steps.email-test-account.outputs.result}}"
+
+      - name: 'Test results 1 (user)'
+        run: echo "${{steps.email-test-account.outputs.result.user}}"
+
+      - name: 'Test results 1 (pass)'
+        run: echo "${{steps.email-test-account.outputs.result.pass}}"
+
+      - name: 'Create Email Test Account'
         id: 'email-test-account-2'
         uses: actions/github-script@v4.0.2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
-            return await createEmailTestAccount()
-      - name: 'Test results'
-        run: echo "${{steps.email-test-account-2.result}}"
+
+            const result = await createEmailTestAccount();
+            console.log('Result 2:', result);
+
+            return result;
+
+      - name: 'Test results 2'
+        run: echo "${{steps.email-test-account-2.outputs.result}}"
+
+      - name: 'Test results 2 (user)'
+        run: echo "${{steps.email-test-account-2.outputs.result.user}}"
+
+      - name: 'Test results 2 (pass)'
+        run: echo "${{steps.email-test-account-2.outputs.result.pass}}"
 
       - name: 'Setup test database'
         run: cd packages/ci-scripts && yarn setup:testDB
