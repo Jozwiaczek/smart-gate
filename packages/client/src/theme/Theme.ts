@@ -65,6 +65,8 @@ export const getTheme = (themeType: ThemeType) => ({
       blue,
       red,
       orange,
+      greenLight,
+      greenDark,
     },
     action: {
       error: red,

@@ -14,7 +14,7 @@
     "serve:build": "yarn build && serve -s build -l 4000",
     "serve:coverage": "yarn test:coverage && serve -s ./coverage -l 4001",
     "start": "react-scripts start",
-    "start:storybook": "yarn test && set STORYBOOK=true && start-storybook -s ./public -p 6006",
+    "start:storybook": "set STORYBOOK=true && start-storybook -s ./public -p 6006",
     "test": "react-scripts test --watchAll=false --passWithNoTests --json --outputFile=./src/jest-test-results.json",
     "test:coverage": "yarn test --coverage",
     "test:watch": "react-scripts test",
