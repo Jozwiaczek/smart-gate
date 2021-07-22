@@ -47,8 +47,6 @@ jobs:
         run: yarn prettier
       - name: 'Run ESLint'
         run: yarn lint
-      - name: 'Run StyleLint'
-        run: yarn stylelint
       - name: 'Run Type check'
         run: yarn type-check
       - name: 'Build API'
