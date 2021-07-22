@@ -8,6 +8,14 @@ const Checkmark = ({ visible = false }: CheckmarkProps) => {
   const animationRefHide = useRef<AnimeInstance>();
 
   useLayoutEffect(() => {
+    // prevents flickering on mount
+    anime({
+      targets: tick.current,
+      opacity: [0, 100],
+      delay: 200,
+      easing: 'easeInOutExpo',
+    });
+
     const opts = {
       targets: tick.current,
       autoplay: false,
