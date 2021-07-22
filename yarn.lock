@@ -2884,17 +2884,17 @@
     tslib "2.2.0"
     uuid "8.3.2"
 
-"@nestjs/core@^7.6.17":
-  version "7.6.18"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-7.6.18.tgz#36448f0ae7f7d08f032e1e7e53b4a4c82ae844d7"
-  integrity sha512-CGu20OjIxgFDY7RJT5t1TDGL8wSlTSlbZEkn8U5OlICZEB3WIpi98G7ajJpnRWmEgW8S4aDJmRKGjT+Ntj5U4A==
+"@nestjs/core@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-8.0.4.tgz#fcef4fa0f62f8b205f6e741bf6cd2da01c94d98a"
+  integrity sha512-1clCaGtVZTE7/tEvVj1FLwgFTHIlaCvwfPSMgxhGalTrx+cM8MoqEGLWklqS5bS+YfQscI1+Gn3OLdWlRcGbRQ==
   dependencies:
     "@nuxtjs/opencollective" "0.3.2"
-    fast-safe-stringify "2.0.7"
+    fast-safe-stringify "2.0.8"
     iterare "1.2.1"
-    object-hash "2.1.1"
+    object-hash "2.2.0"
     path-to-regexp "3.2.0"
-    tslib "2.2.0"
+    tslib "2.3.0"
     uuid "8.3.2"
 
 "@nestjs/mapped-types@^0.4.1":
@@ -10062,12 +10062,7 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
-fast-safe-stringify@2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz#124aa885899261f68aedb42a7c080de9da608743"
-  integrity sha512-Utm6CdzT+6xsDk2m8S6uL8VHxNwI6Jub+e9NYTcAms28T84pTa25GJQV9j0CY0N1rM8hK4x6grpF2BQf+2qwVA==
-
-fast-safe-stringify@^2.0.7:
+fast-safe-stringify@2.0.8, fast-safe-stringify@^2.0.7:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.8.tgz#dc2af48c46cf712b683e849b2bbd446b32de936f"
   integrity sha512-lXatBjf3WPjmWD6DpIZxkeSsCOwqI0maYMpgDlx8g4U2qi4lbjA9oH/HD2a87G+KfsUmo5WbJFmqBZlPxtptag==
@@ -15451,12 +15446,7 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-hash@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.1.1.tgz#9447d0279b4fcf80cff3259bf66a1dc73afabe09"
-  integrity sha512-VOJmgmS+7wvXf8CjbQmimtCnEx3IAoLxI3fp2fbWehxrWBcAQFbk+vcwb6vzR0VZv/eNCJ/27j151ZTwqW/JeQ==
-
-object-hash@^2.0.3:
+object-hash@2.2.0, object-hash@^2.0.3:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.2.0.tgz#5ad518581eefc443bd763472b8ff2e9c2c0d54a5"
   integrity sha512-gScRMn0bS5fH+IuwyIFgnh9zBdo4DV+6GhygmWM9HyNJSgS0hScp1f5vjtm7oIIOiT9trXrShAkLFSc2IqKNgw==
@@ -20288,15 +20278,15 @@ tslib@2.2.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
 
+tslib@2.3.0, tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
-
-tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
-  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
 
 tslib@~2.1.0:
   version "2.1.0"
