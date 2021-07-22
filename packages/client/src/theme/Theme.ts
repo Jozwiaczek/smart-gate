@@ -5,6 +5,12 @@ export enum ThemeType {
   dark = 'dark',
 }
 
+export enum StoredThemeType {
+  light = 'light',
+  dark = 'dark',
+  system = 'system',
+}
+
 const getBoxShadow = (strength: number): string => `0 1px 1px rgba(0,0,0,${strength}),
               0 2px 2px rgba(0,0,0,${strength}),
               0 4px 4px rgba(0,0,0,${strength}),
