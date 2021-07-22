@@ -1,0 +1,3 @@
+interface CheckmarkProps {
+  visible: boolean;
+}

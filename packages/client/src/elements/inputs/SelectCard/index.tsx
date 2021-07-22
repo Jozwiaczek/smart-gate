@@ -7,9 +7,10 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { Checkmark } from 'src/elements/animations';
 
 import { SelectOption } from '../Select/Select.types';
-import { CardItem, StyledCard, StyledTickIcon } from './SelectCard.styled';
+import { CardItemButton, CheckmarkBox, StyledCard } from './SelectCard.styled';
 
 interface SelectCardOption<T> {
   index: number;
@@ -61,15 +62,20 @@ const SelectCard = <T extends unknown>({ value, onChange, children }: SelectCard
     [onChange],
   );
 
-  const isCurrentOption = (option: SelectCardOption<T>) => currentOption?.value === option.value;
+  const isCurrentOption = useCallback(
+    (option: SelectCardOption<T>) => currentOption?.value === option.value,
+    [currentOption?.value],
+  );
 
   return (
     <StyledCard data-testid="selectCard">
       {allOptions?.map((option) => (
-        <CardItem key={option.value as never} onClick={onOptionClick(option)}>
+        <CardItemButton key={option.value as never} onClick={onOptionClick(option)}>
           <h5>{option.label}</h5>
-          {isCurrentOption(option) && <StyledTickIcon />}
-        </CardItem>
+          <CheckmarkBox>
+            <Checkmark visible={isCurrentOption(option)} />
+          </CheckmarkBox>
+        </CardItemButton>
       ))}
     </StyledCard>
   );

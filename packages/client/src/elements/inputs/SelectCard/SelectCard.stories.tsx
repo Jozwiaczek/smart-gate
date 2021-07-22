@@ -9,11 +9,13 @@ export default {
 } as Meta;
 
 const Template: Story<SelectCardProps<number>> = (args) => (
-  <SelectCard {...args}>
-    <option value={5}>5</option>
-    <option value={15}>15</option>
-    <option value={25}>25</option>
-  </SelectCard>
+  <div style={{ width: 300 }}>
+    <SelectCard {...args}>
+      <option value={5}>5</option>
+      <option value={15}>15</option>
+      <option value={25}>25</option>
+    </SelectCard>
+  </div>
 );
 
 export const Default = Template.bind({});
