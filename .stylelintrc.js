@@ -1,12 +1,14 @@
 module.exports = {
-  processors: ['stylelint-processor-styled-components'],
-  extends: ['stylelint-config-recommended', 'stylelint-config-styled-components'],
+  extends: ['stylelint-config-recommended'],
   rules: {
-    'selector-type-no-unknown': [
+    'no-extra-semicolons': null,
+    'at-rule-no-unknown': [
       true,
       {
-        ignoreTypes: ['/-styled-mixin/', '$dummyValue'],
+        ignoreAtRules: ['extends'],
       },
     ],
+    'block-no-empty': null,
+    'no-empty-source': null,
   },
 };
