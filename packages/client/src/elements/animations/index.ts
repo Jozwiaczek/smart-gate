@@ -6,3 +6,4 @@ export { default as PageLoader } from './PageLoader';
 export { default as PaperPlane } from './PaperPlane';
 export { default as RippleEffect } from './RippleEffect';
 export { default as Spinner } from './Spinner';
+export { default as ThemeTypeIndicator } from './ThemeTypeIndicator';

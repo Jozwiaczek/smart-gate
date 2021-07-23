@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: Roboto, Rubik, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background: ${({ theme }) => theme.palette.background.default};
+    transition: background 200ms ease-in-out;
   }
 
   main {

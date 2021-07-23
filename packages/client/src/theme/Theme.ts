@@ -28,7 +28,23 @@ const navyBlueLight = '#30444E';
 const blue = '#40AFDF';
 const red = '#D32F2F';
 const orange = '#FFB400';
+const dark = '#1E1E1E';
 const disabledOpacity = 0.3;
+
+export const colors = {
+  greenLight,
+  greenDark,
+  greyLight,
+  greyDark,
+  white,
+  whiteDark,
+  navyBlueDark,
+  navyBlueLight,
+  blue,
+  red,
+  orange,
+  dark,
+};
 
 export const getTheme = (themeType: ThemeType) => ({
   name: themeType,
@@ -67,13 +83,7 @@ export const getTheme = (themeType: ThemeType) => ({
         themeType === ThemeType.light ? hexToRgba(navyBlueLight, 0.05) : hexToRgba(whiteDark, 0.05),
       disabled: hexToRgba(navyBlueLight, disabledOpacity),
     },
-    colors: {
-      blue,
-      red,
-      orange,
-      greenLight,
-      greenDark,
-    },
+    colors,
     action: {
       error: red,
       warning: orange,

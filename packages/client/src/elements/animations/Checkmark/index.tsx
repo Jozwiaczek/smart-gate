@@ -35,10 +35,7 @@ const Checkmark = ({ visible = false }: CheckmarkProps) => {
       animationRefShow.current?.play();
       return;
     }
-
-    if (!visible) {
-      animationRefHide.current?.play();
-    }
+    animationRefHide.current?.play();
   }, [visible]);
 
   return <TickIcon ref={tick} />;
