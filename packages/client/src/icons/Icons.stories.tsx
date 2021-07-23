@@ -17,11 +17,14 @@ import {
   HistoryIcon,
   InvitationIcon,
   LockIcon,
+  MoonIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
   SendEmailIcon,
   SettingsIcon,
   StatisticsIcon,
+  SunIcon,
+  SystemThemeIcon,
   TickIcon,
   TrashIcon,
   UserIcon,
@@ -45,6 +48,12 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <SystemThemeIcon />
+
+    <MoonIcon />
+
+    <SunIcon />
+
     <AdminIcon />
     <ArrowIcon />
     <BackArrowIcon />

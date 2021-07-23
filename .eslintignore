@@ -1,2 +1,7 @@
 node_modules/
 build/
+_templates/
+coverage/
+*.generated.ts
+*.generated.d.ts
+*.log
