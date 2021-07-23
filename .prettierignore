@@ -4,8 +4,6 @@ build/
 CHANGELOG.md
 jest-test-results.json
 node_modules/
-.cache/
-public
 /coverage
 _templates/
 .eslintcache

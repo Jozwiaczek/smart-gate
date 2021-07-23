@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6, p, b {
     color: ${({ theme }) => theme.palette.text.primary};
+    transition: color 200ms ease-in-out;
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { SelectCard } from '../../../../../elements';
 import { ThemeTypeIndicator } from '../../../../../elements/animations';
-import { SelectOption } from '../../../../../elements/inputs/Select/Select.types';
+import { SelectCardOption } from '../../../../../elements/inputs/SelectCard/SelectCard.types';
 import { useThemeType } from '../../../../../hooks';
 import { StoredThemeType } from '../../../../../theme/Theme';
 
@@ -20,17 +20,10 @@ export const CardHeader = styled.div`
   gap: 15px;
 `;
 
-const Tmp = styled.div`
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  height: 100%;
-`;
-
 const ThemeCard = () => {
   const { themeType, storedThemeType, setThemeType } = useThemeType();
 
-  const onChange = (selectedOption: SelectOption<StoredThemeType>) => {
+  const onChange = (selectedOption: SelectCardOption<StoredThemeType>) => {
     setThemeType(selectedOption.value);
   };
 
@@ -40,24 +33,18 @@ const ThemeCard = () => {
         <ThemeTypeIndicator themeType={themeType} />
         <h2>Theme</h2>
       </CardHeader>
-      <SelectCard value={storedThemeType} onChange={onChange}>
+      <SelectCard<StoredThemeType> value={storedThemeType} onChange={onChange}>
         <option value="light">
-          <Tmp>
-            <SunIcon />
-            Light
-          </Tmp>
+          <SunIcon />
+          <h5>Light</h5>
         </option>
         <option value="dark">
-          <Tmp>
-            <MoonIcon />
-            Dark
-          </Tmp>
+          <MoonIcon />
+          <h5>Dark</h5>
         </option>
         <option value="system">
-          <Tmp>
-            <SystemThemeIcon />
-            System theme
-          </Tmp>
+          <SystemThemeIcon />
+          <h5>System theme</h5>
         </option>
       </SelectCard>
     </Wrapper>

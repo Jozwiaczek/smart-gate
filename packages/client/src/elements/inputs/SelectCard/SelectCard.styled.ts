@@ -56,3 +56,11 @@ export const CheckmarkBox = styled.div(
     color: ${palette.colors.greenLight};
   `,
 );
+
+export const ItemContentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+`;

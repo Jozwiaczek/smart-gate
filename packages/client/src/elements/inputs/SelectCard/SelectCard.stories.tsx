@@ -1,7 +1,8 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 
-import SelectCard, { SelectCardProps } from './index';
+import SelectCard from './index';
+import { SelectCardProps } from './SelectCard.types';
 
 export default {
   title: 'Elements/Inputs/Select Card',
