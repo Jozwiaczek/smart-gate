@@ -88,6 +88,12 @@ const en = {
         title: 'Settings',
         logout: 'Logout',
         logoutFromAllDevices: 'Logout from all devices',
+        theme: {
+          title: 'Theme',
+          light: 'Light',
+          dark: 'Dark',
+          system: 'Sync with system',
+        },
       },
       invitations: {
         sendInvitation: 'Send Invitation',

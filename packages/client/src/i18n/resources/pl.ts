@@ -90,6 +90,12 @@ const pl: TranslationStructure = {
         title: 'Ustawienia',
         logout: 'Wyloguj się',
         logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+        theme: {
+          title: 'Motyw',
+          light: 'Jasny',
+          dark: 'Ciemny',
+          system: 'Systemowy',
+        },
       },
       invitations: {
         sendInvitation: 'Nowe zaproszenie',
