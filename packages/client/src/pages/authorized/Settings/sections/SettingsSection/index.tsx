@@ -1,11 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { HeaderWrapper, Wrapper } from './SettingsCard.styled';
-import { SettingsCardProps } from './SettingsCard.tyles';
+import { HeaderWrapper, Wrapper } from './SettingsSection.styled';
+import { SettingsSectionProps } from './SettingsSection.tyles';
 
-const SettingsCard = ({ title, titleIcon, children }: SettingsCardProps) => {
+const SettingsSection = ({ title, titleIcon, children }: SettingsSectionProps) => {
   const { t } = useTranslation();
+
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -17,4 +18,4 @@ const SettingsCard = ({ title, titleIcon, children }: SettingsCardProps) => {
   );
 };
 
-export default SettingsCard;
+export default SettingsSection;

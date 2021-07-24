@@ -5,7 +5,7 @@ import { SelectCard } from '../../../../../elements';
 import { SelectCardOption } from '../../../../../elements/inputs/SelectCard/SelectCard.types';
 import { SGLocale } from '../../../../../i18n';
 import { BritishFlagIcon, PolishFlagIcon } from '../../../../../icons';
-import SettingsCard from '../SettingsCard';
+import SettingsSection from '../SettingsSection';
 
 const LanguageCard = () => {
   const { i18n, t } = useTranslation();
@@ -15,7 +15,7 @@ const LanguageCard = () => {
   };
 
   return (
-    <SettingsCard title="routes.settings.language.title">
+    <SettingsSection title="routes.settings.language.title">
       <SelectCard<SGLocale> value={i18n.language as SGLocale} onChange={onChange}>
         <option value={SGLocale.pl}>
           <PolishFlagIcon />
@@ -26,7 +26,7 @@ const LanguageCard = () => {
           <h5>{t('routes.settings.language.en')}</h5>
         </option>
       </SelectCard>
-    </SettingsCard>
+    </SettingsSection>
   );
 };
 

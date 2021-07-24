@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface SettingsCardProps {
+interface SettingsSectionProps {
   title: string;
   titleIcon?: ReactNode;
   children: ReactNode;

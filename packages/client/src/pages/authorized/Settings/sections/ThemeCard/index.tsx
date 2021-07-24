@@ -7,7 +7,7 @@ import { ThemeTypeIndicator } from '../../../../../elements/animations';
 import { SelectCardOption } from '../../../../../elements/inputs/SelectCard/SelectCard.types';
 import { useThemeType } from '../../../../../hooks';
 import { StoredThemeType } from '../../../../../theme/Theme';
-import SettingsCard from '../SettingsCard';
+import SettingsSection from '../SettingsSection';
 
 const ThemeCard = () => {
   const { themeType, storedThemeType, setThemeType } = useThemeType();
@@ -20,7 +20,7 @@ const ThemeCard = () => {
   };
 
   return (
-    <SettingsCard title="routes.settings.theme.title" titleIcon={titleIcon}>
+    <SettingsSection title="routes.settings.theme.title" titleIcon={titleIcon}>
       <SelectCard<StoredThemeType> value={storedThemeType} onChange={onChange}>
         <option value="dark">
           <MoonIcon />
@@ -35,7 +35,7 @@ const ThemeCard = () => {
           <h5>{t('routes.settings.theme.system')}</h5>
         </option>
       </SelectCard>
-    </SettingsCard>
+    </SettingsSection>
   );
 };
 

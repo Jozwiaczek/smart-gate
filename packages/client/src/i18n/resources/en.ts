@@ -86,8 +86,6 @@ const en = {
       },
       settings: {
         title: 'Settings',
-        logout: 'Logout',
-        logoutFromAllDevices: 'Logout from all devices',
         theme: {
           title: 'Theme',
           light: 'Light',
@@ -98,6 +96,17 @@ const en = {
           title: 'Language',
           en: 'English',
           pl: 'Polish',
+        },
+        logout: {
+          title: 'Logout',
+          logout: 'Logout',
+          logoutFromAllDevices: 'Logout from all devices',
+        },
+        account: {
+          title: 'Account',
+        },
+        privileges: {
+          title: 'Privileges',
         },
       },
       invitations: {

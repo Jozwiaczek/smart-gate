@@ -1,36 +1,37 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '../../../elements';
-import { useAuth } from '../../../hooks';
 import { Title } from '../AuthorizedPages.styled';
-import LanguageCard from './cards/LanguageCard';
-import ThemeCard from './cards/ThemeCard';
+import Account from './sections/Account';
+import LanguageCard from './sections/LanguageCard';
+import LogoutSection from './sections/LogoutSection';
+import Privileges from './sections/Privileges';
+import ThemeCard from './sections/ThemeCard';
+import {
+  FitSectionsWrapper,
+  SectionsWrapper,
+  WideSectionsWrapper,
+  Wrapper,
+} from './Settings.styled';
 
 const Settings = () => {
   const { t } = useTranslation();
-  const { logout, logoutFromAllDevices } = useAuth();
-
-  const logoutUser = async () => {
-    await logout();
-  };
-
-  const logoutUserFromAllDevices = async () => {
-    await logoutFromAllDevices();
-  };
 
   return (
-    <>
+    <Wrapper>
       <Title>{t('routes.settings.title')}</Title>
-      <ThemeCard />
-      <LanguageCard />
-      <Button data-testid="button-logout" onClick={logoutUser} margin="20px 0">
-        {t('routes.settings.logout')}
-      </Button>
-      <Button onClick={logoutUserFromAllDevices} margin="20px 0">
-        {t('routes.settings.logoutFromAllDevices')}
-      </Button>
-    </>
+      <SectionsWrapper>
+        <WideSectionsWrapper>
+          <Account />
+          <Privileges />
+        </WideSectionsWrapper>
+        <FitSectionsWrapper>
+          <ThemeCard />
+          <LanguageCard />
+          <LogoutSection />
+        </FitSectionsWrapper>
+      </SectionsWrapper>
+    </Wrapper>
   );
 };
 

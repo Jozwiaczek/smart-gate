@@ -88,8 +88,6 @@ const pl: TranslationStructure = {
       },
       settings: {
         title: 'Ustawienia',
-        logout: 'Wyloguj się',
-        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
         theme: {
           title: 'Motyw',
           light: 'Jasny',
@@ -100,6 +98,17 @@ const pl: TranslationStructure = {
           title: 'Język',
           en: 'Angielski',
           pl: 'Polski',
+        },
+        logout: {
+          title: 'Wyloguj się',
+          logout: 'Wyloguj się',
+          logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+        },
+        account: {
+          title: 'Konto',
+        },
+        privileges: {
+          title: 'Uprawnienia',
         },
       },
       invitations: {
