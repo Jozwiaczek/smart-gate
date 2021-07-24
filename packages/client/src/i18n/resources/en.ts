@@ -94,6 +94,11 @@ const en = {
           dark: 'Dark',
           system: 'Sync with system',
         },
+        language: {
+          title: 'Language',
+          en: 'English',
+          pl: 'Polish',
+        },
       },
       invitations: {
         sendInvitation: 'Send Invitation',

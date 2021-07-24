@@ -15,8 +15,8 @@ const ThemeCard = () => {
 
   const titleIcon = <ThemeTypeIndicator themeType={themeType} />;
 
-  const onChange = (selectedOption: SelectCardOption<StoredThemeType>) => {
-    setThemeType(selectedOption.value);
+  const onChange = ({ value }: SelectCardOption<StoredThemeType>) => {
+    setThemeType(value);
   };
 
   return (

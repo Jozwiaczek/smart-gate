@@ -6,6 +6,7 @@ import {
   AdminIcon,
   ArrowIcon,
   BackArrowIcon,
+  BritishFlagIcon,
   CancelIcon,
   ChevronDownIcon,
   ConfirmLockIcon,
@@ -18,6 +19,7 @@ import {
   InvitationIcon,
   LockIcon,
   MoonIcon,
+  PolishFlagIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
   SendEmailIcon,
@@ -48,12 +50,11 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <PolishFlagIcon />
+    <BritishFlagIcon />
     <SystemThemeIcon />
-
     <MoonIcon />
-
     <SunIcon />
-
     <AdminIcon />
     <ArrowIcon />
     <BackArrowIcon />

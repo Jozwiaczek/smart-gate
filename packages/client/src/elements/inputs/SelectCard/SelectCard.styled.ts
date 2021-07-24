@@ -2,17 +2,19 @@ import styled, { css } from 'styled-components';
 
 import Card from '../../Card';
 
+const CARD_ITEM_PADDING = '20px';
+
 export const CardItemButton = styled.button(
   ({ theme: { palette } }) => css`
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 24px;
-    height: 60px;
+    padding: ${CARD_ITEM_PADDING};
     width: 100%;
     background: none;
     border: none;
     outline: none;
+    position: relative;
 
     :hover {
       cursor: pointer;
@@ -44,8 +46,16 @@ export const StyledCard = styled(Card)(
     }
 
     ${CardItemButton}:not(:last-child) {
-      border-bottom: 1px solid ${palette.background.default};
       border-radius: ${sizes.borderRadius} ${sizes.borderRadius} 0 0;
+      :after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: ${CARD_ITEM_PADDING};
+        right: ${CARD_ITEM_PADDING};
+        height: 1px;
+        background: ${palette.background.default};
+      }
     }
   `,
 );

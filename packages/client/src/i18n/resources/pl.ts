@@ -96,6 +96,11 @@ const pl: TranslationStructure = {
           dark: 'Ciemny',
           system: 'Systemowy',
         },
+        language: {
+          title: 'Język',
+          en: 'Angielski',
+          pl: 'Polski',
+        },
       },
       invitations: {
         sendInvitation: 'Nowe zaproszenie',
