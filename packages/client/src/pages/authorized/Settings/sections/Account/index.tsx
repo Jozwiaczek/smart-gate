@@ -1,24 +1,29 @@
 import React, { MouseEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import { TextField, TextInput } from '../../../../../elements';
 import TabbedLayout from '../../../../../elements/layouts/TabbedLayout';
 import { TabProps } from '../../../../../elements/layouts/TabbedLayout/Tab/Tab.types';
-import { DashboardIcon, HistoryIcon } from '../../../../../icons';
+import { useCurrentUser } from '../../../../../hooks';
+import { UserActionsIcon, UserIcon } from '../../../../../icons';
 import SettingsSection from '../SettingsSection';
-import { StyledCard, TabsWrapper } from './Account.styled';
+import { StyledCard, TabPanelWrapper, TabsWrapper } from './Account.styled';
 
 const tabs: Array<TabProps> = [
   {
-    label: 'Basics',
-    icon: <HistoryIcon />,
+    label: 'routes.settings.account.basics.title',
+    icon: <UserIcon />,
   },
   {
-    label: 'Actions',
-    icon: <DashboardIcon />,
+    label: 'routes.settings.account.actions.title',
+    icon: <UserActionsIcon />,
   },
 ];
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [currentUser] = useCurrentUser();
+  const { t } = useTranslation();
 
   const handleChange = (event: MouseEvent, newValue: number) => {
     setActiveTab(newValue);
@@ -39,10 +44,30 @@ const Account = () => {
           </TabbedLayout.Tabs>
         </TabsWrapper>
         <TabbedLayout.TabPanel value={activeTab} index={0}>
-          <p>Email</p>
+          <TabPanelWrapper>
+            <TextField record={currentUser} source="email" label="baseApiFields.email" />
+            <TextInput
+              data-testid="input-firstName"
+              name="firstName"
+              label={t('user.firstName')}
+              required
+              defaultValue={currentUser?.firstName}
+              startAdornment={<UserIcon />}
+            />
+            <TextInput
+              data-testid="input-lastName"
+              name="lastName"
+              label={t('user.lastName')}
+              required
+              defaultValue={currentUser?.lastName}
+              startAdornment={<UserIcon />}
+            />
+          </TabPanelWrapper>
         </TabbedLayout.TabPanel>
         <TabbedLayout.TabPanel value={activeTab} index={1}>
-          <p>Remove account</p>
+          <TabPanelWrapper>
+            <p>Remove account</p>
+          </TabPanelWrapper>
         </TabbedLayout.TabPanel>
       </StyledCard>
     </SettingsSection>

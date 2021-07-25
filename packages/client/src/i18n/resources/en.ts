@@ -104,6 +104,12 @@ const en = {
         },
         account: {
           title: 'Account',
+          basics: {
+            title: 'Basics',
+          },
+          actions: {
+            title: 'Actions',
+          },
         },
         privileges: {
           title: 'Privileges',

@@ -31,6 +31,7 @@ import {
   SystemThemeIcon,
   TickIcon,
   TrashIcon,
+  UserActionsIcon,
   UserIcon,
   UsersIcon,
 } from '.';
@@ -52,6 +53,8 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <UserActionsIcon />
+
     <LogoutAllIcon />
     <LogoutIcon />
     <PolishFlagIcon />

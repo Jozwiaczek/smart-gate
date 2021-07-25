@@ -106,6 +106,12 @@ const pl: TranslationStructure = {
         },
         account: {
           title: 'Konto',
+          basics: {
+            title: 'Dane',
+          },
+          actions: {
+            title: 'Akcje',
+          },
         },
         privileges: {
           title: 'Uprawnienia',

@@ -29,5 +29,6 @@ export { default as SunIcon } from './SunIcon';
 export { default as SystemThemeIcon } from './SystemThemeIcon';
 export { default as TickIcon } from './TickIcon';
 export { default as TrashIcon } from './TrashIcon';
+export { default as UserActionsIcon } from './UserActionsIcon';
 export { default as UserIcon } from './UserIcon';
 export { default as UsersIcon } from './UsersIcon';
