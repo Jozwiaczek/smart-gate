@@ -5,9 +5,9 @@ import { TextField, TextInput } from '../../../../../elements';
 import TabbedLayout from '../../../../../elements/layouts/TabbedLayout';
 import { TabProps } from '../../../../../elements/layouts/TabbedLayout/Tab/Tab.types';
 import { useCurrentUser } from '../../../../../hooks';
-import { UserActionsIcon, UserIcon } from '../../../../../icons';
+import { TrashIcon, UserActionsIcon, UserIcon } from '../../../../../icons';
 import SettingsSection from '../SettingsSection';
-import { StyledCard, TabPanelWrapper, TabsWrapper } from './Account.styled';
+import { StyledButton, StyledCard, TabPanelWrapper, TabsWrapper } from './Account.styled';
 
 const tabs: Array<TabProps> = [
   {
@@ -66,7 +66,13 @@ const Account = () => {
         </TabbedLayout.TabPanel>
         <TabbedLayout.TabPanel value={activeTab} index={1}>
           <TabPanelWrapper>
-            <p>Remove account</p>
+            <h4>Change password</h4>
+            <p>Update password</p>
+
+            <h4>Delete account</h4>
+            <StyledButton fullWidth colorVariant="red">
+              Delete account <TrashIcon />
+            </StyledButton>
           </TabPanelWrapper>
         </TabbedLayout.TabPanel>
       </StyledCard>

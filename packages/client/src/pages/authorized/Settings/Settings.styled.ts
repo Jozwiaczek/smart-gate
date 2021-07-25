@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { ITheme } from '../../../theme/Theme';
+
 export const SectionsWrapper = styled.div(
   ({ theme: { down, breakpoints } }) => css`
     margin-top: 60px;
@@ -17,20 +19,22 @@ export const SectionsWrapper = styled.div(
   `,
 );
 
-const baseSectionsWrapper = css`
+const baseSectionsWrapper = ({ theme: { down, breakpoints } }: { theme: ITheme }) => css`
   display: flex;
   flex-direction: column;
   gap: 50px;
+
+  ${down(breakpoints.md)} {
+    width: 100%;
+  }
 `;
 
-export const WideSectionsWrapper = styled.div`
+export const WideSectionsWrapper = styled.section`
   ${baseSectionsWrapper};
   width: 400px;
 `;
 
-export const FitSectionsWrapper = styled.div`
+export const FitSectionsWrapper = styled.section`
   ${baseSectionsWrapper};
   width: 300px;
 `;
-
-export const Wrapper = styled.div``;

@@ -7,18 +7,13 @@ import LanguageCard from './sections/LanguageCard';
 import LogoutSection from './sections/LogoutSection';
 import Privileges from './sections/Privileges';
 import ThemeCard from './sections/ThemeCard';
-import {
-  FitSectionsWrapper,
-  SectionsWrapper,
-  WideSectionsWrapper,
-  Wrapper,
-} from './Settings.styled';
+import { FitSectionsWrapper, SectionsWrapper, WideSectionsWrapper } from './Settings.styled';
 
 const Settings = () => {
   const { t } = useTranslation();
 
   return (
-    <Wrapper>
+    <>
       <Title>{t('routes.settings.title')}</Title>
       <SectionsWrapper>
         <WideSectionsWrapper>
@@ -31,7 +26,7 @@ const Settings = () => {
           <LogoutSection />
         </FitSectionsWrapper>
       </SectionsWrapper>
-    </Wrapper>
+    </>
   );
 };
 
