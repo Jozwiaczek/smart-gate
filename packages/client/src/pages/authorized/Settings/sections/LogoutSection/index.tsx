@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'src/elements';
 
 import { useAuth } from '../../../../../hooks';
+import { LogoutAllIcon, LogoutIcon } from '../../../../../icons';
 import SettingsSection from '../SettingsSection';
+import { ButtonsContainer, StyledButton } from './LogoutSection.styled';
 
 const LogoutSection = () => {
   const { t } = useTranslation();
@@ -19,12 +21,21 @@ const LogoutSection = () => {
 
   return (
     <SettingsSection title="routes.settings.logout.title">
-      <Button fullWidth data-testid="button-logout" onClick={logoutUser} margin="20px 0">
-        {t('routes.settings.logout.logout')}
-      </Button>
-      <Button fullWidth onClick={logoutUserFromAllDevices} margin="20px 0">
-        {t('routes.settings.logout.logoutFromAllDevices')}
-      </Button>
+      <ButtonsContainer>
+        <StyledButton
+          colorVariant="card"
+          fullWidth
+          data-testid="button-logout"
+          onClick={logoutUser}
+        >
+          <LogoutIcon />
+          {t('routes.settings.logout.logout')}
+        </StyledButton>
+        <StyledButton colorVariant="card" fullWidth onClick={logoutUserFromAllDevices}>
+          <LogoutAllIcon />
+          {t('routes.settings.logout.logoutFromAllDevices')}
+        </StyledButton>
+      </ButtonsContainer>
     </SettingsSection>
   );
 };

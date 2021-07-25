@@ -13,6 +13,8 @@ export { default as FiltersIcon } from './FiltersIcon';
 export { default as HistoryIcon } from './HistoryIcon';
 export { default as InvitationIcon } from './InvitationIcon';
 export { default as LockIcon } from './LockIcon';
+export { default as LogoutAllIcon } from './LogoutAllIcon';
+export { default as LogoutIcon } from './LogoutIcon';
 export { default as MoonIcon } from './MoonIcon';
 export { default as PolishFlagIcon } from './PolishFlagIcon';
 export { default as PrivilegesGroupIcon } from './PrivilegesGroupIcon';

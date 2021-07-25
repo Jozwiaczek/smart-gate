@@ -18,6 +18,8 @@ import {
   HistoryIcon,
   InvitationIcon,
   LockIcon,
+  LogoutAllIcon,
+  LogoutIcon,
   MoonIcon,
   PolishFlagIcon,
   PrivilegesGroupIcon,
@@ -50,6 +52,8 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <LogoutAllIcon />
+    <LogoutIcon />
     <PolishFlagIcon />
     <BritishFlagIcon />
     <SystemThemeIcon />
