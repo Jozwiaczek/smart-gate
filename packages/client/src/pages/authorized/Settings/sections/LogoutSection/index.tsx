@@ -19,10 +19,10 @@ const LogoutSection = () => {
 
   return (
     <SettingsSection title="routes.settings.logout.title">
-      <Button data-testid="button-logout" onClick={logoutUser} margin="20px 0">
+      <Button fullWidth data-testid="button-logout" onClick={logoutUser} margin="20px 0">
         {t('routes.settings.logout.logout')}
       </Button>
-      <Button onClick={logoutUserFromAllDevices} margin="20px 0">
+      <Button fullWidth onClick={logoutUserFromAllDevices} margin="20px 0">
         {t('routes.settings.logout.logoutFromAllDevices')}
       </Button>
     </SettingsSection>

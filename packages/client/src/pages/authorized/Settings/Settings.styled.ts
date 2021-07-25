@@ -1,11 +1,21 @@
 import styled, { css } from 'styled-components';
 
-export const SectionsWrapper = styled.div`
-  margin-top: 60px;
-  display: flex;
-  gap: 100px;
-  flex-wrap: wrap;
-`;
+export const SectionsWrapper = styled.div(
+  ({ theme: { down, breakpoints } }) => css`
+    margin-top: 60px;
+    display: flex;
+    gap: 100px;
+    flex-wrap: wrap;
+
+    ${down(breakpoints.sm)} {
+      justify-content: center;
+    }
+
+    ${down(breakpoints.lg)} {
+      gap: 50px;
+    }
+  `,
+);
 
 const baseSectionsWrapper = css`
   display: flex;
