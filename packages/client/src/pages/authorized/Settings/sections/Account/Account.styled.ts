@@ -20,9 +20,13 @@ export const TabPanelWrapper = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
-  margin-top: 16px;
+  margin-top: 20px;
 
   svg {
     margin-left: 16px;
   }
+`;
+
+export const UpdatePasswordSection = styled.div`
+  margin-bottom: 40px;
 `;

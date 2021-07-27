@@ -92,17 +92,17 @@ export const StyledButton = styled.button<ButtonProps>(
         ${colorVariant === ThemeType.light ? palette.primary.dark : palette.primary.light};
     }
 
-    &:disabled {
+    :disabled {
       transition: none;
       background-color: ${palette.background.disabled};
       color: ${palette.text.disabled};
       cursor: not-allowed;
       pointer-events: all !important;
 
-      &:hover,
-      &:active {
+      :hover,
+      :active {
+        box-shadow: ${palette.boxShadow.default};
         background-color: ${palette.background.disabled};
-        box-shadow: none;
         svg {
           transform: none;
         }

@@ -81,7 +81,7 @@ export const getTheme = (themeType: ThemeType) => ({
       paper: themeType === ThemeType.light ? white : navyBlueLight,
       paperHover:
         themeType === ThemeType.light ? hexToRgba(navyBlueLight, 0.05) : hexToRgba(whiteDark, 0.05),
-      disabled: hexToRgba(navyBlueLight, disabledOpacity),
+      disabled: hexToRgba(navyBlueDark, disabledOpacity),
     },
     colors,
     action: {

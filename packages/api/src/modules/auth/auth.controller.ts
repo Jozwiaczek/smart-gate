@@ -20,6 +20,7 @@ import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { LoginUserInfo } from './interfaces/login-user-info';
+import { UserMeInfo } from './interfaces/user-me.types';
 
 @UseSentryTransaction()
 @SentryIgnoreException()
@@ -57,14 +58,18 @@ export class AuthController {
 
   @Auth()
   @Get('me')
-  async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<LoginUserInfo> {
-    const { email, firstName, lastName, roles } = await this.authService.getUser(sub);
+  async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<UserMeInfo> {
+    const { email, firstName, lastName, roles, id, createdAt, updatedAt } =
+      await this.authService.getUser(sub);
     return {
       user: {
+        id,
         email,
         firstName,
         lastName,
         roles,
+        createdAt,
+        updatedAt,
       },
       expirationDate: exp * 1000,
     };

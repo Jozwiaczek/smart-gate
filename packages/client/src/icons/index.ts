@@ -12,6 +12,7 @@ export { default as EmailIcon } from './EmailIcon';
 export { default as FiltersIcon } from './FiltersIcon';
 export { default as HistoryIcon } from './HistoryIcon';
 export { default as InvitationIcon } from './InvitationIcon';
+export { default as KeyIcon } from './KeyIcon';
 export { default as LockIcon } from './LockIcon';
 export { default as LogoutAllIcon } from './LogoutAllIcon';
 export { default as LogoutIcon } from './LogoutIcon';
