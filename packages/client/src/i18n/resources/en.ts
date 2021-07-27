@@ -21,6 +21,7 @@ const en = {
     actions: {
       back: 'Back',
       delete: 'Delete',
+      save: 'Save',
     },
     menu: {
       history: 'History',
@@ -43,11 +44,15 @@ const en = {
       errors: {
         onSubmitError: 'Oops! Something went wrong. Operation failed.',
       },
+      success: {
+        update: 'Update successful',
+      },
       inputs: {
         defaultPlaceholderBase: 'Enter',
         confirmPassword: 'Confirm password',
         repeatPassword: 'Repeat your password',
         newPassword: 'New password',
+        repeatNewPassword: 'Confirm new password',
       },
       validation: {
         required: 'Required',
@@ -109,6 +114,9 @@ const en = {
           },
           actions: {
             title: 'Actions',
+            changePassword: 'Change password',
+            deleteAccount: 'Delete account',
+            accountDeleted: 'Account deleted successfully',
           },
         },
         privileges: {

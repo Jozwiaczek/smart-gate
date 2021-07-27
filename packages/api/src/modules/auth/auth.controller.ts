@@ -19,8 +19,7 @@ import { Auth } from './decorators/auth.decorator';
 import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { LoginUserInfo } from './interfaces/login-user-info';
-import { UserMeInfo } from './interfaces/user-me.types';
+import { UserInfo } from './interfaces/user-info.types';
 
 @UseSentryTransaction()
 @SentryIgnoreException()
@@ -32,7 +31,7 @@ export class AuthController {
   async login(
     @Body(new ValidationPipe()) loginUser: LoginDto,
     @Res({ passthrough: true }) response: CookieResponse,
-  ): Promise<LoginUserInfo> {
+  ): Promise<UserInfo> {
     return this.authService.login(loginUser, response).catch(() => {
       throw new UnauthorizedException('Invalid credentials');
     });
@@ -42,7 +41,7 @@ export class AuthController {
   async register(
     @Body(new ValidationPipe()) registerDto: RegisterDto,
     @Res({ passthrough: true }) response: CookieResponse,
-  ): Promise<LoginUserInfo> {
+  ): Promise<UserInfo> {
     const newUser = await this.authService.register(registerDto).catch(() => {
       throw new BadRequestException('User already exists');
     });
@@ -58,7 +57,7 @@ export class AuthController {
 
   @Auth()
   @Get('me')
-  async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<UserMeInfo> {
+  async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<UserInfo> {
     const { email, firstName, lastName, roles, id, createdAt, updatedAt } =
       await this.authService.getUser(sub);
     return {

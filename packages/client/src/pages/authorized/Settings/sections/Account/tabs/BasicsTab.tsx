@@ -51,7 +51,7 @@ const BasicsTab = () => {
     try {
       const updatedUser = await mutation.mutateAsync(values);
       setCurrentUser(updatedUser.data);
-      showSnackbar({ message: 'Update successful', severity: 'success' });
+      showSnackbar({ message: t('form.success.update'), severity: 'success' });
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
@@ -82,7 +82,7 @@ const BasicsTab = () => {
           startAdornment={<UserIcon />}
         />
         <Button fullWidth margin="20px 0 0 0" disabled={!isDataModified} withArrow>
-          Save
+          {t('actions.save')}
         </Button>
       </Form>
     </>

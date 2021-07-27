@@ -23,6 +23,7 @@ const pl: TranslationStructure = {
     actions: {
       back: 'Wróć',
       delete: 'Usuń',
+      save: 'Zapisz',
     },
     menu: {
       history: 'Historia',
@@ -45,11 +46,15 @@ const pl: TranslationStructure = {
       errors: {
         onSubmitError: 'Oops! Coś poszło nie tak.',
       },
+      success: {
+        update: 'Aktualizacja zakończona',
+      },
       inputs: {
         defaultPlaceholderBase: 'Wpisz',
         confirmPassword: 'Potwierdź hasło',
         repeatPassword: 'Powtórz hasło',
         newPassword: 'Nowe hasło',
+        repeatNewPassword: 'Powtórz nowe hasło',
       },
       validation: {
         required: 'Pole wymagane',
@@ -111,6 +116,9 @@ const pl: TranslationStructure = {
           },
           actions: {
             title: 'Akcje',
+            changePassword: 'Zmień hasło',
+            deleteAccount: 'Usuń konto',
+            accountDeleted: 'Konto zostało usunięte',
           },
         },
         privileges: {
