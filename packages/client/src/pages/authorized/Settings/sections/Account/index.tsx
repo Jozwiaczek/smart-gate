@@ -22,7 +22,7 @@ const tabs: Array<TabProps> = [
 const tabsPanels = [<BasicsTab />, <ActionsTab />];
 
 const Account = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   const handleChange = (event: MouseEvent, newValue: number) => {
     setActiveTab(newValue);
