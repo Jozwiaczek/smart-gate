@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -36,9 +36,9 @@ const ActionsTab = () => {
     }
   };
 
-  const isUpdatePasswordBtnDisabled = !dirtyFields?.password || !dirtyFields?.confirmPassword;
+  const isUpdatePasswordFormDirty = !dirtyFields?.password || !dirtyFields?.confirmPassword;
 
-  const deleteAccount = async () => {
+  const deleteAccount = useCallback(async () => {
     if (!currentUser?.id) {
       await logout();
       return;
@@ -55,7 +55,7 @@ const ActionsTab = () => {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
     }
-  };
+  }, [axios, currentUser?.id, logout, showSnackbar, t]);
 
   return (
     <>
@@ -93,7 +93,7 @@ const ActionsTab = () => {
             }}
             required
           />
-          <StyledButton fullWidth disabled={isUpdatePasswordBtnDisabled}>
+          <StyledButton fullWidth disabled={isUpdatePasswordFormDirty}>
             {t('routes.settings.account.actions.changePassword')}
             <KeyIcon />
           </StyledButton>

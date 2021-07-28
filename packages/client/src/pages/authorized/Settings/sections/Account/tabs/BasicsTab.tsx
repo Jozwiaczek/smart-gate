@@ -18,7 +18,7 @@ const BasicsTab = () => {
   const [currentUser, setCurrentUser] = useCurrentUser();
   const { t } = useTranslation();
   const showSnackbar = useSnackbar();
-
+  const axios = useAxios();
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ const BasicsTab = () => {
       lastName: currentUser?.lastName,
     },
   });
-  const axios = useAxios();
+
   const firstNameFieldValue = watch('firstName');
   const lastNameFieldValue = watch('lastName');
 
