@@ -22,7 +22,7 @@
     "typeorm-migration:run": "yarn typeorm migration:run"
   },
   "dependencies": {
-    "@nestjs/cli": "^7.6.0",
+    "@nestjs/cli": "^8.1.0",
     "@nestjs/common": "^7.6.17",
     "@nestjs/core": "^7.6.17",
     "@nestjs/mapped-types": "^0.4.1",
