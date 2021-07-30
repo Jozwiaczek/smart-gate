@@ -1,0 +1,58 @@
+{
+  "onInit": [
+    {
+      "type": "OPEN",
+      "pin": 36,
+      "mode": "OUTPUT",
+      "value": "LOW"
+    },
+    {
+      "type": "OPEN",
+      "pin": 38,
+      "mode": "OUTPUT",
+      "value": "LOW"
+    },
+    {
+      "type": "OPEN",
+      "pin": 40,
+      "mode": "OUTPUT",
+      "value": "LOW"
+    }
+  ],
+  "onToggle": [
+    {
+      "type": "WRITE",
+      "pin": 36,
+      "value": "HIGH"
+    },
+    {
+      "type": "WRITE",
+      "pin": 38,
+      "value": "LOW"
+    },
+    {
+      "type": "WRITE",
+      "pin": 40,
+      "value": "LOW"
+    },
+    {
+      "type": "SLEEP",
+      "time": 1000
+    },
+    {
+      "type": "WRITE",
+      "pin": 36,
+      "value": "LOW"
+    },
+    {
+      "type": "WRITE",
+      "pin": 38,
+      "value": "HIGH"
+    },
+    {
+      "type": "WRITE",
+      "pin": 40,
+      "value": "HIGH"
+    }
+  ]
+}

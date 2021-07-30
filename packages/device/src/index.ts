@@ -1,10 +1,12 @@
 import * as dotenv from 'dotenv';
 import socketClient from 'socket.io-client';
 
-import { onInit, onOpen } from './hooks';
+import actionExecutor from './actions/actionExecutor';
+import { ActionConfig } from './actions/actions.types';
+import actionsConfig from './config/actions.config.json';
 
 dotenv.config();
-onInit();
+actionExecutor((actionsConfig as ActionConfig).onInit);
 
 const socket = socketClient(process.env.API_URL ?? '', {
   query: {
@@ -24,7 +26,7 @@ socket.on('message', (eventType: WebSocketEvent) => {
   console.log('New message with eventType:', eventType);
   switch (eventType) {
     case WebSocketEvent.TOGGLE_GATE: {
-      onOpen();
+      actionExecutor((actionsConfig as ActionConfig).onToggle);
       break;
     }
     default: {
