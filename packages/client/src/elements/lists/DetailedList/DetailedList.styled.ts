@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { IconButton } from '../../buttons';
 import Card from '../../Card';
@@ -102,7 +102,10 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
     theme: {
       sizes: { borderRadius },
     },
-  }) => `${borderRadius} ${borderRadius} 0 0`};
+  }) =>
+    css`
+      ${borderRadius} ${borderRadius} 0 0
+    `};
   box-shadow: ${({ theme }) => theme.palette.boxShadow.getBoxShadow(1)};
   display: flex;
   height: 50px;
