@@ -5,6 +5,8 @@ import { BaseEntity } from './base.entity';
 // eslint-disable-next-line import/no-cycle
 import { InvitationEntity } from './invitation.entity';
 // eslint-disable-next-line import/no-cycle
+import { PushNotificationEntity } from './pushNotification.entity';
+// eslint-disable-next-line import/no-cycle
 import { RefreshTokenEntity } from './refreshToken.entity';
 
 @Entity('users')
@@ -46,4 +48,9 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => InvitationEntity, (invitation) => invitation.updatedBy, { onDelete: 'CASCADE' })
   public updatedInvitations: Array<InvitationEntity>;
+
+  @OneToMany(() => PushNotificationEntity, (pushNotification) => pushNotification.user, {
+    onDelete: 'CASCADE',
+  })
+  public pushNotifications: Array<InvitationEntity>;
 }

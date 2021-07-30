@@ -24,7 +24,6 @@ clientsClaim();
 // Their URLs are injected into the manifest variable below.
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
-// eslint-disable-next-line no-underscore-dangle
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up App Shell-style routing, so that all navigation requests
@@ -46,7 +45,7 @@ registerRoute(
 
     // If this looks like a URL for a resource, because it contains
     // a file extension, skip.
-    if (fileExtensionRegexp.exec(url.pathname)) {
+    if (url.pathname.match(fileExtensionRegexp)) {
       return false;
     }
 
@@ -80,4 +79,12 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// Any other custom service worker logic can go here.
+self.addEventListener('push', (event) => {
+  const { title, options } = event.data?.json();
+  const optionsWithDefaults: NotificationOptions = {
+    icon: '/email-images/sg-logo.png',
+    ...options,
+  };
+
+  self.registration.showNotification(title, optionsWithDefaults);
+});

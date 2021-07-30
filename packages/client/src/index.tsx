@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 import Providers from './providers';
 import Routes from './routes';
-import * as serviceWorkerRegistration from './serviceWorker/serviceWorkerRegistration';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>

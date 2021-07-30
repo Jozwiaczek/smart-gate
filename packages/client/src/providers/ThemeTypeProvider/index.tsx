@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react';
+import React, { createContext, useEffect, useMemo } from 'react';
 
 import useLocalStorage from '../../hooks/useLocalStorage/useLocalStorage';
 import { StoredThemeType, ThemeType } from '../../theme/Theme';
@@ -37,6 +37,20 @@ const ThemeTypeProvider = ({ children }: ThemeProviderProps) => {
       }
     }
   }, [isSystemDarkTheme, storedThemeType]);
+
+  useEffect(() => {
+    const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+    if (!themeColorMetaTag) {
+      return;
+    }
+
+    if (themeType === ThemeType.light) {
+      themeColorMetaTag.setAttribute('content', '#efefef');
+    }
+    if (themeType === ThemeType.dark) {
+      themeColorMetaTag.setAttribute('content', '#22343C');
+    }
+  }, [themeType]);
 
   return (
     <ThemeTypeContext.Provider value={{ themeType, storedThemeType, setThemeType, cleanThemeType }}>

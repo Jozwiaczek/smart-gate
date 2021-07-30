@@ -8,6 +8,7 @@ import { DatabaseModule } from './database/database.module';
 import { InvitationsModule } from './invitations/invitations.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
+import { PushNotificationsModule } from './push-notifications/push-notifications.module';
 import { RepositoryModule } from './repository/repository.module';
 import { SentryModule } from './sentry/sentry.module';
 import { TicketModule } from './ticket/ticket.module';
@@ -35,6 +36,7 @@ import { WebsocketModule } from './websocket/websocket.module';
     RepositoryModule,
     WebsocketModule,
     TicketModule,
+    PushNotificationsModule,
   ],
 })
 export class AppModule {}

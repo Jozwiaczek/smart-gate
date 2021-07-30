@@ -16,6 +16,11 @@ export class Config {
     lastName: string | undefined;
   };
 
+  pushNotifications: {
+    publicVapidKey?: string;
+    privateVapidKey?: string;
+  };
+
   database: {
     database: string;
     databaseTest: string;
