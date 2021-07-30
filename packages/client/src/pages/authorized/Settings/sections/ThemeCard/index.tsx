@@ -22,15 +22,15 @@ const ThemeCard = () => {
   return (
     <SettingsSection title="routes.settings.theme.title" titleIcon={titleIcon}>
       <SelectCard<StoredThemeType> value={storedThemeType} onChange={onChange}>
-        <option value="dark">
+        <option value="dark" data-testid="dark-theme-button">
           <MoonIcon />
           <h5>{t('routes.settings.theme.dark')}</h5>
         </option>
-        <option value="light">
+        <option value="light" data-testid="light-theme-button">
           <SunIcon />
           <h5>{t('routes.settings.theme.light')}</h5>
         </option>
-        <option value="system">
+        <option value="system" data-testid="system-theme-button">
           <SystemThemeIcon />
           <h5>{t('routes.settings.theme.system')}</h5>
         </option>

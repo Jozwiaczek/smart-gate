@@ -16,6 +16,7 @@ const SelectCard = <T extends unknown>({ value, onChange, children }: SelectCard
             index,
             value: childValue,
             children: childChildren,
+            dataTestId: child.props['data-testid'] as string,
           };
         }
       }) ?? [],
@@ -45,7 +46,11 @@ const SelectCard = <T extends unknown>({ value, onChange, children }: SelectCard
   return (
     <StyledCard data-testid="selectCard">
       {allOptions?.map((option) => (
-        <CardItemButton key={option.value as never} onClick={onOptionClick(option)}>
+        <CardItemButton
+          data-testid={option.dataTestId}
+          key={option.value as never}
+          onClick={onOptionClick(option)}
+        >
           <ItemContentWrapper>{option.children}</ItemContentWrapper>
           <CheckmarkBox>
             <Checkmark visible={isCurrentOption(option)} />

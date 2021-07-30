@@ -15,7 +15,7 @@ context('404 Page not found', () => {
   it('displays heaven animation for light theme', () => {
     cy.visit('/');
     cy.login();
-    cy.switchTheme();
+    cy.changeTheme('light');
     cy.visit('/invalid-endpoint');
     cy.url().should('eq', `${Cypress.config().baseUrl as string}/pageNotFound`);
     cy.dataTestId('heaven-animation');
