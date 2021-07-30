@@ -21,16 +21,20 @@ export class PushNotificationsService {
 
     if (publicVapidKey && privateVapidKey) {
       webPush.setVapidDetails(`mailto:${replyTo}`, publicVapidKey, privateVapidKey);
+      this.logger.log('Web push vapid details initialized');
     }
   }
 
-  async subscribe({ subscription, userPromise }: SubscribePushNotificationDto): Promise<void> {
-    this.logger.log('New subscriber');
+  async subscribe({ subscription, user }: SubscribePushNotificationDto): Promise<void> {
+    const { endpoint, keys } = subscription;
+    const { p256dh, auth } = keys;
+
+    this.logger.log(`New subscriber (email: ${user.email}, endpoint: ${endpoint})`);
     await this.pushNotificationRepository.create({
-      user: userPromise,
-      endpoint: subscription.endpoint,
-      p256dh: subscription.keys.p256dh,
-      auth: subscription.keys.auth,
+      user,
+      endpoint,
+      p256dh,
+      auth,
     });
   }
 
@@ -43,12 +47,16 @@ export class PushNotificationsService {
   }
 
   async send({ title, body, options, roles }: SendPushNotificationDto): Promise<void> {
-    this.logger.log('Sending...');
+    this.logger.log(
+      `Sending (title: "${title}", body: "${body}"${
+        roles ? `, roles: [${JSON.stringify(roles)}]` : ''
+      }${options ? `, options: ${JSON.stringify(options)}` : ''})`,
+    );
 
     const subscriptions = await this.getSubscriptions(roles);
 
     if (!subscriptions.length) {
-      this.logger.log('No subscriptions');
+      this.logger.log(`No subscriptions for roles: [${roles ? JSON.stringify(roles) : ' '}]`);
       return;
     }
 
@@ -69,7 +77,7 @@ export class PushNotificationsService {
       await Promise.all(sendNotificationsPromises);
 
       const sendTotal = sendNotificationsPromises.length;
-      this.logger.log(`Sent ${sendTotal} ${sendTotal > 1 ? 'notifications' : 'notification'}`);
+      this.logger.log(`${sendTotal} ${sendTotal > 1 ? 'notifications' : 'notification'} sent`);
     } catch (error) {
       this.logger.error(error);
     }

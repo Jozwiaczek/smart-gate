@@ -8,5 +8,5 @@ export class SubscribePushNotificationDto {
   subscription: PushSubscription;
 
   @ValidateNested()
-  userPromise: Promise<UserEntity>;
+  user: UserEntity;
 }
