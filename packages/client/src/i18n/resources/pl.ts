@@ -119,6 +119,7 @@ const pl: TranslationStructure = {
             title: 'Akcje',
             changePassword: 'Zmień hasło',
             deleteAccount: 'Usuń konto',
+            passwordChanged: 'Hasło zmienione poprawnie',
             deleteAccountInfo:
               'Czy na pewno chcesz usunąć swoje konto? Spowoduje to trwałe usunięcie Twojego konta.',
             accountDeleted: 'Konto zostało usunięte',

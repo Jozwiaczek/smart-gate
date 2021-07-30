@@ -117,6 +117,7 @@ const en = {
             title: 'Actions',
             changePassword: 'Change password',
             deleteAccount: 'Delete account',
+            passwordChanged: 'Password changed successfully',
             deleteAccountInfo:
               'Are you sure you want to delete your account? This will permanently erase your account.',
             accountDeleted: 'Account deleted successfully',

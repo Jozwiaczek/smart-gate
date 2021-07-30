@@ -38,6 +38,12 @@ export class PasswordResetService {
     return generatedUuid;
   }
 
+  async updatePassword(email: string, password: string): Promise<void> {
+    const salt = bcrypt.genSaltSync();
+    const hashPassword = bcrypt.hashSync(password, salt);
+    await this.userRepository.updatePassword(email, hashPassword);
+  }
+
   async recover(email: string, uuid: string, password: string): Promise<void> {
     const cachedUuid = await this.cacheManager.get<string>(email);
     if (cachedUuid === undefined) {
@@ -50,8 +56,6 @@ export class PasswordResetService {
       throw new Error(`uuid mismatch '${uuid}' !== '${cachedUuid} for email '${email}'`);
     }
 
-    const salt = bcrypt.genSaltSync();
-    const hashPassword = bcrypt.hashSync(password, salt);
-    await this.userRepository.updatePassword(email, hashPassword);
+    await this.updatePassword(email, password);
   }
 }

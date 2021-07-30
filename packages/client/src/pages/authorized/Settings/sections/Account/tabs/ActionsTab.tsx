@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Dialog, Form, TextInput } from '../../../../../../elements';
-import { useAuth, useAxios, useCurrentUser, useSnackbar } from '../../../../../../hooks';
+import { useAuth, useSnackbar } from '../../../../../../hooks';
 import { ConfirmLockIcon, KeyIcon, TrashIcon } from '../../../../../../icons';
 import { ThemeType } from '../../../../../../theme/Theme';
 import { onlyOnDevEnv } from '../../../../../../utils';
@@ -15,16 +15,15 @@ import {
 } from '../Account.styled';
 
 const ActionsTab = () => {
+  const { updatePassword, deleteCurrentUser } = useAuth();
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] = useState(false);
   const showSnackbar = useSnackbar();
-  const { logout } = useAuth();
-  const axios = useAxios();
-  const [currentUser] = useCurrentUser();
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, dirtyFields },
+    formState: { errors, dirtyFields },
     getValues,
   } = useForm<UpdatePasswordInputs>({
     defaultValues: {
@@ -33,15 +32,24 @@ const ActionsTab = () => {
     },
   });
 
-  const onSubmitChangePassword = (values: UpdatePasswordInputs) => {
-    try {
-      console.log(values);
-      showSnackbar({ message: t('form.success.update'), severity: 'success' });
-    } catch (error) {
-      onlyOnDevEnv(() => console.error(error));
-      showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
-    }
-  };
+  const onSubmitChangePassword = useCallback(
+    async (values: UpdatePasswordInputs) => {
+      setLoading(true);
+      try {
+        await updatePassword(values);
+        showSnackbar({
+          message: t('routes.settings.account.actions.passwordChanged'),
+          severity: 'success',
+        });
+      } catch (error) {
+        onlyOnDevEnv(() => console.error(error));
+        showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [showSnackbar, t, updatePassword],
+  );
 
   const isUpdatePasswordFormDirty = !dirtyFields?.password || !dirtyFields?.confirmPassword;
 
@@ -54,14 +62,8 @@ const ActionsTab = () => {
   };
 
   const deleteAccount = useCallback(async () => {
-    if (!currentUser?.id) {
-      await logout();
-      return;
-    }
-
     try {
-      await axios.delete(`/users/${currentUser.id}`);
-      await logout();
+      await deleteCurrentUser();
       showSnackbar({
         message: t('routes.settings.account.actions.accountDeleted'),
         severity: 'success',
@@ -72,7 +74,7 @@ const ActionsTab = () => {
     } finally {
       closeConfirmDeleteDialog();
     }
-  }, [axios, currentUser?.id, logout, showSnackbar, t]);
+  }, [deleteCurrentUser, showSnackbar, t]);
 
   return (
     <>
@@ -81,8 +83,8 @@ const ActionsTab = () => {
         <Form
           onSubmit={handleSubmit(onSubmitChangePassword)}
           errors={errors}
-          loading={isSubmitting}
           register={register}
+          loading={loading}
         >
           <TextInput
             data-testid="input-password"
@@ -100,17 +102,14 @@ const ActionsTab = () => {
             placeholder={t('form.inputs.repeatNewPassword')}
             startAdornment={<ConfirmLockIcon />}
             registerOptions={{
-              validate: (value) => {
-                return (
-                  value === getValues().password ||
-                  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-                  (t('form.validation.repeatPasswordError') as string)
-                );
-              },
+              validate: (value) =>
+                value === getValues().password ||
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+                (t('form.validation.repeatPasswordError') as string),
             }}
             required
           />
-          <StyledButton fullWidth disabled={isUpdatePasswordFormDirty}>
+          <StyledButton type="submit" fullWidth disabled={loading || isUpdatePasswordFormDirty}>
             {t('routes.settings.account.actions.changePassword')}
             <KeyIcon />
           </StyledButton>
