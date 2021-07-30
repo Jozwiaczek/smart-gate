@@ -23,14 +23,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#257D69",
-  "background_color": "#22343C",
-  "shortcuts": [
-    {
-      "name": "How's weather today?",
-      "short_name": "Today",
-      "description": "View weather information for today",
-      "url": "/",
-      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
-    }
-  ]
+  "background_color": "#22343C"
 }

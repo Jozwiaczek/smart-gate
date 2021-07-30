@@ -22,6 +22,6 @@ export class PushNotificationEntity extends BaseEntity {
   })
   public auth: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.refreshTokens, { onDelete: 'CASCADE' })
+  @ManyToOne(() => UserEntity, (user) => user.pushNotifications, { onDelete: 'CASCADE' })
   public user: Promise<UserEntity>;
 }

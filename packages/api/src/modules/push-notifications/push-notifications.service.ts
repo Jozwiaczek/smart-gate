@@ -9,7 +9,7 @@ import { SubscribePushNotificationDto } from './dto/subscribe-push-notification.
 
 @Injectable()
 export class PushNotificationsService {
-  private logger: Logger = new Logger('PushNotifications');
+  private readonly logger: Logger = new Logger(PushNotificationsService.name);
 
   constructor(
     private readonly config: Config,
