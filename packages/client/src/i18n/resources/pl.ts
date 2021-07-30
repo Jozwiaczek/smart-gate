@@ -24,6 +24,7 @@ const pl: TranslationStructure = {
       back: 'Wróć',
       delete: 'Usuń',
       save: 'Zapisz',
+      cancel: 'Anuluj',
     },
     menu: {
       history: 'Historia',
@@ -118,6 +119,8 @@ const pl: TranslationStructure = {
             title: 'Akcje',
             changePassword: 'Zmień hasło',
             deleteAccount: 'Usuń konto',
+            deleteAccountInfo:
+              'Czy na pewno chcesz usunąć swoje konto? Spowoduje to trwałe usunięcie Twojego konta.',
             accountDeleted: 'Konto zostało usunięte',
           },
         },

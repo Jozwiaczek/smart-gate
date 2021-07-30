@@ -26,6 +26,10 @@ export const StyledButton = styled.button<StyledButtonProps>(
     width: ${size !== undefined ? `${size}px` : 'auto'};
     height: ${size !== undefined ? `${size}px` : 'auto'};
 
+    svg {
+      margin-left: 0;
+    }
+
     ${RippleContainer} {
       span {
         background: ${getCssColor({ color, theme })};

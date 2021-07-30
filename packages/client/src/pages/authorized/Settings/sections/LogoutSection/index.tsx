@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'src/elements';
 
 import { useAuth } from '../../../../../hooks';
 import { LogoutAllIcon, LogoutIcon } from '../../../../../icons';

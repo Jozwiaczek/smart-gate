@@ -1,14 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { Form, TextInput } from '../../../../../../elements';
+import { Button, Dialog, Form, TextInput } from '../../../../../../elements';
 import { useAuth, useAxios, useCurrentUser, useSnackbar } from '../../../../../../hooks';
 import { ConfirmLockIcon, KeyIcon, TrashIcon } from '../../../../../../icons';
+import { ThemeType } from '../../../../../../theme/Theme';
 import { onlyOnDevEnv } from '../../../../../../utils';
-import { StyledButton, UpdatePasswordSection } from '../Account.styled';
+import {
+  ConfirmDialogButtonsWrapper,
+  StyledButton,
+  StyledCancelIcon,
+  UpdatePasswordSection,
+} from '../Account.styled';
 
 const ActionsTab = () => {
+  const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] = useState(false);
   const showSnackbar = useSnackbar();
   const { logout } = useAuth();
   const axios = useAxios();
@@ -38,6 +45,14 @@ const ActionsTab = () => {
 
   const isUpdatePasswordFormDirty = !dirtyFields?.password || !dirtyFields?.confirmPassword;
 
+  const openConfirmDeleteDialog = () => {
+    setIsConfirmDeleteDialogOpen(true);
+  };
+
+  const closeConfirmDeleteDialog = () => {
+    setIsConfirmDeleteDialogOpen(false);
+  };
+
   const deleteAccount = useCallback(async () => {
     if (!currentUser?.id) {
       await logout();
@@ -54,6 +69,8 @@ const ActionsTab = () => {
     } catch (error) {
       onlyOnDevEnv(() => console.error(error));
       showSnackbar({ message: t('form.errors.onSubmitError'), severity: 'error' });
+    } finally {
+      closeConfirmDeleteDialog();
     }
   }, [axios, currentUser?.id, logout, showSnackbar, t]);
 
@@ -101,10 +118,27 @@ const ActionsTab = () => {
       </UpdatePasswordSection>
 
       <h4>{t('routes.settings.account.actions.deleteAccount')}</h4>
-      <StyledButton fullWidth colorVariant="red" onClick={deleteAccount}>
+      <StyledButton fullWidth colorVariant="red" onClick={openConfirmDeleteDialog}>
         {t('routes.settings.account.actions.deleteAccount')}
         <TrashIcon />
       </StyledButton>
+      <Dialog
+        isOpen={isConfirmDeleteDialogOpen}
+        close={closeConfirmDeleteDialog}
+        title="routes.settings.account.actions.deleteAccount"
+        description="routes.settings.account.actions.deleteAccountInfo"
+      >
+        <ConfirmDialogButtonsWrapper>
+          <Button colorVariant={ThemeType.dark} fullWidth onClick={closeConfirmDeleteDialog}>
+            {t('actions.cancel')}
+            <StyledCancelIcon />
+          </Button>
+          <Button colorVariant="red" fullWidth onClick={deleteAccount}>
+            {t('actions.delete')}
+            <TrashIcon />
+          </Button>
+        </ConfirmDialogButtonsWrapper>
+      </Dialog>
     </>
   );
 };

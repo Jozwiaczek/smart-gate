@@ -55,9 +55,7 @@ const IconsWrapper = styled.div`
 const AllIconsPanel = () => (
   <IconsWrapper>
     <KeyIcon />
-
     <UserActionsIcon />
-
     <LogoutAllIcon />
     <LogoutIcon />
     <PolishFlagIcon />

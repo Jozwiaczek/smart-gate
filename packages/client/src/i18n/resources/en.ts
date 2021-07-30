@@ -21,6 +21,7 @@ const en = {
     actions: {
       back: 'Back',
       delete: 'Delete',
+      cancel: 'Cancel',
       save: 'Save',
     },
     menu: {
@@ -116,6 +117,8 @@ const en = {
             title: 'Actions',
             changePassword: 'Change password',
             deleteAccount: 'Delete account',
+            deleteAccountInfo:
+              'Are you sure you want to delete your account? This will permanently erase your account.',
             accountDeleted: 'Account deleted successfully',
           },
         },

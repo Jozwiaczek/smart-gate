@@ -1,11 +1,8 @@
 import styled, { css } from 'styled-components';
 
 import { ThemeType } from '../../../theme/Theme';
+import hexToRgba from '../../../utils/hexToRgba';
 import { ButtonProps, HelperStyledFunction } from './Button.types';
-
-export const IconContainer = styled.div`
-  margin-left: 8px;
-`;
 
 const getFontColor = ({
   colorVariant,
@@ -50,68 +47,76 @@ const getBaseColor = ({
 };
 
 export const StyledButton = styled.button<ButtonProps>(
-  ({ colorVariant, fullWidth, margin, theme: { palette, sizes } }) => css`
-    position: relative;
-    overflow: hidden;
+  ({ colorVariant, fullWidth, margin, theme: { palette, sizes, name } }) => {
+    const disabledBgColor = hexToRgba(
+      getBaseColor({ colorVariant, palette }),
+      name === 'dark' ? 0.15 : 0.5,
+    );
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: ${sizes.borderRadius};
-    font-size: 16px;
-    background-color: ${getBaseColor({ colorVariant, palette })};
-    color: ${getFontColor({ colorVariant, palette })};
-    padding: 21px 14px;
-    ${margin ? `margin: ${margin}` : ''};
-    border: none;
-    min-width: 100px;
-    cursor: pointer;
-    line-height: 16px;
-    outline: none;
-    box-shadow: ${palette.boxShadow.default};
-    transition: box-shadow 150ms ease-in-out;
+    return css`
+      position: relative;
+      overflow: hidden;
 
-    ${fullWidth ? 'width: 100%' : ''};
-
-    svg {
-      transition: transform 150ms ease-in-out;
-    }
-
-    :hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: ${sizes.borderRadius};
+      font-size: 16px;
+      background-color: ${getBaseColor({ colorVariant, palette })};
+      color: ${getFontColor({ colorVariant, palette })};
+      padding: 21px 14px;
+      ${margin ? `margin: ${margin}` : ''};
+      border: none;
+      min-width: 100px;
+      cursor: pointer;
+      line-height: 16px;
+      outline: none;
+      box-shadow: ${palette.boxShadow.default};
       transition: box-shadow 150ms ease-in-out;
-      box-shadow: ${palette.boxShadow.big};
+
+      ${fullWidth ? 'width: 100%' : ''};
+
       svg {
         transition: transform 150ms ease-in-out;
-        transform: translateX(3px);
+        margin-left: ${fullWidth ? '16px' : '8px'};
       }
-    }
 
-    :focus-visible {
-      transition: box-shadow 150ms ease-in-out;
-      box-shadow: 0 0 0 3px
-        ${colorVariant === ThemeType.light ? palette.primary.dark : palette.primary.light};
-    }
-
-    :disabled {
-      transition: none;
-      background-color: ${palette.background.disabled};
-      color: ${palette.text.disabled};
-      cursor: not-allowed;
-      pointer-events: all !important;
-
-      :hover,
-      :active {
-        box-shadow: ${palette.boxShadow.default};
-        background-color: ${palette.background.disabled};
+      :hover {
+        transition: box-shadow 150ms ease-in-out;
+        box-shadow: ${palette.boxShadow.big};
         svg {
-          transform: none;
+          transition: transform 150ms ease-in-out;
+          transform: translateX(3px);
         }
       }
 
-      :active::after {
-        opacity: 1;
-        transform: none;
+      :focus-visible {
+        transition: box-shadow 150ms ease-in-out;
+        box-shadow: 0 0 0 3px
+          ${colorVariant === ThemeType.light ? palette.primary.dark : palette.primary.light};
       }
-    }
-  `,
+
+      :disabled {
+        transition: none;
+        background: ${disabledBgColor};
+        color: ${palette.text.disabled};
+        cursor: not-allowed;
+        pointer-events: all !important;
+
+        :hover,
+        :active {
+          box-shadow: ${palette.boxShadow.default};
+          background: ${disabledBgColor};
+          svg {
+            transform: none;
+          }
+        }
+
+        :active::after {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    `;
+  },
 );

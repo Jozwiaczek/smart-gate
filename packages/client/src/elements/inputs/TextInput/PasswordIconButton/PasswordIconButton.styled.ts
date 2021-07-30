@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
 
-import { getCssColor } from '../../../../utils';
-import hexToRgba from '../../../../utils/hexToRgba';
 import IconButton from '../../../buttons/IconButton';
 
 const StyledIconButton = styled(IconButton)(
