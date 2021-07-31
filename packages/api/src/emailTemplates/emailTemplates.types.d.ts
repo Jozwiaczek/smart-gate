@@ -1,12 +1,16 @@
-export interface WelcomeTemplateProps extends BaseEmailTemplatesProps {
+interface WelcomeTemplateProps extends BaseEmailTemplatesProps {
   link: string;
 }
 
-export interface PasswordRecoveryTemplateProps extends BaseEmailTemplatesProps {
+interface PasswordRecoveryTemplateProps extends BaseEmailTemplatesProps {
   firstName: string;
   link: string;
 }
 
-export interface BaseEmailTemplatesProps {
+interface PasswordChangedTemplateProps extends BaseEmailTemplatesProps {
+  firstName: string;
+}
+
+interface BaseEmailTemplatesProps {
   clientUrl: string;
 }

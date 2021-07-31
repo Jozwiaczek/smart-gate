@@ -42,6 +42,12 @@ export class PasswordResetService {
     const salt = bcrypt.genSaltSync();
     const hashPassword = bcrypt.hashSync(password, salt);
     await this.userRepository.updatePassword(email, hashPassword);
+    const { firstName } = await this.userRepository.findOneByEmailOrFail(email);
+    await this.mailerService.sendPasswordChangedInfo(email, firstName).catch(async (error) => {
+      await this.cacheManager.del(email);
+      Sentry.captureException(error);
+      throw error;
+    });
   }
 
   async recover(email: string, uuid: string, password: string): Promise<void> {

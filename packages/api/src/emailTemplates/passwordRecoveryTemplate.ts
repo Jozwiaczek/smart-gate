@@ -1,7 +1,5 @@
 import mjml2html from 'mjml';
 
-import { PasswordRecoveryTemplateProps } from './emailTemplates.types';
-
 const passwordRecoveryTemplate = ({
   firstName,
   link,
