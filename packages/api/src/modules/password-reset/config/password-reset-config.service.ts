@@ -16,7 +16,6 @@ export class PasswordResetConfigService {
     const {
       clientEndpoints: { passwordMagicLink },
     } = constants;
-    const baseUrl = this.config.clientUrl.split(';')[0];
-    return `${baseUrl}${passwordMagicLink}`;
+    return `${this.config.clientUrl}${passwordMagicLink}`;
   }
 }

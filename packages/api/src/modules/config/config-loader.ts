@@ -20,7 +20,7 @@ export class ConfigLoader {
       port:
         this.envConfigService.get('API_PORT', false, Number) ||
         this.envConfigService.get('PORT', isProd, Number),
-      clientUrl: this.envConfigService.get('CLIENT_URL'),
+      clientUrl: this.envConfigService.get('CLIENT_URL', true),
       superAdminEmails: this.envConfigService.get('SUPER_ADMIN_EMAILS', false),
       testUser: {
         email: this.envConfigService.get('TEST_USER_EMAIL', isTest),

@@ -68,6 +68,6 @@ export class MailerConfigService {
   }
 
   public getClientUrl(): string {
-    return this.config.clientUrl.split(';')[0];
+    return this.config.clientUrl;
   }
 }
