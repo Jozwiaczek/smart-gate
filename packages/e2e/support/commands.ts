@@ -26,7 +26,7 @@ Cypress.Commands.add('aNavWithoutTarget', (hrefStartsWith: string) => {
   return cy.get(`a[href^="${hrefStartsWith}"]`).click();
 });
 
-Cypress.Commands.add('switchTheme', () => {
+Cypress.Commands.add('changeTheme', (theme: Theme) => {
   cy.mainNavTo('settings');
-  return cy.dataTestId('btn-switch-theme').click();
+  return cy.dataTestId(`${theme}-theme-button`).click();
 });

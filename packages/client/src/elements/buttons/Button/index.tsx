@@ -6,7 +6,7 @@ import { ThemeType } from '../../../theme/Theme';
 import { RippleEffect } from '../../animations';
 import Spinner from '../../animations/Spinner';
 import Link from '../../Link';
-import { IconContainer, StyledButton } from './Button.styled';
+import { StyledButton } from './Button.styled';
 import { ButtonProps } from './Button.types';
 
 const Button = ({
@@ -33,11 +33,7 @@ const Button = ({
     >
       {loading && <Spinner margin="0 8px 0 0" />}
       {t(label as never) || children}
-      {withArrow && (
-        <IconContainer>
-          <ArrowIcon />
-        </IconContainer>
-      )}
+      {withArrow && <ArrowIcon />}
       {!loading && !disabled && <RippleEffect />}
     </StyledButton>
   );

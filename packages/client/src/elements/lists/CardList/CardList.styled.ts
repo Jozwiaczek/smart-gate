@@ -59,6 +59,9 @@ export const FiltersButton = styled(Button)`
   min-width: 0;
   padding: 10px;
   width: 55px;
+  svg {
+    margin-left: 0;
+  }
 `;
 
 export const EditButton = styled(IconButton)`

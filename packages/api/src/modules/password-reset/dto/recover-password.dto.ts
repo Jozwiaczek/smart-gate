@@ -1,8 +1,8 @@
 import { IsEmail, IsString } from 'class-validator';
 
-import { PasswordDto } from '../../auth/dto/password.dto';
+import { UpdatePasswordDto } from './update-password.dto';
 
-export class RecoverPasswordDto extends PasswordDto {
+export class RecoverPasswordDto extends UpdatePasswordDto {
   @IsEmail()
   email: string;
 

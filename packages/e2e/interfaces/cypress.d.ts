@@ -37,10 +37,12 @@ declare namespace Cypress {
     aNavWithoutTarget(hrefStartsWith: string): Chainable<Element>;
 
     /**
-     * Custom command to switch current theme type.
+     * Custom command to change app theme type.
      *
-     * @example cy.switchTheme()
+     * @example cy.changeTheme('light')
+     * @example cy.changeTheme('dark')
+     * @example cy.changeTheme('system')
      */
-    switchTheme(): Chainable<Element>;
+    changeTheme(theme: Theme): Chainable<Element>;
   }
 }

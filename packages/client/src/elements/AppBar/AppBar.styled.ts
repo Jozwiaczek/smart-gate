@@ -13,6 +13,7 @@ export const Wrapper = styled.div<{ orientation: TabsOrientation }>(
 
 export const TabsWrapper = styled.div<{ orientation?: TabsOrientation }>`
   background: ${({ theme }) => theme.palette.background.paper};
+  transition: background 200ms ease-in-out;
   border-radius: 25px 25px 0 0;
   bottom: 0;
   box-shadow: ${({ theme }) => theme.palette.boxShadow.big};

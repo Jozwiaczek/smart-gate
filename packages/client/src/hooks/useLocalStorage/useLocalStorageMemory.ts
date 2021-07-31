@@ -16,7 +16,7 @@ const useLocalStorageMemory = <T>(
   };
 
   const set = (data: T | undefined): void => {
-    if (data) {
+    if (typeof data !== 'undefined') {
       const stringifyData = JSON.stringify(data);
       window.localStorage.setItem(key, stringifyData);
     } else {

@@ -11,7 +11,7 @@ import { onlyOnDevEnv } from '../../../../utils';
 import { ShieldIconWrapper } from './UpdatePassword.styled';
 
 const UpdatePassword = () => {
-  const { updatePassword } = useAuth();
+  const { recoverPassword } = useAuth();
   const showSnackbar = useSnackbar();
   const { t } = useTranslation();
   const { email, code } = useEncodedParams<UpdatePasswordParams>();
@@ -40,7 +40,7 @@ const UpdatePassword = () => {
   const onSubmit = async ({ password }: UpdatePasswordInputs) => {
     setLoading(true);
     try {
-      await updatePassword({ password, email, code });
+      await recoverPassword({ password, email, code });
       reset();
       setIsSent(true);
     } catch (error) {

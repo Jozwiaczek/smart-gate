@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: Roboto, Rubik, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background: ${({ theme }) => theme.palette.background.default};
+    transition: background 200ms ease-in-out;
   }
 
   main {
@@ -28,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6, p, b {
     color: ${({ theme }) => theme.palette.text.primary};
+    transition: color 200ms ease-in-out;
   }
 
   h1, h2, h3, h4, h5, h6 {

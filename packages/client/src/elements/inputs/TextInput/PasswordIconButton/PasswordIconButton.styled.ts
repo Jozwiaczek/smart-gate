@@ -1,46 +1,59 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import IconButton from '../../../buttons/IconButton';
 
 const StyledIconButton = styled(IconButton)(
-  ({ theme: { palette } }) => `
-  position: absolute;
-  top: -12px;
-  right: -7px;
-  width: 45px;
-  height: 45px;
-  .eye-lower {
-    fill: none;
-    stroke: ${palette.text.light};
-    stroke-width: 4.5;
-    stroke-linecap: round;
-  }
+  ({ theme }) => css`
+    position: absolute;
+    top: -12px;
+    right: -7px;
+    width: 45px;
+    height: 45px;
 
-  .eye-iris {
-    fill: ${palette.text.light};
-    stroke-width: 4.65066;
-    stroke-linecap: round;
-  }
+    :hover,
+    :active {
+      .eye-lid {
+        fill: #509183;
+      }
+    }
 
-  .eye-lid {
-    clip-path: polygon(17px 53px, 61px 52px, 57px 14px, 25px 14px);
-    fill: ${palette.primary.dark};
-    stroke-linecap: butt;
-    stroke-width: 4.5;
-    stroke: ${palette.text.light};
-  }
+    svg {
+      transform: scale(2.5);
+    }
 
-  .eye-lashes {
-    transform-origin: 50%;
-  }
+    .eye-lower {
+      fill: none;
+      stroke: ${theme.palette.text.light};
+      stroke-width: 4.5;
+      stroke-linecap: round;
+    }
 
-  .eye-lash {
-    fill: none;
-    stroke: ${palette.text.light};
-    stroke-width: 4.5;
-    stroke-linecap: butt;
-  }
-`,
+    .eye-iris {
+      fill: ${theme.palette.text.light};
+      stroke-width: 4.65066;
+      stroke-linecap: round;
+    }
+
+    .eye-lid {
+      clip-path: polygon(17px 53px, 61px 52px, 57px 14px, 25px 14px);
+      fill: ${theme.palette.primary.dark};
+      stroke-linecap: butt;
+      stroke-width: 4.5;
+      stroke: ${theme.palette.text.light};
+      transition: fill 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+
+    .eye-lashes {
+      transform-origin: 50%;
+    }
+
+    .eye-lash {
+      fill: none;
+      stroke: ${theme.palette.text.light};
+      stroke-width: 4.5;
+      stroke-linecap: butt;
+    }
+  `,
 );
 
 export default StyledIconButton;

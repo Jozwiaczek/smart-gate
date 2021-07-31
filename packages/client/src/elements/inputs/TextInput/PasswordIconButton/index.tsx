@@ -48,7 +48,7 @@ const PasswordIconButton = ({ setPasswordMasked }: PasswordIconButtonProps) => {
       aria-label="Toggle password visibility"
       onClick={togglePasswordMask}
     >
-      <svg className="eye" width="36" height="36" viewBox="0 0 72 72">
+      <svg className="eye" viewBox="0 0 72 72">
         <path
           className="eye-lower"
           d="M 15.6,37 C 15.6,37 24.309181,49.073101 34.102911,49.166773 43.896641,49.260445 53.4,37 53.4,37"

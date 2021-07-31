@@ -10,6 +10,7 @@ import {
   AuthProviderProps,
   LoginData,
   LoginUserInfo,
+  RecoverPasswordData,
   RegistrationData,
   SendPasswordRecoveryEmailData,
   UpdatePasswordData,
@@ -84,12 +85,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     [axios],
   );
 
-  const updatePassword = useCallback(
-    async (userData: UpdatePasswordData) => {
+  const recoverPassword = useCallback(
+    async (userData: RecoverPasswordData) => {
       await axios.post('/passwordReset/recover', userData);
     },
     [axios],
   );
+
+  const updatePassword = useCallback(
+    async (userData: UpdatePasswordData) => {
+      await axios.post('/passwordReset/update', { ...userData, email: currentUser?.email });
+    },
+    [axios, currentUser?.email],
+  );
+
+  const deleteCurrentUser = useCallback(async () => {
+    if (currentUser) {
+      await axios.delete(`/users/${currentUser?.id}`);
+    }
+    await logout();
+  }, [axios, currentUser, logout]);
 
   const generateTicket = useCallback(async () => {
     const { data } = await axios.get<string>('/ticket/generate');
@@ -104,7 +119,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     checkAuth,
     sendPasswordRecoveryEmail,
     updatePassword,
+    recoverPassword,
     generateTicket,
+    deleteCurrentUser,
   };
 
   return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;
