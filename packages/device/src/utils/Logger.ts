@@ -19,7 +19,7 @@ class Logger {
     const loggerSign = chalk[primaryColor]('[SGLogger]  -');
     const timestamp = Logger.getTimestamp();
     const formattedContext = chalk.yellowBright(`[${context}]`);
-    const formattedData = chalk[primaryColor](JSON.stringify(message));
+    const formattedData = chalk[primaryColor](message.toString());
 
     return `${loggerSign} ${timestamp}  ${formattedContext} ${formattedData}`;
   }
