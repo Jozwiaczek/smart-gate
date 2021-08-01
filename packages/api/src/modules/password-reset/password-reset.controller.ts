@@ -26,6 +26,7 @@ export class PasswordResetController {
   @Auth()
   @Post('update')
   async update(@Body(new ValidationPipe()) { email, password }: UpdatePasswordDto) {
+    console.log('test');
     await this.passwordResetService.updatePassword(email, password);
   }
 }
