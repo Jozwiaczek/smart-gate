@@ -3,7 +3,11 @@ import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import SESTransport from 'nodemailer/lib/ses-transport';
 
-import { passwordResetTemplate, welcomeTemplate } from '../../emailTemplates';
+import {
+  passwordChangedTemplate,
+  passwordRecoveryTemplate,
+  welcomeTemplate,
+} from '../../emailTemplates';
 import { Config } from '../config/config';
 import { MailerConfigService } from './config/mailer-config.service';
 
@@ -29,11 +33,22 @@ export class MailerService {
     }
   }
 
+  async sendPasswordChangedInfo(email: string, firstName: string): Promise<void> {
+    await this.sendEmail({
+      to: email,
+      subject: 'Smart Gate - Password changed',
+      html: passwordChangedTemplate({
+        firstName,
+        clientUrl: this.mailerConfigService.getClientUrl(),
+      }),
+    });
+  }
+
   async sendPasswordRecovery(email: string, firstName: string, link: string): Promise<void> {
     await this.sendEmail({
       to: email,
       subject: 'Smart Gate - Password recovery',
-      html: passwordResetTemplate({
+      html: passwordRecoveryTemplate({
         firstName,
         link,
         clientUrl: this.mailerConfigService.getClientUrl(),
