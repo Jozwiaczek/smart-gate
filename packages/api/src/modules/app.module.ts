@@ -4,6 +4,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { AuthModule } from './auth/auth.module';
 import { Config } from './config/config';
 import { ConfigModule } from './config/config.module';
+import { ConfigurationModule } from './configuration/configuration.module';
 import { DatabaseModule } from './database/database.module';
 import { InvitationsModule } from './invitations/invitations.module';
 import { MailerModule } from './mailer/mailer.module';
@@ -37,6 +38,7 @@ import { WebsocketModule } from './websocket/websocket.module';
     WebsocketModule,
     TicketModule,
     PushNotificationsModule,
+    ConfigurationModule,
   ],
 })
 export class AppModule {}
