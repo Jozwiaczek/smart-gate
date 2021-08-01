@@ -9,7 +9,7 @@ module.exports = {
       {
         type: 'input',
         name: 'name',
-        message: 'New icon name:',
+        message: 'New icon name (without "Icon" in name):',
       },
       {
         type: 'input',

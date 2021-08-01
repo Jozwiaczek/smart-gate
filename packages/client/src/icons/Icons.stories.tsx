@@ -6,6 +6,7 @@ import {
   AdminIcon,
   ArrowIcon,
   BackArrowIcon,
+  BritishFlagIcon,
   CancelIcon,
   ChevronDownIcon,
   ConfirmLockIcon,
@@ -16,14 +17,22 @@ import {
   FiltersIcon,
   HistoryIcon,
   InvitationIcon,
+  KeyIcon,
   LockIcon,
+  LogoutAllIcon,
+  LogoutIcon,
+  MoonIcon,
+  PolishFlagIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
   SendEmailIcon,
   SettingsIcon,
   StatisticsIcon,
+  SunIcon,
+  SystemThemeIcon,
   TickIcon,
   TrashIcon,
+  UserActionsIcon,
   UserIcon,
   UsersIcon,
 } from '.';
@@ -45,6 +54,15 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <KeyIcon />
+    <UserActionsIcon />
+    <LogoutAllIcon />
+    <LogoutIcon />
+    <PolishFlagIcon />
+    <BritishFlagIcon />
+    <SystemThemeIcon />
+    <MoonIcon />
+    <SunIcon />
     <AdminIcon />
     <ArrowIcon />
     <BackArrowIcon />

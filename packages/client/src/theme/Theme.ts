@@ -5,6 +5,12 @@ export enum ThemeType {
   dark = 'dark',
 }
 
+export enum StoredThemeType {
+  light = 'light',
+  dark = 'dark',
+  system = 'system',
+}
+
 const getBoxShadow = (strength: number): string => `0 1px 1px rgba(0,0,0,${strength}),
               0 2px 2px rgba(0,0,0,${strength}),
               0 4px 4px rgba(0,0,0,${strength}),
@@ -20,9 +26,25 @@ const whiteDark = '#efefef';
 const navyBlueDark = '#22343C';
 const navyBlueLight = '#30444E';
 const blue = '#40AFDF';
-const red = '#D32F2F';
+const red = '#C12A2A';
 const orange = '#FFB400';
+const dark = '#1E1E1E';
 const disabledOpacity = 0.3;
+
+export const colors = {
+  greenLight,
+  greenDark,
+  greyLight,
+  greyDark,
+  white,
+  whiteDark,
+  navyBlueDark,
+  navyBlueLight,
+  blue,
+  red,
+  orange,
+  dark,
+};
 
 export const getTheme = (themeType: ThemeType) => ({
   name: themeType,
@@ -59,13 +81,9 @@ export const getTheme = (themeType: ThemeType) => ({
       paper: themeType === ThemeType.light ? white : navyBlueLight,
       paperHover:
         themeType === ThemeType.light ? hexToRgba(navyBlueLight, 0.05) : hexToRgba(whiteDark, 0.05),
-      disabled: hexToRgba(navyBlueLight, disabledOpacity),
+      disabled: hexToRgba(navyBlueDark, disabledOpacity),
     },
-    colors: {
-      blue,
-      red,
-      orange,
-    },
+    colors,
     action: {
       error: red,
       warning: orange,

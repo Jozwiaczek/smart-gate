@@ -23,6 +23,8 @@ const pl: TranslationStructure = {
     actions: {
       back: 'Wróć',
       delete: 'Usuń',
+      save: 'Zapisz',
+      cancel: 'Anuluj',
     },
     menu: {
       history: 'Historia',
@@ -45,11 +47,15 @@ const pl: TranslationStructure = {
       errors: {
         onSubmitError: 'Oops! Coś poszło nie tak.',
       },
+      success: {
+        update: 'Aktualizacja zakończona',
+      },
       inputs: {
         defaultPlaceholderBase: 'Wpisz',
         confirmPassword: 'Potwierdź hasło',
         repeatPassword: 'Powtórz hasło',
         newPassword: 'Nowe hasło',
+        repeatNewPassword: 'Powtórz nowe hasło',
       },
       validation: {
         required: 'Pole wymagane',
@@ -88,8 +94,40 @@ const pl: TranslationStructure = {
       },
       settings: {
         title: 'Ustawienia',
-        logout: 'Wyloguj się',
-        logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+        theme: {
+          title: 'Motyw',
+          light: 'Jasny',
+          dark: 'Ciemny',
+          system: 'Systemowy',
+        },
+        language: {
+          title: 'Język',
+          en: 'Angielski',
+          pl: 'Polski',
+        },
+        logout: {
+          title: 'Wyloguj się',
+          logout: 'Wyloguj się',
+          logoutFromAllDevices: 'Wyloguj ze wszystkich urządzeń',
+        },
+        account: {
+          title: 'Konto',
+          basics: {
+            title: 'Dane',
+          },
+          actions: {
+            title: 'Akcje',
+            changePassword: 'Zmień hasło',
+            deleteAccount: 'Usuń konto',
+            passwordChanged: 'Hasło zmienione poprawnie',
+            deleteAccountInfo:
+              'Czy na pewno chcesz usunąć swoje konto? Spowoduje to trwałe usunięcie Twojego konta.',
+            accountDeleted: 'Konto zostało usunięte',
+          },
+        },
+        privileges: {
+          title: 'Uprawnienia',
+        },
       },
       invitations: {
         sendInvitation: 'Nowe zaproszenie',

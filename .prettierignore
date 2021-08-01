@@ -1,7 +1,10 @@
 # Ignore artifacts:
-node_modules
-dist
-build
-coverage
+dist/
+build/
 CHANGELOG.md
 jest-test-results.json
+node_modules/
+/coverage
+_templates/
+.eslintcache
+coverage

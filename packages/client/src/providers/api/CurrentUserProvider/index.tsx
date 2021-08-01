@@ -22,7 +22,9 @@ const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
     newUser: ApiUser | undefined,
     expirationDate: number | undefined = undefined,
   ) => {
-    setExpiration(expirationDate);
+    if ((!newUser && !expirationDate) || expirationDate) {
+      setExpiration(expirationDate);
+    }
     setStoreUser(() => newUser);
 
     if (newUser) {

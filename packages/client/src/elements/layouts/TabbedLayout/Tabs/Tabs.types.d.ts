@@ -19,6 +19,7 @@ interface TabsOptions {
 }
 
 type OnChange = (event: MouseEvent, newValue: number) => void;
+
 interface TabsProps {
   children: Array<ReactElement<TabProps>> | ReactElement<TabProps>;
   value: number;

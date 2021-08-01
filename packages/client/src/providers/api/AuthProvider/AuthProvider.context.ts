@@ -10,7 +10,9 @@ const defaultValues: AuthProps = {
   register: () => Promise.resolve(false),
   sendPasswordRecoveryEmail: () => Promise.resolve(),
   updatePassword: () => Promise.resolve(),
+  recoverPassword: () => Promise.resolve(),
   generateTicket: () => Promise.resolve(''),
+  deleteCurrentUser: () => Promise.resolve(),
 };
 
 export const AuthContext = createContext<AuthProps>(defaultValues);

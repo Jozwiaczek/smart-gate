@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
 
-import { ThemeType } from '../../theme/Theme';
+import { StoredThemeType, ThemeType } from '../../theme/Theme';
 
-export interface ThemeTypeContextValue {
+interface ThemeTypeContextValue {
   themeType: ThemeType;
-  setThemeType: (themeType: ThemeType) => void;
-  setSystemThemeType: () => void;
+  storedThemeType: StoredThemeType;
+  setThemeType: (themeType: StoredThemeType) => void;
   cleanThemeType: () => void;
 }
 
-export interface ThemeProviderProps {
+interface ThemeProviderProps {
   children: ReactNode;
 }
