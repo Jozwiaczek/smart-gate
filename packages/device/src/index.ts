@@ -8,7 +8,7 @@ import { Logger } from './utils';
 
 dotenv.config();
 actionExecutor((actionsConfig as ActionConfig).onInit);
-const logger = new Logger('EventsFactory');
+const logger = new Logger('SocketConnection');
 
 const socket = socketClient(process.env.API_URL ?? '', {
   query: {
@@ -18,6 +18,8 @@ const socket = socketClient(process.env.API_URL ?? '', {
   reconnectionAttempts: Number.MAX_VALUE,
   reconnectionDelay: 1000,
 });
+
+logger.log('Initialized');
 
 enum WebSocketEvent {
   CHECK_DEVICE_CONNECTION = 'checkDeviceConnection',
@@ -39,9 +41,9 @@ socket.on('message', (eventType: WebSocketEvent) => {
 });
 
 socket.on('connect', () => {
-  logger.log(`Connected with API`);
+  logger.log(`Connected`);
 });
 
 socket.on('disconnect', () => {
-  logger.log(`Disconnect with API`);
+  logger.log(`Disconnect`);
 });
