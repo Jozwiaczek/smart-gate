@@ -26,7 +26,7 @@ module.exports = {
     'plugin:cypress/recommended',
     'plugin:jsdoc/recommended',
   ],
-  plugins: ['simple-import-sort', 'better-styled-components'],
+  plugins: ['simple-import-sort'],
   rules: {
     'no-void': 0,
     'consistent-return': 0,
@@ -36,6 +36,8 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-unsafe-call': 0,
+    '@typescript-eslint/no-unsafe-return': 0,
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],
     '@typescript-eslint/no-floating-promises': [2, { ignoreIIFE: true, ignoreVoid: true }],
     '@typescript-eslint/naming-convention': [
@@ -72,8 +74,6 @@ module.exports = {
     'react/display-name': 0,
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
-
-    'better-styled-components/sort-declarations-alphabetically': 2,
 
     'node/no-unsupported-features/es-syntax': 0,
     'node/no-unpublished-import': 0,

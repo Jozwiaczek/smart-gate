@@ -7,6 +7,22 @@ import Button from './index';
 export default {
   title: 'Elements/buttons/Button',
   component: Button,
+  argTypes: {
+    colorVariant: {
+      options: ['light', 'dark', 'red', 'blue', 'card'],
+      control: { type: 'radio' },
+    },
+    withArrow: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    fullWidth: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
 } as Meta;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;

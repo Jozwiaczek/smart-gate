@@ -21,6 +21,8 @@ const en = {
     actions: {
       back: 'Back',
       delete: 'Delete',
+      cancel: 'Cancel',
+      save: 'Save',
     },
     menu: {
       history: 'History',
@@ -43,11 +45,15 @@ const en = {
       errors: {
         onSubmitError: 'Oops! Something went wrong. Operation failed.',
       },
+      success: {
+        update: 'Update successful',
+      },
       inputs: {
         defaultPlaceholderBase: 'Enter',
         confirmPassword: 'Confirm password',
         repeatPassword: 'Repeat your password',
         newPassword: 'New password',
+        repeatNewPassword: 'Confirm new password',
       },
       validation: {
         required: 'Required',
@@ -86,8 +92,40 @@ const en = {
       },
       settings: {
         title: 'Settings',
-        logout: 'Logout',
-        logoutFromAllDevices: 'Logout from all devices',
+        theme: {
+          title: 'Theme',
+          light: 'Light',
+          dark: 'Dark',
+          system: 'Sync with system',
+        },
+        language: {
+          title: 'Language',
+          en: 'English',
+          pl: 'Polish',
+        },
+        logout: {
+          title: 'Logout',
+          logout: 'Logout',
+          logoutFromAllDevices: 'Logout from all devices',
+        },
+        account: {
+          title: 'Account',
+          basics: {
+            title: 'Basics',
+          },
+          actions: {
+            title: 'Actions',
+            changePassword: 'Change password',
+            deleteAccount: 'Delete account',
+            passwordChanged: 'Password changed successfully',
+            deleteAccountInfo:
+              'Are you sure you want to delete your account? This will permanently erase your account.',
+            accountDeleted: 'Account deleted successfully',
+          },
+        },
+        privileges: {
+          title: 'Privileges',
+        },
       },
       invitations: {
         sendInvitation: 'Send Invitation',

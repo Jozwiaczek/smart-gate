@@ -30,9 +30,13 @@ export interface SendPasswordRecoveryEmailData {
 }
 
 interface UpdatePasswordData {
-  email: string;
-  code: string;
   password: string;
+}
+
+interface RecoverPasswordData {
+  email: string;
+  password: string;
+  code: string;
 }
 
 export interface AuthProps {
@@ -43,5 +47,7 @@ export interface AuthProps {
   logoutFromAllDevices: () => Promise<void>;
   sendPasswordRecoveryEmail: (emailData: SendPasswordRecoveryEmailData) => Promise<void>;
   updatePassword: (user: UpdatePasswordData) => Promise<void>;
+  recoverPassword: (user: RecoverPasswordData) => Promise<void>;
   generateTicket: () => Promise<string>;
+  deleteCurrentUser: () => Promise<void>;
 }

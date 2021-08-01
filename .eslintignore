@@ -1,2 +1,13 @@
 node_modules/
+node_modules
 build/
+build
+dist/
+_templates/
+coverage/
+*.generated.ts
+*.generated.d.ts
+*.log
+/coverage
+.eslintcache
+jest-test-result.json

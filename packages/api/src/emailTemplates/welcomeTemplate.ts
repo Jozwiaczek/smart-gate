@@ -1,7 +1,5 @@
 import mjml2html from 'mjml';
 
-import { WelcomeTemplateProps } from './emailTemplates.types';
-
 const welcomeTemplate = ({ link, clientUrl }: WelcomeTemplateProps) => {
   const { html, errors } = mjml2html(
     `

@@ -11,7 +11,7 @@ import { RefreshTokenRepository } from '../repository/refresh-token.repository';
 import { UserRepository } from '../repository/user.repository';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { LoginUserInfo } from './interfaces/login-user-info';
+import { UserInfo } from './interfaces/user-info.types';
 import { TokenService } from './token/token.service';
 import { TokenCookieService } from './token/token-cookie.service';
 
@@ -28,7 +28,7 @@ export class AuthService {
   public async login(
     { email, password, keepMeLoggedIn }: LoginDto,
     res: CookieResponse,
-  ): Promise<LoginUserInfo> {
+  ): Promise<UserInfo> {
     const user = await this.validateUser(email, password);
 
     try {
@@ -57,10 +57,13 @@ export class AuthService {
 
       this.tokenCookieService.setCookieTokens(generateTokens, res);
 
-      const { firstName, lastName, roles } = user;
+      const { firstName, lastName, roles, id, createdAt, updatedAt } = user;
 
       return {
         user: {
+          id,
+          createdAt,
+          updatedAt,
           email,
           firstName,
           lastName,

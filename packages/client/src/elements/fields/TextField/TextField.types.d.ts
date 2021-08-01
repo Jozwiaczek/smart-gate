@@ -1,3 +1,5 @@
 import { BaseFieldProps } from '../Fields.types';
 
-type TextFieldProps<T> = BaseFieldProps<T>;
+interface TextFieldProps<T> extends BaseFieldProps<T> {
+  label?: string;
+}

@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "outDir": "./build",
     "jsx": "react-jsx",
     "target": "es5",
