@@ -20,14 +20,12 @@ export class PasswordResetController {
 
   @Post('recover')
   async recover(@Body(new ValidationPipe()) { email, code, password }: RecoverPasswordDto) {
-    console.log('recover');
     await this.passwordResetService.recover(email, code, password);
   }
 
   @Auth()
   @Post('update')
   async update(@Body(new ValidationPipe()) { email, password }: UpdatePasswordDto) {
-    console.log('update');
     await this.passwordResetService.updatePassword(email, password);
   }
 }
