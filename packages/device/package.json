@@ -9,11 +9,13 @@
     "start": "ts-node --project tsconfig.json src/index.ts"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "rpio": "^2.4.2",
     "socket.io-client": "^2.4.0"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
     "@types/node": "^15.12.4",
     "@types/rpio": "^2.4.1",
     "@types/socket.io-client": "^1.4.36",

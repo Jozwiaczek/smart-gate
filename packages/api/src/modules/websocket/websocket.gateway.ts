@@ -27,7 +27,7 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
 
   private clients: Map<string, string> = new Map<string, string>();
 
-  private logger: Logger = new Logger('WebSockets');
+  private logger: Logger = new Logger(Websocket.name);
 
   afterInit() {
     this.logger.log('Socket connection initialized');

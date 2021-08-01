@@ -4,16 +4,18 @@ import socketClient from 'socket.io-client';
 import actionExecutor from './actions/actionExecutor';
 import { ActionConfig } from './actions/actions.types';
 import actionsConfig from './config/actions.config.json';
+import { Logger } from './utils';
 
 dotenv.config();
 actionExecutor((actionsConfig as ActionConfig).onInit);
+const logger = new Logger('EventsFactory');
 
 const socket = socketClient(process.env.API_URL ?? '', {
   query: {
     ticket: process.env.AUTH_TICKET,
   },
   reconnection: true,
-  reconnectionAttempts: 1000,
+  reconnectionAttempts: Number.MAX_VALUE,
   reconnectionDelay: 1000,
 });
 
@@ -23,23 +25,23 @@ enum WebSocketEvent {
 }
 
 socket.on('message', (eventType: WebSocketEvent) => {
-  console.log('New message with eventType:', eventType);
+  logger.log(`New message with eventType: ${eventType}`);
   switch (eventType) {
     case WebSocketEvent.TOGGLE_GATE: {
       actionExecutor((actionsConfig as ActionConfig).onToggle);
       break;
     }
     default: {
-      console.log('Unsupported event type:', eventType);
+      logger.error(`Unsupported event type: ${eventType}`);
       break;
     }
   }
 });
 
 socket.on('connect', () => {
-  console.log('connected');
+  logger.log(`Connected with API`);
 });
 
 socket.on('disconnect', () => {
-  console.log('disconnect');
+  logger.log(`Disconnect with API`);
 });
