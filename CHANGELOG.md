@@ -1,3 +1,51 @@
+# [1.11.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.10.2...v1.11.0) (2021-08-01)
+
+
+### Bug Fixes
+
+* **api:** change client url config requirement ([44ec5af](https://github.com/Jozwiaczek/smart-gate/commit/44ec5afdebf80f68c150d992dff9b4b83b07ecce))
+* **client:** adjust change theme color animation and select card component ([1b21d7f](https://github.com/Jozwiaczek/smart-gate/commit/1b21d7fd1d0fd2bdca0e3018c17c319b8aeacf38))
+* **client:** adjust password eye icon with tmp styling ([ec1b8db](https://github.com/Jozwiaczek/smart-gate/commit/ec1b8dbb3569d15d4ad327c8aeb2cbab53521773))
+* **client:** push notifications env variable name ([6bfd9b3](https://github.com/Jozwiaczek/smart-gate/commit/6bfd9b330a5a2ae4ab8539f84f07235726dcab39))
+* **client:** remove body background transition ([b763a5c](https://github.com/Jozwiaczek/smart-gate/commit/b763a5c2725d200230817917c8b44c9a95dc0ccf))
+* **e2e:** fix change theme command ([def0a8c](https://github.com/Jozwiaczek/smart-gate/commit/def0a8cb4f90202f40b9905f4f8406925dd5f0c7))
+* getSubscriptions func roles ([4ed4fda](https://github.com/Jozwiaczek/smart-gate/commit/4ed4fda1416d186ecfa6c045c1c4928dcfdeb600))
+* prevents checkmark flickering on mount ([d8baf0a](https://github.com/Jozwiaczek/smart-gate/commit/d8baf0a939da1af621694f7529de8c6265a1ecdd))
+
+
+### Features
+
+* **api:** send email when user change his password ([202e8d0](https://github.com/Jozwiaczek/smart-gate/commit/202e8d08885b2d4de48c6b6f54e94dcb59bf133c))
+* handle update password ([84b0c26](https://github.com/Jozwiaczek/smart-gate/commit/84b0c26f6a8b7884df0ef30f9998cd57e29c8ed1))
+* **api:** handle sending push notifications by roles ([a54ee69](https://github.com/Jozwiaczek/smart-gate/commit/a54ee69691a5d43497337c9d970a2656f8c82f59))
+* **api:** require web-push envs only on prod ([0dd3cc4](https://github.com/Jozwiaczek/smart-gate/commit/0dd3cc48d61a1926a7c86a5c3794cfea7334a2d7))
+* **client:** add confirm delete account dialog ([eff4725](https://github.com/Jozwiaczek/smart-gate/commit/eff472552bc85ea8ab2cc9019a4ff7071ed602b9))
+* **client:** add select card item outline styling ([bdd0f78](https://github.com/Jozwiaczek/smart-gate/commit/bdd0f7800454bd8e171dc59e1d4fc3fb5c4d92e1))
+* **client:** add settings account basics fields ([3bf998c](https://github.com/Jozwiaczek/smart-gate/commit/3bf998ce47e14a71e02afb4703fc9e8a74f33b07))
+* **client:** add settings account tabbed section ([e1a91ea](https://github.com/Jozwiaczek/smart-gate/commit/e1a91ea35fdfc65da4c57e2e8fdf1ab5778487cc))
+* **client:** add settings base layout, add logout section ([abc2e8c](https://github.com/Jozwiaczek/smart-gate/commit/abc2e8c80cc7ec87527dfc0b93f3e54ed7988839))
+* **client:** add settings lang select card ([3853aa9](https://github.com/Jozwiaczek/smart-gate/commit/3853aa986c5832615de9d48da1e56ba6dea77deb))
+* **client:** add styling and icons for logout section ([7254ef2](https://github.com/Jozwiaczek/smart-gate/commit/7254ef2d6146a46dbd1b2abde074942cb42186c5))
+* **client:** add theme icons ([95a4f3a](https://github.com/Jozwiaczek/smart-gate/commit/95a4f3a6f6b23421be30e2fbec2331e443c9c6c1))
+* **client:** add theme type indicator and add window bg color transition ([3a97330](https://github.com/Jozwiaczek/smart-gate/commit/3a97330960b5e45b39bbca979c050b0baade2706))
+* **client:** adjust settings mobile view ([15b21cf](https://github.com/Jozwiaczek/smart-gate/commit/15b21cfe6aab5677691356970c4dfa2f990f6039))
+* **client:** center settings cards on mobile ([cd6c312](https://github.com/Jozwiaczek/smart-gate/commit/cd6c3120301e81b4a481c9fac86c817a6c9b54c1))
+* **client:** extract settings card and add theme card i18n ([9d17a71](https://github.com/Jozwiaczek/smart-gate/commit/9d17a71c0e927bbdad7222085315323c1f773caa))
+* **client:** settings account: ([27f6455](https://github.com/Jozwiaczek/smart-gate/commit/27f6455c06dad3506ff47fb73d3f07d187ff7807))
+* **client:** settings account: ([458ad95](https://github.com/Jozwiaczek/smart-gate/commit/458ad95bd320cefd9a8cc594bfa1ea277f4131a4))
+* add basic logic for push notifications ([906d45f](https://github.com/Jozwiaczek/smart-gate/commit/906d45f6864ff0bd58ea0503a9e5f67f028ea1f8))
+* add basic select card ([86966ce](https://github.com/Jozwiaczek/smart-gate/commit/86966cea8b348b372aefb0a930eb6485e5fca504))
+* add checkmark animation ([1f0a973](https://github.com/Jozwiaczek/smart-gate/commit/1f0a973c7505b412d13dc45c2cc7e040bcb6341e))
+* handle auth for web push ([23bcd31](https://github.com/Jozwiaczek/smart-gate/commit/23bcd3169226a31d6055bd29796830910d322293))
+* handle storing system theme type ([cfee224](https://github.com/Jozwiaczek/smart-gate/commit/cfee224321ea8675697b1b6aa2003d3d14ff598c))
+* handle web push subscriptions in db ([e052123](https://github.com/Jozwiaczek/smart-gate/commit/e05212387e2413a2454e6e06fceef0d54a61786c))
+* handle web push user permission ([e79a2af](https://github.com/Jozwiaczek/smart-gate/commit/e79a2aff133bb801dabb77c5aa3576d4e97c25aa))
+
+
+### Reverts
+
+* **api:** client url as a single address ([edd3057](https://github.com/Jozwiaczek/smart-gate/commit/edd3057302eecaa6aa048afd886bca12b879c9f7))
+
 ## [1.10.2](https://github.com/Jozwiaczek/smart-gate/compare/v1.10.1...v1.10.2) (2021-06-27)
 
 
