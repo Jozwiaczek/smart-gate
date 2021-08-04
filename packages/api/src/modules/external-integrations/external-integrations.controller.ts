@@ -21,8 +21,15 @@ export class ExternalIntegrationsController {
   @Auth()
   @Post('generate-token')
   async generateToken(@CookiePayload() { sub }: TokenPayload): Promise<string> {
-    const { email } = await this.authService.getUser(sub);
-    return this.externalIntegrationsService.generateToken(email);
+    const { id } = await this.authService.getUser(sub);
+    return this.externalIntegrationsService.generateToken(id);
+  }
+
+  @Auth()
+  @Post('delete-token')
+  async deleteToken(@CookiePayload() { sub }: TokenPayload): Promise<void> {
+    const { id } = await this.authService.getUser(sub);
+    return this.externalIntegrationsService.removeToken(id);
   }
 
   @Get('toggle-gate')

@@ -1,4 +1,5 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { unwatchFile } from 'fs';
 import { v4 as uuidV4 } from 'uuid';
 
 import { UsersService } from '../users/users.service';
@@ -13,16 +14,22 @@ export class ExternalIntegrationsService {
 
   private logger: Logger = new Logger(ExternalIntegrationsService.name);
 
-  async generateToken(email: string): Promise<string> {
+  async generateToken(userId: string): Promise<string> {
     const token = uuidV4();
 
-    const { externalIntegrationsToken } = await this.usersService.updateExternalIntegrationsToken(
-      email,
-      token,
-    );
-    this.logger.log(`New external integrations token generated for ${email}`);
+    const updatedUser = await this.usersService.update(userId, {
+      externalIntegrationsToken: token,
+    });
+    this.logger.log(`New external integrations token generated for user: ${userId}`);
 
-    return externalIntegrationsToken;
+    return updatedUser.externalIntegrationsToken;
+  }
+
+  async removeToken(userId: string): Promise<void> {
+    await this.usersService.update(userId, {
+      externalIntegrationsToken: '',
+    });
+    this.logger.log(`External integrations token removed for user: ${userId}`);
   }
 
   private async validateToken(token: string, email: string): Promise<true> {

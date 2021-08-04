@@ -125,9 +125,16 @@ const en = {
           integrations: {
             title: 'Integrations',
             extendedTitle: 'External integrations',
+            description:
+              'Here you can integrate with external services. Thanks to that you will be able for example to open doors with <strong>voice assistant</strong>.',
             generateApiKey: 'Generate token',
             regenerate: 'Regenerate',
             tokenGeneratedAndCopied: 'Token generated and copied to clipboard.',
+            tokenDeleted: 'Token deleted successfully',
+            generateTokenToIntegrate:
+              'In order to integrate with external services, you have to generate your private token key.',
+            sharingTokenWarning:
+              '<strong>Warning:</strong> Don’t share your token to anyone.<br />Every user should have his own unique token.',
           },
         },
         privileges: {

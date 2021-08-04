@@ -35,12 +35,18 @@ export const WarningNote = styled.p(
   `,
 );
 
-export const IntegrationsTitle = styled.h4`
+export const AccountTabTitle = styled.h4`
   margin-bottom: 30px;
 `;
 
-export const UpdatePasswordSection = styled.div`
-  margin-bottom: 80px;
+export const AccountTabSubtitle = styled.h5`
+  margin: 26px 0 18px;
+`;
+
+export const TokenActionsButtonsWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
 `;
 
 export const ConfirmDialogButtonsWrapper = styled.div`

@@ -127,9 +127,16 @@ const pl: TranslationStructure = {
           integrations: {
             title: 'Integracje',
             extendedTitle: 'Zewnętrzne integracje',
+            description:
+              'Możesz tutaj stworzyć integracje z zewnętrznymi serwisami. Dzięki temu będziesz w stanie np. otworzyć bramę z wykorzystaniem <strong>asystenta głosowego</strong>.',
             generateApiKey: 'Wygeneruj klucz',
             regenerate: 'Wygeneruj ponownie',
             tokenGeneratedAndCopied: 'Klucz wygenerowany oraz skopiowany do schowka',
+            tokenDeleted: 'Klucz usunięty poprawnie',
+            generateTokenToIntegrate:
+              'W celu integracji z zewnętrznymi serwisami, wygeneruj swój prywatny klucz.',
+            sharingTokenWarning:
+              '<strong>Ostrzeżenie:</strong><br />Nikomu nie udostępniaj swojego klucza.<br />Każdy użytkownik powinien używać swojego unikalnego klucza.',
           },
         },
         privileges: {
