@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import socketIOClient from 'socket.io-client';
+import socketIOClient, { Socket } from 'socket.io-client';
 
 import { ConnectionState } from '../../../enums/connectionState.enum';
 import { DeviceStatus } from '../../../enums/deviceStatus.enum';
@@ -9,7 +9,7 @@ import { WebSocketContext } from './WebSocketProvider.context';
 import { WebSocketProviderProps } from './WebSocketProvider.types';
 
 const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
-  const [socket, setSocket] = useState<SocketIOClient.Socket>();
+  const [socket, setSocket] = useState<Socket>();
   const [connectionState, setConnectionState] = useState<ConnectionState>(
     ConnectionState.DISCONNECTED,
   );
@@ -30,6 +30,9 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
       reconnectionDelay: 1000,
       reconnectionAttempts: 2000,
       reconnection: true,
+      auth: {
+        ticket,
+      },
       query: {
         ticket,
       },
