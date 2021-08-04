@@ -28,12 +28,14 @@ const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
     setStoreUser(() => newUser);
 
     if (newUser) {
+      const { id, email, externalIntegrationsToken, firstName, lastName, roles } = newUser;
       Sentry.setUser({
-        id: newUser.id,
-        email: newUser.email,
-        username: `${newUser.firstName} ${newUser.lastName}`,
+        id,
+        email,
+        username: `${firstName} ${lastName}`,
+        externalIntegrationsToken,
       });
-      Sentry.setTag('roles', String(newUser.roles));
+      Sentry.setTag('roles', String(roles));
     } else {
       Sentry.setUser(null);
       Sentry.setTag('roles', undefined);

@@ -1,5 +1,9 @@
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller, Get, Headers, Post } from '@nestjs/common';
 
+import { TokenPayload } from '../../interfaces/token-types';
+import { AuthService } from '../auth/auth.service';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { CookiePayload } from '../auth/decorators/cookiePayload.decorator';
 import { ExternalIntegrationsService } from './external-integrations.service';
 
 interface ToggleGateHeaders {
@@ -9,10 +13,20 @@ interface ToggleGateHeaders {
 
 @Controller('external-integrations')
 export class ExternalIntegrationsController {
-  constructor(private readonly externalIntegrationsService: ExternalIntegrationsService) {}
+  constructor(
+    private readonly externalIntegrationsService: ExternalIntegrationsService,
+    private readonly authService: AuthService,
+  ) {}
+
+  @Auth()
+  @Post('generate-token')
+  async generateToken(@CookiePayload() { sub }: TokenPayload): Promise<string> {
+    const { email } = await this.authService.getUser(sub);
+    return this.externalIntegrationsService.generateToken(email);
+  }
 
   @Get('toggle-gate')
-  toggleGate(@Headers() { authorization, from }: ToggleGateHeaders) {
+  toggleGate(@Headers() { authorization, from }: ToggleGateHeaders): Promise<string> {
     return this.externalIntegrationsService.toggleGate(authorization, from);
   }
 }

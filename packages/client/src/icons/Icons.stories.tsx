@@ -16,6 +16,7 @@ import {
   EmailIcon,
   FiltersIcon,
   HistoryIcon,
+  IntegrationsIcon,
   InvitationIcon,
   KeyIcon,
   LockIcon,
@@ -54,6 +55,7 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <IntegrationsIcon />
     <KeyIcon />
     <UserActionsIcon />
     <LogoutAllIcon />

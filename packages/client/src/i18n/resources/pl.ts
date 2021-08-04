@@ -126,8 +126,10 @@ const pl: TranslationStructure = {
           },
           integrations: {
             title: 'Integracje',
+            extendedTitle: 'Zewnętrzne integracje',
             generateApiKey: 'Wygeneruj klucz',
             regenerate: 'Wygeneruj ponownie',
+            tokenGeneratedAndCopied: 'Klucz wygenerowany oraz skopiowany do schowka',
           },
         },
         privileges: {

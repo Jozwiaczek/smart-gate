@@ -11,6 +11,7 @@ export { default as EditIcon } from './EditIcon';
 export { default as EmailIcon } from './EmailIcon';
 export { default as FiltersIcon } from './FiltersIcon';
 export { default as HistoryIcon } from './HistoryIcon';
+export { default as IntegrationsIcon } from './IntegrationsIcon';
 export { default as InvitationIcon } from './InvitationIcon';
 export { default as KeyIcon } from './KeyIcon';
 export { default as LockIcon } from './LockIcon';

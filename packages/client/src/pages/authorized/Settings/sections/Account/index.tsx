@@ -2,7 +2,7 @@ import React, { MouseEvent, useState } from 'react';
 
 import TabbedLayout from '../../../../../elements/layouts/TabbedLayout';
 import { TabProps } from '../../../../../elements/layouts/TabbedLayout/Tab/Tab.types';
-import { UserActionsIcon, UserIcon } from '../../../../../icons';
+import { IntegrationsIcon, UserActionsIcon, UserIcon } from '../../../../../icons';
 import SettingsSection from '../SettingsSection';
 import { StyledCard, TabPanelWrapper, TabsWrapper } from './Account.styled';
 import ActionsTab from './tabs/ActionsTab';
@@ -20,7 +20,7 @@ const tabs: Array<TabProps> = [
   },
   {
     label: 'routes.settings.account.integrations.title',
-    icon: <UserActionsIcon />,
+    icon: <IntegrationsIcon />,
   },
 ];
 

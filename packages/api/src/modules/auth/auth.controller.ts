@@ -58,8 +58,16 @@ export class AuthController {
   @Auth()
   @Get('me')
   async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<UserInfo> {
-    const { email, firstName, lastName, roles, id, createdAt, updatedAt } =
-      await this.authService.getUser(sub);
+    const {
+      email,
+      firstName,
+      lastName,
+      roles,
+      id,
+      createdAt,
+      updatedAt,
+      externalIntegrationsToken,
+    } = await this.authService.getUser(sub);
     return {
       user: {
         id,
@@ -69,6 +77,7 @@ export class AuthController {
         roles,
         createdAt,
         updatedAt,
+        externalIntegrationsToken,
       },
       expirationDate: exp * 1000,
     };

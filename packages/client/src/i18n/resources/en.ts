@@ -124,8 +124,10 @@ const en = {
           },
           integrations: {
             title: 'Integrations',
+            extendedTitle: 'External integrations',
             generateApiKey: 'Generate token',
             regenerate: 'Regenerate',
+            tokenGeneratedAndCopied: 'Token generated and copied to clipboard.',
           },
         },
         privileges: {
