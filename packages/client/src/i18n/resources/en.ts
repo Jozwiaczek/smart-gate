@@ -122,6 +122,11 @@ const en = {
               'Are you sure you want to delete your account? This will permanently erase your account.',
             accountDeleted: 'Account deleted successfully',
           },
+          automations: {
+            title: 'Automations',
+            generateApiKey: 'Generate API key',
+            regenerate: 'Regenerate',
+          },
         },
         privileges: {
           title: 'Privileges',

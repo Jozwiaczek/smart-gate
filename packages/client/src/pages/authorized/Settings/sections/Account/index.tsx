@@ -6,6 +6,7 @@ import { UserActionsIcon, UserIcon } from '../../../../../icons';
 import SettingsSection from '../SettingsSection';
 import { StyledCard, TabPanelWrapper, TabsWrapper } from './Account.styled';
 import ActionsTab from './tabs/ActionsTab';
+import AutomationsTab from './tabs/AutomationsTab';
 import BasicsTab from './tabs/BasicsTab';
 
 const tabs: Array<TabProps> = [
@@ -17,9 +18,13 @@ const tabs: Array<TabProps> = [
     label: 'routes.settings.account.actions.title',
     icon: <UserActionsIcon />,
   },
+  {
+    label: 'routes.settings.account.automations.title',
+    icon: <UserActionsIcon />,
+  },
 ];
 
-const tabsPanels = [<BasicsTab />, <ActionsTab />];
+const tabsPanels = [<BasicsTab />, <ActionsTab />, <AutomationsTab />];
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState(0);

@@ -27,6 +27,25 @@ export class UsersService {
     });
   }
 
+  async findOneByEmail(email: string): Promise<UserEntity> {
+    return this.userRepository.findOneByEmailOrFail(email);
+  }
+
+  async updateExternalAutomationToken(email: string, newToken: string): Promise<UserEntity> {
+    try {
+      const foundUser = await this.findOneByEmail(email);
+
+      if (newToken !== undefined) {
+        foundUser.externalAutomationToken = newToken;
+      }
+
+      await this.userRepository.update(foundUser.id, foundUser);
+      return foundUser;
+    } catch (error) {
+      throw new NotFoundException(`User with email: ${email} not found`);
+    }
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto): Promise<UserEntity | undefined> {
     const foundUser = await this.findOne(id);
 

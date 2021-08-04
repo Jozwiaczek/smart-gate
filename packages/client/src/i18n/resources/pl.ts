@@ -124,6 +124,11 @@ const pl: TranslationStructure = {
               'Czy na pewno chcesz usunąć swoje konto? Spowoduje to trwałe usunięcie Twojego konta.',
             accountDeleted: 'Konto zostało usunięte',
           },
+          automations: {
+            title: 'Automatyzacje',
+            generateApiKey: 'Wygeneruj klucz API',
+            regenerate: 'Wygeneruj ponownie',
+          },
         },
         privileges: {
           title: 'Uprawnienia',

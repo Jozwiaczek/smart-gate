@@ -10,7 +10,7 @@ const Link = ({ children, to, asOuterLink, colorVariant = 'default', ...rest }: 
         $colorVariant={colorVariant}
         href={to}
         to=""
-        rel="noreferrer"
+        rel="noreferrer noopener"
         target="_blank"
         {...rest}
       >
