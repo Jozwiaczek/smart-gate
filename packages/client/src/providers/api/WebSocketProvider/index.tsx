@@ -27,9 +27,6 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
 
     setConnectionState(ConnectionState.CONNECTING);
     const apiSocket = socketIOClient(process.env.REACT_APP_API_URL ?? '', {
-      reconnectionDelay: 1000,
-      reconnectionAttempts: 2000,
-      reconnection: true,
       auth: {
         ticket,
       },
