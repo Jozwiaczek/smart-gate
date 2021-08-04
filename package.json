@@ -1,6 +1,6 @@
 {
   "name": "smart-gate",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "private": true,
   "description": "Smart Gate project - for opening physical home/garage gate",
   "repository": "git@github.com:Jozwiaczek/smart-gate.git",
