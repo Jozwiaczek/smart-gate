@@ -31,12 +31,12 @@ export class UsersService {
     return this.userRepository.findOneByEmailOrFail(email);
   }
 
-  async updateExternalAutomationToken(email: string, newToken: string): Promise<UserEntity> {
+  async updateExternalIntegrationsToken(email: string, newToken: string): Promise<UserEntity> {
     try {
       const foundUser = await this.findOneByEmail(email);
 
       if (newToken !== undefined) {
-        foundUser.externalAutomationToken = newToken;
+        foundUser.externalIntegrationsToken = newToken;
       }
 
       await this.userRepository.update(foundUser.id, foundUser);

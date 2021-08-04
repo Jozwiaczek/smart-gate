@@ -45,7 +45,7 @@ export class UserEntity extends BaseEntity {
     unique: true,
     nullable: true,
   })
-  public externalAutomationToken: string;
+  public externalIntegrationsToken: string;
 
   @OneToMany(() => RefreshTokenEntity, (token) => token.user, { onDelete: 'CASCADE' })
   public refreshTokens: Promise<[RefreshTokenEntity]>;

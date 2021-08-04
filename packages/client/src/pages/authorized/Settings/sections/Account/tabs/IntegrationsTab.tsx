@@ -5,7 +5,7 @@ import Link from '../../../../../../elements/Link';
 import { KeyIcon } from '../../../../../../icons';
 import { StyledButton } from '../Account.styled';
 
-const AutomationsTab = () => {
+const IntegrationsTab = () => {
   const { t } = useTranslation();
 
   return (
@@ -25,4 +25,4 @@ const AutomationsTab = () => {
   );
 };
 
-export default AutomationsTab;
+export default IntegrationsTab;
