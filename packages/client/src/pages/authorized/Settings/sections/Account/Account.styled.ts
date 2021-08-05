@@ -50,7 +50,7 @@ export const StyledCopyIcon = styled(CopyIcon)(
     height: 20px;
     transition: color 200ms ease-in-out;
     :hover {
-      color: ${palette.text.primary};
+      color: ${palette.text.light};
       cursor: pointer;
     }
   `,
