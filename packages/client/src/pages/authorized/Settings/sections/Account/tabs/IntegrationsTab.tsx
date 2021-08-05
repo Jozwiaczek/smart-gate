@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { TextInput } from '../../../../../../elements';
+import { Button, Dialog, TextInput } from '../../../../../../elements';
 import useExternalIntegrations from '../../../../../../hooks/useExternalIntegrations';
 import { AppleIcon, KeyIcon, RefreshIcon, TrashIcon } from '../../../../../../icons';
+import { ThemeType } from '../../../../../../theme/Theme';
 import {
   AccountTabSubtitle,
   AccountTabTitle,
+  ConfirmDialogButtonsWrapper,
   GenerateTokenButton,
   IntegrationTemplateLink,
   Note,
   RegenerateTokenButton,
+  StyledCancelIcon,
   StyledCopyIcon,
   TokenActionButton,
   TokenActionsButtonsWrapper,
@@ -18,6 +21,8 @@ import {
 
 const IntegrationsTab = () => {
   const { t } = useTranslation();
+  const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] = useState(false);
+  const [isConfirmRegenerateDialogOpen, setIsConfirmRegenerateDialogOpen] = useState(false);
   const {
     copyTokenToClipboard,
     generateToken,
@@ -26,6 +31,32 @@ const IntegrationsTab = () => {
     deleteToken,
     appleShortcutsTemplateLink,
   } = useExternalIntegrations();
+
+  const openConfirmDeleteDialog = () => {
+    setIsConfirmDeleteDialogOpen(true);
+  };
+
+  const closeConfirmDeleteDialog = () => {
+    setIsConfirmDeleteDialogOpen(false);
+  };
+
+  const openConfirmRegenerateDialog = () => {
+    setIsConfirmRegenerateDialogOpen(true);
+  };
+
+  const closeConfirmRegenerateDialog = () => {
+    setIsConfirmRegenerateDialogOpen(false);
+  };
+
+  const onDelete = async () => {
+    await deleteToken();
+    closeConfirmDeleteDialog();
+  };
+
+  const onRegenerate = async () => {
+    await generateToken();
+    closeConfirmRegenerateDialog();
+  };
 
   if (!isTokenGenerated) {
     return (
@@ -68,14 +99,48 @@ const IntegrationsTab = () => {
         <Trans i18nKey="routes.settings.account.integrations.sharingTokenWarning" />
       </Note>
       <TokenActionsButtonsWrapper>
-        <TokenActionButton fullWidth colorVariant="red" onClick={deleteToken}>
+        <TokenActionButton fullWidth colorVariant="red" onClick={openConfirmDeleteDialog}>
           {t('actions.delete')}
           <TrashIcon />
         </TokenActionButton>
-        <RegenerateTokenButton fullWidth onClick={generateToken}>
+        <Dialog
+          isOpen={isConfirmDeleteDialogOpen}
+          close={closeConfirmDeleteDialog}
+          title="routes.settings.account.integrations.deleteToken"
+          description="routes.settings.account.integrations.deleteTokenInfo"
+        >
+          <ConfirmDialogButtonsWrapper>
+            <Button colorVariant={ThemeType.dark} fullWidth onClick={closeConfirmDeleteDialog}>
+              {t('actions.cancel')}
+              <StyledCancelIcon />
+            </Button>
+            <Button colorVariant="red" fullWidth onClick={onDelete}>
+              {t('actions.delete')}
+              <TrashIcon />
+            </Button>
+          </ConfirmDialogButtonsWrapper>
+        </Dialog>
+        <RegenerateTokenButton fullWidth onClick={openConfirmRegenerateDialog}>
           {t('actions.regenerate')}
           <RefreshIcon />
         </RegenerateTokenButton>
+        <Dialog
+          isOpen={isConfirmRegenerateDialogOpen}
+          close={closeConfirmRegenerateDialog}
+          title="routes.settings.account.integrations.regenerateTokenConfirmation"
+          description="routes.settings.account.integrations.regenerateTokenConfirmationInfo"
+        >
+          <ConfirmDialogButtonsWrapper>
+            <Button colorVariant={ThemeType.dark} fullWidth onClick={closeConfirmRegenerateDialog}>
+              {t('actions.cancel')}
+              <StyledCancelIcon />
+            </Button>
+            <RegenerateTokenButton fullWidth onClick={onRegenerate}>
+              {t('actions.regenerate')}
+              <RefreshIcon />
+            </RegenerateTokenButton>
+          </ConfirmDialogButtonsWrapper>
+        </Dialog>
       </TokenActionsButtonsWrapper>
       <AccountTabSubtitle>
         {t('routes.settings.account.integrations.integrationsTemplates')}
@@ -92,11 +157,7 @@ const IntegrationsTab = () => {
       <p>
         <strong>{t('routes.settings.account.integrations.pickToStart')}</strong>
       </p>
-      <IntegrationTemplateLink
-        to={appleShortcutsTemplateLink}
-        asOuterLink
-        title="Download Smart Gate Apple Shortcut template"
-      >
+      <IntegrationTemplateLink to={appleShortcutsTemplateLink} asOuterLink>
         <AppleIcon />
         {t('routes.settings.account.integrations.shortcutsTemplate')}
       </IntegrationTemplateLink>

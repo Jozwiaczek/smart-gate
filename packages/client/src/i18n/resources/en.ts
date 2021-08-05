@@ -135,8 +135,14 @@ const en = {
             tokenManagement: 'Token management',
             externalIntegrationsToken: 'External integrations token',
             integrationsTemplates: 'Integrations templates',
+            deleteToken: 'Delete external integrations token',
+            deleteTokenInfo:
+              'Are you sure you want to delete your token? This will permanently erase it and all created integrations will lose connection.',
             templatesDescription:
               'Integrations templates are actions prepared with a view to quickly adding external integrations. They are fully customizable and only require the <strong>e-mail</strong> assigned to the Smart Gate account and the generated <strong>token</strong>.',
+            regenerateTokenConfirmation: 'Regenerate external integrations token',
+            regenerateTokenConfirmationInfo:
+              'Are you sure you want to regenerate your token? All created integrations will lose connection.',
             pickToStart: 'Pick one of the links below to get started quickly:',
             templatesNote:
               '<strong>Note:</strong> In order to add prepared integrations templates in most cases you will have to <strong>allow for untrusted templates/shortcuts</strong> in your device settings.',

@@ -137,6 +137,12 @@ const pl: TranslationStructure = {
             tokenManagement: 'Zarządzanie kluczem',
             externalIntegrationsToken: 'Klucz integracji zewnętrznych',
             integrationsTemplates: 'Szablony integracji',
+            deleteToken: 'Usuń klucz integracji zewnętrznych',
+            deleteTokenInfo:
+              'Czy na pewno chcesz usunąć swój token? Spowoduje to trwałe usunięcie oraz utratę połączenia ze stworzonymi integracjami.',
+            regenerateTokenConfirmation: 'Odnów klucz integracji zewnętrznych',
+            regenerateTokenConfirmationInfo:
+              'Czy na pewno chcesz odnowić swój token? Spowoduje to utratę połączenia ze stworzonymi integracjami.',
             templatesDescription:
               'Szablony to przygotowane z myślą o szybkim dodawaniu integracji zewnętrznych predefiniowane akcje. Są w pełni konfigurowalne i do działania wymagają tylko <strong>e-maila</strong> przypisanego do konta Smart Gate i wygenerowanego <strong>klucza</strong>.',
             pickToStart: 'Wybierz jeden z poniższych linków, aby szybko rozpocząć:',
