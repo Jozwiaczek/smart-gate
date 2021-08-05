@@ -14,7 +14,11 @@ import { TicketService } from '../ticket/ticket.service';
 import { WebsocketConfigService } from './config/websocket-config.service';
 
 @Injectable()
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: process.env.CLIENT_URL,
+  },
+})
 export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private readonly ticketService: TicketService,
@@ -34,7 +38,7 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
   }
 
   async handleConnection(client: Socket) {
-    const ticket = client.handshake.query.ticket as string | undefined;
+    const ticket = client.handshake.auth.ticket as string | undefined;
     if (!ticket) {
       client.disconnect();
       return;

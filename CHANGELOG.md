@@ -1,3 +1,11 @@
+## [1.11.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.11.0...v1.11.1) (2021-08-04)
+
+
+### Bug Fixes
+
+* **client:** remove useless reconnect socket params ([9c35624](https://github.com/Jozwiaczek/smart-gate/commit/9c3562423023351be09c1f87dd7b2f173f7ff2e9))
+* remove useless @types/socket.io ([44a4357](https://github.com/Jozwiaczek/smart-gate/commit/44a4357863640b074e5fa02d2bf43a7c0e15b8cd))
+
 # [1.11.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.10.2...v1.11.0) (2021-08-01)
 
 
