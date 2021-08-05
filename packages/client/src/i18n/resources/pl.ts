@@ -139,9 +139,10 @@ const pl: TranslationStructure = {
             integrationsTemplates: 'Szablony integracji',
             templatesDescription:
               'Szablony to przygotowane z myślą o szybkim dodawaniu integracji zewnętrznych predefiniowane akcje. Są w pełni konfigurowalne i do działania wymagają tylko <strong>e-maila</strong> przypisanego do konta Smart Gate i wygenerowanego <strong>klucza</strong>.',
+            pickToStart: 'Wybierz jeden z poniższych linków, aby szybko rozpocząć:',
             templatesNote:
               '<strong>Uwaga:</strong> aby dodać gotowe szablony integracji, w większości przypadków musisz <strong>zezwolić na niezaufane szablony/skróty</strong> w ustawieniach twojego urządzenia.',
-            getShortcutTemplate: 'Pobierz szablon Apple Shortcut',
+            shortcutsTemplate: 'Szablon Apple Shortcuts',
             generateTokenToIntegrate:
               'W celu integracji z zewnętrznymi serwisami, wygeneruj swój prywatny klucz.',
             sharingTokenWarning:

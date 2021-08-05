@@ -137,9 +137,10 @@ const en = {
             integrationsTemplates: 'Integrations templates',
             templatesDescription:
               'Integrations templates are actions prepared with a view to quickly adding external integrations. They are fully customizable and only require the <strong>e-mail</strong> assigned to the Smart Gate account and the generated <strong>token</strong>.',
+            pickToStart: 'Pick one of the links below to get started quickly:',
             templatesNote:
               '<strong>Note:</strong> In order to add prepared integrations templates in most cases you will have to <strong>allow for untrusted templates/shortcuts</strong> in your device settings.',
-            getShortcutTemplate: 'Get Apple Shortcut template',
+            shortcutsTemplate: 'Apple Shortcuts template',
             generateTokenToIntegrate:
               'In order to integrate with external services, you have to generate your private token key.',
             sharingTokenWarning:

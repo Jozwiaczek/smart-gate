@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { Button, Card, Link } from '../../../../../elements';
-import { CancelIcon } from '../../../../../icons';
+import { CancelIcon, CopyIcon } from '../../../../../icons';
 
 export const StyledCard = styled(Card)`
   padding: 0;
@@ -42,6 +42,20 @@ export const AccountTabSubtitle = styled.h5`
   margin: 16px 0 10px;
 `;
 
+export const StyledCopyIcon = styled(CopyIcon)(
+  ({ theme: { palette } }) => css`
+    position: absolute;
+    color: ${palette.text.dark};
+    width: 20px;
+    height: 20px;
+    transition: color 200ms ease-in-out;
+    :hover {
+      color: ${palette.text.primary};
+      cursor: pointer;
+    }
+  `,
+);
+
 export const IntegrationTemplateLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -57,6 +71,15 @@ export const TokenActionsButtonsWrapper = styled.div`
 
 export const TokenActionButton = styled(Button)`
   padding: 16px;
+`;
+
+export const RegenerateTokenButton = styled(TokenActionButton)`
+  :hover {
+    svg {
+      transition: transform 600ms cubic-bezier(0.68, -0.6, 0.32, 1.6);
+      transform: rotate(90deg);
+    }
+  }
 `;
 
 export const ConfirmDialogButtonsWrapper = styled.div`

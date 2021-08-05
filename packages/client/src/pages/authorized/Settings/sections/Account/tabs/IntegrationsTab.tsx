@@ -3,21 +3,29 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import { TextInput } from '../../../../../../elements';
 import useExternalIntegrations from '../../../../../../hooks/useExternalIntegrations';
-import { AppleIcon, CopyIcon, KeyIcon, RefreshIcon, TrashIcon } from '../../../../../../icons';
+import { AppleIcon, KeyIcon, RefreshIcon, TrashIcon } from '../../../../../../icons';
 import {
   AccountTabSubtitle,
   AccountTabTitle,
   GenerateTokenButton,
   IntegrationTemplateLink,
   Note,
+  RegenerateTokenButton,
+  StyledCopyIcon,
   TokenActionButton,
   TokenActionsButtonsWrapper,
 } from '../Account.styled';
 
 const IntegrationsTab = () => {
   const { t } = useTranslation();
-  const { generateToken, isTokenGenerated, token, deleteToken, appleShortcutsTemplateLink } =
-    useExternalIntegrations();
+  const {
+    copyTokenToClipboard,
+    generateToken,
+    isTokenGenerated,
+    token,
+    deleteToken,
+    appleShortcutsTemplateLink,
+  } = useExternalIntegrations();
 
   if (!isTokenGenerated) {
     return (
@@ -54,7 +62,7 @@ const IntegrationsTab = () => {
         label={t('routes.settings.account.integrations.externalIntegrationsToken')}
         readOnly
         type="password"
-        startAdornment={<CopyIcon />}
+        startAdornment={<StyledCopyIcon onClick={copyTokenToClipboard} />}
       />
       <Note>
         <Trans i18nKey="routes.settings.account.integrations.sharingTokenWarning" />
@@ -64,10 +72,10 @@ const IntegrationsTab = () => {
           {t('actions.delete')}
           <TrashIcon />
         </TokenActionButton>
-        <TokenActionButton fullWidth onClick={generateToken}>
+        <RegenerateTokenButton fullWidth onClick={generateToken}>
           {t('actions.regenerate')}
           <RefreshIcon />
-        </TokenActionButton>
+        </RegenerateTokenButton>
       </TokenActionsButtonsWrapper>
       <AccountTabSubtitle>
         {t('routes.settings.account.integrations.integrationsTemplates')}
@@ -79,9 +87,18 @@ const IntegrationsTab = () => {
       <Note>
         <Trans i18nKey="routes.settings.account.integrations.templatesNote" />
       </Note>
-      <IntegrationTemplateLink to={appleShortcutsTemplateLink} asOuterLink>
+      <br />
+      <br />
+      <p>
+        <strong>{t('routes.settings.account.integrations.pickToStart')}</strong>
+      </p>
+      <IntegrationTemplateLink
+        to={appleShortcutsTemplateLink}
+        asOuterLink
+        title="Download Smart Gate Apple Shortcut template"
+      >
         <AppleIcon />
-        {t('routes.settings.account.integrations.getShortcutTemplate')}
+        {t('routes.settings.account.integrations.shortcutsTemplate')}
       </IntegrationTemplateLink>
     </>
   );

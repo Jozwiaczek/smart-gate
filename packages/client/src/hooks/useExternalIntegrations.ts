@@ -1,3 +1,4 @@
+import copy from 'copy-to-clipboard';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,6 +13,24 @@ const useExternalIntegrations = () => {
   const { logout } = useAuth();
   const showSnackbar = useSnackbar();
   const { t, i18n } = useTranslation();
+
+  const token = useMemo(
+    () => currentUser?.externalIntegrationsToken,
+    [currentUser?.externalIntegrationsToken],
+  );
+
+  const isTokenGenerated = Boolean(token);
+
+  const copyTokenToClipboard = useCallback(() => {
+    if (!token) {
+      return;
+    }
+    copy(token);
+    showSnackbar({
+      message: t('routes.settings.account.integrations.tokenCopied'),
+      leftAdornment: CopyIcon,
+    });
+  }, [showSnackbar, t, token]);
 
   const appleShortcutsTemplateLink = useMemo(() => {
     const enUrl = 'https://www.icloud.com/shortcuts/5f754527e564467d8b56322d2fab010b';
@@ -38,9 +57,9 @@ const useExternalIntegrations = () => {
         `external-integrations/generate-token`,
       );
       setCurrentUser({ ...currentUser, externalIntegrationsToken });
+      copy(externalIntegrationsToken);
       showSnackbar({
         message: t('routes.settings.account.integrations.tokenCopied'),
-        severity: 'success',
         leftAdornment: CopyIcon,
       });
     } catch (error) {
@@ -68,14 +87,14 @@ const useExternalIntegrations = () => {
     }
   }, [axios, currentUser, logout, setCurrentUser, showSnackbar, t]);
 
-  const token = useMemo(
-    () => currentUser?.externalIntegrationsToken,
-    [currentUser?.externalIntegrationsToken],
-  );
-
-  const isTokenGenerated = Boolean(token);
-
-  return { generateToken, deleteToken, token, isTokenGenerated, appleShortcutsTemplateLink };
+  return {
+    generateToken,
+    deleteToken,
+    token,
+    isTokenGenerated,
+    appleShortcutsTemplateLink,
+    copyTokenToClipboard,
+  };
 };
 
 export default useExternalIntegrations;
