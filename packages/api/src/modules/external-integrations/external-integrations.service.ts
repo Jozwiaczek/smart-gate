@@ -1,5 +1,4 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
-import { unwatchFile } from 'fs';
 import { v4 as uuidV4 } from 'uuid';
 
 import { UsersService } from '../users/users.service';

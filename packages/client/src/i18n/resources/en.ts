@@ -23,6 +23,7 @@ const en = {
       delete: 'Delete',
       cancel: 'Cancel',
       save: 'Save',
+      regenerate: 'Regenerate',
     },
     menu: {
       history: 'History',
@@ -129,12 +130,20 @@ const en = {
               'Here you can integrate with external services. Thanks to that you will be able for example to open doors with <strong>voice assistant</strong>.',
             generateApiKey: 'Generate token',
             regenerate: 'Regenerate',
-            tokenGeneratedAndCopied: 'Token generated and copied to clipboard.',
+            tokenCopied: 'Token copied to clipboard',
             tokenDeleted: 'Token deleted successfully',
+            tokenManagement: 'Token management',
+            externalIntegrationsToken: 'External integrations token',
+            integrationsTemplates: 'Integrations templates',
+            templatesDescription:
+              'Integrations templates are actions prepared with a view to quickly adding external integrations. They are fully customizable and only require the <strong>e-mail</strong> assigned to the Smart Gate account and the generated <strong>token</strong>.',
+            templatesNote:
+              '<strong>Note:</strong> In order to add prepared integrations templates in most cases you will have to <strong>allow for untrusted templates/shortcuts</strong> in your device settings.',
+            getShortcutTemplate: 'Get Apple Shortcut template',
             generateTokenToIntegrate:
               'In order to integrate with external services, you have to generate your private token key.',
             sharingTokenWarning:
-              '<strong>Warning:</strong> Don’t share your token to anyone.<br />Every user should have his own unique token.',
+              '<strong>Warning:</strong> Don’t share your token to anyone. Every user should have his own unique token.',
           },
         },
         privileges: {

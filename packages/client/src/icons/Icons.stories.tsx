@@ -4,12 +4,14 @@ import styled from 'styled-components';
 
 import {
   AdminIcon,
+  AppleIcon,
   ArrowIcon,
   BackArrowIcon,
   BritishFlagIcon,
   CancelIcon,
   ChevronDownIcon,
   ConfirmLockIcon,
+  CopyIcon,
   DashboardIcon,
   DeviceIcon,
   EditIcon,
@@ -26,6 +28,7 @@ import {
   PolishFlagIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
+  RefreshIcon,
   SendEmailIcon,
   SettingsIcon,
   StatisticsIcon,
@@ -55,6 +58,9 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <AppleIcon />
+    <CopyIcon />
+    <RefreshIcon />
     <IntegrationsIcon />
     <KeyIcon />
     <UserActionsIcon />

@@ -25,6 +25,7 @@ const pl: TranslationStructure = {
       delete: 'Usuń',
       save: 'Zapisz',
       cancel: 'Anuluj',
+      regenerate: 'Odnów',
     },
     menu: {
       history: 'Historia',
@@ -128,11 +129,19 @@ const pl: TranslationStructure = {
             title: 'Integracje',
             extendedTitle: 'Zewnętrzne integracje',
             description:
-              'Możesz tutaj stworzyć integracje z zewnętrznymi serwisami. Dzięki temu będziesz w stanie np. otworzyć bramę z wykorzystaniem <strong>asystenta głosowego</strong>.',
+              'Stwórz swoje integracje z zewnętrznymi serwisami. Umożliwia to przykładowo na otworzenie bramy z wykorzystaniem <strong>asystenta głosowego</strong>.',
             generateApiKey: 'Wygeneruj klucz',
             regenerate: 'Wygeneruj ponownie',
-            tokenGeneratedAndCopied: 'Klucz wygenerowany oraz skopiowany do schowka',
-            tokenDeleted: 'Klucz usunięty poprawnie',
+            tokenCopied: 'Klucz skopiowany do schowka',
+            tokenDeleted: 'Klucz poprawnie usunięty',
+            tokenManagement: 'Zarządzanie kluczem',
+            externalIntegrationsToken: 'Klucz integracji zewnętrznych',
+            integrationsTemplates: 'Szablony integracji',
+            templatesDescription:
+              'Szablony to przygotowane z myślą o szybkim dodawaniu integracji zewnętrznych predefiniowane akcje. Są w pełni konfigurowalne i do działania wymagają tylko <strong>e-maila</strong> przypisanego do konta Smart Gate i wygenerowanego <strong>klucza</strong>.',
+            templatesNote:
+              '<strong>Uwaga:</strong> aby dodać gotowe szablony integracji, w większości przypadków musisz <strong>zezwolić na niezaufane szablony/skróty</strong> w ustawieniach twojego urządzenia.',
+            getShortcutTemplate: 'Pobierz szablon Apple Shortcut',
             generateTokenToIntegrate:
               'W celu integracji z zewnętrznymi serwisami, wygeneruj swój prywatny klucz.',
             sharingTokenWarning:

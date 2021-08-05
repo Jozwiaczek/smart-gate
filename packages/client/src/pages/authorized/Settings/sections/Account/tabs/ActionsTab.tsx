@@ -9,7 +9,6 @@ import { ThemeType } from '../../../../../../theme/Theme';
 import { onlyOnDevEnv } from '../../../../../../utils';
 import {
   AccountTabSubtitle,
-  AccountTabTitle,
   ConfirmDialogButtonsWrapper,
   StyledButton,
   StyledCancelIcon,
@@ -79,7 +78,6 @@ const ActionsTab = () => {
 
   return (
     <>
-      <AccountTabTitle>{t('routes.settings.account.actions.title')}</AccountTabTitle>
       <AccountTabSubtitle>{t('routes.settings.account.actions.changePassword')}</AccountTabSubtitle>
       <Form
         onSubmit={handleSubmit(onSubmitChangePassword)}

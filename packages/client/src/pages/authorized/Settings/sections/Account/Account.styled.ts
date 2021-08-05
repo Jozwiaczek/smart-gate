@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { Button, Card } from '../../../../../elements';
+import { Button, Card, Link } from '../../../../../elements';
 import { CancelIcon } from '../../../../../icons';
 
 export const StyledCard = styled(Card)`
@@ -25,28 +25,38 @@ export const StyledButton = styled(Button)`
 `;
 
 export const GenerateTokenButton = styled(Button)`
-  margin: 50px 0;
+  margin: 40px 0;
 `;
 
-export const WarningNote = styled.p(
+export const Note = styled.p(
   ({ theme: { palette } }) => css`
     color: ${palette.text.secondary};
-    text-align: center;
   `,
 );
 
 export const AccountTabTitle = styled.h4`
-  margin-bottom: 30px;
+  margin-bottom: 18px;
 `;
 
 export const AccountTabSubtitle = styled.h5`
-  margin: 26px 0 18px;
+  margin: 16px 0 10px;
+`;
+
+export const IntegrationTemplateLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 30px;
 `;
 
 export const TokenActionsButtonsWrapper = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 30px;
+  margin: 30px 0;
+`;
+
+export const TokenActionButton = styled(Button)`
+  padding: 16px;
 `;
 
 export const ConfirmDialogButtonsWrapper = styled.div`
