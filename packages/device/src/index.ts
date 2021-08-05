@@ -7,12 +7,9 @@ dotenv.config();
 onInit();
 
 const socket = socketClient(process.env.API_URL ?? '', {
-  query: {
+  auth: {
     ticket: process.env.AUTH_TICKET,
   },
-  reconnection: true,
-  reconnectionAttempts: 1000,
-  reconnectionDelay: 1000,
 });
 
 enum WebSocketEvent {
