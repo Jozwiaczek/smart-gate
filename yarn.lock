@@ -21615,10 +21615,10 @@ workbox-core@^5.1.4:
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-5.1.4.tgz#8bbfb2362ecdff30e25d123c82c79ac65d9264f4"
   integrity sha512-+4iRQan/1D8I81nR2L5vcbaaFskZC2CL17TLbvWVzQ4qiF/ytOGF6XeV54pVxAvKUtkLANhk8TyIUMtiMw2oDg==
 
-workbox-core@^6.1.5:
-  version "6.1.5"
-  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.1.5.tgz#424ff600e2c5448b14ebd58b2f5ac8ed91b73fb9"
-  integrity sha512-9SOEle7YcJzg3njC0xMSmrPIiFjfsFm9WjwGd5enXmI8Lwk8wLdy63B0nzu5LXoibEmS9k+aWF8EzaKtOWjNSA==
+workbox-core@^6.1.5, workbox-core@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.2.0.tgz#02b98158d9618ecda57595a9590bb6faa19d8544"
+  integrity sha512-ECNeZhyYm1Y/xLzDyRFwGneHUtwq5MnOhV4ETYILzgq0nS3PUM+yDGUxAgHX6qsNiAfKkAmyvqjIbDUjKjQrkg==
 
 workbox-expiration@^5.1.4:
   version "5.1.4"
@@ -21721,11 +21721,11 @@ workbox-strategies@^5.1.4:
     workbox-routing "^5.1.4"
 
 workbox-strategies@^6.1.5:
-  version "6.1.5"
-  resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.1.5.tgz#2549a3e78f0eda371b760c4db21feb0d26143573"
-  integrity sha512-QhiOn9KT9YGBdbfWOmJT6pXZOIAxaVrs6J6AMYzRpkUegBTEcv36+ZhE/cfHoT0u2fxVtthHnskOQ/snEzaXQw==
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.2.0.tgz#ae13e2137c063e7aadf866400af0c32e09721c0b"
+  integrity sha512-6BffCwXZJhGfXGoKbruPKsdmcbTrzsQY6f2lYxMA/mGfW5vPxDRIoiIHXfRbn5qMCQ7mvl/YX0EspG8wazDTMA==
   dependencies:
-    workbox-core "^6.1.5"
+    workbox-core "^6.2.0"
 
 workbox-streams@^5.1.4:
   version "5.1.4"
