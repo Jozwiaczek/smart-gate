@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { Button, Card, Link } from '../../../../../elements';
-import { CancelIcon, CopyIcon } from '../../../../../icons';
+import { CopyIcon } from '../../../../../icons';
 
 export const StyledCard = styled(Card)`
   padding: 0;
@@ -69,28 +69,11 @@ export const TokenActionsButtonsWrapper = styled.div`
   margin: 30px 0;
 `;
 
-export const TokenActionButton = styled(Button)`
-  padding: 16px;
-`;
-
-export const RegenerateTokenButton = styled(TokenActionButton)`
+export const RegenerateTokenButton = styled(Button)`
   :hover {
     svg {
       transition: transform 600ms cubic-bezier(0.68, -0.6, 0.32, 1.6);
       transform: rotate(90deg);
     }
   }
-`;
-
-export const ConfirmDialogButtonsWrapper = styled.div`
-  display: flex;
-  margin-top: 20px;
-  width: 100%;
-  align-items: center;
-  gap: 20px;
-`;
-
-export const StyledCancelIcon = styled(CancelIcon)`
-  height: 16px;
-  width: 16px;
 `;

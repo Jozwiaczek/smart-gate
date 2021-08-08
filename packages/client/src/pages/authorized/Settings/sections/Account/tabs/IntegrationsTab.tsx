@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { Button, Dialog, TextInput } from '../../../../../../elements';
+import { Button, TextInput } from '../../../../../../elements';
+import { useConfirmDialog } from '../../../../../../hooks';
 import useExternalIntegrations from '../../../../../../hooks/useExternalIntegrations';
 import { AppleIcon, KeyIcon, RefreshIcon, TrashIcon } from '../../../../../../icons';
-import { ThemeType } from '../../../../../../theme/Theme';
 import {
   AccountTabSubtitle,
   AccountTabTitle,
-  ConfirmDialogButtonsWrapper,
   GenerateTokenButton,
   IntegrationTemplateLink,
   Note,
   RegenerateTokenButton,
-  StyledCancelIcon,
   StyledCopyIcon,
-  TokenActionButton,
   TokenActionsButtonsWrapper,
 } from '../Account.styled';
 
 const IntegrationsTab = () => {
   const { t } = useTranslation();
-  const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] = useState(false);
-  const [isConfirmRegenerateDialogOpen, setIsConfirmRegenerateDialogOpen] = useState(false);
   const {
     copyTokenToClipboard,
     generateToken,
@@ -32,31 +27,23 @@ const IntegrationsTab = () => {
     appleShortcutsTemplateLink,
   } = useExternalIntegrations();
 
-  const openConfirmDeleteDialog = () => {
-    setIsConfirmDeleteDialogOpen(true);
-  };
+  const confirmDelete = useConfirmDialog({
+    onConfirm: deleteToken,
+    title: 'routes.settings.account.integrations.deleteToken',
+    description: 'routes.settings.account.integrations.deleteTokenInfo',
+  });
 
-  const closeConfirmDeleteDialog = () => {
-    setIsConfirmDeleteDialogOpen(false);
-  };
-
-  const openConfirmRegenerateDialog = () => {
-    setIsConfirmRegenerateDialogOpen(true);
-  };
-
-  const closeConfirmRegenerateDialog = () => {
-    setIsConfirmRegenerateDialogOpen(false);
-  };
-
-  const onDelete = async () => {
-    await deleteToken();
-    closeConfirmDeleteDialog();
-  };
-
-  const onRegenerate = async () => {
-    await generateToken();
-    closeConfirmRegenerateDialog();
-  };
+  const confirmRegenerate = useConfirmDialog({
+    onConfirm: generateToken,
+    title: 'routes.settings.account.integrations.regenerateTokenConfirmation',
+    description: 'routes.settings.account.integrations.regenerateTokenConfirmationInfo',
+    confirmButton: (
+      <RegenerateTokenButton fullWidth>
+        {t('actions.regenerate')}
+        <RefreshIcon />
+      </RegenerateTokenButton>
+    ),
+  });
 
   if (!isTokenGenerated) {
     return (
@@ -99,48 +86,14 @@ const IntegrationsTab = () => {
         <Trans i18nKey="routes.settings.account.integrations.sharingTokenWarning" />
       </Note>
       <TokenActionsButtonsWrapper>
-        <TokenActionButton fullWidth colorVariant="red" onClick={openConfirmDeleteDialog}>
+        <Button fullWidth colorVariant="red" onClick={confirmDelete}>
           {t('actions.delete')}
           <TrashIcon />
-        </TokenActionButton>
-        <Dialog
-          isOpen={isConfirmDeleteDialogOpen}
-          close={closeConfirmDeleteDialog}
-          title="routes.settings.account.integrations.deleteToken"
-          description="routes.settings.account.integrations.deleteTokenInfo"
-        >
-          <ConfirmDialogButtonsWrapper>
-            <Button colorVariant={ThemeType.dark} fullWidth onClick={closeConfirmDeleteDialog}>
-              {t('actions.cancel')}
-              <StyledCancelIcon />
-            </Button>
-            <Button colorVariant="red" fullWidth onClick={onDelete}>
-              {t('actions.delete')}
-              <TrashIcon />
-            </Button>
-          </ConfirmDialogButtonsWrapper>
-        </Dialog>
-        <RegenerateTokenButton fullWidth onClick={openConfirmRegenerateDialog}>
+        </Button>
+        <RegenerateTokenButton fullWidth onClick={confirmRegenerate}>
           {t('actions.regenerate')}
           <RefreshIcon />
         </RegenerateTokenButton>
-        <Dialog
-          isOpen={isConfirmRegenerateDialogOpen}
-          close={closeConfirmRegenerateDialog}
-          title="routes.settings.account.integrations.regenerateTokenConfirmation"
-          description="routes.settings.account.integrations.regenerateTokenConfirmationInfo"
-        >
-          <ConfirmDialogButtonsWrapper>
-            <Button colorVariant={ThemeType.dark} fullWidth onClick={closeConfirmRegenerateDialog}>
-              {t('actions.cancel')}
-              <StyledCancelIcon />
-            </Button>
-            <RegenerateTokenButton fullWidth onClick={onRegenerate}>
-              {t('actions.regenerate')}
-              <RefreshIcon />
-            </RegenerateTokenButton>
-          </ConfirmDialogButtonsWrapper>
-        </Dialog>
       </TokenActionsButtonsWrapper>
       <AccountTabSubtitle>
         {t('routes.settings.account.integrations.integrationsTemplates')}
