@@ -1,15 +1,11 @@
-import { Controller, Get, Headers, Post } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 
 import { Auth } from '../auth/decorators/auth.decorator';
 import { CookiePayload } from '../auth/decorators/cookiePayload.decorator';
 import { UserFromCookiePayloadPipe } from '../auth/pipes/user-from-cookie-payload.pipe';
 import { UserEntity } from '../database/entities/user.entity';
+import { ExternalIntegrationsAuth } from './decorators/external-integrations-auth.decorator';
 import { ExternalIntegrationsService } from './external-integrations.service';
-
-interface ToggleGateHeaders {
-  from: string;
-  authorization: string;
-}
 
 @Controller('external-integrations')
 export class ExternalIntegrationsController {
@@ -31,8 +27,9 @@ export class ExternalIntegrationsController {
     return this.externalIntegrationsService.removeToken(id, email);
   }
 
+  @ExternalIntegrationsAuth()
   @Get('toggle-gate')
-  toggleGate(@Headers() { authorization, from }: ToggleGateHeaders): Promise<string> {
-    return this.externalIntegrationsService.toggleGate(authorization, from);
+  toggleGate(): string {
+    return this.externalIntegrationsService.toggleGate();
   }
 }

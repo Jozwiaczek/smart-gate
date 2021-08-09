@@ -14,4 +14,7 @@ const clientEndpoints = {
   passwordMagicLink: '/passwordRecovery/magicLink',
   registrationMagicLink: '/registration',
 };
-export default { authTokens, clientEndpoints };
+
+const roles_key = 'roles';
+
+export default { authTokens, clientEndpoints, roles_key };

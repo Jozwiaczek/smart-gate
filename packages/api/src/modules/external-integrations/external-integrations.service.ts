@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { v4 as uuidV4 } from 'uuid';
 
 import { UsersService } from '../users/users.service';
@@ -31,18 +31,7 @@ export class ExternalIntegrationsService {
     this.logger.log(`External integrations token removed for user: ${email}`);
   }
 
-  private async validateToken(token: string, email: string): Promise<true> {
-    const foundUser = await this.usersService.findOneByEmail(email);
-
-    if (!foundUser || token !== foundUser.externalIntegrationsToken) {
-      throw new UnauthorizedException();
-    }
-
-    return true;
-  }
-
-  async toggleGate(token: string, email: string): Promise<string> {
-    await this.validateToken(token, email);
+  toggleGate(): string {
     //    this.websocketGateway.toggleGate();
     return 'Successfully open';
   }
