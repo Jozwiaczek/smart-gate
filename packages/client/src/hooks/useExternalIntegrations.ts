@@ -33,8 +33,8 @@ const useExternalIntegrations = () => {
   }, [showSnackbar, t, token]);
 
   const appleShortcutsTemplateLink = useMemo(() => {
-    const enUrl = 'https://www.icloud.com/shortcuts/5f754527e564467d8b56322d2fab010b';
-    const plUrl = 'https://www.icloud.com/shortcuts/2f72b75a096549bc8352b317f7d7c9fc';
+    const enUrl = 'https://www.icloud.com/shortcuts/3648757aeaf541e58752307b915c14d2';
+    const plUrl = 'https://www.icloud.com/shortcuts/4fcd6357afc4481484412164999e4106';
 
     switch (i18n.language as SGLocale) {
       case SGLocale.en:
