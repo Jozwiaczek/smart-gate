@@ -32,7 +32,7 @@ export class ExternalIntegrationsService {
   }
 
   toggleGate(): string {
-    //    this.websocketGateway.toggleGate();
+    this.websocketGateway.toggleGate();
     return 'Successfully open';
   }
 }
