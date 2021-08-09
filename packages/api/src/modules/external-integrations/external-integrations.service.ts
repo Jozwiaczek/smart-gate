@@ -13,22 +13,22 @@ export class ExternalIntegrationsService {
 
   private logger: Logger = new Logger(ExternalIntegrationsService.name);
 
-  async generateToken(userId: string): Promise<string> {
+  async generateToken(userId: string, email: string): Promise<string> {
     const token = uuidV4();
 
     const updatedUser = await this.usersService.update(userId, {
       externalIntegrationsToken: token,
     });
-    this.logger.log(`New external integrations token generated for user: ${userId}`);
+    this.logger.log(`New external integrations token generated for user: ${email}`);
 
     return updatedUser.externalIntegrationsToken;
   }
 
-  async removeToken(userId: string): Promise<void> {
+  async removeToken(userId: string, email: string): Promise<void> {
     await this.usersService.update(userId, {
       externalIntegrationsToken: '',
     });
-    this.logger.log(`External integrations token removed for user: ${userId}`);
+    this.logger.log(`External integrations token removed for user: ${email}`);
   }
 
   private async validateToken(token: string, email: string): Promise<true> {

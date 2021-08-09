@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
 import { Role } from '../../enums/role.enum';
-import { TokenPayload } from '../../interfaces/token-types';
 import { ValidationPipe } from '../../utils/validation.pipe';
-import { AuthService } from '../auth/auth.service';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { CookiePayload } from '../auth/decorators/cookiePayload.decorator';
+import { UserFromCookiePayloadPipe } from '../auth/pipes/user-from-cookie-payload.pipe';
+import { UserEntity } from '../database/entities/user.entity';
 import { UseSentryTransaction } from '../sentry/decorators/use-sentry-transaction.decorator';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
 import { RemoveManyInvitationDto } from './dto/removeMany-invitation.dto';
@@ -16,18 +16,14 @@ import { InvitationsService } from './invitations.service';
 @UseSentryTransaction()
 @Controller('invitations')
 export class InvitationsController {
-  constructor(
-    private readonly invitationsService: InvitationsService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly invitationsService: InvitationsService) {}
 
   @Post()
   async send(
-    @CookiePayload() { sub }: TokenPayload,
+    @CookiePayload(UserFromCookiePayloadPipe) currentUser: UserEntity,
     @Body(new ValidationPipe()) createInvitationDto: CreateInvitationDto,
   ) {
-    const getCurrentUser = await this.authService.getUser(sub);
-    await this.invitationsService.send(createInvitationDto, getCurrentUser);
+    await this.invitationsService.send(createInvitationDto, currentUser);
   }
 
   @Get()
@@ -42,12 +38,11 @@ export class InvitationsController {
 
   @Patch(':id')
   async update(
-    @CookiePayload() { sub }: TokenPayload,
+    @CookiePayload(UserFromCookiePayloadPipe) currentUser: UserEntity,
     @Param('id') id: string,
     @Body(new ValidationPipe()) updateUserDto: UpdateInvitationDto,
   ) {
-    const getCurrentUser = await this.authService.getUser(sub);
-    return this.invitationsService.update(id, updateUserDto, getCurrentUser);
+    return this.invitationsService.update(id, updateUserDto, currentUser);
   }
 
   @Delete(':id')

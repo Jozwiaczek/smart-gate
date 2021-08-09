@@ -12,5 +12,6 @@ import { ExternalIntegrationsService } from './external-integrations.service';
   controllers: [ExternalIntegrationsController],
   providers: [ExternalIntegrationsService],
   imports: [WebsocketModule, UsersModule, AuthModule, RepositoryModule, TokenModule],
+  exports: [ExternalIntegrationsService],
 })
 export class ExternalIntegrationsModule {}
