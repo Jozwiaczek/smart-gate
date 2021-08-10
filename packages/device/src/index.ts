@@ -11,12 +11,9 @@ actionExecutor((actionsConfig as ActionConfig).onInit);
 const logger = new Logger('SocketConnection');
 
 const socket = socketClient(process.env.API_URL ?? '', {
-  query: {
+  auth: {
     ticket: process.env.AUTH_TICKET,
   },
-  reconnection: true,
-  reconnectionAttempts: Number.MAX_VALUE,
-  reconnectionDelay: 1000,
 });
 
 logger.log('Initialized');
