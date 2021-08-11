@@ -15,14 +15,19 @@ export class ExternalIntegrationsAuthGuard implements CanActivate {
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<{ headers: ExternalIntegrationsHeaders }>();
     const { authorization, from } = request.headers;
+    const trimmedToken = authorization?.trim();
 
-    if (!authorization || !from) {
+    if (!trimmedToken || !from) {
       throw new BadRequestException();
     }
 
-    const foundUser = await this.usersService.findOneByEmail(from);
+    try {
+      const foundUser = await this.usersService.findOneByEmail(from);
 
-    if (!foundUser || authorization !== foundUser.externalIntegrationsToken) {
+      if (!foundUser || trimmedToken !== foundUser.externalIntegrationsToken) {
+        throw new UnauthorizedException();
+      }
+    } catch (e) {
       throw new UnauthorizedException();
     }
 

@@ -2,10 +2,11 @@ import copy from 'copy-to-clipboard';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { SGLocale } from '../i18n';
-import { CopyIcon } from '../icons';
-import { onlyOnDevEnv } from '../utils';
-import { useAuth, useAxios, useCurrentUser, useSnackbar } from './index';
+import { SGLocale } from '../../i18n';
+import { CopyIcon } from '../../icons';
+import { onlyOnDevEnv } from '../../utils';
+import { useAuth, useAxios, useCurrentUser, useSnackbar } from '../index';
+import externalIntegrationsConfig from './externalIntegrations.config';
 
 const useExternalIntegrations = () => {
   const [currentUser, setCurrentUser] = useCurrentUser();
@@ -33,8 +34,8 @@ const useExternalIntegrations = () => {
   }, [showSnackbar, t, token]);
 
   const appleShortcutsTemplateLink = useMemo(() => {
-    const enUrl = 'https://www.icloud.com/shortcuts/3648757aeaf541e58752307b915c14d2';
-    const plUrl = 'https://www.icloud.com/shortcuts/4fcd6357afc4481484412164999e4106';
+    const enUrl = externalIntegrationsConfig.appleShortcuts.templates.en;
+    const plUrl = externalIntegrationsConfig.appleShortcuts.templates.pl;
 
     switch (i18n.language as SGLocale) {
       case SGLocale.en:
