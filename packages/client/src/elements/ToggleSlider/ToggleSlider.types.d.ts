@@ -12,3 +12,7 @@ interface PulseCircleProps {
 interface SliderThumbProps {
   disabledPulsing: boolean;
 }
+
+interface ArrowUpProps {
+  isDragging: boolean;
+}

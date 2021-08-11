@@ -10,20 +10,6 @@ export const Wrapper = styled.div`
   gap: 30px;
 `;
 
-export const Slider = styled.div(
-  ({ theme: { palette } }) => css`
-    background: ${palette.background.paper};
-    width: ${SLIDER_WIDTH}px;
-    height: ${SLIDER_HEIGHT}px;
-    border-radius: ${SLIDER_WIDTH / 2}px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    justify-content: space-between;
-  `,
-);
-
 export const InfoBox = styled.div(
   ({ theme: { palette, sizes } }) => css`
     background: ${palette.background.paper};
@@ -40,7 +26,7 @@ export const InfoBoxLabel = styled.p(
 
 export const SliderTarget = styled.div(
   ({ theme: { palette } }) => css`
-    background: #3a535f;
+    background: ${palette.background.paperHover};
     border-radius: 100%;
     color: ${palette.background.paper};
     height: ${SLIDER_TARGET_SIZE}px;
@@ -49,7 +35,59 @@ export const SliderTarget = styled.div(
     margin-top: 10px;
     justify-content: center;
     align-items: center;
-    padding-bottom: 5px;
+    position: relative;
+  `,
+);
+
+export const ArrowUp = styled.div<ArrowUpProps>(
+  ({ isDragging, theme: { palette } }) => css`
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 30px;
+    transform: rotate(-45deg);
+
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-width: 4px 4px 0 0;
+      border-style: solid;
+      border-color: ${palette.background.paper};
+      transition: 0.2s ease;
+      display: block;
+      transform-origin: 100% 0;
+    }
+
+    &:after {
+      content: '';
+      float: left;
+      position: relative;
+      top: -100%;
+      width: 100%;
+      height: 100%;
+      border-width: 0 4px 0 0;
+      border-style: solid;
+      border-color: ${palette.background.paper};
+      transform-origin: 100% 0;
+      transition: 0.2s ease;
+    }
+
+    ${isDragging &&
+    css`
+      :after {
+        transform: rotate(45deg);
+        border-color: ${palette.primary.main};
+        height: 110%;
+        top: -27px;
+      }
+
+      :before {
+        border-color: ${palette.primary.main};
+        transform: scale(0.8);
+      }
+    `}
   `,
 );
 
@@ -148,5 +186,22 @@ export const SliderThumb = styled.div<SliderThumbProps>(
         animation-delay: 0s;
       }
     `}
+  `,
+);
+
+export const Slider = styled.div(
+  ({ theme: { palette } }) => css`
+    background: ${palette.background.paper};
+    width: ${SLIDER_WIDTH}px;
+    height: ${SLIDER_HEIGHT}px;
+    border-radius: ${SLIDER_WIDTH / 2}px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    ${SliderThumb}:hover ~ ${ArrowUp} {
+    }
   `,
 );

@@ -2,10 +2,11 @@ import React, { useMemo, useRef, useState } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import useSound from 'use-sound';
 
-import { ChevronUpIcon, DetailedKeyIcon } from '../../icons';
+import { DetailedKeyIcon } from '../../icons';
 import switchOnSfx from '../../sounds/switch-on.mp3';
 import { DEFAULT_THUMB_Y, THUMB_Y_TARGET } from './ToggleSlider.constants';
 import {
+  ArrowUp,
   InfoBox,
   InfoBoxLabel,
   PulseCircle,
@@ -65,7 +66,7 @@ const ToggleSlider = () => {
       </InfoBox>
       <Slider>
         <SliderTarget>
-          <ChevronUpIcon />
+          <ArrowUp isDragging={isDragging} />
         </SliderTarget>
         <Draggable
           axis="y"
