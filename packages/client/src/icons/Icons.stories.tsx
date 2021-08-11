@@ -9,8 +9,10 @@ import {
   BritishFlagIcon,
   CancelIcon,
   ChevronDownIcon,
+  ChevronUpIcon,
   ConfirmLockIcon,
   DashboardIcon,
+  DetailedKeyIcon,
   DeviceIcon,
   EditIcon,
   EmailIcon,
@@ -54,6 +56,10 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <ChevronUpIcon />
+
+    <DetailedKeyIcon />
+
     <KeyIcon />
     <UserActionsIcon />
     <LogoutAllIcon />

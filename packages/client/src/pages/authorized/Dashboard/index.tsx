@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ToggleSlider } from '../../../elements';
 import { useAxios, useSnackbar } from '../../../hooks';
 import { WebSocketContext } from '../../../providers/api/WebSocketProvider/WebSocketProvider.context';
 import registerWebPush from '../../../utils/registerWebPush';
@@ -39,6 +40,7 @@ const Dashboard = () => {
       <p>WebSocket: {connectionState}</p>
       <p>DeviceStatus: {deviceStatus}</p>
       <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
+      <ToggleSlider />
       <ToggleButton margin="40px" onClick={onToggle}>
         {t('routes.dashboard.toggleGate')}
       </ToggleButton>
