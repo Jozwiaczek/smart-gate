@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { useInterval } from '../../../hooks';
-
-interface UseTogglingProgressProps {
-  onComplete: () => unknown;
-}
+import { UseTogglingProgressProps } from '../ToggleSlider.types';
 
 const useTogglingProgress = ({ onComplete }: UseTogglingProgressProps) => {
   const delay = 3;

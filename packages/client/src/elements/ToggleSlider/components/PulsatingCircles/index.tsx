@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PulseCircle } from '../../ToggleSlider.styled';
+import { PulseCircle } from './PulsatingCircles.styled';
 
 const PulsatingCircles = () => (
   <>

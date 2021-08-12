@@ -22,7 +22,7 @@ export const ProgressCircleWrapper = styled.div<{ isCompleted: boolean }>(
   ({ theme: { palette }, isCompleted }) => css`
     position: absolute;
     top: -${STROKE_WIDTH / 2}px;
-    color: ${palette.primary.mainInvert};
+    color: ${palette.primary.main};
 
     ${isCompleted &&
     css`

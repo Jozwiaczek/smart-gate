@@ -2,15 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ToggleSlider } from '../../../elements';
-import { useAxios, useSnackbar } from '../../../hooks';
+import { useAxios } from '../../../hooks';
 import { WebSocketContext } from '../../../providers/api/WebSocketProvider/WebSocketProvider.context';
 import registerWebPush from '../../../utils/registerWebPush';
 import { Title } from '../AuthorizedPages.styled';
-import { ToggleButton } from './Dashboard.styled';
+import { ToggleSliderWrapper } from './Dashboard.styled';
 
 const Dashboard = () => {
   const { t } = useTranslation();
-  const showSnackbar = useSnackbar();
   const axios = useAxios();
   const { connect, disconnect, toggleGate, connectionState, deviceStatus } =
     useContext(WebSocketContext);
@@ -30,20 +29,17 @@ const Dashboard = () => {
   }, [axios]);
 
   const onToggle = () => {
-    console.count('toggledGate');
     toggleGate();
-    showSnackbar({ message: t('routes.dashboard.toggleSuccess'), severity: 'success' });
   };
 
   return (
     <>
+      <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
+      <ToggleSliderWrapper>
+        <ToggleSlider onToggle={onToggle} />
+      </ToggleSliderWrapper>
       <p>WebSocket: {connectionState}</p>
       <p>DeviceStatus: {deviceStatus}</p>
-      <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
-      <ToggleSlider />
-      <ToggleButton margin="40px" onClick={onToggle}>
-        {t('routes.dashboard.toggleGate')}
-      </ToggleButton>
     </>
   );
 };

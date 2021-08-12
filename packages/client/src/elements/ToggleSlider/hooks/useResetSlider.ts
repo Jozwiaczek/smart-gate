@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useInterval } from '../../../hooks';
 import {
@@ -6,14 +6,7 @@ import {
   DEFAULT_THUMB_Y,
   SLIDE_PROGRESS_MIN,
 } from '../ToggleSlider.constants';
-
-interface UseResetSliderProps {
-  thumbYPosition: number;
-  setThumbYPosition: Dispatch<SetStateAction<number>>;
-  slideProgress: number;
-  setSlideProgress: Dispatch<SetStateAction<number>>;
-  onComplete: () => unknown;
-}
+import { UseResetSliderProps } from '../ToggleSlider.types';
 
 const useResetSlider = ({
   thumbYPosition,

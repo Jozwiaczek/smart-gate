@@ -74,8 +74,8 @@ const en = {
       },
       dashboard: {
         title: 'Dashboard',
-        toggleGate: 'Toggle gate',
-        toggleSuccess: 'Gate successfully toggled',
+        swipeUpToToggle: 'Swipe up to toggle gate',
+        toggleSuccess: 'Successfully toggled',
       },
       history: {
         title: 'History',

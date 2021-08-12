@@ -1,9 +1,8 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { useTranslation } from 'react-i18next';
 import useSound from 'use-sound';
 
-import { useSnackbar } from '../../hooks';
 import { DetailedKeyIcon } from '../../icons';
 import switchOnSfx from '../../sounds/switch-on.mp3';
 import unlockSfx from '../../sounds/unlock.mp3';
@@ -12,6 +11,7 @@ import PulsatingCircles from './components/PulsatingCircles';
 import useResetSlider from './hooks/useResetSlider';
 import useTogglingProgress from './hooks/useTogglingProgress';
 import {
+  AFTER_SUCCESS_INFO_DISPLAY_DURATION,
   DEFAULT_THUMB_Y,
   SLIDE_PROGRESS_MAX,
   SLIDE_PROGRESS_MIN,
@@ -28,69 +28,90 @@ import {
   ThumbCircle,
   Wrapper,
 } from './ToggleSlider.styled';
+import { InfoBoxState, ToggleSliderProps } from './ToggleSlider.types';
 
-const ToggleSlider = () => {
-  const thumbYTarget = -(SLIDER_HEIGHT - SLIDER_WIDTH);
+const THUMB_Y_TARGET = -(SLIDER_HEIGHT - SLIDER_WIDTH);
+
+const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
+  const { t } = useTranslation();
   const [playTickSfx] = useSound(switchOnSfx);
   const [playUnlockSfx] = useSound(unlockSfx);
-  const showSnackbar = useSnackbar();
-  const { t } = useTranslation();
-  const nodeRef = useRef(null);
+  const draggableSliderThumbRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isSnapped, setIsSnapped] = useState(false);
   const [thumbYPosition, setThumbYPosition] = useState(DEFAULT_THUMB_Y);
   const [slideProgress, setSlideProgress] = useState(SLIDE_PROGRESS_MIN);
+  const [infoBoxState, setInfoBoxState] = useState<InfoBoxState>('default');
+
+  const onCompleteSliderReset = useCallback(() => {
+    if (infoBoxState !== 'default') {
+      setTimeout(() => {
+        setInfoBoxState('default');
+      }, AFTER_SUCCESS_INFO_DISPLAY_DURATION);
+    }
+    setIsSnapped(false);
+    setSlideProgress(SLIDE_PROGRESS_MIN);
+    setIsDragging(false);
+  }, [infoBoxState]);
+
   const { resetSlider } = useResetSlider({
     thumbYPosition,
     setThumbYPosition,
     slideProgress,
     setSlideProgress,
-    onComplete: () => {
-      setIsSnapped(false);
-      setSlideProgress(SLIDE_PROGRESS_MIN);
-      setIsDragging(false);
-    },
+    onComplete: onCompleteSliderReset,
   });
+
+  const onCompleteTogglingProgress = useCallback(() => {
+    setInfoBoxState('success');
+    playUnlockSfx();
+    onToggle();
+    resetSlider();
+  }, [onToggle, playUnlockSfx, resetSlider]);
+
   const { isTogglingProgressCompleted, togglingProgress, runTogglingProgress } =
     useTogglingProgress({
-      onComplete: () => {
-        playUnlockSfx();
-        showSnackbar({ message: t('routes.dashboard.toggleSuccess'), severity: 'success' });
-        resetSlider();
-      },
+      onComplete: onCompleteTogglingProgress,
     });
 
-  const handleDragging = (e: DraggableEvent, { y }: DraggableData) => {
+  const handleDragging = useCallback((event: DraggableEvent, { y }: DraggableData) => {
     setThumbYPosition(y);
-    const newSlideProgress = Math.abs(y / thumbYTarget) * 100;
+    const newSlideProgress = Math.abs(y / THUMB_Y_TARGET) * 100;
     setSlideProgress(newSlideProgress);
-  };
+  }, []);
 
-  const handleDragStart = () => {
+  const handleDragStart = useCallback(() => {
     setIsDragging(true);
-  };
+  }, []);
 
-  const handleDragStop = () => {
+  const handleDragStop = useCallback(() => {
     setIsDragging(false);
     if (slideProgress === SLIDE_PROGRESS_MAX) {
       playTickSfx();
-      setThumbYPosition(thumbYTarget);
+      setThumbYPosition(THUMB_Y_TARGET);
       setIsSnapped(true);
       runTogglingProgress();
       return;
     }
     resetSlider(0);
-  };
+  }, [playTickSfx, resetSlider, runTogglingProgress, slideProgress]);
 
   const keyIconRotateDegree = useMemo(
     () => (90 * slideProgress) / SLIDE_PROGRESS_MAX,
     [slideProgress],
   );
 
+  const infoBoxMessage = useMemo(() => {
+    if (infoBoxState === 'success') {
+      return t('routes.dashboard.toggleSuccess');
+    }
+    return t('routes.dashboard.swipeUpToToggle');
+  }, [infoBoxState, t]);
+
   return (
     <Wrapper data-testid="toggleSlider">
-      <InfoBox>
-        <InfoBoxLabel>Swipe up to toggle</InfoBoxLabel>
+      <InfoBox state={infoBoxState}>
+        <InfoBoxLabel state={infoBoxState}>{infoBoxMessage}</InfoBoxLabel>
       </InfoBox>
       <Slider>
         <SliderTarget>
@@ -99,7 +120,7 @@ const ToggleSlider = () => {
         <Draggable
           axis="y"
           handle=".handle"
-          nodeRef={nodeRef}
+          nodeRef={draggableSliderThumbRef}
           bounds="parent"
           disabled={isSnapped}
           position={{ x: 0, y: thumbYPosition }}
@@ -107,7 +128,11 @@ const ToggleSlider = () => {
           onDrag={handleDragging}
           onStop={handleDragStop}
         >
-          <SliderThumb className="handle" ref={nodeRef} disabledPulsing={isDragging || isSnapped}>
+          <SliderThumb
+            className="handle"
+            ref={draggableSliderThumbRef}
+            disabledPulsing={isDragging || isSnapped}
+          >
             <ThumbCircle
               isSnapped={isSnapped}
               isDragging={isDragging}

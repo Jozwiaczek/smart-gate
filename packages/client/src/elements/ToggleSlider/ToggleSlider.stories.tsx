@@ -4,13 +4,13 @@ import React from 'react';
 import ToggleSlider from '.';
 
 export default {
-  title: 'Elements/ToggleSlider',
+  title: 'Elements/Toggle Slider',
   component: ToggleSlider,
 } as Meta;
 
-const Template: Story = (args) => <ToggleSlider {...args} />;
+const Template: Story = () => {
+  const toggleGate = () => console.log('toggled');
+  return <ToggleSlider onToggle={toggleGate} />;
+};
 
 export const Default = Template.bind({});
-Default.args = {
-  children: <>Lorem Ipsum</>,
-};
