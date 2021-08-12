@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useInterval } from '../../../hooks';
 import {
@@ -18,14 +18,14 @@ const useResetSlider = ({
   const [isRun, setIsRun] = useState(false);
   const [initDelay, setInitDelay] = useState(COMPLETED_TOGGLING_ANIMATION_DURATION);
 
-  const resetSlider = (initialDelay?: number) => {
+  const resetSlider = useCallback((initialDelay?: number) => {
     setIsRun(true);
     if (initialDelay === undefined) {
       setInitDelay(COMPLETED_TOGGLING_ANIMATION_DURATION);
       return;
     }
     setInitDelay(initialDelay);
-  };
+  }, []);
 
   useEffect(() => {
     if (thumbYPosition >= DEFAULT_THUMB_Y && isRun) {

@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 import useSound from 'use-sound';
 
 import { DetailedKeyIcon } from '../../icons';
-import switchOnSfx from '../../sounds/switch-on.mp3';
+import mountSfx from '../../sounds/mount.mp3';
 import unlockSfx from '../../sounds/unlock.mp3';
+import unmountSfx from '../../sounds/unmount.mp3';
 import ProgressCircle from './components/ProgressCircle';
 import PulsatingCircles from './components/PulsatingCircles';
 import useResetSlider from './hooks/useResetSlider';
-import useTogglingProgress from './hooks/useTogglingProgress';
+import useToggleLoading from './hooks/useToggleLoading';
 import {
   AFTER_SUCCESS_INFO_DISPLAY_DURATION,
   DEFAULT_THUMB_Y,
@@ -34,7 +35,8 @@ const THUMB_Y_TARGET = -(SLIDER_HEIGHT - SLIDER_WIDTH);
 
 const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
   const { t } = useTranslation();
-  const [playTickSfx] = useSound(switchOnSfx);
+  const [playMountSfx] = useSound(mountSfx);
+  const [playUnmountSfx] = useSound(unmountSfx);
   const [playUnlockSfx] = useSound(unlockSfx);
   const draggableSliderThumbRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -44,11 +46,12 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
   const [infoBoxState, setInfoBoxState] = useState<InfoBoxState>('default');
 
   const onCompleteSliderReset = useCallback(() => {
-    if (infoBoxState !== 'default') {
+    if (infoBoxState === 'success') {
       setTimeout(() => {
         setInfoBoxState('default');
       }, AFTER_SUCCESS_INFO_DISPLAY_DURATION);
     }
+
     setIsSnapped(false);
     setSlideProgress(SLIDE_PROGRESS_MIN);
     setIsDragging(false);
@@ -62,17 +65,16 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
     onComplete: onCompleteSliderReset,
   });
 
-  const onCompleteTogglingProgress = useCallback(() => {
+  const onCompleteToggleLoading = useCallback(() => {
     setInfoBoxState('success');
     playUnlockSfx();
     onToggle();
     resetSlider();
   }, [onToggle, playUnlockSfx, resetSlider]);
 
-  const { isTogglingProgressCompleted, togglingProgress, runTogglingProgress } =
-    useTogglingProgress({
-      onComplete: onCompleteTogglingProgress,
-    });
+  const { isToggleLoadingCompleted, toggleLoadingProgress, runToggleLoading } = useToggleLoading({
+    onComplete: onCompleteToggleLoading,
+  });
 
   const handleDragging = useCallback((event: DraggableEvent, { y }: DraggableData) => {
     setThumbYPosition(y);
@@ -82,19 +84,20 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
 
   const handleDragStart = useCallback(() => {
     setIsDragging(true);
-  }, []);
+    playUnmountSfx();
+  }, [playUnmountSfx]);
 
   const handleDragStop = useCallback(() => {
     setIsDragging(false);
     if (slideProgress === SLIDE_PROGRESS_MAX) {
-      playTickSfx();
+      playMountSfx();
       setThumbYPosition(THUMB_Y_TARGET);
       setIsSnapped(true);
-      runTogglingProgress();
+      runToggleLoading();
       return;
     }
     resetSlider(0);
-  }, [playTickSfx, resetSlider, runTogglingProgress, slideProgress]);
+  }, [playMountSfx, resetSlider, runToggleLoading, slideProgress]);
 
   const keyIconRotateDegree = useMemo(
     () => (90 * slideProgress) / SLIDE_PROGRESS_MAX,
@@ -137,11 +140,14 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
               isSnapped={isSnapped}
               isDragging={isDragging}
               rotateDegree={keyIconRotateDegree}
-              isToggled={isTogglingProgressCompleted}
+              isToggled={isToggleLoadingCompleted}
             >
               <DetailedKeyIcon />
             </ThumbCircle>
-            <ProgressCircle progress={togglingProgress} isCompleted={isTogglingProgressCompleted} />
+            <ProgressCircle
+              progress={toggleLoadingProgress}
+              isCompleted={isToggleLoadingCompleted}
+            />
             <PulsatingCircles />
           </SliderThumb>
         </Draggable>

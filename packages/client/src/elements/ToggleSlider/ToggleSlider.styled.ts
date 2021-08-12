@@ -144,11 +144,6 @@ export const ThumbCircle = styled.div<ThumbCircleProps>(
       animation: ${keyIconTick} ${COMPLETED_TOGGLING_ANIMATION_DURATION}ms 1 ease-in-out;
     `}
 
-    ${isDragging &&
-    css`
-      cursor: ${isDragging ? 'grabbing' : 'grab'};
-    `}
-
     ${isSnapped
       ? css`
           :hover {

@@ -3,10 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from '../../../hooks';
 import { UseTogglingProgressProps } from '../ToggleSlider.types';
 
-const useTogglingProgress = ({ onComplete }: UseTogglingProgressProps) => {
-  const delay = 3;
-  const initValue = 0;
-  const targetValue = 100;
+const delay = 3;
+const initValue = 0;
+const targetValue = 100;
+
+const useToggleLoading = ({ onComplete }: UseTogglingProgressProps) => {
   const [isRun, setIsRun] = useState(false);
   const [progress, setProgress] = useState(initValue);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -23,7 +24,7 @@ const useTogglingProgress = ({ onComplete }: UseTogglingProgressProps) => {
       setIsRun(false);
       onComplete();
     }
-  }, [isRun, onComplete, progress, targetValue]);
+  }, [isRun, onComplete, progress]);
 
   useInterval({
     callback: () => {
@@ -35,10 +36,10 @@ const useTogglingProgress = ({ onComplete }: UseTogglingProgressProps) => {
   });
 
   return {
-    isTogglingProgressCompleted: isCompleted,
-    togglingProgress: progress,
-    runTogglingProgress: run,
+    isToggleLoadingCompleted: isCompleted,
+    toggleLoadingProgress: progress,
+    runToggleLoading: run,
   };
 };
 
-export default useTogglingProgress;
+export default useToggleLoading;
