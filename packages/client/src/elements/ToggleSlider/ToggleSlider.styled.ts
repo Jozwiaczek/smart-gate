@@ -1,6 +1,11 @@
 import styled, { css, keyframes } from 'styled-components';
 
-import { SLIDER_HEIGHT, SLIDER_TARGET_SIZE, SLIDER_WIDTH } from './ToggleSlider.constants';
+import {
+  COMPLETED_TOGGLING_ANIMATION_DURATION,
+  SLIDER_HEIGHT,
+  SLIDER_TARGET_SIZE,
+  SLIDER_WIDTH,
+} from './ToggleSlider.constants';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -14,7 +19,11 @@ export const InfoBox = styled.div(
   ({ theme: { palette, sizes } }) => css`
     background: ${palette.background.paper};
     border-radius: ${sizes.borderRadius};
-    padding: 6px 26px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `,
 );
 
@@ -91,8 +100,20 @@ export const ArrowUp = styled.div<ArrowUpProps>(
   `,
 );
 
+const keyIconTick = keyframes`
+  0% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(80deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+`;
+
 export const ThumbCircle = styled.div<ThumbCircleProps>(
-  ({ isDragging, rotateDegree, isSnapped, theme: { palette } }) => css`
+  ({ isDragging, rotateDegree, isSnapped, isToggled, theme: { palette } }) => css`
     z-index: 100;
     border-radius: 100%;
     width: 100%;
@@ -103,10 +124,15 @@ export const ThumbCircle = styled.div<ThumbCircleProps>(
     background: ${palette.background.paper};
     transition: box-shadow 150ms ease-in-out;
     transform: rotate(${rotateDegree}deg);
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
+
+    ${isToggled &&
+    css`
+      animation: ${keyIconTick} ${COMPLETED_TOGGLING_ANIMATION_DURATION}ms 1 ease-in-out;
+    `}
 
     ${isDragging &&
     css`
-      box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
       cursor: ${isDragging ? 'grabbing' : 'grab'};
     `}
 
@@ -200,8 +226,6 @@ export const Slider = styled.div(
     position: relative;
     align-items: center;
     justify-content: space-between;
-
-    ${SliderThumb}:hover ~ ${ArrowUp} {
-    }
+    box-shadow: ${palette.boxShadow.default};
   `,
 );

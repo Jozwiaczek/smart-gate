@@ -2,6 +2,7 @@ interface ThumbCircleProps {
   isSnapped: boolean;
   rotateDegree: number;
   isDragging: boolean;
+  isToggled: boolean;
 }
 
 interface PulseCircleProps {
