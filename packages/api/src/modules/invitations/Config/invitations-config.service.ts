@@ -14,6 +14,6 @@ export class InvitationsConfigService {
   }
 
   getBaseMagicLinkUrl() {
-    return `${this.config.clientUrl}${constants.clientEndpoints.registrationMagicLink}`;
+    return `${this.config.clientUrl}${constants.CLIENT_ENDPOINTS.registrationMagicLink}`;
   }
 }

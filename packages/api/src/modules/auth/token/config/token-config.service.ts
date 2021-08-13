@@ -26,7 +26,7 @@ export class TokenConfigService {
 
   getTokenConfig(): TokenConfig {
     const {
-      authTokens: {
+      AUTH_TOKENS: {
         accessToken: { name: accessTokenName },
         refreshToken: { name: refreshTokenName },
         logoutToken: { name: logoutTokenName },

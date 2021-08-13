@@ -31,7 +31,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
           id: payload.sub,
           email: payload.email,
         });
-        scope.setTag(constants.roles_key, String(payload.roles));
+        scope.setTag(constants.ROLES_KEY, String(payload.roles));
       });
 
       const { exp: accessTokenExp, sub: accessTokenSub, keepMeLoggedIn } = payload;

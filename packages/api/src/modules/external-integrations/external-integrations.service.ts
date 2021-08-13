@@ -3,6 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { UsersService } from '../users/users.service';
 import { Websocket } from '../websocket/websocket.gateway';
+import { SUCCESSFULLY_OPEN } from './external-integrations.responses';
 
 @Injectable()
 export class ExternalIntegrationsService {
@@ -33,6 +34,6 @@ export class ExternalIntegrationsService {
 
   toggleGate(): string {
     this.websocketGateway.toggleGate();
-    return 'Successfully open';
+    return SUCCESSFULLY_OPEN;
   }
 }
