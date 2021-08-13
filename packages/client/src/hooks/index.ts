@@ -1,9 +1,11 @@
 export { default as useAuth } from './useAuth';
 export { default as useAxios } from './useAxios';
+export { default as useConfirmDialog } from './useConfirmDialog';
 export { default as useCurrentUser } from './useCurrentUser';
 export { default as useDebounce } from './useDebounce';
 export { default as useEncodedParams } from './useEncodedParams';
 export { default as useHotkeys } from './useHotkeys';
+export { default as useInterval } from './useInterval';
 export { default as useLocalStorage } from './useLocalStorage/useLocalStorage';
 export { default as useLocalStorageMemory } from './useLocalStorage/useLocalStorageMemory';
 export { default as useMediaDevice } from './useMediaDevice';

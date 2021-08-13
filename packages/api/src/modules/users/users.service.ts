@@ -27,15 +27,26 @@ export class UsersService {
     });
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<UserEntity | undefined> {
+  async findOneByEmail(email: string): Promise<UserEntity> {
+    return this.userRepository.findOneByEmailOrFail(email);
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<UserEntity> {
     const foundUser = await this.findOne(id);
 
     if (!foundUser) {
       throw new NotFoundException(`User with id: ${id} not found`);
     }
 
-    if (updateUserDto.firstName !== undefined) foundUser.firstName = updateUserDto.firstName;
-    if (updateUserDto.lastName !== undefined) foundUser.lastName = updateUserDto.lastName;
+    if (updateUserDto.firstName !== undefined) {
+      foundUser.firstName = updateUserDto.firstName;
+    }
+    if (updateUserDto.lastName !== undefined) {
+      foundUser.lastName = updateUserDto.lastName;
+    }
+    if (updateUserDto.externalIntegrationsToken !== undefined) {
+      foundUser.externalIntegrationsToken = updateUserDto.externalIntegrationsToken;
+    }
 
     await this.userRepository.update(foundUser.id, foundUser);
     return foundUser;

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { Button, Card } from '../../../../../elements';
-import { CancelIcon } from '../../../../../icons';
+import { Button, Card, Link } from '../../../../../elements';
+import { CopyIcon } from '../../../../../icons';
 
 export const StyledCard = styled(Card)`
   padding: 0;
@@ -24,19 +24,56 @@ export const StyledButton = styled(Button)`
   margin-top: 20px;
 `;
 
-export const UpdatePasswordSection = styled.div`
-  margin-bottom: 40px;
+export const GenerateTokenButton = styled(Button)`
+  margin: 40px 0;
 `;
 
-export const ConfirmDialogButtonsWrapper = styled.div`
+export const Note = styled.p(
+  ({ theme: { palette } }) => css`
+    color: ${palette.text.secondary};
+  `,
+);
+
+export const AccountTabTitle = styled.h4`
+  margin-bottom: 18px;
+`;
+
+export const AccountTabSubtitle = styled.h5`
+  margin: 16px 0 10px;
+`;
+
+export const StyledCopyIcon = styled(CopyIcon)(
+  ({ theme: { palette } }) => css`
+    position: absolute;
+    color: ${palette.text.dark};
+    width: 20px;
+    height: 20px;
+    transition: color 200ms ease-in-out;
+    :hover {
+      color: ${palette.text.light};
+      cursor: pointer;
+    }
+  `,
+);
+
+export const IntegrationTemplateLink = styled(Link)`
   display: flex;
-  margin-top: 20px;
-  width: 100%;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+  margin-top: 30px;
 `;
 
-export const StyledCancelIcon = styled(CancelIcon)`
-  height: 16px;
-  width: 16px;
+export const TokenActionsButtonsWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 30px 0;
+`;
+
+export const RegenerateTokenButton = styled(Button)`
+  :hover {
+    svg {
+      transition: transform 600ms cubic-bezier(0.68, -0.6, 0.32, 1.6);
+      transform: rotate(90deg);
+    }
+  }
 `;

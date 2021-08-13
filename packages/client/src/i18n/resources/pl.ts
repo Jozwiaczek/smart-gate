@@ -25,6 +25,7 @@ const pl: TranslationStructure = {
       delete: 'Usuń',
       save: 'Zapisz',
       cancel: 'Anuluj',
+      regenerate: 'Odnów',
     },
     menu: {
       history: 'Historia',
@@ -76,8 +77,8 @@ const pl: TranslationStructure = {
       },
       dashboard: {
         title: 'Pulpit',
-        toggleGate: 'Aktywuj bramę',
-        toggleSuccess: 'Brama aktywowana pomyślnie',
+        swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
+        toggleSuccess: 'Aktywowano bramę',
       },
       history: {
         title: 'Historia',
@@ -123,6 +124,35 @@ const pl: TranslationStructure = {
             deleteAccountInfo:
               'Czy na pewno chcesz usunąć swoje konto? Spowoduje to trwałe usunięcie Twojego konta.',
             accountDeleted: 'Konto zostało usunięte',
+          },
+          integrations: {
+            title: 'Integracje',
+            extendedTitle: 'Zewnętrzne integracje',
+            description:
+              'Stwórz swoje integracje z zewnętrznymi serwisami. Umożliwia to przykładowo na otworzenie bramy z wykorzystaniem <strong>asystenta głosowego</strong>.',
+            generateApiKey: 'Wygeneruj klucz',
+            regenerate: 'Wygeneruj ponownie',
+            tokenCopied: 'Klucz skopiowany do schowka',
+            tokenDeleted: 'Klucz poprawnie usunięty',
+            tokenManagement: 'Zarządzanie kluczem',
+            externalIntegrationsToken: 'Klucz integracji zewnętrznych',
+            integrationsTemplates: 'Szablony integracji',
+            deleteToken: 'Usuń klucz integracji zewnętrznych',
+            deleteTokenInfo:
+              'Czy na pewno chcesz usunąć swój token? Spowoduje to trwałe usunięcie oraz utratę połączenia ze stworzonymi integracjami.',
+            regenerateTokenConfirmation: 'Odnów klucz integracji zewnętrznych',
+            regenerateTokenConfirmationInfo:
+              'Czy na pewno chcesz odnowić swój token? Spowoduje to utratę połączenia ze stworzonymi integracjami.',
+            templatesDescription:
+              'Szablony to przygotowane z myślą o szybkim dodawaniu integracji zewnętrznych predefiniowane akcje. Są w pełni konfigurowalne i do działania wymagają tylko <strong>e-maila</strong> przypisanego do konta Smart Gate i wygenerowanego <strong>klucza</strong>.',
+            pickToStart: 'Wybierz jeden z poniższych linków, aby szybko rozpocząć:',
+            templatesNote:
+              '<strong>Uwaga:</strong> aby dodać gotowe szablony integracji, w większości przypadków musisz <strong>zezwolić na niezaufane szablony/skróty</strong> w ustawieniach twojego urządzenia.',
+            shortcutsTemplate: 'Szablon Apple Shortcuts',
+            generateTokenToIntegrate:
+              'W celu integracji z zewnętrznymi serwisami, wygeneruj swój prywatny klucz.',
+            sharingTokenWarning:
+              '<strong>Ostrzeżenie:</strong><br />Nikomu nie udostępniaj swojego klucza.<br />Każdy użytkownik powinien używać swojego unikalnego klucza.',
           },
         },
         privileges: {

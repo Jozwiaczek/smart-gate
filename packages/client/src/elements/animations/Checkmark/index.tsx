@@ -2,6 +2,8 @@ import anime, { AnimeInstance } from 'animejs';
 import React, { useLayoutEffect, useRef } from 'react';
 import { TickIcon } from 'src/icons';
 
+import { CheckmarkProps } from './Checkmark.types';
+
 const Checkmark = ({ visible = false }: CheckmarkProps) => {
   const tick = useRef<SVGPathElement>(null);
   const animationRefShow = useRef<AnimeInstance>();
@@ -38,7 +40,7 @@ const Checkmark = ({ visible = false }: CheckmarkProps) => {
     animationRefHide.current?.play();
   }, [visible]);
 
-  return <TickIcon ref={tick} />;
+  return <TickIcon isVisible={visible} ref={tick} />;
 };
 
 Checkmark.displayName = 'Checkmark';

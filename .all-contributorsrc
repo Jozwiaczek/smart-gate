@@ -38,6 +38,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "Vatras",
+      "name": "Vatras",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4075877?v=4",
+      "profile": "https://github.com/Vatras",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,

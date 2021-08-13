@@ -16,6 +16,7 @@ interface BaseProps {
 }
 
 export interface LinkProps extends BaseProps {
+  title?: string;
   colorVariant?: LinkColorVariant;
   asOuterLink?: boolean;
   to: string;
