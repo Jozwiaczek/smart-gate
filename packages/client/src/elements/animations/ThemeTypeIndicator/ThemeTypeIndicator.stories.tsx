@@ -9,7 +9,7 @@ export default {
   component: ThemeTypeIndicator,
 } as Meta;
 
-const Template: Story<CheckmarkProps> = () => {
+const Template: Story = () => {
   const [themeType, setThemeType] = useState<ThemeType>(ThemeType.dark);
 
   const showDark = () => {

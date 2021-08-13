@@ -77,8 +77,8 @@ const pl: TranslationStructure = {
       },
       dashboard: {
         title: 'Pulpit',
-        toggleGate: 'Aktywuj bramę',
-        toggleSuccess: 'Brama aktywowana pomyślnie',
+        swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
+        toggleSuccess: 'Aktywowano bramę',
       },
       history: {
         title: 'Historia',

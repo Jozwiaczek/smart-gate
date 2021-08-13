@@ -10,9 +10,11 @@ import {
   BritishFlagIcon,
   CancelIcon,
   ChevronDownIcon,
+  ChevronUpIcon,
   ConfirmLockIcon,
   CopyIcon,
   DashboardIcon,
+  DetailedKeyIcon,
   DeviceIcon,
   EditIcon,
   EmailIcon,
@@ -62,6 +64,8 @@ const AllIconsPanel = () => (
     <CopyIcon />
     <RefreshIcon />
     <IntegrationsIcon />
+    <ChevronUpIcon />
+    <DetailedKeyIcon />
     <KeyIcon />
     <UserActionsIcon />
     <LogoutAllIcon />
