@@ -21,3 +21,4 @@ export { CardLayout, DefaultLayout, GlobalLayout, TabbedLayout } from './layouts
 export { default as Link } from './Link';
 export { CardList, DetailedList } from './lists';
 export { default as Snackbar } from './Snackbar';
+export { default as ToggleSlider } from './ToggleSlider';

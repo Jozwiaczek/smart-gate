@@ -1,10 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { Button } from '../../../elements';
-
-export const ToggleButton = styled(Button)`
-  font-size: 32px;
-  font-weight: 700;
-  height: 200px;
-  width: 300px;
-`;
+export const ToggleSliderWrapper = styled.div(
+  ({ theme: { down, breakpoints } }) => css`
+    margin: 80px 0 20px;
+    display: inline-block;
+    ${down(breakpoints.sm)} {
+      display: flex;
+      justify-content: center;
+    }
+  `,
+);
