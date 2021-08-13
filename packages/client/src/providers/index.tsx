@@ -9,6 +9,7 @@ import {
   ReactQueryProvider,
   WebSocketProvider,
 } from './api';
+import ConfirmDialogProvider from './ConfirmDialogProvider';
 import SnackbarProvider from './SnackbarProvider';
 import StylesProvider from './StylesProvider';
 
@@ -24,7 +25,9 @@ const Providers = ({ children }: ProvidersProps) => (
           <ReactQueryProvider>
             <StylesProvider>
               <I18nextProvider i18n={i18n}>
-                <SnackbarProvider>{children}</SnackbarProvider>
+                <ConfirmDialogProvider>
+                  <SnackbarProvider>{children}</SnackbarProvider>
+                </ConfirmDialogProvider>
               </I18nextProvider>
             </StylesProvider>
           </ReactQueryProvider>

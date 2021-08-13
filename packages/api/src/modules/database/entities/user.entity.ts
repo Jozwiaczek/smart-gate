@@ -40,6 +40,13 @@ export class UserEntity extends BaseEntity {
   })
   public roles: Array<Role>;
 
+  @Column({
+    type: 'varchar',
+    unique: true,
+    nullable: true,
+  })
+  public externalIntegrationsToken: string;
+
   @OneToMany(() => RefreshTokenEntity, (token) => token.user, { onDelete: 'CASCADE' })
   public refreshTokens: Promise<[RefreshTokenEntity]>;
 

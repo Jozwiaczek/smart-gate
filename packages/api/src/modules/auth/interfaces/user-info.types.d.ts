@@ -9,6 +9,7 @@ export interface UserInfo {
     roles: Array<Role>;
     createdAt: number;
     updatedAt: number;
+    externalIntegrationsToken?: string;
   };
   expirationDate: number;
 }

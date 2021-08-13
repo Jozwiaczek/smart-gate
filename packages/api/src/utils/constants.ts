@@ -1,4 +1,4 @@
-const authTokens = {
+const AUTH_TOKENS = {
   accessToken: {
     name: 'access_token',
   },
@@ -10,8 +10,11 @@ const authTokens = {
   },
 };
 
-const clientEndpoints = {
+const CLIENT_ENDPOINTS = {
   passwordMagicLink: '/passwordRecovery/magicLink',
   registrationMagicLink: '/registration',
 };
-export default { authTokens, clientEndpoints };
+
+const ROLES_KEY = 'roles';
+
+export default { AUTH_TOKENS, CLIENT_ENDPOINTS, ROLES_KEY };

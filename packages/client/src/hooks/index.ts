@@ -1,5 +1,6 @@
 export { default as useAuth } from './useAuth';
 export { default as useAxios } from './useAxios';
+export { default as useConfirmDialog } from './useConfirmDialog';
 export { default as useCurrentUser } from './useCurrentUser';
 export { default as useDebounce } from './useDebounce';
 export { default as useEncodedParams } from './useEncodedParams';
