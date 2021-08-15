@@ -75,8 +75,17 @@ const en = {
       },
       dashboard: {
         title: 'Dashboard',
-        swipeUpToToggle: 'Swipe up to toggle gate',
-        toggleSuccess: 'Successfully toggled',
+        sections: {
+          toggling: {
+            swipeUpToToggle: 'Swipe up to toggle gate',
+            toggleSuccess: 'Successfully toggled',
+            gateDisconnected: {
+              title: 'Gate disconnected',
+              description:
+                'Gate is currently unavailable. <br />Contact with your system administrator for more details.',
+            },
+          },
+        },
       },
       history: {
         title: 'History',
