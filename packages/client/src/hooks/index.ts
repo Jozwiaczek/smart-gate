@@ -12,5 +12,6 @@ export { default as useMediaDevice } from './useMediaDevice';
 export { default as useMediaQuery } from './useMediaQuery';
 export { default as useOnClickOutside } from './useOnClickOutside';
 export { default as useOnScreen } from './useOnScreen';
+export { default as usePopper } from './usePopper';
 export { default as useSnackbar } from './useSnackbar';
 export { default as useThemeType } from './useThemeType';

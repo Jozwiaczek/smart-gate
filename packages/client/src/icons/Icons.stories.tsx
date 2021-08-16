@@ -15,7 +15,9 @@ import {
   CopyIcon,
   DashboardIcon,
   DetailedKeyIcon,
+  DeviceDisconnectedIcon,
   DeviceIcon,
+  DisconnectedWiresIcon,
   EditIcon,
   EmailIcon,
   FiltersIcon,
@@ -32,6 +34,7 @@ import {
   QuestionMarkIcon,
   RefreshIcon,
   SendEmailIcon,
+  ServerDisconnectedIcon,
   SettingsIcon,
   StatisticsIcon,
   SunIcon,
@@ -60,6 +63,9 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <DisconnectedWiresIcon />
+    <DeviceDisconnectedIcon />
+    <ServerDisconnectedIcon />
     <AppleIcon />
     <CopyIcon />
     <RefreshIcon />

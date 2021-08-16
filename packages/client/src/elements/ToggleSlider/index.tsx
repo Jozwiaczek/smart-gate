@@ -106,9 +106,9 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
 
   const infoBoxMessage = useMemo(() => {
     if (infoBoxState === 'success') {
-      return t('routes.dashboard.toggleSuccess');
+      return t('routes.dashboard.sections.toggling.toggleSuccess');
     }
-    return t('routes.dashboard.swipeUpToToggle');
+    return t('routes.dashboard.sections.toggling.swipeUpToToggle');
   }, [infoBoxState, t]);
 
   return (
