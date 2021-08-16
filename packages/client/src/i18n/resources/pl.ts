@@ -85,6 +85,8 @@ const pl: TranslationStructure = {
               title: 'Brama rozłączona',
               description:
                 'Otwieranie bramy jest chwilowo niedostępne. <br />Skontaktuj się z administratorem systemu w celu rozwiązania problemu.',
+              serverDisconnected: 'Brak połączenia z serwerem',
+              deviceDisconnected: 'Urządzenie odpowiedzialne za otwieranie bramy jest rozłączone',
             },
           },
         },

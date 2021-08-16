@@ -83,6 +83,8 @@ const en = {
               title: 'Gate disconnected',
               description:
                 'Gate is currently unavailable. <br />Contact with your system administrator for more details.',
+              serverDisconnected: 'There is no connection with the server.',
+              deviceDisconnected: 'The device responsible for opening the gate is disconnected.',
             },
           },
         },

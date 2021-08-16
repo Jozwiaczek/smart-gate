@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeDecorator, I18nDecorator, LayoutDecorator } from './decorators';
 import { withTests } from '@storybook/addon-jest';
+import '@storybook/addon-console';
 
 import testResults from '../src/jest-test-results.json';
 

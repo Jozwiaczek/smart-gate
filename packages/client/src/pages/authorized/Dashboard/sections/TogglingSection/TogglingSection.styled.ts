@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
+import { ITheme } from '../../../../../theme/Theme';
+
 export const ToggleSliderWrapper = styled.div(
   ({ theme: { down, breakpoints } }) => css`
     margin: 80px 0 20px;
@@ -46,12 +48,6 @@ export const DisconnectedWiredWrapper = styled.div(
   `,
 );
 
-export const DisconnectedTitle = styled.h3(
-  ({ theme: { palette } }) => css`
-    color: ${palette.text.secondary};
-  `,
-);
-
 export const DisconnectedBody = styled.p(
   ({ theme: { palette } }) => css`
     color: ${palette.text.secondary};
@@ -60,13 +56,28 @@ export const DisconnectedBody = styled.p(
   `,
 );
 
-export const DisconnectedIcons = styled.div(
-  ({ theme: { palette } }) => css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 60px;
-    gap: 50px;
+const changeColors = ({ theme: { palette } }: { theme: ITheme }) => keyframes`
+  0% {
     color: ${palette.text.secondary};
-  `,
-);
+  }
+  10% {
+    color: ${palette.text.secondary};
+  }
+  50% {
+    color: ${palette.text.primary};
+  }
+  100% {
+    color: ${palette.text.secondary};
+  }
+`;
+
+export const DisconnectedIcons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  gap: 50px;
+  svg {
+    animation: ${changeColors} 3s infinite;
+  }
+`;
