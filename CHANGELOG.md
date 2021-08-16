@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.12.0...v1.13.0) (2021-08-16)
+
+
+### Features
+
+* **client:** add gate disconnected view ([da2f237](https://github.com/Jozwiaczek/smart-gate/commit/da2f237699813db7833dc0316fcc27b14b8789f9))
+* **client:** add tooltip and disconnected icons color animation ([514e54b](https://github.com/Jozwiaczek/smart-gate/commit/514e54be6a2c99ab7c244f61fbd89920fbd70671))
+
 # [1.12.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.11.1...v1.12.0) (2021-08-13)
 
 
