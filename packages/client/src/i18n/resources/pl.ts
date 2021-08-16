@@ -77,8 +77,19 @@ const pl: TranslationStructure = {
       },
       dashboard: {
         title: 'Pulpit',
-        swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
-        toggleSuccess: 'Aktywowano bramę',
+        sections: {
+          toggling: {
+            swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
+            toggleSuccess: 'Aktywowano bramę',
+            gateDisconnected: {
+              title: 'Brama rozłączona',
+              description:
+                'Otwieranie bramy jest chwilowo niedostępne. <br />Skontaktuj się z administratorem systemu w celu rozwiązania problemu.',
+              serverDisconnected: 'Brak połączenia z serwerem',
+              deviceDisconnected: 'Urządzenie odpowiedzialne za otwieranie bramy jest rozłączone',
+            },
+          },
+        },
       },
       history: {
         title: 'Historia',
