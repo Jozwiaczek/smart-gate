@@ -37,6 +37,7 @@
 ## 🚩 Table of Contents
 
 - [About](#-about)
+- [Setup for your own usage](setup-for-your-own-usage)
 - [Getting started](#-getting-started)
   - [Prerequisites](#-prerequisites)
   - [General installation](#-general-installation)
@@ -53,6 +54,34 @@
 ![Smart gate info banner](banner-about.png)
 
 System for managing and handling access to any physical entry home gate.
+
+## 🚛 Setup for your own usage
+
+In order to use the Smart Gate system in your environment, you have to deploy your own instance
+of the client, server and database.
+To make it as simple as possible there is already a prepared template for deploying all packages.
+
+What's important is that the whole setup and its usage is **COMPLETELY FREE**.
+
+Why it's free because every part of this setup assumes usage of free tiers without any need to upgrades those pricing plans.
+
+You only have to click the buttons below to deploy your own instances and fill up the required environment variables.
+
+### Deploy [client package](./packages/client/README.md) (Web app)
+
+Click the button below to deploy with predefined [Netlify](https://www.netlify.com) template.
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jozwiaczek/smart-gate)
+
+### Deploy [api package](./packages/api/README.md) (Server)
+
+Click the button below to deploy with predefined [Heroku](https://www.heroku.com) template.
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Jozwiaczek/smart-gate)
+
+### Prepare [device package](./packages/device/README.md) (Physical part)
+
+WIP
 
 ## 🎓 Getting started
 
