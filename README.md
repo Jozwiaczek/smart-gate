@@ -12,10 +12,6 @@
 </p>
 
 <p align="center">
-    Live app:
-    <a href="https://smart-gate.netlify.app/"><strong>smart-gate.netlify.app</strong></a>
-    <br>
-    <br>
     UI/UX:
     <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
@@ -79,7 +75,7 @@ Click the button below to deploy with predefined [Heroku](https://www.heroku.com
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Jozwiaczek/smart-gate)
 
-### Prepare [device package](./packages/device/README.md) (Physical part)
+### Prepare your [device](./packages/device/README.md) (Physical part)
 
 WIP
 
