@@ -1,0 +1,131 @@
+{
+  "name": "Smart Gate API",
+  "description": "API (server) package designed for Smart Gate System",
+  "repository": "https://github.com/Jozwiaczek/smart-gate",
+  "logo": "https://github.com/Jozwiaczek/smart-gate/blob/main/packages/client/public/email-images/sg-logo.png?raw=true",
+  "image": "https://github.com/Jozwiaczek/smart-gate/blob/main/packages/client/public/email-images/sg-logo.png?raw=true",
+  "keywords": [
+    "node",
+    "home-automation",
+    "iot",
+    "smart-home",
+    "nestjs",
+    "typescript",
+    "javascript"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "as": "DATABASE",
+      "options": {
+        "version": "12.7"
+      }
+    }
+  ],
+  "env": {
+    "ACCESS_SECRET": {
+      "description": "A secret key for verifying authentication layer.",
+      "generator": "secret"
+    },
+    "CLIENT_URL": {
+      "description": "Address URL of your deployed client(frontend). (Fill after client package deploy)",
+      "required": false
+    },
+    "COOKIE_SECRET": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "DATABASE_URL": {
+      "description": "Address URL of your database. (Fill after deploy)",
+      "required": false
+    },
+    "DB_DATABASE": {
+      "description": "Name of your database. (Fill after deploy)",
+      "required": false
+    },
+    "DB_HOST": {
+      "description": "Host of your database. (Fill after deploy)",
+      "required": false
+    },
+    "DB_PASSWORD": {
+      "description": "Password to your database. (Fill after deploy)",
+      "required": false
+    },
+    "DB_PORT": {
+      "description": "Port where database is running.",
+      "value": "5432"
+    },
+    "DB_USERNAME": {
+      "description": "Username for your database. (Fill after deploy)",
+      "required": false
+    },
+    "DEVICE_TICKET": {
+      "description": "A secret key for verifying the websockets connection.",
+      "generator": "secret"
+    },
+    "INVITATION_EXPIRATION_DATE": {
+      "description": "The amount of time that the invitations are active from the moment they are sent.",
+      "value": "10 days"
+    },
+    "LOGOUT_SECRET": {
+      "description": "A secret key for verifying logout process.",
+      "generator": "secret"
+    },
+    "PASSWORD_RESET_TIME": {
+      "description": "The amount of time that user is able to reset his password from the moment that e-mail was sent.",
+      "value": "600"
+    },
+    "PUSH_NOTIFICATION_PRIVATE_VAPID_KEY": {
+      "description": "Push notification PRIVATE Vapid key. (Check Smart Gate documentation for more details)"
+    },
+    "PUSH_NOTIFICATION_PUBLIC_VAPID_KEY": {
+      "description": "Push notification PUBLIC Vapid key. (Check Smart Gate documentation for more details)"
+    },
+    "RATE_LIMIT_MAX_CONCURRENT": {
+      "value": "100"
+    },
+    "RATE_LIMIT_MIN_TIME": {
+      "value": "60"
+    },
+    "REFRESH_SECRET": {
+      "description": "A secret key for verifying refreshing process of users sessions.",
+      "generator": "secret"
+    },
+    "REPLY_TO": {
+      "description": "Address email for system e-mails."
+    },
+    "SENDER": {
+      "description": "Sender name for system e-mails.",
+      "value": "Smart Gate"
+    },
+    "SENDGRID_API_KEY": {
+      "description": "Sendgrid API key."
+    },
+    "SENTRY_DEBUG": {
+      "description": "Define whether you want to enable Sentry debug mode.",
+      "value": "false",
+      "required": false
+    },
+    "SENTRY_DSN": {
+      "description": "Your Sentry project DSN URL.",
+      "required": false
+    },
+    "SENTRY_ENABLED": {
+      "description": "Define whether you want to enable Sentry.",
+      "value": "false",
+      "required": false
+    },
+    "SENTRY_ENVIRONMENT": {
+      "required": false,
+      "value": "production"
+    },
+    "SUPER_ADMIN_EMAILS": {
+      "description": "At first point system does not have any registered users. In order to login to your Smart Gate, you have to provide your e-mail to receive invitation email."
+    }
+  }
+}
