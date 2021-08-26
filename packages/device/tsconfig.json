@@ -7,6 +7,6 @@
     "module": "commonjs",
     "isolatedModules": false
   },
-  "include": ["src"],
+  "include": ["src", "**/*.json"],
   "exclude": ["node_modules"]
 }
