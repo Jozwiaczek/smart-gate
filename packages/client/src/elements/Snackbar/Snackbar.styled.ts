@@ -100,6 +100,13 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
 
 const closeButtonSize = '21px';
 
+export const SnackbarLeftAdornment = styled.div`
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const CloseButton = styled.div<CloseButtonProps>`
   height: ${closeButtonSize};
   opacity: 1;

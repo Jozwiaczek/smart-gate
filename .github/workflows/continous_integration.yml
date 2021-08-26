@@ -38,6 +38,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: 'Install dependency'
+        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
       # End of yarn setup
 
@@ -94,10 +95,12 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: 'Find location of global yarn cache'
         id: yarn-cache
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: 'Cache global yarn cache'
         uses: actions/cache@v2.1.6
         if: steps.cache-modules.outputs.cache-hit != 'true'
@@ -106,7 +109,16 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+      - name: 'Cache Cypress'
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
       - name: 'Install dependency'
+        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: 'Build CI scripts'
@@ -157,6 +169,7 @@ jobs:
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
           record: true
+          install: false
           spec: packages/e2e/src/**/*.spec.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

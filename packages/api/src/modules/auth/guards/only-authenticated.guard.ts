@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/node';
 
 import { CookieResponse } from '../../../interfaces/cookie-types';
 import { TokenPayload } from '../../../interfaces/token-types';
+import { constants } from '../../../utils';
 import { UserRepository } from '../../repository/user.repository';
 import { TokenService } from '../token/token.service';
 import { TokenCookieService } from '../token/token-cookie.service';
@@ -30,7 +31,7 @@ export class OnlyAuthenticatedGuard implements CanActivate {
           id: payload.sub,
           email: payload.email,
         });
-        scope.setTag('roles', String(payload.roles));
+        scope.setTag(constants.ROLES_KEY, String(payload.roles));
       });
 
       const { exp: accessTokenExp, sub: accessTokenSub, keepMeLoggedIn } = payload;

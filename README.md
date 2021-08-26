@@ -2,20 +2,16 @@
 
 <p align="center">
     <a href="https://github.com/Jozwiaczek/smart-gate">
-        <img src="./readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
+        <img src="./readme-logo.png" alt="smart gate logo" width="192" height="192"/>
     </a>
     <br>
     <i>🔐 Open source system for handling access to any physical entry gate.</i>
     <br>
     <br>
-    <i>Created by <b>Jakub Jóźwiak</b> and <b>Mateusz Nestorowicz</b></i>
+    <i>Created by <a href="https://github.com/Jozwiaczek"><b>Jakub Jóźwiak</b></a> and <a href='https://github.com/Mefjus'><b>Mateusz Nestorowicz</b></a></i>
 </p>
 
 <p align="center">
-    Live app:
-    <a href="https://smart-gate.netlify.app/"><strong>smart-gate.netlify.app</strong></a>
-    <br>
-    <br>
     UI/UX:
     <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
@@ -31,127 +27,100 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)](https://github.com/Jozwiaczek/smart-gate/commits)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg)](#contributors-)
 [![Star on GitHub](https://img.shields.io/github/stars/Jozwiaczek/smart-gate.svg?style=social)](https://github.com/Jozwiaczek/smart-gate)
 
 ## 🚩 Table of Contents
 
 - [About](#-about)
-- [Getting started](#-getting-started)
-  - [Prerequisites](#-prerequisites)
-  - [General installation](#-general-installation)
-- [Packages Docs](#-packages-docs)
-- [Conventional Commits](#-conventional-commits)
-- [Hygen - Code generator](#-hygen-code-generator)
-- [Available root scripts](#-available-root-scripts)
+- [Setup for your own usage](#-setup-for-your-own-usage)
+  - [Deploy web application](#-deploy-web-application)
+  - [Deploy server](#-deploy-server)
+  - [Prepare your Raspberry Pi](#-prepare-your-raspberry-pi)
+- [Documentation](#-documentation)
+- [Contributing](#-contributing)
+  - [Contributing Guidelines](#-contributing-guidelines)
+  - [Want to Help?](#-want-to-help?)
+  - [Code of Conduct](#-code-of-conduct)
+- [Roadmap](#-roadmap)
 - [Changelog](#-changelog)
 - [Contributors](#-contributors)
 - [License](#-license)
 
-## 📖 About
+## 🔑 About
 
 ![Smart gate info banner](banner-about.png)
 
-System for managing and handling access to any physical entry home gate.
+System for managing and handling access to any physical entry home gate or door.
+The whole idea is to add smart control for your any already existed electric lock or gate.
 
-## 🎓 Getting started
+Sounds familiar?
+Right, but there is one significant difference between others smart lock, it is **COMPLETELY FREE**.
 
-### Prerequisites
+From physical side only what you have to do is to prepare [Raspberry Pi](https://www.raspberrypi.org/products/) and add some [3V Relay Module](https://www.google.com/search?q=relay+module+3v&tbm=isch&ved=2ahUKEwjll9aUt8_yAhVXvyoKHeMbBmgQ2-cCegQIABAA&oq=relay+module+3v&gs_lcp=CgNpbWcQAzIHCCMQ7wMQJzIGCAAQCBAeUKweWP8hYNEjaABwAHgAgAFliAGXApIBAzIuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=o-wnYaW6Ldf-qgHjt5jABg&bih=1329&biw=2560&rlz=1C5CHFA_enPL923PL923) between Raspberry and your gate to enable ability for opening.
 
-- [Node.js](https://nodejs.org/en/) >= 12
-- [Yarn](https://classic.yarnpkg.com/lang/en/) >=1.22
+Rest part of Smart Gate system is handled by predefined templates for simplifying process of deploying server, database, and web app.
+Only what you have to do in this step is to click 2 buttons from [Setup for your own usage](#-setup-for-your-own-usage) and fill provided secrets.
 
-### General installation
+After those steps You will transform your simply or even old gate/door into your private smart system.
 
-```shell script
-yarn
-```
+https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-8ed0-3694fe3e4809.mp4
 
-## 📦 Packages Docs
+## 🚛 Setup for your own usage
 
-- Backend:
-  - [Api](./packages/api/README.md)
-  - [Device](./packages/device/README.md)
-- Frontend:
-  - [Client](./packages/client/README.md)
-- Utils:
-  - [CI scripts](./packages/ci-scipts/README.md)
-  - [E2E tests](./packages/e2e/README.md)
+In order to use the Smart Gate system in your environment, you have to deploy your own instance
+of the client, server and database.
+To make it as simple as possible there is already a prepared template for deploying all packages.
 
-## 📏 Conventional Commits
+What's important is that the whole setup and its usage is free, so You don't have to worry about any billing.
 
-Commitlint checks if your commit messages meet the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) format.
-Also it requires package scope (https://www.npmjs.com/package/@commitlint/config-lerna-scopes).
+Why it's free because every part of this setup assumes usage of free tiers without any need to upgrades those pricing plans.
 
-Structure:
+You only have to click the buttons below to deploy your own instances and fill up the required environment variables.
 
-```git
-type(package-name): general info
-```
+### Deploy web application
 
-Structure with more inforamtion:
+Click the button below to deploy [client package](packages/client/README.md) with predefined [Netlify](https://www.netlify.com) template.
 
-```git
-type(package-name): general info
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jozwiaczek/smart-gate)
 
-- add login panel
-- add avatar
-```
+### Deploy server
 
-Example:
+Click the button below to deploy [api package](packages/api/README.md) with predefined [Heroku](https://www.heroku.com) template.
 
-```git
-feat(smart-gate-api): add comment section
-```
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Jozwiaczek/smart-gate)
 
-Common types according to commitlint-config-conventional (based on the Angular convention) can be:
-[conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json).
-Header (first line) must not be longer than 100 characters.
+### Prepare your Raspberry Pi
 
-For just validating your commit message without commiting it use terminal:
+WIP [device](packages/device/README.md)
 
-```shell
-echo 'foo: bar' | commitlint
-```
+## 📖 Documentation
 
-## 🤖 Hygen - Code generator
+WIP
 
-Hygen is the cli dev tool that provides the ability for generating scalable code. All code generation templates are defined in the `__template` directory.
-Remember to add created model to git files (typically those files are excluded from default).
-For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
+## 🙏 Contributing
 
-### Available generators:
+### Contributing Guidelines
 
-| Package | Script          | Description                                                   |
-| ------- | --------------- | ------------------------------------------------------------- |
-| client  | `hygen:element` | Creates new standardize React component, story and style file |
+Read the [contributing guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Smart Gate.
 
-## 📝 Available root scripts
+### Want to Help?
 
-To run script, in terminal type `yarn {script}`.
+Want to file a bug, contribute some code, or improve documentation? Excellent!
 
-| Script              | Description                                               | Note                                       |
-| ------------------- | --------------------------------------------------------- | ------------------------------------------ |
-| `build`             |                                                           |                                            |
-| `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
-| `heroku-postbuild`  | It runs on heroku before api build                        |                                            |
-| `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
-| `lint`              | Checks linter rules                                       |                                            |
-| `lint:fix`          | Fix linter                                                |                                            |
-| `stylelint`         | Checks stylelint rules for styled-components              |                                            |
-| `prettier`          | Checks prettier rules                                     |                                            |
-| `prettier:fix`      | Fix prettier                                              |                                            |
-| `prepare`           | Install husky                                             | It runs automatically after every install  |
-| `removeNodeModules` | Remove all node_modules from project (all packages)       |                                            |
-| `sortPackageJson`   | Sort alphabetical all package.json in project             |                                            |
-| `start`             | Used to run api package on heroku                         |                                            |
-| `start:ci`          | Start concurrently api and client in test mode            |                                            |
-| `test`              | Runs tests for all packages                               |                                            |
-| `type-check`        | Checks TypeScript types for all packages                  |                                            |
+Read up on our guidelines for contributing and then check out one of our issues labeled as [![Help Wanted](https://img.shields.io/github/issues/Jozwiaczek/smart-gate/help%20wanted.svg)](https://github.com/Jozwiaczek/smart-gate/issues?q=is%3Aopen+is%3Aissue+label%3A%22help-wanted%22) or [![Good First Issue](https://img.shields.io/github/issues/Jozwiaczek/smart-gate/good%20first%20issue.svg)](https://github.com/Jozwiaczek/smart-gate/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
 
-## Changelog
+### Code of Conduct
 
-[Learn about the latest improvements](CHANGELOG.md).
+Help us keep Smart Gate open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## 📍 Roadmap
+
+The future plans and high priority features and enhancements can be found in the [roadmap](https://github.com/Jozwiaczek/smart-gate/projects/1).
+
+## 📈 Changelog
+
+For details about the latest updates check the [changelog](CHANGELOG.md).
 
 ## Contributors ✨
 
@@ -165,6 +134,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Jozwiaczek"><img src="https://avatars.githubusercontent.com/u/29049653?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Jóźwiak</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Code">💻</a> <a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Jozwiaczek" title="Documentation">📖</a> <a href="#design-Jozwiaczek" title="Design">🎨</a> <a href="#ideas-Jozwiaczek" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-Jozwiaczek" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AJozwiaczek" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/Mefjus"><img src="https://avatars.githubusercontent.com/u/29005327?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mefjus</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/commits?author=Mefjus" title="Code">💻</a> <a href="#ideas-Mefjus" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AMefjus" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/nikofiko123"><img src="https://avatars.githubusercontent.com/u/39961079?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nikofiko123</b></sub></a><br /><a href="#design-nikofiko123" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/Vatras"><img src="https://avatars.githubusercontent.com/u/4075877?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vatras</b></sub></a><br /><a href="https://github.com/Jozwiaczek/smart-gate/pulls?q=is%3Apr+reviewed-by%3AVatras" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 

@@ -1,3 +1,45 @@
+# [1.14.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.13.0...v1.14.0) (2021-08-26)
+
+
+### Features
+
+* add predefined deploy buttons for client and api packages ([c9aac33](https://github.com/Jozwiaczek/smart-gate/commit/c9aac33fb18b618d0fce19ad34dd4ad1c81d2412))
+
+# [1.13.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.12.0...v1.13.0) (2021-08-16)
+
+
+### Features
+
+* **client:** add gate disconnected view ([da2f237](https://github.com/Jozwiaczek/smart-gate/commit/da2f237699813db7833dc0316fcc27b14b8789f9))
+* **client:** add tooltip and disconnected icons color animation ([514e54b](https://github.com/Jozwiaczek/smart-gate/commit/514e54be6a2c99ab7c244f61fbd89920fbd70671))
+
+# [1.12.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.11.1...v1.12.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **client:** tick icon on ios devices ([6e5060a](https://github.com/Jozwiaczek/smart-gate/commit/6e5060a932b39b83f916a4413aa731e581ceacf1))
+* adjust external integrations api guard, extract external integrations client config ([1bd6d38](https://github.com/Jozwiaczek/smart-gate/commit/1bd6d38fd09e621f02274a06ba36fbd4214c3f84))
+* **client:** copy to clipboard icon on hover ([da26197](https://github.com/Jozwiaczek/smart-gate/commit/da261972e66523b37dc318f0f81d305e30ae9487))
+* **client:** input end adornment padding ([ef3d12a](https://github.com/Jozwiaczek/smart-gate/commit/ef3d12a1da58a6413aa93058e3b4cf0044fbe218))
+
+
+### Features
+
+* **api:** add base setup for external integrations ([06eb566](https://github.com/Jozwiaczek/smart-gate/commit/06eb5665e3aab1c0110c06d703f9f9fd06c86ee9))
+* **api:** add error when gate is disconnected ([2e1d50d](https://github.com/Jozwiaczek/smart-gate/commit/2e1d50d771fbcf174d4664603bc3ceeb030fb991))
+* **api:** add guard and decorator for authentication external integrations ([211c676](https://github.com/Jozwiaczek/smart-gate/commit/211c676abe615cc53d50d3a1cf9aef201579827e))
+* **api:** add user from cookie payload pipe ([d86674a](https://github.com/Jozwiaczek/smart-gate/commit/d86674af5526b12108692012dc0ea88e5f775137))
+* **client:** add animated up arrow ([ac37c1d](https://github.com/Jozwiaczek/smart-gate/commit/ac37c1d2877c60e2969f28d67eea9972ee62e4e9))
+* **client:** add base toggle slider ([8fdacd7](https://github.com/Jozwiaczek/smart-gate/commit/8fdacd759ab1d3bfce54e82289f7284144107402))
+* **client:** add confirmations dialogs for integrations actions ([87fe002](https://github.com/Jozwiaczek/smart-gate/commit/87fe002345d7a3f0ca3d5dc851082301d5735b40))
+* **client:** add copy to clipboard ([dd1d4d2](https://github.com/Jozwiaczek/smart-gate/commit/dd1d4d29468fa86b216c299da552e049fdbfbca6))
+* **client:** add toggling progress animation and reset state after complete ([134d49b](https://github.com/Jozwiaczek/smart-gate/commit/134d49b4ba7e2c4b5e67da17457b4b2515d70a0b))
+* **client:** show success info in info box ([ab6b7a8](https://github.com/Jozwiaczek/smart-gate/commit/ab6b7a8dbccac24b156585a78906c01461f7d220))
+* add completed ui for account external integrations view ([263be93](https://github.com/Jozwiaczek/smart-gate/commit/263be93d1a047d32a2ec14ca4e45ffa55179b0c6))
+* generate external integrations token ([8cfc3f8](https://github.com/Jozwiaczek/smart-gate/commit/8cfc3f852cef057bc3bfe9650a50a9a3816bc35a))
+* handle deleting and regeneration of integrations token ([b9f2863](https://github.com/Jozwiaczek/smart-gate/commit/b9f286324fac00be914e924db2ce676e078c130a))
+
 ## [1.11.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.11.0...v1.11.1) (2021-08-04)
 
 

@@ -1,8 +1,8 @@
-export const inputAdornmentSize = 22;
+export const inputAdornmentSize = 30;
 export const inputBasePadding = 20;
 
 export const getInputPadding = (isStartAdornment?: boolean, isEndAdornment?: boolean): string => {
-  const adornmentPadding = 1.5 * inputBasePadding + inputAdornmentSize;
+  const adornmentPadding = inputBasePadding + inputAdornmentSize;
   let leftPadding = inputBasePadding;
   let rightPadding = inputBasePadding;
 
@@ -10,7 +10,7 @@ export const getInputPadding = (isStartAdornment?: boolean, isEndAdornment?: boo
     leftPadding = adornmentPadding;
   }
   if (isEndAdornment) {
-    rightPadding = adornmentPadding;
+    rightPadding = adornmentPadding * 1.5;
   }
 
   return `${inputBasePadding}px ${rightPadding}px ${inputBasePadding}px ${leftPadding}px`;

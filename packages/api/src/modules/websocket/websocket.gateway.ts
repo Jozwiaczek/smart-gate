@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -62,9 +62,10 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
 
   @SubscribeMessage(WebSocketEvent.TOGGLE_GATE)
   toggleGate(): void {
-    if (this.deviceClient) {
-      this.deviceClient.send(WebSocketEvent.TOGGLE_GATE);
+    if (!this.deviceClient) {
+      throw new ServiceUnavailableException('Gate disconnected');
     }
+    this.deviceClient.send(WebSocketEvent.TOGGLE_GATE);
   }
 
   @SubscribeMessage(WebSocketEvent.CHECK_DEVICE_CONNECTION)

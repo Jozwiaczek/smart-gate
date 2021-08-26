@@ -57,7 +57,8 @@ export class AuthService {
 
       this.tokenCookieService.setCookieTokens(generateTokens, res);
 
-      const { firstName, lastName, roles, id, createdAt, updatedAt } = user;
+      const { firstName, lastName, roles, id, createdAt, updatedAt, externalIntegrationsToken } =
+        user;
 
       return {
         user: {
@@ -68,6 +69,7 @@ export class AuthService {
           firstName,
           lastName,
           roles,
+          externalIntegrationsToken,
         },
         expirationDate: expirationDate.getTime(),
       };

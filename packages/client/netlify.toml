@@ -1,8 +1,19 @@
+# Client deploy configuration
 #
 # https://docs.netlify.com/configure-builds/file-based-configuration
 #
 
 [build]
     base = "packages/client"
-    publish = "build"
+    publish = "build/"
     command = "yarn build"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://app-my-home.herokuapp.com/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

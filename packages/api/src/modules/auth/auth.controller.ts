@@ -12,6 +12,7 @@ import {
 import { CookieRequest, CookieResponse } from '../../interfaces/cookie-types';
 import { BasePayload, TokenPayload } from '../../interfaces/token-types';
 import { ValidationPipe } from '../../utils/validation.pipe';
+import { UserEntity } from '../database/entities/user.entity';
 import { SentryIgnoreException } from '../sentry/decorators/sentry-ignore-exception.decorator';
 import { UseSentryTransaction } from '../sentry/decorators/use-sentry-transaction.decorator';
 import { AuthService } from './auth.service';
@@ -20,6 +21,7 @@ import { CookiePayload } from './decorators/cookiePayload.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { UserInfo } from './interfaces/user-info.types';
+import { UserFromCookiePayloadPipe } from './pipes/user-from-cookie-payload.pipe';
 
 @UseSentryTransaction()
 @SentryIgnoreException()
@@ -57,9 +59,20 @@ export class AuthController {
 
   @Auth()
   @Get('me')
-  async me(@CookiePayload() { sub, exp }: TokenPayload): Promise<UserInfo> {
-    const { email, firstName, lastName, roles, id, createdAt, updatedAt } =
-      await this.authService.getUser(sub);
+  me(
+    @CookiePayload() { exp }: TokenPayload,
+    @CookiePayload(UserFromCookiePayloadPipe)
+    {
+      email,
+      firstName,
+      lastName,
+      roles,
+      id,
+      createdAt,
+      updatedAt,
+      externalIntegrationsToken,
+    }: UserEntity,
+  ): UserInfo {
     return {
       user: {
         id,
@@ -69,6 +82,7 @@ export class AuthController {
         roles,
         createdAt,
         updatedAt,
+        externalIntegrationsToken,
       },
       expirationDate: exp * 1000,
     };

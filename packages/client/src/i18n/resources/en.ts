@@ -23,6 +23,7 @@ const en = {
       delete: 'Delete',
       cancel: 'Cancel',
       save: 'Save',
+      regenerate: 'Regenerate',
     },
     menu: {
       history: 'History',
@@ -74,8 +75,19 @@ const en = {
       },
       dashboard: {
         title: 'Dashboard',
-        toggleGate: 'Toggle gate',
-        toggleSuccess: 'Gate successfully toggled',
+        sections: {
+          toggling: {
+            swipeUpToToggle: 'Swipe up to toggle gate',
+            toggleSuccess: 'Successfully toggled',
+            gateDisconnected: {
+              title: 'Gate disconnected',
+              description:
+                'Gate is currently unavailable. <br />Contact with your system administrator for more details.',
+              serverDisconnected: 'There is no connection with the server.',
+              deviceDisconnected: 'The device responsible for opening the gate is disconnected.',
+            },
+          },
+        },
       },
       history: {
         title: 'History',
@@ -121,6 +133,35 @@ const en = {
             deleteAccountInfo:
               'Are you sure you want to delete your account? This will permanently erase your account.',
             accountDeleted: 'Account deleted successfully',
+          },
+          integrations: {
+            title: 'Integrations',
+            extendedTitle: 'External integrations',
+            description:
+              'Here you can integrate with external services. Thanks to that you will be able for example to open doors with <strong>voice assistant</strong>.',
+            generateApiKey: 'Generate token',
+            regenerate: 'Regenerate',
+            tokenCopied: 'Token copied to clipboard',
+            tokenDeleted: 'Token deleted successfully',
+            tokenManagement: 'Token management',
+            externalIntegrationsToken: 'External integrations token',
+            integrationsTemplates: 'Integrations templates',
+            deleteToken: 'Delete external integrations token',
+            deleteTokenInfo:
+              'Are you sure you want to delete your token? This will permanently erase it and all created integrations will lose connection.',
+            templatesDescription:
+              'Integrations templates are actions prepared with a view to quickly adding external integrations. They are fully customizable and only require the <strong>e-mail</strong> assigned to the Smart Gate account and the generated <strong>token</strong>.',
+            regenerateTokenConfirmation: 'Regenerate external integrations token',
+            regenerateTokenConfirmationInfo:
+              'Are you sure you want to regenerate your token? All created integrations will lose connection.',
+            pickToStart: 'Pick one of the links below to get started quickly:',
+            templatesNote:
+              '<strong>Note:</strong> In order to add prepared integrations templates in most cases you will have to <strong>allow for untrusted templates/shortcuts</strong> in your device settings.',
+            shortcutsTemplate: 'Apple Shortcuts template',
+            generateTokenToIntegrate:
+              'In order to integrate with external services, you have to generate your private token key.',
+            sharingTokenWarning:
+              '<strong>Warning:</strong> Don’t share your token to anyone. Every user should have his own unique token.',
           },
         },
         privileges: {

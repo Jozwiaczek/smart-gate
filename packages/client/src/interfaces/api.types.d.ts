@@ -12,6 +12,7 @@ interface ApiUser extends BaseApiResource {
   firstName: string;
   lastName: string;
   roles: Array<Role>;
+  externalIntegrationsToken?: string;
 }
 
 interface ApiInvitation extends BaseApiResource {

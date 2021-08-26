@@ -1,4 +1,4 @@
-const authTokens = {
+const AUTH_TOKENS = {
   accessToken: {
     name: 'access_token',
   },
@@ -14,8 +14,11 @@ const DB_CONFIG_KEYS = {
   DEVICE_ACTION_CONFIG: 'DEVICE_ACTION_CONFIG',
 };
 
-const clientEndpoints = {
+const CLIENT_ENDPOINTS = {
   passwordMagicLink: '/passwordRecovery/magicLink',
   registrationMagicLink: '/registration',
 };
-export default { authTokens, clientEndpoints, DB_CONFIG_KEYS };
+
+const ROLES_KEY = 'roles';
+
+export default { AUTH_TOKENS, CLIENT_ENDPOINTS, ROLES_KEY, DB_CONFIG_KEYS };
