@@ -64,6 +64,8 @@ Only what you have to do in this step is to click 2 buttons from [Setup for your
 
 After those steps You will transform your simply or even old gate/door into your private smart system.
 
+https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-8ed0-3694fe3e4809.mp4
+
 ## 🚛 Setup for your own usage
 
 In order to use the Smart Gate system in your environment, you have to deploy your own instance
@@ -75,12 +77,6 @@ What's important is that the whole setup and its usage is free, so You don't hav
 Why it's free because every part of this setup assumes usage of free tiers without any need to upgrades those pricing plans.
 
 You only have to click the buttons below to deploy your own instances and fill up the required environment variables.
-
-
-
-https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-8ed0-3694fe3e4809.mp4
-
-
 
 ### Deploy web application
 
