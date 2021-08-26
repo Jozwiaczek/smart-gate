@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.13.0...v1.14.0) (2021-08-26)
+
+
+### Features
+
+* add predefined deploy buttons for client and api packages ([c9aac33](https://github.com/Jozwiaczek/smart-gate/commit/c9aac33fb18b618d0fce19ad34dd4ad1c81d2412))
+
 # [1.13.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.12.0...v1.13.0) (2021-08-16)
 
 
