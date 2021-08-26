@@ -76,10 +76,11 @@ Why it's free because every part of this setup assumes usage of free tiers witho
 
 You only have to click the buttons below to deploy your own instances and fill up the required environment variables.
 
-<video width='300' height='650' autoplay loop muted>
-  <source src="./open-gate-preview.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+
+
+https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-8ed0-3694fe3e4809.mp4
+
+
 
 ### Deploy web application
 
