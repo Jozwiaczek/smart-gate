@@ -2,13 +2,13 @@
 
 <p align="center">
     <a href="https://github.com/Jozwiaczek/smart-gate">
-        <img src="./readme-logo.png" alt="smart gate logo" width="120px" height="120px"/>
+        <img src="./readme-logo.png" alt="smart gate logo" width="192" height="192"/>
     </a>
     <br>
     <i>🔐 Open source system for handling access to any physical entry gate.</i>
     <br>
     <br>
-    <i>Created by <b>Jakub Jóźwiak</b> and <b>Mateusz Nestorowicz</b></i>
+    <i>Created by <a href="https://github.com/Jozwiaczek"><b>Jakub Jóźwiak</b></a> and <a href='https://github.com/Mefjus'><b>Mateusz Nestorowicz</b></a></i>
 </p>
 
 <p align="center">
@@ -33,23 +33,38 @@
 ## 🚩 Table of Contents
 
 - [About](#-about)
-- [Setup for your own usage](setup-for-your-own-usage)
-- [Getting started](#-getting-started)
-  - [Prerequisites](#-prerequisites)
-  - [General installation](#-general-installation)
-- [Packages Docs](#-packages-docs)
-- [Conventional Commits](#-conventional-commits)
-- [Hygen - Code generator](#-hygen-code-generator)
-- [Available root scripts](#-available-root-scripts)
+- [Setup for your own usage](#-setup-for-your-own-usage)
+  - [Deploy web application](#-deploy-web-application)
+  - [Deploy server](#-deploy-server)
+  - [Prepare your Raspberry Pi](#-prepare-your-raspberry-pi)
+- [Documentation](#-documentation)
+- [Contributing](#-contributing)
+  - [Contributing Guidelines](#-contributing-guidelines)
+  - [Want to Help?](#-want-to-help?)
+  - [Code of Conduct](#-code-of-conduct)
+- [Roadmap](#-roadmap)
 - [Changelog](#-changelog)
 - [Contributors](#-contributors)
 - [License](#-license)
 
-## 📖 About
+## 🔑 About
 
 ![Smart gate info banner](banner-about.png)
 
-System for managing and handling access to any physical entry home gate.
+System for managing and handling access to any physical entry home gate or door.
+The whole idea is to add smart control for your any already existed electric lock or gate.
+
+Sounds familiar?
+Right, but there is one significant difference between others smart lock, it is **COMPLETELY FREE**.
+
+From physical side only what you have to do is to prepare [Raspberry Pi](https://www.raspberrypi.org/products/) and add some [3V Relay Module](https://www.google.com/search?q=relay+module+3v&tbm=isch&ved=2ahUKEwjll9aUt8_yAhVXvyoKHeMbBmgQ2-cCegQIABAA&oq=relay+module+3v&gs_lcp=CgNpbWcQAzIHCCMQ7wMQJzIGCAAQCBAeUKweWP8hYNEjaABwAHgAgAFliAGXApIBAzIuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=o-wnYaW6Ldf-qgHjt5jABg&bih=1329&biw=2560&rlz=1C5CHFA_enPL923PL923) between Raspberry and your gate to enable ability for opening.
+
+Rest part of Smart Gate system is handled by predefined templates for simplifying process of deploying server, database, and web app.
+Only what you have to do in this step is to click 2 buttons from [Setup for your own usage](#-setup-for-your-own-usage) and fill provided secrets.
+
+After those steps You will transform your simply or even old gate/door into your private smart system.
+
+https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-8ed0-3694fe3e4809.mp4
 
 ## 🚛 Setup for your own usage
 
@@ -57,126 +72,55 @@ In order to use the Smart Gate system in your environment, you have to deploy yo
 of the client, server and database.
 To make it as simple as possible there is already a prepared template for deploying all packages.
 
-What's important is that the whole setup and its usage is **COMPLETELY FREE**.
+What's important is that the whole setup and its usage is free, so You don't have to worry about any billing.
 
 Why it's free because every part of this setup assumes usage of free tiers without any need to upgrades those pricing plans.
 
 You only have to click the buttons below to deploy your own instances and fill up the required environment variables.
 
-### Deploy [client package](./packages/client/README.md) (Web app)
+### Deploy web application
 
-Click the button below to deploy with predefined [Netlify](https://www.netlify.com) template.
+Click the button below to deploy [client package](packages/client/README.md) with predefined [Netlify](https://www.netlify.com) template.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jozwiaczek/smart-gate)
 
-### Deploy [api package](./packages/api/README.md) (Server)
+### Deploy server
 
-Click the button below to deploy with predefined [Heroku](https://www.heroku.com) template.
+Click the button below to deploy [api package](packages/api/README.md) with predefined [Heroku](https://www.heroku.com) template.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Jozwiaczek/smart-gate)
 
-### Prepare your [device](./packages/device/README.md) (Physical part)
+### Prepare your Raspberry Pi
+
+WIP [device](packages/device/README.md)
+
+## 📖 Documentation
 
 WIP
 
-## 🎓 Getting started
+## 🙏 Contributing
 
-### Prerequisites
+### Contributing Guidelines
 
-- [Node.js](https://nodejs.org/en/) >= 12
-- [Yarn](https://classic.yarnpkg.com/lang/en/) >=1.22
+Read the [contributing guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Smart Gate.
 
-### General installation
+### Want to Help?
 
-```shell script
-yarn
-```
+Want to file a bug, contribute some code, or improve documentation? Excellent!
 
-## 📦 Packages Docs
+Read up on our guidelines for contributing and then check out one of our issues labeled as [![Help Wanted](https://img.shields.io/github/issues/Jozwiaczek/smart-gate/help%20wanted.svg)](https://github.com/Jozwiaczek/smart-gate/issues?q=is%3Aopen+is%3Aissue+label%3A%22help-wanted%22) or [![Good First Issue](https://img.shields.io/github/issues/Jozwiaczek/smart-gate/good%20first%20issue.svg)](https://github.com/Jozwiaczek/smart-gate/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).
 
-- Backend:
-  - [Api](./packages/api/README.md)
-  - [Device](./packages/device/README.md)
-- Frontend:
-  - [Client](./packages/client/README.md)
-- Utils:
-  - [CI scripts](./packages/ci-scipts/README.md)
-  - [E2E tests](./packages/e2e/README.md)
+### Code of Conduct
 
-## 📏 Conventional Commits
+Help us keep Smart Gate open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
-Commitlint checks if your commit messages meet the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) format.
-Also it requires package scope (https://www.npmjs.com/package/@commitlint/config-lerna-scopes).
+## 📍 Roadmap
 
-Structure:
+The future plans and high priority features and enhancements can be found in the [roadmap](https://github.com/Jozwiaczek/smart-gate/projects/1).
 
-```git
-type(package-name): general info
-```
+## 📈 Changelog
 
-Structure with more inforamtion:
-
-```git
-type(package-name): general info
-
-- add login panel
-- add avatar
-```
-
-Example:
-
-```git
-feat(smart-gate-api): add comment section
-```
-
-Common types according to commitlint-config-conventional (based on the Angular convention) can be:
-[conventional-commit-types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json).
-Header (first line) must not be longer than 100 characters.
-
-For just validating your commit message without commiting it use terminal:
-
-```shell
-echo 'foo: bar' | commitlint
-```
-
-## 🤖 Hygen - Code generator
-
-Hygen is the cli dev tool that provides the ability for generating scalable code. All code generation templates are defined in the `__template` directory.
-Remember to add created model to git files (typically those files are excluded from default).
-For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
-
-### Available generators:
-
-| Package | Script          | Description                                                   |
-| ------- | --------------- | ------------------------------------------------------------- |
-| client  | `hygen:element` | Creates new standardize React component, story and style file |
-
-## 📝 Available root scripts
-
-To run script, in terminal type `yarn {script}`.
-
-| Script              | Description                                               | Note                                       |
-| ------------------- | --------------------------------------------------------- | ------------------------------------------ |
-| `build`             |                                                           |                                            |
-| `check`             | Runs linter, prettier, tests and ts-check in all packages |                                            |
-| `heroku-postbuild`  | It runs on heroku before api build                        |                                            |
-| `preinstall`        | Checks is yarn was used package manager                   | It runs automatically before every install |
-| `lint`              | Checks linter rules                                       |                                            |
-| `lint:fix`          | Fix linter                                                |                                            |
-| `stylelint`         | Checks stylelint rules for styled-components              |                                            |
-| `prettier`          | Checks prettier rules                                     |                                            |
-| `prettier:fix`      | Fix prettier                                              |                                            |
-| `prepare`           | Install husky                                             | It runs automatically after every install  |
-| `removeNodeModules` | Remove all node_modules from project (all packages)       |                                            |
-| `sortPackageJson`   | Sort alphabetical all package.json in project             |                                            |
-| `start`             | Used to run api package on heroku                         |                                            |
-| `start:ci`          | Start concurrently api and client in test mode            |                                            |
-| `test`              | Runs tests for all packages                               |                                            |
-| `type-check`        | Checks TypeScript types for all packages                  |                                            |
-
-## Changelog
-
-[Learn about the latest improvements](CHANGELOG.md).
+For details about the latest updates check the [changelog](CHANGELOG.md).
 
 ## Contributors ✨
 
