@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import socketIOClient, { Socket } from 'socket.io-client';
 
 import { ConnectionState } from '../../../enums/connectionState.enum';
@@ -63,6 +63,16 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
       setConnectionState(ConnectionState.DISCONNECTED);
     }
   }, [socket]);
+
+  useEffect(() => {
+    void connect();
+  }, [connect]);
+
+  useEffect(() => {
+    return () => {
+      disconnect();
+    };
+  }, [disconnect]);
 
   const toggleGate = useCallback(() => {
     if (socket) {
