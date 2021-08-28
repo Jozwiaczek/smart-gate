@@ -10,7 +10,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://app-my-home.herokuapp.com/:splat"
+  to = "https://smart-gate-jj.herokuapp.com/:splat"
   status = 200
 
 [[redirects]]
