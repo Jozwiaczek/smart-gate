@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.15.0...v1.15.1) (2021-08-28)
+
+
+### Bug Fixes
+
+* **client:** change api redirect url ([989f94a](https://github.com/Jozwiaczek/smart-gate/commit/989f94afc20b3bf901666531e37c412b1b12c1f8))
+
 # [1.15.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.14.0...v1.15.0) (2021-08-28)
 
 
