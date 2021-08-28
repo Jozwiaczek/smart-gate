@@ -84,6 +84,11 @@ Click the button below to deploy [client package](packages/client/README.md) wit
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jozwiaczek/smart-gate)
 
+> _Note:_
+> In case of issue with authentication process in your deployed client package, please replace api redirect url to point your deployed api.
+>
+> It can be changed in [netlify.toml](packages/client/netlify.toml) configuration file.
+
 ### Deploy server
 
 Click the button below to deploy [api package](packages/api/README.md) with predefined [Heroku](https://www.heroku.com) template.
