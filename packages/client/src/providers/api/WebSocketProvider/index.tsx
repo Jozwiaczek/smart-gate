@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import socketIOClient, { Socket } from 'socket.io-client';
 
 import { ConnectionState } from '../../../enums/connectionState.enum';
 import { DeviceStatus } from '../../../enums/deviceStatus.enum';
 import { WebSocketEvent } from '../../../enums/webSocketEvent.enum';
-import { useAuth } from '../../../hooks';
+import { useAuth, useCurrentUser } from '../../../hooks';
 import { WebSocketContext } from './WebSocketProvider.context';
 import { WebSocketProviderProps } from './WebSocketProvider.types';
 
@@ -15,6 +15,7 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
   );
   const [deviceStatus, setDeviceStatus] = useState<DeviceStatus>(DeviceStatus.UNKNOWN);
   const { generateTicket } = useAuth();
+  const [currentUser] = useCurrentUser();
 
   const connect = useCallback(async () => {
     if (
@@ -63,6 +64,18 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
       setConnectionState(ConnectionState.DISCONNECTED);
     }
   }, [socket]);
+
+  useEffect(() => {
+    if (currentUser) {
+      void connect();
+    }
+  }, [connect, currentUser]);
+
+  useEffect(() => {
+    return () => {
+      disconnect();
+    };
+  }, [disconnect]);
 
   const toggleGate = useCallback(() => {
     if (socket) {

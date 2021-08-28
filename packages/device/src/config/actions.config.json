@@ -1,0 +1,46 @@
+{
+  "pinDefinition": {
+    "LOCK_POWER": 38,
+    "CAMERA_POWER": 40
+  },
+  "onInit": [
+    {
+      "type": "OPEN",
+      "pin": "LOCK_POWER",
+      "mode": "OUTPUT",
+      "value": "HIGH"
+    },
+    {
+      "type": "OPEN",
+      "pin": "CAMERA_POWER",
+      "mode": "OUTPUT",
+      "value": "HIGH"
+    }
+  ],
+  "onToggle": [
+    {
+      "type": "WRITE",
+      "pin": "LOCK_POWER",
+      "value": "LOW"
+    },
+    {
+      "type": "WRITE",
+      "pin": "CAMERA_POWER",
+      "value": "LOW"
+    },
+    {
+      "type": "SLEEP",
+      "time": 1000
+    },
+    {
+      "type": "WRITE",
+      "pin": "LOCK_POWER",
+      "value": "HIGH"
+    },
+    {
+      "type": "WRITE",
+      "pin": "CAMERA_POWER",
+      "value": "HIGH"
+    }
+  ]
+}

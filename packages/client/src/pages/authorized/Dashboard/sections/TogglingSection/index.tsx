@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import { ToggleSlider } from '../../../../../elements';
 import { ConnectionState } from '../../../../../enums/connectionState.enum';
@@ -8,18 +8,7 @@ import GateDisconnected from './components/GateDisconnected';
 import { ToggleSliderWrapper } from './TogglingSection.styled';
 
 const TogglingSection = () => {
-  const { connect, disconnect, toggleGate, connectionState, deviceStatus } =
-    useContext(WebSocketContext);
-
-  useEffect(() => {
-    void connect();
-  }, [connect]);
-
-  useEffect(() => {
-    return () => {
-      disconnect();
-    };
-  }, [disconnect]);
+  const { toggleGate, connectionState, deviceStatus } = useContext(WebSocketContext);
 
   const isConnected = useMemo(
     () => connectionState === ConnectionState.CONNECTED && deviceStatus === DeviceStatus.CONNECTED,
