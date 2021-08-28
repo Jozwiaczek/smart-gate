@@ -1,3 +1,22 @@
+# [1.15.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.14.0...v1.15.0) (2021-08-28)
+
+
+### Bug Fixes
+
+* **client:** connect with device only if user is logged in ([3863725](https://github.com/Jozwiaczek/smart-gate/commit/3863725343df17c0afbab9a20317acfc77d9ce37))
+* **client:** handle socket connect and disconnect in provider layer ([bf03dbb](https://github.com/Jozwiaczek/smart-gate/commit/bf03dbb591f0ea6a679060a86d14f82974370de6))
+* **device:** add init log and change logger context name ([65afa0f](https://github.com/Jozwiaczek/smart-gate/commit/65afa0fbf5f233ad45e80e214dbe0956a9ca4ceb))
+* **device:** adjust formatting message in logger ([a405086](https://github.com/Jozwiaczek/smart-gate/commit/a40508699ef1e8d8d9e4436b3ed4b148ccbda31f))
+
+
+### Features
+
+* add config entity ([1ff24f1](https://github.com/Jozwiaczek/smart-gate/commit/1ff24f1da4b15b563033a9839dbb963dec388d8e))
+* add config entity ([09e8acd](https://github.com/Jozwiaczek/smart-gate/commit/09e8acd28e81f54970a72133ca531fa562d26b50))
+* add device config pin definition ([0a7764e](https://github.com/Jozwiaczek/smart-gate/commit/0a7764e8e3ce21dcf26e06ad8c28c1300ed116d2))
+* **device:** add logger, remove hooks, adjust actions config, remove led pin ([274557b](https://github.com/Jozwiaczek/smart-gate/commit/274557bb709d0fdac34349cadf3cd8f27354236c))
+* add device config json ([7ed1e40](https://github.com/Jozwiaczek/smart-gate/commit/7ed1e408de208ec3a2bfecd4325b7bbb06c2a7db))
+
 # [1.14.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.13.0...v1.14.0) (2021-08-26)
 
 
