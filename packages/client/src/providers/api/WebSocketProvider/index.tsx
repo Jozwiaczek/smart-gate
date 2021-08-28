@@ -4,7 +4,7 @@ import socketIOClient, { Socket } from 'socket.io-client';
 import { ConnectionState } from '../../../enums/connectionState.enum';
 import { DeviceStatus } from '../../../enums/deviceStatus.enum';
 import { WebSocketEvent } from '../../../enums/webSocketEvent.enum';
-import { useAuth } from '../../../hooks';
+import { useAuth, useCurrentUser } from '../../../hooks';
 import { WebSocketContext } from './WebSocketProvider.context';
 import { WebSocketProviderProps } from './WebSocketProvider.types';
 
@@ -15,6 +15,7 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
   );
   const [deviceStatus, setDeviceStatus] = useState<DeviceStatus>(DeviceStatus.UNKNOWN);
   const { generateTicket } = useAuth();
+  const [currentUser] = useCurrentUser();
 
   const connect = useCallback(async () => {
     if (
@@ -65,8 +66,10 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
   }, [socket]);
 
   useEffect(() => {
-    void connect();
-  }, [connect]);
+    if (currentUser) {
+      void connect();
+    }
+  }, [connect, currentUser]);
 
   useEffect(() => {
     return () => {
