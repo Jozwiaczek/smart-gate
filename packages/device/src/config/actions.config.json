@@ -30,7 +30,7 @@
     },
     {
       "type": "SLEEP",
-      "time": 1000
+      "time": 300
     },
     {
       "type": "WRITE",

@@ -1,4 +1,5 @@
 import { ConfigEntity } from './config.entity';
+import { HistoryEntity } from './history.entity';
 import { InvitationEntity } from './invitation.entity';
 import { PushNotificationEntity } from './pushNotification.entity';
 import { RefreshTokenEntity } from './refreshToken.entity';
@@ -10,4 +11,5 @@ export default [
   InvitationEntity,
   PushNotificationEntity,
   ConfigEntity,
+  HistoryEntity,
 ];

@@ -7,6 +7,7 @@ import { ConfigModule } from './config/config.module';
 import { ConfigurationModule } from './configuration/configuration.module';
 import { DatabaseModule } from './database/database.module';
 import { ExternalIntegrationsModule } from './external-integrations/external-integrations.module';
+import { HistoryModule } from './history/history.module';
 import { InvitationsModule } from './invitations/invitations.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
@@ -41,6 +42,7 @@ import { WebsocketModule } from './websocket/websocket.module';
     PushNotificationsModule,
     ExternalIntegrationsModule,
     ConfigurationModule,
+    HistoryModule,
   ],
 })
 export class AppModule {}

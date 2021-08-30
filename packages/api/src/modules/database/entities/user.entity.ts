@@ -3,6 +3,8 @@ import { Column, Entity, Index, OneToMany } from 'typeorm';
 import { Role } from '../../../enums/role.enum';
 import { BaseEntity } from './base.entity';
 // eslint-disable-next-line import/no-cycle
+import { HistoryEntity } from './history.entity';
+// eslint-disable-next-line import/no-cycle
 import { InvitationEntity } from './invitation.entity';
 // eslint-disable-next-line import/no-cycle
 import { PushNotificationEntity } from './pushNotification.entity';
@@ -46,6 +48,9 @@ export class UserEntity extends BaseEntity {
     nullable: true,
   })
   public externalIntegrationsToken: string;
+
+  @OneToMany(() => HistoryEntity, (history) => history.user, { onDelete: 'CASCADE' })
+  public history: Array<HistoryEntity>;
 
   @OneToMany(() => RefreshTokenEntity, (token) => token.user, { onDelete: 'CASCADE' })
   public refreshTokens: Promise<[RefreshTokenEntity]>;
