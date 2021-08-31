@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BaseRecordField } from '../Fields.types';
-import { FunctionFieldParagraph } from './FunctionField.styled';
+import { FunctionFieldContainer } from './FunctionField.styled';
 import { FunctionFieldProps } from './FunctionField.types';
 
 const FunctionField = <T extends BaseRecordField>({
@@ -14,9 +14,9 @@ const FunctionField = <T extends BaseRecordField>({
   }
 
   return (
-    <FunctionFieldParagraph data-testid="functionField" style={style}>
+    <FunctionFieldContainer data-testid="functionField" style={style}>
       {render(record)}
-    </FunctionFieldParagraph>
+    </FunctionFieldContainer>
   );
 };
 

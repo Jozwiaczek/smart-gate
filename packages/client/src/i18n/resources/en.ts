@@ -105,6 +105,13 @@ const en = {
           privileges: 'Privileges groups',
           statistics: 'Statistics',
         },
+        routes: {
+          users: {
+            isAdmin: 'Is admin',
+            userWithAdmin: 'User with admin access',
+            userWithoutAdmin: 'User without admin access',
+          },
+        },
       },
       settings: {
         title: 'Settings',

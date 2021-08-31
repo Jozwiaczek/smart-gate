@@ -107,6 +107,13 @@ const pl: TranslationStructure = {
           privileges: 'Grupy dostępu',
           statistics: 'Statystyki',
         },
+        routes: {
+          users: {
+            isAdmin: 'Administrator',
+            userWithAdmin: 'User with admin access',
+            userWithoutAdmin: 'User without admin access',
+          },
+        },
       },
       settings: {
         title: 'Ustawienia',

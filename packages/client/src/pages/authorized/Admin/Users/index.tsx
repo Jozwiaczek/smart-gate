@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { CardList, DateField, DetailedList, FunctionField, TextField } from '../../../../elements';
+import {
+  CardList,
+  DateField,
+  DetailedList,
+  FunctionField,
+  TextField,
+  Tooltip,
+} from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
 import { ApiUser } from '../../../../interfaces/api.types';
 import { isAdmin } from '../../../../utils';
@@ -29,12 +36,21 @@ const Users = () => {
               render={({ firstName, lastName }) => `${firstName} ${lastName}`}
             />
             <FunctionField<ApiUser>
-              label="Is admin"
+              label="routes.admin.routes.users.isAdmin"
               render={({ roles }) => {
                 if (isAdmin(roles)) {
-                  return <AdminAccessIcon />;
+                  return (
+                    <Tooltip label="routes.admin.routes.users.userWithAdmin">
+                      <AdminAccessIcon />
+                    </Tooltip>
+                  );
                 }
-                return <UserAccessIcon />;
+
+                return (
+                  <Tooltip label="routes.admin.routes.users.userWithoutAdmin">
+                    <UserAccessIcon />
+                  </Tooltip>
+                );
               }}
             />
             <TextField source="email" />
