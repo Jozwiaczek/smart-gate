@@ -34,6 +34,9 @@ const pl: TranslationStructure = {
       admin: 'Admin',
     },
     lists: {
+      general: {
+        noData: 'Brak danych',
+      },
       detailedList: {
         items: 'wierszy',
         item: 'wiersz',
@@ -93,6 +96,7 @@ const pl: TranslationStructure = {
       },
       history: {
         title: 'Historia',
+        noData: 'Brak historii',
       },
       admin: {
         title: 'Admin panel',

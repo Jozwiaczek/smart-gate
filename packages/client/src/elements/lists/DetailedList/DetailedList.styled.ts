@@ -129,12 +129,8 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
     `}
 `;
 
-export const BulkCancelButton = styled(IconButton)`
-  color: ${({ theme }) => theme.palette.text.dark};
-  margin-right: 9px;
-  svg {
-    width: 14px;
-  }
+export const BulkCancelButtonWrapper = styled.div`
+  margin: 0 10px;
 `;
 
 export const BulkCancelWrapper = styled.div`

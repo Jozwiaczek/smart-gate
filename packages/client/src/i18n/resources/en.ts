@@ -32,6 +32,9 @@ const en = {
       admin: 'Admin',
     },
     lists: {
+      general: {
+        noData: 'No data',
+      },
       detailedList: {
         items: 'items',
         item: 'item',
@@ -91,6 +94,7 @@ const en = {
       },
       history: {
         title: 'History',
+        noData: 'History is empty',
       },
       admin: {
         title: 'Admin panel',

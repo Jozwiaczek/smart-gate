@@ -11,14 +11,15 @@ import { useMutation, useQuery } from 'react-query';
 import { CSSProperties, useTheme } from 'styled-components';
 
 import { useAxios, useSnackbar } from '../../../hooks';
-import { CancelIcon, TrashIcon } from '../../../icons';
+import { TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
 import { getLabelFromSource } from '../../../utils';
+import { CloseButton } from '../../buttons';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import { Checkbox } from '../../inputs';
 import {
   BulkActionsWrapper,
-  BulkCancelButton,
+  BulkCancelButtonWrapper,
   BulkCancelWrapper,
   DeleteButton,
   ListWrapper,
@@ -33,9 +34,17 @@ import {
   TableRow,
 } from './DetailedList.styled';
 import { DetailedListProps, PerPage } from './DetailedList.types';
+import NoData from './NoData';
 import Pagination from './Pagination';
 
-const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedListProps) => {
+const DetailedList = ({
+  onRowClick,
+  children,
+  resource,
+  rowStyle,
+  rowCellsStyle,
+  noDataLabel,
+}: DetailedListProps) => {
   const theme = useTheme();
   const axios = useAxios();
   const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
@@ -137,14 +146,18 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
     return t(label as never) || t(`baseApiFields.${source}` as never);
   };
 
+  if (!totalRecords) {
+    return <NoData label={noDataLabel} />;
+  }
+
   return (
     <ListWrapper>
       <StyledCard isBulkActionsOpen={isBulkActionsOpen}>
         <BulkActionsWrapper isOpen={isBulkActionsOpen}>
           <BulkCancelWrapper>
-            <BulkCancelButton onClick={unselectAllRows}>
-              <CancelIcon />
-            </BulkCancelButton>
+            <BulkCancelButtonWrapper>
+              <CloseButton color="text-dark" size="18px" onClick={unselectAllRows} />
+            </BulkCancelButtonWrapper>
             {selectedRows.length}&nbsp;
             {selectedRows.length > 1 ? t('lists.detailedList.items') : t('lists.detailedList.item')}
           </BulkCancelWrapper>
@@ -171,6 +184,11 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
               const injectedRowStyle = rowStyle
                 ? (rowStyle(record, theme) as CSSProperties)
                 : undefined;
+
+              const injectedRowCellsStyle = rowCellsStyle
+                ? (rowCellsStyle(record, theme) as CSSProperties)
+                : undefined;
+
               return (
                 <TableRow key={record.id} style={injectedRowStyle}>
                   <TableCellCheckbox>
@@ -188,7 +206,7 @@ const DetailedList = ({ onRowClick, children, resource, rowStyle }: DetailedList
 
                     return (
                       <TableCell onClick={onRowClick} key={`${record.id}-${source}`}>
-                        {cloneElement(child, { record })}
+                        {cloneElement(child, { record, style: injectedRowCellsStyle })}
                       </TableCell>
                     );
                   })}

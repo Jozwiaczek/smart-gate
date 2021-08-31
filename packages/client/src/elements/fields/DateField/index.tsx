@@ -4,11 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { BaseRecordField } from '../Fields.types';
 import { DateFieldProps } from './DateField.types';
 
-const DateField = <T extends BaseRecordField>({ source, record, showTime }: DateFieldProps<T>) => {
+const DateField = <T extends BaseRecordField>({
+  source,
+  record,
+  showTime,
+  style,
+}: DateFieldProps<T>) => {
   const { i18n } = useTranslation();
 
   if (!record || !record[source]) {
-    return <p data-testid="dateField">-</p>;
+    return (
+      <p data-testid="dateField" style={style}>
+        -
+      </p>
+    );
   }
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const date = new Date(record[source].toString());
@@ -18,7 +27,11 @@ const DateField = <T extends BaseRecordField>({ source, record, showTime }: Date
   });
   const formattedDate = formatter.format(date);
 
-  return <p data-testid="dateField">{formattedDate}</p>;
+  return (
+    <p data-testid="dateField" style={style}>
+      {formattedDate}
+    </p>
+  );
 };
 
 DateField.displayName = 'DateField';

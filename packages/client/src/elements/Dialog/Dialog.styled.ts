@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-import hexToRgba from '../../utils/hexToRgba';
+import { hexToRgba } from '../../utils';
 import Card from '../Card';
 
 const fadeIn = keyframes`

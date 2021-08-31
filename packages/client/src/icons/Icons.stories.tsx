@@ -29,7 +29,9 @@ import {
   LogoutAllIcon,
   LogoutIcon,
   MoonIcon,
+  NoDataIcon,
   PolishFlagIcon,
+  PowerSupplyIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
   RefreshIcon,
@@ -63,6 +65,8 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <PowerSupplyIcon />
+    <NoDataIcon />
     <DisconnectedWiresIcon />
     <DeviceDisconnectedIcon />
     <ServerDisconnectedIcon />
