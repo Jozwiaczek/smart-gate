@@ -24,7 +24,10 @@ export class HistoryService {
   }
 
   async findAll(): Promise<GetList<HistoryEntity>> {
-    const fullHistory = await this.historyRepository.find();
+    const fullHistory = await this.historyRepository.find({
+      relations: ['user'],
+      order: { createdAt: 'DESC' },
+    });
     return { data: fullHistory, total: fullHistory.length };
   }
 
