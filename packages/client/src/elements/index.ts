@@ -8,7 +8,7 @@ export {
   Spinner,
 } from './animations';
 export { default as BackgroundSideLogo } from './BackgroundSideLogo';
-export { BackButton, Button, CloseButton, IconButton } from './buttons';
+export { BackButton, Button, CloseButton, DeleteHoverButton, IconButton } from './buttons';
 export { default as Card } from './Card';
 export { default as Copyright } from './Copyright';
 export { default as Dialog } from './Dialog';

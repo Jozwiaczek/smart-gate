@@ -12,7 +12,7 @@ export const RightLeft = styled.div`
 `;
 
 export const StyledButton = styled.button<StyledCloseButtonProps>(
-  ({ theme, size, color }) => css`
+  ({ theme, size, color, hoverColor }) => css`
     align-items: center;
     background: transparent;
     border: none;
@@ -40,11 +40,11 @@ export const StyledButton = styled.button<StyledCloseButtonProps>(
     }
 
     &:hover ${LeftRight} {
-      background: ${theme.palette.colors.red};
+      background: ${getCssColor({ theme, color: hoverColor })};
       transform: rotate(-45deg);
     }
     &:hover ${RightLeft} {
-      background: ${theme.palette.colors.red};
+      background: ${getCssColor({ theme, color: hoverColor })};
       transform: rotate(45deg);
     }
   `,

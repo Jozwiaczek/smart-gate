@@ -11,17 +11,15 @@ import { useMutation, useQuery } from 'react-query';
 import { CSSProperties, useTheme } from 'styled-components';
 
 import { useAxios, useSnackbar } from '../../../hooks';
-import { TrashIcon } from '../../../icons';
 import { ApiList } from '../../../interfaces/api.types';
 import { getLabelFromSource } from '../../../utils';
-import { CloseButton } from '../../buttons';
+import { CloseButton, DeleteHoverButton } from '../../buttons';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import { Checkbox } from '../../inputs';
 import {
   BulkActionsWrapper,
   BulkCancelButtonWrapper,
   BulkCancelWrapper,
-  DeleteButton,
   ListWrapper,
   StyledCard,
   Table,
@@ -156,15 +154,17 @@ const DetailedList = ({
         <BulkActionsWrapper isOpen={isBulkActionsOpen}>
           <BulkCancelWrapper>
             <BulkCancelButtonWrapper>
-              <CloseButton color="text-dark" size="18px" onClick={unselectAllRows} />
+              <CloseButton
+                color="text-dark"
+                hoverColor="text-light"
+                size="18px"
+                onClick={unselectAllRows}
+              />
             </BulkCancelButtonWrapper>
             {selectedRows.length}&nbsp;
             {selectedRows.length > 1 ? t('lists.detailedList.items') : t('lists.detailedList.item')}
           </BulkCancelWrapper>
-          <DeleteButton color="red" onClick={removeSelectedItems}>
-            <TrashIcon />
-            {t('actions.delete')}
-          </DeleteButton>
+          <DeleteHoverButton onClick={removeSelectedItems} />
         </BulkActionsWrapper>
         <Table data-testid={`table-${resource}`}>
           <TableHead>
