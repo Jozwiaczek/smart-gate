@@ -37,7 +37,7 @@ const defaultTabs: Array<AppBarItem> = [
     path: mapRoutesToArray(admin),
     label: 'menu.admin',
     icon: <AdminIcon />,
-    onlyAdmin: false,
+    onlyAdmin: true,
     component: AdminDashboard,
     exact: true,
   },

@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { KeyIcon } from '../../../../icons';
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -15,3 +17,15 @@ export const ListContainer = styled.div`
   overflow-x: auto;
   padding-top: 60px;
 `;
+
+export const AdminAccessIcon = styled(KeyIcon)(
+  ({ theme: { palette } }) => css`
+    color: ${palette.colors.orange};
+  `,
+);
+
+export const UserAccessIcon = styled(KeyIcon)(
+  ({ theme: { palette } }) => css`
+    color: ${palette.text.secondary};
+  `,
+);

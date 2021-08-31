@@ -3,7 +3,8 @@ import React from 'react';
 import { CardList, DateField, DetailedList, FunctionField, TextField } from '../../../../elements';
 import { useMediaQuery } from '../../../../hooks';
 import { ApiUser } from '../../../../interfaces/api.types';
-import { ListContainer, Wrapper } from './Users.styled';
+import { isAdmin } from '../../../../utils';
+import { AdminAccessIcon, ListContainer, UserAccessIcon, Wrapper } from './Users.styled';
 
 const Users = () => {
   const isMobile = useMediaQuery(({ breakpoints, down }) => down(breakpoints.lg));
@@ -26,6 +27,15 @@ const Users = () => {
             <FunctionField<ApiUser>
               label="user.name"
               render={({ firstName, lastName }) => `${firstName} ${lastName}`}
+            />
+            <FunctionField<ApiUser>
+              label="Is admin"
+              render={({ roles }) => {
+                if (isAdmin(roles)) {
+                  return <AdminAccessIcon />;
+                }
+                return <UserAccessIcon />;
+              }}
             />
             <TextField source="email" />
             <DateField source="createdAt" showTime />
