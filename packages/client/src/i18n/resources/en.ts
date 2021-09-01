@@ -95,6 +95,13 @@ const en = {
       history: {
         title: 'History',
         noData: 'History is empty',
+        date: 'Date',
+        event: 'Event',
+        events: {
+          open: 'Gate opened',
+          turnedOff: 'Device turned off',
+          turnedOn: 'Device turned on',
+        },
       },
       admin: {
         title: 'Admin panel',
@@ -105,13 +112,11 @@ const en = {
           privileges: 'Privileges groups',
           statistics: 'Statistics',
         },
-        routes: {
-          users: {
-            isAdmin: 'Is admin',
-            userWithAdmin: 'User with admin access',
-            userWithoutAdmin: 'User without admin access',
-          },
-        },
+      },
+      users: {
+        isAdmin: 'Is admin',
+        userWithAdmin: 'User with admin access',
+        userWithoutAdmin: 'User without admin access',
       },
       settings: {
         title: 'Settings',

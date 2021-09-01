@@ -36,18 +36,18 @@ const Users = () => {
               render={({ firstName, lastName }) => `${firstName} ${lastName}`}
             />
             <FunctionField<ApiUser>
-              label="routes.admin.routes.users.isAdmin"
+              label="routes.users.isAdmin"
               render={({ roles }) => {
                 if (isAdmin(roles)) {
                   return (
-                    <Tooltip label="routes.admin.routes.users.userWithAdmin">
+                    <Tooltip label="routes.users.userWithAdmin">
                       <AdminAccessIcon />
                     </Tooltip>
                   );
                 }
 
                 return (
-                  <Tooltip label="routes.admin.routes.users.userWithoutAdmin">
+                  <Tooltip label="routes.users.userWithoutAdmin">
                     <UserAccessIcon />
                   </Tooltip>
                 );

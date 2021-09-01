@@ -97,6 +97,13 @@ const pl: TranslationStructure = {
       history: {
         title: 'Historia',
         noData: 'Brak historii',
+        date: 'Data',
+        event: 'Zdarzenie',
+        events: {
+          open: 'Brama otworzona',
+          turnedOff: 'Urządzenie wyłączone',
+          turnedOn: 'Urządzenie włączone',
+        },
       },
       admin: {
         title: 'Admin panel',
@@ -107,13 +114,11 @@ const pl: TranslationStructure = {
           privileges: 'Grupy dostępu',
           statistics: 'Statystyki',
         },
-        routes: {
-          users: {
-            isAdmin: 'Administrator',
-            userWithAdmin: 'User with admin access',
-            userWithoutAdmin: 'User without admin access',
-          },
-        },
+      },
+      users: {
+        isAdmin: 'Administrator',
+        userWithAdmin: 'Użytkownik z dostępem administratora',
+        userWithoutAdmin: 'Użytkownik bez dostępu administratora',
       },
       settings: {
         title: 'Ustawienia',

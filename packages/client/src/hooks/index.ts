@@ -4,6 +4,7 @@ export { default as useConfirmDialog } from './useConfirmDialog';
 export { default as useCurrentUser } from './useCurrentUser';
 export { default as useDebounce } from './useDebounce';
 export { default as useEncodedParams } from './useEncodedParams';
+export { default as useHistoryEventLabel } from './useHistoryEventLabel';
 export { default as useHotkeys } from './useHotkeys';
 export { default as useInterval } from './useInterval';
 export { default as useLocalStorage } from './useLocalStorage/useLocalStorage';

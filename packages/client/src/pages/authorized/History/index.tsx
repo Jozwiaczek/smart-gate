@@ -2,15 +2,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DateField, DetailedList, FunctionField } from '../../../elements';
+import useHistoryEventLabel from '../../../hooks/useHistoryEventLabel';
 import { PowerSupplyIcon } from '../../../icons';
 import { ApiHistoryRecord } from '../../../interfaces/api.types';
-import { mapHistoryEventToLabel } from '../../../utils';
 import { Title } from '../AuthorizedPages.styled';
 import { ListContainer, Wrapper } from './History.styled';
 import { getRowCellsStyle } from './History.utils';
 
 const History = () => {
   const { t } = useTranslation();
+  const mapHistoryEventToLabel = useHistoryEventLabel();
 
   return (
     <Wrapper>
@@ -31,9 +32,9 @@ const History = () => {
               return `${firstName} ${lastName}`;
             }}
           />
-          <DateField label="Date" source="createdAt" showTime />
+          <DateField label="routes.history.date" source="createdAt" showTime />
           <FunctionField<ApiHistoryRecord>
-            label="Event"
+            label="routes.history.event"
             render={({ event }) => mapHistoryEventToLabel(event)}
           />
         </DetailedList>

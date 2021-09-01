@@ -3,6 +3,5 @@ export { default as getLabelFromSource } from './getLabelFromSource';
 export { default as getPlaceholderFromSource } from './getPlaceholderFromSource';
 export { default as hexToRgba } from './hexToRgba';
 export { default as isAdmin } from './isAdmin';
-export { default as mapHistoryEventToLabel } from './mapHistoryEventToLabel';
 export { default as onlyOnDevEnv } from './onlyOnDevEnv';
 export { default as registerWebPush } from './registerWebPush';
