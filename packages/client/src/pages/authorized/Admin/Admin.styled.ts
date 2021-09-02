@@ -31,6 +31,8 @@ export const CardButton = styled(Button)(
     align-items: center;
     text-align: center;
     flex-direction: column;
+    column-gap: 10px;
+
     ${down(breakpoints.md)} {
       width: 100%;
       height: 75px;
@@ -38,6 +40,9 @@ export const CardButton = styled(Button)(
       text-align: left;
       justify-content: flex-start;
       padding-left: 20px;
+      svg {
+        transform: none;
+      }
     }
   `,
 );

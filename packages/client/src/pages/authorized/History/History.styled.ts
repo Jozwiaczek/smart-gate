@@ -13,5 +13,5 @@ export const DesktopListContainer = styled.div`
 `;
 
 export const MobileListContainer = styled.div`
-  margin-top: 40px;
+  padding: 40px 0;
 `;

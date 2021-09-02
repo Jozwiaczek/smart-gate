@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 import { HistoryEvent } from '../../../enums/historyEvent.enum';
 import { OpenLockIcon, PowerSupplyIcon } from '../../../icons';
-import { StyledHelperFunc } from '../../../interfaces/utils.types';
 import Card from '../../Card';
 import { RECORD_ICON_CIRCLE_SIZE } from './HistoryCompactList.constants';
 import { RecordIconCircleProps } from './HistoryCompactList.types';
@@ -33,7 +32,7 @@ export const RecordRow = styled.div`
 
 export const RecordIconCircle = styled.div<RecordIconCircleProps>(
   ({ theme: { down, breakpoints }, firstRecord, event }) => css`
-    ${getRecordIconCircleColors}
+    ${getRecordIconCircleColors};
     border-radius: 100%;
     width: ${RECORD_ICON_CIRCLE_SIZE};
     height: ${RECORD_ICON_CIRCLE_SIZE};

@@ -5,7 +5,7 @@ import Card from '../../Card';
 const CARD_ITEM_PADDING = '20px';
 
 export const CardItemButton = styled.button(
-  ({ theme: { palette } }) => css`
+  ({ theme: { palette, breakpoints, up } }) => css`
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -16,13 +16,15 @@ export const CardItemButton = styled.button(
     outline: none;
     position: relative;
 
-    :hover {
-      cursor: pointer;
-      background: ${palette.background.paperHover};
-    }
+    ${up(breakpoints.sm)} {
+      :hover {
+        cursor: pointer;
+        background: ${palette.background.paperHover};
+      }
 
-    :focus-visible {
-      box-shadow: inset 0 0 0 2px ${palette.primary.light};
+      :focus-visible {
+        box-shadow: inset 0 0 0 2px ${palette.primary.light};
+      }
     }
   `,
 );
