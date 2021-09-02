@@ -15,6 +15,11 @@ const pl: TranslationStructure = {
       password: 'Hasło',
       role: 'Rola',
     },
+    history: {
+      event: 'Zdarzenie',
+      date: 'Data',
+      device: 'Urządzenie',
+    },
     invitation: {
       name: 'Zaproszenie',
       inviter: 'Zapraszający',
@@ -97,12 +102,19 @@ const pl: TranslationStructure = {
       history: {
         title: 'Historia',
         noData: 'Brak historii',
-        date: 'Data',
-        event: 'Zdarzenie',
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
         events: {
-          open: 'Brama otworzona',
-          turnedOff: 'Urządzenie wyłączone',
-          turnedOn: 'Urządzenie włączone',
+          personal: {
+            open: 'otworzył bramę',
+            turnedOff: 'wyłączone',
+            turnedOn: 'włączone',
+          },
+          impersonal: {
+            open: 'Brama otworzona',
+            turnedOff: 'Urządzenie wyłączone',
+            turnedOn: 'Urządzenie włączone',
+          },
         },
       },
       admin: {

@@ -30,6 +30,7 @@ import {
   LogoutIcon,
   MoonIcon,
   NoDataIcon,
+  OpenLockIcon,
   PolishFlagIcon,
   PowerSupplyIcon,
   PrivilegesGroupIcon,
@@ -65,6 +66,7 @@ const IconsWrapper = styled.div`
 //
 const AllIconsPanel = () => (
   <IconsWrapper>
+    <OpenLockIcon />
     <PowerSupplyIcon />
     <NoDataIcon />
     <DisconnectedWiresIcon />

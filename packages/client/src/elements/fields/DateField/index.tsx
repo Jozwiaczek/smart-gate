@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useFormatDate } from '../../../hooks';
 import { BaseRecordField } from '../Fields.types';
 import { DateFieldProps } from './DateField.types';
 
@@ -10,7 +10,7 @@ const DateField = <T extends BaseRecordField>({
   showTime,
   style,
 }: DateFieldProps<T>) => {
-  const { i18n } = useTranslation();
+  const formatDate = useFormatDate();
 
   if (!record || !record[source]) {
     return (
@@ -19,17 +19,16 @@ const DateField = <T extends BaseRecordField>({
       </p>
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  const date = new Date(record[source].toString());
-  const formatter = new Intl.DateTimeFormat(i18n.language, {
+
+  const formatterOptions: Intl.DateTimeFormatOptions = {
     timeStyle: showTime ? 'medium' : undefined,
     dateStyle: 'short',
-  });
-  const formattedDate = formatter.format(date);
+  };
+  const dateLabel = formatDate(record[source], formatterOptions);
 
   return (
     <p data-testid="dateField" style={style}>
-      {formattedDate}
+      {dateLabel}
     </p>
   );
 };

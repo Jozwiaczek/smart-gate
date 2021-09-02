@@ -13,6 +13,11 @@ const en = {
       password: 'Password',
       role: 'Role',
     },
+    history: {
+      event: 'Event',
+      date: 'Date',
+      device: 'Device',
+    },
     invitation: {
       name: 'Invitation',
       inviter: 'Inviter',
@@ -95,12 +100,19 @@ const en = {
       history: {
         title: 'History',
         noData: 'History is empty',
-        date: 'Date',
-        event: 'Event',
+        today: 'Today',
+        yesterday: 'Yesterday',
         events: {
-          open: 'Gate opened',
-          turnedOff: 'Device turned off',
-          turnedOn: 'Device turned on',
+          personal: {
+            open: 'open gate',
+            turnedOff: 'turned off',
+            turnedOn: 'turned on',
+          },
+          impersonal: {
+            open: 'Gate opened',
+            turnedOff: 'Device turned off',
+            turnedOn: 'Device turned on',
+          },
         },
       },
       admin: {

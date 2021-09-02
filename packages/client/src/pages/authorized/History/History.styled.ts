@@ -6,8 +6,12 @@ export const Wrapper = styled.div`
   height: 100%;
 `;
 
-export const ListContainer = styled.div`
+export const DesktopListContainer = styled.div`
   height: 100%;
   overflow-x: auto;
   padding-top: 60px;
+`;
+
+export const MobileListContainer = styled.div`
+  margin-top: 40px;
 `;

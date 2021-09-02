@@ -146,7 +146,6 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
           options={{
             tabWidth: isMobile ? 160 : 130,
             indicatorPosition: isMobile ? 'top' : 'right',
-            indicatorWidth: 80,
             variant: isMobile ? 'fullWidth' : 'default',
             orientation,
           }}

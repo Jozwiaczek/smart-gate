@@ -25,6 +25,7 @@ export { default as LogoutAllIcon } from './LogoutAllIcon';
 export { default as LogoutIcon } from './LogoutIcon';
 export { default as MoonIcon } from './MoonIcon';
 export { default as NoDataIcon } from './NoDataIcon';
+export { default as OpenLockIcon } from './OpenLockIcon';
 export { default as PolishFlagIcon } from './PolishFlagIcon';
 export { default as PowerSupplyIcon } from './PowerSupplyIcon';
 export { default as PrivilegesGroupIcon } from './PrivilegesGroupIcon';

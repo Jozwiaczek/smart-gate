@@ -19,7 +19,7 @@ export { Checkbox, Select, TextInput } from './inputs';
 export { default as SelectCard } from './inputs/SelectCard';
 export { CardLayout, DefaultLayout, GlobalLayout, TabbedLayout } from './layouts';
 export { default as Link } from './Link';
-export { CardList, DetailedList } from './lists';
+export { CardList, DetailedList, HistoryCompactList } from './lists';
 export { default as Portal } from './Portal';
 export { default as Snackbar } from './Snackbar';
 export { default as ToggleSlider } from './ToggleSlider';
