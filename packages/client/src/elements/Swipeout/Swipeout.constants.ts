@@ -1,0 +1,1 @@
+export const DEFAULT_ACTION_BUTTON_WIDTH = 60;

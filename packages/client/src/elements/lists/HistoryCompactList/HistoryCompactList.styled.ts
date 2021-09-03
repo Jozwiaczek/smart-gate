@@ -26,15 +26,12 @@ export const DayLabel = styled.h4`
   margin-bottom: 16px;
 `;
 
-export const RecordRow = styled.div<{ width: number }>(
-  ({ width }) => css`
-    display: flex;
-    align-items: center;
-    column-gap: 8px;
-    height: 56px;
-    width: ${width + 1}px;
-  `,
-);
+export const RecordRow = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  height: 56px;
+`;
 
 export const RecordIconCircle = styled.div<RecordIconCircleProps>(
   ({ theme: { down, breakpoints }, firstRecord, event }) => css`

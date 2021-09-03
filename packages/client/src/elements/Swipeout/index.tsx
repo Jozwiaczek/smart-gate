@@ -2,7 +2,14 @@ import React, { useCallback, useLayoutEffect, useMemo, useRef, useState } from '
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 
 import { useOnClickOutside } from '../../hooks';
-import { ActionButton, ActionsContainer, Content, Wrapper } from './Swipeout.styled';
+import { DEFAULT_ACTION_BUTTON_WIDTH } from './Swipeout.constants';
+import {
+  ActionButton,
+  ActionsContainer,
+  ComponentWrapper,
+  Content,
+  Wrapper,
+} from './Swipeout.styled';
 import { SwipeoutProps } from './Swipeout.types';
 
 const Swipeout = ({
@@ -17,16 +24,25 @@ const Swipeout = ({
   const outerContainerRef = useRef<HTMLDivElement>(null);
   const draggableElementRef = useRef(null);
   const actionsContainerRef = useRef<HTMLDivElement>(null);
+  const componentWrapperRef = useRef<HTMLDivElement>(null);
   const [slideXPosition, setSlideXPosition] = useState(0);
   const [actionsContainerWidth, setActionsContainerWidth] = useState(100);
   const [isOpen, setIsOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [componentHeight, setComponentHeight] = useState(60);
 
   useLayoutEffect(() => {
     if (!actionsContainerRef.current) {
       return;
     }
     setActionsContainerWidth(actionsContainerRef.current.clientWidth);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!componentWrapperRef.current) {
+      return;
+    }
+    setComponentHeight(componentWrapperRef.current.clientHeight);
   }, []);
 
   const close = useCallback(() => {
@@ -78,10 +94,21 @@ const Swipeout = ({
 
   const sortedRightActions = useMemo(() => right.sort((a, b) => a.order - b.order), [right]);
 
+  const rightActionsWidth = useMemo(
+    () => right.reduce((prev, curr) => prev + (curr?.width ?? DEFAULT_ACTION_BUTTON_WIDTH), 0),
+    [right],
+  );
+
   return (
-    <Wrapper data-testid="swipeout" ref={outerContainerRef} isDragging={isDragging}>
+    <Wrapper
+      data-testid="swipeout"
+      ref={outerContainerRef}
+      isDragging={isDragging}
+      height={componentHeight}
+    >
       <Draggable
         axis="x"
+        handle=".handle"
         disabled={disabled}
         nodeRef={draggableElementRef}
         onStart={handleDragStart}
@@ -90,8 +117,14 @@ const Swipeout = ({
         position={{ x: slideXPosition, y: 0 }}
       >
         <Content ref={draggableElementRef} isDragging={isDragging}>
-          {children}
-          <ActionsContainer ref={actionsContainerRef}>
+          <ComponentWrapper ref={componentWrapperRef} className="handle">
+            {children}
+          </ComponentWrapper>
+          <ActionsContainer
+            ref={actionsContainerRef}
+            width={rightActionsWidth}
+            height={componentHeight}
+          >
             {sortedRightActions.map(({ order, component, onPress, ...buttonProps }) => (
               <ActionButton
                 {...buttonProps}

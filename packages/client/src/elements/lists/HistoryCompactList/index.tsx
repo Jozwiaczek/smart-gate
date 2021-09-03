@@ -1,4 +1,3 @@
-import { useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useFormatDate, useHistoryCompactListData } from '../../../hooks';
@@ -22,22 +21,13 @@ const HistoryCompactList = () => {
   const formatDate = useFormatDate();
   const mapHistoryEventToLabel = useHistoryEventLabel(true);
   const history = useHistoryCompactListData();
-  const singleDayRecordsWrapperRef = useRef<HTMLDivElement>(null);
-  const [singleDayRecordsWrapperWidth, setSingleDayRecordsWrapperWidth] = useState(320);
-
-  useLayoutEffect(() => {
-    if (!singleDayRecordsWrapperRef.current) {
-      return;
-    }
-    setSingleDayRecordsWrapperWidth(singleDayRecordsWrapperRef.current.clientWidth);
-  }, []);
 
   return (
     <ListCard>
       {history.map(([dateKey, records]) => (
         <div key={dateKey}>
           <DayLabel>{dateKey}</DayLabel>
-          <SingleDayRecordsWrapper ref={singleDayRecordsWrapperRef}>
+          <SingleDayRecordsWrapper>
             {records.map(({ id, event, createdAt, user }, index) => (
               <Swipeout
                 key={id}
@@ -52,7 +42,7 @@ const HistoryCompactList = () => {
                 ]}
                 autoClose
               >
-                <RecordRow width={singleDayRecordsWrapperWidth}>
+                <RecordRow>
                   <TimeLabel>{formatDate(createdAt, { timeStyle: 'short' })}</TimeLabel>
                   <RecordIconCircle event={event} firstRecord={!index}>
                     {user ? <StyleOpenLockIcon /> : <StyledPowerSupplyIcon />}

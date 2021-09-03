@@ -1,13 +1,18 @@
 import styled, { css } from 'styled-components';
 
 import { getCssColor } from '../../utils';
-import { ContentProps, SwipeoutActionButtonProps, WrapperProps } from './Swipeout.types';
+import { DEFAULT_ACTION_BUTTON_WIDTH } from './Swipeout.constants';
+import {
+  ActionsContainerProps,
+  ContentProps,
+  SwipeoutActionButtonProps,
+  WrapperProps,
+} from './Swipeout.types';
 
 export const Wrapper = styled.div<WrapperProps>(
-  ({ isDragging }) => css`
-    display: flex;
-    justify-content: space-between;
+  ({ isDragging, height }) => css`
     width: 100%;
+    height: ${height}px;
     .react-draggable {
       ${!isDragging &&
       css`
@@ -16,12 +21,15 @@ export const Wrapper = styled.div<WrapperProps>(
     }
   `,
 );
+export const ComponentWrapper = styled.div`
+  position: absolute;
+`;
 
 export const Content = styled.div<ContentProps>(
   ({ isDragging }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: relative;
+    width: 100%;
+
     :hover {
       ${isDragging
         ? css`
@@ -34,16 +42,24 @@ export const Content = styled.div<ContentProps>(
   `,
 );
 
-export const ActionsContainer = styled.div`
-  height: 100%;
-  display: flex;
-`;
+export const ActionsContainer = styled.div<ActionsContainerProps>(
+  ({ width, height }) => css`
+    height: ${height}px;
+    position: absolute;
+    right: -${width + 1}px;
+    width: ${width}px;
+    display: flex;
+  `,
+);
 
 export const ActionButton = styled.button<SwipeoutActionButtonProps>(
-  ({ theme, borderRadius, background, color }) => css`
+  ({ theme, borderRadius, background, color, width = DEFAULT_ACTION_BUTTON_WIDTH }) => css`
     height: 100%;
-    min-width: 100px;
+    width: ${width}px;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: ${getCssColor({ color: background ?? 'background-default', theme })};
     color: ${getCssColor({ color: color ?? 'text-primary', theme })};
     border-radius: ${borderRadius ?? 0};

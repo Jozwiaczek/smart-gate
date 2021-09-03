@@ -4,6 +4,7 @@ interface SwipeoutActionButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
   color?: string;
   background?: string;
   borderRadius?: string;
+  width?: number;
 }
 
 interface SwipeoutAction extends SwipeoutActionButtonProps {
@@ -24,8 +25,14 @@ interface SwipeoutProps {
 
 interface WrapperProps {
   isDragging: boolean;
+  height: number;
 }
 
 interface ContentProps {
   isDragging: boolean;
+}
+
+interface ActionsContainerProps {
+  width: number;
+  height: number;
 }

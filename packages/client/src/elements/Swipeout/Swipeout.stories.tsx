@@ -50,6 +50,7 @@ Default.args = {
       onPress: () => console.log('Edit button pressed'),
       borderRadius: '12px 0 0 12px',
       background: 'transparent',
+      width: 100,
     },
     {
       order: 2,
