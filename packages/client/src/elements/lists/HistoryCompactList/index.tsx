@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useFormatDate, useHistoryCompactListData } from '../../../hooks';
 import useHistoryEventLabel from '../../../hooks/useHistoryEventLabel';
+import { TrashIcon } from '../../../icons';
 import Swipeout from '../../Swipeout';
 import {
   DayLabel,
@@ -43,7 +44,7 @@ const HistoryCompactList = () => {
                 right={[
                   {
                     order: 1,
-                    component: 'Delete',
+                    component: <TrashIcon />,
                     onPress: () => console.log('delete history record'),
                     background: 'red',
                     borderRadius: '12px 0 0 12px',
