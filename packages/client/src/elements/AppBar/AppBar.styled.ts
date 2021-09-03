@@ -57,8 +57,5 @@ export const AppBarPageWrapper = styled.div(
     ${down(breakpoints.md)} {
       padding: 40px 20px;
     }
-    ${down(breakpoints.xs)} {
-      padding: 40px 16px;
-    }
   `,
 );

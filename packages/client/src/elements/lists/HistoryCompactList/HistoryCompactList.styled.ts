@@ -9,13 +9,15 @@ import { getRecordIconCircleColors } from './HistoryCompactList.utils';
 
 export const ListCard = styled(Card)(
   ({ theme: { down, breakpoints } }) => css`
-    padding: 18px 16px;
+    padding: 18px 0 18px 16px;
     display: flex;
+    width: 100%;
     flex-direction: column;
     row-gap: 32px;
+    overflow: hidden;
 
     ${down(breakpoints.xxs)} {
-      padding: 12px 10px;
+      padding: 12px 0 12px 10px;
     }
   `,
 );
@@ -24,11 +26,15 @@ export const DayLabel = styled.h4`
   margin-bottom: 16px;
 `;
 
-export const RecordRow = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 8px;
-`;
+export const RecordRow = styled.div<{ width: number }>(
+  ({ width }) => css`
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    height: 56px;
+    width: ${width + 1}px;
+  `,
+);
 
 export const RecordIconCircle = styled.div<RecordIconCircleProps>(
   ({ theme: { down, breakpoints }, firstRecord, event }) => css`
@@ -56,7 +62,6 @@ export const SingleDayRecordsWrapper = styled.div(
   ({ theme: { palette } }) => css`
     display: flex;
     flex-direction: column;
-    row-gap: ${RECORD_ICON_CIRCLE_SIZE};
 
     ${RecordIconCircle}:before {
       content: '';

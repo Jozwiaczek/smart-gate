@@ -22,5 +22,6 @@ export { default as Link } from './Link';
 export { CardList, DetailedList, HistoryCompactList } from './lists';
 export { default as Portal } from './Portal';
 export { default as Snackbar } from './Snackbar';
+export { default as Swipeout } from './Swipeout';
 export { default as ToggleSlider } from './ToggleSlider';
 export { default as Tooltip } from './Tooltip';

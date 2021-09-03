@@ -17,6 +17,10 @@ const getCssColor = ({ color, theme: { palette } }: GetColorProps): string => {
       return palette.text.light;
     case 'primary':
       return palette.primary.main;
+    case 'background-default':
+      return palette.background.default;
+    case 'background-paper':
+      return palette.background.paper;
     case 'red':
       return palette.colors.red;
     default:
