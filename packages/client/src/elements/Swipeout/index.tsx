@@ -19,7 +19,8 @@ const Swipeout = ({
   autoClose,
   right,
   onOpen,
-  onSwipe,
+  onSwipeStart,
+  onSwipeEnd,
 }: SwipeoutProps) => {
   const outerContainerRef = useRef<HTMLDivElement>(null);
   const draggableElementRef = useRef(null);
@@ -59,6 +60,7 @@ const Swipeout = ({
 
   const handleDragStop = useCallback(
     (event: DraggableEvent, { x }: DraggableData) => {
+      onSwipeEnd && onSwipeEnd();
       setIsDragging(false);
       if (x > 0) {
         return;
@@ -76,13 +78,13 @@ const Swipeout = ({
         onOpen && onOpen();
       }
     },
-    [actionsContainerWidth, close, isOpen, onOpen],
+    [actionsContainerWidth, close, isOpen, onOpen, onSwipeEnd],
   );
 
   const handleDragStart = useCallback(() => {
     setIsDragging(true);
-    onSwipe && onSwipe();
-  }, [onSwipe]);
+    onSwipeStart && onSwipeStart();
+  }, [onSwipeStart]);
 
   const onActionButtonClick = useCallback(
     (onClickCb?: () => void) => () => {

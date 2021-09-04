@@ -62,7 +62,8 @@ Default.args = {
   ],
   onOpen: () => console.log('onOpen'),
   onClose: () => console.log('onClose'),
-  onSwipe: () => console.log('onSwipe'),
+  onSwipeStart: () => console.log('onSwipeStart'),
+  onSwipeEnd: () => console.log('onSwipeEnd'),
   autoClose: true,
   disabled: false,
 };

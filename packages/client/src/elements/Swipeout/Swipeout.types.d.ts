@@ -17,7 +17,8 @@ interface SwipeoutProps {
   children: ReactNode;
   right: Array<SwipeoutAction>;
   onOpen?: () => void;
-  onSwipe?: () => void;
+  onSwipeStart?: () => void;
+  onSwipeEnd?: () => void;
   onClose?: () => void;
   autoClose?: boolean;
   disabled?: boolean;

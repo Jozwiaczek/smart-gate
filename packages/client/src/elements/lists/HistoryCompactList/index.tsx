@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useFormatDate, useHistoryCompactListData } from '../../../hooks';
@@ -21,6 +22,10 @@ const HistoryCompactList = () => {
   const formatDate = useFormatDate();
   const mapHistoryEventToLabel = useHistoryEventLabel(true);
   const history = useHistoryCompactListData();
+  const [swipingRecordIndex, setSwipingRecordIndex] = useState<undefined | number>();
+
+  const setSwipingEl = (index: number) => () => setSwipingRecordIndex(index);
+  const clearSwipingEl = () => setSwipingRecordIndex(undefined);
 
   return (
     <ListCard>
@@ -40,11 +45,19 @@ const HistoryCompactList = () => {
                     borderRadius: '12px 0 0 12px',
                   },
                 ]}
+                onOpen={setSwipingEl(index)}
+                onSwipeStart={setSwipingEl(index)}
+                onClose={clearSwipingEl}
+                onSwipeEnd={clearSwipingEl}
                 autoClose
               >
                 <RecordRow>
                   <TimeLabel>{formatDate(createdAt, { timeStyle: 'short' })}</TimeLabel>
-                  <RecordIconCircle event={event} firstRecord={!index}>
+                  <RecordIconCircle
+                    isSwiping={swipingRecordIndex === index || swipingRecordIndex === index - 1}
+                    event={event}
+                    firstRecord={!index}
+                  >
                     {user ? <StyleOpenLockIcon /> : <StyledPowerSupplyIcon />}
                   </RecordIconCircle>
                   <p>{user ? `${user?.firstName} ${user?.lastName}` : t('history.device')}</p>

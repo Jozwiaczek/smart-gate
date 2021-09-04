@@ -34,7 +34,7 @@ export const RecordRow = styled.div`
 `;
 
 export const RecordIconCircle = styled.div<RecordIconCircleProps>(
-  ({ theme: { down, breakpoints }, firstRecord, event }) => css`
+  ({ theme: { palette, down, breakpoints }, firstRecord, event, isSwiping }) => css`
     ${getRecordIconCircleColors};
     border-radius: 100%;
     width: ${RECORD_ICON_CIRCLE_SIZE};
@@ -43,9 +43,28 @@ export const RecordIconCircle = styled.div<RecordIconCircleProps>(
     justify-content: center;
     align-items: center;
     position: relative;
+
     ${down(breakpoints.xxs)} {
       display: none;
     }
+
+    :before {
+      content: '';
+      position: absolute;
+      top: -${RECORD_ICON_CIRCLE_SIZE};
+      width: 2px;
+      height: ${RECORD_ICON_CIRCLE_SIZE};
+      background: ${palette.primary.dark};
+      transition: height 300ms ease-in-out;
+    }
+
+    ${isSwiping &&
+    css`
+      :before {
+        height: 0;
+      }
+    `}
+
     ${(firstRecord || event === HistoryEvent.TurnedOff) &&
     css`
       :before {
@@ -55,21 +74,10 @@ export const RecordIconCircle = styled.div<RecordIconCircleProps>(
   `,
 );
 
-export const SingleDayRecordsWrapper = styled.div(
-  ({ theme: { palette } }) => css`
-    display: flex;
-    flex-direction: column;
-
-    ${RecordIconCircle}:before {
-      content: '';
-      position: absolute;
-      top: -${RECORD_ICON_CIRCLE_SIZE};
-      width: 2px;
-      height: ${RECORD_ICON_CIRCLE_SIZE};
-      background: ${palette.primary.dark};
-    }
-  `,
-);
+export const SingleDayRecordsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const TimeLabel = styled.p(
   ({ theme: { palette } }) => css`
