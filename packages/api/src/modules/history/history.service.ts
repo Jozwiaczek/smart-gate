@@ -6,7 +6,6 @@ import { HistoryEntity } from '../database/entities/history.entity';
 import { HistoryRepository } from '../repository/history.repository';
 import { UsersService } from '../users/users.service';
 import { CreateHistoryDeviceEventDto } from './dto/create-history-device-event.dto';
-import { CreateHistoryEventDto } from './dto/create-history-event.dto';
 import { CreateHistoryUserEventDto } from './dto/create-history-user-event.dto';
 import { RemoveManyHistoryDto } from './dto/remove-many-history.dto';
 
@@ -17,9 +16,9 @@ export class HistoryService {
     private readonly usersService: UsersService,
   ) {}
 
-  async create(createHistoryDto: CreateHistoryUserEventDto): Promise<HistoryEntity>;
-  async create(createHistoryDto: CreateHistoryDeviceEventDto): Promise<HistoryEntity>;
-  async create(createHistoryEventDto: CreateHistoryEventDto): Promise<HistoryEntity> {
+  async create(
+    createHistoryEventDto: CreateHistoryUserEventDto | CreateHistoryDeviceEventDto,
+  ): Promise<HistoryEntity> {
     return this.historyRepository.create(createHistoryEventDto);
   }
 
@@ -33,7 +32,11 @@ export class HistoryService {
 
   async findAllByUserId(userId: string): Promise<GetList<HistoryEntity>> {
     const user = await this.usersService.findOne(userId);
-    const userHistory = await this.historyRepository.findAllByUser(user);
+    const userHistory = await this.historyRepository.find({
+      where: { user },
+      relations: ['user'],
+      order: { createdAt: 'DESC' },
+    });
     return { data: userHistory, total: userHistory.length };
   }
 
