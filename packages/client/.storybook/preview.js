@@ -4,6 +4,7 @@ import { withTests } from '@storybook/addon-jest';
 import '@storybook/addon-console';
 
 import testResults from '../src/jest-test-results.json';
+import ProvidersDecorator from './decorators/ProvidersDecorator';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -39,6 +40,7 @@ export const globalTypes = {
 };
 
 export const decorators = [
+  ProvidersDecorator,
   LayoutDecorator,
   ThemeDecorator,
   I18nDecorator,

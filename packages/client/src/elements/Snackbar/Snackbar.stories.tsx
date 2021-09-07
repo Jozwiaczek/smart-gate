@@ -1,29 +1,54 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React, { useState } from 'react';
 
+import { useSnackbar } from '../../hooks';
+import { KeyIcon } from '../../icons';
+import { ShowSnackbarProps } from '../../providers/SnackbarProvider/SnackbarProvider.types';
 import Snackbar from '.';
 import { SnackbarProps } from './Snackbar.types';
 
 export default {
   title: 'Elements/Snackbar',
   component: Snackbar,
+  argTypes: {
+    severity: {
+      options: ['info', 'error', 'success', 'warning'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
-const StoryWrapper = (props: SnackbarProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+export const Default: Story<SnackbarProps> = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <button type="button" onClick={() => setIsOpen(true)}>
-        Open
+        Open snackbar
       </button>
-      <Snackbar {...props} onClose={() => setIsOpen(false)} open={isOpen}>
-        Lorem ipsum Oops, Something Went Wrong
-      </Snackbar>
+      <Snackbar {...args} onClose={() => setIsOpen(false)} open={isOpen} />
     </>
   );
 };
+Default.args = {
+  children: 'Lorem ipsum Oops, Something Went Wrong',
+  severity: 'info',
+};
 
-const Template: Story<SnackbarProps> = (args) => <StoryWrapper {...args} />;
+export const WithHook: Story<ShowSnackbarProps> = (args) => {
+  const showSnackbar = useSnackbar();
+  const onClick = () => {
+    showSnackbar(args);
+  };
 
-export const Default = Template.bind({});
-Default.args = {};
+  return (
+    <button type="button" onClick={onClick}>
+      Open snackbar
+    </button>
+  );
+};
+WithHook.args = {
+  message: 'Lorem ipsum Oops, Something Went Wrong',
+  severity: 'info',
+  duration: 5000,
+  leftAdornment: KeyIcon,
+};
