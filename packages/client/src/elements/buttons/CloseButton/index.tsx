@@ -11,10 +11,10 @@ const CloseButton = ({
 }: CloseButtonProps) => (
   <StyledButton
     data-testid="closeButton"
+    {...rest}
     color={color}
     hoverColor={hoverColor}
     size={size}
-    {...rest}
   >
     <LeftRight />
     <RightLeft />

@@ -39,9 +39,9 @@ const History = () => {
                 return `${firstName} ${lastName}`;
               }}
             />
-            <DateField label="routes.history.date" source="createdAt" showTime />
+            <DateField label="history.date" source="createdAt" showTime />
             <FunctionField<ApiHistoryRecord>
-              label="routes.history.event"
+              label="history.event"
               render={({ event }) => mapHistoryEventToLabel(event)}
             />
           </DetailedList>

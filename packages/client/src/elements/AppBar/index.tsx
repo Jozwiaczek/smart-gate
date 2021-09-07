@@ -106,7 +106,7 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
 
   const handleChange = (event: MouseEvent, newValue: number) => {
     setActiveTab(newValue);
-    const selectedTab = tabs.find(
+    const selectedTab = sortedItems.find(
       (tab) => newValue === (isMobile ? tab.indexMobile ?? tab.index : tab.index),
     );
     if (selectedTab) {
