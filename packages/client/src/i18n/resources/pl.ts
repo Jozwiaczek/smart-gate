@@ -101,6 +101,8 @@ const pl: TranslationStructure = {
       },
       history: {
         title: 'Historia',
+        description:
+          'Poniżej możesz przejrzeć swoją historię otwarcia.<br />W celu uzyskania dostępu do pełnej historii, skontaktuj sie ze swoim administratorem.',
         noData: 'Brak historii',
         today: 'Dzisiaj',
         yesterday: 'Wczoraj',

@@ -1,12 +1,12 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { DateField, DetailedList, FunctionField, HistoryCompactList } from '../../../elements';
-import { useMediaQuery } from '../../../hooks';
+import { useIsCurrentUserAdmin, useMediaQuery } from '../../../hooks';
 import useHistoryEventLabel from '../../../hooks/useHistoryEventLabel';
 import { PowerSupplyIcon } from '../../../icons';
 import { ApiHistoryRecord } from '../../../interfaces/api.types';
-import { Title } from '../AuthorizedPages.styled';
+import { Description, Title } from '../AuthorizedPages.styled';
 import { DesktopListContainer, MobileListContainer, Wrapper } from './History.styled';
 import { getRowCellsStyle } from './History.utils';
 
@@ -14,10 +14,16 @@ const History = () => {
   const { t } = useTranslation();
   const mapHistoryEventToLabel = useHistoryEventLabel();
   const isMobile = useMediaQuery(({ breakpoints, down }) => down(breakpoints.md));
+  const isCurrentUserNonAdmin = !useIsCurrentUserAdmin();
 
   return (
     <Wrapper>
       <Title>{t('routes.history.title')}</Title>
+      {isCurrentUserNonAdmin && (
+        <Description>
+          <Trans i18nKey="routes.history.description" />
+        </Description>
+      )}
       {isMobile ? (
         <MobileListContainer>
           <HistoryCompactList />

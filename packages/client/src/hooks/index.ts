@@ -9,6 +9,7 @@ export { default as useHistoryCompactListData } from './useHistoryCompactListDat
 export { default as useHistoryEventLabel } from './useHistoryEventLabel';
 export { default as useHotkeys } from './useHotkeys';
 export { default as useInterval } from './useInterval';
+export { default as useIsCurrentUserAdmin } from './useIsCurrentUserAdmin';
 export { default as useLocalStorage } from './useLocalStorage/useLocalStorage';
 export { default as useLocalStorageMemory } from './useLocalStorage/useLocalStorageMemory';
 export { default as useMediaDevice } from './useMediaDevice';

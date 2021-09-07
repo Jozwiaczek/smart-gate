@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 export const DesktopListContainer = styled.div`
   height: 100%;
   overflow-x: auto;
-  padding-top: 60px;
+  padding-top: 40px;
 `;
 
 export const MobileListContainer = styled.div`

@@ -99,6 +99,8 @@ const en = {
       },
       history: {
         title: 'History',
+        description:
+          'Below you can browse your opening history.<br /> In order to access full history, request your administrator.',
         noData: 'History is empty',
         today: 'Today',
         yesterday: 'Yesterday',

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useFormatDate, useHistoryCompactListData } from '../../../hooks';
+import { useFormatDate, useHistoryCompactListData, useIsCurrentUserAdmin } from '../../../hooks';
 import useHistoryEventLabel from '../../../hooks/useHistoryEventLabel';
 import { TrashIcon } from '../../../icons';
 import Swipeout from '../../Swipeout';
@@ -20,12 +20,18 @@ import {
 const HistoryCompactList = () => {
   const { t } = useTranslation();
   const formatDate = useFormatDate();
-  const mapHistoryEventToLabel = useHistoryEventLabel(true);
+  const mapHistoryEventToPersonalLabel = useHistoryEventLabel(true);
+  const mapHistoryEventToImpersonalLabel = useHistoryEventLabel(false);
   const history = useHistoryCompactListData();
   const [swipingRecordIndex, setSwipingRecordIndex] = useState<undefined | number>();
+  const isCurrentUserAdmin = useIsCurrentUserAdmin();
+  const getEventLabel = isCurrentUserAdmin
+    ? mapHistoryEventToPersonalLabel
+    : mapHistoryEventToImpersonalLabel;
 
   const setSwipingEl = (index: number) => () => setSwipingRecordIndex(index);
   const clearSwipingEl = () => setSwipingRecordIndex(undefined);
+  const isCurrentUserNonAdmin = !useIsCurrentUserAdmin();
 
   return (
     <ListCard>
@@ -49,6 +55,7 @@ const HistoryCompactList = () => {
                 onSwipeStart={setSwipingEl(index)}
                 onClose={clearSwipingEl}
                 onSwipeEnd={clearSwipingEl}
+                disabled={isCurrentUserNonAdmin}
                 autoClose
               >
                 <RecordRow>
@@ -60,8 +67,10 @@ const HistoryCompactList = () => {
                   >
                     {user ? <StyleOpenLockIcon /> : <StyledPowerSupplyIcon />}
                   </RecordIconCircle>
-                  <p>{user ? `${user?.firstName} ${user?.lastName}` : t('history.device')}</p>
-                  <EventLabel>{mapHistoryEventToLabel(event)}</EventLabel>
+                  {isCurrentUserAdmin && (
+                    <p>{user ? `${user?.firstName} ${user?.lastName}` : t('history.device')}</p>
+                  )}
+                  <EventLabel>{getEventLabel(event)}</EventLabel>
                 </RecordRow>
               </Swipeout>
             ))}
