@@ -48,4 +48,7 @@ const ServerDisconnectedIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVG
   </svg>
 );
 
-export default memo(forwardRef(ServerDisconnectedIcon));
+const Composed = memo(forwardRef(ServerDisconnectedIcon));
+Composed.displayName = 'ServerDisconnectedIcon';
+
+export default Composed;

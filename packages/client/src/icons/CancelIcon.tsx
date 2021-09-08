@@ -1,6 +1,6 @@
 import React, { forwardRef, memo, Ref, SVGProps } from 'react';
 
-const TrashIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
+const CancelIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
   <svg
     width="100%"
     viewBox="0 0 14 14"
@@ -18,4 +18,7 @@ const TrashIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) 
   </svg>
 );
 
-export default memo(forwardRef(TrashIcon));
+const Composed = memo(forwardRef(CancelIcon));
+Composed.displayName = 'CancelIcon';
+
+export default Composed;

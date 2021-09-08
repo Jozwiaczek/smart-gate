@@ -6,9 +6,9 @@ import { routes } from '../../../../constants';
 import { Button, CardLayout, Form, Link, TextInput } from '../../../../elements';
 import { useAuth, useEncodedParams, useSnackbar } from '../../../../hooks';
 import useAnimated from '../../../../hooks/useAnimated';
-import { ConfirmLockIcon, ShieldLock } from '../../../../icons';
+import { ShieldLock } from '../../../../icons';
 import { onlyOnDevEnv } from '../../../../utils';
-import { ShieldIconWrapper } from './UpdatePassword.styled';
+import { ShieldIconWrapper, StyledConfirmLockIcon } from './UpdatePassword.styled';
 
 const UpdatePassword = () => {
   const { recoverPassword } = useAuth();
@@ -75,7 +75,7 @@ const UpdatePassword = () => {
           name={t('form.inputs.confirmPassword')}
           type="password"
           placeholder={t('form.inputs.repeatPassword')}
-          startAdornment={<ConfirmLockIcon />}
+          startAdornment={<StyledConfirmLockIcon />}
           registerOptions={{
             validate: (value) => {
               return (

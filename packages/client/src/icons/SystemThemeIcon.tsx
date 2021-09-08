@@ -86,4 +86,7 @@ const SystemThemeIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElem
   </svg>
 );
 
-export default memo(forwardRef(SystemThemeIcon));
+const Composed = memo(forwardRef(SystemThemeIcon));
+Composed.displayName = 'SystemThemeIcon';
+
+export default Composed;

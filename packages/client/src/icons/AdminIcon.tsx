@@ -17,4 +17,7 @@ const AdminIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) 
   </svg>
 );
 
-export default memo(forwardRef(AdminIcon));
+const Composed = memo(forwardRef(AdminIcon));
+Composed.displayName = 'AdminIcon';
+
+export default Composed;

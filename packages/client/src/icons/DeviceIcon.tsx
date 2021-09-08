@@ -27,4 +27,7 @@ const DeviceIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>)
   </svg>
 );
 
-export default memo(forwardRef(DeviceIcon));
+const Composed = memo(forwardRef(DeviceIcon));
+Composed.displayName = 'DeviceIcon';
+
+export default Composed;

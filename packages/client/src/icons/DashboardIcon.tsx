@@ -17,4 +17,7 @@ const DashboardIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElemen
   </svg>
 );
 
-export default memo(forwardRef(DashboardIcon));
+const Composed = memo(forwardRef(DashboardIcon));
+Composed.displayName = 'DashboardIcon';
+
+export default Composed;

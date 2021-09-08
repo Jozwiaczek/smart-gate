@@ -18,4 +18,7 @@ const PolishFlagIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGEleme
   </svg>
 );
 
-export default memo(forwardRef(PolishFlagIcon));
+const Composed = memo(forwardRef(PolishFlagIcon));
+Composed.displayName = 'PolishFlagIcon';
+
+export default Composed;

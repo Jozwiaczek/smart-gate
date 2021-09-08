@@ -17,4 +17,7 @@ const AppleIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) 
   </svg>
 );
 
-export default memo(forwardRef(AppleIcon));
+const Composed = memo(forwardRef(AppleIcon));
+Composed.displayName = 'AppleIcon';
+
+export default Composed;

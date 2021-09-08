@@ -35,4 +35,7 @@ const DeviceDisconnectedIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVG
   </svg>
 );
 
-export default memo(forwardRef(DeviceDisconnectedIcon));
+const Composed = memo(forwardRef(DeviceDisconnectedIcon));
+Composed.displayName = 'DeviceDisconnectedIcon';
+
+export default Composed;
