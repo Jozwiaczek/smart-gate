@@ -5,3 +5,8 @@ interface RecordIconCircleProps {
   firstRecord: boolean;
   isSwiping: boolean;
 }
+
+interface SwipingRecord {
+  index: number;
+  dateKey: string;
+}

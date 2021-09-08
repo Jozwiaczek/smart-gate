@@ -16,22 +16,32 @@ import {
   StyleOpenLockIcon,
   TimeLabel,
 } from './HistoryCompactList.styled';
+import { SwipingRecord } from './HistoryCompactList.types';
 
 const HistoryCompactList = () => {
   const { t } = useTranslation();
   const formatDate = useFormatDate();
-  const mapHistoryEventToPersonalLabel = useHistoryEventLabel(true);
-  const mapHistoryEventToImpersonalLabel = useHistoryEventLabel(false);
   const history = useHistoryCompactListData();
-  const [swipingRecordIndex, setSwipingRecordIndex] = useState<undefined | number>();
   const isCurrentUserAdmin = useIsCurrentUserAdmin();
-  const getEventLabel = isCurrentUserAdmin
-    ? mapHistoryEventToPersonalLabel
-    : mapHistoryEventToImpersonalLabel;
+  const getEventLabel = useHistoryEventLabel(isCurrentUserAdmin);
+  const [swipingRecord, setSwipingRecord] = useState<undefined | SwipingRecord>();
 
-  const setSwipingEl = (index: number) => () => setSwipingRecordIndex(index);
-  const clearSwipingEl = () => setSwipingRecordIndex(undefined);
-  const isCurrentUserNonAdmin = !useIsCurrentUserAdmin();
+  const setSwipingEl = (index: number, dateKey: string) => () =>
+    setSwipingRecord({ index, dateKey });
+
+  const clearSwipingEl = () => setSwipingRecord(undefined);
+
+  const isSwipedElement = (index: number, dateKey: string): boolean => {
+    if (!swipingRecord || dateKey !== swipingRecord.dateKey) {
+      return false;
+    }
+
+    if (swipingRecord.index === index) {
+      return true;
+    }
+
+    return swipingRecord.index === index - 1;
+  };
 
   return (
     <ListCard>
@@ -51,17 +61,17 @@ const HistoryCompactList = () => {
                     borderRadius: '12px 0 0 12px',
                   },
                 ]}
-                onOpen={setSwipingEl(index)}
-                onSwipeStart={setSwipingEl(index)}
+                onOpen={setSwipingEl(index, dateKey)}
+                onSwipeStart={setSwipingEl(index, dateKey)}
                 onClose={clearSwipingEl}
                 onSwipeEnd={clearSwipingEl}
-                disabled={isCurrentUserNonAdmin}
+                disabled={!isCurrentUserAdmin}
                 autoClose
               >
                 <RecordRow>
                   <TimeLabel>{formatDate(createdAt, { timeStyle: 'short' })}</TimeLabel>
                   <RecordIconCircle
-                    isSwiping={swipingRecordIndex === index || swipingRecordIndex === index - 1}
+                    isSwiping={isSwipedElement(index, dateKey)}
                     event={event}
                     firstRecord={!index}
                   >
