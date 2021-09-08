@@ -1,24 +1,43 @@
 import { useTranslation } from 'react-i18next';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
-import { ApiHistoryRecord, ApiList } from '../../interfaces/api.types';
+import { onlyOnDevEnv } from '../../utils';
+import { useAxios, useSnackbar } from '../index';
 import useFormatDate from '../useFormatDate';
+import {
+  ApiHistoryRecords,
+  ApiHistoryRecordsResponse,
+  UseHistoryCompactListData,
+} from './useHistoryCompactListData.types';
 import {
   addHistoryRecordByLabelToMap,
   getPastDate,
   isSameDay,
 } from './useHistoryCompactListData.utils';
 
-const useHistoryCompactListData = (): Array<[string, Array<ApiHistoryRecord>]> => {
+const useHistoryCompactListData = (): UseHistoryCompactListData => {
   const formatDate = useFormatDate();
   const { t } = useTranslation();
-  const { data } = useQuery<ApiList<ApiHistoryRecord>>('/history');
+  const axios = useAxios();
+  const showSnackbar = useSnackbar();
+  const { data, refetch } = useQuery<ApiHistoryRecordsResponse>('/history');
   const history = data?.data;
 
-  const currentDate = new Date();
+  const removeRecord = async (id: string) => {
+    try {
+      await axios.delete(`/history/${id}`);
+      await refetch();
+    } catch (error) {
+      onlyOnDevEnv(() => console.error(error));
+      showSnackbar({ message: t('lists.general.removeError'), severity: 'error' });
+    }
+  };
 
+  const deleteRecordMutation = useMutation(removeRecord);
+
+  const currentDate = new Date();
   if (!history?.length) {
-    return [];
+    return { history: [], deleteRecord: deleteRecordMutation };
   }
 
   const splitByDateHistoryMap = history.reduce((prev, historyRecord) => {
@@ -32,9 +51,9 @@ const useHistoryCompactListData = (): Array<[string, Array<ApiHistoryRecord>]> =
 
     const formattedDate = formatDate(historyRecord.createdAt, { dateStyle: 'short' });
     return addHistoryRecordByLabelToMap(formattedDate, prev, historyRecord);
-  }, new Map<string, Array<ApiHistoryRecord>>());
+  }, new Map<string, ApiHistoryRecords>());
 
-  return [...splitByDateHistoryMap];
+  return { history: [...splitByDateHistoryMap], deleteRecord: deleteRecordMutation };
 };
 
 export default useHistoryCompactListData;

@@ -1,4 +1,5 @@
 import { ApiHistoryRecord } from '../../interfaces/api.types';
+import { ApiHistoryRecords } from './useHistoryCompactListData.types';
 
 export const isSameDay = (d1: Date | string, d2: Date | string): boolean => {
   const date1 = new Date(d1);
@@ -18,13 +19,13 @@ export const getPastDate = (pastDays: number) => {
 
 export const addHistoryRecordByLabelToMap = (
   label: string,
-  array: Map<string, Array<ApiHistoryRecord>>,
+  array: Map<string, ApiHistoryRecords>,
   recordToAdd: ApiHistoryRecord,
 ) => {
   const arrayCopy = array;
 
   if (arrayCopy.has(label)) {
-    const todayHistoryRecords = arrayCopy.get(label) as Array<ApiHistoryRecord>;
+    const todayHistoryRecords = arrayCopy.get(label) as ApiHistoryRecords;
     arrayCopy.set(label, [...todayHistoryRecords, recordToAdd]);
     return arrayCopy;
   }

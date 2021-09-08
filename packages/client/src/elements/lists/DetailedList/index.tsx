@@ -11,8 +11,8 @@ import { useMutation, useQuery } from 'react-query';
 import { CSSProperties, useTheme } from 'styled-components';
 
 import { useAxios, useSnackbar } from '../../../hooks';
-import { ApiList } from '../../../interfaces/api.types';
-import { getLabelFromSource } from '../../../utils';
+import { ApiListResponse } from '../../../interfaces/api.types';
+import { getLabelFromSource, onlyOnDevEnv } from '../../../utils';
 import { CloseButton, DeleteHoverButton } from '../../buttons';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import { Checkbox } from '../../inputs';
@@ -45,7 +45,7 @@ const DetailedList = ({
 }: DetailedListProps) => {
   const theme = useTheme();
   const axios = useAxios();
-  const { data: queryResult, refetch } = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+  const { data: queryResult, refetch } = useQuery<ApiListResponse<BaseRecordField>>(`/${resource}`);
   const [selectedRows, setSelectedRows] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<PerPage>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -53,17 +53,15 @@ const DetailedList = ({
   const { t } = useTranslation();
 
   const removeMany = async (ids: Array<string>) => {
-    await axios
-      .post(`/${resource}/removeMany`, { ids })
-      .catch((err) => {
-        snackbar({ message: t('lists.detailedList.removeManyError'), severity: 'error' });
-        throw err;
-      })
-      .then(async () => {
-        await refetch();
-      });
+    try {
+      await axios.post(`/${resource}/removeMany`, { ids });
+      await refetch();
+    } catch (error) {
+      onlyOnDevEnv(() => console.error(error));
+      snackbar({ message: t('lists.general.removeError'), severity: 'error' });
+    }
   };
-  const deleteMutation = useMutation(removeMany);
+  const removeManyMutation = useMutation(removeMany);
 
   const totalRecords = useMemo((): number => {
     if (queryResult) {
@@ -132,9 +130,9 @@ const DetailedList = ({
   const isBulkActionsOpen = Boolean(selectedRows.length);
 
   const removeSelectedItems = useCallback(() => {
-    deleteMutation.mutate(selectedRows);
+    removeManyMutation.mutate(selectedRows);
     setSelectedRows([]);
-  }, [deleteMutation, selectedRows]);
+  }, [removeManyMutation, selectedRows]);
 
   const getHeaderLabel = (source: string, label?: string, noTranslation?: boolean) => {
     if (noTranslation) {

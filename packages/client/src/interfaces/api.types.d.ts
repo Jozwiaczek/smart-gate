@@ -30,7 +30,7 @@ interface ApiInvitation extends BaseApiResource {
   updatedBy?: ApiUser;
 }
 
-interface ApiList<T> {
+interface ApiListResponse<T> {
   data: Array<T>;
   total: number;
 }

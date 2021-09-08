@@ -21,7 +21,7 @@ import { SwipingRecord } from './HistoryCompactList.types';
 const HistoryCompactList = () => {
   const { t } = useTranslation();
   const formatDate = useFormatDate();
-  const history = useHistoryCompactListData();
+  const { history, deleteRecord } = useHistoryCompactListData();
   const isCurrentUserAdmin = useIsCurrentUserAdmin();
   const getEventLabel = useHistoryEventLabel(isCurrentUserAdmin);
   const [swipingRecord, setSwipingRecord] = useState<undefined | SwipingRecord>();
@@ -56,7 +56,7 @@ const HistoryCompactList = () => {
                   {
                     order: 1,
                     component: <TrashIcon />,
-                    onPress: () => console.log('delete history record'),
+                    onPress: () => deleteRecord.mutate(id),
                     background: 'red',
                     borderRadius: '12px 0 0 12px',
                   },

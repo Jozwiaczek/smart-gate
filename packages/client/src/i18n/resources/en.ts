@@ -39,6 +39,7 @@ const en = {
     lists: {
       general: {
         noData: 'No data',
+        removeError: 'Something went wrong during the delete operation. Try again later.',
       },
       detailedList: {
         items: 'items',
@@ -47,7 +48,6 @@ const en = {
         ofTotal: 'of',
         next: 'next',
         prev: 'prev',
-        removeManyError: 'Something went wrong during the delete operation!',
       },
     },
     form: {

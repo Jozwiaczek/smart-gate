@@ -41,6 +41,7 @@ const pl: TranslationStructure = {
     lists: {
       general: {
         noData: 'Brak danych',
+        removeError: 'Coś poszło nie tak podczas operacji usuwania. Spróbuj ponownie później.',
       },
       detailedList: {
         items: 'wierszy',
@@ -49,7 +50,6 @@ const pl: TranslationStructure = {
         ofTotal: 'z',
         next: 'następny',
         prev: 'poprzedni',
-        removeManyError: 'Coś poszło nie tak podczas operacji usuwania!',
       },
     },
     form: {
