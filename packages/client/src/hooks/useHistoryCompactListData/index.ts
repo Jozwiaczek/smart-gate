@@ -2,8 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from 'react-query';
 
 import { onlyOnDevEnv } from '../../utils';
-import { useAxios, useSnackbar } from '../index';
+import useAxios from '../useAxios';
 import useFormatDate from '../useFormatDate';
+import useSnackbar from '../useSnackbar';
 import {
   ApiHistoryRecords,
   ApiHistoryRecordsResponse,
