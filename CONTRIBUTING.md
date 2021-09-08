@@ -106,6 +106,7 @@ For more details check [Hygen docs](https://www.hygen.io/docs/quick-start/).
 | ------- | --------------- | ------------------------------------------------------------------------- |
 | client  | `hygen:element` | Creates new standardize React component, story and style file             |
 | client  | `hygen:icon`    | Creates new standardize Icon component and adds it to the main icon story |
+| client  | `hygen:util`    | Creates new standardize helper function in util directory                 |
 
 ## 📝 Available root scripts
 
