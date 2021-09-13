@@ -1,4 +1,11 @@
-import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
+import {
+  CACHE_MANAGER,
+  Inject,
+  Injectable,
+  Logger,
+  MethodNotAllowedException,
+  ServiceUnavailableException,
+} from '@nestjs/common';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -7,9 +14,11 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
+import { Cache } from 'cache-manager';
 import { Server, Socket } from 'socket.io';
 
 import { WebSocketEvent } from '../../enums/webSocketEvent.enum';
+import { NgrokData } from '../camera/camera.controller';
 import { TicketService } from '../ticket/ticket.service';
 import { WebsocketConfigService } from './config/websocket-config.service';
 
@@ -21,6 +30,7 @@ import { WebsocketConfigService } from './config/websocket-config.service';
 })
 export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   constructor(
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly ticketService: TicketService,
     private readonly websocketConfigService: WebsocketConfigService,
   ) {}
@@ -66,6 +76,15 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
       throw new ServiceUnavailableException('Gate disconnected');
     }
     this.deviceClient.send(WebSocketEvent.TOGGLE_GATE);
+  }
+
+  @SubscribeMessage(WebSocketEvent.SET_NGROK_DATA)
+  async setNgrokData(client: Socket, ngrokData: NgrokData): Promise<void> {
+    if (this.deviceClient && client.id === this.deviceClient.id) {
+      await this.cacheManager.set('ngrokData', ngrokData, { ttl: 60 * 60 * 24 }); // Expires every 1 day
+    } else {
+      throw new MethodNotAllowedException();
+    }
   }
 
   @SubscribeMessage(WebSocketEvent.CHECK_DEVICE_CONNECTION)

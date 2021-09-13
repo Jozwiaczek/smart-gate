@@ -76,6 +76,10 @@ const en = {
       dashboard: {
         title: 'Dashboard',
         sections: {
+          camera: {
+            title: 'Camera preview',
+            loadingPreview: 'Loading camera preview...',
+          },
           toggling: {
             swipeUpToToggle: 'Swipe up to toggle gate',
             toggleSuccess: 'Successfully toggled',

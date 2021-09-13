@@ -1,14 +1,19 @@
-import * as dotenv from 'dotenv';
+import 'dotenv/config';
+
+import ngrok from 'ngrok';
 import socketClient from 'socket.io-client';
 
 import actionExecutor from './actions/actionExecutor';
 import { ActionConfig } from './actions/actions.types';
 import actionsConfig from './config/actions.config.json';
+import { WebSocketEvent } from './enums/webSocketEvent.enum';
+import initMotion from './initMotion';
+import initNgrok from './initNgrok';
 import { Logger } from './utils';
 
-dotenv.config();
 actionExecutor((actionsConfig as ActionConfig).onInit);
-const logger = new Logger('SocketConnection');
+
+const socketConnectionLogger = new Logger('SocketConnection');
 
 const socket = socketClient(process.env.API_URL ?? '', {
   auth: {
@@ -16,31 +21,31 @@ const socket = socketClient(process.env.API_URL ?? '', {
   },
 });
 
-logger.log('Initialized');
-
-enum WebSocketEvent {
-  CHECK_DEVICE_CONNECTION = 'checkDeviceConnection',
-  TOGGLE_GATE = 'toggleGate',
-}
-
 socket.on('message', (eventType: WebSocketEvent) => {
-  logger.log(`New message with eventType: ${eventType}`);
+  socketConnectionLogger.log(`New message with eventType: ${eventType}`);
   switch (eventType) {
     case WebSocketEvent.TOGGLE_GATE: {
       actionExecutor((actionsConfig as ActionConfig).onToggle);
       break;
     }
     default: {
-      logger.error(`Unsupported event type: ${eventType}`);
+      socketConnectionLogger.error(`Unsupported event type: ${eventType}`);
       break;
     }
   }
 });
 
+let motionInitialised = false;
 socket.on('connect', () => {
-  logger.log(`Connected`);
+  socketConnectionLogger.log(`API connected`);
+  if (!motionInitialised) {
+    initMotion();
+    motionInitialised = true;
+  }
+  void initNgrok(socket);
 });
 
 socket.on('disconnect', () => {
-  logger.log(`Disconnect`);
+  void ngrok.disconnect();
+  socketConnectionLogger.log(`API disconnected`);
 });

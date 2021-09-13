@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useAxios } from '../../../hooks';
 import registerWebPush from '../../../utils/registerWebPush';
 import { Title } from '../AuthorizedPages.styled';
+import { RowSection } from './Dashboard.styled';
+import CameraPreviewSection from './sections/CameraPreviewSection';
 import TogglingSection from './sections/TogglingSection';
 
 const Dashboard = () => {
@@ -17,7 +19,10 @@ const Dashboard = () => {
   return (
     <>
       <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
-      <TogglingSection />
+      <RowSection>
+        <TogglingSection />
+        <CameraPreviewSection />
+      </RowSection>
     </>
   );
 };
