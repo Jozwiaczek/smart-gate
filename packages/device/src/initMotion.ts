@@ -1,12 +1,19 @@
 import { exec } from 'child_process';
 
-import { isCameraUsageEnabled, Logger } from './utils';
+import { isCameraUsageEnabled, isWiredCameraMode, Logger } from './utils';
 
 const initMotion = () => {
   const logger = new Logger('Motion');
 
   if (!isCameraUsageEnabled()) {
     logger.log('Skip Motion initialisation - Camera usage disabled');
+    return;
+  }
+
+  if (!isWiredCameraMode()) {
+    logger.log(
+      'Skip Motion initialisation - Camera uses external video source (non-raspberry wired)',
+    );
     return;
   }
 
