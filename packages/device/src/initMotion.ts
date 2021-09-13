@@ -11,9 +11,7 @@ const initMotion = () => {
   }
 
   if (!isWiredCameraMode()) {
-    logger.log(
-      'Skip Motion initialisation - Camera uses external video source (non-raspberry wired)',
-    );
+    logger.log('Skip Motion initialisation - Camera wireless mode detected');
     return;
   }
 
