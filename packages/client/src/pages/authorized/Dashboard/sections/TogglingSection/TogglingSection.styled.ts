@@ -14,7 +14,7 @@ export const ToggleSliderWrapper = styled.div(
 );
 
 export const DisconnectedContainer = styled.div`
-  margin-top: 40px;
+  margin-top: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +36,7 @@ const wiresAnimation = keyframes`
 export const DisconnectedWiredWrapper = styled.div(
   ({ theme: { breakpoints, down } }) => css`
     width: 300px;
-    margin-bottom: 60px;
+    margin-bottom: 36px;
     overflow: hidden;
     svg {
       animation: ${wiresAnimation} 1500ms infinite ease-in-out;
@@ -75,7 +75,7 @@ export const DisconnectedIcons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 36px;
   gap: 50px;
   svg {
     animation: ${changeColors} 3s infinite;

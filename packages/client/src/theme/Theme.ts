@@ -49,6 +49,7 @@ export const colors = {
 export const getTheme = (themeType: ThemeType) => ({
   name: themeType,
   breakpoints: {
+    xxs: 340,
     xs: 375,
     sm: 600,
     md: 960,

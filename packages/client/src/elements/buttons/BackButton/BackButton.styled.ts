@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import BackArrowIcon from '../../../icons/BackArrowIcon';
 import TextButton from '../TextButton';
@@ -8,9 +8,16 @@ export const BackIcon = styled(BackArrowIcon)`
 `;
 
 export const StyledTextButton = styled(TextButton)`
-  ${({ theme: { breakpoints, down } }) => `
-      ${down(breakpoints.md)} {
-        padding: 0;
+  ${({ theme: { breakpoints, down } }) => css`
+    ${down(breakpoints.md)} {
+      padding-left: 0;
+      padding-bottom: 0;
+
+      :focus-visible,
+      :hover,
+      :active {
+        background: none;
       }
+    }
   `};
 `;

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 
-import { IconButton } from '../../buttons';
 import Card from '../../Card';
 
 export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
@@ -17,7 +16,6 @@ export const StyledCard = styled(Card)<{ isBulkActionsOpen: boolean }>`
   overflow-y: auto;
   padding: 0;
   transition: border-radius 150ms;
-
   width: 100%;
 
   th {
@@ -129,12 +127,8 @@ export const BulkActionsWrapper = styled.div<{ isOpen: boolean }>`
     `}
 `;
 
-export const BulkCancelButton = styled(IconButton)`
-  color: ${({ theme }) => theme.palette.text.dark};
-  margin-right: 9px;
-  svg {
-    width: 14px;
-  }
+export const BulkCancelButtonWrapper = styled.div`
+  margin: 0 10px;
 `;
 
 export const BulkCancelWrapper = styled.div`
@@ -142,12 +136,4 @@ export const BulkCancelWrapper = styled.div`
   color: ${({ theme }) => theme.palette.text.primary};
   display: flex;
   height: 100%;
-`;
-
-export const DeleteButton = styled(IconButton)`
-  border-radius: ${({ theme }) => theme.sizes.borderRadius};
-  height: 36px;
-  svg {
-    margin-right: 10px;
-  }
 `;

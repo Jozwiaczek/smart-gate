@@ -72,6 +72,7 @@ module.exports = {
     'react/jsx-boolean-value': [2, 'never'],
     'react/jsx-props-no-spreading': 0,
     'react/display-name': 0,
+    'react/react-in-jsx-scope': 0,
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
 

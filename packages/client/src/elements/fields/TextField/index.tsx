@@ -5,7 +5,12 @@ import { BaseRecordField } from '../Fields.types';
 import { Label, Wrapper } from './TextField.styled';
 import { TextFieldProps } from './TextField.types';
 
-const TextField = <T extends BaseRecordField>({ source, record, label }: TextFieldProps<T>) => {
+const TextField = <T extends BaseRecordField>({
+  source,
+  record,
+  label,
+  style,
+}: TextFieldProps<T>) => {
   const { t } = useTranslation();
 
   if (!record) {
@@ -13,7 +18,7 @@ const TextField = <T extends BaseRecordField>({ source, record, label }: TextFie
   }
 
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       {label && <Label>{t(label as never)}</Label>}
       <p data-testid="textField">{record[source] ?? <strong>-</strong>}</p>
     </Wrapper>
