@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef } from 'react';
 
 import useOnScreen from '../useOnScreen';
 import getAnimation from './getAnimation';
-import { AnimationType, UseAnimatedProps, UseAnimatedReturnProps } from './useAnimated.typed';
+import { UseAnimatedProps, UseAnimatedReturnProps } from './useAnimated.typed';
 
 const useAnimated = <T extends Element>({
   targets,
@@ -12,8 +12,8 @@ const useAnimated = <T extends Element>({
 }: UseAnimatedProps): UseAnimatedReturnProps<T> => {
   const { root, rootMargin, animationOpt, autoTrigger = true, autoTriggerOnce = false } = opt;
   const isInOut = Array.isArray(type);
-  const animateInType = (isInOut ? type[0] : type) as AnimationType;
-  const animateOutType = isInOut ? (type[1] as AnimationType) : undefined;
+  const animateInType = isInOut ? type[0] : type;
+  const animateOutType = isInOut ? type[1] : undefined;
 
   const animateInRef = useRef<AnimeInstance>();
   const animateOutRef = useRef<AnimeInstance>();

@@ -10,10 +10,5 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
     "type-check": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@types/nodemailer": "^6.4.4",
-    "nodemailer": "^6.6.3",
-    "ts-node": "^10.1.0"
   }
 }

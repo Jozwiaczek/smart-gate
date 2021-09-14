@@ -26,7 +26,7 @@ Read up on our guidelines for contributing and then check out one of our issues 
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) >= 12
+- [Node.js](https://nodejs.org/en/) >= 14
 - [Yarn](https://classic.yarnpkg.com/lang/en/) >=1.22
 
 ### General project dependencies installation

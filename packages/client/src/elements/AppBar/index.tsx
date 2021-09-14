@@ -37,7 +37,7 @@ const defaultTabs: Array<AppBarItem> = [
     path: mapRoutesToArray(admin),
     label: 'menu.admin',
     icon: <AdminIcon />,
-    onlyAdmin: false,
+    onlyAdmin: true,
     component: AdminDashboard,
     exact: true,
   },
@@ -106,7 +106,7 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
 
   const handleChange = (event: MouseEvent, newValue: number) => {
     setActiveTab(newValue);
-    const selectedTab = tabs.find(
+    const selectedTab = sortedItems.find(
       (tab) => newValue === (isMobile ? tab.indexMobile ?? tab.index : tab.index),
     );
     if (selectedTab) {
@@ -146,7 +146,6 @@ const AppBar = ({ tabs = defaultTabs }: AppBarProps) => {
           options={{
             tabWidth: isMobile ? 160 : 130,
             indicatorPosition: isMobile ? 'top' : 'right',
-            indicatorWidth: 80,
             variant: isMobile ? 'fullWidth' : 'default',
             orientation,
           }}

@@ -28,7 +28,10 @@ import {
   LogoutAllIcon,
   LogoutIcon,
   MoonIcon,
+  NoDataIcon,
+  OpenLockIcon,
   PolishFlagIcon,
+  PowerSupplyIcon,
   PrivilegesGroupIcon,
   QuestionMarkIcon,
   RefreshIcon,
@@ -49,6 +52,9 @@ import { IconsStoryProps } from './ComposeIconsLabels/ComposeIconsLabels.types';
 
 const AllIconsPanel = (args: IconsStoryProps) => (
   <ComposeIconsLabels {...args}>
+    <OpenLockIcon />
+    <PowerSupplyIcon />
+    <NoDataIcon />
     <PolishFlagIcon />
     <BritishFlagIcon />
     <SystemThemeIcon />

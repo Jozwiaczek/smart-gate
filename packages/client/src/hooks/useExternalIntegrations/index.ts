@@ -37,7 +37,7 @@ const useExternalIntegrations = () => {
     const enUrl = externalIntegrationsConfig.appleShortcuts.templates.en;
     const plUrl = externalIntegrationsConfig.appleShortcuts.templates.pl;
 
-    switch (i18n.language as SGLocale) {
+    switch (i18n.language) {
       case SGLocale.en:
         return enUrl;
       case SGLocale.pl:

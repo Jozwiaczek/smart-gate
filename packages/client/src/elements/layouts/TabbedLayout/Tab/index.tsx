@@ -34,6 +34,7 @@ const Tab = ({
       tabRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
     }
   };
+
   const isActive = value === index;
 
   let width = variant === 'fullWidth' ? '100%' : `${tabWidth}px`;

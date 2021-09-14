@@ -1,3 +1,7 @@
+interface BaseEmailTemplatesProps {
+  clientUrl: string;
+}
+
 interface WelcomeTemplateProps extends BaseEmailTemplatesProps {
   link: string;
 }
@@ -9,8 +13,4 @@ interface PasswordRecoveryTemplateProps extends BaseEmailTemplatesProps {
 
 interface PasswordChangedTemplateProps extends BaseEmailTemplatesProps {
   firstName: string;
-}
-
-interface BaseEmailTemplatesProps {
-  clientUrl: string;
 }

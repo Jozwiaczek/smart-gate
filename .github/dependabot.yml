@@ -6,7 +6,7 @@ updates:
     target-branch: 'dev'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
     commit-message:
       prefix: 'chore'
     ignore:
@@ -16,7 +16,7 @@ updates:
     target-branch: 'dev'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
     commit-message:
       prefix: 'chore'
     ignore:

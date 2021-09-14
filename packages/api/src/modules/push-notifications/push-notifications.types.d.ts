@@ -1,3 +1,11 @@
+type PushNotificationDirection = 'auto' | 'ltr' | 'rtl';
+
+interface PushNotificationAction {
+  action: string;
+  title: string;
+  icon?: string;
+}
+
 interface PushNotificationOptions {
   dir?: PushNotificationDirection;
   lang?: string;
@@ -18,12 +26,4 @@ interface PushNotificationOptions {
 interface PushNotificationPayload {
   title: string;
   options?: PushNotificationOptions;
-}
-
-type PushNotificationDirection = 'auto' | 'ltr' | 'rtl';
-
-interface PushNotificationAction {
-  action: string;
-  title: string;
-  icon?: string;
 }

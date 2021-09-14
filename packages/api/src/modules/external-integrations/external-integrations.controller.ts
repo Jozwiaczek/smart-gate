@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Headers, Post } from '@nestjs/common';
 
 import { Auth } from '../auth/decorators/auth.decorator';
 import { CookiePayload } from '../auth/decorators/cookiePayload.decorator';
@@ -29,7 +29,7 @@ export class ExternalIntegrationsController {
 
   @ExternalIntegrationsAuth()
   @Get('toggle-gate')
-  toggleGate(): string {
-    return this.externalIntegrationsService.toggleGate();
+  async toggleGate(@Headers('from') userEmail: string): Promise<string> {
+    return this.externalIntegrationsService.toggleGate(userEmail);
   }
 }

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../../constants';
 import { EditIcon, FiltersIcon } from '../../../icons';
-import { ApiList } from '../../../interfaces/api.types';
+import { ApiListResponse } from '../../../interfaces/api.types';
 import { ThemeType } from '../../../theme/Theme';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import {
@@ -22,7 +22,7 @@ import {
 import { CardListProps } from './CardList.types';
 
 const CardList = ({ children, resource, actionButton }: CardListProps) => {
-  const queryResult = useQuery<ApiList<BaseRecordField>>(`/${resource}`);
+  const queryResult = useQuery<ApiListResponse<BaseRecordField>>(`/${resource}`);
   const records = queryResult.data?.data;
   const history = useHistory();
   const { t } = useTranslation();
