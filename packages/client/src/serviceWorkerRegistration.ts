@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -19,7 +17,7 @@ const isLocalhost = Boolean(
     // [::1] is the IPv6 localhost address.
     window.location.hostname === '[::1]' ||
     // 127.0.0.0/8 are considered localhost for IPv4.
-    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/.exec(window.location.hostname),
+    /^127(?:\.(?:25[0-5]|2[0-4]\d|[01]?\d{1,2})){3}$/.exec(window.location.hostname),
 );
 
 type Config = {
@@ -27,6 +25,9 @@ type Config = {
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
 
+/**
+ * @param config - Service worker configuration
+ */
 export function register(config?: Config) {
   if (process.env.NODE_ENV === environments.PROD && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -47,7 +48,7 @@ export function register(config?: Config) {
 
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
+        void navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://cra.link/PWA',
@@ -61,10 +62,15 @@ export function register(config?: Config) {
   }
 }
 
+/**
+ * @param swUrl - Service worker location url
+ * @param config - Service worker configuration
+ */
 function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
-    .then(async (registration) => {
+    .then((registration) => {
+      // eslint-disable-next-line no-param-reassign
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
@@ -105,6 +111,10 @@ function registerValidSW(swUrl: string, config?: Config) {
     });
 }
 
+/**
+ * @param swUrl - Service worker location url
+ * @param config - Service worker configuration
+ */
 function checkValidServiceWorker(swUrl: string, config?: Config) {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl, {
@@ -118,8 +128,10 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
         (contentType != null && contentType.indexOf('javascript') === -1)
       ) {
         // No service worker found. Probably a different app. Reload the page.
-        navigator.serviceWorker.ready.then((registration) => {
-          registration.unregister().then(() => {
+        // eslint-disable-next-line promise/no-nesting
+        void navigator.serviceWorker.ready.then((registration) => {
+          // eslint-disable-next-line promise/no-nesting
+          void registration.unregister().then(() => {
             window.location.reload();
           });
         });
@@ -133,11 +145,14 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
     });
 }
 
+/**
+ * Unregister service worker
+ */
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
       .then((registration) => {
-        registration.unregister();
+        void registration.unregister();
       })
       .catch((error) => {
         console.error(error.message);

@@ -11,8 +11,10 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:eslint-comments/recommended',
     'plugin:node/recommended',
     'plugin:promise/recommended',
+    'airbnb',
     'airbnb/hooks',
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
@@ -32,6 +34,7 @@ module.exports = {
     'consistent-return': 0,
     'no-console': 0,
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
+    'no-use-before-define': 0,
 
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
@@ -40,6 +43,10 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 0,
     '@typescript-eslint/no-unused-expressions': [2, { allowShortCircuit: true }],
     '@typescript-eslint/no-floating-promises': [2, { ignoreIIFE: true, ignoreVoid: true }],
+    '@typescript-eslint/no-use-before-define': [
+      2,
+      { functions: false, classes: true, variables: true, typedefs: true },
+    ],
     '@typescript-eslint/naming-convention': [
       2,
       {
@@ -54,8 +61,9 @@ module.exports = {
 
     'security/detect-non-literal-regexp': 0,
     'security/detect-object-injection': 0,
-
     'security/detect-unsafe-regex': 0,
+
+    'regexp/no-unused-capturing-group': 0,
 
     'simple-import-sort/imports': 2,
     'simple-import-sort/exports': 2,
