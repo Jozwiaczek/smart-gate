@@ -41,9 +41,12 @@
     "babel-loader": "8.1.0"
   },
   "dependencies": {
+    "@types/nodemailer": "^6.4.4",
     "base64url": "^3.0.1",
     "dotenv": "^10.0.0",
+    "nodemailer": "^6.6.3",
     "pg": "^8.7.1",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
   "devDependencies": {
@@ -52,6 +55,7 @@
     "@commitlint/config-lerna-scopes": "^13.1.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.1",
+    "@types/node": "^16.9.1",
     "@types/pg": "^8.6.1",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
