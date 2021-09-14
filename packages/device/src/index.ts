@@ -21,7 +21,10 @@ logger.log('Initialized');
 enum WebSocketEvent {
   CHECK_DEVICE_CONNECTION = 'checkDeviceConnection',
   TOGGLE_GATE = 'toggleGate',
+  DEVICE_TURNED_ON = 'deviceTurnedOn',
 }
+
+let turnedOnEventSent = false;
 
 socket.on('message', (eventType: WebSocketEvent) => {
   logger.log(`New message with eventType: ${eventType}`);
@@ -38,7 +41,11 @@ socket.on('message', (eventType: WebSocketEvent) => {
 });
 
 socket.on('connect', () => {
-  logger.log(`Connected`);
+  logger.log('Connected');
+  if (!turnedOnEventSent) {
+    socket.emit(WebSocketEvent.DEVICE_TURNED_ON);
+    turnedOnEventSent = true;
+  }
 });
 
 socket.on('disconnect', () => {

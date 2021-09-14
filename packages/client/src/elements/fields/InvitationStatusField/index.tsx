@@ -16,14 +16,18 @@ const getStatusIcon = (status: InvitationStatus, expirationDate: Date) => {
   return <PendingIcon />;
 };
 
-const InvitationStatusField = ({ record }: InvitationStatusFieldProps) => {
+const InvitationStatusField = ({ record, style }: InvitationStatusFieldProps) => {
   if (!record) {
     return null;
   }
   const { status, expirationDate } = record;
   const statusIcon = getStatusIcon(status, expirationDate);
 
-  return <Wrapper data-testid="invitationStatusField">{statusIcon}</Wrapper>;
+  return (
+    <Wrapper data-testid="invitationStatusField" style={style}>
+      {statusIcon}
+    </Wrapper>
+  );
 };
 
 InvitationStatusField.displayName = 'InvitationStatusField';

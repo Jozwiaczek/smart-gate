@@ -1,4 +1,5 @@
 import { ConfigRepository } from './config.repository';
+import { HistoryRepository } from './history.repository';
 import { InvitationRepository } from './invitation.repository';
 import { PushNotificationRepository } from './push-notification.repository';
 import { RefreshTokenRepository } from './refresh-token.repository';
@@ -10,4 +11,5 @@ export default [
   RefreshTokenRepository,
   PushNotificationRepository,
   ConfigRepository,
+  HistoryRepository,
 ];

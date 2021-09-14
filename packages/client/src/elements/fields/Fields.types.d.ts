@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 import { BaseApiResource } from '../../interfaces/api.types';
 
 interface BaseFieldProps<T> {
@@ -7,6 +9,7 @@ interface BaseFieldProps<T> {
   asTitle?: boolean;
   noLabel?: boolean;
   noTranslation?: boolean;
+  style?: CSSProperties;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

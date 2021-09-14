@@ -32,8 +32,9 @@ export class ExternalIntegrationsService {
     this.logger.log(`External integrations token removed for user: ${email}`);
   }
 
-  toggleGate(): string {
-    this.websocketGateway.toggleGate();
+  async toggleGate(userEmail: string): Promise<string> {
+    const user = await this.usersService.findOneByEmail(userEmail);
+    await this.websocketGateway.toggleGate(undefined, user);
     return SUCCESSFULLY_OPEN;
   }
 }

@@ -41,7 +41,7 @@ describe('users service', () => {
       expect(allUsers.data).toStrictEqual([]);
     });
 
-    it('returns user from database', async () => {
+    it('returns users from database', async () => {
       await testClearRepository(connection, UserEntity);
 
       const firstUser = await testCreateRandomUser(connection);
