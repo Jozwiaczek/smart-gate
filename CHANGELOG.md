@@ -1,3 +1,24 @@
+# [1.16.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.15.1...v1.16.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* **client:** app bar navigation for non admin, delete hover button rest props ([d6c1812](https://github.com/Jozwiaczek/smart-gate/commit/d6c1812d09619bfdc3944a24456c2b2eb6217975))
+* **client:** condition for collapsing record lines ([41b4ce4](https://github.com/Jozwiaczek/smart-gate/commit/41b4ce42d5d2a2eb2e8dfbb6686a3009cec7432b))
+
+
+### Features
+
+* **api:** add history module ([a87bebd](https://github.com/Jozwiaczek/smart-gate/commit/a87bebde804380b1458b9d86cda92704210c8890))
+* **api:** return all history records sorted by date ([e5478c2](https://github.com/Jozwiaczek/smart-gate/commit/e5478c2b26fbc14b2e4fab504de1a0abd75f3171))
+* **client:** add ability to remove record in history compact list ([d4b66c6](https://github.com/Jozwiaczek/smart-gate/commit/d4b66c6b800eb378afc8307c82b9b6c0231417a7))
+* **client:** add compact history list for mobile view ([0f4e150](https://github.com/Jozwiaczek/smart-gate/commit/0f4e150d1c10c732b40eb42e64096c93c42fa0f0))
+* **client:** add history list for desktop ([004fae4](https://github.com/Jozwiaczek/smart-gate/commit/004fae4a5b1f2b2f5421e671d61ee9baf6f65fbe))
+* **client:** add Swipeout component ([8c21c80](https://github.com/Jozwiaczek/smart-gate/commit/8c21c8037563edd9fa2ec538f7a23e7605fb9f79))
+* **client:** adjust detailed list bulk buttons ([1f670e6](https://github.com/Jozwiaczek/smart-gate/commit/1f670e6d3ee5cb675d43ae07b4092c8d474cb8d0))
+* **client:** handle nav tabs admin access and add admin column for users list ([563e2bc](https://github.com/Jozwiaczek/smart-gate/commit/563e2bcd8832500b90717782c918e95a51386565))
+* **client:** hide history mobile records lines on swipe ([81c39e9](https://github.com/Jozwiaczek/smart-gate/commit/81c39e93d047776d0bf8c849974a2c52589ba2e2))
+
 ## [1.15.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.15.0...v1.15.1) (2021-08-28)
 
 

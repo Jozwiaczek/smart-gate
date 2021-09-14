@@ -15,6 +15,11 @@ const pl: TranslationStructure = {
       password: 'Hasło',
       role: 'Rola',
     },
+    history: {
+      event: 'Zdarzenie',
+      date: 'Data',
+      device: 'Urządzenie',
+    },
     invitation: {
       name: 'Zaproszenie',
       inviter: 'Zapraszający',
@@ -34,6 +39,10 @@ const pl: TranslationStructure = {
       admin: 'Admin',
     },
     lists: {
+      general: {
+        noData: 'Brak danych',
+        removeError: 'Coś poszło nie tak podczas operacji usuwania. Spróbuj ponownie później.',
+      },
       detailedList: {
         items: 'wierszy',
         item: 'wiersz',
@@ -41,7 +50,6 @@ const pl: TranslationStructure = {
         ofTotal: 'z',
         next: 'następny',
         prev: 'poprzedni',
-        removeManyError: 'Coś poszło nie tak podczas operacji usuwania!',
       },
     },
     form: {
@@ -97,6 +105,23 @@ const pl: TranslationStructure = {
       },
       history: {
         title: 'Historia',
+        description:
+          'Poniżej możesz przejrzeć swoją historię otwarcia.<br />W celu uzyskania dostępu do pełnej historii, skontaktuj sie ze swoim administratorem.',
+        noData: 'Brak historii',
+        today: 'Dzisiaj',
+        yesterday: 'Wczoraj',
+        events: {
+          personal: {
+            open: 'otworzył bramę',
+            turnedOff: 'wyłączone',
+            turnedOn: 'włączone',
+          },
+          impersonal: {
+            open: 'Brama otworzona',
+            turnedOff: 'Urządzenie wyłączone',
+            turnedOn: 'Urządzenie włączone',
+          },
+        },
       },
       admin: {
         title: 'Admin panel',
@@ -107,6 +132,11 @@ const pl: TranslationStructure = {
           privileges: 'Grupy dostępu',
           statistics: 'Statystyki',
         },
+      },
+      users: {
+        isAdmin: 'Administrator',
+        userWithAdmin: 'Użytkownik z dostępem administratora',
+        userWithoutAdmin: 'Użytkownik bez dostępu administratora',
       },
       settings: {
         title: 'Ustawienia',

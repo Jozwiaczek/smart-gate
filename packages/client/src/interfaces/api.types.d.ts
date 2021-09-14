@@ -1,3 +1,4 @@
+import { HistoryEvent } from '../enums/historyEvent.enum';
 import { InvitationStatus } from '../enums/invitationStatus.enum';
 import { Role } from '../enums/role.enum';
 
@@ -15,6 +16,11 @@ interface ApiUser extends BaseApiResource {
   externalIntegrationsToken?: string;
 }
 
+interface ApiHistoryRecord extends BaseApiResource {
+  user?: ApiUser;
+  event: HistoryEvent;
+}
+
 interface ApiInvitation extends BaseApiResource {
   email: string;
   expirationDate: Date;
@@ -24,7 +30,7 @@ interface ApiInvitation extends BaseApiResource {
   updatedBy?: ApiUser;
 }
 
-interface ApiList<T> {
+interface ApiListResponse<T> {
   data: Array<T>;
   total: number;
 }

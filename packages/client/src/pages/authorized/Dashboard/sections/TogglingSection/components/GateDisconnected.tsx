@@ -33,16 +33,12 @@ const GateDisconnected = ({ connectionState, deviceStatus }: GateDisconnectedPro
       </DisconnectedBody>
       <DisconnectedIcons>
         {isServerDisconnected && (
-          <Tooltip
-            label={t('routes.dashboard.sections.toggling.gateDisconnected.serverDisconnected')}
-          >
+          <Tooltip label="routes.dashboard.sections.toggling.gateDisconnected.serverDisconnected">
             <ServerDisconnectedIcon />
           </Tooltip>
         )}
         {isDeviceDisconnected && (
-          <Tooltip
-            label={t('routes.dashboard.sections.toggling.gateDisconnected.deviceDisconnected')}
-          >
+          <Tooltip label="routes.dashboard.sections.toggling.gateDisconnected.deviceDisconnected">
             <DeviceDisconnectedIcon />
           </Tooltip>
         )}

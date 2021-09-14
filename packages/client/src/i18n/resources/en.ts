@@ -13,6 +13,11 @@ const en = {
       password: 'Password',
       role: 'Role',
     },
+    history: {
+      event: 'Event',
+      date: 'Date',
+      device: 'Device',
+    },
     invitation: {
       name: 'Invitation',
       inviter: 'Inviter',
@@ -32,6 +37,10 @@ const en = {
       admin: 'Admin',
     },
     lists: {
+      general: {
+        noData: 'No data',
+        removeError: 'Something went wrong during the delete operation. Try again later.',
+      },
       detailedList: {
         items: 'items',
         item: 'item',
@@ -39,7 +48,6 @@ const en = {
         ofTotal: 'of',
         next: 'next',
         prev: 'prev',
-        removeManyError: 'Something went wrong during the delete operation!',
       },
     },
     form: {
@@ -95,6 +103,23 @@ const en = {
       },
       history: {
         title: 'History',
+        description:
+          'Below you can browse your opening history.<br /> In order to access full history, request your administrator.',
+        noData: 'History is empty',
+        today: 'Today',
+        yesterday: 'Yesterday',
+        events: {
+          personal: {
+            open: 'open gate',
+            turnedOff: 'turned off',
+            turnedOn: 'turned on',
+          },
+          impersonal: {
+            open: 'Gate opened',
+            turnedOff: 'Device turned off',
+            turnedOn: 'Device turned on',
+          },
+        },
       },
       admin: {
         title: 'Admin panel',
@@ -105,6 +130,11 @@ const en = {
           privileges: 'Privileges groups',
           statistics: 'Statistics',
         },
+      },
+      users: {
+        isAdmin: 'Is admin',
+        userWithAdmin: 'User with admin access',
+        userWithoutAdmin: 'User without admin access',
       },
       settings: {
         title: 'Settings',
