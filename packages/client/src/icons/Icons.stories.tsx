@@ -52,9 +52,6 @@ import { IconsStoryProps } from './ComposeIconsLabels/ComposeIconsLabels.types';
 
 const AllIconsPanel = (args: IconsStoryProps) => (
   <ComposeIconsLabels {...args}>
-    <OpenLockIcon />
-    <PowerSupplyIcon />
-    <NoDataIcon />
     <PolishFlagIcon />
     <BritishFlagIcon />
     <SystemThemeIcon />
@@ -83,6 +80,7 @@ const AllIconsPanel = (args: IconsStoryProps) => (
     <LogoutAllIcon />
     <LogoutIcon />
     <CopyIcon />
+    <OpenLockIcon />
     <LockIcon />
     <ConfirmLockIcon />
     <KeyIcon />
@@ -96,6 +94,8 @@ const AllIconsPanel = (args: IconsStoryProps) => (
     <SettingsIcon />
     <StatisticsIcon />
     <TrashIcon />
+    <PowerSupplyIcon />
+    <NoDataIcon />
   </ComposeIconsLabels>
 );
 
