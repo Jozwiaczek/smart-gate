@@ -14,7 +14,6 @@ const CopyIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =
     <path
       d="M14.5 6.25H7.75C6.92157 6.25 6.25 6.92157 6.25 7.75V14.5C6.25 15.3284 6.92157 16 7.75 16H14.5C15.3284 16 16 15.3284 16 14.5V7.75C16 6.92157 15.3284 6.25 14.5 6.25Z"
       stroke="currentColor"
-      strokeOpacity="0.7"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -22,7 +21,6 @@ const CopyIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =
     <path
       d="M3.25 10.75H2.5C1.67157 10.75 1 10.0784 1 9.25V2.5C1 1.67157 1.67157 1 2.5 1H9.25C10.0784 1 10.75 1.67157 10.75 2.5V3.25"
       stroke="currentColor"
-      strokeOpacity="0.7"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -30,4 +28,7 @@ const CopyIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =
   </svg>
 );
 
-export default memo(forwardRef(CopyIcon));
+const Composed = memo(forwardRef(CopyIcon));
+Composed.displayName = 'CopyIcon';
+
+export default Composed;

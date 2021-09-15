@@ -1,6 +1,5 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import styled from 'styled-components';
 
 import {
   AdminIcon,
@@ -48,69 +47,56 @@ import {
   UserIcon,
   UsersIcon,
 } from '.';
+import ComposeIconsLabels from './ComposeIconsLabels';
+import { IconsStoryProps } from './ComposeIconsLabels/ComposeIconsLabels.types';
 
-const IconsWrapper = styled.div`
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 80%;
-
-  > * {
-    color: ${({ theme: { palette } }) => palette.primary.main};
-    margin-right: 10px;
-    width: 30px;
-  }
-`;
-
-//
-const AllIconsPanel = () => (
-  <IconsWrapper>
-    <OpenLockIcon />
-    <PowerSupplyIcon />
-    <NoDataIcon />
-    <DisconnectedWiresIcon />
-    <DeviceDisconnectedIcon />
-    <ServerDisconnectedIcon />
-    <AppleIcon />
-    <CopyIcon />
-    <RefreshIcon />
-    <IntegrationsIcon />
-    <ChevronUpIcon />
-    <DetailedKeyIcon />
-    <KeyIcon />
-    <UserActionsIcon />
-    <LogoutAllIcon />
-    <LogoutIcon />
+const AllIconsPanel = (args: IconsStoryProps) => (
+  <ComposeIconsLabels {...args}>
     <PolishFlagIcon />
     <BritishFlagIcon />
     <SystemThemeIcon />
     <MoonIcon />
     <SunIcon />
-    <AdminIcon />
-    <ArrowIcon />
-    <BackArrowIcon />
-    <CancelIcon />
-    <ChevronDownIcon />
-    <ConfirmLockIcon />
-    <DashboardIcon />
+    <DetailedKeyIcon />
+    <DisconnectedWiresIcon />
     <DeviceIcon />
+    <DeviceDisconnectedIcon />
+    <ServerDisconnectedIcon />
+    <PrivilegesGroupIcon />
+    <UsersIcon />
+    <UserIcon />
+    <AdminIcon />
+    <UserActionsIcon />
+    <BackArrowIcon />
+    <ArrowIcon />
+    <ChevronUpIcon />
+    <ChevronDownIcon />
+    <CancelIcon />
+    <TickIcon />
+    <QuestionMarkIcon />
     <EditIcon />
+    <InvitationIcon />
+    <SendEmailIcon />
+    <LogoutAllIcon />
+    <LogoutIcon />
+    <CopyIcon />
+    <OpenLockIcon />
+    <LockIcon />
+    <ConfirmLockIcon />
+    <KeyIcon />
+    <AppleIcon />
+    <RefreshIcon />
+    <IntegrationsIcon />
+    <DashboardIcon />
     <EmailIcon />
     <FiltersIcon />
     <HistoryIcon />
-    <InvitationIcon />
-    <LockIcon />
-    <PrivilegesGroupIcon />
-    <QuestionMarkIcon />
-    <SendEmailIcon />
     <SettingsIcon />
     <StatisticsIcon />
-    <TickIcon />
     <TrashIcon />
-    <UserIcon />
-    <UsersIcon />
-  </IconsWrapper>
+    <PowerSupplyIcon />
+    <NoDataIcon />
+  </ComposeIconsLabels>
 );
 
 export default {
@@ -118,7 +104,7 @@ export default {
   component: AllIconsPanel,
 } as Meta;
 
-const Template: Story = (args) => <AllIconsPanel {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};
+export const Default: Story<IconsStoryProps> = (args) => <AllIconsPanel {...args} />;
+Default.args = {
+  showLabelAsComponentName: false,
+};

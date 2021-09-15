@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { Button, Card, Link } from '../../../../../elements';
-import { CopyIcon } from '../../../../../icons';
+import { ConfirmLockIcon, CopyIcon } from '../../../../../icons';
 
 export const StyledCard = styled(Card)`
   padding: 0;
@@ -48,6 +48,7 @@ export const StyledCopyIcon = styled(CopyIcon)(
     color: ${palette.text.dark};
     width: 20px;
     height: 20px;
+    opacity: 0.7;
     transition: color 200ms ease-in-out;
     :hover {
       color: ${palette.text.light};
@@ -77,3 +78,9 @@ export const RegenerateTokenButton = styled(Button)`
     }
   }
 `;
+
+export const StyledConfirmLockIcon = styled(ConfirmLockIcon)(
+  ({ theme: { palette } }) => css`
+    color: ${palette.colors.red};
+  `,
+);

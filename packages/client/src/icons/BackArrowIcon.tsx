@@ -18,4 +18,7 @@ const BackArrowIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElemen
   </svg>
 );
 
-export default memo(forwardRef(BackArrowIcon));
+const Composed = memo(forwardRef(BackArrowIcon));
+Composed.displayName = 'BackArrowIcon';
+
+export default Composed;

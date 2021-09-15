@@ -23,4 +23,7 @@ const HistoryIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>
   </svg>
 );
 
-export default memo(forwardRef(HistoryIcon));
+const Composed = memo(forwardRef(HistoryIcon));
+Composed.displayName = 'HistoryIcon';
+
+export default Composed;

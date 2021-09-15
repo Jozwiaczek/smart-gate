@@ -65,4 +65,7 @@ const SunIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =>
   </svg>
 );
 
-export default memo(forwardRef(SunIcon));
+const Composed = memo(forwardRef(SunIcon));
+Composed.displayName = 'SunIcon';
+
+export default Composed;

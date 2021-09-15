@@ -7,4 +7,7 @@ const <%= h.changeCase.pascal(Name) %>Icon = (props: SVGProps<SVGSVGElement>, sv
     <%- iconSource %>
 )
 
-export default memo(forwardRef(<%= h.changeCase.pascal(Name) %>Icon));
+const Composed = memo(forwardRef(<%= h.changeCase.pascal(Name) %>Icon));
+Composed.displayName = '<%= h.changeCase.pascal(Name) %>Icon';
+
+export default Composed;

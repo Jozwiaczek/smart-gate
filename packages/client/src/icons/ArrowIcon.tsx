@@ -16,4 +16,7 @@ const ArrowIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) 
   </svg>
 );
 
-export default memo(forwardRef(ArrowIcon));
+const Composed = memo(forwardRef(ArrowIcon));
+Composed.displayName = 'ArrowIcon';
+
+export default Composed;

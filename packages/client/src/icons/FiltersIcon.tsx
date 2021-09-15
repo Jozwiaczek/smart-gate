@@ -89,4 +89,7 @@ const FiltersIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>
   );
 };
 
-export default memo(forwardRef(FiltersIcon));
+const Composed = memo(forwardRef(FiltersIcon));
+Composed.displayName = 'FiltersIcon';
+
+export default Composed;

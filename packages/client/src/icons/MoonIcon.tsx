@@ -25,4 +25,7 @@ const MoonIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =
   </svg>
 );
 
-export default memo(forwardRef(MoonIcon));
+const Composed = memo(forwardRef(MoonIcon));
+Composed.displayName = 'MoonIcon';
+
+export default Composed;

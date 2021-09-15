@@ -20,4 +20,7 @@ const UserActionsIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElem
   </svg>
 );
 
-export default memo(forwardRef(UserActionsIcon));
+const Composed = memo(forwardRef(UserActionsIcon));
+Composed.displayName = 'UserActionsIcon';
+
+export default Composed;

@@ -7,10 +7,10 @@ import { routes } from '../../../constants';
 import { CardLayout, Form, Link, TextInput } from '../../../elements';
 import { useAuth, useEncodedParams, useSnackbar } from '../../../hooks';
 import useAnimated from '../../../hooks/useAnimated';
-import { ConfirmLockIcon, UserIcon } from '../../../icons';
+import { UserIcon } from '../../../icons';
 import { RegistrationData } from '../../../providers/api/AuthProvider/AuthProvider.types';
 import { onlyOnDevEnv } from '../../../utils';
-import { StyledButton } from './Registration.styled';
+import { StyledButton, StyledConfirmLockIcon } from './Registration.styled';
 import { RegistrationInputs, RegistrationParams } from './Registration.types';
 
 const Registration = () => {
@@ -107,7 +107,7 @@ const Registration = () => {
           name={t('form.inputs.confirmPassword')}
           type="password"
           placeholder={t('form.inputs.repeatPassword')}
-          startAdornment={<ConfirmLockIcon />}
+          startAdornment={<StyledConfirmLockIcon />}
           registerOptions={{
             validate: (value) => {
               return (

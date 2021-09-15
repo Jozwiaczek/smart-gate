@@ -17,4 +17,7 @@ const StatisticsIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGEleme
   </svg>
 );
 
-export default memo(forwardRef(StatisticsIcon));
+const Composed = memo(forwardRef(StatisticsIcon));
+Composed.displayName = 'StatisticsIcon';
+
+export default Composed;

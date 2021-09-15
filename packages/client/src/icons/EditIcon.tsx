@@ -29,4 +29,7 @@ const EditIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =
   );
 };
 
-export default memo(forwardRef(EditIcon));
+const Composed = memo(forwardRef(EditIcon));
+Composed.displayName = 'EditIcon';
+
+export default Composed;
