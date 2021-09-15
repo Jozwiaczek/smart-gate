@@ -24,4 +24,7 @@ const TickIcon = ({ isVisible = true, ...rest }: TickIconProps, svgRef?: Ref<SVG
   </svg>
 );
 
-export default memo(forwardRef(TickIcon));
+const Composed = memo(forwardRef(TickIcon));
+Composed.displayName = 'TickIcon';
+
+export default Composed;

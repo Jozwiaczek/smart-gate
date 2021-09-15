@@ -194,4 +194,7 @@ const ShieldLock = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>)
   </svg>
 );
 
-export default memo(forwardRef(ShieldLock));
+const Composed = memo(forwardRef(ShieldLock));
+Composed.displayName = 'ShieldLock';
+
+export default Composed;

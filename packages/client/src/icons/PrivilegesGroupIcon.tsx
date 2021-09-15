@@ -23,4 +23,7 @@ const PrivilegesGroupIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVG
   </svg>
 );
 
-export default memo(forwardRef(PrivilegesGroupIcon));
+const Composed = memo(forwardRef(PrivilegesGroupIcon));
+Composed.displayName = 'PrivilegesGroupIcon';
+
+export default Composed;

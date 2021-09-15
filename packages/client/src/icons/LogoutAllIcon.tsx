@@ -27,4 +27,7 @@ const LogoutAllIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElemen
   </svg>
 );
 
-export default memo(forwardRef(LogoutAllIcon));
+const Composed = memo(forwardRef(LogoutAllIcon));
+Composed.displayName = 'LogoutAllIcon';
+
+export default Composed;

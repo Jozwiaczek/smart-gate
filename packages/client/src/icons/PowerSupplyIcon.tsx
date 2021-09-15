@@ -20,4 +20,7 @@ const PowerSupplyIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElem
   </svg>
 );
 
-export default memo(forwardRef(PowerSupplyIcon));
+const Composed = memo(forwardRef(PowerSupplyIcon));
+Composed.displayName = 'PowerSupplyIcon';
+
+export default Composed;

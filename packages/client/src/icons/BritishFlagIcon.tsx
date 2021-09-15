@@ -69,4 +69,7 @@ const BritishFlagIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElem
   </svg>
 );
 
-export default memo(forwardRef(BritishFlagIcon));
+const Composed = memo(forwardRef(BritishFlagIcon));
+Composed.displayName = 'BritishFlagIcon';
+
+export default Composed;

@@ -19,4 +19,7 @@ const OpenLockIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement
   </svg>
 );
 
-export default memo(forwardRef(OpenLockIcon));
+const Composed = memo(forwardRef(OpenLockIcon));
+Composed.displayName = 'OpenLockIcon';
+
+export default Composed;

@@ -14,4 +14,7 @@ const InvitationIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGEleme
   </svg>
 );
 
-export default memo(forwardRef(InvitationIcon));
+const Composed = memo(forwardRef(InvitationIcon));
+Composed.displayName = 'InvitationIcon';
+
+export default Composed;

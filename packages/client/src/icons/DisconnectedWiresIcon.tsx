@@ -58,4 +58,7 @@ const DisconnectedWiresIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGS
   </svg>
 );
 
-export default memo(forwardRef(DisconnectedWiresIcon));
+const Composed = memo(forwardRef(DisconnectedWiresIcon));
+Composed.displayName = 'DisconnectedWiresIcon';
+
+export default Composed;

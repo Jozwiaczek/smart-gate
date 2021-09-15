@@ -33,4 +33,7 @@ const NoDataIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>)
   </svg>
 );
 
-export default memo(forwardRef(NoDataIcon));
+const Composed = memo(forwardRef(NoDataIcon));
+Composed.displayName = 'NoDataIcon';
+
+export default Composed;

@@ -20,4 +20,7 @@ const ChevronDownIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElem
   </svg>
 );
 
-export default memo(forwardRef(ChevronDownIcon));
+const Composed = memo(forwardRef(ChevronDownIcon));
+Composed.displayName = 'ChevronDownIcon';
+
+export default Composed;
