@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useFormatDate, useHistoryCompactListData, useIsCurrentUserAdmin } from '../../../hooks';
-import { ApiHistoryRecords } from '../../../hooks/useHistoryCompactListData/useHistoryCompactListData.types';
 import useHistoryEventLabel from '../../../hooks/useHistoryEventLabel';
 import { TrashIcon } from '../../../icons';
 import Swipeout from '../../Swipeout';
@@ -38,22 +37,22 @@ const HistoryCompactList = () => {
       return false;
     }
 
+    // Current swiped element
     if (swipingRecord.index === index) {
       return true;
     }
 
+    // Previous swiped element
     return swipingRecord.index === index - 1;
   };
 
-  const tmp = [] as Array<[string, ApiHistoryRecords]>;
-
-  if (!tmp.length) {
+  if (!history.length) {
     return <NoData label="routes.history.noData" />;
   }
 
   return (
     <ListCard>
-      {tmp.map(([dateKey, records]) => (
+      {history.map(([dateKey, records]) => (
         <div key={dateKey}>
           <DayLabel>{dateKey}</DayLabel>
           <SingleDayRecordsWrapper>
