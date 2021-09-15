@@ -24,6 +24,10 @@ const CameraPreviewSection = () => {
     };
   }, [cameraURL, reloadCameraPreview]);
 
+  if (process.env.REACT_APP_CAMERA_PREVIEW_ENABLED !== 'true') {
+    return null;
+  }
+
   return (
     <div>
       {!isPreviewLoaded && (
