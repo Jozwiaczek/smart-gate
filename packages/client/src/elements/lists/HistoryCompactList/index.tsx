@@ -5,6 +5,7 @@ import { useFormatDate, useHistoryCompactListData, useIsCurrentUserAdmin } from 
 import useHistoryEventLabel from '../../../hooks/useHistoryEventLabel';
 import { TrashIcon } from '../../../icons';
 import Swipeout from '../../Swipeout';
+import NoData from '../NoData';
 import {
   DayLabel,
   EventLabel,
@@ -36,12 +37,18 @@ const HistoryCompactList = () => {
       return false;
     }
 
+    // Current swiped element
     if (swipingRecord.index === index) {
       return true;
     }
 
+    // Previous swiped element
     return swipingRecord.index === index - 1;
   };
+
+  if (!history.length) {
+    return <NoData label="routes.history.noData" />;
+  }
 
   return (
     <ListCard>
