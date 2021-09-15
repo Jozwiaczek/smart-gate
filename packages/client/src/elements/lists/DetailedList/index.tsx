@@ -16,6 +16,7 @@ import { getLabelFromSource, onlyOnDevEnv } from '../../../utils';
 import { CloseButton, DeleteHoverButton } from '../../buttons';
 import { BaseFieldProps, BaseRecordField } from '../../fields/Fields.types';
 import { Checkbox } from '../../inputs';
+import NoData from '../NoData';
 import {
   BulkActionsWrapper,
   BulkCancelButtonWrapper,
@@ -32,7 +33,6 @@ import {
   TableRow,
 } from './DetailedList.styled';
 import { DetailedListProps, PerPage } from './DetailedList.types';
-import NoData from './NoData';
 import Pagination from './Pagination';
 
 const DetailedList = ({

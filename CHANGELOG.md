@@ -1,3 +1,11 @@
+## [1.16.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.16.0...v1.16.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* **client:** add no data view for mobile detailed history list ([2766180](https://github.com/Jozwiaczek/smart-gate/commit/2766180ca5d4972e436765bc4e8cf83a3a1539c1))
+* **client:** revert usage of history data from hook ([4e3a9b7](https://github.com/Jozwiaczek/smart-gate/commit/4e3a9b7421fe694698a1b4ddeeea2533473b719c))
+
 # [1.16.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.15.1...v1.16.0) (2021-09-14)
 
 
