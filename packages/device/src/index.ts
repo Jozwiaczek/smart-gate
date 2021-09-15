@@ -1,5 +1,6 @@
 import 'dotenv/config';
 
+import ngrok from 'ngrok';
 import socketClient from 'socket.io-client';
 
 import actionExecutor from './actions/actionExecutor';
@@ -45,11 +46,13 @@ socket.on('connect', () => {
   if (!deviceInitialisedOnConnect) {
     socket.emit(WebSocketEvent.DEVICE_TURNED_ON);
     initMotion();
-    void initNgrok(socket);
     deviceInitialisedOnConnect = true;
   }
+
+  void initNgrok(socket);
 });
 
 socket.on('disconnect', () => {
+  void ngrok.disconnect();
   logger.log(`API disconnected`);
 });
