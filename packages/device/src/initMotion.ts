@@ -1,9 +1,10 @@
 import { exec } from 'child_process';
 
+import { LoggerContext } from './enums/loggerContext.enum';
 import { isCameraUsageEnabled, isWiredCameraMode, Logger } from './utils';
 
 const initMotion = () => {
-  const logger = new Logger('Motion');
+  const logger = new Logger(LoggerContext.MOTION);
 
   if (!isCameraUsageEnabled()) {
     logger.log('Skip Motion initialisation - Camera usage disabled');

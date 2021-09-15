@@ -1,7 +1,9 @@
 import chalk, { ForegroundColor } from 'chalk';
 
+import { LoggerContext } from '../enums/loggerContext.enum';
+
 class Logger {
-  constructor(private context: string) {}
+  constructor(private context: LoggerContext) {}
 
   static getTimestamp(): string {
     const currentDate = new Date();
@@ -24,23 +26,23 @@ class Logger {
     return `${loggerSign} ${timestamp}  ${formattedContext} ${formattedData}`;
   }
 
-  log(message: any, context?: string): void {
+  log(message: any, context?: LoggerContext): void {
     console.log(this.composeMessage(message, 'green', context));
   }
 
-  debug(message: any, context?: string): void {
+  debug(message: any, context?: LoggerContext): void {
     console.debug(this.composeMessage(message, 'magenta', context));
   }
 
-  error(message: any, context?: string): void {
+  error(message: any, context?: LoggerContext): void {
     console.error(this.composeMessage(message, 'red', context));
   }
 
-  warn(message: any, context?: string): void {
+  warn(message: any, context?: LoggerContext): void {
     console.warn(this.composeMessage(message, 'yellowBright', context));
   }
 
-  verbose(message: any, context?: string): void {
+  verbose(message: any, context?: LoggerContext): void {
     console.log(this.composeMessage(message, 'cyan', context));
   }
 }

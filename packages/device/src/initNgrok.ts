@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import ngrok from 'ngrok';
 
+import { LoggerContext } from './enums/loggerContext.enum';
 import { WebSocketEvent } from './enums/webSocketEvent.enum';
 import { isCameraUsageEnabled, Logger, streamlineNgrokEvent } from './utils';
 
@@ -12,7 +13,7 @@ interface NgrokHandshakeData {
 }
 
 const initNgrok = async (socket: any): Promise<void> => {
-  const logger = new Logger('Ngrok');
+  const logger = new Logger(LoggerContext.NGROK);
   const { NGROK_REGION = 'eu', NGROK_LOCAL_CAMERA_ADDRESS = 'http://localhost:8081' } = process.env;
 
   if (!isCameraUsageEnabled()) {
@@ -50,10 +51,10 @@ const initNgrok = async (socket: any): Promise<void> => {
     return;
   }
 
-  logger.verbose(`New ngrok camera URL: ${ngrokCameraUrl}`);
+  logger.verbose(`New camera URL: ${ngrokCameraUrl}`);
 
   socket.emit(WebSocketEvent.SET_NGROK_DATA, { auth, url: ngrokCameraUrl } as NgrokHandshakeData);
-  logger.log('Handshake sent to API');
+  logger.log('Data sent to API');
 };
 
 export default initNgrok;

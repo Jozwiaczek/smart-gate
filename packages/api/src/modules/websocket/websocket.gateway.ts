@@ -1,6 +1,5 @@
 import {
-  CACHE_MANAGER,
-  Inject,
+  ForbiddenException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -15,12 +14,10 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Cache } from 'cache-manager';
 import { Server, Socket } from 'socket.io';
 
 import { HistoryEvent } from '../../enums/historyEvent.enum';
 import { WebSocketEvent } from '../../enums/webSocketEvent.enum';
-import { NgrokData } from '../camera/camera.controller';
 import { UserEntity } from '../database/entities/user.entity';
 import { HistoryService } from '../history/history.service';
 import { TicketService } from '../ticket/ticket.service';
@@ -28,6 +25,11 @@ import { UsersService } from '../users/users.service';
 import { WebsocketConfigService } from './config/websocket-config.service';
 
 const HEROKU_RECONNECT_DELAY = 30;
+
+export interface NgrokData {
+  url: string;
+  auth: string;
+}
 
 @Injectable()
 @WebSocketGateway({
@@ -37,7 +39,6 @@ const HEROKU_RECONNECT_DELAY = 30;
 })
 export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   constructor(
-    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly ticketService: TicketService,
     private readonly websocketConfigService: WebsocketConfigService,
     private readonly historyService: HistoryService,
@@ -47,6 +48,8 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
   @WebSocketServer() server: Server;
 
   private deviceClient: Socket | undefined;
+
+  private ngrokData: NgrokData | undefined;
 
   private clients: Map<string, string> = new Map<string, string>();
 
@@ -115,17 +118,24 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
     this.logger.log('Device turned on');
   }
 
+  getNgrokData(): NgrokData {
+    if (this.ngrokData) {
+      return this.ngrokData;
+    }
+    throw new ServiceUnavailableException();
+  }
+
   @SubscribeMessage(WebSocketEvent.SET_NGROK_DATA)
-  async setNgrokData(client: Socket, ngrokData: NgrokData): Promise<void> {
+  private setNgrokData(client: Socket, newNgrokData: NgrokData): void {
     if (this.deviceClient && client.id === this.deviceClient.id) {
-      await this.cacheManager.set('ngrokData', ngrokData, { ttl: 60 * 60 * 24 }); // Expires every 1 day
+      this.ngrokData = newNgrokData;
     } else {
-      throw new MethodNotAllowedException();
+      throw new ForbiddenException();
     }
   }
 
   @SubscribeMessage(WebSocketEvent.CHECK_DEVICE_CONNECTION)
-  checkDeviceConnection(): void {
+  private checkDeviceConnection(): void {
     this.logger.log('Check device connection');
     this.server.emit(WebSocketEvent.CHECK_DEVICE_CONNECTION, Boolean(this.deviceClient));
   }

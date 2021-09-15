@@ -1,36 +1,20 @@
-import {
-  BadGatewayException,
-  CACHE_MANAGER,
-  Controller,
-  Get,
-  Inject,
-  Logger,
-  Res,
-} from '@nestjs/common';
-import { Cache } from 'cache-manager';
+import { Controller, Get, Logger, Res } from '@nestjs/common';
 import { Response } from 'express';
 import https from 'https';
 
 import { Auth } from '../auth/decorators/auth.decorator';
-
-export interface NgrokData {
-  url: string;
-  auth: string;
-}
+import { Websocket } from '../websocket/websocket.gateway';
 
 @Auth()
 @Controller('camera')
 export class CameraController {
+  constructor(private readonly websocketGateway: Websocket) {}
+
   private readonly logger: Logger = new Logger(CameraController.name);
 
-  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
-
   @Get()
-  async proxyCameraRequest(@Res() res: Response) {
-    const ngrokData = (await this.cacheManager.get('ngrokData')) as NgrokData;
-    if (!ngrokData?.url || !ngrokData?.auth) {
-      throw new BadGatewayException();
-    }
+  proxyCameraRequest(@Res() res: Response) {
+    const ngrokData = this.websocketGateway.getNgrokData();
 
     res.set({
       'Content-Type': 'multipart/x-mixed-replace; boundary=BoundaryString',
