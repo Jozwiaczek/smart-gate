@@ -9,4 +9,23 @@ export class ConfigRepository extends BaseRepository(ConfigEntity) {
     } = constants;
     return this.findOne({ where: { id: DEVICE_ACTION_CONFIG } });
   }
+
+  async addRaspberryPiActionConfig(config: string): Promise<ConfigEntity> {
+    const {
+      DB_CONFIG_KEYS: { DEVICE_ACTION_CONFIG },
+    } = constants;
+
+    const configEntity = await this.getRaspberryPiActionConfig();
+
+    if (configEntity) {
+      return this.update(DEVICE_ACTION_CONFIG, {
+        value: config,
+      });
+    }
+
+    return this.create({
+      id: DEVICE_ACTION_CONFIG,
+      value: config,
+    });
+  }
 }
