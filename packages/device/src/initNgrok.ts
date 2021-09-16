@@ -14,10 +14,19 @@ interface NgrokHandshakeData {
 
 const initNgrok = async (socket: any): Promise<void> => {
   const logger = new Logger(LoggerContext.NGROK);
-  const { NGROK_REGION = 'eu', NGROK_LOCAL_CAMERA_ADDRESS = 'http://localhost:8081' } = process.env;
+  const {
+    NGROK_AUTH_TOKEN,
+    NGROK_REGION = 'eu',
+    NGROK_LOCAL_CAMERA_ADDRESS = 'http://localhost:8081',
+  } = process.env;
 
   if (!isCameraUsageEnabled()) {
     logger.log('Skip ngrok initialisation - Camera usage disabled.');
+    return;
+  }
+
+  if (!NGROK_AUTH_TOKEN) {
+    logger.error('Skip ngrok initialisation - Missing auth token');
     return;
   }
 
@@ -30,6 +39,7 @@ const initNgrok = async (socket: any): Promise<void> => {
   try {
     ngrokCameraUrl = await ngrok.connect({
       region: NGROK_REGION as ngrok.Ngrok.Region,
+      authtoken: NGROK_AUTH_TOKEN,
       auth,
       addr: NGROK_LOCAL_CAMERA_ADDRESS,
       onStatusChange: (status) => {
