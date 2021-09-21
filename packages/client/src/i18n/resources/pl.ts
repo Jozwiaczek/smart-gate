@@ -86,6 +86,10 @@ const pl: TranslationStructure = {
       dashboard: {
         title: 'Pulpit',
         sections: {
+          camera: {
+            title: 'Podgląd kamery',
+            loadingPreview: 'Ładowanie podglądu...',
+          },
           toggling: {
             swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
             toggleSuccess: 'Aktywowano bramę',

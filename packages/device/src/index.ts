@@ -1,14 +1,20 @@
-import * as dotenv from 'dotenv';
+import 'dotenv/config';
+
+import ngrok from 'ngrok';
 import socketClient from 'socket.io-client';
 
 import actionExecutor from './actions/actionExecutor';
 import { ActionConfig } from './actions/actions.types';
 import actionsConfig from './config/actions.config.json';
+import { LoggerContext } from './enums/loggerContext.enum';
+import { WebSocketEvent } from './enums/webSocketEvent.enum';
+import initMotion from './initMotion';
+import initNgrok from './initNgrok';
 import { Logger } from './utils';
 
-dotenv.config();
 actionExecutor((actionsConfig as ActionConfig).onInit);
-const logger = new Logger('SocketConnection');
+
+const logger = new Logger(LoggerContext.SOCKET_CONNECTION);
 
 const socket = socketClient(process.env.API_URL ?? '', {
   auth: {
@@ -18,13 +24,7 @@ const socket = socketClient(process.env.API_URL ?? '', {
 
 logger.log('Initialized');
 
-enum WebSocketEvent {
-  CHECK_DEVICE_CONNECTION = 'checkDeviceConnection',
-  TOGGLE_GATE = 'toggleGate',
-  DEVICE_TURNED_ON = 'deviceTurnedOn',
-}
-
-let turnedOnEventSent = false;
+let deviceInitialisedOnConnect = false;
 
 socket.on('message', (eventType: WebSocketEvent) => {
   logger.log(`New message with eventType: ${eventType}`);
@@ -41,13 +41,18 @@ socket.on('message', (eventType: WebSocketEvent) => {
 });
 
 socket.on('connect', () => {
-  logger.log('Connected');
-  if (!turnedOnEventSent) {
+  logger.log(`API connected`);
+
+  if (!deviceInitialisedOnConnect) {
     socket.emit(WebSocketEvent.DEVICE_TURNED_ON);
-    turnedOnEventSent = true;
+    initMotion();
+    deviceInitialisedOnConnect = true;
   }
+
+  void initNgrok(socket);
 });
 
 socket.on('disconnect', () => {
-  logger.log(`Disconnect`);
+  void ngrok.disconnect();
+  logger.log(`API disconnected`);
 });

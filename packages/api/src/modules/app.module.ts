@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 import { AuthModule } from './auth/auth.module';
+import { CameraModule } from './camera/camera.module';
 import { Config } from './config/config';
 import { ConfigModule } from './config/config.module';
 import { ConfigurationModule } from './configuration/configuration.module';
@@ -42,6 +43,7 @@ import { WebsocketModule } from './websocket/websocket.module';
     PushNotificationsModule,
     ExternalIntegrationsModule,
     ConfigurationModule,
+    CameraModule,
     HistoryModule,
   ],
 })
