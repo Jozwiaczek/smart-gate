@@ -17,4 +17,7 @@ const QuestionMarkIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGEle
   </svg>
 );
 
-export default memo(forwardRef(QuestionMarkIcon));
+const Composed = memo(forwardRef(QuestionMarkIcon));
+Composed.displayName = 'QuestionMarkIcon';
+
+export default Composed;

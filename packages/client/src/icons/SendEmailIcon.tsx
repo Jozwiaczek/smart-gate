@@ -20,4 +20,7 @@ const SendEmailIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElemen
   </svg>
 );
 
-export default memo(forwardRef(SendEmailIcon));
+const Composed = memo(forwardRef(SendEmailIcon));
+Composed.displayName = 'SendEmailIcon';
+
+export default Composed;

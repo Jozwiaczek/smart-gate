@@ -18,4 +18,7 @@ const TrashIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) 
   </svg>
 );
 
-export default memo(forwardRef(TrashIcon));
+const Composed = memo(forwardRef(TrashIcon));
+Composed.displayName = 'TrashIcon';
+
+export default Composed;

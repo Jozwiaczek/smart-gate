@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Form, TextInput } from '../../../../../../elements';
 import { useAuth, useConfirmDialog, useSnackbar } from '../../../../../../hooks';
-import { ConfirmLockIcon, KeyIcon, TrashIcon } from '../../../../../../icons';
+import { KeyIcon, TrashIcon } from '../../../../../../icons';
 import { onlyOnDevEnv } from '../../../../../../utils';
-import { AccountTabSubtitle, StyledButton } from '../Account.styled';
+import { AccountTabSubtitle, StyledButton, StyledConfirmLockIcon } from '../Account.styled';
 
 const ActionsTab = () => {
   const { updatePassword, deleteCurrentUser } = useAuth();
@@ -88,7 +88,7 @@ const ActionsTab = () => {
           label={t('form.inputs.repeatNewPassword')}
           type="password"
           placeholder={t('form.inputs.repeatNewPassword')}
-          startAdornment={<ConfirmLockIcon />}
+          startAdornment={<StyledConfirmLockIcon />}
           registerOptions={{
             validate: (value) =>
               value === getValues().password ||

@@ -76,4 +76,7 @@ const IntegrationsIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGEle
   </svg>
 );
 
-export default memo(forwardRef(IntegrationsIcon));
+const Composed = memo(forwardRef(IntegrationsIcon));
+Composed.displayName = 'IntegrationsIcon';
+
+export default Composed;

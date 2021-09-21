@@ -14,7 +14,7 @@
       "type": "OPEN",
       "pin": "CAMERA_POWER",
       "mode": "OUTPUT",
-      "value": "HIGH"
+      "value": "LOW"
     }
   ],
   "onToggle": [
@@ -24,22 +24,12 @@
       "value": "LOW"
     },
     {
-      "type": "WRITE",
-      "pin": "CAMERA_POWER",
-      "value": "LOW"
-    },
-    {
       "type": "SLEEP",
       "time": 300
     },
     {
       "type": "WRITE",
       "pin": "LOCK_POWER",
-      "value": "HIGH"
-    },
-    {
-      "type": "WRITE",
-      "pin": "CAMERA_POWER",
       "value": "HIGH"
     }
   ]

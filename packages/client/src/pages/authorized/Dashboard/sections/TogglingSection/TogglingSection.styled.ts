@@ -4,7 +4,6 @@ import { ITheme } from '../../../../../theme/Theme';
 
 export const ToggleSliderWrapper = styled.div(
   ({ theme: { down, breakpoints } }) => css`
-    margin: 80px 0 20px;
     display: inline-block;
     ${down(breakpoints.sm)} {
       display: flex;
@@ -13,13 +12,20 @@ export const ToggleSliderWrapper = styled.div(
   `,
 );
 
-export const DisconnectedContainer = styled.div`
-  margin-top: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+export const DisconnectedContainer = styled.div(
+  ({ theme: { down, breakpoints } }) => css`
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    ${down(breakpoints.sm)} {
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+  `,
+);
 
 const wiresAnimation = keyframes`
   0% {

@@ -31,4 +31,7 @@ const SmartGateLogoIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGPathE
   </svg>
 );
 
-export default memo(forwardRef(SmartGateLogoIcon));
+const Composed = memo(forwardRef(SmartGateLogoIcon));
+Composed.displayName = 'SmartGateLogoIcon';
+
+export default Composed;

@@ -21,4 +21,7 @@ const SmartGateBackgroundLogoIcon = (
   </svg>
 );
 
-export default memo(forwardRef(SmartGateBackgroundLogoIcon));
+const Composed = memo(forwardRef(SmartGateBackgroundLogoIcon));
+Composed.displayName = 'SmartGateBackgroundLogoIcon';
+
+export default Composed;

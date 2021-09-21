@@ -1,4 +1,5 @@
 import {
+  ForbiddenException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -25,6 +26,11 @@ import { WebsocketConfigService } from './config/websocket-config.service';
 
 const HEROKU_RECONNECT_DELAY = 30;
 
+export interface NgrokData {
+  url: string;
+  auth: string;
+}
+
 @Injectable()
 @WebSocketGateway({
   cors: {
@@ -42,6 +48,8 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
   @WebSocketServer() server: Server;
 
   private deviceClient: Socket | undefined;
+
+  private ngrokData: NgrokData | undefined;
 
   private clients: Map<string, string> = new Map<string, string>();
 
@@ -110,8 +118,24 @@ export class Websocket implements OnGatewayInit, OnGatewayConnection, OnGatewayD
     this.logger.log('Device turned on');
   }
 
+  getNgrokData(): NgrokData {
+    if (this.ngrokData) {
+      return this.ngrokData;
+    }
+    throw new ServiceUnavailableException();
+  }
+
+  @SubscribeMessage(WebSocketEvent.SET_NGROK_DATA)
+  private setNgrokData(client: Socket, newNgrokData: NgrokData): void {
+    if (this.deviceClient && client.id === this.deviceClient.id) {
+      this.ngrokData = newNgrokData;
+    } else {
+      throw new ForbiddenException();
+    }
+  }
+
   @SubscribeMessage(WebSocketEvent.CHECK_DEVICE_CONNECTION)
-  checkDeviceConnection(): void {
+  private checkDeviceConnection(): void {
     this.logger.log('Check device connection');
     this.server.emit(WebSocketEvent.CHECK_DEVICE_CONNECTION, Boolean(this.deviceClient));
   }

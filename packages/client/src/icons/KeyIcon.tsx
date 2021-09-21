@@ -19,4 +19,7 @@ const KeyIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) =>
   </svg>
 );
 
-export default memo(forwardRef(KeyIcon));
+const Composed = memo(forwardRef(KeyIcon));
+Composed.displayName = 'KeyIcon';
+
+export default Composed;

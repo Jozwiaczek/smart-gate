@@ -17,4 +17,7 @@ const SettingsIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement
   </svg>
 );
 
-export default memo(forwardRef(SettingsIcon));
+const Composed = memo(forwardRef(SettingsIcon));
+Composed.displayName = 'SettingsIcon';
+
+export default Composed;
