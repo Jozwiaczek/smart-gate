@@ -1,6 +1,7 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useAxios } from '../../../../../hooks';
 import { CameraPreview, LoadingContainer, LoadingContent } from './CameraPreviewSection.styled';
 
 const CameraPreviewSection = () => {
@@ -8,13 +9,18 @@ const CameraPreviewSection = () => {
   const previewRef = useRef<HTMLImageElement>(null);
   const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
   const { t } = useTranslation();
+  const axios = useAxios();
 
   const reloadCameraPreview = useCallback(() => {
-    if (previewRef.current && cameraURL) {
-      const requestPreviewTime = new Date().getTime();
-      previewRef.current.src = `${cameraURL}/?t=${requestPreviewTime}`;
-    }
-  }, [cameraURL]);
+    axios
+      .get<string>('/ticket/generate')
+      .then((generatedTicket) => {
+        if (previewRef.current && cameraURL) {
+          previewRef.current.src = `${cameraURL}/?ticket=${generatedTicket.data}`;
+        }
+      })
+      .catch((ticketErr) => console.log(ticketErr));
+  }, [axios, cameraURL]);
 
   useLayoutEffect(() => {
     reloadCameraPreview();

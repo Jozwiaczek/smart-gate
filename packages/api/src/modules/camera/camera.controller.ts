@@ -1,19 +1,28 @@
-import { Controller, Get, Logger, Res } from '@nestjs/common';
+import { Controller, Get, Logger, Query, Res, UnauthorizedException } from '@nestjs/common';
 import { Response } from 'express';
 import https from 'https';
 
-import { Auth } from '../auth/decorators/auth.decorator';
+import { TicketService } from '../ticket/ticket.service';
 import { Websocket } from '../websocket/websocket.gateway';
 
-@Auth()
+const CLIENT_DISCONNECTED_ERROR_MSG = 'Client disconnected';
+
 @Controller('camera')
 export class CameraController {
-  constructor(private readonly websocketGateway: Websocket) {}
+  constructor(
+    private readonly ticketService: TicketService,
+    private readonly websocketGateway: Websocket,
+  ) {}
 
   private readonly logger: Logger = new Logger(CameraController.name);
 
   @Get()
-  proxyCameraRequest(@Res() res: Response) {
+  async proxyCameraRequest(@Res() res: Response, @Query('ticket') ticket: string) {
+    const userId = await this.ticketService.check(ticket);
+    if (!userId) {
+      throw new UnauthorizedException();
+    }
+
     const ngrokData = this.websocketGateway.getNgrokData();
 
     res.set({
@@ -28,7 +37,7 @@ export class CameraController {
     const ngrokRequest = https
       .request(ngrokData.url, { auth: ngrokData.auth }, (httpRes) => {
         res.on('close', () => {
-          ngrokRequest.destroy(new Error('Client disconnected'));
+          ngrokRequest.destroy(new Error(CLIENT_DISCONNECTED_ERROR_MSG));
         });
 
         httpRes.on('data', (dataBuffer) => {
@@ -56,7 +65,7 @@ export class CameraController {
         });
       })
       .on('error', (e) => {
-        if (e.message === 'Client disconnected') {
+        if (e.message === CLIENT_DISCONNECTED_ERROR_MSG) {
           // Info about disconnect handled above in ngrok request
           return;
         }
