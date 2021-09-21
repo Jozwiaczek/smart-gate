@@ -1,3 +1,19 @@
+# [1.17.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.16.1...v1.17.0) (2021-09-21)
+
+
+### Bug Fixes
+
+* **client:** add feature flag for camera preview ([036cef2](https://github.com/Jozwiaczek/smart-gate/commit/036cef2d185f3314b57d28ea79fdbd40736bb5ac))
+* **device:** add ngrok auth token ([78f6cb3](https://github.com/Jozwiaczek/smart-gate/commit/78f6cb32e70cbee2f4a1a7355aa70aa4eb2fdfc2))
+* handle api reconnections ([87be799](https://github.com/Jozwiaczek/smart-gate/commit/87be799409f1d8f7682fd5899f6ec6530e19525d))
+* store ngrokData in variable ([fd33d2b](https://github.com/Jozwiaczek/smart-gate/commit/fd33d2b8d74eaf784b7992f4e8ff9051eb8fc80c))
+
+
+### Features
+
+* **device:** handle non-wired camera mode ([c5dac94](https://github.com/Jozwiaczek/smart-gate/commit/c5dac94aeff66af81458b3619f7f7bb534bbafa0))
+* handle camera preview ([8bb911b](https://github.com/Jozwiaczek/smart-gate/commit/8bb911b91749b0d2103fc371c9ab1a27eca014e2))
+
 ## [1.16.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.16.0...v1.16.1) (2021-09-15)
 
 
