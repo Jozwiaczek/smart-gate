@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.17.0...v1.17.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* change camera auth layer for ticket service ([f97c8a6](https://github.com/Jozwiaczek/smart-gate/commit/f97c8a6b394ce3c5bc16630a562b4f9732381f04))
+
 # [1.17.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.16.1...v1.17.0) (2021-09-21)
 
 
