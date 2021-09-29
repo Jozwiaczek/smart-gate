@@ -66,6 +66,7 @@
 }
 
 .heroBtn:hover {
+  color: #22343C;
   cursor: pointer;
   text-decoration: none;
   transition: box-shadow 150ms ease-in-out;
