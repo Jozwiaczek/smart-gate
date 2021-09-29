@@ -110,6 +110,10 @@
   color: #257D69;
 }
 
+html[data-theme='dark'] .featureDescription strong {
+  color: #3ed598;
+}
+
 .featureImage {
   max-width: 600px;
   width: 100%;
