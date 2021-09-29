@@ -1,43 +1,52 @@
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import BlobsBackground from '@site/src/components/BlobsBackground';
+import { useGithubStars } from '@site/src/hooks/useGithubStars';
+import { features } from '@site/src/pages/features';
 import Layout from '@theme/Layout';
-import clsx from 'clsx';
 import React from 'react';
 
-import HomepageFeatures from '../components/HomepageFeatures';
 import styles from './index.module.css';
 
-const HomepageHeader = () => {
+const Home = (): JSX.Element => {
   const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-};
+  useGithubStars();
 
-/**
- *
- */
-export default function Home(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
-    >
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
+    <Layout description={siteConfig.tagline}>
+      <main className={styles.mainContainer}>
+        <BlobsBackground>
+          <section className={styles.heroContainer}>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.heroTitleHighlight}>Smart</span> Gate
+            </h1>
+            <p className={styles.heroDescription}>{siteConfig.tagline}</p>
+            <div className={styles.heroBtnContainer}>
+              <Link to="/docs/intro" className={styles.heroBtn}>
+                Get Started
+              </Link>
+            </div>
+          </section>
+        </BlobsBackground>
+        {features.map(({ title, description, imgSrc, imgAlt }, index) => (
+          <section
+            key={title}
+            className={styles.featureSection}
+            style={index % 2 !== 0 ? { flexDirection: 'row-reverse', textAlign: 'right' } : {}}
+          >
+            <div
+              className={styles.featureTextContainer}
+              style={index % 2 !== 0 ? { alignItems: 'flex-end' } : {}}
+            >
+              <h2 className={styles.featureTitle}>{title}</h2>
+              <div className={styles.featureDescription}>{description}</div>
+            </div>
+            <img className={styles.featureImage} alt={imgAlt} src={imgSrc} />
+          </section>
+        ))}
       </main>
     </Layout>
   );
-}
+};
+
+export default Home;

@@ -6,23 +6,65 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #257d69;
+  --ifm-color-primary-dark: #21715f;
+  --ifm-color-primary-darker: #1f6a59;
+  --ifm-color-primary-darkest: #1a584a;
+  --ifm-color-primary-light: #298a74;
+  --ifm-color-primary-lighter: #2b9079;
+  --ifm-color-primary-lightest: #30a389;
   --ifm-code-font-size: 95%;
+  color: #30444e;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+html {
+  overflow-x: hidden;
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
+html[data-theme='dark'] {
+  --ifm-background-color: #1f201c;
+  --ifm-color-primary: #3ed598;
+  --ifm-color-primary-dark: #2ccb8b;
+  --ifm-color-primary-darker: #2ac083;
+  --ifm-color-primary-darkest: #229e6c;
+  --ifm-color-primary-light: #55daa4;
+  --ifm-color-primary-lighter: #60dcaa;
+  --ifm-color-primary-lightest: #82e4bc;
+  color: #ffffff;
+}
+
+.github-counter {
+  position: absolute;
+  color: #000;
+  top: -10px;
+  right: 15px;
+  font-size: 9px;
+  background-color: #ccc;
+  padding: 2px 5px;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+html[data-theme='dark'] .github-counter {
+  background-color: #222;
+  color: #fff;
+}
+
+.navbar__item.navbar__link[href*='github'] {
+  padding: 0 1.5rem 0 0;
+  display: flex;
+  font-size: 0;
+  position: relative;
+}
+
+.navbar__item.navbar__link[href*='github']:before {
+  content: '';
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('/img/brand-github.svg');
+  background-repeat: no-repeat;
+}
+
+html[data-theme='dark'] .navbar__item.navbar__link[href*='github']:before {
+  background-image: url('/img/brand-github-inverted.svg');
 }
