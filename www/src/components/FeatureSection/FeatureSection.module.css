@@ -1,0 +1,44 @@
+.featureSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 966px) {
+  .featureSection {
+    text-align: center !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.featureTextContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.featureTitle {
+  font-size: 48px;
+  max-width: 500px;
+}
+
+.featureDescription {
+  max-width: 530px;
+}
+
+.featureDescription strong {
+  color: #257d69;
+}
+
+html[data-theme='dark'] .featureDescription strong {
+  color: #3ed598;
+}
+
+.featureImage {
+  max-width: 600px;
+  width: 100%;
+}

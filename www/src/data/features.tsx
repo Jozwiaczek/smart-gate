@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react';
 
-interface FeatureSection {
+export interface FeatureSectionProps {
   title: string;
   description: ReactElement;
   imgSrc: string;
   imgAlt: string;
+  isOdd?: boolean;
 }
 
-export const features: Array<FeatureSection> = [
+export const features: Array<FeatureSectionProps> = [
   {
     title: 'Open from anywhere',
     description: (

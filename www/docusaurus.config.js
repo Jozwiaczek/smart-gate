@@ -88,7 +88,7 @@ module.exports = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Smart Gate`,
+        copyright: `Copyright © ${new Date().getFullYear()} Jakub Jóźwiak`,
       },
       prism: {
         theme: lightCodeTheme,

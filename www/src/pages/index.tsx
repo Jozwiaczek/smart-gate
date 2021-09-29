@@ -1,6 +1,7 @@
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BlobsBackground from '@site/src/components/BlobsBackground';
+import FeatureSection from '@site/src/components/FeatureSection';
 import { features } from '@site/src/data/features';
 import { useGithubStars } from '@site/src/hooks/useGithubStars';
 import Layout from '@theme/Layout';
@@ -29,20 +30,14 @@ const Home = (): JSX.Element => {
           </section>
         </BlobsBackground>
         {features.map(({ title, description, imgSrc, imgAlt }, index) => (
-          <section
+          <FeatureSection
             key={title}
-            className={styles.featureSection}
-            style={index % 2 !== 0 ? { flexDirection: 'row-reverse', textAlign: 'right' } : {}}
-          >
-            <div
-              className={styles.featureTextContainer}
-              style={index % 2 !== 0 ? { alignItems: 'flex-end' } : {}}
-            >
-              <h2 className={styles.featureTitle}>{title}</h2>
-              <div className={styles.featureDescription}>{description}</div>
-            </div>
-            <img className={styles.featureImage} alt={imgAlt} src={imgSrc} />
-          </section>
+            title={title}
+            description={description}
+            imgSrc={imgSrc}
+            imgAlt={imgAlt}
+            isOdd={index % 2 !== 0}
+          />
         ))}
       </main>
     </Layout>
