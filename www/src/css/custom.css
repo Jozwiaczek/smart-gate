@@ -23,7 +23,7 @@ html {
 
 html[data-theme='dark'] {
   --ifm-background-color: #22343c;
-  --ifm-navbar-background-color: #30444E;
+  --ifm-navbar-background-color: #30444e;
   --ifm-color-primary: #3ed598;
   --ifm-color-primary-dark: #2ccb8b;
   --ifm-color-primary-darker: #2ac083;

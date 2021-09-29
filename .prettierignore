@@ -8,3 +8,4 @@ node_modules/
 _templates/
 .eslintcache
 coverage
+www/.docusaurus/

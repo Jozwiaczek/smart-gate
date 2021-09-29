@@ -66,7 +66,7 @@
 }
 
 .heroBtn:hover {
-  color: #22343C;
+  color: #22343c;
   cursor: pointer;
   text-decoration: none;
   transition: box-shadow 150ms ease-in-out;
@@ -107,7 +107,7 @@
 }
 
 .featureDescription strong {
-  color: #257D69;
+  color: #257d69;
 }
 
 html[data-theme='dark'] .featureDescription strong {
