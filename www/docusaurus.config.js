@@ -7,7 +7,7 @@ module.exports = {
   title: 'Smart Gate',
   tagline: 'Secure system for opening electric gates or doors',
   url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/www/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

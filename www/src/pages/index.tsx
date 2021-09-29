@@ -1,8 +1,8 @@
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BlobsBackground from '@site/src/components/BlobsBackground';
+import { features } from '@site/src/data/features';
 import { useGithubStars } from '@site/src/hooks/useGithubStars';
-import { features } from '@site/src/pages/features';
 import Layout from '@theme/Layout';
 import React from 'react';
 
