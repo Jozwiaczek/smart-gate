@@ -21,6 +21,10 @@ module.exports = {
         defaultMode: 'dark',
         disableSwitch: false,
         respectPrefersColorScheme: true,
+        switchConfig: {
+          darkIcon: '🌑',
+          lightIcon: '💡',
+        },
       },
       image: '/img/social-media-card.png',
       announcementBar: {
