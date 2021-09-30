@@ -61,7 +61,7 @@ jobs:
 
   tests:
     name: 'Unit and E2E tests'
-    timeout-minutes: 15
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
     strategy:
