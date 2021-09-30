@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0 # Required to retrieve git history
 
-      # Beginning of yarn setup, keep in sync between all workflows, see continuous-integration.yml
+      # Beginning of yarn setup, keep in sync between all workflows
       - name: Use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2.1.5
         with:
@@ -39,8 +39,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: 'Install dependency'
+      - name: 'Install packages dependency'
+        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+      - name: 'Install www dependency'
+        run: cd www && yarn install --frozen-lockfile
       # End of yarn setup
 
       - name: 'Run client unit tests'

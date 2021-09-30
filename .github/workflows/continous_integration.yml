@@ -61,7 +61,7 @@ jobs:
 
   tests:
     name: 'Unit and E2E tests'
-    timeout-minutes: 20
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
     strategy:
@@ -125,6 +125,9 @@ jobs:
       - name: 'Install dependency'
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: 'Install www dependency'
+        run: cd www && yarn install --frozen-lockfile
 
       - name: 'Build CI scripts'
         run: cd packages/ci-scripts && yarn build
