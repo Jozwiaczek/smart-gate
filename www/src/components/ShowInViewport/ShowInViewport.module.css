@@ -1,0 +1,22 @@
+@keyframes showElement {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.visible {
+  opacity: 1;
+  animation-duration: 700ms;
+  animation-name: showElement;
+  animation-timing-function: ease-in-out;
+}
+
+.hidden {
+  opacity: 0;
+}

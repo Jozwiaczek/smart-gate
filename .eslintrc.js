@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    project: ['./packages/*/tsconfig.json', 'tsconfig.dev.json'],
+    project: ['./packages/*/tsconfig.json', 'tsconfig.dev.json', './www/tsconfig.json'],
     tsconfigRootDir: __dirname,
     EXPERIMENTAL_useSourceOfProjectReferenceRedirect: true,
     ecmaVersion: 2020,

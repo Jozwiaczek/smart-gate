@@ -4,9 +4,9 @@
 #
 
 [build]
-    base = "packages/client"
-    publish = "build/"
-    command = "yarn build"
+  base = "packages/client"
+  publish = "build/"
+  command = "yarn build"
 
 [[redirects]]
   from = "/api/*"

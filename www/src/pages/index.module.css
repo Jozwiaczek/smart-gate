@@ -1,0 +1,120 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.mainContainer {
+  max-width: 1440px;
+  padding: 0 100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 966px) {
+  .mainContainer {
+    padding: 0 21px;
+  }
+}
+
+.heroContainer {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 10vh;
+  position: relative;
+  width: 100%;
+}
+
+.heroTitle {
+  font-size: 82px;
+  line-height: 82px;
+  margin-bottom: 1rem !important;
+}
+
+.heroTitleHighlight {
+  background: -webkit-linear-gradient(#257d69, #40df9f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroDescription {
+  font-size: 40px;
+  line-height: 47px;
+}
+
+.heroBtnContainer {
+  margin-top: 90px;
+}
+
+.heroBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #30444e;
+
+  background: #3ed598;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03), 0 2px 2px rgba(0, 0, 0, 0.03),
+    0 4px 4px rgba(0, 0, 0, 0.03), 0 8px 8px rgba(0, 0, 0, 0.03), 0 16px 16px rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  transition: box-shadow 150ms ease-in-out;
+
+  padding: 15px 40px;
+  border: none;
+}
+
+.heroBtn:hover {
+  color: #22343c;
+  cursor: pointer;
+  text-decoration: none;
+  transition: box-shadow 150ms ease-in-out;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.08),
+    0 4px 4px rgba(0, 0, 0, 0.08), 0 8px 8px rgba(0, 0, 0, 0.08), 0 16px 16px rgba(0, 0, 0, 0.08);
+}
+
+.featureSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 966px) {
+  .featureSection {
+    text-align: center !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.featureTextContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.featureTitle {
+  font-size: 48px;
+  max-width: 500px;
+}
+
+.featureDescription {
+  max-width: 530px;
+}
+
+.featureDescription strong {
+  color: #257d69;
+}
+
+html[data-theme='dark'] .featureDescription strong {
+  color: #3ed598;
+}
+
+.featureImage {
+  max-width: 600px;
+  width: 100%;
+}
