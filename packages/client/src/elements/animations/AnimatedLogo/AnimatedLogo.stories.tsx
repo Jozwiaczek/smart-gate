@@ -12,5 +12,5 @@ const Template: Story = (args) => <AnimatedLogo {...args} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
-  chromatic: { disable: true },
+  chromatic: { pauseAnimationAtEnd: true },
 };
