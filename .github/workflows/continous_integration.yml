@@ -130,6 +130,12 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
+            console.log('TEST_LOG_START');
+            console.log('createEmailTestAccount:', createEmailTestAccount);
+            const emailAccount = await createEmailTestAccount();
+            console.log('emailAccount', emailAccount);
+            console.log('TEST_LOG_END');
+
             return await createEmailTestAccount();
       - name: 'Get Email Test Account User'
         id: 'email-test-account-user'
@@ -141,7 +147,6 @@ jobs:
           result-encoding: string
           script: |
             const emailAccount = process.env.EMAIL_TEST_ACCOUNT;
-            console.log('emailAccount', emailAccount);
             return JSON.parse(emailAccount).user;
       - name: 'Get Email Test Account Password'
         id: 'email-test-account-pass'
