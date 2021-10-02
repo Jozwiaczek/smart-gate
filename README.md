@@ -154,3 +154,5 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 Copyright 2020 Jakub Jóźwiak.
 Licensed under the [MIT license](LICENSE).
+
+# TEST BRANCH (TO BE REMOVED)
