@@ -136,7 +136,7 @@ jobs:
               const emailAccount = await createEmailTestAccount();
               console.log('emailAccount:', emailAccount);
             } catch (error) {
-              console.log('Error:', error);
+              console.log('Error:', error.message);
             }
             console.log('TEST_LOG_END');
 
