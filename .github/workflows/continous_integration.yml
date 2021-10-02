@@ -132,8 +132,12 @@ jobs:
             const { createEmailTestAccount } = require(`./packages/ci-scripts/build/src/createEmailTestAccount.js`)
             console.log('TEST_LOG_START');
             console.log('createEmailTestAccount:', createEmailTestAccount);
-            const emailAccount = await createEmailTestAccount();
-            console.log('emailAccount', emailAccount);
+            try {
+              const emailAccount = await createEmailTestAccount();
+              console.log('emailAccount:', emailAccount);
+            } catch (error) {
+              console.log('Error:', error);
+            }
             console.log('TEST_LOG_END');
 
             return await createEmailTestAccount();
