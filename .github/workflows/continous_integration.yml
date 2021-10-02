@@ -141,6 +141,7 @@ jobs:
           result-encoding: string
           script: |
             const emailAccount = process.env.EMAIL_TEST_ACCOUNT;
+            console.log('emailAccount', emailAccount);
             return JSON.parse(emailAccount).user;
       - name: 'Get Email Test Account Password'
         id: 'email-test-account-pass'
