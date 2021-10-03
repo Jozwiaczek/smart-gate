@@ -37,9 +37,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: 'Install dependency'
+      - name: 'Install packages dependency'
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+      - name: 'Install www dependency'
+        run: cd www && yarn install --frozen-lockfile
       # End of yarn setup
 
       - name: 'Audit dependencies'
@@ -54,6 +56,8 @@ jobs:
         run: cd packages/api && NODE_ENV=production yarn build
       - name: 'Build Client'
         run: cd packages/client && NODE_ENV=production yarn build
+      - name: 'Build WWW (Landing + Docs)'
+        run: cd www && yarn build
 
   tests:
     name: 'Unit and E2E tests'
@@ -76,6 +80,7 @@ jobs:
       TEST_USER_FIRSTNAME: 'Joe'
       TEST_USER_LASTNAME: 'Doe'
       DEVICE_TICKET: 'ticket'
+      NODE_OPTIONS: --max_old_space_size=4096
 
     services:
       postgres:
@@ -120,6 +125,9 @@ jobs:
       - name: 'Install dependency'
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: 'Install www dependency'
+        run: cd www && yarn install --frozen-lockfile
 
       - name: 'Build CI scripts'
         run: cd packages/ci-scripts && yarn build
