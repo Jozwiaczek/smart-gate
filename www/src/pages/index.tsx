@@ -15,6 +15,9 @@ const Home = (): JSX.Element => {
   return (
     <Layout description={siteConfig.tagline}>
       <main className={styles.mainContainer}>
+        asdasdsa///asdad{}
+        {}
+        {asda}
         <HeroSection />
         {features.map(({ title, description, imgSrc, imgAlt }, index) => (
           <FeatureSection
