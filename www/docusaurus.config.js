@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 module.exports = {
   title: 'Smart Gate',
   tagline: 'Secure system for opening electric gates or doors',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://smart-gate-docs.vercel.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
