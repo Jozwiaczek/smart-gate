@@ -1,7 +1,6 @@
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import BlobsBackground from '@site/src/components/BlobsBackground';
 import FeatureSection from '@site/src/components/FeatureSection';
+import HeroSection from '@site/src/components/HeroSection';
 import { features } from '@site/src/data/features';
 import { useGithubStars } from '@site/src/hooks/useGithubStars';
 import Layout from '@theme/Layout';
@@ -16,19 +15,7 @@ const Home = (): JSX.Element => {
   return (
     <Layout description={siteConfig.tagline}>
       <main className={styles.mainContainer}>
-        <BlobsBackground>
-          <section className={styles.heroContainer}>
-            <h1 className={styles.heroTitle}>
-              <span className={styles.heroTitleHighlight}>Smart</span> Gate
-            </h1>
-            <p className={styles.heroDescription}>{siteConfig.tagline}</p>
-            <div className={styles.heroBtnContainer}>
-              <Link to="/docs/intro" className={styles.heroBtn}>
-                Get Started
-              </Link>
-            </div>
-          </section>
-        </BlobsBackground>
+        <HeroSection />
         {features.map(({ title, description, imgSrc, imgAlt }, index) => (
           <FeatureSection
             key={title}
