@@ -16,11 +16,19 @@
     <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
     <br>
+    Documentation:
+    <a href="https://smart-gate-docs.vercel.app/"><strong>smart-gate-docs.vercel.app</strong></a>
+    <br>
+    <br>
     Storybook:
     <a href="https://main--6059282c88843d002106b484.chromatic.com"><strong>smart-gate.chromatic.com</strong></a>
 </p>
 
-<hr>
+<hr/>
+
+<p align="center">ð Smart Gate is in heavy development ð</p>
+
+<hr/>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 [![CI](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml/badge.svg?branch=dev)](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml)
@@ -68,6 +76,9 @@ https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-
 
 ## 🚛 Setup for your own usage
 
+> _Important note:_ Bellow you will find only short and a temporary description on how to setup Smart Gate.
+> More details in [documentation website](https://smart-gate-docs.vercel.app/).
+
 In order to use the Smart Gate system in your environment, you have to deploy your own instance
 of the client, server and database.
 To make it as simple as possible there is already a prepared template for deploying all packages.
@@ -101,7 +112,7 @@ WIP [device](packages/device/README.md)
 
 ## 📖 Documentation
 
-WIP
+Check out our [documentation website](https://smart-gate-docs.vercel.app/).
 
 ## 🙏 Contributing
 
