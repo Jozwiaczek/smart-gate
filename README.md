@@ -26,7 +26,7 @@
 
 <hr/>
 
-<p align="center">ð Smart Gate is in heavy development ð</p>
+<p align="center">⚠️ Smart Gate is still in heavy development ⚠️</p>
 
 <hr/>
 
