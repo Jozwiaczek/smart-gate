@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import styles from './ShowInViewport.module.css';
 
 interface ShowInViewportProps {
-  children: ReactElement;
+  children: ReactNode;
   triggerOnce?: boolean;
   threshold?: number;
 }
