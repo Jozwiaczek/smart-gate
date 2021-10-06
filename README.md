@@ -12,12 +12,12 @@
 </p>
 
 <p align="center">
-    UI/UX:
-    <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
-    <br>
-    <br>
     Documentation:
     <a href="https://smart-gate-docs.vercel.app/"><strong>smart-gate-docs.vercel.app</strong></a>
+    <br>
+    <br>
+    UI/UX:
+    <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
     <br>
     Storybook:
@@ -31,6 +31,7 @@
 <hr/>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
+[![Docs Status](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/Production?label=Docs&logo=vercel&logoColor=white)](https://smart-gate-docs.vercel.app/)
 [![CI](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml/badge.svg?branch=dev)](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)](https://github.com/Jozwiaczek/smart-gate/commits)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)

@@ -2,34 +2,22 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Overview
 
-Let's discover **Docusaurus in less than 5 minutes**.
+![Docs Version Dropdown](/img/banner-about.png)
 
-## Getting Started
+In order to use the Smart Gate system in your environment, you have to deploy your own instance
+of the client, server and database.
+To make it as simple as possible there is already a prepared template for deploying all packages.
 
-Get started by **creating a new site**.
+What's important is that the whole setup and its usage is free, so You don't have to worry about any billing.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Why it's free because every part of this setup assumes usage of free tiers without any need to upgrades those pricing plans.
 
-## Generate a new site
+You only have to click the buttons below to deploy your own instances and fill up the required environment variables.
 
-Generate a new Docusaurus site using the **classic template**:
+## Why & How it's Completely Free
 
-```shell
-npx @docusaurus/init@latest init my-website classic
-```
+## Architecture
 
-## Start your site
-
-Run the development server:
-
-```shell
-cd my-website
-
-npx docusaurus start
-```
-
-Your site starts at `http://localhost:3000`.
-
-Open `docs/intro.md` and edit some lines: the site **reloads automatically** and display your changes.
+![Services Architecture Diagram](../static/img/diagrams/services-architecture.drawio.png)
