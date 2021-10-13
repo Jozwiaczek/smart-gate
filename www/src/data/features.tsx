@@ -1,11 +1,14 @@
 import React, { ReactElement } from 'react';
 
+export type FeatureSectionImageSize = 'normal' | 'large' | 'small';
+
 export interface FeatureSectionProps {
   title: string;
   description: ReactElement;
   imgSrc: string;
   imgAlt: string;
   isOdd?: boolean;
+  imgSize?: 'normal' | 'large' | 'small';
 }
 
 export const features: Array<FeatureSectionProps> = [
@@ -20,18 +23,65 @@ export const features: Array<FeatureSectionProps> = [
       </p>
     ),
     imgSrc: '/img/features/app_open_preview.png',
-    imgAlt: 'Smart Gate open gate preview',
+    imgAlt: 'Smart Gate dashboard preview',
   },
   {
     title: 'Manage and monitor all access',
     description: (
       <p>
         Track detailed history with details about who and when unlocked lock.
-        <br /> As a admin user you will have also access to more device logs and events.
+        <br />
+        As a admin user you will have also access to more device logs and events.
       </p>
     ),
     imgSrc: '/img/features/app_history_preview.png',
     imgAlt: 'Smart Gate history preview',
+  },
+  {
+    title: 'Desktop access',
+    description: (
+      <p>
+        Smart Gate is designed to be accessible on every device.
+        <br />
+        You can quickly open the app from a desktop browser, on a tablet, same as on mobile.
+      </p>
+    ),
+    imgSrc: '/img/features/desktop-access.png',
+    imgAlt: 'Smart Gate application preview on desktop version',
+  },
+  {
+    title: 'Monitor your device',
+    description: (
+      <p>
+        Monitor the health of your Raspberry Pi from the app.
+        <br />
+        You can track in real-time details like temperature, ram usage, Wi-Fi connection, or logs.
+      </p>
+    ),
+    imgSrc: '/img/features/device-config.png',
+    imgAlt: 'Smart Gate device configuration and health monitoring preview',
+    imgSize: 'large',
+  },
+  {
+    title: 'Track statistics',
+    description: <p>Track statistics like total number of users, admins and gate opens in time.</p>,
+    imgSrc: '/img/features/statistics.png',
+    imgAlt: 'Smart Gate statistics preview',
+    imgSize: 'large',
+  },
+  {
+    title: 'Multi language',
+    description: (
+      <p>
+        Every user can choose his preferable language.
+        <br />
+        Thus, you can easily add support for new languages as a contributor to the SG main
+        repository.
+      </p>
+    ),
+    imgSrc: '/img/features/i18n.png',
+    imgAlt: 'Multi language icon',
+    imgSize: 'small',
   },
   {
     title: 'App without installation',
@@ -43,7 +93,8 @@ export const features: Array<FeatureSectionProps> = [
       </p>
     ),
     imgSrc: '/img/features/pwa.png',
-    imgAlt: 'Progressive Web Application',
+    imgAlt: 'Progressive Web Application logo',
+    imgSize: 'small',
   },
   {
     title: 'Hardware agnostic',
@@ -59,7 +110,8 @@ export const features: Array<FeatureSectionProps> = [
       </p>
     ),
     imgSrc: '/img/features/rpi.png',
-    imgAlt: 'Raspberry Pi',
+    imgAlt: 'Raspberry Pi logo',
+    imgSize: 'small',
   },
   {
     title: 'Open source',
@@ -74,7 +126,8 @@ export const features: Array<FeatureSectionProps> = [
       </p>
     ),
     imgSrc: '/img/features/open-source.png',
-    imgAlt: 'Open Source',
+    imgAlt: 'Open Source logo',
+    imgSize: 'small',
   },
   {
     title: 'Compatible with Apple Shortcuts',
@@ -87,6 +140,7 @@ export const features: Array<FeatureSectionProps> = [
       </p>
     ),
     imgSrc: '/img/features/shortcuts.png',
-    imgAlt: 'Apple Shortcuts',
+    imgAlt: 'Apple Shortcuts logo',
+    imgSize: 'small',
   },
 ];

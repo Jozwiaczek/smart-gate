@@ -4,7 +4,7 @@
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
-  margin-bottom: 140px;
+  margin-bottom: 100px;
 }
 
 @media screen and (max-width: 966px) {
@@ -38,7 +38,17 @@ html[data-theme='dark'] .featureDescription strong {
   color: #3ed598;
 }
 
-.featureImage {
+.featureImageSmall {
+  max-width: 400px;
+  width: 100%;
+}
+
+.featureImageNormal {
   max-width: 600px;
+  width: 100%;
+}
+
+.featureImageLarge {
+  max-width: 700px;
   width: 100%;
 }

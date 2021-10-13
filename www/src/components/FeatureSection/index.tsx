@@ -1,10 +1,28 @@
 import ShowInViewport from '@site/src/components/ShowInViewport';
-import { FeatureSectionProps } from '@site/src/data/features';
+import { FeatureSectionImageSize, FeatureSectionProps } from '@site/src/data/features';
 import React from 'react';
 
 import styles from './FeatureSection.module.css';
 
-const FeatureSection = ({ title, description, imgSrc, imgAlt, isOdd }: FeatureSectionProps) => (
+const getImgSize = (size: FeatureSectionImageSize) => {
+  switch (size) {
+    case 'large':
+      return styles.featureImageLarge;
+    case 'small':
+      return styles.featureImageSmall;
+    default:
+      return styles.featureImageNormal;
+  }
+};
+
+const FeatureSection = ({
+  title,
+  description,
+  imgSrc,
+  imgAlt,
+  isOdd,
+  imgSize = 'normal',
+}: FeatureSectionProps) => (
   <ShowInViewport>
     <section
       className={styles.featureSection}
@@ -14,7 +32,7 @@ const FeatureSection = ({ title, description, imgSrc, imgAlt, isOdd }: FeatureSe
         <h2 className={styles.featureTitle}>{title}</h2>
         <div className={styles.featureDescription}>{description}</div>
       </div>
-      <img className={styles.featureImage} alt={imgAlt} src={imgSrc} />
+      <img className={getImgSize(imgSize)} alt={imgAlt} src={imgSrc} />
     </section>
   </ShowInViewport>
 );
