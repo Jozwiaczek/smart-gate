@@ -50,15 +50,18 @@ Check more details in [After Server Deploy](#after-server-deploy) section.
 ## After Server Deploy
 
 In order to get access to application you also need to provide Server URL for your application.
+It's required in order to handle connection between server and client.
 
-**TODO**
+You can do this by passing `REACT_APP_API_URL` for your application with deployed server URL.
 
-## PWA
+If you're using netlify just go to the `Site settings -> Build & deploy -> environment`, <br/> click `Edit variables` and `New variable`.
+
+![Docs Version Dropdown](/img/guide/netlify-server-url.png)
+
+## How to add Smart Gate to mobile device home screen (Optional)
 
 Thanks to the [Progressive Web App (PWA)](https://web.dev/progressive-web-apps/) approach in Smart Gate, the application works as something in the middle of standard Web App and Native Mobile apps.
 In short, it automatically caches content and works in any browser and delivers an option to install the app on your mobile home screen as well as on your desktop.
-
-### How to add Smart Gate to mobile device home screen
 
 #### iPhone or iPad
 
