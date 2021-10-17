@@ -42,19 +42,19 @@
 ## 🚩 Table of Contents
 
 - [About](#-about)
-- [Setup for your own usage](#-setup-for-your-own-usage)
-  - [Deploy web application](#-deploy-web-application)
-  - [Deploy server](#-deploy-server)
-  - [Prepare your Raspberry Pi](#-prepare-your-raspberry-pi)
-- [Documentation](#-documentation)
-- [Contributing](#-contributing)
-  - [Contributing Guidelines](#-contributing-guidelines)
-  - [Want to Help?](#-want-to-help?)
-  - [Code of Conduct](#-code-of-conduct)
-- [Roadmap](#-roadmap)
-- [Changelog](#-changelog)
-- [Contributors](#-contributors)
-- [License](#-license)
+- [Setup for your own usage](#setup-for-your-own-usage)
+  - [Deploy web application](#deploy-web-application)
+  - [Deploy server](#deploy-server)
+  - [Prepare your Raspberry Pi](#prepare-your-raspberry-pi)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+  - [Contributing Guidelines](#contributing-guidelines)
+  - [Want to Help?](#want-to-help?)
+  - [Code of Conduct](#code-of-conduct)
+- [Roadmap](#roadmap)
+- [Changelog](#changelog)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## 🔑 About
 
@@ -69,7 +69,7 @@ Right, but there is one significant difference between others smart lock, it is 
 From physical side only what you have to do is to prepare [Raspberry Pi](https://www.raspberrypi.org/products/) and add some [3V Relay Module](https://www.google.com/search?q=relay+module+3v&tbm=isch&ved=2ahUKEwjll9aUt8_yAhVXvyoKHeMbBmgQ2-cCegQIABAA&oq=relay+module+3v&gs_lcp=CgNpbWcQAzIHCCMQ7wMQJzIGCAAQCBAeUKweWP8hYNEjaABwAHgAgAFliAGXApIBAzIuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=o-wnYaW6Ldf-qgHjt5jABg&bih=1329&biw=2560&rlz=1C5CHFA_enPL923PL923) between Raspberry and your gate to enable ability for opening.
 
 Rest part of Smart Gate system is handled by predefined templates for simplifying process of deploying server, database, and web app.
-Only what you have to do in this step is to click 2 buttons from [Setup for your own usage](#-setup-for-your-own-usage) and fill provided secrets.
+Only what you have to do in this step is to click 2 buttons from [Setup for your own usage](#setup-for-your-own-usage) and fill provided secrets.
 
 After those steps You will transform your simply or even old gate/door into your private smart system.
 

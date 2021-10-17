@@ -6,6 +6,10 @@ sidebar_position: 1
 
 ![Docs Version Dropdown](/img/banner-about.png)
 
+:::tip Set up Guide
+Wants to jump quickly into the setup guide? [Click here](guide/intro.md).
+:::
+
 Smart Gate is the complete system for building custom smart doors/locks/gates.
 In other words, it's a set of free software packages (incl. application, server, device) which can be easy deployed for free on your own,
 in order to connect them with your electric mechanism.
@@ -17,8 +21,6 @@ The whole concept might sound familiar to other commercial projects.
 What's makes here the main difference is that everything is free and open for the community.
 You can discover the whole code repository, diagrams, designs, and project backlog.
 Besides visibility, you can even download the whole code and adjust for your own or just contribute to the project on GitHub.
-
-**Wants to jump quickly into the setup guide? [Click here](guide/intro.md)**.
 
 ## Main Features
 
@@ -44,9 +46,11 @@ Besides visibility, you can even download the whole code and adjust for your own
 - **Compatible with Apple Shortcuts** - If you have devices with the iOS system you can integrate Smart Gate with Apple Shortcuts.
   This makes it possible to open the door/gate automatically when you will back home or just using Siri.
 
+:::caution More features
 Smart Gate is constantly developed and there are many features in future plans or currently in progress.
 
-For more details check [project backlog in GitHub repository](https://github.com/Jozwiaczek/smart-gate/projects/1).
+For more details check **[project backlog](https://github.com/Jozwiaczek/smart-gate/projects/1)** in GitHub repository.
+:::
 
 ## Why & How it's Completely Free
 
@@ -112,7 +116,7 @@ Here are the external services:
 
 The architecture of Smart Gate is split for three main packages, physical elements and external services.
 
-![Services Architecture Diagram](../static/img/diagrams/services-architecture.drawio.png)
+![Services Architecture Diagram](../static/diagrams/services-architecture.drawio.png)
 
 #### Main software packages
 

@@ -4,6 +4,4 @@ sidebar_position: 1
 
 # Intro
 
-sdf
-
-## Create your first React Page
+Superbus, primus candidatuss grauiter contactus de domesticus, regius particula.
