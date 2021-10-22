@@ -23,9 +23,9 @@ SG_SERVICE_FILE="smart-gate.service"
 
 ### ENVS ###
 ENV_FILE=".env"
-REQUIRED_ENVS=("AUTH_TICKET" "API_URL")
 
 # REQUIRED ENVS #
+REQUIRED_ENVS=("AUTH_TICKET" "API_URL")
 API_URL=""
 AUTH_TICKET=""
 
@@ -434,7 +434,7 @@ main() {
   checkUnusedFiles
   checkEnvs
   installDeviceDependencies
-#  checkService
+  checkService
 }
 
 main "$@"
