@@ -1,0 +1,14 @@
+[Unit]
+Description = Smart Gate
+After = network.target
+StartLimitIntervalSec = 0
+
+[Service]
+ExecStart = yarn --cwd ~/smart-gate/packages/device start
+StandardOutput = append:/var/log/smart-gate-standard.log
+StandardError = append:/var/log/smart-gate-error.log
+Restart = always
+RestartSec = 1
+
+[Install]
+WantedBy = multi-user.target
