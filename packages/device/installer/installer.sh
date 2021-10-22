@@ -52,48 +52,51 @@ OVER="\\r\\033[K"
 
 ### LINKS ###
 DOCS_DEVICE_ENVS_LINK="https://smart-gate-docs.vercel.app"
+DOCS_DEVICE_CAMERA_LINK="https://smart-gate-docs.vercel.app"
 
 ############
 
 ### WHIPTAIL ###
 # Dialog dimensions: 20 rows and 70 chars width assures to fit on small screens and is known to hold all content.
 r=20
-c=70
+c=90
 
 # Set whiptail theme colors as a Smart Gate palette
 export NEWT_COLORS='
-root=white,#257D69
-window=white,#30444E
-border=white,#30444E
-shadow=white,#22343C
-button=white,#257D69
-actbutton=white,#C12A2A
-compactbutton=white,#30444E
-title=white,#30444E
-roottext=white,magenta
-textbox=white,#30444E
-acttextbox=#257D69,white
-entry=#30444E,#257D69
-disentry=#257D69,#30444E
-checkbox=white,#30444E
-actcheckbox=white,#257D69
-emptyscale=,white
-fullscale=,red
-listbox=white,#30444E
-actlistbox=#30444E,#257D69
-actsellistbox=white,#257D69
+  root=white,#257D69
+  window=white,#30444E
+  border=white,#30444E
+  shadow=white,#22343C
+  button=white,#257D69
+  actbutton=white,#C12A2A
+  compactbutton=white,#30444E
+  title=white,#30444E
+  roottext=white,magenta
+  textbox=white,#30444E
+  acttextbox=#257D69,white
+  entry=white,#22343C
+  disentry=#257D69,#30444E
+  checkbox=white,#30444E
+  actcheckbox=white,#257D69
+  emptyscale=,white
+  fullscale=,red
+  listbox=white,#30444E
+  actlistbox=#30444E,#257D69
+  actsellistbox=white,#257D69
 '
 
-# A simple function that just echoes out Smart Gate logo in ASCII format
-# This lets users know that it is a Smart Gate script
-show_ascii_logo() {
-  echo -e "
+ASCII_SG_LOGO="
   ███████ ███    ███  █████  ██████  ████████      ██████   █████  ████████ ███████
   ██      ████  ████ ██   ██ ██   ██    ██        ██       ██   ██    ██    ██
   ███████ ██ ████ ██ ███████ ██████     ██        ██   ███ ███████    ██    █████
        ██ ██  ██  ██ ██   ██ ██   ██    ██        ██    ██ ██   ██    ██    ██
   ███████ ██      ██ ██   ██ ██   ██    ██         ██████  ██   ██    ██    ███████
 "
+
+# A simple function that just echoes out Smart Gate logo in ASCII format
+# This lets users know that it is a Smart Gate script
+show_ascii_logo() {
+  echo -e "$ASCII_SG_LOGO"
 }
 
 # Checks to see if the given command (passed as a string argument) exists on the system.
@@ -301,11 +304,11 @@ setCameraEnvs() {
 
   CAMERA_USAGE_ENABLED="true"
 
-  NGROK_AUTH_TOKEN=$(whiptail --title "Environmental variables setup (NGROK_AUTH_TOKEN)" --passwordbox "Enter your Ngrok Auth Token." "${r}" "${c}" 3>&1 1>&2 2>&3)
+  NGROK_AUTH_TOKEN=$(whiptail --title "Environmental variables setup (NGROK_AUTH_TOKEN)" --passwordbox "\\n\\nEnter your Ngrok Auth Token." "${r}" "${c}" 3>&1 1>&2 2>&3)
 
   NGROK_REGION=$(
     whiptail --title "Environmental variables setup (NGROK_REGION)" --radiolist \
-      "Choose Ngrok region. (Use space to mark option)\nIt should be the nearest to the region where device is located to reduce connection latency." "${r}" "${c}" 7 \
+      "\\n\\nChoose Ngrok region. (Use space to mark option)\nIt should be the nearest to the region where device is located to reduce connection latency." "${r}" "${c}" 7 \
       "eu" "Europe (Frankfurt)" ON \
       "us" "United States (Ohio)" OFF \
       "ap" "Asia/Pacific (Singapore)" OFF \
@@ -317,7 +320,7 @@ setCameraEnvs() {
 
   connectionType=$(
     whiptail --title "Environmental variables setup (CAMERA_USE_WIRED)" --radiolist \
-      "Choose camera connection type. (Use space to mark option)" "${r}" "${c}" 2 \
+      "\\n\\nChoose camera connection type. (Use space to mark option)" "${r}" "${c}" 2 \
       "Wired" "Camera connected over USB or CSI" ON \
       "Wireless" "Camera served over local HTTP stream" OFF \
     3>&1 1>&2 2>&3)
@@ -327,14 +330,14 @@ setCameraEnvs() {
     NGROK_LOCAL_CAMERA_ADDRESS="http://localhost:8081"
   else
     CAMERA_USE_WIRED="false"
-    NGROK_LOCAL_CAMERA_ADDRESS=$(whiptail --title "Environmental variables setup (NGROK_LOCAL_CAMERA_ADDRESS)" --inputbox "Enter local camera address with video stream" "${r}" "${c}" "${NGROK_LOCAL_CAMERA_ADDRESS}" 3>&1 1>&2 2>&3)
+    NGROK_LOCAL_CAMERA_ADDRESS=$(whiptail --title "\\n\\nEnvironmental variables setup (NGROK_LOCAL_CAMERA_ADDRESS)" --inputbox "\\n\\nEnter local camera address with video stream" "${r}" "${c}" "${NGROK_LOCAL_CAMERA_ADDRESS}" 3>&1 1>&2 2>&3)
   fi
 
   printf "%b  %b Camera envs configured\\n" "${OVER}"  "${TICK}"
 }
 
 welcomeDialog() {
- whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\nThis installer will automatically configure Smart Gate system on this device!" "${r}" "${c}"
+ whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\n$ASCII_SG_LOGO\\n\\n  This installer will automatically configure Smart Gate system on this device!" "${r}" "${c}"
 }
 
 checkEnvs() {
@@ -349,16 +352,16 @@ checkEnvs() {
 
     whiptail --msgbox --title "Environmental variables setup" "\\n\\nIn the next steps, You will configure Smart Gate system variables.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_ENVS_LINK" "${r}" "${c}"
 
-    API_URL=$(whiptail --title "Environmental variables setup (API_URL)" --inputbox "Enter your Smart Gate server(api) URL" "${r}" "${c}" "${API_URL}" 3>&1 1>&2 2>&3)
-    AUTH_TICKET=$(whiptail --title "Environmental variables setup (AUTH_TICKET)" --inputbox "Enter your Auth ticket. Same as for Server." "${r}" "${c}" "${AUTH_TICKET}" 3>&1 1>&2 2>&3)
+    API_URL=$(whiptail --title "Environmental variables setup (API_URL)" --inputbox "\\n\\nEnter your Smart Gate deployed server URL" "${r}" "${c}" "${API_URL}" 3>&1 1>&2 2>&3)
+    AUTH_TICKET=$(whiptail --title "Environmental variables setup (AUTH_TICKET)" --passwordbox "\\n\\nEnter your Auth ticket. It should be same value as for server env." "${r}" "${c}" "${AUTH_TICKET}" 3>&1 1>&2 2>&3)
 
-    if (whiptail --title "Environmental variables setup (CAMERA_USAGE_ENABLED)" --yesno "Camera setup is optional.\nCheck more details in Smart Gate documentation.\nDo You want to setup your camera right now?" "${r}" "${c}"); then
+    if (whiptail --title "Environmental variables setup (CAMERA_USAGE_ENABLED)" --yesno "\\n\\nCamera setup is optional.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_CAMERA_LINK.\\n\\nDo You want to setup your camera right now?" "${r}" "${c}"); then
       setCameraEnvs
     else
       printf "  %b Camera setup skipped\\n" "${INFO}"
     fi
 
-    whiptail --title "Environmental variables setup" --msgbox "All environmental variables configured successfully." "${r}" "${c}"
+    whiptail --title "Environmental variables setup" --msgbox "\\n\\nAll environmental variables configured successfully." "${r}" "${c}"
 
     (
       echo "API_URL=$API_URL";
