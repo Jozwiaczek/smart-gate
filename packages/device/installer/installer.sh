@@ -5,6 +5,10 @@
 # instead of continuing the installation with something broken
 set -e
 
+# Append common folders to the PATH to ensure that all basic commands are available.
+# When using "su" an incomplete PATH could be passed: https://github.com/pi-hole/pi-hole/issues/3209
+export PATH+=':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
 ######## VARIABLES #########
 # For better maintainability, we store as much information that can change in variables
 # This allows us to make a change in one place that can propagate to all instances of the variable
@@ -57,40 +61,16 @@ DOCS_DEVICE_CAMERA_LINK="https://smart-gate-docs.vercel.app"
 ############
 
 ### WHIPTAIL ###
-# Dialog dimensions: 20 rows and 70 chars width assures to fit on small screens and is known to hold all content.
+# Dialog dimensions
 r=20
 c=90
 
-# Set whiptail theme colors as a Smart Gate palette
-export NEWT_COLORS='
-  root=white,#257D69
-  window=white,#30444E
-  border=white,#30444E
-  shadow=white,#22343C
-  button=white,#257D69
-  actbutton=white,#C12A2A
-  compactbutton=white,#30444E
-  title=white,#30444E
-  roottext=white,magenta
-  textbox=white,#30444E
-  acttextbox=#257D69,white
-  entry=white,#22343C
-  disentry=#257D69,#30444E
-  checkbox=white,#30444E
-  actcheckbox=white,#257D69
-  emptyscale=,white
-  fullscale=,red
-  listbox=white,#30444E
-  actlistbox=#30444E,#257D69
-  actsellistbox=white,#257D69
-'
-
 ASCII_SG_LOGO="
-  ███████ ███    ███  █████  ██████  ████████      ██████   █████  ████████ ███████
-  ██      ████  ████ ██   ██ ██   ██    ██        ██       ██   ██    ██    ██
-  ███████ ██ ████ ██ ███████ ██████     ██        ██   ███ ███████    ██    █████
-       ██ ██  ██  ██ ██   ██ ██   ██    ██        ██    ██ ██   ██    ██    ██
-  ███████ ██      ██ ██   ██ ██   ██    ██         ██████  ██   ██    ██    ███████
+  ███████ ███    ███  █████  ██████  ████████    ██████   █████  ████████ ███████
+  ██      ████  ████ ██   ██ ██   ██    ██      ██       ██   ██    ██    ██
+  ███████ ██ ████ ██ ███████ ██████     ██     ██   ███ ███████    ██    █████
+       ██ ██  ██  ██ ██   ██ ██   ██    ██      ██    ██ ██   ██    ██    ██
+  ███████ ██      ██ ██   ██ ██   ██    ██       ██████  ██   ██    ██    ███████
 "
 
 # A simple function that just echoes out Smart Gate logo in ASCII format
