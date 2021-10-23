@@ -115,7 +115,7 @@ check_privileges() {
             # when run via curl piping
             if [[ "$0" == "bash" ]]; then
                 # Download the install script and run it with admin rights
-                exec curl -sSL $INSTALLER_RAW_LINK | sudo bash \"\$@\"
+                exec curl -sSL $INSTALLER_RAW_LINK | sudo bash "$@"
             else
                 # when run via calling local bash script
                 exec sudo bash "$0" "$@"
