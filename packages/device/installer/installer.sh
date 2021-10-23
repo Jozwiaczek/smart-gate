@@ -57,6 +57,7 @@ OVER="\\r\\033[K"
 ### LINKS ###
 DOCS_DEVICE_ENVS_LINK="https://smart-gate-docs.vercel.app"
 DOCS_DEVICE_CAMERA_LINK="https://smart-gate-docs.vercel.app"
+INSTALLER_RAW_LINK="https://raw.githubusercontent.com/Jozwiaczek/smart-gate/feat(device)/add-bash-installer/packages/device/installer/installer.sh"
 
 ############
 
@@ -114,7 +115,7 @@ check_privileges() {
             # when run via curl piping
             if [[ "$0" == "bash" ]]; then
                 # Download the install script and run it with admin rights
-                echo "exec curl -sSL https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh | sudo bash \"\$@\""
+                exec curl -sSL $INSTALLER_RAW_LINK | sudo bash \"\$@\"
             else
                 # when run via calling local bash script
                 exec sudo bash "$0" "$@"
