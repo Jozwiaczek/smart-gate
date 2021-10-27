@@ -30,8 +30,10 @@
 
 <hr/>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
 [![CI](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml/badge.svg?branch=dev)](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml)
+[![Heroku Status](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/smart-gate-jj?label=Server&logo=heroku&logoColor=heroku)](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/smart-gate-jj?label=Server&logo=heroku&logoColor=heroku)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
+[![Vercel Status](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/production?label=Documentation&logo=vercel&logoColor=vercel)](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/production?label=Documentation&logo=vercel&logoColor=vercel)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Jozwiaczek/smart-gate)](https://github.com/Jozwiaczek/smart-gate/commits)
 [![CodeFactor](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate/badge)](https://www.codefactor.io/repository/github/jozwiaczek/smart-gate)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
@@ -76,8 +78,10 @@ https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-
 
 ## 🚛 Setup for your own usage
 
-> _Important note:_ Bellow you will find only short and a temporary description on how to setup Smart Gate.
-> More details in [documentation website](https://smart-gate-docs.vercel.app/).
+> _Important note:_
+> Bellow you will find only short and a temporary description on how to setup Smart Gate.
+>
+> More details will be added soon in [documentation website](https://smart-gate-docs.vercel.app/).
 
 In order to use the Smart Gate system in your environment, you have to deploy your own instance
 of the client, server and database.
@@ -91,7 +95,7 @@ You only have to click the buttons below to deploy your own instances and fill u
 
 ### Deploy web application
 
-Click the button below to deploy [client package](packages/client/README.md) with predefined [Netlify](https://www.netlify.com) template.
+Click the button below to deploy [client package](packages/client/README.md) with prepared web application using predefined [Netlify](https://www.netlify.com) template.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jozwiaczek/smart-gate)
 
@@ -102,13 +106,37 @@ Click the button below to deploy [client package](packages/client/README.md) wit
 
 ### Deploy server
 
-Click the button below to deploy [api package](packages/api/README.md) with predefined [Heroku](https://www.heroku.com) template.
+Click the button below to deploy [api package](packages/api/README.md) with prepared server application using predefined [Heroku](https://www.heroku.com) template.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Jozwiaczek/smart-gate)
 
 ### Prepare your Raspberry Pi
 
-WIP [device](packages/device/README.md)
+#### One-Step Automated Install
+
+Those who want to get started quickly and conveniently may install Smart Gate using the following command:
+
+##### `curl -sSL https://smart-gate-docs.vercel.app/install | bash`
+
+#### Alternative Installation Methods
+
+Piping to `bash` is controversial, as it prevents you from [reading code that is about to run](https://raw.githubusercontent.com/Jozwiaczek/smart-gate/main/packages/device/installer/installer.sh) on your system.
+Therefore, we provide these alternative installation methods which allow code review before installation:
+
+##### Method 1: Clone our repository and run
+
+```bash
+git clone --depth 1 https://github.com/Jozwiaczek/smart-gate.git
+cd "smart-gate/packages/device/installer"
+sudo bash installer.sh
+```
+
+##### Method 2: Manually download the installer and run
+
+```bash
+wget -O installer.sh https://smart-gate-docs.vercel.app/install
+sudo bash installer.sh
+```
 
 ## 📖 Documentation
 

@@ -6,7 +6,8 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
     "type-check": "tsc --noEmit",
-    "start": "ts-node --project tsconfig.json src/index.ts"
+    "start": "ts-node --project tsconfig.json src/index.ts",
+    "run:installer": "sudo bash installer/installer.sh"
   },
   "dependencies": {
     "chalk": "^4.1.2",

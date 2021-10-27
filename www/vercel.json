@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    {
+      "source": "/install",
+      "destination": "https://raw.githubusercontent.com/Jozwiaczek/smart-gate/dev/packages/device/installer/installer.sh"
+    }
+  ]
+}
