@@ -216,14 +216,15 @@ checkRepository() {
 }
 
 checkUnusedFiles() {
+  cd "$DEVICE_DIRECTORY"
   printf "  %b Checking unused files\\n" "${INFO}"
   local installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
   local found_files_to_remove_counter=0
 
   while IFS= read -r fileToRemove; do
-      if [[ -f $fileToRemove || -d $fileToRemove ]]; then
-        found_files_to_remove_counter=$((found_files_to_remove_counter + 1))
-      fi
+    if [[ -f $fileToRemove || -d $fileToRemove ]]; then
+      found_files_to_remove_counter=$((found_files_to_remove_counter + 1))
+    fi
   done < "$installer_files_to_remove"
 
   if [[ $found_files_to_remove_counter -eq 0 ]]; then
@@ -346,8 +347,8 @@ checkEnvs() {
 }
 
 installDeviceDependencies() {
-  printf "  %b Installing device dependencies\\n" "${INFO}"
   cd "$DEVICE_DIRECTORY"
+  printf "  %b Installing device dependencies\\n" "${INFO}"
   yarn install
   printf "%b  %b Device dependencies installed\\n" "${OVER}"  "${TICK}"
 }
