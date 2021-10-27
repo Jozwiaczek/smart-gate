@@ -8,10 +8,8 @@
   publish = "build/"
   command = "yarn build"
 
-[[redirects]]
-  from = "/api/*"
-  to = "https://smart-gate-jj.herokuapp.com/:splat"
-  status = 200
+[[plugins]]
+  package = "/plugins/netlify-plugin-customize-sg-redirects"
 
 [[redirects]]
   from = "/*"
