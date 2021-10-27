@@ -56,6 +56,7 @@ OVER="\\r\\033[K"
 DOCS_DEVICE_ENVS_LINK="https://smart-gate-docs.vercel.app"
 DOCS_DEVICE_CAMERA_LINK="https://smart-gate-docs.vercel.app"
 INSTALLER_RAW_LINK="https://raw.githubusercontent.com/Jozwiaczek/smart-gate/feat(device)/add-bash-installer/packages/device/installer/installer.sh"
+REMOTE_REPOSITORY_LINK="https://github.com/Jozwiaczek/smart-gate.git"
 
 ############
 
@@ -163,12 +164,13 @@ checkYarn() {
 
 downloadRepository() {
   printf "  %b Downloading Smart Gate repository\\n" "${INFO}"
-  git clone https://github.com/Jozwiaczek/smart-gate.git $PROJECT_DIRECTORY
+#  git clone "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
+  git clone -b "feat(device)/add-bash-installer" "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
   printf "%b  %b Smart Gate repository downloaded\\n" "${OVER}"  "${TICK}"
 }
 
 updateRepository() {
-  cd $PROJECT_DIRECTORY
+  cd "$PROJECT_DIRECTORY"
   local_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
   # shellcheck disable=SC1083
   remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
@@ -222,7 +224,7 @@ checkUnusedFiles() {
       if [[ -f $fileToRemove || -d $fileToRemove ]]; then
         found_files_to_remove_counter=$((found_files_to_remove_counter + 1))
       fi
-  done < $installer_files_to_remove
+  done < "$installer_files_to_remove"
 
   if [[ $found_files_to_remove_counter -eq 0 ]]; then
       printf "%b  %b No unused files found\\n" "${OVER}"  "${TICK}"
@@ -234,7 +236,7 @@ checkUnusedFiles() {
 
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     printf "  %b Removing unused files\\n" "${INFO}"
-    xargs rm -rf < $installer_files_to_remove
+    xargs rm -rf < "$installer_files_to_remove"
     printf "%b  %b %b unused files removed\\n" "${OVER}"  "${TICK}" "${found_files_to_remove_counter}"
   else
     printf "  %b Skipping removing unused files\\n" "${INFO}"
@@ -242,7 +244,7 @@ checkUnusedFiles() {
 }
 
 checkRequiredEnv() {
-  cd $DEVICE_DIRECTORY
+  cd "$DEVICE_DIRECTORY"
   printf "  %b Checking required ENVs\\n" "${INFO}"
   local missing_envs=()
 
@@ -306,7 +308,7 @@ welcomeDialog() {
 }
 
 checkEnvs() {
-  cd $DEVICE_DIRECTORY
+  cd "$DEVICE_DIRECTORY"
   printf "  %b Checking .env file\\n" "${INFO}"
 
   if [ -e $ENV_FILE ]; then
@@ -345,7 +347,7 @@ checkEnvs() {
 
 installDeviceDependencies() {
   printf "  %b Installing device dependencies\\n" "${INFO}"
-  cd $DEVICE_DIRECTORY
+  cd "$DEVICE_DIRECTORY"
   yarn install
   printf "%b  %b Device dependencies installed\\n" "${OVER}"  "${TICK}"
 }
