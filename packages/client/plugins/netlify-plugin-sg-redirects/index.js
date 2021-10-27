@@ -5,6 +5,8 @@ module.exports = {
 
     const { REACT_APP_API_URL } = process.env;
 
+    // IMPORTANT
+    // Order of redirects matters
     redirects.push({
       from: '/api/*',
       to: `${REACT_APP_API_URL}/:splat`,

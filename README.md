@@ -43,19 +43,19 @@
 ## 🚩 Table of Contents
 
 - [About](#-about)
-- [Setup for your own usage](#-setup-for-your-own-usage)
-  - [Deploy web application](#-deploy-web-application)
-  - [Deploy server](#-deploy-server)
-  - [Prepare your Raspberry Pi](#-prepare-your-raspberry-pi)
-- [Documentation](#-documentation)
-- [Contributing](#-contributing)
-  - [Contributing Guidelines](#-contributing-guidelines)
-  - [Want to Help?](#-want-to-help?)
-  - [Code of Conduct](#-code-of-conduct)
-- [Roadmap](#-roadmap)
-- [Changelog](#-changelog)
-- [Contributors](#-contributors)
-- [License](#-license)
+- [Quick setup for your own usage](#-quick-setup-for-your-own-usage)
+  - [Deploy web application](#deploy-web-application)
+  - [Deploy server](#deploy-server)
+  - [Prepare your Raspberry Pi](#prepare-your-raspberry-pi)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+  - [Contributing Guidelines](#contributing-guidelines)
+  - [Want to Help?](#want-to-help?)
+  - [Code of Conduct](#code-of-conduct)
+- [Roadmap](#roadmap)
+- [Changelog](#changelog)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## 🔑 About
 
@@ -76,7 +76,7 @@ After those steps You will transform your simply or even old gate/door into your
 
 https://user-images.githubusercontent.com/29049653/131034360-aef67a76-4060-4953-8ed0-3694fe3e4809.mp4
 
-## 🚛 Setup for your own usage
+## 🚛 Quick setup for your own usage
 
 > _Important note:_
 > Bellow you will find only short and a temporary description on how to setup Smart Gate.
@@ -99,11 +99,6 @@ Click the button below to deploy [client package](packages/client/README.md) wit
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jozwiaczek/smart-gate)
 
-> _Note:_
-> In case of issue with authentication process in your deployed client package, please replace api redirect url to point your deployed api.
->
-> It can be changed in [netlify.toml](packages/client/netlify.toml) configuration file.
-
 ### Deploy server
 
 Click the button below to deploy [api package](packages/api/README.md) with prepared server application using predefined [Heroku](https://www.heroku.com) template.
@@ -116,7 +111,7 @@ Click the button below to deploy [api package](packages/api/README.md) with prep
 
 Those who want to get started quickly and conveniently may install Smart Gate using the following command:
 
-##### `curl -sSL https://smart-gate-docs.vercel.app/install | bash`
+### `curl -sSL https://smart-gate-docs.vercel.app/install | bash`
 
 #### Alternative Installation Methods
 
@@ -136,6 +131,24 @@ sudo bash installer.sh
 ```bash
 wget -O installer.sh https://smart-gate-docs.vercel.app/install
 sudo bash installer.sh
+```
+
+#### Post install check
+
+After completed successfully installation check is everything working properly.
+
+Your Raspberry Pi should be initialized and connected with your server.
+
+_Check **standard logs**:_
+
+```bash
+cat /var/log/smart-gate-standard.log
+```
+
+_Check **error logs**:_
+
+```bash
+cat /var/log/smart-gate-error.log
 ```
 
 ## 📖 Documentation
