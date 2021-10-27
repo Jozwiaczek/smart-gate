@@ -132,19 +132,6 @@ check_privileges() {
     fi
 }
 
-updateDebianSystemPackages() {
-  if ! [[ -f "/etc/debian_version" ]]; then
-    # Skip for non Debian system
-    return
-  fi
-
-  printf "  %b Debian system detected\\n" "${INFO}"
-  printf "  %b Updating system packages\\n" "${INFO}"
-  apt update
-  apt full-upgrade
-  printf "%b  %b System packages updated\\n" "${OVER}"  "${TICK}"
-}
-
 checkNodeJs() {
   printf "  %b Checking Node.js version\\n" "${INFO}"
   if which node > /dev/null; then
@@ -411,7 +398,6 @@ checkService() {
 main() {
   check_privileges "$@"
   welcomeDialog
-  updateDebianSystemPackages
   checkNodeJs
   checkYarn
   checkRepository
