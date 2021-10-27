@@ -226,10 +226,14 @@ checkUnusedFiles() {
   echo "WORKING4"
 
   while IFS= read -r fileToRemove; do
+    echo "WORKING5"
     if [[ -f $fileToRemove || -d $fileToRemove ]]; then
+      echo "WORKING6"
       found_files_to_remove_counter=$((found_files_to_remove_counter + 1))
     fi
+    echo "WORKING7"
   done < "$installer_files_to_remove"
+  echo "WORKING8"
 
   if [[ $found_files_to_remove_counter -eq 0 ]]; then
       printf "%b  %b No unused files found\\n" "${OVER}"  "${TICK}"
