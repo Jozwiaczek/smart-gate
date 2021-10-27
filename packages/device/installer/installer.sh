@@ -374,22 +374,17 @@ checkService() {
   printf "  %b Checking Systemd service\\n" "${INFO}"
 
   if [ -e "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" ]; then
-      printf "%b  %b Service file already exists\\n" "${OVER}"  "${TICK}"
+    printf "%b  %b Service file already exists\\n" "${OVER}"  "${TICK}"
 
-      local -r isNewerVersion=$(! cmp --silent "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE")
-      local -r isActive=$(systemctl is-active --quiet smart-gate)
-
-      if [[ "$isActive" || "$isEqualToRemote" ]] ; then
-        if [ "$isEqualToRemote" ] ; then
-          if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate systemd service available, do you want to update now? (Recommended)" "${r}" "${c}"); then
-            rm "$SERVICES_DIRECTORY/$SG_SERVICE_FILE"
-            cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
-          fi
-        fi
-        restartService
-      else
-        startService
+    # Check is there a newer version of the service
+    if ! (cmp --silent "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE") ; then
+      if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate systemd service available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+        rm "$SERVICES_DIRECTORY/$SG_SERVICE_FILE"
+        cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
       fi
+    fi
+
+    restartService
   else
     printf "  %b Service file not found\\n" "${INFO}"
     printf "  %b Creating service file\\n" "${INFO}"
