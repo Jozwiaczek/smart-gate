@@ -184,7 +184,7 @@ updateRepository() {
     return
   fi
 
-  if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+  if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version of Smart Gate repository available, do you want to update now? (Recommended)" "${r}" "${c}"); then
     printf "  %b Updating local repository\\n" "${INFO}"
 
     if git merge-base --is-ancestor HEAD "$remote_branch"; then
@@ -380,6 +380,12 @@ checkService() {
       local -r isActive=$(systemctl is-active --quiet smart-gate)
 
       if [[ "$isActive" || "$isEqualToRemote" ]] ; then
+        if [ "$isEqualToRemote" ] ; then
+          if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate systemd service available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+            rm "$SERVICES_DIRECTORY/$SG_SERVICE_FILE"
+            cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
+          fi
+        fi
         restartService
       else
         startService
