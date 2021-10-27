@@ -4,6 +4,7 @@
 # We do not want users to end up with a partially working install, so we exit the script
 # instead of continuing the installation with something broken
 set -e
+set -x
 
 ######## VARIABLES #########
 # For better maintainability, we store as much information that can change in variables
