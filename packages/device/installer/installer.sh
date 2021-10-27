@@ -107,6 +107,7 @@ log_error() {
 
 completed_successfully_dialog() {
   whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\nInstallation completed successfully!\\n\\n\\n\\nIn order to check logs, in terminal enter command:\\n\\n    -  For standard logs: \"cat /var/log/smart-gate-standard.log\"\\n\\n    -  For errors: \"cat /var/log/smart-gate-error.log\"" "${r}" "${c}"
+  log_success "Installation completed successfully"
 }
 
 welcome_dialog() {
@@ -219,7 +220,7 @@ update_repository() {
     return
   fi
 
-  if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version of Smart Gate repository available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+  if (whiptail --title "Repository update (Recommended)" --yesno "\\n\\nThere is a new version of Smart Gate repository available, do you want to update now? (Recommended)" "${r}" "${c}"); then
     log_info "Updating local repository"
 
     if git merge-base --is-ancestor HEAD "$remote_branch"; then
@@ -264,7 +265,7 @@ check_unused_files() {
       return
   fi
 
-  if (whiptail --title "Removing unused files" --yesno "\\n\\nThere are $found_files_to_remove_counter unused files, do you want to delete them? (Recommended)" "${r}" "${c}"); then
+  if (whiptail --title "Removing unused repository files (Recommended)" --yesno "\\n\\nThere are $found_files_to_remove_counter Smart Gate project unused files, do you want to delete them? (Recommended)" "${r}" "${c}"); then
     log_info "Removing unused files"
     xargs rm -rf < "$installer_files_to_remove"
     log_success "$found_files_to_remove_counter unused files removed"
@@ -305,7 +306,7 @@ set_camera_envs() {
 
   NGROK_REGION=$(
     whiptail --title "Environmental variables setup (NGROK_REGION)" --radiolist \
-      "\\n\\nChoose Ngrok region. (Use space to mark option)\nIt should be the nearest to the region where device is located to reduce connection latency." "${r}" "${c}" 7 \
+      "\\n\\nChoose Ngrok region. (Use space to mark option)\\n\\nIt should be the nearest to the region where device is located to reduce connection latency." "${r}" "${c}" 7 \
       "eu" "Europe (Frankfurt)" ON \
       "us" "United States (Ohio)" OFF \
       "ap" "Asia/Pacific (Singapore)" OFF \
@@ -343,10 +344,10 @@ check_envs() {
   else
     log_info ".env file not found. Creating new .env file"
 
-    whiptail --msgbox --title "Environmental variables setup" "\\n\\nIn the next steps, You will configure Smart Gate system variables.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_ENVS_LINK" "${r}" "${c}"
+    whiptail --msgbox --title "Environmental variables setup" "\\n\\nIn the next steps you will configure Smart Gate system variables.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_ENVS_LINK" "${r}" "${c}"
 
     API_URL=$(whiptail --title "Environmental variables setup (API_URL)" --inputbox "\\n\\nEnter your Smart Gate deployed server URL" "${r}" "${c}" "${API_URL}" 3>&1 1>&2 2>&3)
-    AUTH_TICKET=$(whiptail --title "Environmental variables setup (AUTH_TICKET)" --passwordbox "\\n\\nEnter your Auth ticket. It should be same value as for server env." "${r}" "${c}" "${AUTH_TICKET}" 3>&1 1>&2 2>&3)
+    AUTH_TICKET=$(whiptail --title "Environmental variables setup (AUTH_TICKET)" --passwordbox "\\n\\nEnter your Auth ticket.\\n\\nIt should be same value as for server env." "${r}" "${c}" "${AUTH_TICKET}" 3>&1 1>&2 2>&3)
 
     if (whiptail --title "Environmental variables setup (CAMERA_USAGE_ENABLED)" --yesno "\\n\\nCamera setup is optional.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_CAMERA_LINK.\\n\\nDo You want to setup your camera right now?" "${r}" "${c}"); then
       set_camera_envs
@@ -410,7 +411,7 @@ check_service() {
     log_info "Check is there a newer version of service config file"
     if ! (cmp --silent "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE") ; then
       log_success "Found newer version of service config file"
-      if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate service config file available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+      if (whiptail --title "Systemd Service Update (Recommended)" --yesno "\\n\\nThere is a new version of Smart Gate service config file available, do you want to update now? (Recommended)" "${r}" "${c}"); then
         log_info "Updating service config file"
         rm "$SERVICES_DIRECTORY/$SG_SERVICE_FILE"
         cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
