@@ -16,7 +16,7 @@ export PATH+=':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 # Local variables will be in lowercase and will exist only within functions
 
 ### PATHS ###
-HOME_DIRECTORY=$(eval echo "~$different_user")
+HOME_DIRECTORY=~pi
 PROJECT_DIRECTORY="${HOME_DIRECTORY}/smart-gate"
 DEVICE_DIRECTORY="${PROJECT_DIRECTORY}/packages/device"
 INSTALLER_DIRECTORY="${DEVICE_DIRECTORY}/installer"
