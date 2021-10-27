@@ -4,11 +4,6 @@
 # We do not want users to end up with a partially working install, so we exit the script
 # instead of continuing the installation with something broken
 set -e
-set -x
-
-# Append common folders to the PATH to ensure that all basic commands are available.
-# When using "su" an incomplete PATH could be passed: https://github.com/pi-hole/pi-hole/issues/3209
-export PATH+=':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 
 ######## VARIABLES #########
 # For better maintainability, we store as much information that can change in variables
@@ -189,10 +184,7 @@ updateRepository() {
     return
   fi
 
-  read -p "$(printf "%b  %b There is a new version available, do you want to update now? (y/n)  %b\\n\\n" "${COL_LIGHT_GREEN}" "${INFO}" "${COL_NC}")" -n 1 -r
-  echo    # move to a new line
-
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version available, do you want to update now?" "${r}" "${c}"); then
     printf "  %b Updating local repository\\n" "${INFO}"
 
     if git merge-base --is-ancestor HEAD "$remote_branch"; then
@@ -221,31 +213,21 @@ checkRepository() {
 }
 
 checkUnusedFiles() {
-  echo "WORKING1"
   cd "$PROJECT_DIRECTORY"
-  echo "WORKING2"
   printf "  %b Checking unused files\\n" "${INFO}"
-  echo "WORKING3"
   installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
   found_files_to_remove_counter=0
-  echo "WORKING4"
 
   while IFS= read -r fileToRemove; do
-    echo "WORKING5"
     if [[ -f $fileToRemove || -d $fileToRemove ]]; then
-      echo "WORKING6"
       found_files_to_remove_counter=$((found_files_to_remove_counter + 1))
     fi
-    echo "WORKING7"
   done < "$installer_files_to_remove"
-  echo "WORKING8"
 
   if [[ $found_files_to_remove_counter -eq 0 ]]; then
-      echo "WORKING9"
       printf "%b  %b No unused files found\\n" "${OVER}"  "${TICK}"
       return
   fi
-  echo "WORKING10"
 
   if (whiptail --title "Removing unused files" --yesno "\\n\\nThere are $found_files_to_remove_counter unused files, do you want to delete them?" "${r}" "${c}"); then
     printf "  %b Removing unused files\\n" "${INFO}"
@@ -254,8 +236,6 @@ checkUnusedFiles() {
   else
     printf "  %b Skipping removing unused files\\n" "${INFO}"
   fi
-
-  echo "WORKING11"
 }
 
 checkRequiredEnv() {
