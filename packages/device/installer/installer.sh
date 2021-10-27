@@ -222,8 +222,8 @@ checkUnusedFiles() {
   echo "WORKING2"
   printf "  %b Checking unused files\\n" "${INFO}"
   echo "WORKING3"
-  local installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
-  local found_files_to_remove_counter=0
+  installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
+  found_files_to_remove_counter=0
   echo "WORKING4"
 
   while IFS= read -r fileToRemove; do
