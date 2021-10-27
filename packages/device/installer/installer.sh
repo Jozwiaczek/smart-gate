@@ -22,6 +22,7 @@ DEVICE_DIRECTORY="${PROJECT_DIRECTORY}/packages/device"
 INSTALLER_DIRECTORY="${DEVICE_DIRECTORY}/installer"
 SERVICES_DIRECTORY="/etc/systemd/system"
 SG_SERVICE_FILE="smart-gate.service"
+FILES_TO_REMOVE_FILE="files-to-remove.txt"
 
 ############
 
@@ -84,7 +85,6 @@ show_ascii_logo() {
 # The function returns 0 (success) if the command exists, and 1 if it doesn't.
 is_command() {
     local check_command="$1"
-
     command -v "${check_command}" >/dev/null 2>&1
 }
 
@@ -218,7 +218,7 @@ checkRepository() {
 
 checkUnusedFiles() {
   printf "  %b Checking unused files\\n" "${INFO}"
-  local installer_files_to_remove="${INSTALLER_DIRECTORY}/files-to-remove.txt"
+  local installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
   local found_files_to_remove_counter=0
 
   while IFS= read -r fileToRemove; do
