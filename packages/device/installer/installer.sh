@@ -243,12 +243,12 @@ checkUnusedFiles() {
   fi
   echo "WORKING10"
 
-  read -p "There are $found_files_to_remove_counter unused files, do you want to delete them? (y/n) \\n\\n" -n 1 -r
+  read -r -p "There are $found_files_to_remove_counter unused files, do you want to delete them? (y/n) \\n\\n" response
   echo "WORKING11"
-  echo    # move to a new line
+  echo # move to a new line
   echo "WORKING12"
 
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if [[ $response =~ ^[Yy]$ ]]; then
     printf "  %b Removing unused files\\n" "${INFO}"
     xargs rm -rf < "$installer_files_to_remove"
     printf "%b  %b %b unused files removed\\n" "${OVER}"  "${TICK}" "${found_files_to_remove_counter}"
