@@ -247,18 +247,15 @@ checkUnusedFiles() {
   fi
   echo "WORKING10"
 
-  read -p "There are $found_files_to_remove_counter unused files, do you want to delete them? (y/n) \\n\\n" -n 1 -r
-  echo "WORKING11"
-  echo # move to a new line
-  echo "WORKING12"
-
-  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  if (whiptail --title "Removing unused files" --yesno "\\n\\nThere are $found_files_to_remove_counter unused files, do you want to delete them?" "${r}" "${c}"); then
     printf "  %b Removing unused files\\n" "${INFO}"
     xargs rm -rf < "$installer_files_to_remove"
     printf "%b  %b %b unused files removed\\n" "${OVER}"  "${TICK}" "${found_files_to_remove_counter}"
   else
     printf "  %b Skipping removing unused files\\n" "${INFO}"
   fi
+
+  echo "WORKING11"
 }
 
 checkRequiredEnv() {
