@@ -127,3 +127,6 @@ jest-test-results.json
 
 **/e2e/screenshots
 storybook-static
+
+# Local Netlify folder
+.netlify
