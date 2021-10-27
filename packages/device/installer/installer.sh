@@ -86,29 +86,52 @@ is_command() {
     command -v "${check_command}" >/dev/null 2>&1
 }
 
+log_info() {
+  printf "  %b $1\\n" "${INFO}"
+}
+
+log_red_info() {
+  printf "  %b %b $1%b\\n" "${INFO}" "${COL_LIGHT_RED}" "${COL_NC}"
+}
+
+log_green_info() {
+  printf "  %b %b $1%b\\n" "${INFO}" "${COL_LIGHT_GREEN}" "${COL_NC}"
+}
+
+log_yellow_info() {
+  printf "  %b %b $1%b\\n" "${INFO}" "${COL_LIGHT_YELLOW}" "${COL_NC}"
+}
+
+log_success() {
+  printf "%b  %b $1\\n" "${OVER}"  "${TICK}"
+}
+
+log_error() {
+  printf "%b  %b $1\\n" "${OVER}" "${CROSS}"
+}
+
 check_privileges() {
     # Must be root to install
-    local str="Root user check"
     printf "\\n"
 
     # If the user's id is zero,
     if [[ "${EUID}" -eq 0 ]]; then
         # they are root and all is good
-        printf "  %b %s\\n" "${TICK}" "${str}"
+        log_success "Root user check"
         # Show the Smart Gate logo so people know it's genuine since the logo and name are trademarked
         show_ascii_logo
     else
         # Otherwise, they do not have enough privileges, so let the user know
-        printf "  %b %s\\n" "${INFO}" "${str}"
+        log_info "Root user check"
         printf "  %b %bScript called with non-root privileges%b\\n" "${INFO}" "${COL_LIGHT_RED}" "${COL_NC}"
         printf "      The Smart Gate requires elevated privileges to install and run\\n"
         printf "      Please check the installer for any concerns regarding this requirement\\n"
         printf "      Make sure to download this script from a trusted source\\n\\n"
-        printf "  %b Sudo utility check" "${INFO}"
+        log_info "Sudo utility check"
 
         # If the sudo command exists, try rerunning as admin
         if is_command sudo ; then
-            printf "%b  %b Sudo utility check\\n" "${OVER}"  "${TICK}"
+            log_success "Sudo utility check"
 
             # when run via curl piping
             if [[ "$0" == "bash" ]]; then
@@ -122,51 +145,51 @@ check_privileges() {
             exit $?
         else
             # Otherwise, tell the user they need to run the script as root, and bail
-            printf "%b  %b Sudo utility check\\n" "${OVER}" "${CROSS}"
-            printf "  %b Sudo is needed for the Web Interface to run Smart Gate commands\\n\\n" "${INFO}"
-            printf "  %b %bPlease re-run this installer as root${COL_NC}\\n" "${INFO}" "${COL_LIGHT_RED}"
+            log_error "Sudo utility check"
+            log_info "Sudo is needed for the Web Interface to run Smart Gate commands"
+            log_red_info "Please re-run this installer as root"
             exit 1
         fi
     fi
 }
 
 check_node_js() {
-  printf "  %b Checking Node.js version\\n" "${INFO}"
+  log_info "Checking Node.js version"
   if which node > /dev/null; then
     # Node.js already install, continue
-    printf "%b  %b Node.js already exists\\n" "${OVER}"  "${TICK}"
+    log_success "Node.js already exists"
   else
-    printf "  %b Node.js not found\\n" "${INFO}"
-    printf "  %b Installing Node.js LTS\\n" "${INFO}"
+    log_info "Node.js not found"
+    log_info "Installing Node.js LTS"
     curl -sSL https://deb.nodesource.com/setup_lts.x | sudo bash -
     sudo apt install -y nodejs
-    printf "%b  %b Node.js installed\\n" "${OVER}"  "${TICK}"
+    log_success "Node.js installed"
   fi
 
   NODE_VERSION=$(node -v)
-  printf "%b  %b Node.js version is %b\\n" "${OVER}"  "${TICK}"  "${NODE_VERSION}"
+  log_success "Node.js version is $NODE_VERSION"
 }
 
 check_yarn() {
-  printf "  %b Checking Yarn version\\n" "${INFO}"
+  log_info "Checking Yarn version"
   if which yarn > /dev/null; then
-    printf "%b  %b Yarn already exists\\n" "${OVER}"  "${TICK}"
+    log_success "Yarn already exists"
   else
-    printf "  %b Yarn not found\\n" "${INFO}"
-    printf "  %b Installing Yarn\\n" "${INFO}"
+    log_info "Yarn not found"
+    log_info "Installing Yarn"
     npm install --global yarn
-    printf "%b  %b Yarn installed\\n" "${OVER}"  "${TICK}"
+    log_success "Yarn installed"
   fi
 
   YARN_VERSION=$(yarn -v)
-  printf "%b  %b Yarn version is %b\\n" "${OVER}"  "${TICK}"  "${YARN_VERSION}"
+  log_success "Yarn version is $YARN_VERSION"
 }
 
 download_repository() {
-  printf "  %b Downloading Smart Gate repository\\n" "${INFO}"
+  log_info "Downloading Smart Gate repository"
 #  git clone "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
   git clone -b "feat(device)/add-bash-installer" "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
-  printf "%b  %b Smart Gate repository downloaded\\n" "${OVER}"  "${TICK}"
+  log_success "Smart Gate repository downloaded"
 }
 
 update_repository() {
@@ -176,45 +199,45 @@ update_repository() {
   remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
   remote=$(git config branch."$local_branch".remote)
 
-  printf "  %b Checking remote repository for update\\n" "${INFO}"
+  log_info "Checking remote repository for update"
   git fetch "$remote"
 
   if git merge-base --is-ancestor "$remote_branch" HEAD; then
-    printf "%b  %b Local repository is up to date\\n" "${OVER}"  "${TICK}"
+    log_success "Local repository is up to date"
     return
   fi
 
   if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version of Smart Gate repository available, do you want to update now? (Recommended)" "${r}" "${c}"); then
-    printf "  %b Updating local repository\\n" "${INFO}"
+    log_info "Updating local repository"
 
     if git merge-base --is-ancestor HEAD "$remote_branch"; then
-      printf "  %b Fast-forward possible. Merging...\\n" "${INFO}"
+      log_info "Fast-forward possible. Merging..."
       git merge --ff-only --stat "$remote_branch"
     else
-      printf "  %b Fast-forward not possible. Rebasing...\\n" "${INFO}"
+      log_info "Fast-forward not possible. Rebasing..."
       git rebase --preserve-merges --stat "$remote_branch"
     fi
 
-    printf "%b  %b Local repository updated\\n" "${OVER}"  "${TICK}"
+    log_success "Local repository updated"
   else
-    printf "  %b Update skipped\\n" "${INFO}"
+    log_info "Update skipped"
   fi
 }
 
 check_repository() {
-  printf "  %b Repository check\\n" "${INFO}"
+  log_info "Repository check"
   if [[ -d "$PROJECT_DIRECTORY" ]]; then
-    printf "%b  %b Local repository found\\n" "${OVER}"  "${TICK}"
+    log_success "Local repository found"
     update_repository
   else
-    printf "  %b Local repository not found\\n" "${INFO}"
+    log_info "Local repository not found"
     download_repository
   fi
 }
 
 check_unused_files() {
   cd "$PROJECT_DIRECTORY"
-  printf "  %b Checking unused files\\n" "${INFO}"
+  log_info "Checking unused files"
   installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
   found_files_to_remove_counter=0
 
@@ -225,44 +248,44 @@ check_unused_files() {
   done < "$installer_files_to_remove"
 
   if [[ $found_files_to_remove_counter -eq 0 ]]; then
-      printf "%b  %b No unused files found\\n" "${OVER}"  "${TICK}"
+      log_success "No unused files found"
       return
   fi
 
   if (whiptail --title "Removing unused files" --yesno "\\n\\nThere are $found_files_to_remove_counter unused files, do you want to delete them? (Recommended)" "${r}" "${c}"); then
-    printf "  %b Removing unused files\\n" "${INFO}"
+    log_info "Removing unused files"
     xargs rm -rf < "$installer_files_to_remove"
-    printf "%b  %b %b unused files removed\\n" "${OVER}"  "${TICK}" "${found_files_to_remove_counter}"
+    log_success "$found_files_to_remove_counter unused files removed"
   else
-    printf "  %b Skipping removing unused files\\n" "${INFO}"
+    log_info "Skipping removing unused files"
   fi
 }
 
 check_required_env() {
   cd "$DEVICE_DIRECTORY"
-  printf "  %b Checking required ENVs\\n" "${INFO}"
+  log_info "Checking required envs"
   local missing_envs=()
 
   while IFS= read -r line; do
     key=${line%=*}
     value=${line#*=}
     if [[ ${REQUIRED_ENVS[*]} =~ ${key} && -z "$value" ]]; then
-      printf "  %b  %b \"$key\" env variable is required\\n" "${OVER}" "${CROSS}"
+      log_error "\"$key\" env variable is required"
       missing_envs+=("$key")
     fi
   done < $ENV_FILE
 
   # shellcheck disable=SC2128
   if [ -n "$missing_envs" ]; then
-    printf "  %b %bMissing envs variables. Add it to %b file and re-run this installer${COL_NC}\\n" "${INFO}" "${COL_LIGHT_RED}" "$ENV_FILE"
+    log_red_info "Missing envs variables. Add it to $ENV_FILE file and re-run this installer"
     exit 1
   fi
 
-  printf "%b  %b All required envs have been found\\n" "${OVER}"  "${TICK}"
+  log_success "All required envs have been found"
 }
 
 set_camera_envs() {
-  printf "  %b Configuring camera envs\\n" "${INFO}"
+  log_info "Configuring camera envs"
 
   CAMERA_USAGE_ENABLED="true"
 
@@ -295,7 +318,7 @@ set_camera_envs() {
     NGROK_LOCAL_CAMERA_ADDRESS=$(whiptail --title "\\n\\nEnvironmental variables setup (NGROK_LOCAL_CAMERA_ADDRESS)" --inputbox "\\n\\nEnter local camera address with video stream" "${r}" "${c}" "${NGROK_LOCAL_CAMERA_ADDRESS}" 3>&1 1>&2 2>&3)
   fi
 
-  printf "%b  %b Camera envs configured\\n" "${OVER}"  "${TICK}"
+  log_success "Camera envs configured"
 }
 
 welcome_dialog() {
@@ -304,13 +327,13 @@ welcome_dialog() {
 
 check_envs() {
   cd "$DEVICE_DIRECTORY"
-  printf "  %b Checking .env file\\n" "${INFO}"
+  log_info "Checking .env file"
 
   if [ -e $ENV_FILE ]; then
-    printf "%b  %b .env file exists\\n" "${OVER}"  "${TICK}"
+    log_success ".env file exists"
     check_required_env
   else
-    printf "  %b .env file not found. Creating new .env file\\n" "${INFO}"
+    log_info ".env file not found. Creating new .env file"
 
     whiptail --msgbox --title "Environmental variables setup" "\\n\\nIn the next steps, You will configure Smart Gate system variables.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_ENVS_LINK" "${r}" "${c}"
 
@@ -320,7 +343,7 @@ check_envs() {
     if (whiptail --title "Environmental variables setup (CAMERA_USAGE_ENABLED)" --yesno "\\n\\nCamera setup is optional.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_CAMERA_LINK.\\n\\nDo You want to setup your camera right now?" "${r}" "${c}"); then
       set_camera_envs
     else
-      printf "  %b Camera setup skipped\\n" "${INFO}"
+      log_info "Camera setup skipped"
     fi
 
     whiptail --title "Environmental variables setup" --msgbox "\\n\\nAll environmental variables configured successfully." "${r}" "${c}"
@@ -335,64 +358,64 @@ check_envs() {
       echo "NGROK_LOCAL_CAMERA_ADDRESS=$NGROK_LOCAL_CAMERA_ADDRESS"
     ) >> $ENV_FILE
 
-    printf "%b  %b .env file created\\n" "${OVER}"  "${TICK}"
+    log_success ".env file created"
     check_required_env
   fi
 }
 
 install_device_dependencies() {
   cd "$DEVICE_DIRECTORY"
-  printf "  %b Installing device dependencies\\n" "${INFO}"
+  log_info "Installing device dependencies"
   yarn install
-  printf "%b  %b Device dependencies installed\\n" "${OVER}"  "${TICK}"
+  log_success "Device dependencies installed"
 }
 
 start_device() {
-  printf "  %b Starting service\\n" "${INFO}"
+  log_info "Starting service"
   systemctl enable smart-gate
   systemctl start smart-gate
-  printf "%b  %b Service started\\n" "${OVER}"  "${TICK}"
-  printf "  %b To check service logs use \"cat /var/log/smart-gate-standard.log\" command\\n" "${INFO}"
-  printf "  %b To check service errors use \"cat /var/log/smart-gate-error.log\" command\\n" "${INFO}"
+  log_success "Service started"
+  log_yellow_info "To check service logs use \"cat /var/log/smart-gate-standard.log\" command"
+  log_yellow_info "To check service errors use \"cat /var/log/smart-gate-error.log\" command"
 }
 
 stop_service() {
-  printf "%b  %b Stopping service\\n" "${OVER}"  "${TICK}"
+  log_info "Stopping service"
   systemctl disable smart-gate
   systemctl stop smart-gate
-  printf "%b  %b Service stopped\\n" "${OVER}"  "${TICK}"
+  log_success "Service stopped"
 }
 
 restart_service() {
-  printf "  %b Restarting service\\n" "${INFO}"
+  log_info "Restarting service"
   stop_service
   start_device
-  printf "%b  %b Service restarted\\n" "${OVER}"  "${TICK}"
+  log_success "Service restarted"
 }
 
 check_service() {
-  printf "  %b Checking Systemd service\\n" "${INFO}"
+  log_info "Checking Systemd service"
 
   if [ -e "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" ]; then
-    printf "%b  %b Service file already exists\\n" "${OVER}"  "${TICK}"
+    log_success "Service file already exists"
 
-    printf "  %b Check is there a newer version of service config file\\n" "${INFO}"
+    log_info "Check is there a newer version of service config file"
     if ! (cmp --silent "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE") ; then
-      printf "%b  %b Found newer version of service config file\\n" "${OVER}"  "${TICK}"
+      log_success "Found newer version of service config file"
       if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate service config file available, do you want to update now? (Recommended)" "${r}" "${c}"); then
-        printf "  %b Updating service config file\\n" "${INFO}"
+        log_info "Updating service config file"
         rm "$SERVICES_DIRECTORY/$SG_SERVICE_FILE"
         cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
-        printf "%b  %b Service file updated\\n" "${OVER}"  "${TICK}"
+        log_success "Service file updated"
       fi
     fi
 
     restart_service
   else
-    printf "  %b Service file not found\\n" "${INFO}"
-    printf "  %b Creating service file\\n" "${INFO}"
+    log_info "Service file not found"
+    log_info "Creating service file"
     cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
-    printf "%b  %b Service file created\\n" "${OVER}"  "${TICK}"
+    log_success "Service file created"
     start_device
   fi
 }
