@@ -73,17 +73,12 @@ ASCII_SG_LOGO="
  █████ █      █ █   █ █   █    █       ████   █   █    █    █████
 "
 
+######## LOGGERS #########
+
 # A simple function that just echoes out Smart Gate logo in ASCII format
 # This lets users know that it is a Smart Gate script
 show_ascii_logo() {
   echo -e "$ASCII_SG_LOGO"
-}
-
-# Checks to see if the given command (passed as a string argument) exists on the system.
-# The function returns 0 (success) if the command exists, and 1 if it doesn't.
-is_command() {
-    local check_command="$1"
-    command -v "${check_command}" >/dev/null 2>&1
 }
 
 log_info() {
@@ -108,6 +103,15 @@ log_success() {
 
 log_error() {
   printf "%b  %b $1\\n" "${OVER}" "${CROSS}"
+}
+
+############
+
+# Checks to see if the given command (passed as a string argument) exists on the system.
+# The function returns 0 (success) if the command exists, and 1 if it doesn't.
+is_command() {
+    local check_command="$1"
+    command -v "${check_command}" >/dev/null 2>&1
 }
 
 check_privileges() {
