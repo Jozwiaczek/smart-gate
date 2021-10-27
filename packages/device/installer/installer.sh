@@ -105,6 +105,14 @@ log_error() {
   printf "%b  %b $1\\n" "${OVER}" "${CROSS}"
 }
 
+completed_successfully_dialog() {
+  whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\nInstallation completed successfully!\\n\\n\\n\\nIn order to check logs, in terminal enter command:\\n\\n    -  For standard logs: \"cat /var/log/smart-gate-standard.log\"\\n\\n    -  For errors: \"cat /var/log/smart-gate-error.log\"" "${r}" "${c}"
+}
+
+welcome_dialog() {
+  whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\n$ASCII_SG_LOGO\\n\\nThis installer will automatically configure Smart Gate system on this device!" "${r}" "${c}"
+}
+
 ############
 
 # Checks to see if the given command (passed as a string argument) exists on the system.
@@ -325,10 +333,6 @@ set_camera_envs() {
   log_success "Camera envs configured"
 }
 
-welcome_dialog() {
- whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\n$ASCII_SG_LOGO\\n\\n  This installer will automatically configure Smart Gate system on this device!" "${r}" "${c}"
-}
-
 check_envs() {
   cd "$DEVICE_DIRECTORY"
   log_info "Checking .env file"
@@ -434,6 +438,7 @@ main() {
   check_envs
   install_device_dependencies
   check_service
+  completed_successfully_dialog
 }
 
 main "$@"
