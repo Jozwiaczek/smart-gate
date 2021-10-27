@@ -216,7 +216,7 @@ checkRepository() {
 }
 
 checkUnusedFiles() {
-  cd "$DEVICE_DIRECTORY"
+  cd "$PROJECT_DIRECTORY"
   printf "  %b Checking unused files\\n" "${INFO}"
   local installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
   local found_files_to_remove_counter=0
