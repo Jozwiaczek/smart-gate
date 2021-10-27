@@ -220,6 +220,7 @@ checkUnusedFiles() {
   printf "  %b Checking unused files\\n" "${INFO}"
   local installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
   local found_files_to_remove_counter=0
+  echo "WORKING!!!"
 
   while IFS= read -r fileToRemove; do
     if [[ -f $fileToRemove || -d $fileToRemove ]]; then
