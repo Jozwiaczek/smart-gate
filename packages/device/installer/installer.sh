@@ -243,9 +243,10 @@ checkUnusedFiles() {
   fi
   echo "WORKING10"
 
-  read -p "$(printf "%b  %b There are %b unused files, do you want to delete them? (y/n)  %b\\n\\n" "${COL_LIGHT_YELLOW}" "${INFO}" "${found_files_to_remove_counter}" "${COL_NC}")" -n 1 -r
-  echo    # move to a new line
+  read -p "There are $found_files_to_remove_counter unused files, do you want to delete them? (y/n) \\n\\n" -n 1 -r
   echo "WORKING11"
+  echo    # move to a new line
+  echo "WORKING12"
 
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     printf "  %b Removing unused files\\n" "${INFO}"
