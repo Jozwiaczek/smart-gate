@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.18.0...v1.18.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* **client:** add index redirect from netlify plugin ([1319b7d](https://github.com/Jozwiaczek/smart-gate/commit/1319b7d1ceba2a0206b995c90d68d20d6bec9844))
+
 # [1.18.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.17.1...v1.18.0) (2021-10-27)
 
 
