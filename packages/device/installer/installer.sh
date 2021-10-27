@@ -54,7 +54,7 @@ OVER="\\r\\033[K"
 ### LINKS ###
 DOCS_DEVICE_ENVS_LINK="https://smart-gate-docs.vercel.app"
 DOCS_DEVICE_CAMERA_LINK="https://smart-gate-docs.vercel.app"
-INSTALLER_RAW_LINK="https://raw.githubusercontent.com/Jozwiaczek/smart-gate/feat(device)/add-bash-installer/packages/device/installer/installer.sh"
+INSTALLER_RAW_LINK="https://raw.githubusercontent.com/Jozwiaczek/smart-gate/main/packages/device/installer/installer.sh"
 REMOTE_REPOSITORY_LINK="https://github.com/Jozwiaczek/smart-gate.git"
 
 ############
@@ -200,8 +200,7 @@ check_yarn() {
 
 download_repository() {
   log_info "Downloading Smart Gate repository"
-#  git clone "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
-  git clone -b "feat(device)/add-bash-installer" "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
+  git clone "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
   log_success "Smart Gate repository downloaded"
 }
 
