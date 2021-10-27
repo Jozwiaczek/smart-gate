@@ -130,7 +130,7 @@ check_privileges() {
     fi
 }
 
-checkNodeJs() {
+check_node_js() {
   printf "  %b Checking Node.js version\\n" "${INFO}"
   if which node > /dev/null; then
     # Node.js already install, continue
@@ -147,7 +147,7 @@ checkNodeJs() {
   printf "%b  %b Node.js version is %b\\n" "${OVER}"  "${TICK}"  "${NODE_VERSION}"
 }
 
-checkYarn() {
+check_yarn() {
   printf "  %b Checking Yarn version\\n" "${INFO}"
   if which yarn > /dev/null; then
     printf "%b  %b Yarn already exists\\n" "${OVER}"  "${TICK}"
@@ -162,14 +162,14 @@ checkYarn() {
   printf "%b  %b Yarn version is %b\\n" "${OVER}"  "${TICK}"  "${YARN_VERSION}"
 }
 
-downloadRepository() {
+download_repository() {
   printf "  %b Downloading Smart Gate repository\\n" "${INFO}"
 #  git clone "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
   git clone -b "feat(device)/add-bash-installer" "$REMOTE_REPOSITORY_LINK" "$PROJECT_DIRECTORY"
   printf "%b  %b Smart Gate repository downloaded\\n" "${OVER}"  "${TICK}"
 }
 
-updateRepository() {
+update_repository() {
   cd "$PROJECT_DIRECTORY"
   local_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
   # shellcheck disable=SC1083
@@ -201,18 +201,18 @@ updateRepository() {
   fi
 }
 
-checkRepository() {
+check_repository() {
   printf "  %b Repository check\\n" "${INFO}"
   if [[ -d "$PROJECT_DIRECTORY" ]]; then
     printf "%b  %b Local repository found\\n" "${OVER}"  "${TICK}"
-    updateRepository
+    update_repository
   else
     printf "  %b Local repository not found\\n" "${INFO}"
-    downloadRepository
+    download_repository
   fi
 }
 
-checkUnusedFiles() {
+check_unused_files() {
   cd "$PROJECT_DIRECTORY"
   printf "  %b Checking unused files\\n" "${INFO}"
   installer_files_to_remove="${INSTALLER_DIRECTORY}/${FILES_TO_REMOVE_FILE}"
@@ -238,7 +238,7 @@ checkUnusedFiles() {
   fi
 }
 
-checkRequiredEnv() {
+check_required_env() {
   cd "$DEVICE_DIRECTORY"
   printf "  %b Checking required ENVs\\n" "${INFO}"
   local missing_envs=()
@@ -261,7 +261,7 @@ checkRequiredEnv() {
   printf "%b  %b All required envs have been found\\n" "${OVER}"  "${TICK}"
 }
 
-setCameraEnvs() {
+set_camera_envs() {
   printf "  %b Configuring camera envs\\n" "${INFO}"
 
   CAMERA_USAGE_ENABLED="true"
@@ -298,17 +298,17 @@ setCameraEnvs() {
   printf "%b  %b Camera envs configured\\n" "${OVER}"  "${TICK}"
 }
 
-welcomeDialog() {
+welcome_dialog() {
  whiptail --msgbox --title "Smart Gate Device Installer" "\\n\\n$ASCII_SG_LOGO\\n\\n  This installer will automatically configure Smart Gate system on this device!" "${r}" "${c}"
 }
 
-checkEnvs() {
+check_envs() {
   cd "$DEVICE_DIRECTORY"
   printf "  %b Checking .env file\\n" "${INFO}"
 
   if [ -e $ENV_FILE ]; then
     printf "%b  %b .env file exists\\n" "${OVER}"  "${TICK}"
-    checkRequiredEnv
+    check_required_env
   else
     printf "  %b .env file not found. Creating new .env file\\n" "${INFO}"
 
@@ -318,7 +318,7 @@ checkEnvs() {
     AUTH_TICKET=$(whiptail --title "Environmental variables setup (AUTH_TICKET)" --passwordbox "\\n\\nEnter your Auth ticket. It should be same value as for server env." "${r}" "${c}" "${AUTH_TICKET}" 3>&1 1>&2 2>&3)
 
     if (whiptail --title "Environmental variables setup (CAMERA_USAGE_ENABLED)" --yesno "\\n\\nCamera setup is optional.\\n\\nFor more details check Smart Gate documentation site:\\n$DOCS_DEVICE_CAMERA_LINK.\\n\\nDo You want to setup your camera right now?" "${r}" "${c}"); then
-      setCameraEnvs
+      set_camera_envs
     else
       printf "  %b Camera setup skipped\\n" "${INFO}"
     fi
@@ -336,18 +336,18 @@ checkEnvs() {
     ) >> $ENV_FILE
 
     printf "%b  %b .env file created\\n" "${OVER}"  "${TICK}"
-    checkRequiredEnv
+    check_required_env
   fi
 }
 
-installDeviceDependencies() {
+install_device_dependencies() {
   cd "$DEVICE_DIRECTORY"
   printf "  %b Installing device dependencies\\n" "${INFO}"
   yarn install
   printf "%b  %b Device dependencies installed\\n" "${OVER}"  "${TICK}"
 }
 
-startService() {
+start_device() {
   printf "  %b Starting service\\n" "${INFO}"
   systemctl enable smart-gate
   systemctl start smart-gate
@@ -356,21 +356,21 @@ startService() {
   printf "  %b To check service errors use \"cat /var/log/smart-gate-error.log\" command\\n" "${INFO}"
 }
 
-stopService() {
+stop_service() {
   printf "%b  %b Stopping service\\n" "${OVER}"  "${TICK}"
   systemctl disable smart-gate
   systemctl stop smart-gate
   printf "%b  %b Service stopped\\n" "${OVER}"  "${TICK}"
 }
 
-restartService() {
+restart_service() {
   printf "  %b Restarting service\\n" "${INFO}"
-  stopService
-  startService
+  stop_service
+  start_device
   printf "%b  %b Service restarted\\n" "${OVER}"  "${TICK}"
 }
 
-checkService() {
+check_service() {
   printf "  %b Checking Systemd service\\n" "${INFO}"
 
   if [ -e "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" ]; then
@@ -387,26 +387,26 @@ checkService() {
       fi
     fi
 
-    restartService
+    restart_service
   else
     printf "  %b Service file not found\\n" "${INFO}"
     printf "  %b Creating service file\\n" "${INFO}"
     cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
     printf "%b  %b Service file created\\n" "${OVER}"  "${TICK}"
-    startService
+    start_device
   fi
 }
 
 main() {
   check_privileges "$@"
-  welcomeDialog
-  checkNodeJs
-  checkYarn
-  checkRepository
-  checkUnusedFiles
-  checkEnvs
-  installDeviceDependencies
-  checkService
+  welcome_dialog
+  check_node_js
+  check_yarn
+  check_repository
+  check_unused_files
+  check_envs
+  install_device_dependencies
+  check_service
 }
 
 main "$@"
