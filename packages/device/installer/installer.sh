@@ -6,6 +6,10 @@
 set -e
 set -x
 
+# Append common folders to the PATH to ensure that all basic commands are available.
+# When using "su" an incomplete PATH could be passed: https://github.com/pi-hole/pi-hole/issues/3209
+export PATH+=':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
 ######## VARIABLES #########
 # For better maintainability, we store as much information that can change in variables
 # This allows us to make a change in one place that can propagate to all instances of the variable
