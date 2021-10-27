@@ -62,15 +62,16 @@ REMOTE_REPOSITORY_LINK="https://github.com/Jozwiaczek/smart-gate.git"
 
 ### WHIPTAIL ###
 # Dialog dimensions
+# 20 rows and 70 chars width assures to fit on small screens and is known to hold all content.
 r=20
-c=90
+c=70
 
 ASCII_SG_LOGO="
-  ███████ ███    ███  █████  ██████  ████████    ██████   █████  ████████ ███████
-  ██      ████  ████ ██   ██ ██   ██    ██      ██       ██   ██    ██    ██
-  ███████ ██ ████ ██ ███████ ██████     ██     ██   ███ ███████    ██    █████
-       ██ ██  ██  ██ ██   ██ ██   ██    ██      ██    ██ ██   ██    ██    ██
-  ███████ ██      ██ ██   ██ ██   ██    ██       ██████  ██   ██    ██    ███████
+ █████ ██    ██  ███  ████  ███████    █████   ███  ███████ █████
+ █     ███  ███ █   █ █   █    █      █       █   █    █    █
+ █████ █  ██  █ █████ ████     █     █   ██   █████    █    ████
+     █ █      █ █   █ █   █    █      █    █  █   █    █    █
+ █████ █      █ █   █ █   █    █       ████   █   █    █    █████
 "
 
 # A simple function that just echoes out Smart Gate logo in ASCII format
