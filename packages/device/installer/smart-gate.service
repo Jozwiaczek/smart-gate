@@ -4,7 +4,7 @@ After = network.target
 StartLimitIntervalSec = 0
 
 [Service]
-ExecStart = yarn --cwd ~/smart-gate/packages/device start
+ExecStart = yarn --cwd /home/pi/smart-gate/packages/device start
 StandardOutput = append:/var/log/smart-gate-standard.log
 StandardError = append:/var/log/smart-gate-error.log
 Restart = always

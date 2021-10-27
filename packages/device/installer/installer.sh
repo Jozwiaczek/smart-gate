@@ -12,8 +12,7 @@ set -e
 # Local variables will be in lowercase and will exist only within functions
 
 ### PATHS ###
-SCRIPT_USER=$( [ "$SUDO_USER" == "" ] && echo "$USER" || echo "$SUDO_USER" )
-HOME_DIRECTORY=$( eval echo ~"$SCRIPT_USER" )
+HOME_DIRECTORY="/home/pi"
 PROJECT_DIRECTORY="${HOME_DIRECTORY}/smart-gate"
 DEVICE_DIRECTORY="${PROJECT_DIRECTORY}/packages/device"
 INSTALLER_DIRECTORY="${DEVICE_DIRECTORY}/installer"
@@ -185,7 +184,7 @@ updateRepository() {
     return
   fi
 
-  if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version available, do you want to update now?" "${r}" "${c}"); then
+  if (whiptail --title "Repository update" --yesno "\\n\\nThere is a new version available, do you want to update now? (Recommended)" "${r}" "${c}"); then
     printf "  %b Updating local repository\\n" "${INFO}"
 
     if git merge-base --is-ancestor HEAD "$remote_branch"; then
@@ -230,7 +229,7 @@ checkUnusedFiles() {
       return
   fi
 
-  if (whiptail --title "Removing unused files" --yesno "\\n\\nThere are $found_files_to_remove_counter unused files, do you want to delete them?" "${r}" "${c}"); then
+  if (whiptail --title "Removing unused files" --yesno "\\n\\nThere are $found_files_to_remove_counter unused files, do you want to delete them? (Recommended)" "${r}" "${c}"); then
     printf "  %b Removing unused files\\n" "${INFO}"
     xargs rm -rf < "$installer_files_to_remove"
     printf "%b  %b %b unused files removed\\n" "${OVER}"  "${TICK}" "${found_files_to_remove_counter}"
@@ -376,7 +375,11 @@ checkService() {
 
   if [ -e "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" ]; then
       printf "%b  %b Service file already exists\\n" "${OVER}"  "${TICK}"
-      if systemctl is-active --quiet smart-gate ; then
+
+      local -r isNewerVersion=$(! cmp --silent "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE")
+      local -r isActive=$(systemctl is-active --quiet smart-gate)
+
+      if [[ "$isActive" || "$isEqualToRemote" ]] ; then
         restartService
       else
         startService
