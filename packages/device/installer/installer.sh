@@ -376,11 +376,14 @@ checkService() {
   if [ -e "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" ]; then
     printf "%b  %b Service file already exists\\n" "${OVER}"  "${TICK}"
 
-    # Check is there a newer version of the service
+    printf "  %b Check is there a newer version of service config file\\n" "${INFO}"
     if ! (cmp --silent "$SERVICES_DIRECTORY/$SG_SERVICE_FILE" "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE") ; then
-      if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate systemd service available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+      printf "%b  %b Found newer version of service config file\\n" "${OVER}"  "${TICK}"
+      if (whiptail --title "Systemd Service Update" --yesno "\\n\\nThere is a new version of Smart Gate service config file available, do you want to update now? (Recommended)" "${r}" "${c}"); then
+        printf "  %b Updating service config file\\n" "${INFO}"
         rm "$SERVICES_DIRECTORY/$SG_SERVICE_FILE"
         cp "$INSTALLER_DIRECTORY/$SG_SERVICE_FILE" $SERVICES_DIRECTORY
+        printf "%b  %b Service file updated\\n" "${OVER}"  "${TICK}"
       fi
     fi
 
