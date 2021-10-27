@@ -5,10 +5,6 @@
 # instead of continuing the installation with something broken
 set -e
 
-# Append common folders to the PATH to ensure that all basic commands are available.
-# When using "su" an incomplete PATH could be passed: https://github.com/pi-hole/pi-hole/issues/3209
-export PATH+=':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-
 ######## VARIABLES #########
 # For better maintainability, we store as much information that can change in variables
 # This allows us to make a change in one place that can propagate to all instances of the variable
@@ -16,7 +12,8 @@ export PATH+=':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 # Local variables will be in lowercase and will exist only within functions
 
 ### PATHS ###
-HOME_DIRECTORY=~pi
+SCRIPT_USER=$( [ "$SUDO_USER" == "" ] && echo "$USER" || echo "$SUDO_USER" )
+HOME_DIRECTORY=$( eval echo ~"$SCRIPT_USER" )
 PROJECT_DIRECTORY="${HOME_DIRECTORY}/smart-gate"
 DEVICE_DIRECTORY="${PROJECT_DIRECTORY}/packages/device"
 INSTALLER_DIRECTORY="${DEVICE_DIRECTORY}/installer"
