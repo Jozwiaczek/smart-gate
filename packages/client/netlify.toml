@@ -10,8 +10,3 @@
 
 [[plugins]]
   package = "/plugins/netlify-plugin-customize-sg-redirects"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
