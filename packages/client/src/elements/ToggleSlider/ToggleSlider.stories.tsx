@@ -1,16 +1,19 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import ToggleSlider from '.';
+import { ToggleSliderProps } from './ToggleSlider.types';
 
 export default {
   title: 'Elements/Toggle Slider',
   component: ToggleSlider,
 } as Meta;
 
-const Template: Story = () => {
-  const toggleGate = () => console.log('toggled');
-  return <ToggleSlider onToggle={toggleGate} />;
+const Template: Story<ToggleSliderProps> = (args) => {
+  return <ToggleSlider {...args} />;
 };
 
 export const Default = Template.bind({});
+Default.args = {
+  onToggle: () => console.log('toggled'),
+};
