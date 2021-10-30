@@ -12,7 +12,7 @@ export const infoBoxZoomInOut = keyframes`
   }
 `;
 
-export const keyIconTick = keyframes`
+export const verticalKeyIconTick = keyframes`
   0% {
     transform: rotate(90deg);
   }

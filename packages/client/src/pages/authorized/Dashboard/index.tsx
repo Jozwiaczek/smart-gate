@@ -37,6 +37,7 @@ const Dashboard = () => {
     <>
       <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
       <RowSection>
+        <DeviceSections />
         {isConnected ? (
           <DeviceSections />
         ) : (

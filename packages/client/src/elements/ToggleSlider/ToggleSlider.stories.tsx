@@ -15,5 +15,6 @@ const Template: Story<ToggleSliderProps> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
+  orientation: 'horizontal',
   onToggle: () => console.log('toggled'),
 };

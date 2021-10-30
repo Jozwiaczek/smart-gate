@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components';
 
+import { DetailedKeyIcon } from '../../icons';
 import { PulseCircle } from './components/PulsatingCircles/PulsatingCircles.styled';
-import { hidePulsatingCircles, infoBoxZoomInOut, keyIconTick } from './ToggleSlider.animations';
+import {
+  hidePulsatingCircles,
+  infoBoxZoomInOut,
+  verticalKeyIconTick,
+} from './ToggleSlider.animations';
 import {
   ARROW_UP_BORDER_SIZE,
   COMPLETED_TOGGLING_ANIMATION_DURATION,
@@ -12,6 +17,7 @@ import {
 } from './ToggleSlider.constants';
 import {
   ArrowUpProps,
+  BaseSliderStylesProps,
   InfoBoxLabelProps,
   InfoBoxProps,
   SliderThumbProps,
@@ -58,29 +64,30 @@ export const InfoBoxLabel = styled.p<InfoBoxLabelProps>(
   `,
 );
 
-export const SliderTarget = styled.div(
-  ({ theme: { palette } }) => css`
+export const SliderTarget = styled.div<BaseSliderStylesProps>(
+  ({ theme: { palette }, isHorizontal }) => css`
     background: ${palette.background.paperHover};
     border-radius: 100%;
     color: ${palette.background.paper};
     height: ${SLIDER_TARGET_SIZE}px;
     width: ${SLIDER_TARGET_SIZE}px;
     display: flex;
-    margin-top: 10px;
+    margin: ${isHorizontal ? '0 10px 0 0' : '10px 0 0 0'};
     justify-content: center;
     align-items: center;
     position: relative;
   `,
 );
 
-export const ArrowUp = styled.div<ArrowUpProps>(
-  ({ isDragging, theme: { palette } }) => css`
+export const HintArrow = styled.div<ArrowUpProps>(
+  ({ isDragging, isHorizontal, theme: { palette } }) => css`
     width: 30px;
     height: 30px;
     box-sizing: border-box;
     position: absolute;
-    top: 30px;
-    transform: rotate(-45deg);
+    top: ${isHorizontal ? '26px' : '30px'};
+    left: ${isHorizontal ? '20px' : 'none'};
+    transform: rotate(${isHorizontal ? '45deg' : '-45deg'});
 
     &::before {
       content: '';
@@ -141,7 +148,7 @@ export const ThumbCircle = styled.div<ThumbCircleProps>(
 
     ${isToggled &&
     css`
-      animation: ${keyIconTick} ${COMPLETED_TOGGLING_ANIMATION_DURATION}ms 1 ease-in-out;
+      animation: ${verticalKeyIconTick} ${COMPLETED_TOGGLING_ANIMATION_DURATION}ms 1 ease-in-out;
     `}
 
     ${isSnapped
@@ -177,17 +184,25 @@ export const SliderThumb = styled.div<SliderThumbProps>(
   `,
 );
 
-export const Slider = styled.div(
-  ({ theme: { palette } }) => css`
+export const Slider = styled.div<BaseSliderStylesProps>(
+  ({ theme: { palette }, isHorizontal }) => css`
     background: ${palette.background.paper};
-    width: ${SLIDER_WIDTH}px;
-    height: ${SLIDER_HEIGHT}px;
-    border-radius: ${SLIDER_WIDTH / 2}px;
+    width: ${isHorizontal ? SLIDER_HEIGHT : SLIDER_WIDTH}px;
+    height: ${isHorizontal ? SLIDER_WIDTH : SLIDER_HEIGHT}px;
+    border-radius: ${(isHorizontal ? SLIDER_HEIGHT : SLIDER_WIDTH) / 2}px;
     display: flex;
-    flex-direction: column;
+    flex-direction: ${isHorizontal ? 'row-reverse' : 'column'};
     position: relative;
     align-items: center;
     justify-content: space-between;
     box-shadow: ${palette.boxShadow.default};
   `,
+);
+
+export const StyledDetailedKeyIcon = styled(DetailedKeyIcon)<BaseSliderStylesProps>(
+  ({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      transform: scale(-1, 1) rotate(90deg);
+    `,
 );
