@@ -199,9 +199,9 @@ export const Slider = styled.div<BaseSliderStylesProps>(
   `,
 );
 
-export const StyledDetailedKeyIcon = styled(DetailedKeyIcon)<BaseSliderStylesProps>(
-  ({ isHorizontal }) =>
-    isHorizontal &&
+export const StyledDetailedKeyIcon = styled(DetailedKeyIcon)<{ $isHorizontal: boolean }>(
+  ({ $isHorizontal }) =>
+    $isHorizontal &&
     css`
       transform: scale(-1, 1) rotate(90deg);
     `,

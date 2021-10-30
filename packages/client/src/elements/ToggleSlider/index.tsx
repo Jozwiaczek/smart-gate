@@ -150,7 +150,7 @@ const ToggleSlider = ({ onToggle, orientation = 'vertical' }: ToggleSliderProps)
               rotateDegree={keyIconRotateDegree}
               isToggled={isToggleLoadingCompleted}
             >
-              <StyledDetailedKeyIcon isHorizontal={isHorizontal} />
+              <StyledDetailedKeyIcon $isHorizontal={isHorizontal} />
             </ThumbCircle>
             <ProgressCircle
               progress={toggleLoadingProgress}
