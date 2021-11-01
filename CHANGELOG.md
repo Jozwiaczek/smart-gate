@@ -1,3 +1,11 @@
+# [1.19.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.18.1...v1.19.0) (2021-11-01)
+
+
+### Features
+
+* **client:** add ToggleSlider horizontal variant and handle duration prop for loading animation ([c5322b9](https://github.com/Jozwiaczek/smart-gate/commit/c5322b98617bb486f5a8a48edf68134c33027e34))
+* **client:** adjust dashboard margins for layout with camera preview ([cd42676](https://github.com/Jozwiaczek/smart-gate/commit/cd42676f2de5a4b6adaa821c678ee7da15288569))
+
 ## [1.18.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.18.0...v1.18.1) (2021-10-27)
 
 
