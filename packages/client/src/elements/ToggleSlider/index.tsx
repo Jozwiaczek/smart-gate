@@ -3,7 +3,6 @@ import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { useTranslation } from 'react-i18next';
 import useSound from 'use-sound';
 
-import { DetailedKeyIcon } from '../../icons';
 import mountSfx from '../../sounds/mount.mp3';
 import unlockSfx from '../../sounds/unlock.mp3';
 import unmountSfx from '../../sounds/unmount.mp3';
@@ -13,27 +12,26 @@ import useResetSlider from './hooks/useResetSlider';
 import useToggleLoading from './hooks/useToggleLoading';
 import {
   AFTER_SUCCESS_INFO_DISPLAY_DURATION,
-  DEFAULT_THUMB_Y,
+  INITIAL_THUMB_POSITION,
   SLIDE_PROGRESS_MAX,
   SLIDE_PROGRESS_MIN,
   SLIDER_HEIGHT,
   SLIDER_WIDTH,
 } from './ToggleSlider.constants';
 import {
-  ArrowUp,
+  HintArrow,
   InfoBox,
   InfoBoxLabel,
   Slider,
   SliderTarget,
   SliderThumb,
+  StyledDetailedKeyIcon,
   ThumbCircle,
   Wrapper,
 } from './ToggleSlider.styled';
 import { InfoBoxState, ToggleSliderProps } from './ToggleSlider.types';
 
-const THUMB_Y_TARGET = -(SLIDER_HEIGHT - SLIDER_WIDTH);
-
-const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
+const ToggleSlider = ({ onToggle, orientation = 'vertical' }: ToggleSliderProps) => {
   const { t } = useTranslation();
   const [playMountSfx] = useSound(mountSfx);
   const [playUnmountSfx] = useSound(unmountSfx);
@@ -41,9 +39,14 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
   const draggableSliderThumbRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isSnapped, setIsSnapped] = useState(false);
-  const [thumbYPosition, setThumbYPosition] = useState(DEFAULT_THUMB_Y);
+  const [thumbPosition, setThumbPosition] = useState(INITIAL_THUMB_POSITION);
   const [slideProgress, setSlideProgress] = useState(SLIDE_PROGRESS_MIN);
   const [infoBoxState, setInfoBoxState] = useState<InfoBoxState>('default');
+  const isHorizontal = orientation === 'horizontal';
+
+  const targetThumbPosition = isHorizontal
+    ? -(SLIDER_WIDTH - SLIDER_HEIGHT)
+    : -(SLIDER_HEIGHT - SLIDER_WIDTH);
 
   const onCompleteSliderReset = useCallback(() => {
     if (infoBoxState === 'success') {
@@ -58,8 +61,9 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
   }, [infoBoxState]);
 
   const { resetSlider } = useResetSlider({
-    thumbYPosition,
-    setThumbYPosition,
+    isHorizontal,
+    thumbPosition,
+    setThumbPosition,
     slideProgress,
     setSlideProgress,
     onComplete: onCompleteSliderReset,
@@ -76,11 +80,15 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
     onComplete: onCompleteToggleLoading,
   });
 
-  const handleDragging = useCallback((event: DraggableEvent, { y }: DraggableData) => {
-    setThumbYPosition(y);
-    const newSlideProgress = Math.abs(y / THUMB_Y_TARGET) * 100;
-    setSlideProgress(newSlideProgress);
-  }, []);
+  const handleDragging = useCallback(
+    (event: DraggableEvent, { y, x }: DraggableData) => {
+      const newThumbPosition = isHorizontal ? x : y;
+      setThumbPosition(newThumbPosition);
+      const newSlideProgress = Math.abs(newThumbPosition / targetThumbPosition) * 100;
+      setSlideProgress(newSlideProgress);
+    },
+    [isHorizontal, targetThumbPosition],
+  );
 
   const handleDragStart = useCallback(() => {
     setIsDragging(true);
@@ -91,13 +99,13 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
     setIsDragging(false);
     if (slideProgress === SLIDE_PROGRESS_MAX) {
       playMountSfx();
-      setThumbYPosition(THUMB_Y_TARGET);
+      setThumbPosition(targetThumbPosition);
       setIsSnapped(true);
       runToggleLoading();
       return;
     }
     resetSlider(0);
-  }, [playMountSfx, resetSlider, runToggleLoading, slideProgress]);
+  }, [playMountSfx, resetSlider, runToggleLoading, slideProgress, targetThumbPosition]);
 
   const keyIconRotateDegree = useMemo(
     () => (90 * slideProgress) / SLIDE_PROGRESS_MAX,
@@ -108,7 +116,7 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
     if (infoBoxState === 'success') {
       return t('routes.dashboard.sections.toggling.toggleSuccess');
     }
-    return t('routes.dashboard.sections.toggling.swipeUpToToggle');
+    return t('routes.dashboard.sections.toggling.swipeToToggle');
   }, [infoBoxState, t]);
 
   return (
@@ -116,17 +124,17 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
       <InfoBox state={infoBoxState}>
         <InfoBoxLabel state={infoBoxState}>{infoBoxMessage}</InfoBoxLabel>
       </InfoBox>
-      <Slider>
-        <SliderTarget>
-          <ArrowUp isDragging={isDragging} />
+      <Slider isHorizontal={isHorizontal}>
+        <SliderTarget isHorizontal={isHorizontal}>
+          <HintArrow isDragging={isDragging} isHorizontal={isHorizontal} />
         </SliderTarget>
         <Draggable
-          axis="y"
+          axis={isHorizontal ? 'x' : 'y'}
           handle=".handle"
           nodeRef={draggableSliderThumbRef}
           bounds="parent"
           disabled={isSnapped}
-          position={{ x: 0, y: thumbYPosition }}
+          position={isHorizontal ? { x: thumbPosition, y: 0 } : { x: 0, y: thumbPosition }}
           onStart={handleDragStart}
           onDrag={handleDragging}
           onStop={handleDragStop}
@@ -142,7 +150,7 @@ const ToggleSlider = ({ onToggle }: ToggleSliderProps) => {
               rotateDegree={keyIconRotateDegree}
               isToggled={isToggleLoadingCompleted}
             >
-              <DetailedKeyIcon />
+              <StyledDetailedKeyIcon $isHorizontal={isHorizontal} />
             </ThumbCircle>
             <ProgressCircle
               progress={toggleLoadingProgress}

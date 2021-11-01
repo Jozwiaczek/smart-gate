@@ -9,4 +9,4 @@
   command = "yarn build"
 
 [[plugins]]
-  package = "/plugins/netlify-plugin-customize-sg-redirects"
+  package = "/plugins/netlify-plugin-sg-redirects"

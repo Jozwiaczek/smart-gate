@@ -91,7 +91,7 @@ const pl: TranslationStructure = {
             loadingPreview: 'Ładowanie podglądu...',
           },
           toggling: {
-            swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
+            swipeToToggle: 'Przesuń aby aktywować bramę',
             toggleSuccess: 'Aktywowano bramę',
             gateDisconnected: {
               title: 'Brama rozłączona',

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import React, { MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 
