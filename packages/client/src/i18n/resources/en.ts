@@ -89,7 +89,7 @@ const en = {
             loadingPreview: 'Loading camera preview...',
           },
           toggling: {
-            swipeUpToToggle: 'Swipe up to toggle gate',
+            swipeToToggle: 'Swipe to toggle gate',
             toggleSuccess: 'Successfully toggled',
             gateDisconnected: {
               title: 'Gate disconnected',

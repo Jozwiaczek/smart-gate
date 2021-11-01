@@ -5,7 +5,7 @@ import { ConnectionState } from '../../../enums/connectionState.enum';
 import { DeviceStatus } from '../../../enums/deviceStatus.enum';
 import { useAxios } from '../../../hooks';
 import { WebSocketContext } from '../../../providers/api/WebSocketProvider/WebSocketProvider.context';
-import { registerWebPush } from '../../../utils';
+import { isCameraPreviewEnabled, registerWebPush } from '../../../utils';
 import { Title } from '../AuthorizedPages.styled';
 import { RowSection } from './Dashboard.styled';
 import CameraPreviewSection from './sections/CameraPreviewSection';
@@ -36,7 +36,7 @@ const Dashboard = () => {
   return (
     <>
       <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
-      <RowSection>
+      <RowSection isCameraMode={isCameraPreviewEnabled()}>
         {isConnected ? (
           <DeviceSections />
         ) : (

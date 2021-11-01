@@ -11,12 +11,19 @@ interface SliderThumbProps {
   disabledPulsing: boolean;
 }
 
-interface ArrowUpProps {
+interface ArrowUpProps extends BaseSliderStylesProps {
   isDragging: boolean;
 }
 
+type ToggleSliderOrientation = 'vertical' | 'horizontal';
+
 interface ToggleSliderProps {
   onToggle: () => void;
+  orientation?: ToggleSliderOrientation;
+}
+
+interface BaseSliderStylesProps {
+  isHorizontal: boolean;
 }
 
 type InfoBoxState = 'default' | 'success';
@@ -31,11 +38,13 @@ interface InfoBoxLabelProps {
 
 interface UseTogglingProgressProps {
   onComplete: () => unknown;
+  duration?: number;
 }
 
 interface UseResetSliderProps {
-  thumbYPosition: number;
-  setThumbYPosition: Dispatch<SetStateAction<number>>;
+  isHorizontal: boolean;
+  thumbPosition: number;
+  setThumbPosition: Dispatch<SetStateAction<number>>;
   slideProgress: number;
   setSlideProgress: Dispatch<SetStateAction<number>>;
   onComplete: () => unknown;

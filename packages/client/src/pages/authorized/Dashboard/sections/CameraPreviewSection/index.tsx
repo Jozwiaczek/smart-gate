@@ -2,6 +2,7 @@ import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAxios } from '../../../../../hooks';
+import { isCameraPreviewEnabled } from '../../../../../utils';
 import { CameraPreview, LoadingContainer, LoadingContent } from './CameraPreviewSection.styled';
 
 const CameraPreviewSection = () => {
@@ -30,7 +31,7 @@ const CameraPreviewSection = () => {
     };
   }, [cameraURL, reloadCameraPreview]);
 
-  if (process.env.REACT_APP_CAMERA_PREVIEW_ENABLED !== 'true') {
+  if (!isCameraPreviewEnabled()) {
     return null;
   }
 
