@@ -116,7 +116,7 @@ const ToggleSlider = ({ onToggle, orientation = 'vertical' }: ToggleSliderProps)
     if (infoBoxState === 'success') {
       return t('routes.dashboard.sections.toggling.toggleSuccess');
     }
-    return t('routes.dashboard.sections.toggling.swipeUpToToggle');
+    return t('routes.dashboard.sections.toggling.swipeToToggle');
   }, [infoBoxState, t]);
 
   return (
