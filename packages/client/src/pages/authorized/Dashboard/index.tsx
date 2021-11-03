@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { CircleLoader } from '../../../elements';
 import { ConnectionState } from '../../../enums/connectionState.enum';
 import { DeviceStatus } from '../../../enums/deviceStatus.enum';
 import { useAxios } from '../../../hooks';
@@ -21,27 +22,31 @@ const Dashboard = () => {
     () => connectionState === ConnectionState.CONNECTED && deviceStatus === DeviceStatus.CONNECTED,
     [connectionState, deviceStatus],
   );
+  //  const isLoading = connectionState === ConnectionState.CONNECTING;
+  const isLoading = true;
 
   useEffect(() => {
     void registerWebPush(axios);
   }, [axios]);
 
-  const DeviceSections = () => (
-    <>
-      <TogglingSection />
-      <CameraPreviewSection />
-    </>
-  );
+  const DeviceSections = () => {
+    if (!isConnected) {
+      return <GateDisconnected connectionState={connectionState} deviceStatus={deviceStatus} />;
+    }
+
+    return (
+      <>
+        <TogglingSection />
+        <CameraPreviewSection />
+      </>
+    );
+  };
 
   return (
     <>
       <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
       <RowSection isCameraMode={isCameraPreviewEnabled()}>
-        {isConnected ? (
-          <DeviceSections />
-        ) : (
-          <GateDisconnected connectionState={connectionState} deviceStatus={deviceStatus} />
-        )}
+        {isLoading ? <CircleLoader label="routes.dashboard.connecting" /> : <DeviceSections />}
       </RowSection>
     </>
   );

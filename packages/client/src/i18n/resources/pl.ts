@@ -85,6 +85,7 @@ const pl: TranslationStructure = {
       },
       dashboard: {
         title: 'Pulpit',
+        connecting: 'Łączenie...',
         sections: {
           camera: {
             title: 'Podgląd kamery',
