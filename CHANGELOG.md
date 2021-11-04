@@ -1,3 +1,16 @@
+# [1.20.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.19.0...v1.20.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **client:** thunder styled-component isLarge prop ([ee87f2f](https://github.com/Jozwiaczek/smart-gate/commit/ee87f2f028f4c41004aa3acc953eaac67b2c2c52))
+
+
+### Features
+
+* **client:** add camera preview loader ([007628b](https://github.com/Jozwiaczek/smart-gate/commit/007628b3197ca462868a169655abaa5a24399c02))
+* **client:** add dashboard circle loader and adjust hygen scripts ([a9fa596](https://github.com/Jozwiaczek/smart-gate/commit/a9fa596a4153bab75198cce9720378f20c539998))
+
 # [1.19.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.18.1...v1.19.0) (2021-11-01)
 
 
