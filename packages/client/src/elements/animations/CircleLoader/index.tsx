@@ -20,7 +20,7 @@ const CircleLoader = ({ variant, label }: CircleLoaderProps) => {
       <BackgroundCircle size={size} />
       <Indicator size={size} />
       <ContentWrapper>
-        <Thunder isLarge={isLarge} />
+        <Thunder $isLarge={isLarge} />
         {isLarge && label && <Label>{t(label)}</Label>}
       </ContentWrapper>
     </Wrapper>

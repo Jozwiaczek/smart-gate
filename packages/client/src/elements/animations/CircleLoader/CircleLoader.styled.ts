@@ -50,9 +50,9 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Thunder = styled(ThunderIcon)<ThunderProps>(
-  ({ isLarge }) => css`
-    width: ${isLarge ? 106 : 52}px;
-    height: ${isLarge ? 64 : 32}px;
+  ({ $isLarge }) => css`
+    width: ${$isLarge ? 106 : 52}px;
+    height: ${$isLarge ? 64 : 32}px;
   `,
 );
 

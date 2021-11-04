@@ -8,5 +8,5 @@ interface CircleLoaderProps {
 }
 
 interface ThunderProps {
-  isLarge: boolean;
+  $isLarge: boolean;
 }
