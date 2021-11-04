@@ -10,13 +10,14 @@ export const RowSection = styled.div<RowSectionProps>(
     flex-wrap: wrap;
     gap: 100px;
     margin: ${isCameraMode ? '32px 0 20px' : '80px 0 20px'};
+    width: 100%;
 
-    ${down(breakpoints.md)} {
+    ${down(breakpoints.sm)} {
       gap: 0;
       align-items: center;
       flex-direction: column-reverse;
       & > :not(:first-child) {
-        margin-bottom: ${isCameraMode ? '16px' : '50px'};
+        margin-bottom: 50px;
       }
     }
   `,

@@ -1,9 +1,15 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { CircleLoader } from '../../../../../elements';
 import { useAxios } from '../../../../../hooks';
 import { isCameraPreviewEnabled } from '../../../../../utils';
-import { CameraPreview, LoadingContainer, LoadingContent } from './CameraPreviewSection.styled';
+import {
+  CameraPreview,
+  LoadingContainer,
+  LoadingLabel,
+  Wrapper,
+} from './CameraPreviewSection.styled';
 
 const CameraPreviewSection = () => {
   const cameraURL = process.env.REACT_APP_API_URL && `${process.env.REACT_APP_API_URL}/camera`;
@@ -36,12 +42,11 @@ const CameraPreviewSection = () => {
   }
 
   return (
-    <div>
+    <Wrapper>
       {!isPreviewLoaded && (
         <LoadingContainer>
-          <LoadingContent>
-            <h3>{t('routes.dashboard.sections.camera.loadingPreview')}</h3>
-          </LoadingContent>
+          <CircleLoader variant="small" />
+          <LoadingLabel>{t('routes.dashboard.sections.camera.loadingPreview')}</LoadingLabel>
         </LoadingContainer>
       )}
       <CameraPreview
@@ -52,7 +57,7 @@ const CameraPreviewSection = () => {
           setIsPreviewLoaded(true);
         }}
       />
-    </div>
+    </Wrapper>
   );
 };
 

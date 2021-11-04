@@ -9,3 +9,5 @@ _templates/
 .eslintcache
 coverage
 www/.docusaurus/
+storybook-static/
+.DS_Store

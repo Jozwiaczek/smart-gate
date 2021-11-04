@@ -83,6 +83,7 @@ const en = {
       },
       dashboard: {
         title: 'Dashboard',
+        connecting: 'Connecting...',
         sections: {
           camera: {
             title: 'Camera preview',
