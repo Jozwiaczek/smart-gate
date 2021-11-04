@@ -1,31 +1,43 @@
 import styled, { css } from 'styled-components';
 
+import { baseCircleLoaderLabel } from '../../../../../elements/animations/CircleLoader/CircleLoader.styled';
+
+export const Wrapper = styled.div(
+  ({ theme: { down, breakpoints } }) => css`
+    width: 100%;
+    display: flex;
+
+    ${down(breakpoints.sm)} {
+      justify-content: center;
+    }
+  `,
+);
+
 export const LoadingContainer = styled.div(
   ({ theme: { palette, sizes, down, breakpoints } }) => css`
     position: relative;
     width: 520px;
     height: 345px;
     border-radius: ${sizes.borderRadius};
-    background: ${palette.background.paper};
+    background: ${palette.background.default};
+    box-shadow: 5px 5px 15px 10px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     ${down(breakpoints.sm)} {
       width: 100%;
-      padding-bottom: 66.66%;
+      max-width: 520px;
+      height: unset;
+      aspect-ratio: 3 / 2;
     }
   `,
 );
 
-export const LoadingContent = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+export const LoadingLabel = styled.h5`
+  ${baseCircleLoaderLabel};
 `;
 
 export const CameraPreview = styled.img<CameraPreviewProps>(
@@ -37,6 +49,8 @@ export const CameraPreview = styled.img<CameraPreviewProps>(
     ${!isLoaded &&
     css`
       visibility: hidden;
+      height: 0 !important;
+      width: 0 !important;
     `};
 
     ${down(breakpoints.sm)} {

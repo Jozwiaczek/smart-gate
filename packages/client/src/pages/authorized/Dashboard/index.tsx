@@ -22,8 +22,7 @@ const Dashboard = () => {
     () => connectionState === ConnectionState.CONNECTED && deviceStatus === DeviceStatus.CONNECTED,
     [connectionState, deviceStatus],
   );
-  //  const isLoading = connectionState === ConnectionState.CONNECTING;
-  const isLoading = true;
+  const isLoading = connectionState === ConnectionState.CONNECTING;
 
   useEffect(() => {
     void registerWebPush(axios);
@@ -46,7 +45,11 @@ const Dashboard = () => {
     <>
       <Title data-testid="dashboard-title">{t('routes.dashboard.title')}</Title>
       <RowSection isCameraMode={isCameraPreviewEnabled()}>
-        {isLoading ? <CircleLoader label="routes.dashboard.connecting" /> : <DeviceSections />}
+        {isLoading ? (
+          <CircleLoader variant="large" label="routes.dashboard.connecting" />
+        ) : (
+          <DeviceSections />
+        )}
       </RowSection>
     </>
   );

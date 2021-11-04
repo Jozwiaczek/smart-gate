@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-import { CircleLoaderBackgroundIcon, CircleLoaderIndicatorIcon } from '../../../icons';
+import { CircleLoaderBackgroundIcon, CircleLoaderIndicatorIcon, ThunderIcon } from '../../../icons';
 
 export const BackgroundCircle = styled(CircleLoaderBackgroundIcon)<BaseCircleLoaderStyledProps>(
   ({ size }) => css`
@@ -49,6 +49,13 @@ export const ContentWrapper = styled.div`
   align-items: center;
 `;
 
+export const Thunder = styled(ThunderIcon)<ThunderProps>(
+  ({ isLarge }) => css`
+    width: ${isLarge ? 106 : 52}px;
+    height: ${isLarge ? 64 : 32}px;
+  `,
+);
+
 const linearAnimation = keyframes`
   0% {
     background-position: 10% 0
@@ -61,11 +68,15 @@ const linearAnimation = keyframes`
   }
 `;
 
-export const Label = styled.h4`
+export const baseCircleLoaderLabel = css`
   animation: ${linearAnimation} 3s cubic-bezier(0.65, 0.47, 0.32, 0.44) infinite;
   background: linear-gradient(90deg, #257d69 15%, #40df9f 60%);
   background-size: 250% 250%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 12px;
+`;
+
+export const Label = styled.h4`
+  ${baseCircleLoaderLabel};
 `;

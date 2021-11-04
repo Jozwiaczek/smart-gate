@@ -2,6 +2,11 @@ interface BaseCircleLoaderStyledProps {
   size: number;
 }
 
-interface CircleLoaderProps extends Partial<BaseCircleLoaderStyledProps> {
-  label: string;
+interface CircleLoaderProps {
+  label?: string;
+  variant: 'small' | 'large';
+}
+
+interface ThunderProps {
+  isLarge: boolean;
 }
