@@ -1,5 +1,6 @@
 export {
   AnimatedLogo,
+  CircleLoader,
   Heaven,
   Hell,
   PageLoader,
