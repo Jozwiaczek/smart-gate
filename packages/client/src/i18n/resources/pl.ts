@@ -182,6 +182,7 @@ const pl: TranslationStructure = {
             tokenDeleted: 'Klucz poprawnie usunięty',
             tokenManagement: 'Zarządzanie kluczem',
             externalIntegrationsToken: 'Klucz integracji zewnętrznych',
+            externalIntegrationsUrl: 'Adres URL integracji zewnętrznych',
             integrationsTemplates: 'Szablony integracji',
             deleteToken: 'Usuń klucz integracji zewnętrznych',
             deleteTokenInfo:

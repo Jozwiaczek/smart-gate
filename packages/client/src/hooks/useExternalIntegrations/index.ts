@@ -2,18 +2,17 @@ import copy from 'copy-to-clipboard';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { SGLocale } from '../../i18n';
 import { CopyIcon } from '../../icons';
-import { onlyOnDevEnv } from '../../utils';
+import { getApiUrl, onlyOnDevEnv } from '../../utils';
+import getPublicUrl from '../../utils/getPublicUrl';
 import { useAuth, useAxios, useCurrentUser, useSnackbar } from '../index';
-import externalIntegrationsConfig from './externalIntegrations.config';
 
 const useExternalIntegrations = () => {
   const [currentUser, setCurrentUser] = useCurrentUser();
   const axios = useAxios();
   const { logout } = useAuth();
   const showSnackbar = useSnackbar();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const token = useMemo(
     () => currentUser?.externalIntegrationsToken,
@@ -33,19 +32,16 @@ const useExternalIntegrations = () => {
     });
   }, [showSnackbar, t, token]);
 
-  const appleShortcutsTemplateLink = useMemo(() => {
-    const enUrl = externalIntegrationsConfig.appleShortcuts.templates.en;
-    const plUrl = externalIntegrationsConfig.appleShortcuts.templates.pl;
+  const openGateTemplateShortcut = 'Open Gate.shortcut';
+  const publicUrl = getPublicUrl();
+  const appleShortcutsTemplateLink = `${publicUrl}/${openGateTemplateShortcut}`;
+  const externalIntegrationsEndpoint = 'external-integrations';
+  const apiUrl: string = getApiUrl();
+  const externalIntegrationsUrl = `${apiUrl}/${externalIntegrationsEndpoint}`;
 
-    switch (i18n.language) {
-      case SGLocale.en:
-        return enUrl;
-      case SGLocale.pl:
-        return plUrl;
-      default:
-        return enUrl;
-    }
-  }, [i18n.language]);
+  const copyExternalIntegrationsUrl = useCallback(() => {
+    copy(externalIntegrationsUrl);
+  }, [externalIntegrationsUrl]);
 
   const generateToken = useCallback(async () => {
     try {
@@ -55,7 +51,7 @@ const useExternalIntegrations = () => {
       }
 
       const { data: externalIntegrationsToken } = await axios.post<string>(
-        `external-integrations/generate-token`,
+        `${externalIntegrationsEndpoint}/generate-token`,
       );
       setCurrentUser({ ...currentUser, externalIntegrationsToken });
       copy(externalIntegrationsToken);
@@ -95,6 +91,8 @@ const useExternalIntegrations = () => {
     isTokenGenerated,
     appleShortcutsTemplateLink,
     copyTokenToClipboard,
+    copyExternalIntegrationsUrl,
+    externalIntegrationsUrl,
   };
 };
 

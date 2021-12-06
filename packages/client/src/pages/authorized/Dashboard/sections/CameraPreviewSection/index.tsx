@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { CircleLoader } from '../../../../../elements';
 import { useAxios } from '../../../../../hooks';
-import { isCameraPreviewEnabled } from '../../../../../utils';
+import { getApiUrl, isCameraPreviewEnabled } from '../../../../../utils';
 import {
   CameraPreview,
   LoadingContainer,
@@ -12,7 +12,8 @@ import {
 } from './CameraPreviewSection.styled';
 
 const CameraPreviewSection = () => {
-  const cameraURL = process.env.REACT_APP_API_URL && `${process.env.REACT_APP_API_URL}/camera`;
+  const apiUrl: string = getApiUrl();
+  const cameraURL = `${apiUrl}/camera`;
   const previewRef = useRef<HTMLImageElement>(null);
   const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
   const { t } = useTranslation();

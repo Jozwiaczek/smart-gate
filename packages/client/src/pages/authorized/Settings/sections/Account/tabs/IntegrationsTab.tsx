@@ -20,11 +20,13 @@ const IntegrationsTab = () => {
   const { t } = useTranslation();
   const {
     copyTokenToClipboard,
+    copyExternalIntegrationsUrl,
     generateToken,
     isTokenGenerated,
     token,
     deleteToken,
     appleShortcutsTemplateLink,
+    externalIntegrationsUrl,
   } = useExternalIntegrations();
 
   const confirmDelete = useConfirmDialog({
@@ -71,6 +73,7 @@ const IntegrationsTab = () => {
       <p>
         <Trans i18nKey="routes.settings.account.integrations.description" />
       </p>
+
       <AccountTabSubtitle>
         {t('routes.settings.account.integrations.tokenManagement')}
       </AccountTabSubtitle>
@@ -81,6 +84,7 @@ const IntegrationsTab = () => {
         readOnly
         type="password"
         startAdornment={<StyledCopyIcon onClick={copyTokenToClipboard} />}
+        disabled
       />
       <Note>
         <Trans i18nKey="routes.settings.account.integrations.sharingTokenWarning" />
@@ -95,6 +99,17 @@ const IntegrationsTab = () => {
           <RefreshIcon />
         </RegenerateTokenButton>
       </TokenActionsButtonsWrapper>
+
+      <AccountTabSubtitle>External Integrations URL</AccountTabSubtitle>
+      <TextInput
+        name="externalIntegrationsUrl"
+        value={externalIntegrationsUrl}
+        label={t('routes.settings.account.integrations.externalIntegrationsUrl')}
+        readOnly
+        startAdornment={<StyledCopyIcon onClick={copyExternalIntegrationsUrl} />}
+        disabled
+      />
+
       <AccountTabSubtitle>
         {t('routes.settings.account.integrations.integrationsTemplates')}
       </AccountTabSubtitle>
