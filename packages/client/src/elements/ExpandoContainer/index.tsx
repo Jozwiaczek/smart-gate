@@ -18,7 +18,7 @@ const ExpandoContainer = ({
     <Wrapper data-testid="expandoContainer">
       <Header data-testid="expandoContainerHeader">
         {header}
-        <IconButton data-testid="expandoContainerHeaderButton" onClick={toggle}>
+        <IconButton data-testid="expandoContainerToggleButton" onClick={toggle}>
           <StyledChevronDownIcon open={isOpen} />
         </IconButton>
       </Header>

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { ChevronDownIcon } from '../../icons';
+import { EXPANDO_CONTAINER_HEIGHT_ANIMATION_DURATION } from './ExpandoContainer.constants';
 import { ContentProps, StyledChevronDownIconProps } from './ExpandoContainer.types';
 
 export const Wrapper = styled.div`
@@ -23,13 +24,15 @@ export const Content = styled.div<ContentProps>(
     width: 100%;
     overflow: hidden;
     height: ${open ? `${contentHeight}px` : '0'};
-    transition: height 400ms cubic-bezier(0.83, 0, 0.17, 1);
+    transition: height ${EXPANDO_CONTAINER_HEIGHT_ANIMATION_DURATION}ms
+      cubic-bezier(0.83, 0, 0.17, 1);
   `,
 );
 
 export const StyledChevronDownIcon = styled(ChevronDownIcon)<StyledChevronDownIconProps>(
   ({ open }) => css`
-    transition: transform 400ms cubic-bezier(0.83, 0, 0.17, 1);
+    transition: transform ${EXPANDO_CONTAINER_HEIGHT_ANIMATION_DURATION}ms
+      cubic-bezier(0.83, 0, 0.17, 1);
 
     ${open &&
     css`
