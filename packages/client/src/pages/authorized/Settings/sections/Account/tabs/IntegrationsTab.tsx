@@ -1,10 +1,10 @@
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { Button, TextInput } from '../../../../../../elements';
+import { Button, ExpandoContainer, TextInput } from '../../../../../../elements';
 import { useConfirmDialog } from '../../../../../../hooks';
 import useExternalIntegrations from '../../../../../../hooks/useExternalIntegrations';
-import { AppleIcon, KeyIcon, RefreshIcon, TrashIcon } from '../../../../../../icons';
+import { AppleIcon, CopyIcon, KeyIcon, RefreshIcon, TrashIcon } from '../../../../../../icons';
 import {
   AccountTabSubtitle,
   AccountTabTitle,
@@ -74,61 +74,84 @@ const IntegrationsTab = () => {
         <Trans i18nKey="routes.settings.account.integrations.description" />
       </p>
 
-      <AccountTabSubtitle>
-        {t('routes.settings.account.integrations.tokenManagement')}
-      </AccountTabSubtitle>
-      <TextInput
-        name="externalIntegrationsToken"
-        value={token}
-        label={t('routes.settings.account.integrations.externalIntegrationsToken')}
-        readOnly
-        type="password"
-        startAdornment={<StyledCopyIcon onClick={copyTokenToClipboard} />}
-        disabled
-      />
-      <Note>
-        <Trans i18nKey="routes.settings.account.integrations.sharingTokenWarning" />
-      </Note>
-      <TokenActionsButtonsWrapper>
-        <Button fullWidth colorVariant="red" onClick={confirmDelete}>
-          {t('actions.delete')}
-          <TrashIcon />
-        </Button>
-        <RegenerateTokenButton fullWidth onClick={confirmRegenerate}>
-          {t('actions.regenerate')}
-          <RefreshIcon />
-        </RegenerateTokenButton>
-      </TokenActionsButtonsWrapper>
+      <ExpandoContainer
+        header={
+          <AccountTabSubtitle>
+            {t('routes.settings.account.integrations.tokenManagement')}
+          </AccountTabSubtitle>
+        }
+      >
+        <TextInput
+          name="externalIntegrationsToken"
+          value={token}
+          label={t('routes.settings.account.integrations.externalIntegrationsToken')}
+          readOnly
+          type="password"
+          startAdornment={<StyledCopyIcon onClick={copyTokenToClipboard} />}
+          disabled
+        />
+        <Note>
+          <Trans i18nKey="routes.settings.account.integrations.sharingTokenWarning" />
+        </Note>
+        <TokenActionsButtonsWrapper>
+          <Button fullWidth colorVariant="red" onClick={confirmDelete}>
+            {t('actions.delete')}
+            <TrashIcon />
+          </Button>
+          <RegenerateTokenButton fullWidth onClick={confirmRegenerate}>
+            {t('actions.regenerate')}
+            <RefreshIcon />
+          </RegenerateTokenButton>
+        </TokenActionsButtonsWrapper>
+      </ExpandoContainer>
 
-      <AccountTabSubtitle>External Integrations URL</AccountTabSubtitle>
-      <TextInput
-        name="externalIntegrationsUrl"
-        value={externalIntegrationsUrl}
-        label={t('routes.settings.account.integrations.externalIntegrationsUrl')}
-        readOnly
-        startAdornment={<StyledCopyIcon onClick={copyExternalIntegrationsUrl} />}
-        disabled
-      />
+      <ExpandoContainer
+        header={
+          <AccountTabSubtitle>
+            {t('routes.settings.account.integrations.externalIntegrationsUrl')}
+          </AccountTabSubtitle>
+        }
+      >
+        <TextInput
+          name="externalIntegrationsUrl"
+          value={externalIntegrationsUrl}
+          label={t('routes.settings.account.integrations.externalIntegrationsUrl')}
+          readOnly
+          disabled
+        />
 
-      <AccountTabSubtitle>
-        {t('routes.settings.account.integrations.integrationsTemplates')}
-      </AccountTabSubtitle>
-      <p>
-        <Trans i18nKey="routes.settings.account.integrations.templatesDescription" />
-      </p>
-      <br />
-      <Note>
-        <Trans i18nKey="routes.settings.account.integrations.templatesNote" />
-      </Note>
-      <br />
-      <br />
-      <p>
-        <strong>{t('routes.settings.account.integrations.pickToStart')}</strong>
-      </p>
-      <IntegrationTemplateLink to={appleShortcutsTemplateLink} asOuterLink>
-        <AppleIcon />
-        {t('routes.settings.account.integrations.shortcutsTemplate')}
-      </IntegrationTemplateLink>
+        <TokenActionsButtonsWrapper>
+          <Button fullWidth onClick={copyExternalIntegrationsUrl}>
+            {t('routes.settings.account.integrations.copyExternalIntegrationsUrl')}
+            <CopyIcon />
+          </Button>
+        </TokenActionsButtonsWrapper>
+      </ExpandoContainer>
+
+      <ExpandoContainer
+        header={
+          <AccountTabSubtitle>
+            {t('routes.settings.account.integrations.integrationsTemplates')}
+          </AccountTabSubtitle>
+        }
+      >
+        <p>
+          <Trans i18nKey="routes.settings.account.integrations.templatesDescription" />
+        </p>
+        <br />
+        <Note>
+          <Trans i18nKey="routes.settings.account.integrations.templatesNote" />
+        </Note>
+        <br />
+        <br />
+        <p>
+          <strong>{t('routes.settings.account.integrations.pickToStart')}</strong>
+        </p>
+        <IntegrationTemplateLink to={appleShortcutsTemplateLink} asOuterLink>
+          <AppleIcon />
+          {t('routes.settings.account.integrations.shortcutsTemplate')}
+        </IntegrationTemplateLink>
+      </ExpandoContainer>
     </>
   );
 };
