@@ -61,7 +61,6 @@
     "@storybook/addon-actions": "^6.3.8",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.3.8",
-    "@storybook/addon-jest": "^6.3.8",
     "@storybook/addon-storysource": "^6.3.8",
     "@storybook/addons": "^6.3.8",
     "@storybook/components": "^6.3.8",

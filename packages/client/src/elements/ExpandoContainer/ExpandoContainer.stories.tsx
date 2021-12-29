@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
 `;
 
-export const Content = styled.div(
+const Content = styled.div(
   ({ theme: { palette } }) => css`
     background: ${palette.primary.main};
   `,
