@@ -3560,22 +3560,6 @@
     storybook-addon-outline "^1.4.1"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-jest@^6.3.8":
-  version "6.3.8"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-jest/-/addon-jest-6.3.8.tgz#7c8ec7288d69dc07fcdb2c4ab1817512bbd1a742"
-  integrity sha512-qB4aky4J5PySc32EvOU8rNSPGR53WwvrKaHr5N1guRUIHNuct/rx39sFrwcZVOXi5X55BWsRwhCnPiA3Zh298A==
-  dependencies:
-    "@storybook/addons" "6.3.8"
-    "@storybook/api" "6.3.8"
-    "@storybook/components" "6.3.8"
-    "@storybook/core-events" "6.3.8"
-    "@storybook/theming" "6.3.8"
-    core-js "^3.8.2"
-    global "^4.4.0"
-    react-sizeme "^3.0.1"
-    regenerator-runtime "^0.13.7"
-    upath "^1.2.0"
-
 "@storybook/addon-measure@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@storybook/addon-measure/-/addon-measure-2.0.0.tgz#c40bbe91bacd3f795963dc1ee6ff86be87deeda9"
