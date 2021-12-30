@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useCallback, useMemo, useState } from 'react';
 
 import { Dialog } from '../../elements';
 import { CancelButton, ConfirmButton } from './ConfirmDialogButtons';
@@ -21,12 +21,15 @@ const ConfirmDialogProvider = ({ children }: ConfirmDialogProviderProps) => {
     setOpen(false);
   };
 
-  const open = (options: OpenConfirmDialogOptions) => () => {
-    if (!isOpen) {
-      setOptionsInternal(options);
-      setOpen(true);
-    }
-  };
+  const open = useCallback(
+    (options: OpenConfirmDialogOptions) => () => {
+      if (!isOpen) {
+        setOptionsInternal(options);
+        setOpen(true);
+      }
+    },
+    [isOpen],
+  );
 
   const confirm = () => {
     optionsInternal?.onConfirm();
@@ -38,9 +41,16 @@ const ConfirmDialogProvider = ({ children }: ConfirmDialogProviderProps) => {
     close();
   };
 
+  const contextValue: ConfirmDialogContextValue = useMemo(
+    () => ({
+      open,
+    }),
+    [open],
+  );
+
   return (
     <>
-      <ConfirmDialogContext.Provider value={{ open }}>{children}</ConfirmDialogContext.Provider>
+      <ConfirmDialogContext.Provider value={contextValue}>{children}</ConfirmDialogContext.Provider>
       <Dialog
         isOpen={isOpen}
         close={cancel}

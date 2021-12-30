@@ -7,7 +7,7 @@ export const testClearRepository = async <T>(
   const repository = connection.getRepository(entity);
   await repository.delete({});
 
-  await expect(repository.count()).resolves.toEqual(0);
+  await expect(repository.count()).resolves.toBe(0);
 
   return repository;
 };

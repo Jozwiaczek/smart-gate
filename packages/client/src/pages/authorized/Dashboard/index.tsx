@@ -28,7 +28,7 @@ const Dashboard = () => {
     void registerWebPush(axios);
   }, [axios]);
 
-  const DeviceSections = () => {
+  const deviceSections = useMemo(() => {
     if (!isConnected) {
       return <GateDisconnected connectionState={connectionState} deviceStatus={deviceStatus} />;
     }
@@ -39,7 +39,7 @@ const Dashboard = () => {
         <CameraPreviewSection />
       </>
     );
-  };
+  }, [connectionState, deviceStatus, isConnected]);
 
   return (
     <>
@@ -48,7 +48,7 @@ const Dashboard = () => {
         {isLoading ? (
           <CircleLoader variant="large" label="routes.dashboard.connecting" />
         ) : (
-          <DeviceSections />
+          deviceSections
         )}
       </RowSection>
     </>

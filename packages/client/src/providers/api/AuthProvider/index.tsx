@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useCurrentUser, useLocalStorageMemory } from '../../../hooks';
 import useAxios from '../../../hooks/useAxios';
@@ -111,20 +111,34 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return data;
   }, [axios]);
 
-  const AuthValue: AuthProps = {
-    login,
-    register,
-    logout,
-    logoutFromAllDevices,
-    checkAuth,
-    sendPasswordRecoveryEmail,
-    updatePassword,
-    recoverPassword,
-    generateTicket,
-    deleteCurrentUser,
-  };
+  const contextValue: AuthProps = useMemo(
+    () => ({
+      login,
+      register,
+      logout,
+      logoutFromAllDevices,
+      checkAuth,
+      sendPasswordRecoveryEmail,
+      updatePassword,
+      recoverPassword,
+      generateTicket,
+      deleteCurrentUser,
+    }),
+    [
+      checkAuth,
+      deleteCurrentUser,
+      generateTicket,
+      login,
+      logout,
+      logoutFromAllDevices,
+      recoverPassword,
+      register,
+      sendPasswordRecoveryEmail,
+      updatePassword,
+    ],
+  );
 
-  return <AuthContext.Provider value={AuthValue}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

@@ -37,7 +37,7 @@ describe('users service', () => {
       await testClearRepository(connection, UserEntity);
       const allUsers = await usersService.findAll();
 
-      expect(allUsers.total).toStrictEqual(0);
+      expect(allUsers.total).toBe(0);
       expect(allUsers.data).toStrictEqual([]);
     });
 
@@ -48,7 +48,7 @@ describe('users service', () => {
       const secondUser = await testCreateRandomUser(connection);
 
       const allUsers = await usersService.findAll();
-      expect(allUsers.total).toEqual(2);
+      expect(allUsers.total).toBe(2);
       expect(allUsers.data).toStrictEqual([firstUser, secondUser]);
     });
   });
@@ -107,7 +107,7 @@ describe('users service', () => {
         email: randomUser.email,
       };
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(usersService.update(`${Date.now()}`, user)).rejects.toBeInstanceOf(
         NotFoundException,
       );
@@ -130,7 +130,7 @@ describe('users service', () => {
       // eslint-disable-next-line no-unused-vars
       const { updatedAt: _, ...userToCompare } = newUser;
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(usersService.update(newUser.id, noChanges)).resolves.toEqual(
         expect.objectContaining(userToCompare),
       );
@@ -145,7 +145,7 @@ describe('users service', () => {
       const repository = await testClearRepository(connection, UserEntity);
       await testCreateRandomUser(connection);
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(usersService.remove(`${Date.now()}`)).rejects.toBeInstanceOf(QueryFailedError);
     });
 
@@ -155,7 +155,7 @@ describe('users service', () => {
       const secondUser = await testCreateRandomUser(connection);
 
       await expect(repository.find()).resolves.toStrictEqual([firstUser, secondUser]);
-      await expect(usersService.remove(firstUser.id)).resolves.toStrictEqual(true);
+      await expect(usersService.remove(firstUser.id)).resolves.toBe(true);
       await expect(repository.find()).resolves.toStrictEqual([secondUser]);
       await expect(repository.findOne({ id: firstUser.id })).resolves.toBeUndefined();
     });
@@ -166,7 +166,7 @@ describe('users service', () => {
       const repository = await testClearRepository(connection, UserEntity);
       await testCreateRandomUser(connection);
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(usersService.removeMany({ ids: [`${Date.now()}`] })).rejects.toBeInstanceOf(
         BadRequestException,
       );

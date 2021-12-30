@@ -37,6 +37,7 @@ module.exports = {
     'no-use-before-define': 0,
 
     '@typescript-eslint/ban-ts-comment': 0,
+    '@typescript-eslint/no-unsafe-argument': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-unsafe-call': 0,
@@ -81,6 +82,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/display-name': 0,
     'react/react-in-jsx-scope': 0,
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
 
@@ -94,7 +96,7 @@ module.exports = {
     'promise/always-return': 0,
 
     'jest/consistent-test-it': 2,
-    'jest/lowercase-name': 2,
+    'jest/prefer-lowercase-title': 2,
     'jest/require-top-level-describe': 2,
 
     'jsdoc/require-param-type': 0,

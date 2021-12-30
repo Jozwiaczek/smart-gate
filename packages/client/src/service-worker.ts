@@ -79,7 +79,7 @@ self.addEventListener('message', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,no-unsafe-optional-chaining
   const { title, options } = event.data?.json();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const optionsWithDefaults: NotificationOptions = {
