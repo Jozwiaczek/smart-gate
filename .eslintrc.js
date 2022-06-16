@@ -1,16 +1,10 @@
 module.exports = {
   parserOptions: {
+    root: true,
     project: ['./packages/*/tsconfig.json', 'tsconfig.dev.json', './www/tsconfig.json'],
     tsconfigRootDir: __dirname,
-    EXPERIMENTAL_useSourceOfProjectReferenceRedirect: true,
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
   },
   extends: [
-    'eslint:recommended',
     'plugin:eslint-comments/recommended',
     'plugin:node/recommended',
     'plugin:promise/recommended',
@@ -19,7 +13,6 @@ module.exports = {
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:prettier/recommended',
     'plugin:regexp/recommended',
     'plugin:security/recommended',
     'plugin:jest/recommended',
@@ -27,15 +20,19 @@ module.exports = {
     'plugin:testing-library/react',
     'plugin:cypress/recommended',
     'plugin:jsdoc/recommended',
+    'prettier',
   ],
   plugins: ['simple-import-sort'],
   rules: {
+    semi: 'off',
     'no-void': 0,
     'consistent-return': 0,
     'no-console': 0,
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
     'no-use-before-define': 0,
 
+    '@typescript-eslint/semi': 2,
+    '@typescript-eslint/indent': 0,
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/no-unsafe-member-access': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
@@ -67,6 +64,13 @@ module.exports = {
 
     'simple-import-sort/imports': 2,
     'simple-import-sort/exports': 2,
+
+    // TypeScript provides the same checks as part of standard type checking.
+    // https://typescript-eslint.io/docs/linting/troubleshooting#eslint-plugin-import
+    'import/named': 0,
+    'import/namespace': 0,
+    'import/default': 0,
+    'import/no-named-as-default-member': 0,
 
     'import/first': 2,
     'import/newline-after-import': 2,

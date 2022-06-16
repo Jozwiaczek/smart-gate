@@ -34,11 +34,12 @@ const BasicsTab = () => {
   const firstNameFieldValue = watch('firstName');
   const lastNameFieldValue = watch('lastName');
 
-  const isDataModified = useMemo(() => {
-    return (
-      firstNameFieldValue !== currentUser?.firstName || lastNameFieldValue !== currentUser?.lastName
-    );
-  }, [currentUser?.firstName, currentUser?.lastName, firstNameFieldValue, lastNameFieldValue]);
+  const isDataModified = useMemo(
+    () =>
+      firstNameFieldValue !== currentUser?.firstName ||
+      lastNameFieldValue !== currentUser?.lastName,
+    [currentUser?.firstName, currentUser?.lastName, firstNameFieldValue, lastNameFieldValue],
+  );
 
   const mutation = useMutation((formData: UserBasicsInputs) => {
     if (!currentUser) {

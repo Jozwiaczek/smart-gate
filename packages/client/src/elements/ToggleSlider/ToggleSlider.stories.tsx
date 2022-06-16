@@ -9,9 +9,7 @@ export default {
   component: ToggleSlider,
 } as Meta;
 
-const Template: Story<ToggleSliderProps> = (args) => {
-  return <ToggleSlider {...args} />;
-};
+const Template: Story<ToggleSliderProps> = (args) => <ToggleSlider {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

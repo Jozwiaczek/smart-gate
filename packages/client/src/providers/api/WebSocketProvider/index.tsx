@@ -71,11 +71,12 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     }
   }, [connect, currentUser]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       disconnect();
-    };
-  }, [disconnect]);
+    },
+    [disconnect],
+  );
 
   const toggleGate = useCallback(() => {
     if (socket) {

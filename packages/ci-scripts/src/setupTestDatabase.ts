@@ -62,7 +62,6 @@ const setupTestDatabase = async (): Promise<void> => {
 };
 
 setupTestDatabase()
-  // eslint-disable-next-line promise/always-return
   .then(() => {
     process.exit();
   })
