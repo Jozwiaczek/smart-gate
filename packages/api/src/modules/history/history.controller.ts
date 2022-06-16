@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 
 import { Role } from '../../enums/role.enum';
 import { Auth } from '../auth/decorators/auth.decorator';
@@ -14,11 +14,14 @@ export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 
   @Get()
-  findAll(@CookiePayload(UserFromCookiePayloadPipe) { id, roles }: UserEntity) {
+  findAll(
+    @CookiePayload(UserFromCookiePayloadPipe) { id: userId, roles }: UserEntity,
+    @Query() findQuery: FindQuery,
+  ) {
     if (roles.includes(Role.Admin) || roles.includes(Role.SuperAdmin)) {
-      return this.historyService.findAll();
+      return this.historyService.findAll(findQuery);
     }
-    return this.historyService.findAllByUserId(id);
+    return this.historyService.findAllByUserId(userId, findQuery);
   }
 
   @Auth(Role.Admin, Role.SuperAdmin)

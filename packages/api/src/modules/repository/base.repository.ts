@@ -16,6 +16,7 @@ export interface BaseRepositoryType<T> {
   findOneOrFail: (options: FindOneOptions<T>) => Promise<T>;
 
   find: (options?: FindManyOptions<T>) => Promise<T[]>;
+  findAndCount: (options?: FindManyOptions<T>) => Promise<[T[], number]>;
 
   update: (id: string, dataToUpdate: DeepPartial<T>) => Promise<T>;
 
@@ -65,6 +66,10 @@ export const BaseRepository = <T extends BaseEntity>(
 
     async find(options?: FindManyOptions): Promise<T[]> {
       return this.repository.find(options);
+    }
+
+    async findAndCount(options?: FindManyOptions): Promise<[T[], number]> {
+      return this.repository.findAndCount(options);
     }
 
     async update(id: string, dataToUpdate: DeepPartial<T>): Promise<T> {

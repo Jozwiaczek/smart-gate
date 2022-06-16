@@ -3,6 +3,7 @@ import { Connection } from 'typeorm';
 
 import { GetList } from '../../interfaces/react-admin-types';
 import { urlEncodedParams } from '../../utils';
+import getPaginationOptions from '../../utils/getPaginationOptions';
 import { InvitationEntity } from '../database/entities/invitation.entity';
 import { UserEntity } from '../database/entities/user.entity';
 import { MailerService } from '../mailer/mailer.service';
@@ -64,8 +65,12 @@ export class InvitationsService {
     return createdInvitation;
   }
 
-  async findAll(): Promise<GetList<InvitationItemDto>> {
-    const invitations = await this.repository.find({ relations: ['createdBy', 'updatedBy'] });
+  async findAll(query?: FindQuery): Promise<GetList<InvitationItemDto>> {
+    const [invitations, invitationsTotal] = await this.repository.findAndCount({
+      relations: ['createdBy', 'updatedBy'],
+      ...getPaginationOptions(query),
+    });
+
     const resultInvitation = invitations.map(
       ({
         email,
@@ -106,7 +111,7 @@ export class InvitationsService {
       },
     );
 
-    return { data: resultInvitation, total: resultInvitation.length };
+    return { data: resultInvitation, total: invitationsTotal };
   }
 
   async findOne(id: string): Promise<InvitationEntity> {

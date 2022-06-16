@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import { Role } from '../../enums/role.enum';
@@ -33,8 +34,8 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query() findQuery: FindQuery) {
+    return this.usersService.findAll(findQuery);
   }
 
   @Get(':id')

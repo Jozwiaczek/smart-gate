@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 
 import { GetList } from '../../interfaces/react-admin-types';
+import getPaginationOptions from '../../utils/getPaginationOptions';
 import { HistoryEntity } from '../database/entities/history.entity';
 import { HistoryRepository } from '../repository/history.repository';
 import { UsersService } from '../users/users.service';
@@ -22,21 +23,26 @@ export class HistoryService {
     return this.historyRepository.create(createHistoryEventDto);
   }
 
-  async findAll(): Promise<GetList<HistoryEntity>> {
-    const fullHistory = await this.historyRepository.find({
+  async findAll(query?: FindQuery): Promise<GetList<HistoryEntity>> {
+    const [fullHistory, totalOfHistoryRecords] = await this.historyRepository.findAndCount({
       relations: ['user'],
       order: { createdAt: 'DESC' },
+      ...getPaginationOptions(query),
     });
-    return { data: fullHistory, total: fullHistory.length };
+
+    return { data: fullHistory, total: totalOfHistoryRecords };
   }
 
-  async findAllByUserId(userId: string): Promise<GetList<HistoryEntity>> {
+  async findAllByUserId(userId: string, query?: FindQuery): Promise<GetList<HistoryEntity>> {
     const user = await this.usersService.findOne(userId);
+
     const userHistory = await this.historyRepository.find({
       where: { user },
       relations: ['user'],
       order: { createdAt: 'DESC' },
+      ...getPaginationOptions(query),
     });
+
     return { data: userHistory, total: userHistory.length };
   }
 
