@@ -3,10 +3,10 @@
   "version": "1.0.3",
   "private": true,
   "scripts": {
+    "cypress:info": "cypress info",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:verify": "cypress verify",
-    "cypress:info": "cypress info",
     "cypress:version": "cypress version",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "yarn lint --fix",
