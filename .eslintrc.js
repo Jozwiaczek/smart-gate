@@ -9,8 +9,8 @@ module.exports = {
     'plugin:node/recommended',
     'plugin:promise/recommended',
     'airbnb',
-    'airbnb/hooks',
     'airbnb-typescript',
+    'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:regexp/recommended',
@@ -31,6 +31,12 @@ module.exports = {
     'operator-linebreak': [2, 'after', { overrides: { '?': 'before', ':': 'before' } }],
     'no-use-before-define': 0,
 
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        checksVoidReturn: false,
+      },
+    ],
     '@typescript-eslint/semi': 2,
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/ban-ts-comment': 0,
@@ -79,12 +85,21 @@ module.exports = {
     'import/no-duplicates': 2,
     'import/extensions': [2, 'never', { json: 'always' }],
 
+    'react/react-in-jsx-scope': 0,
+    'react/jsx-uses-react': 0,
     'react/prop-types': 0,
     'react/require-default-props': 0,
     'react/jsx-boolean-value': [2, 'never'],
     'react/jsx-props-no-spreading': 0,
     'react/display-name': 0,
-    'react/react-in-jsx-scope': 0,
+    'react/no-unstable-nested-components': 0,
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
 
     'jsx-a11y/click-events-have-key-events': 0, // Disabled (https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/click-events-have-key-events.md)
 
@@ -98,7 +113,7 @@ module.exports = {
     'promise/always-return': 0,
 
     'jest/consistent-test-it': 2,
-    'jest/lowercase-name': 2,
+    'jest/prefer-lowercase-title': 2,
     'jest/require-top-level-describe': 2,
 
     'jsdoc/require-param-type': 0,

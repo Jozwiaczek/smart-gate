@@ -54,7 +54,7 @@ describe('invitations service', () => {
       await testClearRepository(connection, InvitationEntity);
       const allInvitations = await invitationsService.findAll();
 
-      expect(allInvitations.total).toStrictEqual(0);
+      expect(allInvitations.total).toBe(0);
       expect(allInvitations.data).toStrictEqual([]);
     });
 
@@ -77,7 +77,7 @@ describe('invitations service', () => {
       };
 
       const allInvitations = await invitationsService.findAll();
-      expect(allInvitations.total).toEqual(2);
+      expect(allInvitations.total).toBe(2);
       expect(allInvitations.data).toStrictEqual([firstInvitationDto, secondInvitationDto]);
     });
   });
@@ -109,7 +109,7 @@ describe('invitations service', () => {
         roles: randomInvitation.roles,
       };
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(invitationsService.update(`${Date.now()}`, invitation)).rejects.toBeInstanceOf(
         NotFoundException,
       );
@@ -126,7 +126,7 @@ describe('invitations service', () => {
         roles: [Role.Admin],
       };
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(invitationsService.update(newInvitation.id, noChanges)).resolves.toEqual(
         expect.objectContaining(newInvitation),
       );
@@ -141,7 +141,7 @@ describe('invitations service', () => {
       const repository = await testClearRepository(connection, InvitationEntity);
       await testCreateRandomInvitation(connection);
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(invitationsService.remove(`${Date.now()}`)).rejects.toBeInstanceOf(
         QueryFailedError,
       );
@@ -153,7 +153,7 @@ describe('invitations service', () => {
       const secondInvitation = await testCreateRandomInvitation(connection);
 
       await expect(repository.find()).resolves.toStrictEqual([firstInvitation, secondInvitation]);
-      await expect(invitationsService.remove(firstInvitation.id)).resolves.toStrictEqual(true);
+      await expect(invitationsService.remove(firstInvitation.id)).resolves.toBe(true);
       await expect(repository.find()).resolves.toStrictEqual([secondInvitation]);
       await expect(repository.findOne({ id: firstInvitation.id })).resolves.toBeUndefined();
     });
