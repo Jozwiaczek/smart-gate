@@ -45,6 +45,7 @@ const SendInvitationButtonWithDialog = () => {
 
   const queryClient = useQueryClient();
   const invitationsQueryKey = '/invitations';
+  // @ts-ignore
   const sendInvitationMutation = useMutation(
     async (values: CreateInvitationValues) => {
       setLoading(true);

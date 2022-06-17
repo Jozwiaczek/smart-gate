@@ -37,9 +37,6 @@
     "test": "lerna run test",
     "type-check": "lerna run type-check"
   },
-  "resolutions": {
-    "babel-loader": "8.1.0"
-  },
   "dependencies": {
     "@types/nodemailer": "^6.4.4",
     "base64url": "^3.0.1",
@@ -55,7 +52,7 @@
     "@commitlint/config-lerna-scopes": "^13.1.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.1",
-    "@types/node": "^16.9.1",
+    "@types/node": "^18.0.0",
     "@types/pg": "^8.6.1",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",

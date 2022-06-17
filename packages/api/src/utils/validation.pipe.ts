@@ -8,6 +8,7 @@ export class ValidationPipe implements PipeTransform {
     if (!metatype || !ValidationPipe.toValidate(metatype)) {
       return value;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const objectClass = plainToClass<unknown, unknown>(metatype, value);
     // eslint-disable-next-line @typescript-eslint/ban-types
     const errors = await validate(objectClass as object);
