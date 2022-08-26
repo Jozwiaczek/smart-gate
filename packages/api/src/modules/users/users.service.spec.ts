@@ -49,7 +49,7 @@ describe('users service', () => {
 
       const allUsers = await usersService.findAll();
       expect(allUsers.total).toEqual(2);
-      expect(allUsers.data).toStrictEqual([firstUser, secondUser]);
+      expect(allUsers.data).toStrictEqual([secondUser, firstUser]);
     });
   });
 
