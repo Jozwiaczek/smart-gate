@@ -18,7 +18,7 @@ jobs:
 
       # Beginning of yarn setup, keep in sync between all workflows
       - name: Use node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v3.5.1
         with:
           node-version: ${{ matrix.node-version }}
       - name: 'Use cached node_modules'
