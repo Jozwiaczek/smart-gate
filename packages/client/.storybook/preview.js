@@ -1,9 +1,7 @@
 import React from 'react';
 import { ThemeDecorator, I18nDecorator, LayoutDecorator } from './decorators';
-import { withTests } from '@storybook/addon-jest';
 import '@storybook/addon-console';
 
-import testResults from '../src/jest-test-results.json';
 import ProvidersDecorator from './decorators/ProvidersDecorator';
 
 export const parameters = {
@@ -39,12 +37,4 @@ export const globalTypes = {
   },
 };
 
-export const decorators = [
-  ProvidersDecorator,
-  LayoutDecorator,
-  ThemeDecorator,
-  I18nDecorator,
-  withTests({
-    results: testResults,
-  }),
-];
+export const decorators = [ProvidersDecorator, LayoutDecorator, ThemeDecorator, I18nDecorator];

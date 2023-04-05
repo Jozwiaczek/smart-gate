@@ -1,4 +1,5 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import CtaSection from '@site/src/components/CtaSection';
 import FeatureSection from '@site/src/components/FeatureSection';
 import HeroSection from '@site/src/components/HeroSection';
 import { features } from '@site/src/data/features';
@@ -16,7 +17,7 @@ const Home = (): JSX.Element => {
     <Layout description={siteConfig.tagline}>
       <main className={styles.mainContainer}>
         <HeroSection />
-        {features.map(({ title, description, imgSrc, imgAlt }, index) => (
+        {features.map(({ title, description, imgSrc, imgAlt, imgSize }, index) => (
           <FeatureSection
             key={title}
             title={title}
@@ -24,8 +25,10 @@ const Home = (): JSX.Element => {
             imgSrc={imgSrc}
             imgAlt={imgAlt}
             isOdd={index % 2 !== 0}
+            imgSize={imgSize}
           />
         ))}
+        <CtaSection />
       </main>
     </Layout>
   );

@@ -180,6 +180,8 @@ const en = {
             tokenDeleted: 'Token deleted successfully',
             tokenManagement: 'Token management',
             externalIntegrationsToken: 'External integrations token',
+            externalIntegrationsUrl: 'External integrations URL',
+            copyExternalIntegrationsUrl: 'Copy external integrations URL',
             integrationsTemplates: 'Integrations templates',
             deleteToken: 'Delete external integrations token',
             deleteTokenInfo:
