@@ -7,7 +7,7 @@ import { <%= h.changeCase.pascal(Name) %>Props } from './<%= h.changeCase.pascal
 
 const <%= h.changeCase.pascal(Name) %> = ({ children }: <%= h.changeCase.pascal(Name) %>Props) => {
   return (
-    <Wrapper data-testid="<%= h.changeCase.camel(Name) %>">{children}</Wrapper>;
+    <Wrapper data-testid="<%= h.changeCase.camel(Name) %>">{children}</Wrapper>
   );
 };
 

@@ -1,3 +1,52 @@
+# [1.20.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.19.0...v1.20.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **client:** thunder styled-component isLarge prop ([ee87f2f](https://github.com/Jozwiaczek/smart-gate/commit/ee87f2f028f4c41004aa3acc953eaac67b2c2c52))
+
+
+### Features
+
+* **client:** add camera preview loader ([007628b](https://github.com/Jozwiaczek/smart-gate/commit/007628b3197ca462868a169655abaa5a24399c02))
+* **client:** add dashboard circle loader and adjust hygen scripts ([a9fa596](https://github.com/Jozwiaczek/smart-gate/commit/a9fa596a4153bab75198cce9720378f20c539998))
+
+# [1.19.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.18.1...v1.19.0) (2021-11-01)
+
+
+### Features
+
+* **client:** add ToggleSlider horizontal variant and handle duration prop for loading animation ([c5322b9](https://github.com/Jozwiaczek/smart-gate/commit/c5322b98617bb486f5a8a48edf68134c33027e34))
+* **client:** adjust dashboard margins for layout with camera preview ([cd42676](https://github.com/Jozwiaczek/smart-gate/commit/cd42676f2de5a4b6adaa821c678ee7da15288569))
+
+## [1.18.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.18.0...v1.18.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* **client:** add index redirect from netlify plugin ([1319b7d](https://github.com/Jozwiaczek/smart-gate/commit/1319b7d1ceba2a0206b995c90d68d20d6bec9844))
+
+# [1.18.0](https://github.com/Jozwiaczek/smart-gate/compare/v1.17.1...v1.18.0) (2021-10-27)
+
+
+### Bug Fixes
+
+* **device:** installer sudo args ([4d44a4b](https://github.com/Jozwiaczek/smart-gate/commit/4d44a4bba62976eaba2a7aa5ae654266d2e4ef0c))
+* **device:** installer sudo args ([0b45269](https://github.com/Jozwiaczek/smart-gate/commit/0b45269cca65dc4a1cbeae4d3d19126a8ba595a3))
+* **device:** remove updateDebianSystemPackages installer check ([4b940a3](https://github.com/Jozwiaczek/smart-gate/commit/4b940a3fe9a1873f8a94500860d826462b05a4de))
+
+
+### Features
+
+* **client:** customize netlify redirects ([16b39aa](https://github.com/Jozwiaczek/smart-gate/commit/16b39aa458f1cdd153677d3c608322a9aded62ac))
+* **device:** add bash installer script ([a9c8f5b](https://github.com/Jozwiaczek/smart-gate/commit/a9c8f5b6b279c6cc90de5a8767af140b847ba706))
+* **device:** add success dialog on complete ([a5f324e](https://github.com/Jozwiaczek/smart-gate/commit/a5f324e46320e155be42e1a1f750f20f8af3da8e))
+
+
+### Reverts
+
+* Revert "refactor(device): modularize installer script" ([b423d6a](https://github.com/Jozwiaczek/smart-gate/commit/b423d6a15156a9b31bb6b5ecdf1dd99923a25ff6))
+
 ## [1.17.1](https://github.com/Jozwiaczek/smart-gate/compare/v1.17.0...v1.17.1) (2021-09-21)
 
 

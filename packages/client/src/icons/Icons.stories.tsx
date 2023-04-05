@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -10,6 +10,8 @@ import {
   CancelIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  CircleLoaderBackgroundIcon,
+  CircleLoaderIndicatorIcon,
   ConfirmLockIcon,
   CopyIcon,
   DashboardIcon,
@@ -41,6 +43,7 @@ import {
   StatisticsIcon,
   SunIcon,
   SystemThemeIcon,
+  ThunderIcon,
   TickIcon,
   TrashIcon,
   UserActionsIcon,
@@ -52,6 +55,9 @@ import { IconsStoryProps } from './ComposeIconsLabels/ComposeIconsLabels.types';
 
 const AllIconsPanel = (args: IconsStoryProps) => (
   <ComposeIconsLabels {...args}>
+    <ThunderIcon />
+    <CircleLoaderIndicatorIcon />
+    <CircleLoaderBackgroundIcon />
     <PolishFlagIcon />
     <BritishFlagIcon />
     <SystemThemeIcon />

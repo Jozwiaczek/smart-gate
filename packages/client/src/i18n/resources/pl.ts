@@ -85,13 +85,14 @@ const pl: TranslationStructure = {
       },
       dashboard: {
         title: 'Pulpit',
+        connecting: 'Łączenie...',
         sections: {
           camera: {
             title: 'Podgląd kamery',
             loadingPreview: 'Ładowanie podglądu...',
           },
           toggling: {
-            swipeUpToToggle: 'Przesuń w górę aby aktywować bramę',
+            swipeToToggle: 'Przesuń aby aktywować bramę',
             toggleSuccess: 'Aktywowano bramę',
             gateDisconnected: {
               title: 'Brama rozłączona',
@@ -181,6 +182,8 @@ const pl: TranslationStructure = {
             tokenDeleted: 'Klucz poprawnie usunięty',
             tokenManagement: 'Zarządzanie kluczem',
             externalIntegrationsToken: 'Klucz integracji zewnętrznych',
+            externalIntegrationsUrl: 'URL integracji zewnętrznych',
+            copyExternalIntegrationsUrl: 'Skopuj URL integracji zewnętrznych',
             integrationsTemplates: 'Szablony integracji',
             deleteToken: 'Usuń klucz integracji zewnętrznych',
             deleteTokenInfo:

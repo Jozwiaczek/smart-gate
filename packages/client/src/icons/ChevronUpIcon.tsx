@@ -2,8 +2,8 @@ import React, { forwardRef, memo, Ref, SVGProps } from 'react';
 
 const ChevronUpIcon = (props: SVGProps<SVGSVGElement>, svgRef?: Ref<SVGSVGElement>) => (
   <svg
-    width="40"
-    height="23"
+    width="14"
+    height="14"
     viewBox="0 0 40 23"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

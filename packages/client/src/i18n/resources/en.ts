@@ -83,13 +83,14 @@ const en = {
       },
       dashboard: {
         title: 'Dashboard',
+        connecting: 'Connecting...',
         sections: {
           camera: {
             title: 'Camera preview',
             loadingPreview: 'Loading camera preview...',
           },
           toggling: {
-            swipeUpToToggle: 'Swipe up to toggle gate',
+            swipeToToggle: 'Swipe to toggle gate',
             toggleSuccess: 'Successfully toggled',
             gateDisconnected: {
               title: 'Gate disconnected',
@@ -179,6 +180,8 @@ const en = {
             tokenDeleted: 'Token deleted successfully',
             tokenManagement: 'Token management',
             externalIntegrationsToken: 'External integrations token',
+            externalIntegrationsUrl: 'External integrations URL',
+            copyExternalIntegrationsUrl: 'Copy external integrations URL',
             integrationsTemplates: 'Integrations templates',
             deleteToken: 'Delete external integrations token',
             deleteTokenInfo:

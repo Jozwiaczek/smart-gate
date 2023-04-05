@@ -1,5 +1,6 @@
 export {
   AnimatedLogo,
+  CircleLoader,
   Heaven,
   Hell,
   PageLoader,
@@ -12,6 +13,7 @@ export { BackButton, Button, CloseButton, DeleteHoverButton, IconButton } from '
 export { default as Card } from './Card';
 export { default as Copyright } from './Copyright';
 export { default as Dialog } from './Dialog';
+export { default as ExpandoContainer } from './ExpandoContainer';
 export { DateField, FunctionField, TextField } from './fields';
 export { default as InvitationStatusField } from './fields/InvitationStatusField';
 export { default as Form } from './Form';

@@ -144,11 +144,11 @@ export const Container = styled.div<TextInputContainerProps>(
       right: 0;
     }
 
-    & input:focus + label {
+    & input:focus:not(:disabled) + label {
       color: ${palette.text.primary};
     }
 
-    & input:hover + label {
+    & input:hover:not(:disabled) + label {
       color: ${palette.text.primary};
     }
   `,

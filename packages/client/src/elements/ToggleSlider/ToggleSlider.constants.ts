@@ -1,6 +1,6 @@
 export const SLIDER_HEIGHT = 300;
 export const SLIDER_WIDTH = 100;
-export const DEFAULT_THUMB_Y = 0;
+export const INITIAL_THUMB_POSITION = 0;
 export const SLIDER_TARGET_SIZE = 80;
 export const SLIDE_PROGRESS_MIN = 0;
 export const SLIDE_PROGRESS_MAX = 100;

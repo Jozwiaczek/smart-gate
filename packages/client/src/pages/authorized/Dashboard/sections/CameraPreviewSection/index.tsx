@@ -1,11 +1,19 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { CircleLoader } from '../../../../../elements';
 import { useAxios } from '../../../../../hooks';
-import { CameraPreview, LoadingContainer, LoadingContent } from './CameraPreviewSection.styled';
+import { getApiUrl, isCameraPreviewEnabled } from '../../../../../utils';
+import {
+  CameraPreview,
+  LoadingContainer,
+  LoadingLabel,
+  Wrapper,
+} from './CameraPreviewSection.styled';
 
 const CameraPreviewSection = () => {
-  const cameraURL = process.env.REACT_APP_API_URL && `${process.env.REACT_APP_API_URL}/camera`;
+  const apiUrl: string = getApiUrl();
+  const cameraURL = `${apiUrl}/camera`;
   const previewRef = useRef<HTMLImageElement>(null);
   const [isPreviewLoaded, setIsPreviewLoaded] = useState(false);
   const { t } = useTranslation();
@@ -30,17 +38,16 @@ const CameraPreviewSection = () => {
     };
   }, [cameraURL, reloadCameraPreview]);
 
-  if (process.env.REACT_APP_CAMERA_PREVIEW_ENABLED !== 'true') {
+  if (!isCameraPreviewEnabled()) {
     return null;
   }
 
   return (
-    <div>
+    <Wrapper>
       {!isPreviewLoaded && (
         <LoadingContainer>
-          <LoadingContent>
-            <h3>{t('routes.dashboard.sections.camera.loadingPreview')}</h3>
-          </LoadingContent>
+          <CircleLoader variant="small" />
+          <LoadingLabel>{t('routes.dashboard.sections.camera.loadingPreview')}</LoadingLabel>
         </LoadingContainer>
       )}
       <CameraPreview
@@ -51,7 +58,7 @@ const CameraPreviewSection = () => {
           setIsPreviewLoaded(true);
         }}
       />
-    </div>
+    </Wrapper>
   );
 };
 

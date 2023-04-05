@@ -1,0 +1,17 @@
+.github
+.husky
+.run
+packages/api
+packages/ci-scripts
+packages/client
+packages/e2e
+www
+.all-contributorsrc
+app.json
+lerna.json
+lint-staged.config.js
+netlify.toml
+package.json
+release.config.js
+yarn.lock
+

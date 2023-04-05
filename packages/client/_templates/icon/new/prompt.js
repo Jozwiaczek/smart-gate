@@ -9,12 +9,7 @@ module.exports = {
       {
         type: 'input',
         name: 'name',
-        message: 'New icon name (without "Icon" in name):',
-      },
-      {
-        type: 'input',
-        name: 'iconSource',
-        message: 'Enter svg code:',
+        message: 'Enter icon name (without "Icon" in name):',
       },
     ]),
 };
