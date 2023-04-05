@@ -12,12 +12,12 @@
 </p>
 
 <p align="center">
-    UI/UX:
-    <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
-    <br>
-    <br>
     Documentation:
     <a href="https://smart-gate-docs.vercel.app/"><strong>smart-gate-docs.vercel.app</strong></a>
+    <br>
+    <br>
+    UI/UX:
+    <a href="https://www.figma.com/file/MqlnLhknWh1u0Ho8z1Oefe/Smart-Gate?node-id=0%3A1"><strong>figma.com/smart-gate</strong></a>
     <br>
     <br>
     Storybook:
@@ -30,6 +30,8 @@
 
 <hr/>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
+[![Docs Status](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/Production?label=Docs&logo=vercel&logoColor=white)](https://smart-gate-docs.vercel.app/)
 [![CI](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml/badge.svg?branch=dev)](https://github.com/Jozwiaczek/smart-gate/actions/workflows/continous_integration.yml)
 [![Heroku Status](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/smart-gate-jj?label=Server&logo=heroku&logoColor=heroku)](https://img.shields.io/github/deployments/Jozwiaczek/smart-gate/smart-gate-jj?label=Server&logo=heroku&logoColor=heroku)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/426cfdcb-e5e4-4067-97f2-c6106bde9195/deploy-status)](https://app.netlify.com/sites/smart-gate/deploys)
@@ -43,7 +45,7 @@
 ## 🚩 Table of Contents
 
 - [About](#-about)
-- [Quick setup for your own usage](#-quick-setup-for-your-own-usage)
+- [Setup for your own usage](#setup-for-your-own-usage)
   - [Deploy web application](#deploy-web-application)
   - [Deploy server](#deploy-server)
   - [Prepare your Raspberry Pi](#prepare-your-raspberry-pi)
@@ -70,7 +72,7 @@ Right, but there is one significant difference between others smart lock, it is 
 From physical side only what you have to do is to prepare [Raspberry Pi](https://www.raspberrypi.org/products/) and add some [3V Relay Module](https://www.google.com/search?q=relay+module+3v&tbm=isch&ved=2ahUKEwjll9aUt8_yAhVXvyoKHeMbBmgQ2-cCegQIABAA&oq=relay+module+3v&gs_lcp=CgNpbWcQAzIHCCMQ7wMQJzIGCAAQCBAeUKweWP8hYNEjaABwAHgAgAFliAGXApIBAzIuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=o-wnYaW6Ldf-qgHjt5jABg&bih=1329&biw=2560&rlz=1C5CHFA_enPL923PL923) between Raspberry and your gate to enable ability for opening.
 
 Rest part of Smart Gate system is handled by predefined templates for simplifying process of deploying server, database, and web app.
-Only what you have to do in this step is to click 2 buttons from [Setup for your own usage](#-setup-for-your-own-usage) and fill provided secrets.
+Only what you have to do in this step is to click 2 buttons from [Setup for your own usage](#setup-for-your-own-usage) and fill provided secrets.
 
 After those steps You will transform your simply or even old gate/door into your private smart system.
 

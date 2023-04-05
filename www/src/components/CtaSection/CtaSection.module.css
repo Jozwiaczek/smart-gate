@@ -1,0 +1,36 @@
+.ctaSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #30444e;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 60px 0;
+}
+
+@media screen and (max-width: 966px) {
+  .ctaSection {
+    text-align: center !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.ctaTitle {
+  font-size: 48px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.ctaKeyIcon {
+  margin-bottom: 30px;
+}
+
+.ctaButton {
+  margin-top: 70px;
+}

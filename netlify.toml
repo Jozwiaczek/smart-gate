@@ -5,7 +5,3 @@
 
 [build]
   base = "packages/client"
-
-[template.environment]
-  REACT_APP_API_URL = "Set the URL to your API deployed on Heroku"
-  REACT_APP_PUSH_NOTIFICATION_PUBLIC_VAPID_KEY = "Set your public VAPID key for push notifications"
