@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Select } from '../../../inputs';
-import { SelectOption } from '../../../inputs/Select/Select.types';
-import { PerPage } from '../DetailedList.types';
+import { Select } from '../../../../inputs';
+import { SelectOption } from '../../../../inputs/Select/Select.types';
+import { PerPage } from '../../DetailedList.types';
+import PaginationNumbers from '../PaginationNumbers';
 import {
   PageNavigation,
   PaginationButton,
@@ -52,33 +53,27 @@ const Pagination = ({
         {totalRecords}
       </TotalsLabel>
       {totalPages > 1 && (
-        <>
-          {currentPage !== 1 && (
-            <PaginationButton color="primary" onClick={() => setCurrentPage(currentPage - 1)}>
-              {t('lists.detailedList.prev')}
-            </PaginationButton>
-          )}
-          <PageNavigation>
-            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-            {[...Array(totalPages)].map((_, index) => {
-              const pageKey = index + 1;
-              return (
-                <PaginationButton
-                  key={pageKey}
-                  disabled={pageKey === currentPage}
-                  onClick={() => setCurrentPage(pageKey)}
-                >
-                  {pageKey}
-                </PaginationButton>
-              );
-            })}
-            {currentPage !== totalPages && (
-              <PaginationButton color="primary" onClick={() => setCurrentPage(currentPage + 1)}>
-                {t('lists.detailedList.next')}
-              </PaginationButton>
-            )}
-          </PageNavigation>
-        </>
+        <PageNavigation>
+          <PaginationButton
+            color="primary"
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            {t('lists.detailedList.prev')}
+          </PaginationButton>
+          <PaginationNumbers
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+          />
+          <PaginationButton
+            color="primary"
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            {t('lists.detailedList.next')}
+          </PaginationButton>
+        </PageNavigation>
       )}
     </PaginationWrapper>
   );

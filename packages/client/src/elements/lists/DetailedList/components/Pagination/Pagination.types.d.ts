@@ -1,4 +1,4 @@
-import { PerPage } from '../DetailedList.types';
+import { PerPage } from '../../DetailedList.types';
 
 interface PaginationProps {
   perPage: PerPage;

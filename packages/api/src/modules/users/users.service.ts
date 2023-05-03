@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import * as Sentry from '@sentry/node';
 
 import { GetList } from '../../interfaces/react-admin-types';
+import getPaginationOptions from '../../utils/getPaginationOptions';
 import { UserEntity } from '../database/entities/user.entity';
 import { UserRepository } from '../repository/user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,9 +17,13 @@ export class UsersService {
     return this.userRepository.create(createUserDto);
   }
 
-  async findAll(): Promise<GetList<UserEntity>> {
-    const allUsers = await this.userRepository.find();
-    return { data: allUsers, total: allUsers.length };
+  async findAll(query?: FindQuery): Promise<GetList<UserEntity>> {
+    const [allUsers, allUsersTotal] = await this.userRepository.findAndCount({
+      ...getPaginationOptions(query),
+      order: { createdAt: 'DESC' },
+    });
+
+    return { data: allUsers, total: allUsersTotal };
   }
 
   async findOne(id: string): Promise<UserEntity> {

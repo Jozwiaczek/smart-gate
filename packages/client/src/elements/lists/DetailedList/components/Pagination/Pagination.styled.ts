@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { IconButton } from '../../../buttons';
+import { IconButton } from '../../../../buttons';
 
 export const PaginationWrapper = styled.div`
   align-items: center;
@@ -17,7 +17,6 @@ export const PaginationWrapper = styled.div`
 export const PaginationButton = styled(IconButton)`
   border-radius: ${({ theme }) => theme.sizes.borderRadius};
   color: ${({ theme }) => theme.palette.text.primary};
-  height: 16px;
 `;
 
 export const PerPageWrapper = styled.div`
@@ -33,10 +32,11 @@ export const PerPageLabel = styled.p`
 
 export const TotalsLabel = styled.p`
   color: ${({ theme }) => theme.palette.text.secondary};
-  margin-right: 20px;
+  width: 120px;
 `;
 
 export const PageNavigation = styled.div`
   display: flex;
+  width: 360px;
   margin-right: 20px;
 `;

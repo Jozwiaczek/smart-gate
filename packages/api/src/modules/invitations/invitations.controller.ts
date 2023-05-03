@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
 import { Role } from '../../enums/role.enum';
 import { ValidationPipe } from '../../utils/validation.pipe';
@@ -27,8 +27,8 @@ export class InvitationsController {
   }
 
   @Get()
-  findAll() {
-    return this.invitationsService.findAll();
+  findAll(@Query() findQuery: FindQuery) {
+    return this.invitationsService.findAll(findQuery);
   }
 
   @Get(':id')
