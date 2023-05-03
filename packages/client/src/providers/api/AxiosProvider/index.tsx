@@ -31,9 +31,7 @@ const AxiosProvider = ({ children }: AxiosProviderProps) => {
   });
 
   AxiosOverriddenInstance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
+    (response) => response,
     (error: AxiosError) => {
       if (error && error.response && error.response.status === 401) {
         setUser(undefined);

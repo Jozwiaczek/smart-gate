@@ -41,7 +41,7 @@ describe('history service', () => {
       await testClearRepository(connection, HistoryEntity);
       const emptyHistory = await historyService.findAll();
 
-      expect(emptyHistory.total).toStrictEqual(0);
+      expect(emptyHistory.total).toBe(0);
       expect(emptyHistory.data).toStrictEqual([]);
     });
 
@@ -53,7 +53,7 @@ describe('history service', () => {
       await testCreateHistoryRecord(connection, HistoryEvent.Open);
 
       const fullHistory = await historyService.findAll();
-      expect(fullHistory.total).toEqual(3);
+      expect(fullHistory.total).toBe(3);
     });
   });
 
@@ -68,7 +68,7 @@ describe('history service', () => {
 
       const emptyHistory = await historyService.findAllByUserId(testUser.id);
 
-      expect(emptyHistory.total).toStrictEqual(0);
+      expect(emptyHistory.total).toBe(0);
     });
 
     it('returns user history', async () => {
@@ -82,7 +82,7 @@ describe('history service', () => {
 
       const userHistory = await historyService.findAllByUserId(testUser.id);
 
-      expect(userHistory.total).toStrictEqual(2);
+      expect(userHistory.total).toBe(2);
     });
   });
 
@@ -120,7 +120,7 @@ describe('history service', () => {
       const repository = await testClearRepository(connection, HistoryEntity);
       await testCreateHistoryRecord(connection, HistoryEvent.TurnedOn);
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(historyService.remove('INVALID_ID')).rejects.toBeInstanceOf(QueryFailedError);
     });
 
@@ -133,7 +133,7 @@ describe('history service', () => {
         firstHistoryRecord,
         secondHistoryRecord,
       ]);
-      await expect(historyService.remove(firstHistoryRecord.id)).resolves.toStrictEqual(true);
+      await expect(historyService.remove(firstHistoryRecord.id)).resolves.toBe(true);
       await expect(repository.find()).resolves.toStrictEqual([secondHistoryRecord]);
       await expect(repository.findOne({ id: firstHistoryRecord.id })).resolves.toBeUndefined();
     });
@@ -144,7 +144,7 @@ describe('history service', () => {
       const repository = await testClearRepository(connection, HistoryEntity);
       await testCreateHistoryRecord(connection, HistoryEvent.TurnedOn);
 
-      await expect(repository.count()).resolves.toStrictEqual(1);
+      await expect(repository.count()).resolves.toBe(1);
       await expect(historyService.removeMany({ ids: ['INVALID_ID'] })).rejects.toBeInstanceOf(
         BadRequestException,
       );

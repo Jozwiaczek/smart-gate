@@ -45,6 +45,7 @@ const SendInvitationButtonWithDialog = () => {
 
   const queryClient = useQueryClient();
   const invitationsQueryKey = '/invitations';
+  // @ts-ignore
   const sendInvitationMutation = useMutation(
     async (values: CreateInvitationValues) => {
       setLoading(true);
@@ -75,12 +76,10 @@ const SendInvitationButtonWithDialog = () => {
           invitationsQueryKey,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          ({ data, total }: { data: Array<ApiInvitation>; total: number }) => {
-            return {
-              data: [...data, sentInvitation],
-              total: total + 1,
-            };
-          },
+          ({ data, total }: { data: Array<ApiInvitation>; total: number }) => ({
+            data: [...data, sentInvitation],
+            total: total + 1,
+          }),
         );
 
         return { previousInvitations };

@@ -1,20 +1,22 @@
 import './loadSentry';
 import './loadPolyfills';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 import Providers from './providers';
 import Routes from './routes';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
+root.render(
+  <StrictMode>
     <Providers>
       <Routes />
     </Providers>
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </StrictMode>,
 );
 
 serviceWorkerRegistration.register();

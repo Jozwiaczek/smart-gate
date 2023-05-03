@@ -25,6 +25,6 @@ describe('getLabelFromSource', () => {
 
   it('returns empty string for empty string', () => {
     const label = getLabelFromSource('');
-    expect(label).toEqual('');
+    expect(label).toBe('');
   });
 });

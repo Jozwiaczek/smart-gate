@@ -4,10 +4,9 @@ import { BasicConditionProps, ConditionFunc } from './ConditionRoute/Condition.t
 
 type onlyAuthenticatedConditionType = (requiredRoles?: [Role]) => ConditionFunc;
 
-export const onlyAuthenticatedCondition: onlyAuthenticatedConditionType = (
-  requiredRoles?: [Role],
-) => {
-  return ({ currentUser }) => {
+export const onlyAuthenticatedCondition: onlyAuthenticatedConditionType =
+  (requiredRoles?: [Role]) =>
+  ({ currentUser }) => {
     if (!currentUser) {
       return false;
     }
@@ -21,7 +20,6 @@ export const onlyAuthenticatedCondition: onlyAuthenticatedConditionType = (
       requiredRoles.some((role) => currentUser.roles.includes(role))
     );
   };
-};
 
 const onlyUnauthenticatedCondition: ConditionFunc = ({ currentUser }) => !currentUser;
 

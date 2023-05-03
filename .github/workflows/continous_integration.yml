@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - name: 'Git checkout'
@@ -66,7 +66,7 @@ jobs:
     container: cypress/browsers:node12.18.3-chrome87-ff82
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
     env:
       NODE_ENV: 'test'
       DB_PORT: 5432

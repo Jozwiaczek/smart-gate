@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapRoutesToArray = (routes: any): Array<string> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const tmp = Object.values(routes);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return tmp.flatMap((el: any) => {

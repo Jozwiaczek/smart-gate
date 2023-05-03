@@ -1,8 +1,5 @@
-node_modules/
-node_modules
-build/
 build
-dist/
+dist
 _templates/
 coverage/
 *.generated.ts

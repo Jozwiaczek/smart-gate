@@ -52,11 +52,17 @@ const ThemeTypeProvider = ({ children }: ThemeProviderProps) => {
     }
   }, [themeType]);
 
-  return (
-    <ThemeTypeContext.Provider value={{ themeType, storedThemeType, setThemeType, cleanThemeType }}>
-      {children}
-    </ThemeTypeContext.Provider>
+  const contextValue: ThemeTypeContextValue = useMemo(
+    () => ({
+      themeType,
+      storedThemeType,
+      setThemeType,
+      cleanThemeType,
+    }),
+    [cleanThemeType, setThemeType, storedThemeType, themeType],
   );
+
+  return <ThemeTypeContext.Provider value={contextValue}>{children}</ThemeTypeContext.Provider>;
 };
 
 export default ThemeTypeProvider;

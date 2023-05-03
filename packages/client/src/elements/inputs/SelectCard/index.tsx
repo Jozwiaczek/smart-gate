@@ -4,7 +4,7 @@ import { Checkmark } from 'src/elements/animations';
 import { CardItemButton, CheckmarkBox, ItemContentWrapper, StyledCard } from './SelectCard.styled';
 import { SelectCardOption, SelectCardProps } from './SelectCard.types';
 
-const SelectCard = <T extends unknown>({ value, onChange, children }: SelectCardProps<T>) => {
+const SelectCard = <T,>({ value, onChange, children }: SelectCardProps<T>) => {
   const [currentValue, setCurrentValue] = useState(value);
 
   const allOptions = useMemo(

@@ -14,8 +14,10 @@ import {
 import { Checkbox, TextInput } from '../inputs';
 import { FormBaseInputProps, FormProps, ValidationType } from './Form.types';
 
-// Every input in app which is used with Form component must be declared here
+// Every input in the app, which is used with Form component must be declared here
+// @ts-ignore
 const formInputs: Array<ReactNode> = [Checkbox, TextInput];
+// @ts-ignore
 const isFormInput = (child: ReactElement) => formInputs.includes(child.type);
 
 const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormProps) => {
@@ -80,8 +82,10 @@ const Form = ({ children, errors, register, loading, onSubmit, ...rest }: FormPr
 
         // Recursive function invoke for nested elements
         if (child.props.children) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           return cloneElement(child, {
             ...child.props,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             children: adjustChildrenRecursively(child.props.children),
           });
         }

@@ -47,7 +47,7 @@ const useLocalStorage = <T>(
     ({ storageArea, newValue, key: storageKey }: StorageEvent) => {
       if (storageArea === window.localStorage) {
         if (key === storageKey && newValue) {
-          setData(JSON.parse(newValue));
+          setData(JSON.parse(newValue) as T);
           return;
         }
         setData(defaultValue);

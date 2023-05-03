@@ -11,12 +11,7 @@ import {
 } from './Select.styled';
 import { SelectOption, SelectProps } from './Select.types';
 
-const Select = <T extends unknown>({
-  value,
-  onChange,
-  children,
-  openDirection = 'down',
-}: SelectProps<T>) => {
+const Select = <T,>({ value, onChange, children, openDirection = 'down' }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState(value);
   const selectRef = useRef(null);

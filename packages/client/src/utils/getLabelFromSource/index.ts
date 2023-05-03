@@ -1,5 +1,5 @@
-const getLabelFromSource = (source: string): string => {
-  return source
+const getLabelFromSource = (source: string): string =>
+  source
     .split(/(?=[A-Z])/)
     .map((str, index) => {
       if (index === 0) {
@@ -8,6 +8,5 @@ const getLabelFromSource = (source: string): string => {
       return `${str.charAt(0).toLowerCase()}${str.slice(1)}`;
     })
     .join(' ');
-};
 
 export default getLabelFromSource;

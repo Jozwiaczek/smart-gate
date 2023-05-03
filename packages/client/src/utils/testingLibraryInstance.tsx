@@ -1,12 +1,16 @@
 import { render, RenderOptions } from '@testing-library/react';
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import i18n from '../i18n';
 import SnackbarProvider from '../providers/SnackbarProvider';
 import StylesProvider from '../providers/StylesProvider';
 
-const AllTheProviders: FC = ({ children }) => (
+interface AllTheProvidersProps {
+  children: ReactNode;
+}
+
+const AllTheProviders = ({ children }: AllTheProvidersProps) => (
   <StylesProvider>
     <I18nextProvider i18n={i18n}>
       <SnackbarProvider>{children}</SnackbarProvider>

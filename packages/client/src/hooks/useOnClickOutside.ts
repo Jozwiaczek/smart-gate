@@ -1,6 +1,7 @@
-import { BaseSyntheticEvent, RefObject, useEffect } from 'react';
+import type { RefObject } from 'react';
+import { useEffect } from 'react';
 
-type Handler = (e: BaseSyntheticEvent) => void;
+type Handler = (e: Event) => void;
 
 /**
  * Fire handler when user click outside referenced element
@@ -11,10 +12,10 @@ type Handler = (e: BaseSyntheticEvent) => void;
  */
 const useOnClickOutside = (ref: RefObject<HTMLElement>, handler: Handler) => {
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const listener = (event: any) => {
+    const listener = (event: Event) => {
       // Do nothing if clicking ref's element or descendent elements
-      if (!ref.current || ref.current.contains(event.target)) {
+      // @ts-ignore
+      if (!ref.current || ref.current.contains(event?.target)) {
         return;
       }
 

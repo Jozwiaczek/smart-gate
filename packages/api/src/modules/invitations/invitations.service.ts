@@ -77,33 +77,31 @@ export class InvitationsService {
         updatedBy,
         createdAt,
         updatedAt,
-      }): InvitationItemDto => {
-        return {
-          id,
-          email,
-          roles,
-          createdAt,
-          updatedAt,
-          expirationDate,
-          status,
-          createdBy: createdBy
-            ? {
-                email: createdBy.email,
-                roles: createdBy.roles,
-                firstName: createdBy.firstName,
-                lastName: createdBy.lastName,
-              }
-            : undefined,
-          updatedBy: updatedBy
-            ? {
-                email: updatedBy.email,
-                roles: updatedBy.roles,
-                firstName: updatedBy.firstName,
-                lastName: updatedBy.lastName,
-              }
-            : undefined,
-        };
-      },
+      }): InvitationItemDto => ({
+        id,
+        email,
+        roles,
+        createdAt,
+        updatedAt,
+        expirationDate,
+        status,
+        createdBy: createdBy
+          ? {
+              email: createdBy.email,
+              roles: createdBy.roles,
+              firstName: createdBy.firstName,
+              lastName: createdBy.lastName,
+            }
+          : undefined,
+        updatedBy: updatedBy
+          ? {
+              email: updatedBy.email,
+              roles: updatedBy.roles,
+              firstName: updatedBy.firstName,
+              lastName: updatedBy.lastName,
+            }
+          : undefined,
+      }),
     );
 
     return { data: resultInvitation, total: resultInvitation.length };

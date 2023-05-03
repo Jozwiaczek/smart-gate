@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import socketIOClient, { Socket } from 'socket.io-client';
 
 import { ConnectionState } from '../../../enums/connectionState.enum';
@@ -6,7 +6,7 @@ import { DeviceStatus } from '../../../enums/deviceStatus.enum';
 import { WebSocketEvent } from '../../../enums/webSocketEvent.enum';
 import { useAuth, useCurrentUser } from '../../../hooks';
 import { WebSocketContext } from './WebSocketProvider.context';
-import { WebSocketProviderProps } from './WebSocketProvider.types';
+import { WebSocketContextValue, WebSocketProviderProps } from './WebSocketProvider.types';
 
 const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
   const [socket, setSocket] = useState<Socket>();
@@ -71,11 +71,12 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     }
   }, [connect, currentUser]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       disconnect();
-    };
-  }, [disconnect]);
+    },
+    [disconnect],
+  );
 
   const toggleGate = useCallback(() => {
     if (socket) {
@@ -83,13 +84,12 @@ const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
     }
   }, [socket]);
 
-  return (
-    <WebSocketContext.Provider
-      value={{ connect, disconnect, deviceStatus, connectionState, toggleGate }}
-    >
-      {children}
-    </WebSocketContext.Provider>
+  const contextValue: WebSocketContextValue = useMemo(
+    () => ({ connect, disconnect, deviceStatus, connectionState, toggleGate }),
+    [connect, connectionState, deviceStatus, disconnect, toggleGate],
   );
+
+  return <WebSocketContext.Provider value={contextValue}>{children}</WebSocketContext.Provider>;
 };
 
 export default WebSocketProvider;

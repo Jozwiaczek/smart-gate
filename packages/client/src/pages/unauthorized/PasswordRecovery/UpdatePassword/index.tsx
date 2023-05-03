@@ -77,13 +77,10 @@ const UpdatePassword = () => {
           placeholder={t('form.inputs.repeatPassword')}
           startAdornment={<StyledConfirmLockIcon />}
           registerOptions={{
-            validate: (value) => {
-              return (
-                value === getValues().password ||
-                // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-                (t('form.validation.repeatPasswordError') as string)
-              );
-            },
+            validate: (value) =>
+              value === getValues().password ||
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+              (t('form.validation.repeatPasswordError') as string),
           }}
           required
         />

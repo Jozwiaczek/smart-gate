@@ -25,6 +25,6 @@ describe('getPlaceholderFromSource', () => {
 
   it('returns empty string for empty string', () => {
     const label = getPlaceholderFromSource('');
-    expect(label).toEqual('');
+    expect(label).toBe('');
   });
 });

@@ -77,51 +77,49 @@ const Admin = () => {
   const history = useHistory();
 
   return (
-    <>
-      <Switch>
-        <Route path={ADMIN} exact>
-          <Title>{t('routes.admin.title')}</Title>
+    <Switch>
+      <Route path={ADMIN} exact>
+        <Title>{t('routes.admin.title')}</Title>
 
-          <CardsWrapper>
-            {adminRoutes.map(({ index, title, icon, path }) => (
-              <CardButton
-                data-testid={`button-${path}`}
-                key={index}
-                colorVariant="card"
-                onClick={() => history.push(path)}
-              >
-                <CardIconWrapper>{icon}</CardIconWrapper>
-                <CardButtonLabel>{t(title as never)}</CardButtonLabel>
-              </CardButton>
-            ))}
-          </CardsWrapper>
-        </Route>
+        <CardsWrapper>
+          {adminRoutes.map(({ index, title, icon, path }) => (
+            <CardButton
+              data-testid={`button-${path}`}
+              key={index}
+              colorVariant="card"
+              onClick={() => history.push(path)}
+            >
+              <CardIconWrapper>{icon}</CardIconWrapper>
+              <CardButtonLabel>{t(title as never)}</CardButtonLabel>
+            </CardButton>
+          ))}
+        </CardsWrapper>
+      </Route>
 
-        {adminRoutes.map(({ index, title, icon, component: Component, exact, path }) => (
-          <Route
-            path={path}
-            key={index}
-            exact={exact}
-            render={(routeProps) => (
-              <RouteWrapper>
-                <RouteTopContainer>
-                  <BackButtonWrapper>
-                    <BackButton />
-                  </BackButtonWrapper>
-                  <TitleWrapper>
-                    <h2>{t(title as never)}</h2>
-                    <RouteIconWrapper>{icon}</RouteIconWrapper>
-                  </TitleWrapper>
-                </RouteTopContainer>
-                <Component {...routeProps} />
-              </RouteWrapper>
-            )}
-          />
-        ))}
+      {adminRoutes.map(({ index, title, icon, component: Component, exact, path }) => (
+        <Route
+          path={path}
+          key={index}
+          exact={exact}
+          render={(routeProps) => (
+            <RouteWrapper>
+              <RouteTopContainer>
+                <BackButtonWrapper>
+                  <BackButton />
+                </BackButtonWrapper>
+                <TitleWrapper>
+                  <h2>{t(title as never)}</h2>
+                  <RouteIconWrapper>{icon}</RouteIconWrapper>
+                </TitleWrapper>
+              </RouteTopContainer>
+              <Component {...routeProps} />
+            </RouteWrapper>
+          )}
+        />
+      ))}
 
-        <Redirect to={routes.unauthorized.PAGE_NOT_FOUND} />
-      </Switch>
-    </>
+      <Redirect to={routes.unauthorized.PAGE_NOT_FOUND} />
+    </Switch>
   );
 };
 

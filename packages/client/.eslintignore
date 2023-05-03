@@ -1,5 +1,4 @@
-node_modules/
-build/
-_templates/
-coverage/
-storybook-static/
+build
+_templates
+coverage
+storybook-static

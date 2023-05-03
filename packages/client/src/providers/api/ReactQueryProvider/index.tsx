@@ -13,6 +13,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const axios = useAxios();
   const defaultQueryFn = async ({ queryKey }: DefaultQueryFn) => {
     const { data } = await axios.get<DefaultQueryFnResult>(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       Array.isArray(queryKey) ? queryKey[0] : queryKey,
     );
     return data;

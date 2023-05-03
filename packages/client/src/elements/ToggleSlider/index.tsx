@@ -33,9 +33,9 @@ import { InfoBoxState, ToggleSliderProps } from './ToggleSlider.types';
 
 const ToggleSlider = ({ onToggle, orientation = 'vertical' }: ToggleSliderProps) => {
   const { t } = useTranslation();
-  const [playMountSfx] = useSound(mountSfx);
-  const [playUnmountSfx] = useSound(unmountSfx);
-  const [playUnlockSfx] = useSound(unlockSfx);
+  const [playMountSfx] = useSound(mountSfx as string);
+  const [playUnmountSfx] = useSound(unmountSfx as string);
+  const [playUnlockSfx] = useSound(unlockSfx as string);
   const draggableSliderThumbRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isSnapped, setIsSnapped] = useState(false);
